@@ -1,0 +1,36 @@
+{
+  "user_id": "user_029",
+  "task": "I’m cleaning up a short troubleshooting note for a home repair before I share it with someone else. Can you help me make it clear and usable, and point out anything that doesn’t hold up?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.5,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Absolutely. Paste the note here, and I’ll help you:\n\n- rewrite it clearly and compactly\n- make the repair/problem/options easy to understand\n- flag anything that seems shaky, incomplete, or not logically supported\n- point out missing details that matter before someone acts on it\n\nIf you want, I can also format it in a simple structure like:\n\n1. **Observed problem**\n2. **Likely failed part / failure mode**\n3. **Option A**\n4. **Option B**\n5. **What to inspect first**\n6. **Risks / unknowns**\n7. **Recommendation**\n\nSend the note whenever you’re ready.",
+      "user_simulator": {
+        "feedback_type": "add_context",
+        "text": "Yeah, here’s the note. Keep it tight and don’t smooth over the weak parts:\n\n\"Garage outlet on the west wall stopped working after the storm. GFCI in the bathroom is not tripped, but the garage receptacles are dead. Breaker labeled 'garage' was not tripped either. I reset both anyway, no change. There’s a faint burning smell near the outlet closest to the door, but no visible scorch marks. Could be a loose connection upstream, failed receptacle, or damaged wire from moisture. Need to check the first dead outlet, upstream junctions, and any outdoor/attic run before assuming the breaker is bad.\"\n\nAnd if anything in there is sloppy, say so.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Here’s a tighter version that keeps the weak spots visible:\n\n**Cleaned-up note**\n> Garage outlet circuit on the west wall stopped working after the storm. The bathroom GFCI is not tripped, and the garage breaker was not tripped either; resetting both made no difference. There is a faint burning smell near the outlet closest to the door, but no visible scorch marks. Likely causes are a loose/open connection upstream, a failed receptacle, or storm-related damage to wiring. Next checks should focus on the first dead outlet, upstream junctions, and any outdoor/attic run before blaming the breaker.\n\n**What doesn’t fully hold up / needs caution**\n- **“Breaker labeled garage” not tripped** doesn’t rule out a bad breaker, but it makes it less likely. A breaker can fail without visibly tripping.\n- **Bathroom GFCI being fine** doesn’t prove much unless you know the garage circuit is actually fed through that GFCI. If it’s not on the same feed, that detail is basically unrelated.\n- **“Could be moisture”** is plausible after a storm, but it’s still just a guess unless there’s evidence of water intrusion or a known exposed run.\n- **Faint burning smell near the outlet closest to the door** is the strongest clue in the note. That points more toward a loose/overheated connection at that receptacle or just upstream than toward a breaker problem.\n- **“Any outdoor/attic run”** is a bit broad. If you want this to be actionable, specify the likely path or first accessible junctions.\n\n**If you want it even tighter**\n> Garage west-wall outlet circuit stopped working after the storm. Bathroom GFCI is not tripped, and the garage breaker was not tripped; resetting both did not restore power. There is a faint burning smell near the outlet closest to the door, with no visible scorch marks. Most likely causes are an open/loose connection at that receptacle or upstream, a failed receptacle, or storm-related wiring damage. Start with the first dead outlet and upstream junctions before considering the breaker.\n\nIf you want, I can also turn this into a **decision-tree troubleshooting note** with “if X, then Y” steps.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s solid. Tight enough, and the weak parts are called out the right way.\n\nOnly thing I’d keep in mind: the bathroom GFCI line is only useful if that garage circuit actually runs through it. Otherwise it’s noise. And the burning smell is the real red flag here — that’s not “maybe later,” that’s first place I’d inspect.\n\nIf you want, the only tweak I’d make is to say “upstream junctions / first dead receptacle” instead of opening with the breaker at all. Breaker’s a lower-probability suspect unless you’ve got actual evidence it’s heating or failing.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    }
+  ]
+}

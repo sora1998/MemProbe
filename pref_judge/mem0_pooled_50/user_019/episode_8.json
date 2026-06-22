@@ -1,0 +1,104 @@
+{
+  "user_id": "user_019",
+  "task": "I’m trying to sanity-check a weird intermittent electrical issue on a used car before I start replacing parts. Can you help me think through the most likely failure points and what evidence would separate a bad sensor, wiring problem, or control module issue?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "directness_preference",
+      "short": "Blunt, no fluff",
+      "explanation": "She responds best to straight answers without hedging or performative softness. Her persona is skeptical and exacting, so she likely prefers help that states the issue clearly and gets to the point. Overly cautious wording would probably feel inefficient to her."
+    },
+    {
+      "idx": 2,
+      "dimension": "detail_level_preference",
+      "short": "Enough context to trust the answer",
+      "explanation": "She likely wants the key caveats and failure modes, not a vague headline. Her reliability-oriented mindset suggests she values context when it changes the conclusion or action. She probably dislikes being told something is “fine” without the conditions that make it fine."
+    },
+    {
+      "idx": 3,
+      "dimension": "format_preference",
+      "short": "Bullets and checklists preferred",
+      "explanation": "She seems likely to prefer responses that are easy to audit and act on. A structured format fits her methodical style and makes it easier to spot gaps, exceptions, or weak logic. Dense prose would probably feel slower and less useful."
+    },
+    {
+      "idx": 4,
+      "dimension": "autonomy_support_preference",
+      "short": "Collaborative, but not hand-holding",
+      "explanation": "She likely wants the assistant to work with her rather than dictate to her. She values control and personal autonomy, so prescriptive overreach would be a poor fit. At the same time, she probably appreciates a clear recommendation once the options are laid out."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Welcomes firm pushback",
+      "explanation": "She is likely comfortable being challenged when a claim is weak, risky, or sloppy. Her reliability-first mindset suggests she would rather get corrected than be coddled. Soft agreement without scrutiny would probably reduce her trust in the help."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — the clean way to do this is to treat it like a failure tree instead of a parts list.\n\n## 1) Start by defining the symptom precisely\nBefore testing, pin down:\n- **What exactly fails?** (no-start, stall, dead gauge, warning light, limp mode, random code, etc.)\n- **When does it happen?** cold/hot, rain, bumps, after long drive, key on/off, engine load, etc.\n- **Is it repeatable or random?**\n- **Does it recover on its own?** key cycle, cool down, battery disconnect, etc.\n\nThat gives you the trigger conditions.\n\n## 2) Split the problem into layers\nFor an intermittent electrical issue, I’d branch it like this:\n\n### A. Power / supply problem\nMost common on used cars.\nLook for:\n- weak battery\n- loose terminals\n- poor main grounds\n- failing relay/fuse box\n- voltage drop under load\n\n**Evidence:**\n- voltage dips when the fault happens\n- modules resetting\n- multiple unrelated codes\n- issue changes with wiggle test or load test\n\n### B. Signal / sensor problem\nA sensor may be fine mechanically but fail electrically or intermittently.\n\n**Evidence:**\n- one sensor’s live data drops out, spikes, or becomes implausible\n- fault follows heat, vibration, or harness movement\n- supply and ground at the sensor are good, but signal is not\n- code points to plausibility/range/performance rather than total circuit failure\n\n### C. Wiring / connector problem\nVery common for intermittent faults.\n\n**Evidence:**\n- fault appears with wiggle test\n- corrosion, backed-out pins, oil intrusion, broken wire at flex point\n- voltage present at rest but drops under load\n- continuity looks okay static, but fails when moved or heated\n\n### D. Control module problem\nLess common than wiring/supply, but possible.\n\n**Evidence:**\n- power, ground, sensor inputs, and network lines all test good\n- other modules see the same weird behavior\n- fault persists across harness wiggle, load testing, and sensor substitution\n- module has internal DTCs or known failure pattern\n\n## 3) Best evidence by test type\nHere’s the most useful separation logic:\n\n### Scan data / freeze frame first\n- Pull codes and freeze frame before clearing anything.\n- Check whether the code is:\n  - **circuit high/low/open** → more likely wiring/sensor power/ground\n  - **range/performance/plausibility** → sensor, mechanical, or intermittent signal\n  - **communication** → power, ground, network, or module\n\n### Voltage checks\n- Verify battery and charging voltage.\n- Check module power feeds and sensor reference voltage.\n- Don’t just check “has voltage” — check **under load**.\n\n### Voltage drop tests\nThis is big for intermittent issues.\n- Test battery positive to module/sensor feed under load\n- Test battery negative to module ground under load\n- High drop = bad connection, ground, fuse box, relay, or wire\n\n### Grounds\n- Bad grounds can mimic bad sensors and bad modules.\n- Measure ground drop, not just continuity.\n\n### Relays / fuses\n- Intermittent relay contacts can look perfect until loaded or hot.\n- Swap only if the relay is identical and the evidence points there.\n\n### Wiggle test\n- Wires, connectors, fuse box, relay block, harness near engine movement points.\n- Watch live data while moving the harness.\n\n### Live data\n- Compare the suspect sensor to related sensors or expected behavior.\n- Look for dropouts, spikes, flatlines, or implausible jumps.\n\n## 4) Practical rule of thumb\nIf:\n- **multiple systems fail together** → power/ground/module/network first\n- **one sensor or one circuit fails** → sensor/wiring/connector first\n- **it changes with heat/vibration** → wiring, connector, relay, or internal module solder fault\n- **it fails only under load** → supply, ground, or high-resistance connection\n\n## 5) A compact order of operations\n1. Read codes + freeze frame  \n2. Check battery/charging and main grounds  \n3. Check fuses/relays feeding the affected circuit  \n4. Verify sensor/module power, ground, and reference voltage  \n5. Watch live data for dropouts  \n6. Wiggle test harness/connectors  \n7. Do voltage drop tests under the conditions that trigger the fault  \n8. Only then consider sensor substitution or module diagnosis\n\nIf you want, I can turn this into a **compact troubleshooting matrix** with columns like **symptom / likely layer / test / pass-fail meaning / next branch**.",
+      "score": 4.6,
+      "summary": "mean=4.60 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:2, 5:3}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct and blunt: \"the clean way to do this is to treat it like a failure tree instead of a parts list\" and then gives straight diagnostic branches without hedging."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Provides concrete caveats and failure modes throughout, e.g. \"code points to plausibility/range/performance rather than total circuit failure\" and \"don’t just check 'has voltage' — check under load.\""
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Uses clear structure with numbered sections, bullets, and a compact order of operations, which is easy to audit and act on."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative and non-prescriptive overall, ending with \"If you want, I can turn this into a compact troubleshooting matrix,\" while still giving a clear recommendation path."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Includes firm diagnostic pushback against sloppy assumptions, e.g. \"Don’t just check 'has voltage'\" and \"Only then consider sensor substitution or module diagnosis,\" but it does not strongly challenge the user's premise."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Absolutely — here’s a tighter **failure-separation matrix** that’s meant to **rule branches in or out**, not just list suspects.\n\nI’ll keep the logic strict and practical: **scan data/freeze frame first, then voltage checks, voltage drop, grounds, fuses/relays, wiggle test, live data, then deeper checks**.\n\n---\n\n## Intermittent electrical fault matrix\n\n| Failure type | Live data pattern | Multimeter check | Wiggle / heat / load test | What rules it out |\n|---|---|---|---|---|\n| **Bad sensor** | One sensor shows **dropouts, spikes, flatline, or implausible values** while related sensors stay normal. Often a **range/performance** code, not necessarily open/short. | **Power, ground, and reference are good at the sensor**. Signal may be unstable or out of spec only when fault occurs. Static resistance may look normal. | Fault follows **heat soak**, vibration, or load. Harness movement may change the reading, but the issue is at the sensor body or internal element. | If the sensor has **stable power/ground/reference**, live data is stable, and the fault only appears when the harness is moved or voltage drops are present, the sensor is less likely. Also ruled down if substituting a known-good sensor changes nothing. |\n| **Wiring / connector** | Live data may be normal until the fault happens, then you get **sudden drop to zero, jump to max/min, or intermittent nonsense**. Often looks like an open circuit or intermittent short. | Continuity may test fine **static**, but voltage drop under load is high. Pin fit, corrosion, backed-out terminals, broken conductor near flex points. Power/ground at sensor may be present at rest but collapse under load. | **Wiggle test** is the big one. Heat may open a cracked conductor or corroded terminal. Load may make the fault appear because current demand exposes resistance. | If the harness is moved, heated, and loaded with no change, and voltage drop is clean, wiring/connector becomes less likely. Also if the fault stays with the sensor after harness repair or bypass, wiring is less likely. |\n| **Power / ground / supply fault** | Often causes **multiple sensors or modules** to act weird at once. Live data may show several unrelated implausible readings, resets, or communication loss. Codes can be misleading. | Battery, charging, module feed, and ground checks show **voltage sag or excessive drop under load**. Sensor reference voltage may be low or unstable. Ground side may not be “open,” but it’s high resistance. | Heat soak can open a weak relay, fuse contact, or corroded splice. Load test may make voltage collapse. Wiggle at fuse box, relay, battery terminals, or main ground points may reproduce it. | If supply voltage is stable at the module/sensor under load, ground drop is low, and no other circuits are affected, power/ground moves down the list. |\n| **Control module fault** | Live data may be internally inconsistent, frozen, or wrong in a way that doesn’t match actual inputs. Often there are **communication codes**, internal module DTCs, or multiple false input codes. | Power, ground, reference, and input circuits all test good at the module. Network lines are intact. Yet the module output/interpretation is still wrong. | Heat can trigger internal failure. Wiggle test usually won’t change it unless the module connector itself is the issue. Load test of inputs doesn’t explain the bad behavior. | If the fault follows a specific input being moved, voltage dropped, or harness resistance changes, the module is less likely. Also ruled down if a known-good module or reflash doesn’t change the behavior. |\n\n---\n\n## The annoying trap: “sensor code” that is really power/ground\n\nThis is the part people miss.\n\nA **sensor code does not automatically mean a bad sensor**.\n\n### Example patterns that often mean supply/ground, not the sensor:\n- **5V reference codes** with multiple sensors on the same reference\n- **sensor low / circuit low** on several inputs sharing a common ground\n- **implausible sensor reading** that changes when other loads turn on\n- **sensor drops out only when headlights, blower, rear defrost, or steering load is applied**\n- **code returns after heat soak**, but the sensor tests okay cold\n\n### What to check first in that situation:\n1. **Scan data + freeze frame**\n   - Note engine temp, battery voltage, load, RPM, speed, and which codes coexist.\n2. **Battery voltage**\n   - Key off, key on, cranking, and running.\n3. **Voltage drop**\n   - Battery negative to sensor/module ground under load.\n   - Battery positive to sensor/module feed under load.\n4. **5V reference**\n   - If the reference is dragged down, disconnect sensors on that reference one at a time.\n5. **Shared ground / shared feed**\n   - One bad ground splice can fake multiple sensor failures.\n6. **Wiggle test**\n   - Especially at the harness branch, connector backshells, and fuse box.\n\n### Rule of thumb:\n- **One sensor bad by itself** → more likely sensor or its local wiring\n- **Several sensors on the same 5V or ground misbehave** → supply/ground or shared wiring\n- **Code changes with electrical load** → supply/ground before sensor\n- **Code changes with harness movement** → wiring/connector before sensor\n\n---\n\n## Quick “knock-in / knock-out” logic\n\n### Bad sensor is supported if:\n- power, ground, and reference are correct\n- live data is wrong only for that sensor\n- fault follows heat and not harness movement\n- known-good sensor changes the symptom\n\n### Bad sensor is weakened if:\n- the circuit has voltage drop\n- the fault affects multiple sensors\n- live data drops out only when the harness is moved\n- the sensor code comes back with a shared supply/ground issue\n\n### Wiring/connector is supported if:\n- wiggle test changes live data or sets the fault\n- voltage drop appears under load\n- static continuity passes but dynamic testing fails\n- corrosion, oil, water, or pin fit issues are found\n\n### Power/ground is supported if:\n- multiple circuits act up together\n- module/sensor feed voltage sags\n- ground drop is excessive under load\n- fault appears with high electrical demand or relay/fuse heating\n\n### Module is supported if:\n- inputs and outputs test good\n- power/ground are clean\n- network is clean\n- live data is still wrong or internally inconsistent\n- fault persists across harness manipulation and sensor substitution\n\n---\n\n## A real-world example pattern\n\n### Symptom:\nIntermittent throttle or cam sensor code after hot soak.\n\n### What it looks like if it’s a sensor:\n- one sensor PID goes erratic\n- 5V ref stays good\n- ground stays good\n- wiggle test does nothing\n- heat makes the sensor output fail\n\n### What it looks like if it’s wiring:\n- sensor PID drops out when the engine moves or harness is flexed\n- 5V may be fine at rest but unstable under load\n- voltage drop increases when fault occurs\n- repair at connector or splice fixes it\n\n### What it looks like if it’s supply/ground:\n- multiple sensor PIDs glitch together\n- 5V reference collapses or ground rises\n- fault appears with blower, defrost, fans, or charging issue\n- correcting battery/ground/fuse box issue fixes the “sensor” code\n\n### What it looks like if it’s module:\n- all inputs test normal\n- other sensors on same supply are fine\n- module reports nonsense or drops communication\n- fault survives harness and sensor checks\n\n---\n\n## Best first-pass diagnostic order\n1. **Read codes and freeze frame**\n2. **Check battery and charging voltage**\n3. **Check voltage drop on power and ground**\n4. **Verify fuses and relays feeding the circuit**\n5. **Check 5V reference / sensor supply / ground**\n6. **Watch live data for dropouts or implausible readings**\n7. **Wiggle test the harness and connectors**\n8. **Heat soak / load test**\n9. **Only then replace sensor or suspect module**\n\n---\n\nIf you want, I can turn this into a **one-page matrix with actual pass/fail thresholds** like:\n- battery voltage minimums\n- acceptable voltage drop numbers\n- 5V reference tolerance\n- ground-drop limits\n- what counts as a bad live-data dropout\n\nThat would make it much more usable in the driveway.",
+      "score": 5.0,
+      "summary": "mean=5.00 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:0, 5:5}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct and blunt: \"here’s a tighter failure-separation matrix\" and \"I’ll keep the logic strict and practical\". No hedging or fluff."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Gives substantial context and caveats, e.g. \"A sensor code does not automatically mean a bad sensor\" plus detailed rule-in/rule-out conditions and failure modes."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured with bullets, tables, and checklists: \"failure-separation matrix,\" multiple tables, and a \"Best first-pass diagnostic order\" list."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Collaborative and non-prescriptive: \"If you want, I can turn this into a one-page matrix\" and \"That would make it much more usable in the driveway.\" It offers guidance without overreaching."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Actively pushes back on weak assumptions: \"A sensor code does not automatically mean a bad sensor\" and repeatedly distinguishes sensor vs wiring vs supply vs module instead of just agreeing."
+        }
+      ]
+    }
+  ]
+}

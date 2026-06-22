@@ -1,0 +1,36 @@
+{
+  "user_id": "user_036",
+  "task": "I’m putting together a simple inventory sheet for a few files and links, and I want to avoid a small formula mistake turning one row into the wrong item. Could you help me set it up so it’s easy to update and hard to misread?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.9,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — a simple structure will help keep it readable and reduce formula mistakes.\n\n## Suggested columns\n- **Item ID**\n- **File / Link Name**\n- **Type**\n- **Location / URL**\n- **Owner**\n- **Last Updated**\n- **Status**\n- **Notes**\n- **Flag**\n\n## Good setup tips\n- Keep **one item per row**\n- Use **consistent labels** in the Type and Status columns\n- Avoid merging cells\n- Freeze the header row\n- Use dropdowns for repeated fields if possible\n\n## Simple consistency checks\nFlag a row if:\n- the **name is blank**\n- the **link is missing**\n- the **status doesn’t match the notes**\n- the **same item appears twice**\n- a formula is pulling from the wrong row\n\n## Practical rule\nIf a row has a copied link, a formula, or a recently edited field, check it first.\n\nIf you want, I can also give you:\n- a **copy-paste template**\n- a **formula-safe column layout**\n- or a **quick flag formula** for duplicates and blanks.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Pretty close, but I’d want the actual template, not just the column ideas. I’m mostly worried about the formula side — one shifted cell can turn into the wrong file fast, and I’ve had that happen before with a spreadsheet batch.\n\nCan you give me:\n- a copy-paste header row\n- a layout that keeps formulas away from the editable fields\n- and a simple flag formula for blanks/duplicates\n\nAlso, if you can, make it work in a plain sheet without anything fancy. I don’t need overbuilt, just hard to mess up.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 5.0
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Absolutely — here’s a plain-sheet setup that’s hard to misread and keeps formulas separate from editable fields.\n\n## 1) Copy-paste header row\n```text\nItem ID | File / Link Name | Type | Location / URL | Owner | Last Updated | Status | Notes | Flag\n```\n\n---\n\n## 2) Safer layout\nKeep the first 8 columns editable, and use **Flag** as the only formula column.\n\n### Editable fields\n- **A** Item ID\n- **B** File / Link Name\n- **C** Type\n- **D** Location / URL\n- **E** Owner\n- **F** Last Updated\n- **G** Status\n- **H** Notes\n\n### Formula field\n- **I** Flag\n\nThis keeps the formula away from the data entry columns, which makes shifted-cell mistakes less likely.\n\n---\n\n## 3) Simple flag formula\nPut this in **I2** and fill down:\n\n```excel\n=IF(OR(A2=\"\",B2=\"\",D2=\"\",COUNTIF($B:$B,B2)>1),\"FLAG\",\"\")\n```\n\n### What it catches\n- blank Item ID\n- blank File / Link Name\n- blank Location / URL\n- duplicate File / Link Name\n\n---\n\n## 4) Optional slightly stricter version\nIf you also want to flag missing type or owner:\n\n```excel\n=IF(OR(A2=\"\",B2=\"\",C2=\"\",D2=\"\",E2=\"\",COUNTIF($B:$B,B2)>1),\"FLAG\",\"\")\n```\n\n---\n\n## 5) Simple setup tips\n- Freeze the header row\n- Keep formulas only in the Flag column\n- Don’t merge cells\n- Use one row per item\n- If possible, sort by Item ID so duplicates are easier to spot\n\nIf you want, I can also give you a version with:\n- a **Status dropdown**\n- a **duplicate check on Item ID instead of name**\n- or a **Google Sheets formula that ignores blank rows more cleanly**.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, this works. The plain layout is what I wanted, and keeping the formula only in Flag is the right move.\n\nThe header row is clean enough to paste straight in, and the formula is simple without getting cute. I like that it catches blanks and duplicates without dragging the whole sheet into a bunch of extra logic.\n\nI’d probably use the stricter version if this is for active files, just so missing owner/type doesn’t slide by. But overall, this is solid.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    }
+  ]
+}

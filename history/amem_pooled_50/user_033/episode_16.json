@@ -1,0 +1,36 @@
+{
+  "user_id": "user_033",
+  "task": "I need to prepare a short incident note and attach the related records before a review, but I’m not sure what level of detail belongs in each place. Can you help me think through a clean way to organize the information so it’s easy to follow later?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.4,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — keep it split by purpose and don’t let the short note become the only place the facts live.\n\nA clean way to organize it:\n\n- **Incident note (short, controlling summary):** what happened, when it was noticed, current status, decision made, and who owns the next step.\n- **Related records (supporting record):** raw observations, source data, QC/check results, reruns, timestamps, transfer/chain-of-custody, and anything needed to reconstruct the event later.\n- **Sequence:** keep everything in chronological order with dates/times so the review can follow the path without guessing.\n- **Version/date control:** date every revision of the note and tie it to the case/sample ID so it’s clear which version was current at the time.\n\nRule of thumb: if it explains **how you got to the conclusion**, it belongs with the related records. If it only states the **current summary and next action**, it belongs in the incident note.\n\nAlso make the next owner explicit — “under review” without a named owner tends to turn into a dead end.\n\nIf you want, I can turn your actual notes into a 4–5 line incident summary plus a simple action log.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Mostly right. But it’s a little too clean and generic.\n\nI’d want it split even harder:\n\n- **Incident note:** just the decision trail. What was observed, what failed, what was done, final disposition, and who signed off. No raw data dump.\n- **Records packet:** the evidence. Chromatograms, printouts, rerun results, instrument status, maintenance notes, timestamps, chain-of-custody, sample IDs, any deviation logs.\n- **Cross-reference everything.** Case ID, lot/sample ID, date/time, instrument ID, analyst. If those don’t match exactly, it turns into a mess later.\n- **Keep opinions out.** No “likely,” no “probably,” unless you’re flagging it as a hypothesis in the notes. Facts first.\n\nWhat I’d add: a one-line **cause/probable cause** field only if it’s supported, and a separate **impact** field if the review cares about whether anything was released, held, or retested.\n\nIf you want, give me the actual incident type and I’ll help you lay out a tight template.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — that’s the cleaner split.\n\nI’d set it up like this:\n\n### 1) Incident note = decision trail\nKeep this short and readable. Include only:\n- what was observed\n- what failed or was abnormal\n- what was done\n- final disposition\n- who signed off / who owns next action\n\nOptional, if supported:\n- **cause / probable cause**\n- **impact**: released, held, retested, repeated, etc.\n\n### 2) Records packet = evidence\nThis is where the detail lives:\n- raw data / printouts / chromatograms\n- rerun results\n- instrument status\n- maintenance notes\n- timestamps\n- sample IDs / lot IDs\n- chain-of-custody\n- deviation logs\n- anything needed to reconstruct the event later\n\n### 3) Cross-reference hard\nMake sure every piece matches on:\n- case ID\n- sample / lot ID\n- date/time\n- instrument ID\n- analyst\n\nIf those don’t line up exactly, the review gets messy fast.\n\n### 4) Keep opinions separated from facts\nIn the note:\n- facts first\n- if you include a hypothesis, label it as such\n\nAvoid vague phrasing unless it’s clearly marked as preliminary.\n\n### Simple rule\nIf it answers **“what happened and what was decided?”** → incident note.  \nIf it answers **“how do we prove or reconstruct it?”** → records packet.\n\nIf you want, I can turn that into a 5-line template you can reuse.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s usable.\n\nI’d keep it exactly that split:\n\n- **Incident note:** decision trail only. Observation, failure, action taken, final disposition, sign-off. Maybe cause/probable cause if it’s actually supported. Maybe impact if the review needs it.\n- **Records packet:** all the proof. Chromatograms, printouts, reruns, instrument status, maintenance, timestamps, chain-of-custody, deviation logs, sample/lot IDs.\n- **Cross-reference hard:** case ID, lot/sample ID, date/time, instrument ID, analyst. Exact matches only.\n- **No commentary creep:** facts in the note. Any hypothesis gets labeled as such or left out.\n\nThe simple test is fine: if it explains the decision, it goes in the note. If it proves the decision, it goes in the packet.\n\nThat’s the right level of control. Not bloated, not sloppy.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    }
+  ]
+}

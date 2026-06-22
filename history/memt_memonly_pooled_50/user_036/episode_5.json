@@ -1,0 +1,23 @@
+{
+  "user_id": "user_036",
+  "task": "I’m trying to untangle why a spreadsheet export and the source file don’t line up, and I can’t tell whether the issue started in the data, the import step, or my cleanup pass. Could you help me figure out a sensible way to track down where it went off and what to check first?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.8,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — the fastest way is to treat it like a pipeline check and compare each stage in order:\n\n1. **Source file**\n2. **Import step**\n3. **Cleanup / transformation pass**\n4. **Final spreadsheet export**\n\n### What to check first\nStart with the **first point where the data changes**.\n\n#### 1) Compare source vs imported data\nLook for:\n- missing rows\n- extra rows\n- shifted columns\n- changed text/casing\n- date or number formatting changes\n- duplicate removal or row filtering\n\nIf the mismatch is already present here, the problem is likely in the **import step**.\n\n#### 2) Compare imported data vs cleaned data\nCheck your cleanup logic for:\n- trimming spaces\n- splitting/merging fields\n- deduplication\n- type conversion\n- row filtering\n- default value filling\n- sorting that makes records look different\n\nIf this is where the mismatch appears, the issue is in the **cleanup pass**.\n\n#### 3) Compare cleaned data vs spreadsheet export\nCheck export settings for:\n- column mapping\n- header renaming\n- row limits\n- hidden filters\n- formatting-only changes that make values look different\n- truncation or formula conversion\n\nIf the data is correct before export but wrong after, the issue is in the **export step**.\n\n### A sensible debugging method\nUse a small sample of records and trace them through each stage:\n- pick 5–10 rows that clearly mismatch\n- give each row a stable ID\n- compare the same ID at every stage\n- note the first stage where the value changes\n\n### Helpful checks\n- **Row counts** at every stage\n- **Unique key counts** if rows should be one-to-one\n- **Column-by-column diffs**\n- **Exact raw values**, not just what the spreadsheet displays\n- **Logs** from import/cleanup/export if available\n\n### Best first move\nIf you’re unsure where to start, do this:\n- compare **source file vs imported output**\n- then compare **imported output vs cleaned output**\n- then compare **cleaned output vs export**\n\nThat usually isolates the break quickly.\n\nIf you want, I can help you make a simple **step-by-step reconciliation checklist** or a **comparison table template** you can use on the data.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s the right shape. Pipeline check first, not guessing at the export because that’s usually where people get distracted.\n\nI’d start with the **source vs import** comparison, but with a stable key on each row if you have one. Row counts alone won’t catch a shifted column or a bad parse.\n\nWhat I’d check first, in order:\n- **row count** at each stage\n- **column names/order**\n- **one known ID or title** through all stages\n- **a few raw values** that are likely to break: dates, numbers, empty fields, long text\n- **sorting/filtering** that might make the file *look* different even if it isn’t\n\nThe part people miss most is the **cleanup pass**. Trimming, deduping, type conversion, or a formula that shifts a column can make the export look wrong even when the import was fine.\n\nSo basically:\n1. compare source to import\n2. if that matches, compare import to cleanup output\n3. if that matches, compare cleanup to export\n4. stop at the first mismatch\n\nIf you’re doing this in a spreadsheet, I’d also freeze a tiny sample set — like 5 rows that you know well — and trace only those. Faster than staring at the whole batch.\n\nYour outline is solid. Not much to fix.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    }
+  ]
+}

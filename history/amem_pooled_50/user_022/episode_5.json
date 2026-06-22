@@ -1,0 +1,88 @@
+{
+  "user_id": "user_022",
+  "task": "I’m trying to set up a simple live-check routine for a small process that can drift over a shift, and I want it to be practical rather than overkill. What would you watch in real time, and how would you decide when something is just normal variation versus worth acting on?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.3999999999999995,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "I’d keep it very simple and split it by failure mode, not by “daily/weekly” stuff.\n\n### In real time, watch:\n1. **What can drift**\n   - slow trend away from baseline\n   - compare to a known-good value from the same setup/load/condition\n\n2. **What can fail suddenly**\n   - alarms, drops, spikes, weird jumps, missing signals\n   - anything that crosses a hard limit\n\n3. **What needs cross-checking**\n   - one sensor/reading against a second source\n   - if the live value matters, verify it with a known-good check, not just the same screen\n\n4. **What changes with conditions**\n   - load, temperature, speed, flow, pressure, etc.\n   - only compare readings when the conditions match the baseline\n\n### How to tell normal variation vs worth acting on\nUse three buckets:\n\n- **Normal variation:** small movement inside the expected band, and the cross-check agrees\n- **Watch closely:** trend is moving the wrong way, but still inside limits\n- **Act now:** hard limit hit, sudden change, or the cross-check disagrees\n\n### Practical rule\nDon’t react to one odd reading unless:\n- it repeats\n- it agrees with another sign of the same problem\n- it matches the failure mode you’re looking for\n\n### Simple live-check format\nFor each item, track:\n- **baseline**\n- **current reading**\n- **normal range**\n- **hard limit**\n- **cross-check source**\n- **action if off**\n\n### Quick decision rule\nIf it’s **small, stable, and confirmed** → probably normal.  \nIf it’s **drifting, inconsistent, or unconfirmed** → worth acting on.  \nIf it **breaks a hard limit** → stop and fix it.\n\nIf you want, I can turn that into a one-page shift checklist with columns you can actually use.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Mostly right, but it’s still a little generic. I’d want it tied to the actual process variable and what kind of drift you expect over a shift.\n\nWhat I’d watch in real time:\n- the main control variable\n- the actuator/output driving it\n- one independent cross-check if there is one\n- any condition that changes the reading: load, temperature, flow, pressure, ambient\n- rate of change, not just the value itself\n\nFor normal variation vs action:\n- **normal** = within known band, stable, and the change makes sense for the operating condition\n- **watch** = creeping one direction for multiple readings, even if still in band\n- **act** = sudden jump/drop, limit breach, or disagreement between live reading and cross-check\n\nI’d also add a deadband / hold-off so you don’t chase noise. Last time I had a scrubber sensor drifting, the raw number looked only slightly off at first, but the trend plus a handheld check showed it was already underfeeding reagent. So yeah — trend + cross-check, not one point.\n\nIf you want, give me the actual process and I can help set sane thresholds instead of the usual vague “watch it closely” stuff.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yeah — that’s the right way to frame it.\n\nFor a small process that drifts over a shift, I’d make the live check about **the process variable, the thing driving it, and the condition that changes it**. Not just “is the number okay.”\n\n### What I’d watch in real time\n- **Main process variable**: the thing you actually care about\n- **Actuator/output**: valve position, speed, dose, heater output, pump command, etc.\n- **One independent cross-check** if available: handheld, second sensor, downstream effect, sample result\n- **Operating condition**: load, temp, flow, pressure, ambient, batch stage\n- **Rate of change**: not just the value, but whether it’s drifting faster than expected\n\n### How I’d split normal vs action\n- **Normal**\n  - inside the known band\n  - stable or changing in the expected direction\n  - matches the current operating condition\n  - cross-check agrees\n\n- **Watch**\n  - creeping one way for several readings\n  - still in band, but the slope is wrong\n  - output is moving harder than usual to hold the setpoint\n\n- **Act**\n  - sudden jump/drop\n  - hard limit breached\n  - cross-check disagrees\n  - output is pegged or unusually high/low to maintain control\n\n### Practical anti-noise rule\nUse a small **deadband / hold-off** so you don’t chase jitter.\n\nFor example:\n- ignore tiny wiggles inside the deadband\n- only flag it if it stays off for **N readings** or **X minutes**\n- act immediately if it hits a hard limit or the cross-check fails\n\n### Simple decision logic\n1. Is it outside the hard limit? → **act**\n2. Is it drifting in one direction for multiple checks? → **watch / investigate**\n3. Does the cross-check agree?  \n   - yes → likely real  \n   - no → verify the measurement before changing the process\n4. Does the change make sense for the operating condition?  \n   - yes → probably normal variation  \n   - no → treat as suspicious\n\nIf you want, I can turn this into a tight one-page routine with:\n**variable / expected drift / deadband / hard limit / cross-check / action**.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s closer. Still a bit hand-wavy though — I’d want the drift tied to the *specific variable* and the direction it normally moves over the shift, not just generic bands.\n\nWhat I’d want in the routine:\n- **process variable**\n- **expected drift direction** over a normal shift\n- **normal rate of change**\n- **deadband** so you don’t chase noise\n- **hard limit**\n- **cross-check source**\n- **what would actually trigger action**\n\nThe part I’d push on is the drift expectation. “Creeping one way” is only useful if you know what that looks like for that process. For one system, a slow rise might be normal with temperature; for another, any steady rise means fouling or sensor drift.\n\nSo I’d set it up like:\n- **If the value is moving in the expected direction at the expected rate** → normal\n- **If it’s moving too fast, or in the wrong direction** → watch\n- **If the cross-check doesn’t match, or the output is having to work too hard** → act\n\nAnd I’d still keep the hold-off. Otherwise people start reacting to every little wobble and the whole thing turns into noise.\n\nIf you want depth here, the useful next step is not more theory — it’s a template for one actual variable with:\n**baseline, expected drift per hour, deadband, alarm limit, and verification check**.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yes — that’s the right way to make it practical.\n\nFor a real shift check, I’d write it around **one specific variable** and define the drift you actually expect for that process.\n\n### For each variable, record:\n- **process variable**\n- **expected drift direction** over a normal shift\n- **normal rate of change** per hour or per run\n- **deadband / hold-off**\n- **hard limit**\n- **cross-check source**\n- **action threshold**\n\n### The decision rule I’d use\n- **Normal:** moving in the expected direction, at the expected rate, with the cross-check agreeing\n- **Watch:** moving too fast, slowing/stalling when it normally drifts, or moving the wrong way\n- **Act:** cross-check disagrees, output is working too hard, or a hard limit is hit\n\n### Example logic\nIf the variable is supposed to:\n- **drift up slowly** over the shift → a slow rise is normal\n- **stay flat** → any steady move is suspicious\n- **drift down** → a rise is the problem\n\nThat’s the part that keeps it from being generic: the routine should say **what “normal” looks like for this exact variable**, not just “watch for drift.”\n\n### Simple format\n| Item | Normal drift | Deadband | Hard limit | Cross-check | Action |\n|---|---|---:|---:|---|---|\n| Process variable | up 1–2/hr | ±0.5 | 10 | handheld / second sensor | investigate if outside rate or direction |\n| Output/actuator | adjusts to hold PV | small changes ignored | pegged | command vs actual | act if pegged or unstable |\n\nIf you want, give me the actual process variable and I’ll help you fill in the drift direction, rate, and thresholds without making it overcomplicated.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah. That’s the useful part. But I’d still want it grounded in one real variable, not a template with blanks.\n\nWhat matters is:\n- what the variable is\n- which way it normally walks over the shift\n- how fast that walk is acceptable\n- what condition changes it\n- what secondary check proves it’s real\n\nFor example, if the process normally warms up, a slow rise might be fine. If it normally stabilizes after startup, then any steady rise is a problem. Same with flow, pressure, pH, whatever — the direction changes the meaning.\n\nSo the routine should read more like:\n- PV is expected to drift **up/down/flat** during a normal shift\n- normal rate is about **X per hour** under **Y condition**\n- ignore movement inside **deadband** unless it persists for **N readings / M minutes**\n- verify with **cross-check source** before changing anything if it’s still inside limits\n- act immediately if it moves the wrong way, too fast, or the cross-check disagrees\n\nThat’s the part I’d want nailed down. If you give me one actual variable, I can help write the watch rule in a way that isn’t hand-wavy.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 4,
+      "agent_response": "Yep — that’s the right level of specificity.\n\nFor a **real** live-check, I’d write it around one actual variable like this:\n\n- **PV:** what it is\n- **normal shift direction:** up / down / flat\n- **expected rate:** how much per hour or per run\n- **condition that drives it:** load, temp, flow, startup, etc.\n- **deadband / hold-off:** what you ignore\n- **cross-check:** what proves it’s real\n- **action trigger:** what makes you intervene\n\n### The rule set\n- **Normal:** PV moves in the expected direction, at the expected rate, under the expected condition\n- **Watch:** PV is drifting, but faster/slower than normal, or the direction is off\n- **Act:** wrong direction, hard limit hit, or cross-check disagrees\n\n### Practical version\nIf the variable is supposed to:\n- **rise slowly** over the shift → a slow rise is normal\n- **fall slowly** → a slow fall is normal\n- **stay flat** → any steady drift is suspicious\n\nThen add:\n- ignore tiny wiggles inside the deadband\n- only care if it persists for **N readings / M minutes**\n- if it’s still inside limits but the slope is wrong, **watch**\n- if the cross-check doesn’t match, **verify before changing the process**\n- if it crosses the hard limit, **act**\n\n### One-line rule\n**Expected direction + expected rate + matching cross-check = normal.**  \nAnything else is either **watch** or **act** depending on how far off it is.\n\nIf you want, give me one actual variable and I’ll help you write the exact watch rule in plain language.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s the useful shape. But still not enough to actually run with.\n\nI’d want the next step to be one concrete example, not another generic framework. Like:\n- PV: what exactly\n- normal shift direction: up/down/flat\n- expected rate: roughly how much per hour\n- what condition drives the drift\n- what cross-check proves the reading is real\n- what’s the actual trigger to intervene\n\nBecause the direction is the whole point. A slow rise can be fine in one process and a problem in another. Same number, totally different meaning.\n\nSo if you want this to be practical, give me one real variable and I’d write the watch rule like:\n- normal if it moves the expected way at the expected rate under the expected condition\n- watch if the slope is wrong or the movement persists past the deadband\n- act if the cross-check disagrees or it goes the wrong way fast\n\nThat’s the part worth pinning down.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 5,
+      "agent_response": "Exactly — that’s the useful version.\n\nFor a practical live-check, I’d make it **one variable, one expected drift pattern, one verification source, one action rule**:\n\n- **PV:** what you’re watching\n- **Normal shift direction:** up / down / flat\n- **Expected rate:** roughly how much per hour or per run\n- **Driving condition:** load, temp, flow, startup, etc.\n- **Cross-check:** handheld, second sensor, downstream result, sample\n- **Trigger to act:** wrong direction, too fast, persistent drift, or mismatch\n\n### Simple rule\n- **Normal:** moves the expected way, at the expected rate, under the expected condition\n- **Watch:** slope is off, or the movement persists past the deadband\n- **Act:** cross-check disagrees, hard limit is hit, or it moves the wrong way fast\n\n### The key point\nThe same number can mean different things depending on the process:\n- a slow rise might be normal in one system\n- the same rise might mean fouling, sensor drift, or loss of control in another\n\nSo the routine should be written for the **actual variable**, not a generic “watch for drift” note.\n\nIf you give me one real PV, I can help write the exact watch rule in plain language.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s still the part missing. I don’t need another generic structure — I need one actual example written out so I can see how you’d set the rule.\n\nDo one real PV and make the drift logic explicit:\n- PV\n- normal shift direction\n- expected rate under the normal condition\n- what condition drives that drift\n- what cross-check proves it’s real\n- exact trigger to intervene\n\nIf you want, use something like pH, flow, pressure, temp, whatever — but write it as a real watch rule, not blanks. That’s the useful bit.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 6,
+      "agent_response": "Sure — here’s one concrete example.\n\n### Example PV: **Scrubber pH**\nThis is a good one because the drift direction matters a lot.\n\n- **PV:** scrubber liquor pH\n- **Normal shift direction:** **down slowly**\n- **Expected rate:** about **0.1–0.2 pH per hour**\n- **Driving condition:** increasing acid gas load during the shift, with reagent dosing staying roughly steady\n- **Cross-check:** handheld pH grab sample or a second probe on the same loop\n- **Trigger to intervene:**  \n  - pH drops **faster than about 0.2 pH/hr**\n  - pH keeps falling for **3–4 readings** past the deadband\n  - the probe reading and grab sample disagree by more than **~0.3 pH**\n  - reagent output is already high but pH is still falling\n\n### Real watch rule\n- **Normal:** pH drifts down slowly at the expected rate under normal gas load, and the grab sample agrees\n- **Watch:** pH is still in range but the slope is steeper than usual, or it keeps drifting past the deadband\n- **Act:** pH is falling too fast, the cross-check disagrees, or the dosing system is already working hard and the trend is still going the wrong way\n\n### Why this works\nA slow downward drift is expected here because the scrubber is loading up through the shift.  \nBut if the pH starts falling faster than normal, that can mean:\n- higher-than-usual acid gas load\n- reagent feed problem\n- probe drift\n- mixing issue\n\nSo the rule is not just “pH low = bad.” It’s:\n**expected direction + expected rate + matching cross-check = normal**\n\nIf you want, I can do the same thing for **flow, pressure, temperature, or tank level** — those each have a different “normal drift” pattern.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s the kind of example I meant. Scrubber pH is actually useful because the direction matters and the cross-check makes sense.\n\nThe only thing I’d tighten is the trigger wording — I’d want it tied to the specific operating window, not just a flat number, but that’s close enough to be usable. The part about pH falling while reagent output is already high is exactly the sort of thing I’d watch for. That’s the real signal, not one isolated reading.\n\nIf you can do the same for pressure or flow, that’d be useful too.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    }
+  ]
+}

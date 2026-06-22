@@ -1,0 +1,49 @@
+{
+  "user_id": "user_008",
+  "task": "I’m trying to figure out whether a weather warning is something to take seriously or just noise. Can you help me make a quick way to judge what matters most before I decide what to do?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.466666666666667,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — here’s a quick **weather-warning triage** you can use.\n\n## Take seriously / act now\n- **Tornado warning**\n- **Flash flood warning**\n- **Hurricane warning**\n- **Severe thunderstorm warning** with:\n  - large hail\n  - damaging winds\n  - tornado mention\n- **Evacuation order**\n- **Emergency alert / shelter-in-place order**\n- **Blizzard warning** if you need to travel or could lose power/heat\n\n## Pay close attention\n- **Watch** instead of warning\n- **Flood advisory**\n- **High wind warning**\n- **Winter storm warning**\n- **Heat advisory / excessive heat watch**\n- **Coastal flood warning**\n- **Storm surge watch**\n- **Dense fog advisory** if driving\n\n## Usually lower urgency\n- **Special weather statement**\n- **Weather outlook**\n- **Severe thunderstorm watch** if conditions are possible but nothing is happening yet\n- **Rain advisory** or general storm notice\n- **Seasonal prep reminder**\n\n## Quick rule\nAsk:\n1. **Is it happening now or expected very soon?**\n2. **Does it threaten life, flooding, travel, power, or shelter?**\n3. **Is there a warning, not just a watch or advisory?**\n\nIf the answer is yes to any of those, treat it as important.\n\n## Simple action guide\n- **Warning** → act now\n- **Watch** → get ready\n- **Advisory** → be careful\n- **Statement / outlook** → usually informational\n\nIf you want, I can make this into a **one-line cheat sheet** you can glance at in 5 seconds.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, but that’s still a little too broad. I want something I can use fast, not a list that makes me hunt around.\n\nMake it tighter — like a 3-part check:\n- immediate danger\n- likely damage / outage\n- just noise\n\nAnd tell me what to do if it’s one of those weather alerts that sounds scary but isn’t actually near me. That’s the part people leave out.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Absolutely — here’s a tighter **3-part weather triage**.\n\n## 1) Immediate danger\n**Do now**\n- Tornado warning\n- Flash flood warning\n- Hurricane warning\n- Evacuation order\n- Shelter-in-place / emergency alert\n- Severe thunderstorm warning with **tornado / damaging wind / large hail**\n- Blizzard warning if you’re stuck traveling or could lose heat/power\n\n## 2) Likely damage / outage\n**Get ready**\n- High wind warning\n- Winter storm warning\n- Flood advisory / coastal flood warning\n- Storm surge watch/warning\n- Heat advisory / excessive heat warning\n- Dense fog advisory if driving\n- Severe thunderstorm watch\n- Flood watch\n\n## 3) Just noise\n**Usually ignore for now**\n- Special weather statement\n- Weather outlook\n- Seasonal prep reminder\n- General storm mention with no warning for your area\n- Watch/advisory far from you and not moving your way\n\n## If it sounds scary but isn’t near you\n- **Check the location**\n- If it’s **not your county/area**, and it’s **not moving toward you**, usually **ignore for now**\n- Keep watching only if:\n  - it’s nearby\n  - the track is changing toward you\n  - you’re traveling there\n  - you’re in a flood-prone or exposed area\n\n## Fast rule\n- **Warning + your area = act**\n- **Watch + your area = prepare**\n- **Statement/outlook or far away = ignore unless it moves toward you**\n\nIf you want, I can compress this into a **single-line version** you can read in under 5 seconds.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Better. Still a little soft on the part that matters — **distance** and **what kind of place you’re in**.\n\nI’d want it like this:\n\n**1) Immediate danger**\n- Warning **for my exact area**\n- Or tornado / flash flood / evacuation / shelter order\n- Or storm is already hitting and can trap me\n\n**2) Likely damage / outage**\n- My area is in the path\n- Wind, flood, surge, snow, heat could knock out power, block roads, or flood low spots\n- Not life-or-death right this second, but I’d move things up, charge stuff, stay put\n\n**3) Just noise**\n- Not my area\n- Not moving my way\n- No real local threat, just headline weather\n\n**What to do with scary alerts that aren’t near you:**\n- **Ignore the headline, check the map**\n- If it’s not in your county / zone and not tracking toward you, don’t get worked up\n- Only keep watching if you’re going there, or you’re in a weak spot like flood-prone ground, exposed coast, or bad drainage\n\n**Fast rule:**\n- **My area + warning = act**\n- **My area + watch = get ready**\n- **Else = noise unless it moves**\n\nThat’s the version I’d actually use.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yes — that’s the right level. Here’s the tightened version in the same style:\n\n## 1) Immediate danger\n- Warning **for my exact area**\n- Tornado / flash flood / evacuation / shelter order\n- Storm already hitting and could trap me\n\n## 2) Likely damage / outage\n- My area is in the path\n- Wind / flood / surge / snow / heat could knock out power, block roads, or flood low spots\n- Not life-or-death right now, but I should move things up, charge devices, stay put\n\n## 3) Just noise\n- Not my area\n- Not moving my way\n- No real local threat, just headline weather\n\n## Scary alert, but not near me\n- Ignore the headline, check the map\n- If it’s not in my county/zone and not tracking toward me, don’t overreact\n- Keep watching only if I’m going there, or I’m in a weak spot like flood-prone ground, exposed coast, or bad drainage\n\n## Fast rule\n- **My area + warning = act**\n- **My area + watch = get ready**\n- **Else = noise unless it moves**\n\nIf you want, I can make this into an even shorter **3-line pocket version**.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s the one. Short enough to use, and it keeps the part that matters — my area, not the headline. Good.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    }
+  ]
+}

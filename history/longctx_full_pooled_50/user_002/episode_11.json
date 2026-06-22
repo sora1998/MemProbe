@@ -1,0 +1,49 @@
+{
+  "user_id": "user_002",
+  "task": "I’m trying to get a small property sale back on track after the title company kicked back a few items and the county wants a revised filing. Can you help me figure out the cleanest order to handle the paperwork so I don’t lose time or create another round of corrections?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.666666666666667,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes. Handle it in this order:\n\n## 1) Identify the exact blockers\nGet the title company’s list and the county’s list separately:\n- title exceptions / curative items\n- deed / legal description issues\n- vesting / ownership issues\n- revised filing requirements\n- missing signatures / dates / initials\n- recording format problems\n\nDo not combine them into one vague cleanup list.\n\n## 2) Fix title first if it affects closing\nIf the title issue blocks insurability or recording:\n- cure ownership / vesting problems\n- correct deed language\n- resolve lien or judgment issues\n- get missing releases or affidavits\n- update legal description if needed\n\n**Goal:** make the title company comfortable insuring and the recorder comfortable accepting.\n\n## 3) Then revise the county filing\nPrepare the revised filing only after you know what title needs:\n- correct form\n- correct parcel / legal description\n- correct names\n- correct dates\n- correct acknowledgments / notarization\n- correct fees\n\n**Goal:** avoid filing something the county will reject again.\n\n## 4) Recheck the closing package against both lists\nBefore resubmitting:\n- compare every fix to the title company’s requirements\n- compare every fix to the county’s rejection reason\n- make sure no change created a new mismatch\n\n## 5) Send one clean resubmission\nPackage it with:\n- cover note\n- corrected documents\n- explanation of each fix\n- reference to the original rejection items\n\n## 6) Keep a single version control log\nTrack:\n- document name\n- version\n- what changed\n- who approved it\n- where it was sent\n- date sent\n\n## Rule of thumb\nFix the issue that **blocks insurability or recording** first, then clean up the county filing, then resubmit once.\n\nIf you want, I can turn this into a **tight resubmission checklist** with title / county / closing columns.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Mostly right. But you’re still a little generic.\n\nI’d want this split harder by dependency, because that’s where people waste time:\n\n1) Get the exact rejection language from both sides. Not summaries. The actual comments.\n2) Figure out which item is the root cause and which ones are just fallout. If the county filing got kicked because the legal description or vesting is off, fix that first. If title just wants a curative affidavit or release, that can run in parallel.\n3) Use one master correction set, but don’t submit it until the blocker is cured and the revised filing matches it exactly.\n4) Have the title company confirm in writing they’ll insure/accept the updated package before you re-record or resubmit. Saves a second round of nonsense.\n\nWhat I’d add: a simple priority rule — anything that changes ownership, legal description, or signature authority goes first. Formatting, fees, exhibit tabs, all that is second-tier.\n\nIf you want, give me the actual title exceptions and county rejection notes and I’ll map the order cleanly.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — the cleanest order is **root cause first, fallout second**.\n\n## 1) Get the exact rejection language\nCollect the actual comments from:\n- title company\n- county recorder / filing office\n\nDo not work off summaries.\n\n## 2) Separate root cause from fallout\nClassify each item:\n\n### Root cause\nFix first if it affects:\n- ownership / vesting\n- legal description\n- signature authority\n- deed language\n- recording eligibility\n- insurability\n\n### Fallout\nFix after root cause if it’s just:\n- formatting\n- fees\n- exhibit tabs\n- acknowledgment placement\n- missing attachments caused by the main defect\n\n## 3) Fix the blocker that controls the rest\nPriority order:\n1. ownership / vesting\n2. legal description\n3. signature authority\n4. deed language\n5. title curative items\n6. county formatting / filing issues\n\nIf the county rejection is caused by a title defect, don’t chase the formatting first.\n\n## 4) Build one master correction set\nPrepare one corrected package that matches:\n- title’s curative requirements\n- county’s recording requirements\n\nDo not create separate versions unless absolutely necessary.\n\n## 5) Get written confirmation before resubmission\nAsk title to confirm in writing:\n- the updated package is insurable / acceptable\n- the curative item is satisfied\n- the revised documents are ready for recording or closing\n\n## 6) Then resubmit once\nSend:\n- corrected documents\n- cover note\n- list of what changed\n- reference to each rejection comment\n\n## 7) Keep a control log\nTrack:\n- rejection item\n- root cause or fallout\n- fix prepared\n- who approved it\n- version sent\n- date sent\n\n## Simple priority rule\nAnything that changes:\n- ownership\n- legal description\n- signature authority\n\ngoes first.\n\nEverything else waits until that is cured.\n\nIf you want, I can turn this into a **one-page correction order checklist** with columns for root cause, fix, and resubmission status.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Better, but still a touch too tidy.\n\nWhat I’d want is the actual sequencing logic spelled out in plain English:\n\n- **If the title defect changes insurability or chain of title, stop and cure that first.**\n- **If the county rejection is only because the filing mirrors that defect, don’t touch the filing yet.**\n- **If title’s issue is curable in parallel and doesn’t affect the county’s acceptance, run it alongside the revision prep.**\n- **Nothing gets re-recorded until the legal description, vesting, and signature authority all line up.**\n\nThat’s the part people mess up. They start “fixing” formatting while the underlying ownership language is still wrong, then the county rejects it again and title won’t insure it anyway.\n\nI’d also want a very blunt order of operations:\n1) exact rejection language\n2) identify the controlling defect\n3) cure the controlling defect\n4) reconcile the revised filing to that cure\n5) get written title confirmation\n6) submit once\n\nIf you want to make it actually usable, give me a simple decision tree or checklist format — like **blocker / parallel / dependent / resubmit**. That’s cleaner than another generic list.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Use this order:\n\n## Blocker\n- If the title defect changes **insurability** or **chain of title**, stop and cure that first.\n- If **legal description**, **vesting**, or **signature authority** is wrong, nothing gets re-recorded yet.\n\n## Parallel\n- If title has a **curable issue** that does **not** affect county acceptance, run that cure in parallel with revision prep.\n- If the county rejection is only a mirror of the title defect, don’t touch the filing until the defect is cured.\n\n## Dependent\n- Revised filing depends on the controlling defect being cured.\n- Formatting, fees, exhibit tabs, and attachment cleanup depend on the core language being right first.\n- Nothing gets re-recorded until **legal description + vesting + signature authority** line up.\n\n## Resubmit\n1. Get exact rejection language\n2. Identify the controlling defect\n3. Cure the controlling defect\n4. Reconcile the revised filing to that cure\n5. Get written title confirmation\n6. Submit once\n\n## Simple rule\n- **Title defect affects title or chain** → stop and cure\n- **County rejection mirrors that defect** → wait\n- **Title issue is curable and separate** → run in parallel\n- **Legal description / vesting / authority not aligned** → no resubmission\n\nIf you want, I can turn this into a **one-page blocker / parallel / dependent / resubmit checklist**.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s the structure I wanted. Hard dependency split, no fluff, and the order is usable.\n\nThat blocker / parallel / dependent / resubmit setup is clean enough to work with. The one rule that matters most is still the same: if ownership language, legal description, or signing authority is off, nothing else is worth polishing yet.\n\nThis is fine.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    }
+  ]
+}

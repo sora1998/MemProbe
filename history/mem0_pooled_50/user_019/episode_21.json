@@ -1,0 +1,36 @@
+{
+  "user_id": "user_019",
+  "task": "I’m reviewing a small design/process change and the test package that goes with it, but the evidence is split across a few documents and results. What would you check first to decide whether it’s ready to move forward, and what would make you ask for another round of verification?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.8,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "I’d check these first, in this order:\n\n1. **Is the change cleanly isolated?**  \n   Make sure you can point to exactly what changed and what did not. If the delta is fuzzy, shared with other changes, or bundled with unrelated tweaks, I’d stop there.\n\n2. **Can you trace it to the exact rev/lot/source?**  \n   Confirm the paperwork ties the design/process change to the specific part revision, lot, build, or source used in the test package. Weak traceability is a red flag.\n\n3. **Does the test package cover the failure modes that matter?**  \n   Especially ask: is the missing or split evidence covering the only meaningful verification for a critical failure mode? If yes, it’s not ready.\n\n4. **Is the evidence direct or only inferential?**  \n   If the existing results directly exercise the changed item, that’s stronger. If they’re only proxy evidence or partial confirmation, I’d be cautious.\n\n5. **How hard would rollback be if this is wrong?**  \n   If you can back it out easily and the residual risk is low and boring, that supports moving forward. If rollback is painful or the consequence is expensive, be stricter.\n\nI’d ask for **another round of verification** if any of these are true:\n- the change isn’t isolated cleanly,\n- traceability to the exact rev/lot/source is weak,\n- the missing test is the only real coverage for an important failure mode,\n- the current evidence is mostly confirmatory and not direct,\n- or the cost of being wrong later would be high.\n\nIf you want, I can turn this into a quick **go / no-go checklist** you can use on the review.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Mostly right, but it’s still a bit generic. I’d want the actual decision points tightened around evidence quality, not just “risk” language.\n\nWhat I’d check first:\n- exact delta: what changed, what didn’t\n- traceability: rev/lot/source/build tied to the test article\n- whether the test conditions actually bound the change, not just “passed somewhere”\n- whether the evidence is direct on the changed item or just adjacent/proxy\n- whether any document mismatch means the package can’t be reconciled cleanly\n\nWhat would make me ask for another round:\n- any gap in traceability\n- any missing test on the actual failure mode the change touches\n- any result that only looks good because the test was too mild / not representative\n- split evidence that can’t be stitched into one coherent chain\n- anything that smells like paper coverage without hardware coverage\n\nIf you want this to be useful in a review, turn it into a hard gate list. “Ready” only if every gate is closed; otherwise re-test. The fuzzy part is usually where people sneak junk through.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Agreed — I’d make the first pass a **hard evidence gate**, not a general risk discussion.\n\n### Check first\n1. **Exact delta**\n   - What changed\n   - What did not change\n   - Is the change isolated cleanly, or bundled with other edits?\n\n2. **Traceability**\n   - Can you tie the test article to the exact **rev / lot / source / build**\n   - Can every document in the package be reconciled to that same item?\n\n3. **Evidence quality**\n   - Does the test actually **bound the change**\n   - Is it **direct evidence on the changed item**, or just adjacent/proxy/confirmatory?\n   - Was the condition realistic enough to exercise the failure mode, or too mild to mean much?\n\n4. **Failure-mode coverage**\n   - Is there any missing test that is the **only real coverage** for the failure mode the change touches?\n   - If yes, stop.\n\n5. **Package coherence**\n   - Can all the split documents/results be stitched into one clean chain?\n   - If not, treat it as unresolved, not “good enough.”\n\n### Ask for another round of verification if:\n- traceability has any gap,\n- the delta isn’t isolated,\n- the test doesn’t actually bound the change,\n- the evidence is indirect/proxy only,\n- a critical failure mode lacks direct coverage,\n- or the documents/results can’t be reconciled into one coherent package.\n\n### Hard gate version\n- **Go** only if:\n  - exact delta is clean,\n  - traceability is complete,\n  - test conditions bound the change,\n  - evidence is direct on the changed item,\n  - and the package is internally consistent.\n\n- **Re-test / hold** if any gate is open.\n\nIf you want, I can turn this into a **one-page review checklist with yes/no gates**.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s the right shape. Hard gate is the point.\n\nWhat I’d keep even tighter is this: don’t say “evidence quality” like it’s abstract. Break it into:\n- **direct vs proxy**\n- **representative vs mild**\n- **same article / same build / same rev**\n- **single coherent chain vs stitched-together story**\n\nIf any of those are weak, it’s not ready. The package can look busy and still be junk.\n\nSo the decision is basically:\n- **ready** = exact delta, full traceability, direct coverage of the touched failure mode, and no document contradictions\n- **reverify** = any gap, any proxy-only proof, any test that doesn’t really bound the change, any mismatch in the paper trail\n\nThat’s clean enough to use in a review.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "user_id": "user_006",
+  "task": "I’ve got a time-sensitive network change coming up and I want to avoid turning it into a full-blown incident. Can you help me sketch a tight rollout plan with a rollback path, a few checkpoints, and the first things to verify if something starts acting weird mid-change?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "verbosity_preference",
+      "short": "Wants responses kept tight and efficient",
+      "explanation": "He values speed, control, and efficiency, so he is unlikely to want long-winded help. He would probably prefer responses that get to the point quickly and avoid unnecessary filler. Overexplaining would feel like wasted time to him."
+    },
+    {
+      "idx": 2,
+      "dimension": "directness_preference",
+      "short": "Prefers blunt answers without softening",
+      "explanation": "His skeptical, competitive style suggests he wants clear, unambiguous guidance rather than hedged language. He would likely see excessive caution as evasive or inefficient. Straight answers fit his preference for control and decisive action."
+    },
+    {
+      "idx": 3,
+      "dimension": "format_preference",
+      "short": "Likes structured, actionable output",
+      "explanation": "He seems most likely to respond well to responses that are organized and easy to execute, such as bullets or checklists. That matches his practical, task-focused mindset. Loose, meandering prose would probably frustrate him."
+    },
+    {
+      "idx": 4,
+      "dimension": "detail_level_preference",
+      "short": "Wants the useful essentials, not padding",
+      "explanation": "He likely wants enough context to act, but not exhaustive background unless it helps him win or avoid mistakes. He is efficiency-driven, so extra caveats only matter when they change the decision. He would probably skip anything that does not affect the outcome."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Accepts pushback only if it is sharp and useful",
+      "explanation": "He is skeptical and self-serving, so he probably does not enjoy moralizing or vague objections. But if the pushback is concrete, efficient, and clearly tied to risk or leverage, he is more likely to respect it. Weak or overly gentle correction would likely be ignored."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — use a **small-change rollout plan** with explicit checkpoints and a rollback trigger.\n\n## 1) Before the change\n- Confirm the exact change\n- Confirm the maintenance window\n- Identify affected devices, VLANs, routes, services, and users\n- Capture current state:\n  - config backup\n  - interface status/counters\n  - routing table / neighbors\n  - HA/failover state\n  - DNS/auth/time if relevant\n- Make sure rollback is tested in principle, not just “we have one”\n\n## 2) Define success criteria\nWrite these down before starting:\n- link stays up\n- no counter spike\n- routing converges\n- service checks pass\n- latency/loss stays within tolerance\n- no failover loop\n- no auth/DNS errors\n\n## 3) Rollout in small steps\nIf possible:\n1. apply change to one noncritical node or segment\n2. verify\n3. expand to the next node/segment\n4. verify again\n5. only then complete the rollout\n\nIf the change is not safely incremental, treat it as high risk and shorten the rollback threshold.\n\n## 4) Checkpoints during the change\nAt each step, check:\n- interface status and error counters\n- routing/neighbor state\n- service reachability\n- logs for repeats\n- HA/failover state\n- DNS/auth/time if the change could touch them\n\n## 5) Rollback triggers\nStop and roll back if you see:\n- link flaps\n- counters increasing\n- route loss or neighbor drops\n- asymmetric traffic\n- failover bouncing\n- DNS/auth failures\n- service errors that persist past a short grace period\n\n## 6) First things to verify if it gets weird\nIn order:\n1. **Is the physical link still stable?**\n2. **Did the route/neighbor state change?**\n3. **Is return traffic coming back?**\n4. **Did DNS/auth/time break?**\n5. **Did HA/failover move unexpectedly?**\n6. **Did the config actually apply as intended?**\n\n## 7) Rollback path\nRollback should be:\n- exact previous config\n- exact previous routing/failover state\n- exact previous service placement if applicable\n\nDo not improvise rollback under pressure. If rollback is unclear, the rollout is not ready.\n\n## 8) After rollback or success\n- validate for a defined observation window\n- compare counters/logs before and after\n- document what changed and what was observed\n\n---\n\n## Short operator version\n- Backup current state\n- Define success and rollback triggers\n- Change one piece at a time\n- Verify counters, routes, logs, HA, and service health at each step\n- Roll back on flaps, counter growth, route loss, or persistent errors\n- Validate for a set window before declaring success\n\nIf you want, I can turn this into a **copy-paste change runbook** with checkboxes and rollback points.",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly tight and efficient: it uses short sections, bullets, and a final \"Short operator version.\" A bit more verbose than necessary, but still focused."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Generally direct and blunt, e.g. \"Do not improvise rollback under pressure\" and \"If rollback is unclear, the rollout is not ready.\" Some mild softening remains in phrases like \"If you want, I can...\"."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable: numbered steps, checkpoints, rollback triggers, and a concise operator summary make it easy to execute."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Gives the useful essentials without much padding, focusing on what to check and when to stop. A few items are broad, but it avoids deep background."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Pushback is concrete and useful rather than moralizing: \"treat it as high risk,\" \"shorten the rollback threshold,\" and \"If rollback is unclear, the rollout is not ready.\""
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Absolutely — here’s a **copy-paste change window runbook** you can use under pressure.\n\n---\n\n# Network Change Runbook\n\n## Change\n- **Change ID:**  \n- **Date / window:**  \n- **Owner:**  \n- **Devices / segments affected:**  \n- **Expected impact:**  \n- **Rollback method:**  \n\n---\n\n## 1) Pre-checks\nRun these before touching anything.\n\n### State capture\n- [ ] Save current config\n- [ ] Capture interface status\n- [ ] Capture error/discard counters\n- [ ] Capture routing table / default route\n- [ ] Capture neighbor adjacencies\n- [ ] Capture HA / failover state\n- [ ] Check syslog for the last few minutes\n- [ ] Confirm app reachability from a real client path\n\n### Pre-check pass criteria\n- [ ] Interfaces are up and stable\n- [ ] Counters are not actively increasing\n- [ ] Neighbors are established\n- [ ] Routes/default route are correct\n- [ ] No HA role flip in progress\n- [ ] No repeated errors in logs\n- [ ] App/service reachability is normal\n\n### Stop before change if:\n- counters are climbing\n- links are flapping\n- neighbors are unstable\n- route table is already wrong\n- HA is already moving\n- logs show repeated errors\n- app reachability is already degraded\n\nIf any of those are true, **do not start the change**.\n\n---\n\n## 2) Change steps\nDo the smallest safe piece first.\n\n### Step 1\n- [ ] Apply change to one device / one segment / one side only\n\n### Checkpoint after Step 1\nVerify:\n- [ ] interface up/down state\n- [ ] error/discard counters\n- [ ] neighbor adjacencies\n- [ ] route table / default route\n- [ ] actual app reachability\n- [ ] syslog for the last few minutes\n- [ ] any HA role flip\n\n### Step 1 pass criteria\n- [ ] Link remains stable\n- [ ] Counters are not increasing\n- [ ] Neighbors remain up\n- [ ] Routes are correct\n- [ ] App reachability is normal\n- [ ] No new HA movement\n- [ ] No repeated errors in logs\n\n---\n\n## 3) Rollback decision point\nRollback immediately if any of these happen:\n- link flaps\n- counters increase meaningfully\n- neighbor adjacency drops\n- route/default route changes unexpectedly\n- app reachability fails\n- HA flips unexpectedly\n- logs show repeated new errors\n- failover starts bouncing\n\nIf the change is **risky**, stop at the first checkpoint and do not continue until the first step is clean.\n\n### What makes it risky\n- core path or default route change\n- HA/failover change\n- VLAN/trunk change\n- firewall/NAT change\n- routing protocol change\n- MTU change\n- anything touching DNS/auth dependency paths\n\nFor risky changes, **one bad checkpoint is enough to stop**.\n\n---\n\n## 4) Rollback steps\n- [ ] Revert to previous config\n- [ ] Restore previous route/default route state\n- [ ] Restore previous HA/failover state\n- [ ] Restore previous service placement if applicable\n- [ ] Recheck interface status\n- [ ] Recheck counters\n- [ ] Recheck neighbor adjacencies\n- [ ] Recheck app reachability\n- [ ] Recheck syslog for new errors\n\nRollback is not done until the original state is stable again.\n\n---\n\n## 5) Post-change verify\nAfter all steps are complete:\n\n- [ ] Interfaces remain up\n- [ ] Counters are stable\n- [ ] Neighbors are established\n- [ ] Routes/default route are correct\n- [ ] App reachability is confirmed from a real client path\n- [ ] Syslog is clean for the last few minutes\n- [ ] No HA role flip\n- [ ] No failover loop\n- [ ] No new DNS/auth/time issues if relevant\n\n### Validation window\n- [ ] Observe for: ___ minutes\n- [ ] No new flaps, counter growth, or service errors during window\n\n---\n\n## Short operator version\n1. Capture state  \n2. Check links/counters/routes/neighbors/HA/logs/app reachability  \n3. Make one small change  \n4. Verify immediately  \n5. Roll back on flaps, counter growth, route loss, app failure, or HA churn  \n6. Validate for a set window\n\nIf you want, I can turn this into a **one-page checklist with blanks** you can paste into a change ticket.",
+      "score": 4.4,
+      "summary": "mean=4.40 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:3, 5:2}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Tight and efficient overall: it says \"copy-paste change window runbook\" and ends with a \"Short operator version\". Slightly long, but mostly avoids filler."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly blunt and direct: \"Do not start the change,\" \"Rollback immediately,\" and \"one bad checkpoint is enough to stop\". Some softening remains in explanatory framing."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable: clear numbered sections, checkboxes, checkpoints, pass criteria, and a short operator version."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Focuses on essentials needed to act: state capture, checkpoints, rollback triggers, and post-change verify. Little unnecessary background."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Pushback is concrete and useful: it names specific stop conditions like \"counters are climbing,\" \"links are flapping,\" and \"route/default route is already wrong.\" It is firm, though not especially sharp."
+        }
+      ]
+    }
+  ]
+}

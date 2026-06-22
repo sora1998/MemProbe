@@ -1,0 +1,23 @@
+{
+  "user_id": "user_029",
+  "task": "I’m trying to make sense of a simple battery setup that’s behaving inconsistently, and I want to check my reasoning before I go in circles. If I have two identical batteries and I wire them in series versus parallel, what changes in voltage and current capacity should I expect, and what’s the safest way to think about the load side so I don’t misread the result?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.4,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Here’s the clean way to think about it:\n\n### Two identical batteries in **series**\n- **Voltage adds**\n  - Example: two 12 V batteries in series → **24 V**\n- **Current capacity stays the same**\n  - The **Ah rating does not add** in series\n  - If each battery is 100 Ah, the series pair is still **100 Ah at 24 V**\n- **Use case**\n  - You want a higher system voltage for the same load current\n\n### Two identical batteries in **parallel**\n- **Voltage stays the same**\n  - Example: two 12 V batteries in parallel → **12 V**\n- **Current capacity adds**\n  - The **Ah rating adds**\n  - If each battery is 100 Ah, the parallel pair is **200 Ah at 12 V**\n- **Use case**\n  - You want longer runtime at the same voltage\n\n---\n\n## Safest way to think about the load side\nThe load “sees”:\n- **Series:** higher voltage available, same amp-hour capacity\n- **Parallel:** same voltage available, more amp-hour capacity\n\nA good rule:\n- **Voltage determines whether the load can run**\n- **Capacity determines how long it can run**\n- **Current is whatever the load draws**, up to what the battery setup can supply\n\n---\n\n## Common mistake to avoid\nDon’t confuse:\n- **Battery capacity** (Ah, how much energy is stored over time)\nwith\n- **Current drawn by the load** (A, how fast it’s being used)\n\nAnd don’t assume “more batteries” always means “more voltage” — that only happens in **series**.\n\n---\n\n## Quick example\nIf you have two 12 V, 100 Ah batteries:\n\n- **Series:** 24 V, 100 Ah\n- **Parallel:** 12 V, 200 Ah\n\nIf you want, I can also give you a simple diagram and a quick test procedure for checking whether a real setup is wired series or parallel without misreading the meter.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s the right breakdown.\n\nSeries: voltage adds, Ah stays the same.\nParallel: voltage stays, Ah adds.\n\nAnd the load side — yeah, don’t overthink it. The load doesn’t care about the battery labels, it cares about what voltage is actually sitting across it and how much current it pulls. So if you’re checking a weird setup, measure the terminals under load, not just open-circuit. Open-circuit numbers can look fine and still be garbage once current flows.\n\nThat’s the part people miss. Voltage tells you if it’ll run. Current capacity tells you how long before it falls on its face.\n\nIf you’re trying to avoid misreading it in the field, I’d treat it like this:\n- series = higher system voltage\n- parallel = same system voltage, more reserve\n- load current is determined by the load, not by whatever the battery bank ‘should’ be able to do on paper\n\nI’ve seen enough bad maintenance claims to know the paper version means nothing until you check it under actual load.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    }
+  ]
+}

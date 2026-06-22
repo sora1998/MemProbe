@@ -1,0 +1,62 @@
+{
+  "user_id": "user_028",
+  "task": "I’ve got a property issue that needs attention before it gets more expensive, and I’m trying to decide where to start. Can you help me sort the immediate next steps from the things that can wait until I know more?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.6,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — for a property issue, I’d sort it like this:\n\n### Act now\nAnything with:\n- a **deadline**\n- **default / acceleration / foreclosure**\n- **past due / cure / notice of intent**\n- **escrow shortage**\n- **insurance lapse**\n- **tax / lien**\n- any mention of **legal action** or **bank action**\n\n### Read next\nAnything from:\n- the **county**\n- **HOA**\n- **attorney**\n- **title company**\n- **lender/servicer** if it doesn’t have those urgent words above\n\n### Can wait\n- routine statements\n- servicing notices\n- ads\n- duplicate copies\n- informational mail with no deadline or penalty language\n\nIf you want, send me the **titles or first lines** of the notices, and I’ll help you sort them into:\n1. **read immediately**\n2. **read next**\n3. **safe to set aside for now**",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "That’s the right idea, but it’s still a little broad. I know the obvious red flags. What I need is the next layer — how to spot the stuff that looks routine but still bites you later.\n\nI’ve got a stack here. Some of it is from the county, some from the servicer, maybe one from insurance. Tell me what words in the first line actually matter, and what’s just noise. Deadline, amount due, appeal rights, cure period, inspection, reassessment — that sort of thing. And if there’s anything that can sit for a day or two without costing me, separate that cleanly.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yep. Here’s the tighter version.\n\n## Read immediately\nIf the first line or subject includes any of these, don’t let it sit:\n\n- **deadline / due by / must respond**\n- **amount due / balance due / payment required**\n- **cure period / notice to cure**\n- **appeal rights / protest deadline**\n- **inspection / reinspection / failed inspection**\n- **reassessment / valuation / tax increase**\n- **insurance cancellation / lapse / nonrenewal**\n- **escrow shortage / escrow analysis**\n- **notice of default / intent to lien / foreclosure**\n- **legal action / enforcement / compliance order**\n\n## Read next\nThese are often routine-looking, but they can still matter:\n\n- **county notice**\n- **servicer notice**\n- **HOA violation / compliance**\n- **tax assessment / reassessment**\n- **insurance policy change**\n- **inspection report**\n- **title / lien / recording notice**\n- **escrow / annual analysis**\n- **change in terms / servicing transfer**\n\n## Can sit for a day or two\nUsually safe unless the first line has one of the trigger words above:\n\n- duplicate copies\n- monthly statements\n- informational inserts\n- ads / offers\n- routine account summaries\n- generic “important information” mail with no deadline, amount due, or action required\n\n## The words that actually matter\nIf you’re scanning first lines, these are the ones I’d stop on:\n\n- **deadline**\n- **amount due**\n- **appeal**\n- **cure**\n- **inspection**\n- **reassessment**\n- **lien**\n- **default**\n- **noncompliance**\n- **cancellation**\n- **shortage**\n- **transfer**\n- **enforcement**\n\n## The words that are often noise\nNot always harmless, but not enough by themselves:\n\n- **important**\n- **notice**\n- **update**\n- **information**\n- **annual**\n- **summary**\n- **review**\n- **statement**\n\nIf you want, paste the **first line or subject line** of each item in the stack, and I’ll sort them into:\n1. **drop everything**\n2. **read today**\n3. **can wait**",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Closer. But I’m not asking for the billboard version. I want the tells that hide in plain sight.\n\nWhat I’d use:\n- **appeal rights** = usually means a clock is running, even if it sounds bureaucratic\n- **cure period** = never “routine” if it’s from servicer, HOA, or county enforcement\n- **inspection / reinspection** = can be harmless, but if it mentions failure, access, or compliance, it moves up\n- **reassessment / valuation** = not urgent same hour, but not something to park for long; can change tax bill\n- **amount due / balance due** = obvious, but if it’s buried in the first line, that’s the whole point\n- **notice of intent** = treat as serious even if no hard deadline is front and center\n- **recording / lien / title** = don’t shrug these off; they can become your problem later\n\nNoise words:\n- **important**, **annual**, **update**, **information**, **summary** — mostly padding unless paired with one of the trigger words\n\nWhat I still want is the split I can actually use at the table:\n1. **same day**\n2. **within 48 hours**\n3. **can wait a few days**\n\nAnd if you can, give me the county vs servicer vs insurance angle too, because those are not the same animal.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yes — here’s the tighter split I’d use.\n\n## Same day\nRead now if the first line has any of these, especially from the **servicer** or **county**:\n\n- **appeal rights**\n- **cure period**\n- **notice of intent**\n- **default / acceleration / foreclosure**\n- **amount due / balance due**\n- **deadline / must respond / due by**\n- **lien / recording / title issue**\n- **inspection failed / access denied / compliance**\n- **insurance cancellation / nonrenewal / lapse**\n- **escrow shortage** if it’s tied to a payment change or past due amount\n\n## Within 48 hours\nNot always an emergency, but don’t park it:\n\n- **reassessment / valuation**\n- **tax assessment**\n- **inspection / reinspection** when it’s not clearly a failure notice\n- **county notice** with appeal language\n- **HOA compliance** that doesn’t say immediate fine, but hints at enforcement\n- **servicing transfer / change in terms**\n- **recording notice** or anything that affects title, lien status, or ownership records\n\n## Can wait a few days\nUsually safe to set aside briefly if there’s no trigger language:\n\n- **annual**\n- **update**\n- **information**\n- **summary**\n- routine statements\n- duplicate copies\n- generic notices with no deadline, amount due, appeal rights, cure language, or enforcement language\n\n## How I’d treat the source\n\n### County\nUsually more likely to affect **taxes, assessment, appeal rights, liens, or enforcement**.\n- If it says **appeal**, **reassessment**, **lien**, or **deadline**, move it up fast.\n\n### Servicer / lender\nMost likely to bite you with **payment changes, default language, cure periods, escrow, foreclosure, or transfer**.\n- If it mentions **amount due**, **past due**, **cure**, **default**, or **escrow shortage**, that’s same-day.\n\n### Insurance\nUsually about **coverage changes**, but it matters if it says **cancellation**, **nonrenewal**, **lapse**, or **proof required**.\n- If coverage is threatened, don’t let it sit.\n\nIf you want, paste the **first line / subject line** of each notice and I’ll sort them into:\n1. **same day**\n2. **within 48 hours**\n3. **can wait a few days**",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s the useful split. Still a little too clean, though.\n\nWhat I’d actually do:\n\n**Same day**\n- anything from **county** with **appeal rights, reassessment, lien, enforcement, notice of intent, deadline**\n- anything from **servicer** with **cure period, amount due, balance due, default, escrow shortage, nonpayment, acceleration**\n- anything from **insurance** with **cancellation, nonrenewal, lapse, proof required**\n\n**Within 48 hours**\n- **inspection / reinspection** if it’s not clearly just routine scheduling\n- **recording / title / ownership record** stuff\n- **tax assessment / valuation** if it’s not already in appeal-window territory\n- **servicing transfer / change in terms**\n- HOA compliance if it smells like it might turn into a fine or violation notice\n\n**Can wait a few days**\n- **annual, update, information, summary**\n- routine statements\n- duplicate copies\n- generic notices with no number, no date, no action, no consequence\n\nOne thing I’d add: if the first line has a polite word and a hard noun together — like **important notice**, **annual review**, **information regarding** — that’s usually where they hide the hook. The soft word is cover. The hard word is the real item.\n\nIf you want the next layer, I’d sort by **what kind of damage happens if you miss it**: money today, tax later, title problem, or coverage problem. That’s usually the cleanest way to triage it fast.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 4,
+      "agent_response": "Yes — that’s the right way to triage it.\n\n## Fast sort by damage\n\n### 1) Money today\nTreat as **same day** if it has:\n- **amount due / balance due**\n- **past due / nonpayment**\n- **default / acceleration**\n- **cure period**\n- **escrow shortage**\n- **late fee / penalty**\n- **deadline / due by / must respond**\n\n### 2) Tax later\nUsually **within 48 hours**, but faster if appeal time is short:\n- **appeal rights**\n- **reassessment / valuation**\n- **tax assessment**\n- **change in assessed value**\n- **county notice** with a date or protest window\n\n### 3) Title / ownership problem\nUsually **within 48 hours**:\n- **lien**\n- **recording**\n- **title**\n- **ownership record**\n- **notice of intent to lien**\n- **enforcement** if it affects property rights\n\n### 4) Coverage problem\nUsually **same day**:\n- **insurance cancellation**\n- **nonrenewal**\n- **lapse**\n- **proof required**\n- **coverage denied / suspended**\n\n## The “looks polite but isn’t” pattern\nIf the first line has a soft opener plus a hard noun, don’t let the soft word fool you:\n\n- **important notice**\n- **annual review**\n- **information regarding**\n- **update concerning**\n- **summary of changes**\n\nThose are often just wrappers around the real issue.\n\n## Practical rule\nIf the first line has:\n- a **date**\n- a **dollar amount**\n- a **right to appeal**\n- a **cure or response period**\n- a **lien / title / insurance / default** word\n\nthen it’s not junk.\n\nIf you want, paste the **first line** of each notice and I’ll sort them into:\n1. **same day**\n2. **within 48 hours**\n3. **can wait a few days**",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s the split I’d use too.\n\nThe part that matters is the damage class, not the pretty label:\n\n- **Money today** → same day\n- **Coverage problem** → same day\n- **Tax later** → within 48 hours, maybe same day if the appeal clock is short\n- **Title / ownership problem** → within 48 hours\n\nAnd yeah, the soft opener is usually just camouflage. “Important notice,” “annual review,” “information regarding” — that’s boilerplate until the hard noun shows up.\n\nIf I’m sitting at the table with a stack, I’d scan for:\n- **date**\n- **dollar amount**\n- **appeal rights**\n- **cure / response period**\n- **lien / title / default / insurance**\n\nIf one of those is in the first line, it doesn’t sit around.\n\nThat’s usable.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    }
+  ]
+}

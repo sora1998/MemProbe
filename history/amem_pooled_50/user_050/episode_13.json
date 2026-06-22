@@ -1,0 +1,36 @@
+{
+  "user_id": "user_050",
+  "task": "I had a weird thing happen at work and I want to know what’s normal before I make a bigger deal out of it. If a card payment goes through but the receipt doesn’t print right, what would you check first and what would you treat as the real sign that something actually went wrong?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.1,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "First thing: **check the terminal/payment screen or transaction log**, not just the paper receipt.\n\nWhat I’d look at first:\n1. **Approved vs. declined status** on the terminal  \n2. **Transaction ID / auth code / last 4 digits / amount**  \n3. **Whether the card was actually charged** in the system or on the customer’s card app  \n4. **Printer status** — paper jam, out of paper, error message, partial print\n\nWhat counts as the real sign something went wrong:\n- The terminal shows **declined**, **voided**, or **pending/failed**\n- The transaction **doesn’t appear in the batch/report**\n- The customer’s card app/bank shows **no charge** after a reasonable wait\n- The amount or merchant name is **wrong**\n- The terminal says approved, but the system **can’t match it to a transaction record**\n\nIf the terminal says **approved** and the transaction is in the log, a bad receipt print is usually just a **printer issue**, not a payment issue.\n\nIf you want, I can give you a **30-second checklist** for handling it without overreacting.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that part’s fine. But what if the screen says approved and the receipt only half-prints or cuts off the amount? I want the part that actually matters before I hand over anything or call it a problem. Like, what exact thing on the screen or report do you trust first?",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.0
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Trust the **transaction record on the screen/report**, not the paper receipt.\n\nWhat I’d trust first:\n- **Approved status**\n- **Exact amount**\n- **Auth code / transaction ID**\n- **Timestamp**\n- **Last 4 digits** if shown\n\nIf those match, a half-printed receipt is usually just a **printer problem**, not a payment problem.\n\nWhat actually matters as a problem:\n- screen says **approved** but the **transaction doesn’t show in the log/report**\n- **amount on the screen** doesn’t match what should’ve been charged\n- no **auth code/transaction ID**\n- it shows **pending** or **reversed** instead of approved\n- the batch/report later doesn’t include it\n\nSo the short version: **screen/report first, receipt second**.  \nIf you want, I can turn that into a tiny “what to check first” checklist you can keep in your head.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. Approved on the screen, exact amount, auth code or transaction ID, timestamp. That’s the thing. Receipt can be garbage and still not mean much. If the log has all that and it matches, I’m not treating it like a payment problem. If the log’s missing it, or it says pending/reversed, then yeah, that’s the real issue.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    }
+  ]
+}

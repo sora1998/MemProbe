@@ -1,0 +1,137 @@
+{
+  "user_id": "user_006",
+  "task": "I need to write up a clean incident summary for a network problem that already got fixed, but I want it to hold up if someone pushes back later. What should I include so the timeline, evidence, and final cause are clear without making it longer than it needs to be?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "verbosity_preference",
+      "short": "Wants responses kept tight and efficient",
+      "explanation": "He values speed, control, and efficiency, so he is unlikely to want long-winded help. He would probably prefer responses that get to the point quickly and avoid unnecessary filler. Overexplaining would feel like wasted time to him."
+    },
+    {
+      "idx": 2,
+      "dimension": "directness_preference",
+      "short": "Prefers blunt answers without softening",
+      "explanation": "His skeptical, competitive style suggests he wants clear, unambiguous guidance rather than hedged language. He would likely see excessive caution as evasive or inefficient. Straight answers fit his preference for control and decisive action."
+    },
+    {
+      "idx": 3,
+      "dimension": "format_preference",
+      "short": "Likes structured, actionable output",
+      "explanation": "He seems most likely to respond well to responses that are organized and easy to execute, such as bullets or checklists. That matches his practical, task-focused mindset. Loose, meandering prose would probably frustrate him."
+    },
+    {
+      "idx": 4,
+      "dimension": "detail_level_preference",
+      "short": "Wants the useful essentials, not padding",
+      "explanation": "He likely wants enough context to act, but not exhaustive background unless it helps him win or avoid mistakes. He is efficiency-driven, so extra caveats only matter when they change the decision. He would probably skip anything that does not affect the outcome."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Accepts pushback only if it is sharp and useful",
+      "explanation": "He is skeptical and self-serving, so he probably does not enjoy moralizing or vague objections. But if the pushback is concrete, efficient, and clearly tied to risk or leverage, he is more likely to respect it. Weak or overly gentle correction would likely be ignored."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Include just enough to make the story **reproducible, time-bound, and evidence-backed**. A good incident summary usually has these parts:\n\n### 1) Incident basics\n- **Title / ID**\n- **Date and time range** of the incident\n- **Systems / services affected**\n- **Severity / business impact** in one sentence\n\n### 2) What happened\n- A short, plain-language description of the symptom\n- What users or monitoring saw\n- Scope: who/what was impacted, and how broadly\n\n### 3) Timeline\nKeep this as a tight sequence of **observable events**, not guesses:\n- Detection time\n- Key investigation milestones\n- Mitigation actions\n- Time service was restored\n- Time of full recovery / validation\n\nFor each entry, include:\n- **Timestamp**\n- **Action or observation**\n- **Source** if useful: monitoring alert, log, ticket, packet capture, user report\n\n### 4) Evidence\nThis is what makes it hold up later:\n- Relevant logs, alerts, graphs, traces, packet captures, config diffs\n- Exact error messages or metrics\n- Any before/after comparisons\n- If possible, reference where the evidence lives rather than pasting everything inline\n\n### 5) Root cause / final cause\nState the final cause clearly and specifically:\n- What failed\n- Why it failed\n- Why it caused the observed impact\n- Avoid vague wording like “network issue” or “intermittent problem”\n\nIf there were contributing factors, separate them from the primary cause.\n\n### 6) Resolution\n- What fixed it\n- Whether the fix was temporary mitigation or permanent remediation\n- Any validation performed to confirm recovery\n\n### 7) Prevention / follow-up\n- Corrective actions\n- Owners and due dates if relevant\n- Monitoring or config changes to prevent recurrence\n\n---\n\n## To keep it short but defensible\nUse this structure:\n\n**Summary:** 2–3 sentences  \n**Impact:** 1–2 bullets  \n**Timeline:** 4–8 bullets max  \n**Evidence:** 3–5 bullets max  \n**Cause:** 1 short paragraph  \n**Resolution:** 1 short paragraph  \n**Follow-up:** 1–3 bullets\n\n---\n\n## Writing tips\n- Use **facts, not interpretations** in the timeline.\n- Separate **symptom**, **root cause**, and **resolution**.\n- Use exact times and time zone.\n- If you don’t know something, say **“not yet confirmed”** rather than guessing.\n- Don’t bury the final cause at the end; make it explicit.\n\nIf you want, I can give you a **one-page incident summary template** you can paste into a doc or ticket.",
+      "score": 4.4,
+      "summary": "mean=4.40 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:3, 5:2}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Keeps it fairly tight with phrases like \"Include just enough\" and \"Keep this as a tight sequence\" plus a compact summary format, though it still gives a fairly full checklist."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly direct and unsoftened: \"State the final cause clearly and specifically\" and \"Avoid vague wording\". It does include some cautious language like \"If you don’t know something, say 'not yet confirmed'\"."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable, with explicit sections, bullet points, and a reusable format: \"Summary / Impact / Timeline / Evidence / Cause / Resolution / Follow-up\"."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Directly matches the preference for essentials over padding: \"Include just enough,\" \"Keep it short but defensible,\" and \"4–8 bullets max\" / \"3–5 bullets max\"."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Pushback is concrete and useful rather than moralizing: \"Avoid vague wording like 'network issue'\" and \"If you don’t know something, say 'not yet confirmed' rather than guessing.\" It does not really challenge the user, but the corrective guidance is sharp and practical."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — if you want it to survive scrutiny, keep it **fact-only, time-stamped, and source-backed**.\n\n### Include\n- **Exact incident window**: start/end times with timezone\n- **Impact**: one line on what was affected and the business effect\n- **Observable timeline only**:\n  - alert fired\n  - first confirmation\n  - isolation step\n  - mitigation/fix applied\n  - service restored\n  - validation complete\n- **Evidence references**:\n  - alert IDs\n  - log names/paths\n  - packet captures\n  - switch/router timestamps\n  - config diffs\n  - screenshots/graphs\n- **Final cause**:\n  - the specific failed component/config/path\n  - why it caused the outage\n- **Resolution**:\n  - what restored service\n  - temporary vs permanent\n- **Residual risk / follow-up**:\n  - only if something remains open\n\n### Leave out\n- speculation\n- blame\n- long narrative\n- duplicate detail\n- vague terms like “network issue” or “intermittent problem”\n\n### Tight structure\n- **Summary:** 1–2 sentences\n- **Impact:** 1 bullet\n- **Timeline:** timestamp / event / evidence source\n- **Cause:** 1 short paragraph\n- **Fix:** 1 short paragraph\n- **Validation:** 1–2 bullets\n- **Follow-up:** only if needed\n\n### Rule of thumb\nIf someone challenges it later, each key statement should answer:\n**What happened? When? How do we know?**\n\nIf you want, I can give you a **fill-in-the-blank incident summary template** in that exact format.",
+      "score": 4.6,
+      "summary": "mean=4.60 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:2, 5:3}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very tight and efficient: uses short bullets, says to keep it \"fact-only, time-stamped, and source-backed,\" and explicitly says \"Leave out\" speculation and \"long narrative.\""
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly blunt and direct, with clear imperatives like \"Include\" and \"Leave out\" and no hedging. Minor softness remains in phrases like \"if you want it to survive scrutiny\" and \"If you want, I can give you...\""
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable: provides headings, bullet lists, and a \"Tight structure\" section with exact fields like \"Summary,\" \"Impact,\" \"Timeline,\" \"Cause,\" and \"Fix.\""
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Focuses on the essentials needed to defend the incident summary later, such as \"Exact incident window,\" \"Evidence references,\" and \"Final cause,\" while explicitly excluding padding like \"duplicate detail\" and \"long narrative.\""
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Pushback is concrete and useful: it warns against \"speculation,\" \"blame,\" and vague terms like \"network issue,\" tying the correction to scrutiny and evidence. It is not especially sharp, but it is efficient and clearly risk-based."
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "agent_response": "Exactly. The strongest version is **claim → timestamp → source**.\n\nA concise, defensible incident summary should include:\n\n- **Summary**: what happened, when, and to what system\n- **Impact**: one line on business/user effect\n- **Timeline**: each entry as **event + exact time + evidence source**\n- **Cause**: the specific failed component/config/path and why it caused the outage\n- **Fix**: what restored service, and whether it was temporary or permanent\n- **Validation**: how you confirmed recovery held\n- **Follow-up**: only any remaining risk or open action\n\n### Rule to keep it bulletproof\nIf a sentence can’t be tied to a **log, alert, screenshot, config diff, packet capture, or timestamped observation**, don’t include it.\n\n### A tight format\n- **Summary:** 1–2 sentences  \n- **Impact:** 1 bullet  \n- **Timeline:** timestamp / event / source  \n- **Cause:** 1 short paragraph  \n- **Fix:** 1 short paragraph  \n- **Validation:** 1–2 bullets  \n- **Follow-up:** only if needed\n\n### Example of the style\n- **09:14 UTC** — Uplink link state changed to down on switch SW-12; alert ID #48321 fired.\n- **09:16 UTC** — Packet loss observed on path X; monitoring graph and interface counters increased.\n- **09:28 UTC** — Replaced failed transceiver on port Gi1/0/24; link restored.\n- **09:40 UTC** — Validation passed: interface stable, loss returned to baseline, no further alerts.\n\n### Cause wording\nBe specific:\n- “Failed SFP on SW-12 port Gi1/0/24 caused uplink loss and downstream packet loss”\nnot\n- “Network issue”\n- “Bad hardware”\n- “Misconfig”\n\nIf you want, I can turn this into a **one-page fill-in template** you can reuse for future incidents.",
+      "score": 4.4,
+      "summary": "mean=4.40 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:3, 5:2}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Keeps it fairly tight with phrases like \"concise, defensible incident summary\" and \"A tight format,\" but still includes several sections and examples, so not maximally terse."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly blunt and direct: \"The strongest version is claim → timestamp → source\" and \"Be specific\". It avoids hedging, though \"If you want\" softens the close a bit."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable: clear bullet list, explicit sections, and a reusable format. It gives an easy-to-execute template."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Focuses on essentials only: summary, impact, timeline, cause, fix, validation, follow-up, plus the rule to exclude unsupported claims. It explicitly says \"only any remaining risk or open action.\""
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Pushback is concrete and useful rather than moralizing: \"If a sentence can’t be tied to a log... don’t include it\" and specific examples of good vs bad cause wording. It is firm, though not especially sharp."
+        }
+      ]
+    }
+  ]
+}

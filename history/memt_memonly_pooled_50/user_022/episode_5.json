@@ -1,0 +1,49 @@
+{
+  "user_id": "user_022",
+  "task": "I’m trying to set up a simple live-check routine for a small process that can drift over a shift, and I want it to be practical rather than overkill. What would you watch in real time, and how would you decide when something is just normal variation versus worth acting on?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.466666666666667,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "I’d keep it very simple and use a **three-part live check**:\n\n1. **Power/inputs stable?**  \n   - Watch the main supply or feed condition first.  \n   - If you have a hard threshold, use it. Example: voltage below a set floor, flow/pressure dropping, or input rate fluctuating sharply.\n\n2. **Sensor/process readings trending normally?**  \n   - Track the few measurements that best represent the process.  \n   - Compare them to a short baseline from the start of the shift, not just the last reading.  \n   - Look for **trend**, not noise: steady drift, step change, or repeated spikes.\n\n3. **Recent workflow/operator changes?**  \n   - Check whether anything changed recently: settings, material, operator action, cleaning, maintenance, batch change, etc.  \n   - A lot of “process problems” are really workflow changes showing up first.\n\n### How to tell normal variation vs worth acting on\nUse a simple rule:\n\n- **Normal variation** if the reading is:\n  - bouncing around within the usual band,\n  - not trending in one direction,\n  - and no recent change explains it.\n\n- **Act on it** if you see any of these:\n  - **Threshold breach**: it crosses a known limit.\n  - **Persistent drift**: it keeps moving in one direction over multiple checks.\n  - **Step change**: sudden jump after a change in setup, operator action, or material.\n  - **Mismatch**: one sensor or stage disagrees with the others.\n  - **Repetition**: the same deviation appears more than once in the same shift.\n\n### Practical decision rule\nIf you’re short on time, do this:\n\n- **First check order/timestamp**: is the change real and when did it start?\n- **Then compare to the last good state**: what changed by one variable?\n- **Then check consistency** across similar runs/operators/units.\n\nIf you still can’t point to a clear workflow/input cause, then escalate to the system itself.\n\n### Minimal live log\nKeep a tiny record:\n- time\n- what changed\n- key readings\n- whether it stayed within band\n- action taken\n\nThat gives you enough to spot drift without turning it into a paperwork exercise.\n\nIf you want, I can turn this into a **one-page checklist** or a **simple threshold table** for your specific process.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Pretty close, but still a bit generic. I’d want it tied tighter to the actual process and the few variables that matter most, not just “power/inputs” and “sensor/process readings.”\n\nFor a live-check routine, I’d watch:\n- the one primary control variable that actually drives the process\n- one confirming measurement, if there is one\n- any feed/pressure/flow condition that can explain drift\n- alarm/status flags from the controller\n- recent changes: setpoint, material, cleaning, maintenance, operator intervention\n\nWhat I’d use as the line between normal and action-worthy:\n- normal = stays inside the expected band *and* the direction isn’t changing\n- worth acting on = a steady drift over several readings, not just one noisy point\n- definitely act = step change, repeated spike, or mismatch between the main reading and the confirming reading\n\nI’d also want a rule for time, because one bad reading can be junk but five minutes of the same direction usually isn’t. Something like: if it’s outside the band for 2-3 checks in a row, or the slope keeps worsening, look at it.\n\nAnd honestly, if this is something that can drift over a shift, I’d log:\n- timestamp\n- setpoint or target\n- actual reading\n- what changed right before it moved\n- whether the correction held\n\nIf you want, make it for one specific process and I can help trim it down to the actual live checks instead of a broad template.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — the useful version is to **anchor it on the one process variable that actually matters**, then use only the few checks that explain why it moved.\n\n### Live-check order\n1. **Primary control variable**\n   - The main number that defines whether the process is on target.\n   - Watch its **direction**, not just the value.\n\n2. **Confirming variable**\n   - Only if there’s a second reading that should move with it.\n   - If the main reading changes but the confirm doesn’t, that’s a real clue.\n\n3. **Feed/pressure/flow condition**\n   - Anything upstream that can explain drift before blaming the process itself.\n\n4. **Controller status / alarms**\n   - Mode changes, limits, overrides, faults, or auto/manual shifts.\n\n5. **Recent change**\n   - Setpoint, material, cleaning, maintenance, operator action, changeover.\n\n### Normal vs action-worthy\n- **Normal variation**\n  - stays inside the expected band\n  - no clear directional trend\n  - confirm reading agrees\n  - no recent change that would explain it\n\n- **Worth watching**\n  - one or two readings off, but it settles back\n  - small drift that hasn’t persisted long enough to trust yet\n\n- **Act now**\n  - **2–3 checks in a row** outside the band\n  - a **steady slope** in the same direction\n  - a **step change** after some intervention\n  - mismatch between main and confirming readings\n  - repeated spikes, not a one-off blip\n\n### Simple rule of thumb\n- **One bad point** = note it\n- **Two or three in the same direction** = investigate\n- **Worsening trend or mismatch** = act\n\n### What to log\n- timestamp\n- target/setpoint\n- actual main reading\n- confirming reading\n- feed/pressure/flow condition\n- what changed right before it moved\n- whether the correction held\n\nIf you want, I can turn this into a **tight 5-line shift checklist** for a specific process type.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s the right shape. Still want it a little more tied to the actual control loop, though — like, what’s the one variable you’d trust first, and what’s the one thing that usually makes it drift in the first place?\n\nFor a real shift check, I’d probably keep it to:\n- primary PV\n- one secondary/confirming reading only if it actually tracks the first one\n- the upstream condition that feeds it\n- controller mode/alarm flags\n- any recent human change\n\nAnd I’d be stricter on the timing part:\n- one bad point: ignore unless it’s way out\n- same direction for 2–3 checks: start looking\n- still worsening after that: act\n\nIf you want, I can help turn this into a version for a specific system — scrubber, pump loop, dosing, fan control, whatever. That’s where it stops being generic and actually useful.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yes — the clean way to do it is:\n\n### 1) Trust the **primary PV** first\nThat’s the number that actually defines whether the loop is doing its job.  \nIf you only watch one thing in real time, watch that.\n\n### 2) Use the **one upstream variable** that most often makes it drift\nUsually that’s the thing feeding the loop, not the final output itself:\n- flow\n- pressure\n- feed rate\n- inlet temp\n- supply level\n- load\n\nIf that upstream number moves first, it’s usually the reason the PV is drifting.\n\n### 3) Keep the rest as support checks\n- one confirming reading, if it truly tracks the PV\n- controller mode / alarms\n- recent setpoint or operator changes\n\n### Simple action rule\n- **1 bad point**: usually ignore, unless it’s far outside normal\n- **2–3 checks in the same direction**: start investigating\n- **still worsening after that**: act\n\n### What usually means “real drift”\n- PV keeps moving the same way over multiple checks\n- upstream condition changed first\n- confirming reading agrees\n- controller isn’t in a weird mode or override\n\n### What usually means “noise”\n- one odd point\n- next reading snaps back\n- no upstream change\n- no matching change in the confirming reading\n\n### Minimal live log\n- time\n- PV\n- upstream condition\n- mode/alarm state\n- what changed\n- whether it held\n\nIf you want, I can turn this into a **one-line live-check card** for a specific loop type, like **pump, dosing, fan, scrubber, or temperature control**.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s the useful version.\n\nPrimary PV first, one upstream thing that actually drives it, then the mode/alarm state. That’s about all I’d want on a shift check unless the loop is being weird.\n\nThe 2–3 checks rule makes sense too. One point can be junk. Same direction over several readings is usually not.\n\nIf I were writing it for a card, I’d keep it that short:\n- PV\n- upstream feed/pressure/flow condition\n- controller mode/alarm\n- recent change\n- 2–3 checks in same direction = investigate\n\nSo yeah, that’s tight enough to use.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    }
+  ]
+}

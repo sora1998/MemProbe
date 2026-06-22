@@ -1,0 +1,49 @@
+{
+  "user_id": "user_034",
+  "task": "A client cancels at the last minute, and the weather has turned into heavy rain with strong wind. You suddenly have an open block in the middle of the day, and there’s also a message from an older patient in Tukwila asking if someone could still make their follow-up appointment.",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.733333333333333,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Use a quick priority check:\n\n### 1) Safety and feasibility first\n- In heavy rain and wind, decide whether travel is reasonable at all.\n- If the Tukwila follow-up would put you at risk or make you late, don’t force it.\n\n### 2) Protect the appointment that matters most\nAsk:\n- Is the older patient time-sensitive?\n- Would delaying them create a bigger problem?\n- Can the follow-up be moved by phone, telehealth, or to another day?\n\n### 3) Fill the open block with low-risk work\nIf travel is shaky, use the open slot for:\n- notes\n- calls\n- paperwork\n- rescheduling\n- follow-up messages\n\n### 4) Make one fast decision\n- **If the Tukwila visit is important and still safe:** go, but leave extra time.\n- **If weather makes it too tight:** reschedule early and protect the rest of the day.\n\n### Simple rule\nDon’t use the open block to chase a risky appointment if it will likely create more problems than it solves.\n\nIf you want, I can help you turn this into a **same-day weather disruption rule** you can reuse.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, mostly right. But I’d want it a little more practical than that. In weather like this, I’m not just thinking “safe or not” — I’m thinking road conditions, whether the patient really has another ride, and whether I can still keep the rest of the day from blowing up.\n\nI’ve had this happen before, actually. Heavy rain, traffic near the airport, schedule gets loose fast. If I can still make the Tukwila stop without risking being late to the next client, I’d usually go. If not, I’d call right away, explain plain, and try to move them before they’re left hanging.\n\nSo yeah — I’d want a simple rule, but with one more layer: when to decide by phone, when to drive, and when to just use the gap for paperwork instead of trying to squeeze in one more trip.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Use a **3-way decision rule**:\n\n### 1) Drive it\nGo if all 3 are true:\n- road conditions are still manageable\n- you can get there and back without risking the next appointment\n- the patient would be left without a good backup if you don’t go\n\n### 2) Decide by phone first\nCall first if:\n- you’re unsure about timing\n- the weather may get worse\n- the patient is older or may need help arranging another ride\n- you need to know whether the visit is still worth making today\n\n### 3) Use the gap for admin\nUse the open block for paperwork, calls, or rescheduling if:\n- driving would make the rest of the day crooked\n- you’d likely be late to the next client\n- the visit can safely move without causing a bigger problem\n\n### Practical rule\nIf the Tukwila stop is important, **decide fast by phone**.  \nIf it’s still safe and won’t ripple into the rest of the day, **go**.  \nIf not, **reschedule early and use the block for admin**.\n\n### Simple script\n- “I’m checking weather and timing now.”\n- “If I can get there without throwing off the rest of the day, I’ll come.”\n- “If not, I’ll help move it now so you’re not left waiting.”\n\nIf you want, I can turn this into a **one-page weather-delay triage note** you can keep on hand.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, closer. I’d still tighten it up more though — less general, more like a quick working rule I could actually use while I’m looking at the clock and the road.\n\nSomething like:\n- if the rain/wind is making traffic ugly near the airport or I can’t protect the next appointment, call first\n- if I can still make Tukwila and keep the rest of the day from sliding, drive it\n- if the patient has another ride or it’s not urgent, use the gap for notes, calls, or rescheduling\n\nAnd if I call, it’s just plain: ‘I’m checking conditions and timing. If I can get there without throwing off the rest of the day, I’ll come. If not, I’ll help move it now.’\n\nThat’s more the shape of it. I’d want the rule to account for whether I can keep the schedule intact, not just whether the road is technically safe.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Use this **quick working rule**:\n\n### Go\nDrive if:\n- the road is manageable\n- you can still protect the next appointment\n- the Tukwila visit is worth doing today\n\n### Call first\nCall first if:\n- airport traffic or weather is making timing uncertain\n- you’re not sure you can keep the rest of the day intact\n- you need to know whether the patient has another ride\n\n### Use the gap\nUse the open block for notes, calls, or rescheduling if:\n- the drive would make the day slide\n- the visit isn’t urgent\n- the patient can reasonably move it\n\n### Plain rule\nIf you can **get there and still keep the rest of the day steady**, go.  \nIf not, **call now and move it**.  \nIf the visit can wait, **use the block for admin**.\n\n### Short script\n“I'm checking conditions and timing. If I can get there without throwing off the rest of the day, I’ll come. If not, I’ll help move it now.”\n\n",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s basically it — clean enough to use in real time. The only thing I’d maybe add is the patient’s backup ride, because that’s the part that changes whether I press harder or just move it. But the rule itself is solid: if I can keep the day intact, go; if not, call and reset; if it can wait, use the block for admin.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    }
+  ]
+}

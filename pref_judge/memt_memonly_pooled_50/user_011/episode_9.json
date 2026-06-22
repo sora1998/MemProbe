@@ -1,0 +1,170 @@
+{
+  "user_id": "user_011",
+  "task": "I’m helping someone prep a short video for both online use and a local TV slot, and I want to make sure the delivery specs won’t bite us later. Can you help me sanity-check what usually needs to be different between those two versions and what I should flag before export?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "verbosity_preference",
+      "short": "Prefers concise, efficient responses",
+      "explanation": "He seems to value getting to the point without extra noise, especially given how he works under deadline pressure. A response that is too long or meandering would likely feel inefficient to him. He probably still wants enough detail to act, but not a lot of filler."
+    },
+    {
+      "idx": 2,
+      "dimension": "directness_preference",
+      "short": "Wants clear, plain answers",
+      "explanation": "His communication style in work is straightforward: explain the issue, name the delay, and state the next step. He likely prefers the same from an assistant rather than softened hints or vague hedging. Directness fits his honest, exacting temperament."
+    },
+    {
+      "idx": 3,
+      "dimension": "structure_preference",
+      "short": "Likes organized, step-by-step help",
+      "explanation": "He seems to respond well to order and clean workflow, so scattered or exploratory replies would probably frustrate him. Structured guidance would match how he already thinks about edits, revisions, and process templates. He likely appreciates when the assistant lays things out in a predictable sequence."
+    },
+    {
+      "idx": 4,
+      "dimension": "detail_level_preference",
+      "short": "Wants the main points plus key caveats",
+      "explanation": "He cares about technical correctness, so bare headlines are probably not enough when a mistake could matter. At the same time, he likely does not want exhaustive theory unless it directly helps him act. A focused answer with the important caveats is the best fit."
+    },
+    {
+      "idx": 5,
+      "dimension": "feedback_style_preference",
+      "short": "Responds best to direct, constructive critique",
+      "explanation": "He appears to prefer honest correction over vague reassurance, especially when quality or timing is at stake. Pointing out what is wrong and how to fix it would likely be more useful to him than overly gentle framing. He probably respects critique that is specific and practical."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — the main thing is to treat them as two separate deliveries, even if they come from the same edit.\n\n## What usually differs\n\n### Online version\n- **Codec/container:** usually H.264 or H.265 in MP4\n- **Resolution:** often 1080p, sometimes 4K if needed\n- **Audio:** stereo, AAC\n- **Frame rate:** usually matches the timeline/source\n- **Color:** typically standard web-friendly Rec. 709\n- **File size:** more compressed is usually fine\n\n### Local TV slot\nThis depends on the station, but common differences are:\n- **Codec/container:** often ProRes, DNxHD/DNxHR, or an MPEG-2 variant\n- **Audio:** sometimes PCM/WAV, stereo or occasionally mono, with stricter loudness rules\n- **Resolution/frame rate:** must match the station’s exact spec\n- **Field order / interlacing:** may matter for broadcast delivery\n- **Safe area / legal graphics:** more important than for web\n- **Loudness / peaks:** often much stricter than online\n- **Bars/slate/handles:** sometimes required, depending on the station\n\n## Things to flag before export\n\n### Picture QC\n- Approved cut\n- Missing frames / flash frames\n- Graphics and captions\n- Safe area / aspect ratio\n- Any burn-in or timecode if requested\n\n### Audio QC\n- Clicks, pops, hum, or balance issues\n- Clipping or temp audio left in\n- Full playthrough for music/dialogue consistency\n- Loudness spec for the TV deliverable\n\n### Export / delivery QC\n- Runtime matches spec\n- Correct filename\n- Correct codec, resolution, frame rate, and audio format\n- File opens and plays all the way through\n- If uploading, verify checksum or at least re-open the exported file\n\n## Practical sanity-check order\n1. Confirm the **station’s exact spec** for the TV slot.\n2. Compare that against the **sequence settings**.\n3. Check the **source media** for any odd frame rate, audio, or codec issues.\n4. Do a **tiny-range export** first around a known good section.\n5. Then do a **full export** and watch the end, transitions, and any nested sequences.\n6. For the web version, make sure the compression doesn’t introduce visible artifacts or audio problems.\n\n## Common gotchas\n- Same filename, different actual media\n- Frame rate mismatch between sequence and export\n- Field order mismatch for TV\n- Audio levels fine online but too hot for broadcast\n- Graphics too close to the edge for TV safe area\n- A clip that looks fine in the timeline but breaks on export because of a buried transition or nested sequence\n\nIf you want, I can turn this into a **two-column online vs TV delivery checklist** you can use before export.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Fairly concise and to the point, with a practical checklist and no major filler. It is a bit longer than strictly necessary, but still efficient for the task."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Uses clear, plain language like \"the main thing is to treat them as two separate deliveries\" and directly names what differs and what to flag before export."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Well organized with headings and a numbered \"Practical sanity-check order,\" which gives predictable step-by-step guidance."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Covers the main points plus important caveats, especially \"This depends on the station\" and specifics like loudness, field order, and safe area without overexplaining theory."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Direct and constructive, explicitly flagging issues to check such as \"frame rate mismatch,\" \"field order mismatch,\" and \"audio levels fine online but too hot for broadcast.\""
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Absolutely — the key is to treat the **TV slot as spec-driven**, not “broadcast-ish.”\n\nHere’s the tighter version I’d use:\n\n## 1) Online export defaults\n- **Codec/container:** H.264 MP4\n- **Resolution:** 1080p unless the platform wants otherwise\n- **Frame rate:** match the master/timeline\n- **Audio:** stereo AAC\n- **Color:** Rec. 709\n- **Source:** export from the best available master, not a heavily compressed file\n\n## 2) Broadcast / local TV defaults\n- **Use the station’s exact spec sheet**\n- **Codec/wrapper:** whatever they require, often ProRes / DNx / MPEG variant\n- **Bit depth / chroma:** confirm if they care\n- **Frame rate:** exact match\n- **Field order:** confirm progressive vs interlaced if relevant\n- **Audio:** stereo or mono as requested\n- **Loudness:** target LUFS/LKFS and true peak per spec\n- **Legal/title safe:** keep graphics inside safe area\n- **Captions / slate / bars / tone:** confirm whether required\n- **Head/tail:** check for any required black, slate, or tone duration\n\n## 3) Final QC pass for both\n- Approved version is the one being exported\n- Runtime matches\n- No missing/flash frames\n- Graphics/captions are correct\n- No temp audio or stray VO/music\n- File opens and plays through cleanly\n- Export matches the intended destination spec\n- Web file is not being made from a low-quality intermediate\n\n## Before export, I’d specifically flag\n1. **Exact station spec sheet**\n2. **Frame rate + field order**\n3. **Audio loudness / true peak / mono vs stereo**\n4. **Safe area for titles and graphics**\n5. **Captions, slate, bars, tone, or black head/tail**\n6. **Codec wrapper + bit depth**\n7. **Whether the web version is being exported from the master**\n\nIf you want, I can turn this into a **clean two-column checklist** you can paste into a doc.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Fairly concise and to the point: “Here’s the tighter version I’d use” and a short checklist format. It does include some extra detail, but little filler."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Very direct and plain: “treat the TV slot as spec-driven,” “Use the station’s exact spec sheet,” and concrete bullets like “Frame rate: exact match” and “Audio: stereo or mono as requested.”"
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strong structure throughout: numbered sections, bullet lists, and a final “Before export” list. It lays things out in a predictable sequence."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Gives the main points plus key caveats without overexplaining: e.g. “confirm if they care,” “if relevant,” and specific flags like “Loudness,” “Legal/title safe,” and “Captions / slate / bars / tone.”"
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Direct, constructive critique is present in phrases like “the key is to treat the TV slot as spec-driven” and the explicit warning list of what to flag before export. It points out what matters and how to fix/verify it."
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "agent_response": "Absolutely — here’s the tighter, more practical version.\n\n## Before export: confirm these first\n- **Exact station spec sheet** for the TV slot\n- **Delivery format**: progressive or interlaced\n- **Frame rate**\n- **Audio spec**: LUFS/LKFS target, true peak ceiling, stereo vs mono, and whether they want a specific broadcast standard like **-23** or **-24**\n- **Codec / wrapper**: ProRes 422, LT, DNxHR, etc.\n- **Caption format**: burned-in vs sidecar / embedded\n- **Slate / bars / tone / black**: whether required, and exact length/placement\n- **Safe areas**: legal safe vs action safe if graphics sit near edges\n- **Web master source**: export from the cleanest master, not a compressed upload file\n\n## Online version\n- H.264 MP4 unless the platform wants something else\n- Match timeline frame rate\n- Stereo AAC\n- Export from master\n- If captions are needed, confirm whether they should be burned in or delivered separately\n- Watch for platform-side audio normalization after upload\n\n## Local TV version\n- Match the station’s exact spec\n- Progressive/interlaced exactly as requested\n- Audio to their loudness target and peak ceiling\n- Stereo or mono as required\n- Confirm codec wrapper and bit depth\n- Confirm caption delivery format\n- Check slate/bars/tone/black requirements\n- Keep graphics inside legal/action safe if needed\n\n## Final QC for both\n- Correct approved version\n- Runtime matches\n- No missing/flash frames\n- Graphics and captions are correct\n- No temp audio or stray elements\n- File opens and plays all the way through\n- Exported file matches the intended destination spec\n\n## The main “don’t get bitten later” flags\n1. Station spec sheet is exact, not assumed\n2. Progressive vs interlaced is confirmed\n3. Audio target is explicit\n4. Captions are in the right format\n5. Slate/bars/tone/head-tail length is confirmed\n6. Export is coming from a clean master, not a recompressed file\n\nIf you want, I can turn this into a **short two-column checklist** you can paste straight into a doc.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly concise and efficient: it says \"here’s the tighter, more practical version\" and uses bullets/checklists. It is a bit longer than necessary, but not meandering."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Very direct and plain: \"confirm these first,\" \"match the station’s exact spec,\" and \"The main 'don’t get bitten later' flags\" state issues and next steps clearly without hedging."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strong structure: organized into clear sections—\"Before export,\" \"Online version,\" \"Local TV version,\" \"Final QC,\" and a numbered summary—making it easy to follow step by step."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Gives the main points plus key caveats, not theory: it flags specifics like \"progressive or interlaced,\" \"LUFS/LKFS target,\" \"caption format,\" and \"slate / bars / tone / black\" that matter for export decisions."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Constructive and practical critique style: it identifies what to verify and what can go wrong, e.g. \"don’t get bitten later\" and \"export is coming from a clean master,\" which is specific and actionable rather than soft reassurance."
+        }
+      ]
+    },
+    {
+      "turn": 4,
+      "agent_response": "Absolutely — here’s the tighter version with that split built in.\n\n## Pre-export checklist\n\n### 1) Hard specs — confirm line by line\n- Frame rate\n- Progressive vs interlaced\n- Codec / wrapper\n- Bit depth / chroma if specified\n- Audio sample rate: **48 kHz**\n- Audio layout: stereo / mono / channel order\n- Loudness target: LUFS/LKFS\n- True peak ceiling\n- Caption format: burned-in / embedded / sidecar\n- Any station-specific rejection rules for wrapping or file naming\n\n### 2) Delivery extras\n- Slate required or not\n- Bars / tone required or not\n- Black at head/tail required or not\n- Exact slate / bars / tone durations\n- Naming convention\n- File transfer method\n- Captions language/version\n- Legal safe / action safe if graphics are close to edges\n\n### 3) Source check\n- Export from the cleanest master available\n- Make sure the approved version is the one being used\n- Confirm captions and audio are from the latest approved pass\n- Don’t assume the station sheet covers everything unless it’s been read fully\n\n---\n\n## Final QC checklist\n\n### Picture\n- Approved cut\n- No missing or flash frames\n- Graphics correct\n- Safe areas respected\n- Aspect ratio correct\n- Captions visible and timed correctly if burned in\n\n### Audio\n- 48 kHz confirmed\n- Correct channel layout\n- No temp audio, clicks, pops, or stray elements\n- Loudness target met\n- True peak within spec\n- Mono fold-down only if required\n\n### Export / delivery\n- Correct codec / wrapper\n- Correct frame rate and interlace/progressive setting\n- Correct file name\n- Correct caption file or embedded captions\n- Slate / bars / tone / black correct if required\n- File opens and plays through cleanly\n- No wrapper issues before sending\n\n## The short version\n1. Read the station spec line by line.\n2. Separate **hard specs** from **delivery extras**.\n3. Confirm 48 kHz, audio layout, captions format, and wrapping.\n4. Export from the clean master.\n5. QC the file as a delivery, not just as a timeline.\n\nIf you want, I can turn this into a **one-page copy/paste checklist** with checkboxes.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Fairly concise and action-oriented, with a compact checklist and a short summary. It does add some structure and detail, but avoids meandering and filler."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Very direct and plain: phrases like \"Hard specs — confirm line by line\" and \"The short version\" give clear, unambiguous guidance without hedging."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly organized into \"Pre-export checklist,\" \"Source check,\" \"Final QC checklist,\" and a numbered short version. The step-by-step layout is clear and predictable."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Gives the main points plus important caveats, such as \"station-specific rejection rules,\" \"Slate required or not,\" and \"Don’t assume the station sheet covers everything.\" Enough detail to act without going into theory."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Uses direct, constructive correction style: \"confirm line by line,\" \"Don’t assume,\" and \"QC the file as a delivery, not just as a timeline\" clearly point out what to watch for and how to fix it."
+        }
+      ]
+    }
+  ]
+}

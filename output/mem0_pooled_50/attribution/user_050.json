@@ -1,0 +1,702 @@
+{
+  "user_id": "user_050",
+  "tasks_dir": "CustomTasksPooledFinal",
+  "counts": {
+    "ok": 17,
+    "memory_failure": 10,
+    "agent_elicitation_failure": 3,
+    "task_design_failure": 1
+  },
+  "details": [
+    {
+      "category": "skill_memory",
+      "dimension": "reading_comprehension_skill",
+      "explanation": "She can extract the practical meaning from everyday written material quickly enough to do her job. Her handling of receipts, license details, and bank paperwork shows she reads for consequences, not depth. She likely struggles with anything abstract or dense, but routine text is within reach.",
+      "ground_truth": "Functional reader of receipts, signs, and paperwork",
+      "predicted": "reads for key details and filters out irrelevant noise",
+      "slot_fill_reason": "Multiple notes show they prioritize names, dates, totals, fees, receipt totals, and key payment details while ignoring sob stories, side topics, and other noise.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of functional reading for practical details, though it is phrased more generally and does not explicitly mention receipts, signs, or paperwork.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "active_listening_skill",
+      "explanation": "She pays attention when speech could affect money, safety, or leverage. In customer interactions, she picks up the useful parts and ignores the rest, which helps her stay guarded. She is not warm or especially patient, so she may miss nuance when someone is rambling or emotional.",
+      "ground_truth": "Selective listener who catches what matters",
+      "predicted": "filters for key details and ignores irrelevant chatter",
+      "slot_fill_reason": "Multiple notes show they listen for order/date/amount/what went wrong and ignore sob stories, side topics, and repetitive complaints unless they affect the issue.",
+      "score": 1.0,
+      "judge_reason": "The prediction matches the ground truth closely by describing a selective listener who focuses on key details and ignores irrelevant chatter.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 1.0,
+        "stages": []
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "social_perceptiveness_skill",
+      "explanation": "She notices shaky hands, hurried behavior, and when customers may be trying something. That makes her decent at spotting immediate risk and opportunism. Her read is practical rather than deep, so she can still miss longer cons or more subtle manipulation.",
+      "ground_truth": "Reads danger and motive at a surface level",
+      "predicted": "reads basic customer cues and filters out irrelevant chatter",
+      "slot_fill_reason": "Memories show they notice rushed/off behavior, car-running and repeated-checking cues, and ignore sob stories or side topics unless they affect the transaction.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the surface-level perceptiveness and practical cue-reading, but it omits the explicit focus on detecting danger and opportunism.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "critical_thinking_skill",
+      "explanation": "She weighs evidence in a self-protective, cash-first way. She checks bills, keeps receipts, and looks for the angle before trusting anyone. Her thinking is useful under pressure, but it is narrow and biased toward immediate gain rather than fair or thorough judgment.",
+      "ground_truth": "Pragmatic, suspicious evaluator",
+      "predicted": "handles practical decisions by comparing concrete details",
+      "slot_fill_reason": "They repeatedly break problems into specific checks and comparisons—like receipt vs drawer vs card record, bill vs phone cost, and hold vs posted charge—showing applied critical thinking in real situations.",
+      "score": 0.5,
+      "judge_reason": "The prediction overlaps with the practical, detail-oriented side of the ground truth, but it misses the suspicious, self-protective, cash-first bias and the narrowness of judgment.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "Yes — a natural follow-up about how they verify cash amounts, whether they keep receipts or count bills, and how they decide when to challenge a payment could reveal a pragmatic, suspicious, evidence-checking style of thinking."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"count biggest first, then twenties/tens, then small stuff\"; \"compare to what it was supposed to be\"; \"check the total before you leave\"; \"match it to the agreed amount / receipt\"",
+            "reason": "The user shows a pragmatic, suspicious, evidence-checking style focused on verifying amounts, receipts, and discrepancies in the moment, which is enough to infer a narrow, cash-first critical thinking pattern."
+          }
+        ],
+        "ep_index": 4
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "financial_resource_management_skill",
+      "explanation": "She uses money quickly and defensively to cover rent, replace essentials, and stabilize her situation. The fact that she can stretch odd cash into necessities shows practical resource handling rather than long-term planning. She is not a planner in a broad sense, but she knows how to make limited money work right now.",
+      "ground_truth": "Survives money problems with tight, opportunistic budgeting",
+      "predicted": "can budget cash into bills, buffer, and spendable amounts",
+      "slot_fill_reason": "Multiple notes show they can split extra money into exact allocations, set cash floors tied to bills and buffers, and compare options using plain numbers.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of making limited money cover immediate needs and bills, but it is phrased more generally and misses the opportunistic, survival-focused budgeting emphasis.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "operation_monitoring_skill",
+      "explanation": "Working alone at a gas station requires constant attention to payments, customers, and the flow of transactions, and she handles that well enough. She keeps an eye on what is happening around the register and notices irregularities like declined cards or counterfeit bills. Her vigilance is situational, tied to immediate threats rather than broader process management.",
+      "ground_truth": "Alert on shift and watches the counter closely",
+      "predicted": "monitors registers and customer behavior for payment issues",
+      "slot_fill_reason": "Multiple notes show they can quickly check receipts, drawer counts, card records, and pump/terminal status while watching for sketchy behavior and deciding when to call for help.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of being alert and monitoring the register/customer activity for payment issues, but it is a bit more specific and less directly phrased than the ground truth.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "adaptive_capability",
+      "explanation": "She adapts to changing customers, payment problems, and suspicious situations without freezing up. Her behavior suggests she learns by reacting and then updating her habits, like checking bills after getting burned. She is flexible in narrow, practical ways, though not necessarily open to bigger changes or new systems.",
+      "ground_truth": "Adjusts fast to whatever the night throws at her",
+      "predicted": "handles fast, practical triage in messy situations",
+      "slot_fill_reason": "Multiple notes show they can quickly sort payment mismatches, cash discrepancies, sketchy customer behavior, and used-phone checks using short checklists and first-step rules.",
+      "score": 0.75,
+      "judge_reason": "The prediction captures the same practical, quick adaptation to messy situations, but it is less explicit about adjusting to whatever changes come up and learning from experience.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "financial_literacy_knowledge",
+      "explanation": "She understands everyday money problems like rent, paychecks, counterfeit bills, and making cash stretch. Her knowledge is practical and immediate, not the sort that includes credit, savings strategy, or investing. She seems more alert to being cheated than to building financial stability.",
+      "ground_truth": "Cash-aware, but shallow on broader finance",
+      "predicted": "understands basic cash flow and debt prioritization",
+      "slot_fill_reason": "They distinguish urgent high-interest credit card debt from small balances, set cash floors for bills and emergencies, and compare expenses against money on hand.",
+      "score": 0.5,
+      "judge_reason": "The prediction matches the practical, cash-flow-oriented aspect, but it adds debt prioritization and misses the ground truth’s emphasis on shallow broader finance and being alert to scams.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites discussion of basic money choices after bills are paid, which can lead a user to reveal practical financial knowledge about saving, spending, or simple tradeoffs even if they are not knowledgeable about advanced finance."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"$200–$300: keep it cash. Don’t mess with investing.\" / \"Cash buffer: $500 minimum. If life’s messy, $1,000.\" / \"Credit card debt: if you’re carrying it month to month, that’s the ugly one. Pay that first.\"",
+            "reason": "The user shows practical, cash-first money judgment focused on small buffers, immediate bills, and expensive credit-card debt, while treating investing as a later step rather than demonstrating broader finance knowledge."
+          }
+        ],
+        "ep_index": 8
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "law_and_public_safety_knowledge",
+      "explanation": "She understands enough about IDs, receipts, counterfeit bills, and police timing to protect herself in small ways. Her knowledge is shaped by contact with rules as threats, not by any broader respect for law. She likely knows what gets her in trouble, but not much beyond that.",
+      "ground_truth": "Knows the parts of law that can bite her",
+      "predicted": "knows basic gas-station payment and cash-handling checks",
+      "slot_fill_reason": "Multiple notes show they know to verify receipts, drawer totals, terminal approval, holds vs posted charges, and basic bill authenticity/security features.",
+      "score": 0.5,
+      "judge_reason": "The prediction overlaps with practical knowledge about avoiding bad cash or payment issues, but it misses the broader idea of knowing the legal parts that can get her in trouble.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "A natural follow-up about suspicious bills, cash handling, receipts, and what to do before responding could easily prompt the user to reveal practical knowledge of IDs, counterfeit detection, and other law-and-safety-related precautions."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"Feel the bill\" ... \"Hold it under the light\" ... \"Check if the drawer total matches\" ... \"look at the receipt / last amount rung up\"",
+            "reason": "The user explicitly shows practical knowledge of checking bills, receipts, drawer totals, and cash discrepancies to protect against shorting or fake money, which is enough to infer a narrow, threat-focused understanding of law/public-safety-related rules."
+          }
+        ],
+        "ep_index": 9
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "procedural_knowledge",
+      "explanation": "She can handle the basic procedures of a gas station job and the simple steps around bills, deposits, and receipts. Once a process becomes formal or paperwork-heavy, she seems more cautious than fluent. She knows how to survive systems, not how to work them expertly.",
+      "ground_truth": "Gets by in routine systems, not bureaucracy",
+      "predicted": "knows practical checklists for cash, cards, bills, phones, and routes",
+      "slot_fill_reason": "Multiple notes show they ask for concrete procedures like checking receipts/drawers/cards, spotting fake bills, diagnosing phones, comparing expenses, and judging DeKalb routes.",
+      "score": 0.5,
+      "judge_reason": "The prediction overlaps with the idea of handling routine practical tasks, but it emphasizes specific checklists rather than the ground truth’s broader point about getting by in systems without mastering bureaucracy.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites the user to describe how they handle routine workplace procedures and paperwork order, which can reveal whether they are comfortable with basic systems versus more formal or bureaucratic processes."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"Start with the receipt, then drawer count, then card record if there was one\"",
+            "reason": "The user shows familiarity with basic workplace procedures for checking receipts, till counts, card records, and related paperwork, indicating they can handle routine systems even if not formal bureaucracy."
+          }
+        ],
+        "ep_index": 10
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "digital_literacy_knowledge",
+      "explanation": "Her life suggests familiarity with ordinary consumer tech, like getting a better used phone and handling everyday transactions. She appears comfortable enough with basic devices, but not especially technical or curious. If something is complicated or finicky, she would likely treat it as a nuisance rather than a domain to learn.",
+      "ground_truth": "Uses phones and basic tech without much depth",
+      "predicted": "knows basic practical digital checks, not advanced troubleshooting",
+      "slot_fill_reason": "They ask for quick checks on phones, used phones, receipts, and payment terminals, focusing on obvious signs like lock status, IMEI, SIM, charging, and printer vs payment issues.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the ground truth’s idea of basic, practical use of digital tools without advanced technical depth, though it emphasizes checks/troubleshooting rather than general everyday tech comfort.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "geographic_knowledge",
+      "explanation": "She seems to know her immediate area well enough to read the flow of Route 64 traffic and the kind of people passing through. That is functional local knowledge, not wide geographic familiarity. Her understanding of place is practical and narrow, centered on where she works and lives.",
+      "ground_truth": "Locally grounded, not broadly traveled",
+      "predicted": "knows practical local driving hazards in DeKalb",
+      "slot_fill_reason": "Multiple notes mention detailed DeKalb-specific route knowledge, especially Route 64 congestion, tricky intersections, side-street traps, and nighttime driving annoyances.",
+      "score": 0.5,
+      "judge_reason": "The prediction captures practical local knowledge in DeKalb, but it misses the broader point that the person is locally grounded rather than broadly geographically familiar.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites discussion of nearby roads, traffic patterns, and local route conditions, which can reasonably prompt the user to reveal how well they know their immediate area versus broader geography."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"Route 64 gets jammed where it turns into little-business chaos\" ... \"A side street turns into a trap when it’s dark, parked-up, and boxed in\"",
+            "reason": "The user repeatedly demonstrates practical, local route knowledge about DeKalb and Route 64, indicating familiarity with immediate-area traffic patterns rather than broad geographic travel."
+          }
+        ],
+        "ep_index": 12
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "knowledge_source_preference",
+      "explanation": "She learns from what happens to her on the job and from immediate consequences, not from formal instruction. The way she updates her habits after getting burned shows a strong preference for direct experience. Books, systems, and authority would probably feel less trustworthy to her than what she has seen herself.",
+      "ground_truth": "Trusts lived experience over experts",
+      "predicted": "prefers practical, real-world sources over generic advice",
+      "slot_fill_reason": "Multiple notes ask for blunt, practical, cut-and-dry guidance and reject generic advice or template-like answers.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of valuing direct, practical experience over abstract advice, but it does not explicitly capture distrust of experts or authority.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "knowledge_update_habit",
+      "explanation": "She does not seem proactive about staying informed, but she does adjust when something goes wrong. Checking large bills after the counterfeit incident is a good example of reactive learning. Her knowledge changes slowly and defensively, usually only when a mistake costs her something.",
+      "ground_truth": "Updates only after getting burned",
+      "predicted": "updates knowledge through quick, practical corrections",
+      "slot_fill_reason": "They repeatedly ask for the first thing to check, the quickest way to tell what’s wrong, and concise rules for bills, payments, phones, and bills, showing a habit of refining knowledge in small practical steps.",
+      "score": 0.75,
+      "judge_reason": "Both describe reactive learning from mistakes, but the prediction is less specific about only updating after being burned and sounds somewhat more proactive and quick than the ground truth.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "relocation_or_migration_event",
+      "explanation": "She came to DeKalb for a cheap room and a gas station job, so the move clearly reset her day-to-day life. It wasn't framed as hopeful or sentimental; it was a practical relocation to survive. Her current routines and outlook are tied to that move and the narrow world around it.",
+      "ground_truth": "Moved to DeKalb to start over cheaply",
+      "predicted": "planned a move while job timing and cash were uncertain",
+      "slot_fill_reason": "Multiple memories describe the user trying to get a new place and a job lined up in the same week, with specific cash-floor decisions tied to move-in timing and paycheck delays.",
+      "score": 0.5,
+      "judge_reason": "The prediction overlaps on a practical move with uncertain finances, but it misses the key point that she actually moved to DeKalb to start over cheaply.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task is explicitly about securing housing and work during an imminent move, so natural follow-up questions could easily elicit whether the user is relocating or has recently moved to a new place."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"If the job starts after move-in: don’t move if you’d have less than $800 left.\"",
+            "reason": "The dialogue clearly discusses a practical relocation tied to starting over with limited money, including move-in costs, job timing, and a cash threshold for deciding whether to move."
+          }
+        ],
+        "ep_index": 15
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "financial_shock_event",
+      "explanation": "After keeping the cash from the found wallet, she immediately used it to cover a rent increase. That moment linked unexpected money with survival pressure, not comfort. It likely reinforced her sense that money should be grabbed and spent quickly before life takes it back.",
+      "ground_truth": "Rent hike after a cash windfall",
+      "predicted": "recent rent increase created a tight cash crunch",
+      "slot_fill_reason": "Multiple notes say their rent just increased and they were deciding how to use extra money without risking shortfalls later in May 2026.",
+      "score": 0.5,
+      "judge_reason": "The prediction matches the rent increase and cash pressure, but it misses the key shock event of receiving unexpected cash and using it immediately.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task directly concerns a rent increase and a sudden cash cushion, so natural follow-up about why the user is worried or what happened financially could plausibly elicit a rent-hike-related shock event."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"My rent just jumped\" and \"If it’s under the keep number, don’t touch it\"",
+            "reason": "The dialogue clearly centers on a rent increase creating immediate cash pressure and on using extra money to cover rent/food/gas before payday, which is enough for a memory system to infer a rent-hike-after-cash-windfall style financial shock."
+          }
+        ],
+        "ep_index": 16
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "legal_or_administrative_event",
+      "explanation": "When she tried to deposit the fake ten-dollar bill, the bank kept it and recorded her name. Nothing serious came of it, but the encounter taught her that paperwork and institutions can quietly put her on record. That seems to have made her more careful about checking bills under the counter light.",
+      "ground_truth": "Counterfeit bill got logged at the bank",
+      "predicted": "handled a found wallet by turning it in untouched",
+      "slot_fill_reason": "On May 1, 2026, they found a wallet in a parking lot and decided not to count the cash, instead taking a picture and handing the whole wallet to a manager or police.",
+      "score": 0.0,
+      "judge_reason": "The prediction is about turning in a found wallet, which is unrelated to the ground truth event of a counterfeit bill being kept and logged by the bank.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.0,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task is about handling a suspicious bill and documenting it, which naturally invites discussion of bank procedures, logging, and possible official recording of the incident."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"what you did with it — set aside, marked envelope, handed to manager\" / \"where it got put after\"",
+            "reason": "The dialogue clearly discusses flagging a suspicious bill, documenting its serial number and handling, and setting it aside for reporting, which is enough for a memory system to infer an administrative/legal-style incident involving a bill being recorded by the institution."
+          }
+        ],
+        "ep_index": 17
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "moral_dilemma_event",
+      "explanation": "She faced a clear choice between keeping the money and returning everything, and she split the difference. The decision shows her practical morality: take what helps her, avoid unnecessary exposure, and leave the rest. It is a useful memory because it confirmed that she can bend rules without feeling loyal to them.",
+      "ground_truth": "Kept cash from a found wallet, then turned in the wallet",
+      "predicted": "found a wallet and chose to turn it in untouched",
+      "slot_fill_reason": "On May 1, 2026, they found a wallet in a parking lot and decided not to count or sort the cash, instead handing the whole wallet to the manager or police.",
+      "score": 0.0,
+      "judge_reason": "The prediction contradicts the ground truth by saying she returned the wallet untouched, whereas the ground truth says she kept the cash and only turned in the wallet.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.0,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task is about handling a found wallet, which naturally invites discussion of what the user would do in a moral choice situation, making it plausible for follow-up questions to elicit their stance on keeping versus returning it."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"Leave everything together\" ... \"wallet and cash both\" ... \"hand the whole thing to the manager or police\"",
+            "reason": "The user explicitly chose not to separate or count the cash and to turn in the entire wallet, which reveals a practical split-between-keeping-and-returning response to finding money."
+          }
+        ],
+        "ep_index": 18
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "workplace_conflict_event",
+      "explanation": "The pickup truck incident put her in the middle of a tense on-the-job dispute over payment and possession. She protected herself by sticking to procedure and refusing to take sides. That kind of conflict likely taught her that the safest move at work is to stay detached and make the customer prove things.",
+      "ground_truth": "Handled a disputed gas sale without getting dragged in",
+      "predicted": "Handled gas-station payment disputes during tense shifts",
+      "slot_fill_reason": "Multiple memories describe specific incidents at work where customers disputed gas payments, receipts, or pump charges and the user sought a response plan for those conflicts.",
+      "score": 0.75,
+      "judge_reason": "The prediction captures the core idea of handling a disputed gas sale during tense work shifts, but it is less specific about avoiding involvement and not getting dragged into the dispute.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "unexpected_windfall_event",
+      "explanation": "Discovering a wallet stuffed with cash was an unexpected stroke of luck that directly improved her situation. She used part of it to cover rent and buy a better phone, so the event had immediate practical consequences. It stands out as a rare moment where chance rewarded her caution and opportunism.",
+      "ground_truth": "Found a wallet with over six hundred dollars",
+      "predicted": "used extra cash after bills to cover urgent expenses",
+      "slot_fill_reason": "Multiple May 1, 2026 memories show they had a little extra money after bills and were deciding how to allocate it toward rent, gas, food, and other urgent needs.",
+      "score": 0.25,
+      "judge_reason": "The prediction mentions using extra cash for urgent expenses, but it does not capture the key windfall event of finding a wallet with over six hundred dollars.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "agent_elicitation_failure",
+        "score": 0.25,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "A natural follow-up could ask whether any unexpected money or lucky break recently changed their ability to pay the bill or replace the phone, which could plausibly elicit an unexpected windfall event."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": false,
+            "evidence": "none",
+            "reason": "The dialogue only discusses a hypothetical bill-versus-phone budgeting decision and never mentions any unexpected windfall or found cash event."
+          },
+          {
+            "stage": "disclosure_subclass",
+            "category": "A",
+            "reason": "The agent stayed on a generic bill-vs-phone budgeting framework and never steered toward any unexpected windfall or found-money event, so the target dimension was not actually elicited.",
+            "evidence": "“Pay the bill first unless the phone problem will cost you more than the bill’s late fee/shutoff penalty”"
+          }
+        ],
+        "ep_index": 20
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "turning_point_event",
+      "explanation": "The counterfeit bill incident marked a before-and-after in how she handles cash. Before that, she accepted large bills more casually; after it, she started checking every one under the counter light. It is a small but real shift that shows she learns through damage, not through trust.",
+      "ground_truth": "Getting burned by bad money changed her habits",
+      "predicted": "wallet found in parking lot led to turning it in untouched",
+      "slot_fill_reason": "On May 1, 2026, they found a wallet in a parking lot and decided to leave the cash alone, photograph the location, and hand the whole wallet to a manager or police.",
+      "score": 0.0,
+      "judge_reason": "The prediction describes an act of honesty with a found wallet, which is unrelated to the counterfeit-bill incident and the resulting change in cash-handling habits.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "agent_elicitation_failure",
+        "score": 0.0,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "A natural follow-up could ask why the user is especially cautious about large bills, which could lead them to mention a past counterfeit-bill incident that changed how they handle cash."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": false,
+            "evidence": "none",
+            "reason": "The dialogue shows the user’s bill-checking habits and priorities, but not any before-and-after change caused by a specific bad-money incident or other turning-point event."
+          },
+          {
+            "stage": "disclosure_subclass",
+            "category": "A",
+            "reason": "The conversation stayed entirely on counterfeit-bill detection and never moved toward a life-changing incident or habit shift, so the turning-point event was not elicited at all.",
+            "evidence": "\"What’s the quickest way to check it\" / \"Portrait, then thread. That’s the only part worth burning a second on anyway.\""
+          }
+        ],
+        "ep_index": 21
+      }
+    },
+    {
+      "category": "self_model",
+      "dimension": "sincerity_self_view",
+      "explanation": "She seems to see herself as someone who says only what is useful, not what is heartfelt. Her choices around customers and money suggest she treats honesty as a tool, not a defining virtue. She likely thinks being too genuine is a liability in her world.",
+      "ground_truth": "Strategic, not fully open with people",
+      "predicted": "sees themselves as blunt and straightforward",
+      "slot_fill_reason": "They repeatedly ask for plain, cut-and-dry lines and rules, like wanting blunt cash management, direct customer scripts, and no template-feel responses.",
+      "score": 0.0,
+      "judge_reason": "The prediction contradicts the ground truth by portraying her as blunt and straightforward, whereas the ground truth says she is strategic and not fully open with people.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "agent_elicitation_failure",
+        "score": 0.0,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "A discussion about how much detail to include in a brief, awkward message can naturally lead to follow-up questions about whether the user prefers being direct, tactful, or strategically withholding information, which can reveal their sincerity/self-view."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": false,
+            "evidence": "none",
+            "reason": "The user only discusses wording preferences for a brief shift-cover message, which does not reveal a broader self-view about sincerity or strategic openness."
+          },
+          {
+            "stage": "disclosure_subclass",
+            "category": "A",
+            "reason": "The exchange stayed entirely on crafting a brief shift-cover message and never moved toward the speaker’s honesty, openness, or strategic self-presentation.",
+            "evidence": "“I covered it earlier, so you’re good” is probably the cleanest one."
+          }
+        ],
+        "ep_index": 22
+      }
+    },
+    {
+      "category": "self_model",
+      "dimension": "fairness_self_view",
+      "explanation": "She does not appear to see herself as a fairness-first person. Her self-image seems to make room for taking advantage when it helps her get by, while still avoiding unnecessary trouble. She likely considers that practical rather than unethical.",
+      "ground_truth": "Believes fairness is optional when survival is at stake",
+      "predicted": "sees themselves as blunt and practical about fairness",
+      "slot_fill_reason": "They repeatedly want cut-and-dry rules and final, no-back-and-forth lines for money, customer disputes, and split expenses, which suggests a self-view of being straightforward and fairness-focused.",
+      "score": 0.75,
+      "judge_reason": "The prediction captures the practical, non-idealized view of fairness, but it misses the stronger idea that fairness is specifically seen as optional when survival is at stake.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "self_model",
+      "dimension": "prudence_self_view",
+      "explanation": "She probably thinks she is careful in the ways that matter to her: watching bills, checking receipts, and protecting her position. At the same time, she is not deeply patient or long-range, so her caution is tactical rather than disciplined. She may view herself as someone who takes smart risks, not blind ones.",
+      "ground_truth": "Sees herself as calculated, not reckless",
+      "predicted": "sees themselves as cautious and financially strict",
+      "slot_fill_reason": "They repeatedly set hard cash floors, avoid slow-access money, and say they won’t move or spend if it risks rent, gas, food, or emergencies.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the idea that she sees herself as cautious and deliberate, though it adds a narrower financial strictness that is not explicitly in the ground truth.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "self_model",
+      "dimension": "identity_anchor",
+      "explanation": "Her self-image seems anchored in getting by on her own and not depending on anyone else. She does not come across as someone who roots her identity in family, loyalty, or a formal role. Instead, she likely sees herself as someone who survives by staying detached and looking out for herself.",
+      "ground_truth": "Defines herself by self-protection and independence",
+      "predicted": "practical, no-nonsense, and easily annoyed by fluff",
+      "slot_fill_reason": "Multiple notes show they want blunt cutoff rules, plain language, and short responses while rejecting generic advice and scripted wording.",
+      "score": 0.25,
+      "judge_reason": "The prediction suggests a practical, no-nonsense attitude, but it does not capture the core idea of self-definition through independence and self-protection.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "task_design_failure",
+        "score": 0.25,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": false,
+            "reason": "This bio-writing task is too generic and stylistic to naturally elicit how the person defines herself in terms of self-protection and independence, unless the conversation strays into unrelated personal background."
+          }
+        ],
+        "ep_index": 25
+      }
+    },
+    {
+      "category": "self_model",
+      "dimension": "time_orientation_self_view",
+      "explanation": "She seems to think of herself as present-focused, with little faith in long-term promises. Her decisions center on immediate rent, immediate cash, and immediate risk. Future planning probably feels abstract to her compared with the pressure of getting through the week.",
+      "ground_truth": "Lives for what helps now, not later",
+      "predicted": "future-focused, plans around payday and upcoming bills",
+      "slot_fill_reason": "Multiple notes show they frame decisions by payday timing, upcoming rent, gas, food, and whether money will be needed soon.",
+      "score": 0.25,
+      "judge_reason": "The prediction mentions immediate bills and payday, which overlaps with short-term focus, but it frames her as future-focused and planning-oriented, which contradicts the ground truth.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.25,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task is explicitly about deciding what to do with extra money now versus later, so natural follow-up about priorities, saving, spending, and planning could easily elicit a present-focused self-view."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"Bill first. Gas second. Smokes last. Stash only if something’s left.\"",
+            "reason": "The user clearly prioritizes immediate bills, gas, and short-term spending over saving or future planning, indicating a present-focused orientation."
+          }
+        ],
+        "ep_index": 26
+      }
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "formality_preference",
+      "explanation": "She would likely prefer help that sounds like a real person talking, not a polished office script. Formality can feel like distance or salesmanship to someone as distrustful as her. Casual language fits her guarded, practical style better than stiff professionalism.",
+      "ground_truth": "Casual, no-polish communication",
+      "predicted": "prefers plain, blunt, low-formality help",
+      "slot_fill_reason": "Multiple notes ask for lines that sound normal, casual, not overly formal, and not like a template or training manual.",
+      "score": 1.0,
+      "judge_reason": "Both descriptions indicate a preference for casual, low-formality communication that sounds natural rather than polished or office-like.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 1.0,
+        "stages": []
+      }
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "verbosity_preference",
+      "explanation": "She seems unlikely to want long explanations unless they immediately help her. Her attention is tuned to quick, usable information, not extended discussion. Extra words would probably read as unnecessary padding unless she asks for detail.",
+      "ground_truth": "Wants short answers that get to the point",
+      "predicted": "prefers brief, direct, no-fluff answers",
+      "slot_fill_reason": "Multiple notes ask for concise, practical, plain-English responses and reject generic advice, templates, or lengthy explanations.",
+      "score": 1.0,
+      "judge_reason": "Both descriptions mean she wants concise, direct answers without unnecessary extra detail.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 1.0,
+        "stages": []
+      }
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "directness_preference",
+      "explanation": "She would likely respond better to straight answers than hedged or overly delicate phrasing. Her world rewards quick judgment and skepticism, so indirectness can feel evasive. Bluntness also matches her low tolerance for being managed or coddled.",
+      "ground_truth": "Prefers blunt, no-nonsense answers",
+      "predicted": "prefers blunt, concise, no-fluff answers",
+      "slot_fill_reason": "Multiple notes say they want straightforward, cut-and-dry, practical help and dislike generic advice, lectures, templates, or overly formal wording.",
+      "score": 1.0,
+      "judge_reason": "The predicted description matches the ground truth closely, conveying the same preference for blunt, no-nonsense communication.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 1.0,
+        "stages": []
+      }
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "format_preference",
+      "explanation": "She would probably prefer information broken into clear chunks rather than wrapped in long prose. A compact format makes it easier to scan for the useful part and ignore the rest. That fits someone who treats help as a tool, not a conversation.",
+      "ground_truth": "Likes simple, practical bullets",
+      "predicted": "prefers short, plain, no-template responses",
+      "slot_fill_reason": "Multiple notes ask for concise, normal-sounding lines, brief checklists, and wording that avoids formal or template-like phrasing.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the preference for concise, easy-to-scan information, but it does not explicitly capture the practical bullet-point format.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "language_register_preference",
+      "explanation": "She is more likely to trust plain wording than technical or overly refined language. Simple language reduces the sense that someone is trying to impress, obscure, or manipulate her. She probably wants explanations she can use immediately without decoding them first.",
+      "ground_truth": "Plain English, not fancy language",
+      "predicted": "prefers plain, casual, no-frills language",
+      "slot_fill_reason": "Multiple notes ask for lines that sound normal, real, short, and not overly formal or like a template/training manual.",
+      "score": 1.0,
+      "judge_reason": "Both descriptions mean she prefers plain, simple, non-fancy language.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 1.0,
+        "stages": []
+      }
+    }
+  ]
+}

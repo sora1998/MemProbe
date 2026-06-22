@@ -1,0 +1,1466 @@
+{
+  "user_id": "user_029",
+  "per_category": {
+    "skill_memory": 0.6785714285714286,
+    "knowledge_memory": 0.39285714285714285,
+    "episodic_memory": 0.42857142857142855,
+    "self_model": 0.75,
+    "assistance_preference": 0.8
+  },
+  "overall": 0.61,
+  "details": [
+    {
+      "category": "skill_memory",
+      "dimension": "troubleshooting_skill",
+      "explanation": "He is clearly strongest at tracing failures to their source instead of accepting surface explanations. His work style shows disciplined diagnosis: checking logs, panels, switches, and sequence evidence before drawing a conclusion. He can still be impatient with uncertainty, but that usually pushes him toward more thorough fault isolation.",
+      "ground_truth": "Sharp fault diagnostician",
+      "predicted": "strong at structuring troubleshooting traces",
+      "slot_fill_reason": "They repeatedly refine troubleshooting notes to include exact failure mode, sequence, evidence, actions taken, current status, and next checks.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of being good at systematic troubleshooting and tracing issues, but it is less direct about sharp fault diagnosis and the emphasis on isolating the true source of failures.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Yeah, that’s the right shape. Sequence, checks, result of each check. Keep it tight and traceable.\n\nI’d also add:\n- exact outage start and restore time, if known\n- whether the failure was total or partial\n- any alarms, breaker trips, relay status, fault lights, log entries, or error codes\n- what was physically verified vs. what was reported by someone else\n- any temporary workaround or reset done\n- who accessed what, and whether permission mattered\n- photos, timestamps, or screenshots if you have them\n- what’s still unresolved at the end\n\nIf I were writing it for later review, I’d want it to answer: what failed, what you checked, what you found, and what changed after each step. No guessing. Just the chain.\n\nSo something like:\n1. Time/event\n2. Symptom observed\n3. Checks performed\n4. Findings from each check\n5. Actions taken\n6. Outcome/current state\n\nThat’s enough for someone to reconstruct it later without filling in blanks themselves.",
+          "category": "user_reply",
+          "task_index": 17,
+          "turn": 1,
+          "score": 0.4437316358089447
+        },
+        {
+          "content": "Agent: I’d start with **evidence of completion, not just paperwork**.\n\n## First things I’d check\n1. **Physical condition of the equipment**\n   - Is it actually installed/returned/serviced where it should be?\n   - Any obvious missing parts, loose connections, damage, or temporary fixes?\n\n2. **Functional test**\n   - Does it power on and operate as expected?\n   - Did someone verify the specific outcome the handoff was supposed to achieve?\n\n3. **Work order / checklist vs. reality**\n   - Compare what was marked complete to what you can observe.\n   - Look for vague notes like “completed” without measurements, test results, or sign-off details.\n\n4. **Supporting proof**\n   - Photos before/after\n   - Test readings\n   - Serial numbers or asset tags\n   - Technician comments\n   - Timestamped logs\n\n5. **Exceptions or follow-up items**\n   - Anything deferred?\n   - Any parts ordered, pending repairs, or incomplete steps?\n\n## Quick rule\nIf you can’t answer:\n- **What was done?**\n- **How do we know it was done?**\n- **What proves it works now?**\n\n…then it’s not fully verified yet.\n\nIf you want, I can give you a **tight handoff verification checklist** you can use in 1–2 minutes before sign-off.",
+          "category": "agent_reply",
+          "task_index": 2,
+          "turn": 1,
+          "score": 0.3956606686115265
+        },
+        {
+          "content": "[Task 7] I’ve got a messy equipment issue I want to hand off to someone else, but I don’t want the important details getting lost. Can you help me turn my rough notes into a clean troubleshooting write-up with the key symptoms, what was checked, what changed, and the order of events?",
+          "category": "task",
+          "task_index": 7,
+          "score": 0.3943767249584198
+        },
+        {
+          "content": "User: Pretty close, but it’s still a little generic. I’d want the note to force a real trace, not just a summary.\n\nInclude:\n- exact failure mode, not just “issue”\n- asset/system name or location\n- date/time it last happened\n- what was normal right before it failed\n- what I directly observed vs. what someone else reported\n- any logs, alarms, photos, timestamps, service records\n- what was done immediately after\n- whether it cleared, recurred, or got worse\n- what check has not been done yet\n- who is responsible for the next verification\n\nI’d keep it in a sequence like:\n1. Event\n2. Observation\n3. Evidence\n4. Action taken\n5. Current status\n6. Next check\n\nIf the goal is for the next person to verify it, make them able to answer: what failed, when, how we know, and what still hasn’t been ruled out.",
+          "category": "user_reply",
+          "task_index": 26,
+          "turn": 1,
+          "score": 0.3560296893119812
+        },
+        {
+          "content": "Agent: I’d verify in this order:\n\n1. **Identity**\n   - exact asset / unit / location\n   - serial or tag number\n   - make sure you’re looking at the right thing\n\n2. **What was actually checked**\n   - not just “inspected”\n   - look for the specific task, test, or measurement\n\n3. **Proof it worked**\n   - readings, logs, photos, screenshots, test results\n   - a pass/fail result tied to the task\n\n4. **Who did it**\n   - name, title, date/time\n   - whether the person was qualified to do that work\n\n5. **What was left open**\n   - deferred items\n   - temporary fixes\n   - bypasses\n   - missing parts\n\n6. **Whether the result matches reality**\n   - does the equipment condition match the paperwork?\n   - do the readings make sense?\n   - does the unit actually operate as claimed?\n\n## Red flags\n- “completed” with no evidence\n- generic wording like “checked OK”\n- no date or no asset ID\n- no test values\n- deferred items missing from the record\n- signs of a temporary fix with no note\n\n## If it’s safety-related\nAlso verify the **fail condition**, not just normal operation.\n\nIf you want, I can turn this into a **short accept / reject checklist** you can use before sign-off.",
+          "category": "agent_reply",
+          "task_index": 19,
+          "turn": 1,
+          "score": 0.3552905321121216
+        }
+      ]
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "quality_control_skill",
+      "explanation": "He does not treat a system as acceptable until it has been checked against a standard. He notices missing service intervals, skipped tests, and weak points that others overlook or excuse. The downside is that he can be hard to satisfy and may focus more on defects than on broader collaboration.",
+      "ground_truth": "Exacting verifier",
+      "predicted": "strong at quality-checking equipment and spotting hidden issues",
+      "slot_fill_reason": "They consistently ask for exact asset details, test evidence, fail-condition checks, and red-flag criteria to catch hidden problems before handoff or purchase.",
+      "score": 0.75,
+      "judge_reason": "The prediction captures the core idea of careful quality checking and spotting hidden issues, but it misses the stronger nuance of being exacting, hard to satisfy, and focused on standards and overlooked defects.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "Agent: Let’s do **HVAC / furnace** as the example, since it has clear failure modes and good field thresholds.\n\n## 1) What to watch for\nTrack these first:\n- **Run time**\n- **Cycle frequency**\n- **Supply air temperature**\n- **Return air temperature**\n- **Blower behavior**: speed, noise, delay, weak airflow\n- **Error code / LED flashes**\n- **Burner behavior**: ignition, flame stability, shutdown timing\n- **Filter condition**\n- **Any smell, heat, or visible soot**\n\nIf you only track one thing, track **shutdown timing** and **error codes**.\n\n---\n\n## 2) Practical thresholds\nThese are not universal specs, but they work well as field triggers:\n\n### Acceptable drift\n- Slightly longer heat-up time once in a while\n- Small change in supply air temp\n- One missed start that clears on retry\n- Noise that does not repeat and does not worsen\n\n### Investigate soon\n- Same symptom repeats **2 times in a day/shift**\n- Cycle time changes by about **20–25%** from normal\n- Airflow feels noticeably weaker than usual\n- Furnace runs, then shuts off, then restarts repeatedly\n- Error code appears even if it clears later\n\n### Stop and inspect now\n- **Any safety trip**\n- Burning smell, smoke, soot, arcing, gas smell\n- Loud grinding/banging/metal-on-metal\n- Repeated high-limit trips\n- Flame lights then drops out repeatedly\n- No airflow from registers while burners are on\n- Breaker trips or unit won’t stay powered\n\n---\n\n## 3) Repeat-count rule by symptom\nUse symptom-specific counts:\n\n- **One-off thermostat miss**: note it\n- **Same shutdown pattern twice**: inspect\n- **Same fault code twice**: inspect\n- **Burner dropout during ignition twice**: inspect now\n- **Any safety-related trip once**: stop now\n\nIf it happens under the **same conditions** each time, treat that as more important than raw count.\n\n---\n\n## 4) What measurements matter most\nFor HVAC/furnace, the most useful are:\n- **Supply/return temp difference**\n- **How long burners stay lit**\n- **How long before shutdown**\n- **Filter condition**\n- **Error code**\n- **Blower airflow quality**\n- **Whether the issue happens on every call for heat or only sometimes**\n\nIf you can’t measure temps, at least record:\n- start time\n- shutdown time\n- whether burners stayed lit\n- whether blower was strong\n- code flashed or not\n\n---\n\n## 5) Field logging template\nKeep it short and consistent:\n\n**Equipment:**  \n**Asset ID / location:**  \n**Date/time:**  \n**Symptom:**  \n**Conditions:** (load, outside temp, occupancy, thermostat setting)  \n**Duration before issue:**  \n**Repeat count today:**  \n**Error code:**  \n**Measurements:** (supply temp, return temp, airflow notes)  \n**Action taken:**  \n**Result after action:**  \n\n### Example\n- Equipment: Furnace\n- Asset ID / location: AHU-2 / Hallway\n- Date/time: 2026-04-29 08:15\n- Symptom: Unit started, burners lit, shut off after ~4 min\n- Conditions: Heat call from 68 to 72, all vents open\n- Duration before issue: 4 min\n- Repeat count today: 2\n- Error code: 3 flashes\n- Measurements: Supply air weak, filter dirty\n- Action taken: Replaced filter, retested\n- Result after action: Ran 12 min, no fault\n\n---\n\n## 6) Simple decision tree\n**Any safety issue?**\n- Yes → stop\n- No → next\n\n**Did it repeat in the same pattern?**\n- No → note and monitor\n- Yes → next\n\n**Did it affect heat output or run time?**\n- No → watch\n- Yes → inspect now\n\n**Is there an error code or limit trip?**\n- Yes → inspect now\n- No → monitor with logging\n\n---\n\nIf you want, I can do the same thing for a **motor, pump, panel, or test gear** and make the thresholds specific to that class.",
+          "category": "agent_reply",
+          "task_index": 3,
+          "turn": 3,
+          "score": 0.2947273850440979
+        },
+        {
+          "content": "[Task 25] I’m putting together a quick inspection sheet for a used tool I’m thinking about buying, and I don’t want the checklist to be sloppy or too vague. What items would you put on it so I can catch hidden issues before I commit?",
+          "category": "task",
+          "task_index": 25,
+          "score": 0.2805781364440918
+        },
+        {
+          "content": "User: Yeah, that’s the right lane, but it’s still a bit generic.\n\nI’d want the contract to spell out:\n- exact asset / model / serial\n- required service interval, and whether there’s a grace window\n- each task and the actual test standard, not “inspect” junk\n- who can perform it, and what certs they need\n- what records they have to leave behind: readings, photos, logs, replaced parts\n- how missed work gets handled\n- who signs off, and who verifies it\n- what happens if access is blocked or a visit is deferred\n\nRed flags for me:\n- “routine maintenance” with no task list\n- “or equivalent” everywhere\n- vague completion language with no measurements\n- no carry-forward for deferred items\n- schedule that only shows the visit, not the result\n- anything that lets them claim work happened without evidence\n- revisions after the fact with no reason attached\n\nIf you want, I’d rather see a simple checklist format:\n**required / evidence / suspicious / missing**.\nThat’s easier to audit than a polished summary.",
+          "category": "user_reply",
+          "task_index": 10,
+          "turn": 1,
+          "score": 0.27394217252731323
+        },
+        {
+          "content": "User: Yeah, that’s the right direction. But I’d want it tighter — what I’d check first depends on the gear.\n\nFor a handoff, I’d start with:\n- **asset ID / serial / location** — make sure it’s the exact unit\n- **power and basic operation** — does it actually run, not just “look done”\n- **final test evidence** — readings, screenshots, logs, whatever applies\n- **missing parts / bypasses / temporary fixes**\n- **who signed it and when** — not just a checkbox\n\nIf it’s something safety-related, I’d also want the **fail condition** tested, not just normal operation. A lot of people record “done” after a visual check and call it good. That’s not enough.\n\nWhat kind of equipment is it?",
+          "category": "user_reply",
+          "task_index": 2,
+          "turn": 1,
+          "score": 0.2606462240219116
+        },
+        {
+          "content": "[Task 7] I’ve got a messy equipment issue I want to hand off to someone else, but I don’t want the important details getting lost. Can you help me turn my rough notes into a clean troubleshooting write-up with the key symptoms, what was checked, what changed, and the order of events?",
+          "category": "task",
+          "task_index": 7,
+          "score": 0.25765424966812134
+        }
+      ]
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "operation_monitoring_skill",
+      "explanation": "He is good at watching ongoing systems for signs of drift or failure. He naturally tracks alarms, logs, and conditions over time rather than waiting for a collapse. This makes him attentive in maintenance contexts, though it can also make him hyper-alert and distrustful.",
+      "ground_truth": "Vigilant system watcher",
+      "predicted": "can define detailed operational monitoring criteria and thresholds",
+      "slot_fill_reason": "They specified concrete monitoring variables, repeat-count rules, thresholds, and logging templates for HVAC/furnace issues and handoff verification.",
+      "score": 0.5,
+      "judge_reason": "The prediction overlaps with vigilant monitoring by emphasizing operational criteria and thresholds, but it focuses more on defining standards than on actively watching systems for drift, alarms, and failures over time.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "Agent: I’d start with **evidence of completion, not just paperwork**.\n\n## First things I’d check\n1. **Physical condition of the equipment**\n   - Is it actually installed/returned/serviced where it should be?\n   - Any obvious missing parts, loose connections, damage, or temporary fixes?\n\n2. **Functional test**\n   - Does it power on and operate as expected?\n   - Did someone verify the specific outcome the handoff was supposed to achieve?\n\n3. **Work order / checklist vs. reality**\n   - Compare what was marked complete to what you can observe.\n   - Look for vague notes like “completed” without measurements, test results, or sign-off details.\n\n4. **Supporting proof**\n   - Photos before/after\n   - Test readings\n   - Serial numbers or asset tags\n   - Technician comments\n   - Timestamped logs\n\n5. **Exceptions or follow-up items**\n   - Anything deferred?\n   - Any parts ordered, pending repairs, or incomplete steps?\n\n## Quick rule\nIf you can’t answer:\n- **What was done?**\n- **How do we know it was done?**\n- **What proves it works now?**\n\n…then it’s not fully verified yet.\n\nIf you want, I can give you a **tight handoff verification checklist** you can use in 1–2 minutes before sign-off.",
+          "category": "agent_reply",
+          "task_index": 2,
+          "turn": 1,
+          "score": 0.4051154851913452
+        },
+        {
+          "content": "User: Yeah, that’s the right direction. But I’d want it tighter — what I’d check first depends on the gear.\n\nFor a handoff, I’d start with:\n- **asset ID / serial / location** — make sure it’s the exact unit\n- **power and basic operation** — does it actually run, not just “look done”\n- **final test evidence** — readings, screenshots, logs, whatever applies\n- **missing parts / bypasses / temporary fixes**\n- **who signed it and when** — not just a checkbox\n\nIf it’s something safety-related, I’d also want the **fail condition** tested, not just normal operation. A lot of people record “done” after a visual check and call it good. That’s not enough.\n\nWhat kind of equipment is it?",
+          "category": "user_reply",
+          "task_index": 2,
+          "turn": 1,
+          "score": 0.4025983512401581
+        },
+        {
+          "content": "Agent: Let’s do **HVAC / furnace** as the example, since it has clear failure modes and good field thresholds.\n\n## 1) What to watch for\nTrack these first:\n- **Run time**\n- **Cycle frequency**\n- **Supply air temperature**\n- **Return air temperature**\n- **Blower behavior**: speed, noise, delay, weak airflow\n- **Error code / LED flashes**\n- **Burner behavior**: ignition, flame stability, shutdown timing\n- **Filter condition**\n- **Any smell, heat, or visible soot**\n\nIf you only track one thing, track **shutdown timing** and **error codes**.\n\n---\n\n## 2) Practical thresholds\nThese are not universal specs, but they work well as field triggers:\n\n### Acceptable drift\n- Slightly longer heat-up time once in a while\n- Small change in supply air temp\n- One missed start that clears on retry\n- Noise that does not repeat and does not worsen\n\n### Investigate soon\n- Same symptom repeats **2 times in a day/shift**\n- Cycle time changes by about **20–25%** from normal\n- Airflow feels noticeably weaker than usual\n- Furnace runs, then shuts off, then restarts repeatedly\n- Error code appears even if it clears later\n\n### Stop and inspect now\n- **Any safety trip**\n- Burning smell, smoke, soot, arcing, gas smell\n- Loud grinding/banging/metal-on-metal\n- Repeated high-limit trips\n- Flame lights then drops out repeatedly\n- No airflow from registers while burners are on\n- Breaker trips or unit won’t stay powered\n\n---\n\n## 3) Repeat-count rule by symptom\nUse symptom-specific counts:\n\n- **One-off thermostat miss**: note it\n- **Same shutdown pattern twice**: inspect\n- **Same fault code twice**: inspect\n- **Burner dropout during ignition twice**: inspect now\n- **Any safety-related trip once**: stop now\n\nIf it happens under the **same conditions** each time, treat that as more important than raw count.\n\n---\n\n## 4) What measurements matter most\nFor HVAC/furnace, the most useful are:\n- **Supply/return temp difference**\n- **How long burners stay lit**\n- **How long before shutdown**\n- **Filter condition**\n- **Error code**\n- **Blower airflow quality**\n- **Whether the issue happens on every call for heat or only sometimes**\n\nIf you can’t measure temps, at least record:\n- start time\n- shutdown time\n- whether burners stayed lit\n- whether blower was strong\n- code flashed or not\n\n---\n\n## 5) Field logging template\nKeep it short and consistent:\n\n**Equipment:**  \n**Asset ID / location:**  \n**Date/time:**  \n**Symptom:**  \n**Conditions:** (load, outside temp, occupancy, thermostat setting)  \n**Duration before issue:**  \n**Repeat count today:**  \n**Error code:**  \n**Measurements:** (supply temp, return temp, airflow notes)  \n**Action taken:**  \n**Result after action:**  \n\n### Example\n- Equipment: Furnace\n- Asset ID / location: AHU-2 / Hallway\n- Date/time: 2026-04-29 08:15\n- Symptom: Unit started, burners lit, shut off after ~4 min\n- Conditions: Heat call from 68 to 72, all vents open\n- Duration before issue: 4 min\n- Repeat count today: 2\n- Error code: 3 flashes\n- Measurements: Supply air weak, filter dirty\n- Action taken: Replaced filter, retested\n- Result after action: Ran 12 min, no fault\n\n---\n\n## 6) Simple decision tree\n**Any safety issue?**\n- Yes → stop\n- No → next\n\n**Did it repeat in the same pattern?**\n- No → note and monitor\n- Yes → next\n\n**Did it affect heat output or run time?**\n- No → watch\n- Yes → inspect now\n\n**Is there an error code or limit trip?**\n- Yes → inspect now\n- No → monitor with logging\n\n---\n\nIf you want, I can do the same thing for a **motor, pump, panel, or test gear** and make the thresholds specific to that class.",
+          "category": "agent_reply",
+          "task_index": 3,
+          "turn": 3,
+          "score": 0.3930389881134033
+        },
+        {
+          "content": "User: Yeah, that’s the right lane, but it’s still a bit generic.\n\nI’d want the contract to spell out:\n- exact asset / model / serial\n- required service interval, and whether there’s a grace window\n- each task and the actual test standard, not “inspect” junk\n- who can perform it, and what certs they need\n- what records they have to leave behind: readings, photos, logs, replaced parts\n- how missed work gets handled\n- who signs off, and who verifies it\n- what happens if access is blocked or a visit is deferred\n\nRed flags for me:\n- “routine maintenance” with no task list\n- “or equivalent” everywhere\n- vague completion language with no measurements\n- no carry-forward for deferred items\n- schedule that only shows the visit, not the result\n- anything that lets them claim work happened without evidence\n- revisions after the fact with no reason attached\n\nIf you want, I’d rather see a simple checklist format:\n**required / evidence / suspicious / missing**.\nThat’s easier to audit than a polished summary.",
+          "category": "user_reply",
+          "task_index": 10,
+          "turn": 1,
+          "score": 0.38995474576950073
+        },
+        {
+          "content": "Agent: Yes — for the first version, keep it **tight, factual, and defensible**.\n\n## Include\n- **Exact date/time**\n- **Names, titles, roles**\n- **What you personally saw/heard/did**\n- **What others told you** — clearly labeled as such\n- **Sequence of events**\n- **Specific harm**: safety, cost, delay, damage, policy issue\n- **Immediate response**: who you notified, what you did\n- **Evidence trail**: emails, logs, photos, texts, access records, timestamps\n- **What remains unresolved**\n\n## Verify before sending\n- dates/times against records\n- names and titles\n- quotes, if you include any\n- facts vs inference\n- whether documents/messages contradict your memory\n- witness names and what they actually observed\n\n## Tone rules\nUse:\n- “I observed…”\n- “At approximately…”\n- “The record shows…”\n- “I was informed that…”\n\nAvoid:\n- motive guessing\n- “obviously,” “clearly,” “everyone knows”\n- emotional language\n- conclusions you can’t prove yet\n\n## Best first-pass structure\n1. **Subject**\n2. **Summary**\n3. **Timeline**\n4. **Impact**\n5. **Evidence**\n6. **Requested action**\n\n## Practical tip\nIf this could become a dispute, write it so a third party can read it and answer:\n- what happened\n- when it happened\n- who did what\n- how you know\n\nIf you want, I can give you a **fill-in-the-blank complaint template** that stays neutral and factual.",
+          "category": "agent_reply",
+          "task_index": 11,
+          "turn": 2,
+          "score": 0.38474613428115845
+        }
+      ]
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "equipment_maintenance_skill",
+      "explanation": "He appears capable of keeping equipment in working order through checks, inspections, and follow-up. His interest in service intervals and weak components suggests he understands maintenance as prevention, not just repair after failure. He may be especially strong at spotting neglect before it becomes expensive damage.",
+      "ground_truth": "Preventive maintainer",
+      "predicted": "can structure practical maintenance and troubleshooting checklists",
+      "slot_fill_reason": "They asked for a maintenance routine with intervals and replacement triggers, and for a clean troubleshooting write-up with symptoms, checks, changes, and event order.",
+      "score": 0.5,
+      "judge_reason": "The prediction overlaps with maintenance skill and troubleshooting, but it does not clearly capture the preventive, inspection-focused aspect of keeping equipment in working order before failures occur.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Yeah, that’s the right direction. But I’d want it tighter — what I’d check first depends on the gear.\n\nFor a handoff, I’d start with:\n- **asset ID / serial / location** — make sure it’s the exact unit\n- **power and basic operation** — does it actually run, not just “look done”\n- **final test evidence** — readings, screenshots, logs, whatever applies\n- **missing parts / bypasses / temporary fixes**\n- **who signed it and when** — not just a checkbox\n\nIf it’s something safety-related, I’d also want the **fail condition** tested, not just normal operation. A lot of people record “done” after a visual check and call it good. That’s not enough.\n\nWhat kind of equipment is it?",
+          "category": "user_reply",
+          "task_index": 2,
+          "turn": 1,
+          "score": 0.43957483768463135
+        },
+        {
+          "content": "Agent: I’d start with **evidence of completion, not just paperwork**.\n\n## First things I’d check\n1. **Physical condition of the equipment**\n   - Is it actually installed/returned/serviced where it should be?\n   - Any obvious missing parts, loose connections, damage, or temporary fixes?\n\n2. **Functional test**\n   - Does it power on and operate as expected?\n   - Did someone verify the specific outcome the handoff was supposed to achieve?\n\n3. **Work order / checklist vs. reality**\n   - Compare what was marked complete to what you can observe.\n   - Look for vague notes like “completed” without measurements, test results, or sign-off details.\n\n4. **Supporting proof**\n   - Photos before/after\n   - Test readings\n   - Serial numbers or asset tags\n   - Technician comments\n   - Timestamped logs\n\n5. **Exceptions or follow-up items**\n   - Anything deferred?\n   - Any parts ordered, pending repairs, or incomplete steps?\n\n## Quick rule\nIf you can’t answer:\n- **What was done?**\n- **How do we know it was done?**\n- **What proves it works now?**\n\n…then it’s not fully verified yet.\n\nIf you want, I can give you a **tight handoff verification checklist** you can use in 1–2 minutes before sign-off.",
+          "category": "agent_reply",
+          "task_index": 2,
+          "turn": 1,
+          "score": 0.43878310918807983
+        },
+        {
+          "content": "[Task 4] I’m trying to set up a simple maintenance routine for a couple of things around the house so they don’t turn into bigger problems later. Can you help me sketch out what to check, how often, and what’s worth replacing before it fails?",
+          "category": "task",
+          "task_index": 4,
+          "score": 0.4321506917476654
+        },
+        {
+          "content": "User: Closer. Still a little broad in spots though.\n\nWhat I’d want next is the same thing, but in a cleaner table and with a hard line between:\n- **must replace now / soon**\n- **monitor only**\n- **call a pro**\n\nAlso, don’t bury the useful stuff in generic language. For example, on hoses, valves, alarms, filters, batteries — I want actual replacement triggers, not just “if worn.” Same for electrical: what’s normal wear vs what means the thing is junk.\n\nIf you can, make it look like something I could print and stick in a notebook: item, interval, what to look for, action. Keep the fluff out.",
+          "category": "user_reply",
+          "task_index": 4,
+          "turn": 2,
+          "score": 0.4076538681983948
+        },
+        {
+          "content": "[Task 7] I’ve got a messy equipment issue I want to hand off to someone else, but I don’t want the important details getting lost. Can you help me turn my rough notes into a clean troubleshooting write-up with the key symptoms, what was checked, what changed, and the order of events?",
+          "category": "task",
+          "task_index": 7,
+          "score": 0.40185853838920593
+        }
+      ]
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "critical_thinking_skill",
+      "explanation": "He weighs evidence carefully and does not accept claims without support. His habit of documenting failures and comparing reports to physical evidence shows a strong bias toward verification. The weakness is that his skepticism can become so strong that it slows trust and cooperation.",
+      "ground_truth": "Rigorous evidence skeptic",
+      "predicted": "strong at structured, evidence-based critical review",
+      "slot_fill_reason": "They consistently specify exact checks, evidence, sequence, and red flags, and reject vague or unsupported conclusions in maintenance, handoff, and incident writeups.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of careful, evidence-based evaluation, but it misses the stronger skeptical stance and the note that excessive skepticism can hinder trust and cooperation.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Yeah, that’s the right lane, but it’s still a bit generic.\n\nI’d want the contract to spell out:\n- exact asset / model / serial\n- required service interval, and whether there’s a grace window\n- each task and the actual test standard, not “inspect” junk\n- who can perform it, and what certs they need\n- what records they have to leave behind: readings, photos, logs, replaced parts\n- how missed work gets handled\n- who signs off, and who verifies it\n- what happens if access is blocked or a visit is deferred\n\nRed flags for me:\n- “routine maintenance” with no task list\n- “or equivalent” everywhere\n- vague completion language with no measurements\n- no carry-forward for deferred items\n- schedule that only shows the visit, not the result\n- anything that lets them claim work happened without evidence\n- revisions after the fact with no reason attached\n\nIf you want, I’d rather see a simple checklist format:\n**required / evidence / suspicious / missing**.\nThat’s easier to audit than a polished summary.",
+          "category": "user_reply",
+          "task_index": 10,
+          "turn": 1,
+          "score": 0.2720203995704651
+        },
+        {
+          "content": "User: Yeah, that’s the right shape. Sequence, checks, result of each check. Keep it tight and traceable.\n\nI’d also add:\n- exact outage start and restore time, if known\n- whether the failure was total or partial\n- any alarms, breaker trips, relay status, fault lights, log entries, or error codes\n- what was physically verified vs. what was reported by someone else\n- any temporary workaround or reset done\n- who accessed what, and whether permission mattered\n- photos, timestamps, or screenshots if you have them\n- what’s still unresolved at the end\n\nIf I were writing it for later review, I’d want it to answer: what failed, what you checked, what you found, and what changed after each step. No guessing. Just the chain.\n\nSo something like:\n1. Time/event\n2. Symptom observed\n3. Checks performed\n4. Findings from each check\n5. Actions taken\n6. Outcome/current state\n\nThat’s enough for someone to reconstruct it later without filling in blanks themselves.",
+          "category": "user_reply",
+          "task_index": 17,
+          "turn": 1,
+          "score": 0.26591265201568604
+        },
+        {
+          "content": "User: Yeah, that’s the right direction. But I’d want it tighter — what I’d check first depends on the gear.\n\nFor a handoff, I’d start with:\n- **asset ID / serial / location** — make sure it’s the exact unit\n- **power and basic operation** — does it actually run, not just “look done”\n- **final test evidence** — readings, screenshots, logs, whatever applies\n- **missing parts / bypasses / temporary fixes**\n- **who signed it and when** — not just a checkbox\n\nIf it’s something safety-related, I’d also want the **fail condition** tested, not just normal operation. A lot of people record “done” after a visual check and call it good. That’s not enough.\n\nWhat kind of equipment is it?",
+          "category": "user_reply",
+          "task_index": 2,
+          "turn": 1,
+          "score": 0.2536163330078125
+        },
+        {
+          "content": "Agent: I’d start with **evidence of completion, not just paperwork**.\n\n## First things I’d check\n1. **Physical condition of the equipment**\n   - Is it actually installed/returned/serviced where it should be?\n   - Any obvious missing parts, loose connections, damage, or temporary fixes?\n\n2. **Functional test**\n   - Does it power on and operate as expected?\n   - Did someone verify the specific outcome the handoff was supposed to achieve?\n\n3. **Work order / checklist vs. reality**\n   - Compare what was marked complete to what you can observe.\n   - Look for vague notes like “completed” without measurements, test results, or sign-off details.\n\n4. **Supporting proof**\n   - Photos before/after\n   - Test readings\n   - Serial numbers or asset tags\n   - Technician comments\n   - Timestamped logs\n\n5. **Exceptions or follow-up items**\n   - Anything deferred?\n   - Any parts ordered, pending repairs, or incomplete steps?\n\n## Quick rule\nIf you can’t answer:\n- **What was done?**\n- **How do we know it was done?**\n- **What proves it works now?**\n\n…then it’s not fully verified yet.\n\nIf you want, I can give you a **tight handoff verification checklist** you can use in 1–2 minutes before sign-off.",
+          "category": "agent_reply",
+          "task_index": 2,
+          "turn": 1,
+          "score": 0.2510944902896881
+        },
+        {
+          "content": "Agent: Yes — for the first version, keep it **tight, factual, and defensible**.\n\n## Include\n- **Exact date/time**\n- **Names, titles, roles**\n- **What you personally saw/heard/did**\n- **What others told you** — clearly labeled as such\n- **Sequence of events**\n- **Specific harm**: safety, cost, delay, damage, policy issue\n- **Immediate response**: who you notified, what you did\n- **Evidence trail**: emails, logs, photos, texts, access records, timestamps\n- **What remains unresolved**\n\n## Verify before sending\n- dates/times against records\n- names and titles\n- quotes, if you include any\n- facts vs inference\n- whether documents/messages contradict your memory\n- witness names and what they actually observed\n\n## Tone rules\nUse:\n- “I observed…”\n- “At approximately…”\n- “The record shows…”\n- “I was informed that…”\n\nAvoid:\n- motive guessing\n- “obviously,” “clearly,” “everyone knows”\n- emotional language\n- conclusions you can’t prove yet\n\n## Best first-pass structure\n1. **Subject**\n2. **Summary**\n3. **Timeline**\n4. **Impact**\n5. **Evidence**\n6. **Requested action**\n\n## Practical tip\nIf this could become a dispute, write it so a third party can read it and answer:\n- what happened\n- when it happened\n- who did what\n- how you know\n\nIf you want, I can give you a **fill-in-the-blank complaint template** that stays neutral and factual.",
+          "category": "agent_reply",
+          "task_index": 11,
+          "turn": 2,
+          "score": 0.24630780518054962
+        }
+      ]
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "complex_problem_solving_skill",
+      "explanation": "He can handle unfamiliar, layered problems by breaking them into observable parts and testing each one. The generator outage example shows he can move from symptom to subsystem to root cause without getting lost. He is likely better when the problem is concrete and mechanical than when it is ambiguous or people-driven.",
+      "ground_truth": "Strong multi-step troubleshooter",
+      "predicted": "can structure complex troubleshooting notes into traceable steps",
+      "slot_fill_reason": "They repeatedly asked for help turning messy equipment issues into clean troubleshooting write-ups with sequence, checks, findings, and outcomes.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of being able to organize troubleshooting into clear, traceable steps, but it is less explicit about strong multi-step problem solving and root-cause analysis.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "Agent: Yes — keep it **specific, measurable, and evidence-based**.\n\n## What to include\n- **Your role / scope**\n- **A few concrete examples**\n- **What you did**\n- **What changed because of it**\n- **Any numbers, dates, or outcomes**\n- **Anything you owned end-to-end**\n\n## Good structure\n1. **Context** — what you were responsible for\n2. **Example 1** — problem, action, result\n3. **Example 2** — problem, action, result\n4. **Example 3** — problem, action, result\n5. **Summary** — impact across the cycle\n\n## Keep it factual\nUse:\n- “I handled…”\n- “I identified…”\n- “I resolved…”\n- “This reduced…”\n- “This prevented…”\n\nAvoid:\n- vague praise\n- inflated claims\n- “always” / “never”\n- stuff you can’t back up\n\n## Example format\n> During this cycle, I handled recurring issues on [system/team/process], including [example]. I identified the root cause, coordinated the fix, and confirmed the issue did not recur. This reduced downtime and removed repeat follow-up work.\n\nIf you want, I can help you turn your rough examples into a clean note.",
+          "category": "agent_reply",
+          "task_index": 24,
+          "turn": 1,
+          "score": 0.3055969476699829
+        },
+        {
+          "content": "[Task 22] I need to write a short note to a coworker about a recurring problem that keeps getting brushed aside, and I want it to be specific enough that nobody can miss what I’m pointing to. Can you help me shape it so it stays focused on the facts and the next step?",
+          "category": "task",
+          "task_index": 22,
+          "score": 0.29288482666015625
+        },
+        {
+          "content": "User: Yeah, that’s the right shape. Sequence, checks, result of each check. Keep it tight and traceable.\n\nI’d also add:\n- exact outage start and restore time, if known\n- whether the failure was total or partial\n- any alarms, breaker trips, relay status, fault lights, log entries, or error codes\n- what was physically verified vs. what was reported by someone else\n- any temporary workaround or reset done\n- who accessed what, and whether permission mattered\n- photos, timestamps, or screenshots if you have them\n- what’s still unresolved at the end\n\nIf I were writing it for later review, I’d want it to answer: what failed, what you checked, what you found, and what changed after each step. No guessing. Just the chain.\n\nSo something like:\n1. Time/event\n2. Symptom observed\n3. Checks performed\n4. Findings from each check\n5. Actions taken\n6. Outcome/current state\n\nThat’s enough for someone to reconstruct it later without filling in blanks themselves.",
+          "category": "user_reply",
+          "task_index": 17,
+          "turn": 1,
+          "score": 0.28421273827552795
+        },
+        {
+          "content": "[Task 7] I’ve got a messy equipment issue I want to hand off to someone else, but I don’t want the important details getting lost. Can you help me turn my rough notes into a clean troubleshooting write-up with the key symptoms, what was checked, what changed, and the order of events?",
+          "category": "task",
+          "task_index": 7,
+          "score": 0.2773280143737793
+        },
+        {
+          "content": "[Task 25] I’m putting together a quick inspection sheet for a used tool I’m thinking about buying, and I don’t want the checklist to be sloppy or too vague. What items would you put on it so I can catch hidden issues before I commit?",
+          "category": "task",
+          "task_index": 25,
+          "score": 0.2458924651145935
+        }
+      ]
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "writing_skill",
+      "explanation": "He seems capable of writing precise, useful notes that capture failures and sequences accurately. His documentation style is likely practical and evidence-focused rather than polished or persuasive. He probably writes best when the goal is recordkeeping, reporting, or troubleshooting, not emotional nuance.",
+      "ground_truth": "Clear technical documenter",
+      "predicted": "writes concise, factual notes with strong attention to evidence",
+      "slot_fill_reason": "They repeatedly asked for help shaping notes to be specific, defensible, timeline-based, and evidence-backed, including exact dates, names, sequence, and document trails.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the ground truth’s practical, evidence-focused technical writing style, but it is a bit narrower and does not explicitly capture the broader idea of clear technical documentation.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "[Task 24] I’m putting together a short performance-cycle note and want it to be specific, factual, and easy for a manager to verify. Can you help me frame it around a few concrete examples from my work so it reads clearly and doesn’t overstate anything?",
+          "category": "task",
+          "task_index": 24,
+          "score": 0.31541746854782104
+        },
+        {
+          "content": "Agent: Yes — for the first version, keep it **tight, factual, and defensible**.\n\n## Include\n- **Exact date/time**\n- **Names, titles, roles**\n- **What you personally saw/heard/did**\n- **What others told you** — clearly labeled as such\n- **Sequence of events**\n- **Specific harm**: safety, cost, delay, damage, policy issue\n- **Immediate response**: who you notified, what you did\n- **Evidence trail**: emails, logs, photos, texts, access records, timestamps\n- **What remains unresolved**\n\n## Verify before sending\n- dates/times against records\n- names and titles\n- quotes, if you include any\n- facts vs inference\n- whether documents/messages contradict your memory\n- witness names and what they actually observed\n\n## Tone rules\nUse:\n- “I observed…”\n- “At approximately…”\n- “The record shows…”\n- “I was informed that…”\n\nAvoid:\n- motive guessing\n- “obviously,” “clearly,” “everyone knows”\n- emotional language\n- conclusions you can’t prove yet\n\n## Best first-pass structure\n1. **Subject**\n2. **Summary**\n3. **Timeline**\n4. **Impact**\n5. **Evidence**\n6. **Requested action**\n\n## Practical tip\nIf this could become a dispute, write it so a third party can read it and answer:\n- what happened\n- when it happened\n- who did what\n- how you know\n\nIf you want, I can give you a **fill-in-the-blank complaint template** that stays neutral and factual.",
+          "category": "agent_reply",
+          "task_index": 11,
+          "turn": 2,
+          "score": 0.31359124183654785
+        },
+        {
+          "content": "User: Yeah, that’s the right shape. But it’s still a little generic.\n\nWhat I’d want in the first pass:\n- exact date/time, not just “recently”\n- names, titles, and which person did what\n- what you personally saw vs what someone else told you\n- the sequence, minute by minute if it matters\n- any document trail: emails, logs, photos, texts, badge access, timestamps\n- the specific harm: safety issue, cost, delay, damage, policy violation\n- what you did right after, and who got notified\n\nAnd before sending it, I’d verify:\n- every time/date against records\n- spellings of names and job titles\n- any quote I’m putting in there\n- whether I’m mixing fact with inference\n- whether there’s a paper trail that contradicts my memory\n\nOne thing you didn’t mention: if this could turn into a dispute, keep the tone tight. No motive guessing. No “clearly,” no “obviously,” none of that. Just facts and sequence. That’s how you avoid handing them easy openings.\n\nIf you want the useful version, I’d rather have a fill-in template or the actual incident details, then I can help strip the noise out.",
+          "category": "user_reply",
+          "task_index": 11,
+          "turn": 1,
+          "score": 0.31285330653190613
+        },
+        {
+          "content": "[Task 22] I need to write a short note to a coworker about a recurring problem that keeps getting brushed aside, and I want it to be specific enough that nobody can miss what I’m pointing to. Can you help me shape it so it stays focused on the facts and the next step?",
+          "category": "task",
+          "task_index": 22,
+          "score": 0.2974741756916046
+        },
+        {
+          "content": "User: Yeah, that’s basically the right list. Tight enough. I’d use that before memory starts drifting.\n\nThe only thing I’d keep extra clear is **who had authority over the area** and **whether anyone told you not to enter before or after**. That’s usually where the story gets twisted later.\n\nA line-by-line incident log template would be useful.",
+          "category": "user_reply",
+          "task_index": 16,
+          "turn": 2,
+          "score": 0.29430878162384033
+        }
+      ]
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "engineering_and_technology_knowledge",
+      "explanation": "He clearly understands engineering and technical systems at a practical level, especially failure modes, relays, alarms, and maintenance logic. He does not take equipment behavior at face value and seems comfortable reasoning from evidence rather than relying on official explanations. His knowledge is strongest where systems can be tested and observed directly.",
+      "ground_truth": "Technically fluent skeptic",
+      "predicted": "understands basic home maintenance failure signs and replacement triggers",
+      "slot_fill_reason": "They asked for concrete triggers for hoses, valves, alarms, filters, batteries, and electrical wear versus junk, showing familiarity with those maintenance concepts.",
+      "score": 0.5,
+      "judge_reason": "The prediction overlaps with practical technical awareness and noticing failure signs, but it is much narrower and misses the stronger skeptical, evidence-based understanding of engineering systems described in the ground truth.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Closer. Still a little broad in spots though.\n\nWhat I’d want next is the same thing, but in a cleaner table and with a hard line between:\n- **must replace now / soon**\n- **monitor only**\n- **call a pro**\n\nAlso, don’t bury the useful stuff in generic language. For example, on hoses, valves, alarms, filters, batteries — I want actual replacement triggers, not just “if worn.” Same for electrical: what’s normal wear vs what means the thing is junk.\n\nIf you can, make it look like something I could print and stick in a notebook: item, interval, what to look for, action. Keep the fluff out.",
+          "category": "user_reply",
+          "task_index": 4,
+          "turn": 2,
+          "score": 0.24091234803199768
+        },
+        {
+          "content": "User: Yeah, the structure is fine, but it’s still pretty generic. I want something I can actually use without guessing.\n\nGive me a tighter checklist by item — like:\n- what to inspect\n- how often\n- what failure signs matter\n- what parts are worth replacing proactively\n- what can just be watched\n\nAnd if you can, split it into **high-risk stuff** first — water, heat, electrical, then the rest. I don’t want a laundry list of obvious nonsense.",
+          "category": "user_reply",
+          "task_index": 4,
+          "turn": 1,
+          "score": 0.2401808202266693
+        },
+        {
+          "content": "User: Closer, yeah. But it still needs a couple things before it’s actually usable.\n\nTwo fixes:\n1. make the actions more concrete — not just “replace soon” / “call a pro,” but what exactly crosses the line\n2. split the table by system, with the high-risk stuff first and the rest after. I don’t want to hunt through a mixed list.\n\nAlso, for electrical, I’d want a clearer distinction between:\n- normal wear: dusty, old-looking, but stable\n- junk: heat, looseness, arcing, discoloration, repeat trips, cracked insulation, that kind of thing\n\nAnd on alarms/hoses/valves/filters/batteries, I’m still missing the exact triggers. Example: a smoke alarm that chirps once because of low battery is one thing. One that chirps after a new battery, or fails the test, that’s junk. That’s the kind of line I mean.\n\nSo yeah — same format, cleaner, but tighten the decision points. Notebook-useful, not generic.",
+          "category": "user_reply",
+          "task_index": 4,
+          "turn": 3,
+          "score": 0.23560139536857605
+        },
+        {
+          "content": "Agent: Yes — for the first draft, I’d keep it **fact-first, timestamped, and separated by source**.\n\n## Include up front\n- **Exact date/time**\n- **Who was involved**: names, titles, roles\n- **What you personally saw/heard/did**\n- **What you were told by others** — clearly labeled as such\n- **Sequence of events**\n- **Concrete harm**: safety issue, delay, damage, cost, policy breach\n- **Immediate response**: what you did and who you notified\n- **Paper trail**: logs, emails, photos, texts, badge/access records, timestamps\n- **What remains unresolved**\n\n## Verify before sending\nCheck:\n- every date/time against records\n- names, titles, and spellings\n- any direct quotes\n- whether a document, message, or log contradicts your memory\n- whether a witness actually saw the event or only heard about it\n\n## Tone rules\nUse:\n- “I observed…”\n- “At approximately…”\n- “The record shows…”\n- “I was informed that…”\n\nAvoid:\n- motive guessing\n- “obviously,” “clearly,” “everyone knows”\n- emotional or argumentative language\n- conclusions you can’t prove yet\n\n## Best structure\n1. **Subject**\n2. **Summary**\n3. **Timeline**\n4. **Impact**\n5. **Evidence**\n6. **Requested action**\n\n## Practical rule\nWrite it so a third party can answer:\n- what happened\n- when it happened\n- who did what\n- how you know\n\nIf you want, paste the incident details and I’ll turn them into a clean first draft.",
+          "category": "agent_reply",
+          "task_index": 11,
+          "turn": 3,
+          "score": 0.23501725494861603
+        },
+        {
+          "content": "[Task 22] I need to write a short note to a coworker about a recurring problem that keeps getting brushed aside, and I want it to be specific enough that nobody can miss what I’m pointing to. Can you help me shape it so it stays focused on the facts and the next step?",
+          "category": "task",
+          "task_index": 22,
+          "score": 0.23212704062461853
+        }
+      ]
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "mathematics_and_science_knowledge",
+      "explanation": "He likely has enough math and science to work through cause-and-effect problems in real systems. His thinking appears grounded in measurement, sequence, and physical evidence rather than abstraction for its own sake. He may be less interested in theory unless it helps explain a concrete failure.",
+      "ground_truth": "Solid applied science base",
+      "predicted": "unknown",
+      "slot_fill_reason": "The memories only show the user asking for help writing factual incident notes and discussing verification/timestamps, not their mathematics or science knowledge.",
+      "score": 0.0,
+      "judge_reason": "The prediction is unknown, so it does not provide any evidence of a solid applied science base.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "[Task 22] I need to write a short note to a coworker about a recurring problem that keeps getting brushed aside, and I want it to be specific enough that nobody can miss what I’m pointing to. Can you help me shape it so it stays focused on the facts and the next step?",
+          "category": "task",
+          "task_index": 22,
+          "score": 0.25763580203056335
+        },
+        {
+          "content": "User: Yeah, that’s the right shape. But it’s still a little generic.\n\nWhat I’d want in the first pass:\n- exact date/time, not just “recently”\n- names, titles, and which person did what\n- what you personally saw vs what someone else told you\n- the sequence, minute by minute if it matters\n- any document trail: emails, logs, photos, texts, badge access, timestamps\n- the specific harm: safety issue, cost, delay, damage, policy violation\n- what you did right after, and who got notified\n\nAnd before sending it, I’d verify:\n- every time/date against records\n- spellings of names and job titles\n- any quote I’m putting in there\n- whether I’m mixing fact with inference\n- whether there’s a paper trail that contradicts my memory\n\nOne thing you didn’t mention: if this could turn into a dispute, keep the tone tight. No motive guessing. No “clearly,” no “obviously,” none of that. Just facts and sequence. That’s how you avoid handing them easy openings.\n\nIf you want the useful version, I’d rather have a fill-in template or the actual incident details, then I can help strip the noise out.",
+          "category": "user_reply",
+          "task_index": 11,
+          "turn": 1,
+          "score": 0.17369484901428223
+        },
+        {
+          "content": "User: Yeah, that’s the right shape. Sequence, checks, result of each check. Keep it tight and traceable.\n\nI’d also add:\n- exact outage start and restore time, if known\n- whether the failure was total or partial\n- any alarms, breaker trips, relay status, fault lights, log entries, or error codes\n- what was physically verified vs. what was reported by someone else\n- any temporary workaround or reset done\n- who accessed what, and whether permission mattered\n- photos, timestamps, or screenshots if you have them\n- what’s still unresolved at the end\n\nIf I were writing it for later review, I’d want it to answer: what failed, what you checked, what you found, and what changed after each step. No guessing. Just the chain.\n\nSo something like:\n1. Time/event\n2. Symptom observed\n3. Checks performed\n4. Findings from each check\n5. Actions taken\n6. Outcome/current state\n\nThat’s enough for someone to reconstruct it later without filling in blanks themselves.",
+          "category": "user_reply",
+          "task_index": 17,
+          "turn": 1,
+          "score": 0.1730756014585495
+        },
+        {
+          "content": "Agent: Yes — for the first version, keep it **tight, factual, and defensible**.\n\n## Include\n- **Exact date/time**\n- **Names, titles, roles**\n- **What you personally saw/heard/did**\n- **What others told you** — clearly labeled as such\n- **Sequence of events**\n- **Specific harm**: safety, cost, delay, damage, policy issue\n- **Immediate response**: who you notified, what you did\n- **Evidence trail**: emails, logs, photos, texts, access records, timestamps\n- **What remains unresolved**\n\n## Verify before sending\n- dates/times against records\n- names and titles\n- quotes, if you include any\n- facts vs inference\n- whether documents/messages contradict your memory\n- witness names and what they actually observed\n\n## Tone rules\nUse:\n- “I observed…”\n- “At approximately…”\n- “The record shows…”\n- “I was informed that…”\n\nAvoid:\n- motive guessing\n- “obviously,” “clearly,” “everyone knows”\n- emotional language\n- conclusions you can’t prove yet\n\n## Best first-pass structure\n1. **Subject**\n2. **Summary**\n3. **Timeline**\n4. **Impact**\n5. **Evidence**\n6. **Requested action**\n\n## Practical tip\nIf this could become a dispute, write it so a third party can read it and answer:\n- what happened\n- when it happened\n- who did what\n- how you know\n\nIf you want, I can give you a **fill-in-the-blank complaint template** that stays neutral and factual.",
+          "category": "agent_reply",
+          "task_index": 11,
+          "turn": 2,
+          "score": 0.17141413688659668
+        },
+        {
+          "content": "Agent: Yes — for the first draft, I’d keep it **fact-first, timestamped, and separated by source**.\n\n## Include up front\n- **Exact date/time**\n- **Who was involved**: names, titles, roles\n- **What you personally saw/heard/did**\n- **What you were told by others** — clearly labeled as such\n- **Sequence of events**\n- **Concrete harm**: safety issue, delay, damage, cost, policy breach\n- **Immediate response**: what you did and who you notified\n- **Paper trail**: logs, emails, photos, texts, badge/access records, timestamps\n- **What remains unresolved**\n\n## Verify before sending\nCheck:\n- every date/time against records\n- names, titles, and spellings\n- any direct quotes\n- whether a document, message, or log contradicts your memory\n- whether a witness actually saw the event or only heard about it\n\n## Tone rules\nUse:\n- “I observed…”\n- “At approximately…”\n- “The record shows…”\n- “I was informed that…”\n\nAvoid:\n- motive guessing\n- “obviously,” “clearly,” “everyone knows”\n- emotional or argumentative language\n- conclusions you can’t prove yet\n\n## Best structure\n1. **Subject**\n2. **Summary**\n3. **Timeline**\n4. **Impact**\n5. **Evidence**\n6. **Requested action**\n\n## Practical rule\nWrite it so a third party can answer:\n- what happened\n- when it happened\n- who did what\n- how you know\n\nIf you want, paste the incident details and I’ll turn them into a clean first draft.",
+          "category": "agent_reply",
+          "task_index": 11,
+          "turn": 3,
+          "score": 0.16685734689235687
+        }
+      ]
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "business_and_management_knowledge",
+      "explanation": "He seems to understand enough about operations, service schedules, and administrative accountability to spot when management is cutting corners. He notices missing intervals, skipped maintenance, and weak oversight, which suggests practical awareness of how organizations are supposed to function. At the same time, he likely assumes management will minimize problems unless forced to confront evidence.",
+      "ground_truth": "Skeptical of management logic",
+      "predicted": "understands factual incident reporting and dispute-safe documentation",
+      "slot_fill_reason": "They repeatedly asked for and refined guidance on fact-first, timestamped incident notes, evidence trails, and avoiding motive guessing in workplace writeups.",
+      "score": 0.25,
+      "judge_reason": "The prediction reflects practical documentation awareness, but it misses the main idea of being skeptical of management logic and instead focuses on reporting and record-keeping.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Yeah, that’s basically the right list. Tight enough. I’d use that before memory starts drifting.\n\nThe only thing I’d keep extra clear is **who had authority over the area** and **whether anyone told you not to enter before or after**. That’s usually where the story gets twisted later.\n\nA line-by-line incident log template would be useful.",
+          "category": "user_reply",
+          "task_index": 16,
+          "turn": 2,
+          "score": 0.2698144316673279
+        },
+        {
+          "content": "User: Yeah, that’s the right shape. But it’s still a little generic.\n\nWhat I’d want in the first pass:\n- exact date/time, not just “recently”\n- names, titles, and which person did what\n- what you personally saw vs what someone else told you\n- the sequence, minute by minute if it matters\n- any document trail: emails, logs, photos, texts, badge access, timestamps\n- the specific harm: safety issue, cost, delay, damage, policy violation\n- what you did right after, and who got notified\n\nAnd before sending it, I’d verify:\n- every time/date against records\n- spellings of names and job titles\n- any quote I’m putting in there\n- whether I’m mixing fact with inference\n- whether there’s a paper trail that contradicts my memory\n\nOne thing you didn’t mention: if this could turn into a dispute, keep the tone tight. No motive guessing. No “clearly,” no “obviously,” none of that. Just facts and sequence. That’s how you avoid handing them easy openings.\n\nIf you want the useful version, I’d rather have a fill-in template or the actual incident details, then I can help strip the noise out.",
+          "category": "user_reply",
+          "task_index": 11,
+          "turn": 1,
+          "score": 0.26719173789024353
+        },
+        {
+          "content": "Agent: Yes — for the first draft, I’d keep it **fact-first, timestamped, and separated by source**.\n\n## Include up front\n- **Exact date/time**\n- **Who was involved**: names, titles, roles\n- **What you personally saw/heard/did**\n- **What you were told by others** — clearly labeled as such\n- **Sequence of events**\n- **Concrete harm**: safety issue, delay, damage, cost, policy breach\n- **Immediate response**: what you did and who you notified\n- **Paper trail**: logs, emails, photos, texts, badge/access records, timestamps\n- **What remains unresolved**\n\n## Verify before sending\nCheck:\n- every date/time against records\n- names, titles, and spellings\n- any direct quotes\n- whether a document, message, or log contradicts your memory\n- whether a witness actually saw the event or only heard about it\n\n## Tone rules\nUse:\n- “I observed…”\n- “At approximately…”\n- “The record shows…”\n- “I was informed that…”\n\nAvoid:\n- motive guessing\n- “obviously,” “clearly,” “everyone knows”\n- emotional or argumentative language\n- conclusions you can’t prove yet\n\n## Best structure\n1. **Subject**\n2. **Summary**\n3. **Timeline**\n4. **Impact**\n5. **Evidence**\n6. **Requested action**\n\n## Practical rule\nWrite it so a third party can answer:\n- what happened\n- when it happened\n- who did what\n- how you know\n\nIf you want, paste the incident details and I’ll turn them into a clean first draft.",
+          "category": "agent_reply",
+          "task_index": 11,
+          "turn": 3,
+          "score": 0.24636897444725037
+        },
+        {
+          "content": "Agent: Yes — for the first version, keep it **tight, factual, and defensible**.\n\n## Include\n- **Exact date/time**\n- **Names, titles, roles**\n- **What you personally saw/heard/did**\n- **What others told you** — clearly labeled as such\n- **Sequence of events**\n- **Specific harm**: safety, cost, delay, damage, policy issue\n- **Immediate response**: who you notified, what you did\n- **Evidence trail**: emails, logs, photos, texts, access records, timestamps\n- **What remains unresolved**\n\n## Verify before sending\n- dates/times against records\n- names and titles\n- quotes, if you include any\n- facts vs inference\n- whether documents/messages contradict your memory\n- witness names and what they actually observed\n\n## Tone rules\nUse:\n- “I observed…”\n- “At approximately…”\n- “The record shows…”\n- “I was informed that…”\n\nAvoid:\n- motive guessing\n- “obviously,” “clearly,” “everyone knows”\n- emotional language\n- conclusions you can’t prove yet\n\n## Best first-pass structure\n1. **Subject**\n2. **Summary**\n3. **Timeline**\n4. **Impact**\n5. **Evidence**\n6. **Requested action**\n\n## Practical tip\nIf this could become a dispute, write it so a third party can read it and answer:\n- what happened\n- when it happened\n- who did what\n- how you know\n\nIf you want, I can give you a **fill-in-the-blank complaint template** that stays neutral and factual.",
+          "category": "agent_reply",
+          "task_index": 11,
+          "turn": 2,
+          "score": 0.24303646385669708
+        },
+        {
+          "content": "[Task 22] I need to write a short note to a coworker about a recurring problem that keeps getting brushed aside, and I want it to be specific enough that nobody can miss what I’m pointing to. Can you help me shape it so it stays focused on the facts and the next step?",
+          "category": "task",
+          "task_index": 22,
+          "score": 0.23146377503871918
+        }
+      ]
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "law_and_public_safety_knowledge",
+      "explanation": "He has at least functional knowledge of rules around access, safety, and responsibility, since he kept the complaint and seems to understand its significance. He may not be legally sophisticated, but he recognizes that permissions, liability, and procedural violations matter. His instinct is to document and defend himself rather than trust others to frame the situation fairly.",
+      "ground_truth": "Aware of boundaries and liability",
+      "predicted": "understands factual incident reporting for disputes",
+      "slot_fill_reason": "They repeatedly emphasized exact timestamps, names/titles, separating observation from hearsay, documenting evidence, and avoiding motive guessing in complaint/incident writeups.",
+      "score": 0.5,
+      "judge_reason": "The prediction overlaps with the idea of documenting an incident for a dispute, but it misses the key emphasis on awareness of boundaries, permissions, and liability.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "Agent: Yes — for the first version, keep it **tight, factual, and defensible**.\n\n## Include\n- **Exact date/time**\n- **Names, titles, roles**\n- **What you personally saw/heard/did**\n- **What others told you** — clearly labeled as such\n- **Sequence of events**\n- **Specific harm**: safety, cost, delay, damage, policy issue\n- **Immediate response**: who you notified, what you did\n- **Evidence trail**: emails, logs, photos, texts, access records, timestamps\n- **What remains unresolved**\n\n## Verify before sending\n- dates/times against records\n- names and titles\n- quotes, if you include any\n- facts vs inference\n- whether documents/messages contradict your memory\n- witness names and what they actually observed\n\n## Tone rules\nUse:\n- “I observed…”\n- “At approximately…”\n- “The record shows…”\n- “I was informed that…”\n\nAvoid:\n- motive guessing\n- “obviously,” “clearly,” “everyone knows”\n- emotional language\n- conclusions you can’t prove yet\n\n## Best first-pass structure\n1. **Subject**\n2. **Summary**\n3. **Timeline**\n4. **Impact**\n5. **Evidence**\n6. **Requested action**\n\n## Practical tip\nIf this could become a dispute, write it so a third party can read it and answer:\n- what happened\n- when it happened\n- who did what\n- how you know\n\nIf you want, I can give you a **fill-in-the-blank complaint template** that stays neutral and factual.",
+          "category": "agent_reply",
+          "task_index": 11,
+          "turn": 2,
+          "score": 0.4252062737941742
+        },
+        {
+          "content": "Agent: Yes — for the first draft, I’d keep it **fact-first, timestamped, and separated by source**.\n\n## Include up front\n- **Exact date/time**\n- **Who was involved**: names, titles, roles\n- **What you personally saw/heard/did**\n- **What you were told by others** — clearly labeled as such\n- **Sequence of events**\n- **Concrete harm**: safety issue, delay, damage, cost, policy breach\n- **Immediate response**: what you did and who you notified\n- **Paper trail**: logs, emails, photos, texts, badge/access records, timestamps\n- **What remains unresolved**\n\n## Verify before sending\nCheck:\n- every date/time against records\n- names, titles, and spellings\n- any direct quotes\n- whether a document, message, or log contradicts your memory\n- whether a witness actually saw the event or only heard about it\n\n## Tone rules\nUse:\n- “I observed…”\n- “At approximately…”\n- “The record shows…”\n- “I was informed that…”\n\nAvoid:\n- motive guessing\n- “obviously,” “clearly,” “everyone knows”\n- emotional or argumentative language\n- conclusions you can’t prove yet\n\n## Best structure\n1. **Subject**\n2. **Summary**\n3. **Timeline**\n4. **Impact**\n5. **Evidence**\n6. **Requested action**\n\n## Practical rule\nWrite it so a third party can answer:\n- what happened\n- when it happened\n- who did what\n- how you know\n\nIf you want, paste the incident details and I’ll turn them into a clean first draft.",
+          "category": "agent_reply",
+          "task_index": 11,
+          "turn": 3,
+          "score": 0.4094357490539551
+        },
+        {
+          "content": "User: Yeah, that’s basically the right list. Tight enough. I’d use that before memory starts drifting.\n\nThe only thing I’d keep extra clear is **who had authority over the area** and **whether anyone told you not to enter before or after**. That’s usually where the story gets twisted later.\n\nA line-by-line incident log template would be useful.",
+          "category": "user_reply",
+          "task_index": 16,
+          "turn": 2,
+          "score": 0.4053502082824707
+        },
+        {
+          "content": "User: Yeah, that’s the right shape. But it’s still a little generic.\n\nWhat I’d want in the first pass:\n- exact date/time, not just “recently”\n- names, titles, and which person did what\n- what you personally saw vs what someone else told you\n- the sequence, minute by minute if it matters\n- any document trail: emails, logs, photos, texts, badge access, timestamps\n- the specific harm: safety issue, cost, delay, damage, policy violation\n- what you did right after, and who got notified\n\nAnd before sending it, I’d verify:\n- every time/date against records\n- spellings of names and job titles\n- any quote I’m putting in there\n- whether I’m mixing fact with inference\n- whether there’s a paper trail that contradicts my memory\n\nOne thing you didn’t mention: if this could turn into a dispute, keep the tone tight. No motive guessing. No “clearly,” no “obviously,” none of that. Just facts and sequence. That’s how you avoid handing them easy openings.\n\nIf you want the useful version, I’d rather have a fill-in template or the actual incident details, then I can help strip the noise out.",
+          "category": "user_reply",
+          "task_index": 11,
+          "turn": 1,
+          "score": 0.39755287766456604
+        },
+        {
+          "content": "User: Yeah. Better, but still a little generic.\n\nWhat I’d push in the first draft:\n- separate **what I saw** from **what I was told**\n- use exact timestamps where possible, not loose ranges unless that’s all you’ve got\n- name the actor and the action, not just the event\n- include the paper trail up front if it exists: logs, emails, photos, texts, access records\n- state the concrete harm. Not “it was bad.” Safety issue, delay, damage, cost, policy breach. Pick the actual one(s)\n- note what happened immediately after, and who was notified\n\nAnd before it goes out, I’d verify:\n- every date/time against records\n- names, titles, and spellings\n- any quoted language\n- whether a log/photo/message contradicts your memory\n- whether a witness actually saw the thing, or just heard about it\n\nAlso, if this can turn into a fight, keep the wording cold. No motive guessing, no “obviously,” no drama. I had to do that after that generator outage — the complaint only got more useful once I stripped out anything that sounded like attitude and left the sequence, the missed maintenance, and the record trail.\n\nIf you want, paste the incident details and I’ll help turn it into a first-pass complaint that won’t hand them extra openings.",
+          "category": "user_reply",
+          "task_index": 11,
+          "turn": 2,
+          "score": 0.3493138551712036
+        }
+      ]
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "procedural_knowledge",
+      "explanation": "He understands how maintenance and inspection processes are supposed to work, especially when there are schedules, logs, and follow-up steps. He is good at noticing when procedures were skipped or not completed, which suggests strong familiarity with formal processes. He may, however, prefer to bypass bureaucracy when he believes direct checking is more reliable.",
+      "ground_truth": "Process-minded but self-directed",
+      "predicted": "knows how to structure factual incident reports",
+      "slot_fill_reason": "They repeatedly specified exact dates/times, source-tagged facts, sequence, evidence trails, and neutral tone for a first-pass complaint template.",
+      "score": 0.25,
+      "judge_reason": "The prediction overlaps only slightly by implying procedural/reporting skill, but it misses the core idea of understanding maintenance/inspection workflows and being process-minded yet self-directed.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "Agent: Yes — for the first version, keep it **tight, factual, and defensible**.\n\n## Include\n- **Exact date/time**\n- **Names, titles, roles**\n- **What you personally saw/heard/did**\n- **What others told you** — clearly labeled as such\n- **Sequence of events**\n- **Specific harm**: safety, cost, delay, damage, policy issue\n- **Immediate response**: who you notified, what you did\n- **Evidence trail**: emails, logs, photos, texts, access records, timestamps\n- **What remains unresolved**\n\n## Verify before sending\n- dates/times against records\n- names and titles\n- quotes, if you include any\n- facts vs inference\n- whether documents/messages contradict your memory\n- witness names and what they actually observed\n\n## Tone rules\nUse:\n- “I observed…”\n- “At approximately…”\n- “The record shows…”\n- “I was informed that…”\n\nAvoid:\n- motive guessing\n- “obviously,” “clearly,” “everyone knows”\n- emotional language\n- conclusions you can’t prove yet\n\n## Best first-pass structure\n1. **Subject**\n2. **Summary**\n3. **Timeline**\n4. **Impact**\n5. **Evidence**\n6. **Requested action**\n\n## Practical tip\nIf this could become a dispute, write it so a third party can read it and answer:\n- what happened\n- when it happened\n- who did what\n- how you know\n\nIf you want, I can give you a **fill-in-the-blank complaint template** that stays neutral and factual.",
+          "category": "agent_reply",
+          "task_index": 11,
+          "turn": 2,
+          "score": 0.3272048830986023
+        },
+        {
+          "content": "User: Yeah, that’s the right shape. But it’s still a little generic.\n\nWhat I’d want in the first pass:\n- exact date/time, not just “recently”\n- names, titles, and which person did what\n- what you personally saw vs what someone else told you\n- the sequence, minute by minute if it matters\n- any document trail: emails, logs, photos, texts, badge access, timestamps\n- the specific harm: safety issue, cost, delay, damage, policy violation\n- what you did right after, and who got notified\n\nAnd before sending it, I’d verify:\n- every time/date against records\n- spellings of names and job titles\n- any quote I’m putting in there\n- whether I’m mixing fact with inference\n- whether there’s a paper trail that contradicts my memory\n\nOne thing you didn’t mention: if this could turn into a dispute, keep the tone tight. No motive guessing. No “clearly,” no “obviously,” none of that. Just facts and sequence. That’s how you avoid handing them easy openings.\n\nIf you want the useful version, I’d rather have a fill-in template or the actual incident details, then I can help strip the noise out.",
+          "category": "user_reply",
+          "task_index": 11,
+          "turn": 1,
+          "score": 0.3088224530220032
+        },
+        {
+          "content": "User: Yeah, that’s basically the right list. Tight enough. I’d use that before memory starts drifting.\n\nThe only thing I’d keep extra clear is **who had authority over the area** and **whether anyone told you not to enter before or after**. That’s usually where the story gets twisted later.\n\nA line-by-line incident log template would be useful.",
+          "category": "user_reply",
+          "task_index": 16,
+          "turn": 2,
+          "score": 0.30837470293045044
+        },
+        {
+          "content": "Agent: Yes — for the first draft, I’d keep it **fact-first, timestamped, and separated by source**.\n\n## Include up front\n- **Exact date/time**\n- **Who was involved**: names, titles, roles\n- **What you personally saw/heard/did**\n- **What you were told by others** — clearly labeled as such\n- **Sequence of events**\n- **Concrete harm**: safety issue, delay, damage, cost, policy breach\n- **Immediate response**: what you did and who you notified\n- **Paper trail**: logs, emails, photos, texts, badge/access records, timestamps\n- **What remains unresolved**\n\n## Verify before sending\nCheck:\n- every date/time against records\n- names, titles, and spellings\n- any direct quotes\n- whether a document, message, or log contradicts your memory\n- whether a witness actually saw the event or only heard about it\n\n## Tone rules\nUse:\n- “I observed…”\n- “At approximately…”\n- “The record shows…”\n- “I was informed that…”\n\nAvoid:\n- motive guessing\n- “obviously,” “clearly,” “everyone knows”\n- emotional or argumentative language\n- conclusions you can’t prove yet\n\n## Best structure\n1. **Subject**\n2. **Summary**\n3. **Timeline**\n4. **Impact**\n5. **Evidence**\n6. **Requested action**\n\n## Practical rule\nWrite it so a third party can answer:\n- what happened\n- when it happened\n- who did what\n- how you know\n\nIf you want, paste the incident details and I’ll turn them into a clean first draft.",
+          "category": "agent_reply",
+          "task_index": 11,
+          "turn": 3,
+          "score": 0.30746597051620483
+        },
+        {
+          "content": "Agent: Yes — for the first draft, I’d make it **source-tagged, timestamped, and sequence-based**.\n\n## Include\n- **Exact date/time** for each key event\n- **Actor + action** for each step\n- **Source tag inline**\n  - “I observed…”\n  - “X told me…”\n  - “The log shows…”\n- **Paper trail in the timeline**\n  - emails, texts, badge swipes, photos, logs\n- **Concrete harm**\n  - safety issue, delay, damage, cost, policy breach\n- **Immediate follow-up**\n  - what you did, who you notified, what response you got\n- **What remains unresolved**\n\n## Verify before sending\n- every date/time against records\n- names, titles, spellings\n- any quoted language\n- whether logs/messages/photos contradict memory\n- whether a witness actually saw it or just heard about it\n\n## Tone rules\nUse:\n- “I observed…”\n- “At approximately…”\n- “The record shows…”\n- “I was informed that…”\n\nAvoid:\n- motive guessing\n- “obviously,” “clearly,” “everyone knows”\n- emotional language\n- conclusions you can’t prove\n\n## Best structure\n1. **Subject**\n2. **Summary**\n3. **Timeline**\n4. **Impact**\n5. **Evidence**\n6. **Follow-up / requested action**\n\n## Practical rule\nWrite it so a third party can answer:\n- what happened\n- when it happened\n- who did what\n- how you know\n\nIf you want, I can turn that into a **fill-in-the-blank complaint template** you can paste into directly.",
+          "category": "agent_reply",
+          "task_index": 11,
+          "turn": 4,
+          "score": 0.2626974582672119
+        }
+      ]
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "digital_literacy_knowledge",
+      "explanation": "He appears comfortable using phones and likely other basic digital tools to document evidence and manage information. His use of photos, logs, and records suggests routine confidence with everyday technology rather than fear or confusion. He probably values devices as tools for verification more than for convenience or entertainment.",
+      "ground_truth": "Competent with practical tech",
+      "predicted": "understands factual documentation and timestamped incident records",
+      "slot_fill_reason": "They emphasized exact dates/times, source separation, evidence trails, and avoiding fact-inference mixing when writing incident notes.",
+      "score": 0.5,
+      "judge_reason": "The prediction overlaps with the idea of using digital tools for documentation and records, but it misses the broader sense of practical tech competence and comfort with everyday devices.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Yeah, that’s the right shape. But it’s still a little generic.\n\nWhat I’d want in the first pass:\n- exact date/time, not just “recently”\n- names, titles, and which person did what\n- what you personally saw vs what someone else told you\n- the sequence, minute by minute if it matters\n- any document trail: emails, logs, photos, texts, badge access, timestamps\n- the specific harm: safety issue, cost, delay, damage, policy violation\n- what you did right after, and who got notified\n\nAnd before sending it, I’d verify:\n- every time/date against records\n- spellings of names and job titles\n- any quote I’m putting in there\n- whether I’m mixing fact with inference\n- whether there’s a paper trail that contradicts my memory\n\nOne thing you didn’t mention: if this could turn into a dispute, keep the tone tight. No motive guessing. No “clearly,” no “obviously,” none of that. Just facts and sequence. That’s how you avoid handing them easy openings.\n\nIf you want the useful version, I’d rather have a fill-in template or the actual incident details, then I can help strip the noise out.",
+          "category": "user_reply",
+          "task_index": 11,
+          "turn": 1,
+          "score": 0.2727929949760437
+        },
+        {
+          "content": "Agent: Yes — for the first draft, I’d keep it **fact-first, timestamped, and separated by source**.\n\n## Include up front\n- **Exact date/time**\n- **Who was involved**: names, titles, roles\n- **What you personally saw/heard/did**\n- **What you were told by others** — clearly labeled as such\n- **Sequence of events**\n- **Concrete harm**: safety issue, delay, damage, cost, policy breach\n- **Immediate response**: what you did and who you notified\n- **Paper trail**: logs, emails, photos, texts, badge/access records, timestamps\n- **What remains unresolved**\n\n## Verify before sending\nCheck:\n- every date/time against records\n- names, titles, and spellings\n- any direct quotes\n- whether a document, message, or log contradicts your memory\n- whether a witness actually saw the event or only heard about it\n\n## Tone rules\nUse:\n- “I observed…”\n- “At approximately…”\n- “The record shows…”\n- “I was informed that…”\n\nAvoid:\n- motive guessing\n- “obviously,” “clearly,” “everyone knows”\n- emotional or argumentative language\n- conclusions you can’t prove yet\n\n## Best structure\n1. **Subject**\n2. **Summary**\n3. **Timeline**\n4. **Impact**\n5. **Evidence**\n6. **Requested action**\n\n## Practical rule\nWrite it so a third party can answer:\n- what happened\n- when it happened\n- who did what\n- how you know\n\nIf you want, paste the incident details and I’ll turn them into a clean first draft.",
+          "category": "agent_reply",
+          "task_index": 11,
+          "turn": 3,
+          "score": 0.2589137554168701
+        },
+        {
+          "content": "Agent: Yes — for the first version, keep it **tight, factual, and defensible**.\n\n## Include\n- **Exact date/time**\n- **Names, titles, roles**\n- **What you personally saw/heard/did**\n- **What others told you** — clearly labeled as such\n- **Sequence of events**\n- **Specific harm**: safety, cost, delay, damage, policy issue\n- **Immediate response**: who you notified, what you did\n- **Evidence trail**: emails, logs, photos, texts, access records, timestamps\n- **What remains unresolved**\n\n## Verify before sending\n- dates/times against records\n- names and titles\n- quotes, if you include any\n- facts vs inference\n- whether documents/messages contradict your memory\n- witness names and what they actually observed\n\n## Tone rules\nUse:\n- “I observed…”\n- “At approximately…”\n- “The record shows…”\n- “I was informed that…”\n\nAvoid:\n- motive guessing\n- “obviously,” “clearly,” “everyone knows”\n- emotional language\n- conclusions you can’t prove yet\n\n## Best first-pass structure\n1. **Subject**\n2. **Summary**\n3. **Timeline**\n4. **Impact**\n5. **Evidence**\n6. **Requested action**\n\n## Practical tip\nIf this could become a dispute, write it so a third party can read it and answer:\n- what happened\n- when it happened\n- who did what\n- how you know\n\nIf you want, I can give you a **fill-in-the-blank complaint template** that stays neutral and factual.",
+          "category": "agent_reply",
+          "task_index": 11,
+          "turn": 2,
+          "score": 0.2512952983379364
+        },
+        {
+          "content": "User: Yeah, that’s basically the right list. Tight enough. I’d use that before memory starts drifting.\n\nThe only thing I’d keep extra clear is **who had authority over the area** and **whether anyone told you not to enter before or after**. That’s usually where the story gets twisted later.\n\nA line-by-line incident log template would be useful.",
+          "category": "user_reply",
+          "task_index": 16,
+          "turn": 2,
+          "score": 0.2337510734796524
+        },
+        {
+          "content": "[Task 22] I need to write a short note to a coworker about a recurring problem that keeps getting brushed aside, and I want it to be specific enough that nobody can miss what I’m pointing to. Can you help me shape it so it stays focused on the facts and the next step?",
+          "category": "task",
+          "task_index": 22,
+          "score": 0.2138589769601822
+        }
+      ]
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "knowledge_update_habit",
+      "explanation": "He seems to revise what he knows when new evidence forces it, rather than passively accepting old assumptions. His habit of checking logs, service dates, and physical components shows that he treats knowledge as something to be refreshed through inspection. He may be slow to trust new claims, but he is not stuck in ignorance when the facts change.",
+      "ground_truth": "Updates through active verification",
+      "predicted": "updates beliefs by tightening criteria and verifying against records",
+      "slot_fill_reason": "They repeatedly asked to refine generic guidance into concrete decision points and to verify dates, names, quotes, and paper trails against records.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of updating beliefs through verification against records, though it emphasizes tightening criteria more than the ground truth’s broader active inspection and evidence-driven revision.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "Agent: Yes — for the first draft, I’d keep it **fact-first, timestamped, and separated by source**.\n\n## Include up front\n- **Exact date/time**\n- **Who was involved**: names, titles, roles\n- **What you personally saw/heard/did**\n- **What you were told by others** — clearly labeled as such\n- **Sequence of events**\n- **Concrete harm**: safety issue, delay, damage, cost, policy breach\n- **Immediate response**: what you did and who you notified\n- **Paper trail**: logs, emails, photos, texts, badge/access records, timestamps\n- **What remains unresolved**\n\n## Verify before sending\nCheck:\n- every date/time against records\n- names, titles, and spellings\n- any direct quotes\n- whether a document, message, or log contradicts your memory\n- whether a witness actually saw the event or only heard about it\n\n## Tone rules\nUse:\n- “I observed…”\n- “At approximately…”\n- “The record shows…”\n- “I was informed that…”\n\nAvoid:\n- motive guessing\n- “obviously,” “clearly,” “everyone knows”\n- emotional or argumentative language\n- conclusions you can’t prove yet\n\n## Best structure\n1. **Subject**\n2. **Summary**\n3. **Timeline**\n4. **Impact**\n5. **Evidence**\n6. **Requested action**\n\n## Practical rule\nWrite it so a third party can answer:\n- what happened\n- when it happened\n- who did what\n- how you know\n\nIf you want, paste the incident details and I’ll turn them into a clean first draft.",
+          "category": "agent_reply",
+          "task_index": 11,
+          "turn": 3,
+          "score": 0.30197978019714355
+        },
+        {
+          "content": "Agent: Yes — for the first version, keep it **tight, factual, and defensible**.\n\n## Include\n- **Exact date/time**\n- **Names, titles, roles**\n- **What you personally saw/heard/did**\n- **What others told you** — clearly labeled as such\n- **Sequence of events**\n- **Specific harm**: safety, cost, delay, damage, policy issue\n- **Immediate response**: who you notified, what you did\n- **Evidence trail**: emails, logs, photos, texts, access records, timestamps\n- **What remains unresolved**\n\n## Verify before sending\n- dates/times against records\n- names and titles\n- quotes, if you include any\n- facts vs inference\n- whether documents/messages contradict your memory\n- witness names and what they actually observed\n\n## Tone rules\nUse:\n- “I observed…”\n- “At approximately…”\n- “The record shows…”\n- “I was informed that…”\n\nAvoid:\n- motive guessing\n- “obviously,” “clearly,” “everyone knows”\n- emotional language\n- conclusions you can’t prove yet\n\n## Best first-pass structure\n1. **Subject**\n2. **Summary**\n3. **Timeline**\n4. **Impact**\n5. **Evidence**\n6. **Requested action**\n\n## Practical tip\nIf this could become a dispute, write it so a third party can read it and answer:\n- what happened\n- when it happened\n- who did what\n- how you know\n\nIf you want, I can give you a **fill-in-the-blank complaint template** that stays neutral and factual.",
+          "category": "agent_reply",
+          "task_index": 11,
+          "turn": 2,
+          "score": 0.28754180669784546
+        },
+        {
+          "content": "User: Yeah, that’s the right shape. But it’s still a little generic.\n\nWhat I’d want in the first pass:\n- exact date/time, not just “recently”\n- names, titles, and which person did what\n- what you personally saw vs what someone else told you\n- the sequence, minute by minute if it matters\n- any document trail: emails, logs, photos, texts, badge access, timestamps\n- the specific harm: safety issue, cost, delay, damage, policy violation\n- what you did right after, and who got notified\n\nAnd before sending it, I’d verify:\n- every time/date against records\n- spellings of names and job titles\n- any quote I’m putting in there\n- whether I’m mixing fact with inference\n- whether there’s a paper trail that contradicts my memory\n\nOne thing you didn’t mention: if this could turn into a dispute, keep the tone tight. No motive guessing. No “clearly,” no “obviously,” none of that. Just facts and sequence. That’s how you avoid handing them easy openings.\n\nIf you want the useful version, I’d rather have a fill-in template or the actual incident details, then I can help strip the noise out.",
+          "category": "user_reply",
+          "task_index": 11,
+          "turn": 1,
+          "score": 0.28376394510269165
+        },
+        {
+          "content": "[Task 22] I need to write a short note to a coworker about a recurring problem that keeps getting brushed aside, and I want it to be specific enough that nobody can miss what I’m pointing to. Can you help me shape it so it stays focused on the facts and the next step?",
+          "category": "task",
+          "task_index": 22,
+          "score": 0.2814667522907257
+        },
+        {
+          "content": "User: Closer, yeah. But it still needs a couple things before it’s actually usable.\n\nTwo fixes:\n1. make the actions more concrete — not just “replace soon” / “call a pro,” but what exactly crosses the line\n2. split the table by system, with the high-risk stuff first and the rest after. I don’t want to hunt through a mixed list.\n\nAlso, for electrical, I’d want a clearer distinction between:\n- normal wear: dusty, old-looking, but stable\n- junk: heat, looseness, arcing, discoloration, repeat trips, cracked insulation, that kind of thing\n\nAnd on alarms/hoses/valves/filters/batteries, I’m still missing the exact triggers. Example: a smoke alarm that chirps once because of low battery is one thing. One that chirps after a new battery, or fails the test, that’s junk. That’s the kind of line I mean.\n\nSo yeah — same format, cleaner, but tighten the decision points. Notebook-useful, not generic.",
+          "category": "user_reply",
+          "task_index": 4,
+          "turn": 3,
+          "score": 0.24830181896686554
+        }
+      ]
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "emergency_response_event",
+      "explanation": "When the apartment building lost backup power, he immediately investigated the breaker panel, transfer switch, and alarm log instead of waiting for explanations. That incident seems to have reinforced his habit of verifying failures firsthand under pressure. It also left him with a concrete example of why he does not trust systems or maintenance assurances at face value.",
+      "ground_truth": "Took charge during generator outage",
+      "predicted": "handled a generator outage and a backup system issue",
+      "slot_fill_reason": "They referenced having dealt with a generator outage and a backup system issue, using those incidents to explain how they wrote factual incident notes.",
+      "score": 0.75,
+      "judge_reason": "The prediction captures the same core event of responding to a generator/backup power outage and investigating the system directly, but it is less explicit about taking charge during the incident.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Yeah. Better, but still a little generic.\n\nWhat I’d push in the first draft:\n- separate **what I saw** from **what I was told**\n- use exact timestamps where possible, not loose ranges unless that’s all you’ve got\n- name the actor and the action, not just the event\n- include the paper trail up front if it exists: logs, emails, photos, texts, access records\n- state the concrete harm. Not “it was bad.” Safety issue, delay, damage, cost, policy breach. Pick the actual one(s)\n- note what happened immediately after, and who was notified\n\nAnd before it goes out, I’d verify:\n- every date/time against records\n- names, titles, and spellings\n- any quoted language\n- whether a log/photo/message contradicts your memory\n- whether a witness actually saw the thing, or just heard about it\n\nAlso, if this can turn into a fight, keep the wording cold. No motive guessing, no “obviously,” no drama. I had to do that after that generator outage — the complaint only got more useful once I stripped out anything that sounded like attitude and left the sequence, the missed maintenance, and the record trail.\n\nIf you want, paste the incident details and I’ll help turn it into a first-pass complaint that won’t hand them extra openings.",
+          "category": "user_reply",
+          "task_index": 11,
+          "turn": 2,
+          "score": 0.4301047921180725
+        },
+        {
+          "content": "User: Yeah, that’s basically the right list. Tight enough. I’d use that before memory starts drifting.\n\nThe only thing I’d keep extra clear is **who had authority over the area** and **whether anyone told you not to enter before or after**. That’s usually where the story gets twisted later.\n\nA line-by-line incident log template would be useful.",
+          "category": "user_reply",
+          "task_index": 16,
+          "turn": 2,
+          "score": 0.39116427302360535
+        },
+        {
+          "content": "[Task 17] I’m putting together a note about a building issue after a recent outage, and I want it to stay factual and easy to follow. What details would you include so the sequence of events and any checks done are clear to someone reviewing it later?",
+          "category": "task",
+          "task_index": 17,
+          "score": 0.3834214508533478
+        },
+        {
+          "content": "User: Yeah, that’s the right frame. But I’d want it tighter on the evidence chain.\n\nFor me, “confirmed” means I can point to:\n- a repeatable symptom\n- a timestamped condition that lines up with it\n- and one or two obvious causes that got ruled out\n\nIf it’s just one bad reading, I’d call it noise until it repeats under the same load / temp / timing. If the log, alarm, and physical behavior all line up, then it’s not a guess anymore.\n\nWhat I’d probably use in practice:\n1. Capture the bad event exactly as it happens.\n2. Recreate the same conditions.\n3. See whether the fault follows the condition or just the unit.\n4. Check the boring stuff first — connections, power, setup, environment.\n5. If the same failure shows up again with matching evidence, treat it as real.\n\nI’ve done this before on a backup system issue — one bad event alone didn’t mean much, but when the same sequence kept showing up in the log and on the hardware, the pattern was obvious. Same idea here.\n\nWhat kind of device is it? Different failure modes need different thresholds.",
+          "category": "user_reply",
+          "task_index": 5,
+          "turn": 1,
+          "score": 0.3721638023853302
+        },
+        {
+          "content": "User: Yeah, that’s the right shape. Sequence, checks, result of each check. Keep it tight and traceable.\n\nI’d also add:\n- exact outage start and restore time, if known\n- whether the failure was total or partial\n- any alarms, breaker trips, relay status, fault lights, log entries, or error codes\n- what was physically verified vs. what was reported by someone else\n- any temporary workaround or reset done\n- who accessed what, and whether permission mattered\n- photos, timestamps, or screenshots if you have them\n- what’s still unresolved at the end\n\nIf I were writing it for later review, I’d want it to answer: what failed, what you checked, what you found, and what changed after each step. No guessing. Just the chain.\n\nSo something like:\n1. Time/event\n2. Symptom observed\n3. Checks performed\n4. Findings from each check\n5. Actions taken\n6. Outcome/current state\n\nThat’s enough for someone to reconstruct it later without filling in blanks themselves.",
+          "category": "user_reply",
+          "task_index": 17,
+          "turn": 1,
+          "score": 0.3697083592414856
+        }
+      ]
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "legal_or_administrative_event",
+      "explanation": "After entering the mechanical room, he received a complaint for doing so without permission, and he kept it with the repair records. That suggests the encounter taught him that paperwork and authority can be used against him, even when he believes he is uncovering the truth. He now seems to treat administrative documents as something to preserve for self-protection, not just compliance.",
+      "ground_truth": "Remembered the complaint as evidence",
+      "predicted": "has dealt with incident complaints and access-related disputes",
+      "slot_fill_reason": "They referenced a generator outage complaint and asked for incident logs about restricted-area access, warnings, authority, and whether they were told not to enter.",
+      "score": 0.75,
+      "judge_reason": "The prediction captures the idea of dealing with complaints and access disputes, but it misses the key point that he specifically remembered the complaint as evidence for self-protection.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Yeah, that’s the shape. Still a bit too polished though.\n\nWhat I’d want sharpened in the actual template:\n- a **source line in each event entry**, not just a general note section\n- a **reason** when the timestamp is approximate, not just “about 9:00”\n- separate fields for **actor**, **action**, and **evidence** so it’s harder to blur them together\n- a place to mark **firsthand / secondhand / record** right next to each fact\n- a separate line for **what changed because of it** — not just “impact,” but the actual consequence\n\nAnd I’d want the template to make one thing impossible to miss: if something is based on hearsay, it needs to be labeled right there. People get sloppy there and then act surprised when the other side picks it apart.\n\nIf you’re going to build the template, make it closer to a log entry than a letter. That’s what actually holds up.",
+          "category": "user_reply",
+          "task_index": 11,
+          "turn": 4,
+          "score": 0.4327215552330017
+        },
+        {
+          "content": "User: Yeah, that’s basically the right list. Tight enough. I’d use that before memory starts drifting.\n\nThe only thing I’d keep extra clear is **who had authority over the area** and **whether anyone told you not to enter before or after**. That’s usually where the story gets twisted later.\n\nA line-by-line incident log template would be useful.",
+          "category": "user_reply",
+          "task_index": 16,
+          "turn": 2,
+          "score": 0.43210625648498535
+        },
+        {
+          "content": "User: Yeah. Better, but still a little generic.\n\nWhat I’d push in the first draft:\n- separate **what I saw** from **what I was told**\n- use exact timestamps where possible, not loose ranges unless that’s all you’ve got\n- name the actor and the action, not just the event\n- include the paper trail up front if it exists: logs, emails, photos, texts, access records\n- state the concrete harm. Not “it was bad.” Safety issue, delay, damage, cost, policy breach. Pick the actual one(s)\n- note what happened immediately after, and who was notified\n\nAnd before it goes out, I’d verify:\n- every date/time against records\n- names, titles, and spellings\n- any quoted language\n- whether a log/photo/message contradicts your memory\n- whether a witness actually saw the thing, or just heard about it\n\nAlso, if this can turn into a fight, keep the wording cold. No motive guessing, no “obviously,” no drama. I had to do that after that generator outage — the complaint only got more useful once I stripped out anything that sounded like attitude and left the sequence, the missed maintenance, and the record trail.\n\nIf you want, paste the incident details and I’ll help turn it into a first-pass complaint that won’t hand them extra openings.",
+          "category": "user_reply",
+          "task_index": 11,
+          "turn": 2,
+          "score": 0.4213520884513855
+        },
+        {
+          "content": "Agent: Write down the **sequence, the people, and the exact actions** as soon as you can.\n\n## Capture right away\n- **Date and exact time**\n- **Location / restricted area**\n- **Who was present**\n- **Who said what**\n- **What you did**\n- **What happened next**\n- **Any warnings, instructions, or objections**\n- **Any access changes**: locked out, escorted, asked to leave, etc.\n- **Any witnesses**\n- **Any documents or messages** that followed\n\n## Keep it factual\nUse:\n- “I entered…”\n- “At approximately…”\n- “X told me…”\n- “I was asked to…”\n- “The door was locked at…”\n\nAvoid:\n- guesses about motive\n- emotional language\n- conclusions you can’t prove yet\n\n## If it matters later, also note\n- badge / key / access method\n- whether you were authorized\n- whether you were alone or escorted\n- whether anything was damaged, moved, or recorded\n- whether security or management was notified\n\n## Best format\nA simple timeline:\n1. **Time**\n2. **Action**\n3. **Who was involved**\n4. **Result**\n\nIf you want, I can turn that into a **short incident note template** you can reuse.",
+          "category": "agent_reply",
+          "task_index": 16,
+          "turn": 1,
+          "score": 0.4110422134399414
+        },
+        {
+          "content": "Agent: Yes — for the first draft, I’d keep it **fact-first, timestamped, and separated by source**.\n\n## Include up front\n- **Exact date/time**\n- **Who was involved**: names, titles, roles\n- **What you personally saw/heard/did**\n- **What you were told by others** — clearly labeled as such\n- **Sequence of events**\n- **Concrete harm**: safety issue, delay, damage, cost, policy breach\n- **Immediate response**: what you did and who you notified\n- **Paper trail**: logs, emails, photos, texts, badge/access records, timestamps\n- **What remains unresolved**\n\n## Verify before sending\nCheck:\n- every date/time against records\n- names, titles, and spellings\n- any direct quotes\n- whether a document, message, or log contradicts your memory\n- whether a witness actually saw the event or only heard about it\n\n## Tone rules\nUse:\n- “I observed…”\n- “At approximately…”\n- “The record shows…”\n- “I was informed that…”\n\nAvoid:\n- motive guessing\n- “obviously,” “clearly,” “everyone knows”\n- emotional or argumentative language\n- conclusions you can’t prove yet\n\n## Best structure\n1. **Subject**\n2. **Summary**\n3. **Timeline**\n4. **Impact**\n5. **Evidence**\n6. **Requested action**\n\n## Practical rule\nWrite it so a third party can answer:\n- what happened\n- when it happened\n- who did what\n- how you know\n\nIf you want, paste the incident details and I’ll turn them into a clean first draft.",
+          "category": "agent_reply",
+          "task_index": 11,
+          "turn": 3,
+          "score": 0.40316042304039
+        }
+      ]
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "workplace_conflict_event",
+      "explanation": "The outage led directly to tension with the superintendent and building management, who likely preferred a simpler explanation than his detailed findings. He did not accept the official story and instead sent a list of missed intervals, corroded parts, and skipped testing. The episode appears to have strengthened his expectation that workplace authorities minimize problems unless confronted with evidence.",
+      "ground_truth": "Clashed with maintenance after failure",
+      "predicted": "used a generator outage complaint to strip out attitude and focus on records",
+      "slot_fill_reason": "They said they had to do this after a generator outage, where the complaint became more useful once they removed attitude and kept the sequence, missed maintenance, and record trail.",
+      "score": 0.75,
+      "judge_reason": "The prediction captures the conflict over the outage and the focus on records/evidence, but it is less direct about clashing specifically with maintenance and omits the adversarial workplace tension.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Yeah. Better, but still a little generic.\n\nWhat I’d push in the first draft:\n- separate **what I saw** from **what I was told**\n- use exact timestamps where possible, not loose ranges unless that’s all you’ve got\n- name the actor and the action, not just the event\n- include the paper trail up front if it exists: logs, emails, photos, texts, access records\n- state the concrete harm. Not “it was bad.” Safety issue, delay, damage, cost, policy breach. Pick the actual one(s)\n- note what happened immediately after, and who was notified\n\nAnd before it goes out, I’d verify:\n- every date/time against records\n- names, titles, and spellings\n- any quoted language\n- whether a log/photo/message contradicts your memory\n- whether a witness actually saw the thing, or just heard about it\n\nAlso, if this can turn into a fight, keep the wording cold. No motive guessing, no “obviously,” no drama. I had to do that after that generator outage — the complaint only got more useful once I stripped out anything that sounded like attitude and left the sequence, the missed maintenance, and the record trail.\n\nIf you want, paste the incident details and I’ll help turn it into a first-pass complaint that won’t hand them extra openings.",
+          "category": "user_reply",
+          "task_index": 11,
+          "turn": 2,
+          "score": 0.39009207487106323
+        },
+        {
+          "content": "User: Yeah, that’s the shape. Still a bit too polished though.\n\nWhat I’d want sharpened in the actual template:\n- a **source line in each event entry**, not just a general note section\n- a **reason** when the timestamp is approximate, not just “about 9:00”\n- separate fields for **actor**, **action**, and **evidence** so it’s harder to blur them together\n- a place to mark **firsthand / secondhand / record** right next to each fact\n- a separate line for **what changed because of it** — not just “impact,” but the actual consequence\n\nAnd I’d want the template to make one thing impossible to miss: if something is based on hearsay, it needs to be labeled right there. People get sloppy there and then act surprised when the other side picks it apart.\n\nIf you’re going to build the template, make it closer to a log entry than a letter. That’s what actually holds up.",
+          "category": "user_reply",
+          "task_index": 11,
+          "turn": 4,
+          "score": 0.3802923262119293
+        },
+        {
+          "content": "[Task 26] I’m preparing a short note for a team discussion about a recurring issue that keeps getting brushed aside, and I want it to be clear enough that the next person can verify what actually happened. What details would you include so the sequence of events and the next check are easy to follow?",
+          "category": "task",
+          "task_index": 26,
+          "score": 0.37969058752059937
+        },
+        {
+          "content": "[Task 22] I need to write a short note to a coworker about a recurring problem that keeps getting brushed aside, and I want it to be specific enough that nobody can miss what I’m pointing to. Can you help me shape it so it stays focused on the facts and the next step?",
+          "category": "task",
+          "task_index": 22,
+          "score": 0.363391637802124
+        },
+        {
+          "content": "User: Yeah, that’s the right shape. But it’s still a little generic.\n\nWhat I’d want in the first pass:\n- exact date/time, not just “recently”\n- names, titles, and which person did what\n- what you personally saw vs what someone else told you\n- the sequence, minute by minute if it matters\n- any document trail: emails, logs, photos, texts, badge access, timestamps\n- the specific harm: safety issue, cost, delay, damage, policy violation\n- what you did right after, and who got notified\n\nAnd before sending it, I’d verify:\n- every time/date against records\n- spellings of names and job titles\n- any quote I’m putting in there\n- whether I’m mixing fact with inference\n- whether there’s a paper trail that contradicts my memory\n\nOne thing you didn’t mention: if this could turn into a dispute, keep the tone tight. No motive guessing. No “clearly,” no “obviously,” none of that. Just facts and sequence. That’s how you avoid handing them easy openings.\n\nIf you want the useful version, I’d rather have a fill-in template or the actual incident details, then I can help strip the noise out.",
+          "category": "user_reply",
+          "task_index": 11,
+          "turn": 1,
+          "score": 0.3581874370574951
+        }
+      ]
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "moment_of_clarity_event",
+      "explanation": "The winter outage seems to have crystallized a lasting insight: his own scrutiny is more reliable than other people’s reports. He watched the sequence of failure unfold and then saw the technician confirm what he had already suspected. That kind of confirmation likely made the lesson stick because it tied his judgment directly to a real-world outcome.",
+      "ground_truth": "Realized self-checking beats reports",
+      "predicted": "clarified incident notes after a generator outage complaint",
+      "slot_fill_reason": "The user said the complaint became more useful after stripping attitude and keeping the sequence, missed maintenance, and record trail from that outage.",
+      "score": 0.25,
+      "judge_reason": "The prediction mentions an outage and complaint, but it focuses on clarifying notes rather than the key insight that self-checking is more reliable than others' reports.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Yeah, that’s the shape. Still a bit too polished though.\n\nWhat I’d want sharpened in the actual template:\n- a **source line in each event entry**, not just a general note section\n- a **reason** when the timestamp is approximate, not just “about 9:00”\n- separate fields for **actor**, **action**, and **evidence** so it’s harder to blur them together\n- a place to mark **firsthand / secondhand / record** right next to each fact\n- a separate line for **what changed because of it** — not just “impact,” but the actual consequence\n\nAnd I’d want the template to make one thing impossible to miss: if something is based on hearsay, it needs to be labeled right there. People get sloppy there and then act surprised when the other side picks it apart.\n\nIf you’re going to build the template, make it closer to a log entry than a letter. That’s what actually holds up.",
+          "category": "user_reply",
+          "task_index": 11,
+          "turn": 4,
+          "score": 0.39473170042037964
+        },
+        {
+          "content": "User: Yeah, that’s it. The log-style version is the useful one.\n\nWhat you added actually matters:\n- source tag in every row\n- actor / action / evidence split out\n- approximate time only when you have to, with a reason\n- firsthand vs secondhand made explicit right there\n- consequence separated from the event itself\n\nThat’s a lot harder to twist later. Much better than a polished letter that blurs everything together.\n\nThe only thing I’d still watch is keeping the consequence line concrete, not some vague “impact.” But that’s easy enough to fill in.\n\nSo yeah, this one works.",
+          "category": "user_reply",
+          "task_index": 11,
+          "turn": 5,
+          "score": 0.3911876082420349
+        },
+        {
+          "content": "[Task 26] I’m preparing a short note for a team discussion about a recurring issue that keeps getting brushed aside, and I want it to be clear enough that the next person can verify what actually happened. What details would you include so the sequence of events and the next check are easy to follow?",
+          "category": "task",
+          "task_index": 26,
+          "score": 0.37760090827941895
+        },
+        {
+          "content": "Agent: Yes — for the first draft, I’d keep it **fact-first, timestamped, and separated by source**.\n\n## Include up front\n- **Exact date/time**\n- **Who was involved**: names, titles, roles\n- **What you personally saw/heard/did**\n- **What you were told by others** — clearly labeled as such\n- **Sequence of events**\n- **Concrete harm**: safety issue, delay, damage, cost, policy breach\n- **Immediate response**: what you did and who you notified\n- **Paper trail**: logs, emails, photos, texts, badge/access records, timestamps\n- **What remains unresolved**\n\n## Verify before sending\nCheck:\n- every date/time against records\n- names, titles, and spellings\n- any direct quotes\n- whether a document, message, or log contradicts your memory\n- whether a witness actually saw the event or only heard about it\n\n## Tone rules\nUse:\n- “I observed…”\n- “At approximately…”\n- “The record shows…”\n- “I was informed that…”\n\nAvoid:\n- motive guessing\n- “obviously,” “clearly,” “everyone knows”\n- emotional or argumentative language\n- conclusions you can’t prove yet\n\n## Best structure\n1. **Subject**\n2. **Summary**\n3. **Timeline**\n4. **Impact**\n5. **Evidence**\n6. **Requested action**\n\n## Practical rule\nWrite it so a third party can answer:\n- what happened\n- when it happened\n- who did what\n- how you know\n\nIf you want, paste the incident details and I’ll turn them into a clean first draft.",
+          "category": "agent_reply",
+          "task_index": 11,
+          "turn": 3,
+          "score": 0.35217511653900146
+        },
+        {
+          "content": "User: Yeah. Better, but still a little generic.\n\nWhat I’d push in the first draft:\n- separate **what I saw** from **what I was told**\n- use exact timestamps where possible, not loose ranges unless that’s all you’ve got\n- name the actor and the action, not just the event\n- include the paper trail up front if it exists: logs, emails, photos, texts, access records\n- state the concrete harm. Not “it was bad.” Safety issue, delay, damage, cost, policy breach. Pick the actual one(s)\n- note what happened immediately after, and who was notified\n\nAnd before it goes out, I’d verify:\n- every date/time against records\n- names, titles, and spellings\n- any quoted language\n- whether a log/photo/message contradicts your memory\n- whether a witness actually saw the thing, or just heard about it\n\nAlso, if this can turn into a fight, keep the wording cold. No motive guessing, no “obviously,” no drama. I had to do that after that generator outage — the complaint only got more useful once I stripped out anything that sounded like attitude and left the sequence, the missed maintenance, and the record trail.\n\nIf you want, paste the incident details and I’ll help turn it into a first-pass complaint that won’t hand them extra openings.",
+          "category": "user_reply",
+          "task_index": 11,
+          "turn": 2,
+          "score": 0.3498472571372986
+        }
+      ]
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "betrayal_or_conflict_event",
+      "explanation": "He appears to have experienced the missed service intervals and weak battery condition as a kind of betrayal by the people responsible for the building. Even if no one intentionally deceived him, the failure of duty seems to have landed that way in his memory. It reinforced a distrustful stance: if others say a system is fine, he assumes they may be hiding neglect or incompetence.",
+      "ground_truth": "Felt let down by skipped maintenance",
+      "predicted": "experienced a generator outage complaint that needed tightening",
+      "slot_fill_reason": "They referenced having to strip attitude from a complaint after a generator outage and focus on the sequence, missed maintenance, and record trail.",
+      "score": 0.25,
+      "judge_reason": "The prediction mentions a generator outage complaint, but it misses the core idea of feeling let down by skipped maintenance and only loosely suggests a related service failure.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Yeah. Better, but still a little generic.\n\nWhat I’d push in the first draft:\n- separate **what I saw** from **what I was told**\n- use exact timestamps where possible, not loose ranges unless that’s all you’ve got\n- name the actor and the action, not just the event\n- include the paper trail up front if it exists: logs, emails, photos, texts, access records\n- state the concrete harm. Not “it was bad.” Safety issue, delay, damage, cost, policy breach. Pick the actual one(s)\n- note what happened immediately after, and who was notified\n\nAnd before it goes out, I’d verify:\n- every date/time against records\n- names, titles, and spellings\n- any quoted language\n- whether a log/photo/message contradicts your memory\n- whether a witness actually saw the thing, or just heard about it\n\nAlso, if this can turn into a fight, keep the wording cold. No motive guessing, no “obviously,” no drama. I had to do that after that generator outage — the complaint only got more useful once I stripped out anything that sounded like attitude and left the sequence, the missed maintenance, and the record trail.\n\nIf you want, paste the incident details and I’ll help turn it into a first-pass complaint that won’t hand them extra openings.",
+          "category": "user_reply",
+          "task_index": 11,
+          "turn": 2,
+          "score": 0.44579824805259705
+        },
+        {
+          "content": "User: Yeah, that’s the shape. Still a bit too polished though.\n\nWhat I’d want sharpened in the actual template:\n- a **source line in each event entry**, not just a general note section\n- a **reason** when the timestamp is approximate, not just “about 9:00”\n- separate fields for **actor**, **action**, and **evidence** so it’s harder to blur them together\n- a place to mark **firsthand / secondhand / record** right next to each fact\n- a separate line for **what changed because of it** — not just “impact,” but the actual consequence\n\nAnd I’d want the template to make one thing impossible to miss: if something is based on hearsay, it needs to be labeled right there. People get sloppy there and then act surprised when the other side picks it apart.\n\nIf you’re going to build the template, make it closer to a log entry than a letter. That’s what actually holds up.",
+          "category": "user_reply",
+          "task_index": 11,
+          "turn": 4,
+          "score": 0.4030905067920685
+        },
+        {
+          "content": "User: Yeah, this is closer. But I’d still tighten it one more notch.\n\nWhat I’d add to the first draft:\n- **source tags** in the body, not just in a note section — like “I observed,” “X told me,” “the log shows”\n- **exact timestamps** wherever possible, and if you don’t have exact ones, say why\n- **identity of the actor on each step** — not just who was involved overall\n- **the record trail in the timeline itself** if it matters: email sent at 09:14, badge swipe at 09:17, photo at 09:22, that kind of thing\n- **one clean harm statement** per issue, not a vague summary\n- **the immediate follow-up** and any response you got back, even if it was nothing\n\nI’d also be careful about one thing: if a piece of info is secondhand, don’t bury it. Label it right there. That’s where people get sloppy and hand the other side an easy opening.\n\nIf you want, I can turn this into a **real complaint template with fill-in blanks** — not the generic kind, something you can actually paste into and use.",
+          "category": "user_reply",
+          "task_index": 11,
+          "turn": 3,
+          "score": 0.39353007078170776
+        },
+        {
+          "content": "Agent: Write down the **sequence, the people, and the exact actions** as soon as you can.\n\n## Capture right away\n- **Date and exact time**\n- **Location / restricted area**\n- **Who was present**\n- **Who said what**\n- **What you did**\n- **What happened next**\n- **Any warnings, instructions, or objections**\n- **Any access changes**: locked out, escorted, asked to leave, etc.\n- **Any witnesses**\n- **Any documents or messages** that followed\n\n## Keep it factual\nUse:\n- “I entered…”\n- “At approximately…”\n- “X told me…”\n- “I was asked to…”\n- “The door was locked at…”\n\nAvoid:\n- guesses about motive\n- emotional language\n- conclusions you can’t prove yet\n\n## If it matters later, also note\n- badge / key / access method\n- whether you were authorized\n- whether you were alone or escorted\n- whether anything was damaged, moved, or recorded\n- whether security or management was notified\n\n## Best format\nA simple timeline:\n1. **Time**\n2. **Action**\n3. **Who was involved**\n4. **Result**\n\nIf you want, I can turn that into a **short incident note template** you can reuse.",
+          "category": "agent_reply",
+          "task_index": 16,
+          "turn": 1,
+          "score": 0.3644745349884033
+        },
+        {
+          "content": "Agent: Yes — for the first draft, I’d keep it **fact-first, timestamped, and separated by source**.\n\n## Include up front\n- **Exact date/time**\n- **Who was involved**: names, titles, roles\n- **What you personally saw/heard/did**\n- **What you were told by others** — clearly labeled as such\n- **Sequence of events**\n- **Concrete harm**: safety issue, delay, damage, cost, policy breach\n- **Immediate response**: what you did and who you notified\n- **Paper trail**: logs, emails, photos, texts, badge/access records, timestamps\n- **What remains unresolved**\n\n## Verify before sending\nCheck:\n- every date/time against records\n- names, titles, and spellings\n- any direct quotes\n- whether a document, message, or log contradicts your memory\n- whether a witness actually saw the event or only heard about it\n\n## Tone rules\nUse:\n- “I observed…”\n- “At approximately…”\n- “The record shows…”\n- “I was informed that…”\n\nAvoid:\n- motive guessing\n- “obviously,” “clearly,” “everyone knows”\n- emotional or argumentative language\n- conclusions you can’t prove yet\n\n## Best structure\n1. **Subject**\n2. **Summary**\n3. **Timeline**\n4. **Impact**\n5. **Evidence**\n6. **Requested action**\n\n## Practical rule\nWrite it so a third party can answer:\n- what happened\n- when it happened\n- who did what\n- how you know\n\nIf you want, paste the incident details and I’ll turn them into a clean first draft.",
+          "category": "agent_reply",
+          "task_index": 11,
+          "turn": 3,
+          "score": 0.3615018129348755
+        }
+      ]
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "accomplishment_under_pressure_event",
+      "explanation": "In a stressful, darkened building, he was able to trace the problem path before the official repair process caught up. The next-day confirmation from a technician likely validated his competence and made the episode memorable. This kind of pressure-tested success seems important to him because it proves he can rely on his own observations when conditions are bad.",
+      "ground_truth": "Diagnosed outage before anyone else",
+      "predicted": "handled a generator outage complaint by stripping out attitude and keeping records",
+      "slot_fill_reason": "The user said that after a generator outage, the complaint became more useful once they removed attitude and kept the sequence, missed maintenance, and record trail.",
+      "score": 0.25,
+      "judge_reason": "The prediction involves responding to a generator outage complaint and documenting it, but it does not capture diagnosing the outage before others or the pressure-tested independent problem-solving in the ground truth.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Yeah, that’s it. The log-style version is the useful one.\n\nWhat you added actually matters:\n- source tag in every row\n- actor / action / evidence split out\n- approximate time only when you have to, with a reason\n- firsthand vs secondhand made explicit right there\n- consequence separated from the event itself\n\nThat’s a lot harder to twist later. Much better than a polished letter that blurs everything together.\n\nThe only thing I’d still watch is keeping the consequence line concrete, not some vague “impact.” But that’s easy enough to fill in.\n\nSo yeah, this one works.",
+          "category": "user_reply",
+          "task_index": 11,
+          "turn": 5,
+          "score": 0.39045971632003784
+        },
+        {
+          "content": "User: Yeah, that’s the shape. Still a bit too polished though.\n\nWhat I’d want sharpened in the actual template:\n- a **source line in each event entry**, not just a general note section\n- a **reason** when the timestamp is approximate, not just “about 9:00”\n- separate fields for **actor**, **action**, and **evidence** so it’s harder to blur them together\n- a place to mark **firsthand / secondhand / record** right next to each fact\n- a separate line for **what changed because of it** — not just “impact,” but the actual consequence\n\nAnd I’d want the template to make one thing impossible to miss: if something is based on hearsay, it needs to be labeled right there. People get sloppy there and then act surprised when the other side picks it apart.\n\nIf you’re going to build the template, make it closer to a log entry than a letter. That’s what actually holds up.",
+          "category": "user_reply",
+          "task_index": 11,
+          "turn": 4,
+          "score": 0.3834304213523865
+        },
+        {
+          "content": "[Task 26] I’m preparing a short note for a team discussion about a recurring issue that keeps getting brushed aside, and I want it to be clear enough that the next person can verify what actually happened. What details would you include so the sequence of events and the next check are easy to follow?",
+          "category": "task",
+          "task_index": 26,
+          "score": 0.3346201181411743
+        },
+        {
+          "content": "[Task 17] I’m putting together a note about a building issue after a recent outage, and I want it to stay factual and easy to follow. What details would you include so the sequence of events and any checks done are clear to someone reviewing it later?",
+          "category": "task",
+          "task_index": 17,
+          "score": 0.3315608501434326
+        },
+        {
+          "content": "User: Yeah. Better, but still a little generic.\n\nWhat I’d push in the first draft:\n- separate **what I saw** from **what I was told**\n- use exact timestamps where possible, not loose ranges unless that’s all you’ve got\n- name the actor and the action, not just the event\n- include the paper trail up front if it exists: logs, emails, photos, texts, access records\n- state the concrete harm. Not “it was bad.” Safety issue, delay, damage, cost, policy breach. Pick the actual one(s)\n- note what happened immediately after, and who was notified\n\nAnd before it goes out, I’d verify:\n- every date/time against records\n- names, titles, and spellings\n- any quoted language\n- whether a log/photo/message contradicts your memory\n- whether a witness actually saw the thing, or just heard about it\n\nAlso, if this can turn into a fight, keep the wording cold. No motive guessing, no “obviously,” no drama. I had to do that after that generator outage — the complaint only got more useful once I stripped out anything that sounded like attitude and left the sequence, the missed maintenance, and the record trail.\n\nIf you want, paste the incident details and I’ll help turn it into a first-pass complaint that won’t hand them extra openings.",
+          "category": "user_reply",
+          "task_index": 11,
+          "turn": 2,
+          "score": 0.3247775137424469
+        }
+      ]
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "relocation_or_migration_event",
+      "explanation": "His current life is clearly anchored in Shirley, New York, but the provided story does not show a major move that reshaped his identity. If anything, the setting feels stable and local rather than tied to a defining relocation. Because there is no strong move narrative here, this is a weak fit compared with the more concrete incidents above.",
+      "ground_truth": "Rooted in Shirley, not mobile by story",
+      "predicted": "unknown",
+      "slot_fill_reason": "The memories discuss restricted-area and building-issue note templates, but they do not mention any relocation or migration event.",
+      "score": 0.0,
+      "judge_reason": "The predicted description is unknown, so it does not capture the ground truth that the person is rooted in Shirley and not defined by a relocation event.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "[Task 16] I’m dealing with a follow-up after being in a restricted area at a property, and I need to sort out what happened next. What kinds of details would you normally write down right away so the sequence stays clear later?",
+          "category": "task",
+          "task_index": 16,
+          "score": 0.3440417945384979
+        },
+        {
+          "content": "User: Yeah, that’s basically the right list. Tight enough. I’d use that before memory starts drifting.\n\nThe only thing I’d keep extra clear is **who had authority over the area** and **whether anyone told you not to enter before or after**. That’s usually where the story gets twisted later.\n\nA line-by-line incident log template would be useful.",
+          "category": "user_reply",
+          "task_index": 16,
+          "turn": 2,
+          "score": 0.3386055827140808
+        },
+        {
+          "content": "[Task 17] I’m putting together a note about a building issue after a recent outage, and I want it to stay factual and easy to follow. What details would you include so the sequence of events and any checks done are clear to someone reviewing it later?",
+          "category": "task",
+          "task_index": 17,
+          "score": 0.31320011615753174
+        },
+        {
+          "content": "User: Yeah, that’s the shape. Still a bit too polished though.\n\nWhat I’d want sharpened in the actual template:\n- a **source line in each event entry**, not just a general note section\n- a **reason** when the timestamp is approximate, not just “about 9:00”\n- separate fields for **actor**, **action**, and **evidence** so it’s harder to blur them together\n- a place to mark **firsthand / secondhand / record** right next to each fact\n- a separate line for **what changed because of it** — not just “impact,” but the actual consequence\n\nAnd I’d want the template to make one thing impossible to miss: if something is based on hearsay, it needs to be labeled right there. People get sloppy there and then act surprised when the other side picks it apart.\n\nIf you’re going to build the template, make it closer to a log entry than a letter. That’s what actually holds up.",
+          "category": "user_reply",
+          "task_index": 11,
+          "turn": 4,
+          "score": 0.3098742663860321
+        },
+        {
+          "content": "Agent: Write down the **sequence, the people, and the exact actions** as soon as you can.\n\n## Capture right away\n- **Date and exact time**\n- **Location / restricted area**\n- **Who was present**\n- **Who said what**\n- **What you did**\n- **What happened next**\n- **Any warnings, instructions, or objections**\n- **Any access changes**: locked out, escorted, asked to leave, etc.\n- **Any witnesses**\n- **Any documents or messages** that followed\n\n## Keep it factual\nUse:\n- “I entered…”\n- “At approximately…”\n- “X told me…”\n- “I was asked to…”\n- “The door was locked at…”\n\nAvoid:\n- guesses about motive\n- emotional language\n- conclusions you can’t prove yet\n\n## If it matters later, also note\n- badge / key / access method\n- whether you were authorized\n- whether you were alone or escorted\n- whether anything was damaged, moved, or recorded\n- whether security or management was notified\n\n## Best format\nA simple timeline:\n1. **Time**\n2. **Action**\n3. **Who was involved**\n4. **Result**\n\nIf you want, I can turn that into a **short incident note template** you can reuse.",
+          "category": "agent_reply",
+          "task_index": 16,
+          "turn": 1,
+          "score": 0.304449200630188
+        }
+      ]
+    },
+    {
+      "category": "self_model",
+      "dimension": "sincerity_self_view",
+      "explanation": "He likely sees himself as blunt and direct rather than performative. In his own mind, he tells the truth as he sees it and does not sugarcoat problems for other people’s comfort. The weakness is that he may confuse harshness with honesty and underappreciate how guarded he can be.",
+      "ground_truth": "Straightforward, not socially polished",
+      "predicted": "values factual, non-handwavy self-presentation",
+      "slot_fill_reason": "They repeatedly asked for tight, timestamped, source-separated wording and explicitly rejected generic, soft, or motive-guessing language.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of being straightforward and not overly polished, though it emphasizes factual self-presentation more than the blunt, unsugarcoated sincerity described in the ground truth.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "Agent: Yes — for the first version, keep it **tight, factual, and defensible**.\n\n## Include\n- **Exact date/time**\n- **Names, titles, roles**\n- **What you personally saw/heard/did**\n- **What others told you** — clearly labeled as such\n- **Sequence of events**\n- **Specific harm**: safety, cost, delay, damage, policy issue\n- **Immediate response**: who you notified, what you did\n- **Evidence trail**: emails, logs, photos, texts, access records, timestamps\n- **What remains unresolved**\n\n## Verify before sending\n- dates/times against records\n- names and titles\n- quotes, if you include any\n- facts vs inference\n- whether documents/messages contradict your memory\n- witness names and what they actually observed\n\n## Tone rules\nUse:\n- “I observed…”\n- “At approximately…”\n- “The record shows…”\n- “I was informed that…”\n\nAvoid:\n- motive guessing\n- “obviously,” “clearly,” “everyone knows”\n- emotional language\n- conclusions you can’t prove yet\n\n## Best first-pass structure\n1. **Subject**\n2. **Summary**\n3. **Timeline**\n4. **Impact**\n5. **Evidence**\n6. **Requested action**\n\n## Practical tip\nIf this could become a dispute, write it so a third party can read it and answer:\n- what happened\n- when it happened\n- who did what\n- how you know\n\nIf you want, I can give you a **fill-in-the-blank complaint template** that stays neutral and factual.",
+          "category": "agent_reply",
+          "task_index": 11,
+          "turn": 2,
+          "score": 0.2216234803199768
+        },
+        {
+          "content": "User: Yeah, that’s the right shape. But it’s still a little generic.\n\nWhat I’d want in the first pass:\n- exact date/time, not just “recently”\n- names, titles, and which person did what\n- what you personally saw vs what someone else told you\n- the sequence, minute by minute if it matters\n- any document trail: emails, logs, photos, texts, badge access, timestamps\n- the specific harm: safety issue, cost, delay, damage, policy violation\n- what you did right after, and who got notified\n\nAnd before sending it, I’d verify:\n- every time/date against records\n- spellings of names and job titles\n- any quote I’m putting in there\n- whether I’m mixing fact with inference\n- whether there’s a paper trail that contradicts my memory\n\nOne thing you didn’t mention: if this could turn into a dispute, keep the tone tight. No motive guessing. No “clearly,” no “obviously,” none of that. Just facts and sequence. That’s how you avoid handing them easy openings.\n\nIf you want the useful version, I’d rather have a fill-in template or the actual incident details, then I can help strip the noise out.",
+          "category": "user_reply",
+          "task_index": 11,
+          "turn": 1,
+          "score": 0.1880144327878952
+        },
+        {
+          "content": "User: Mostly fine, but it’s still a little generic. I want a sharper decision tree.\n\nWhat I need is basically:\n- what to check first in the first 5 minutes\n- what counts as “probably okay” vs “don’t trust it”\n- what symptoms point to ATS / relay / battery / charger / inverter / generator, not just “something’s wrong”\n- and one simple test I can do without creating a bigger problem\n\nI’m not looking for theory. I want the obvious failure points, in order, so I can tell whether this was just a normal transfer or the beginning of a real issue.",
+          "category": "user_reply",
+          "task_index": 15,
+          "turn": 1,
+          "score": 0.17183604836463928
+        },
+        {
+          "content": "Agent: Yes — for the first draft, I’d keep it **fact-first, timestamped, and separated by source**.\n\n## Include up front\n- **Exact date/time**\n- **Who was involved**: names, titles, roles\n- **What you personally saw/heard/did**\n- **What you were told by others** — clearly labeled as such\n- **Sequence of events**\n- **Concrete harm**: safety issue, delay, damage, cost, policy breach\n- **Immediate response**: what you did and who you notified\n- **Paper trail**: logs, emails, photos, texts, badge/access records, timestamps\n- **What remains unresolved**\n\n## Verify before sending\nCheck:\n- every date/time against records\n- names, titles, and spellings\n- any direct quotes\n- whether a document, message, or log contradicts your memory\n- whether a witness actually saw the event or only heard about it\n\n## Tone rules\nUse:\n- “I observed…”\n- “At approximately…”\n- “The record shows…”\n- “I was informed that…”\n\nAvoid:\n- motive guessing\n- “obviously,” “clearly,” “everyone knows”\n- emotional or argumentative language\n- conclusions you can’t prove yet\n\n## Best structure\n1. **Subject**\n2. **Summary**\n3. **Timeline**\n4. **Impact**\n5. **Evidence**\n6. **Requested action**\n\n## Practical rule\nWrite it so a third party can answer:\n- what happened\n- when it happened\n- who did what\n- how you know\n\nIf you want, paste the incident details and I’ll turn them into a clean first draft.",
+          "category": "agent_reply",
+          "task_index": 11,
+          "turn": 3,
+          "score": 0.15944615006446838
+        },
+        {
+          "content": "User: Closer, but still a little soft. I want it sharpened so I can actually use it on a repair without hand-waving.\n\nWhat I need now:\n- a **2-column checklist** I can run against two options\n- a harder rule for **repeat work risk** — not just “higher/lower,” but what usually means it’ll come back\n- a more concrete line for **verification** — what counts as enough proof, and what doesn’t\n- and a clean cutoff for **acceptable shortcut vs dumb patch**\n\nThe part I don’t want is generic stuff like “low downside” or “maybe.” I already know that. I want the decision to fail fast if the quick option is just masking the problem.\n\nIf you can tighten it, make it look like:\n- **Go** if…\n- **No-go** if…\n- **Verification passes when…**\n- **Verification fails when…**\n\nShort. Usable. No theory.",
+          "category": "user_reply",
+          "task_index": 30,
+          "turn": 2,
+          "score": 0.1569051891565323
+        }
+      ]
+    },
+    {
+      "category": "self_model",
+      "dimension": "fairness_self_view",
+      "explanation": "He seems to view himself as fundamentally fair because he wants evidence, records, and accountability. At the same time, he probably thinks rules are only legitimate when they protect against negligence or abuse, not when they block his own inspection. That makes his fairness practical and conditional rather than idealistic.",
+      "ground_truth": "Rule-aware, but on his terms",
+      "predicted": "values fairness through neutral, defensible facts",
+      "slot_fill_reason": "They repeatedly asked for tight, factual, non-accusatory wording and warned against motive guessing or unsupported conclusions.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the emphasis on evidence, records, and defensible facts, but it misses the conditional, rule-aware-on-his-terms aspect of the ground truth.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Yeah, that’s the right shape. But it’s still a little generic.\n\nWhat I’d want in the first pass:\n- exact date/time, not just “recently”\n- names, titles, and which person did what\n- what you personally saw vs what someone else told you\n- the sequence, minute by minute if it matters\n- any document trail: emails, logs, photos, texts, badge access, timestamps\n- the specific harm: safety issue, cost, delay, damage, policy violation\n- what you did right after, and who got notified\n\nAnd before sending it, I’d verify:\n- every time/date against records\n- spellings of names and job titles\n- any quote I’m putting in there\n- whether I’m mixing fact with inference\n- whether there’s a paper trail that contradicts my memory\n\nOne thing you didn’t mention: if this could turn into a dispute, keep the tone tight. No motive guessing. No “clearly,” no “obviously,” none of that. Just facts and sequence. That’s how you avoid handing them easy openings.\n\nIf you want the useful version, I’d rather have a fill-in template or the actual incident details, then I can help strip the noise out.",
+          "category": "user_reply",
+          "task_index": 11,
+          "turn": 1,
+          "score": 0.20597845315933228
+        },
+        {
+          "content": "Agent: Yes — for the first version, keep it **tight, factual, and defensible**.\n\n## Include\n- **Exact date/time**\n- **Names, titles, roles**\n- **What you personally saw/heard/did**\n- **What others told you** — clearly labeled as such\n- **Sequence of events**\n- **Specific harm**: safety, cost, delay, damage, policy issue\n- **Immediate response**: who you notified, what you did\n- **Evidence trail**: emails, logs, photos, texts, access records, timestamps\n- **What remains unresolved**\n\n## Verify before sending\n- dates/times against records\n- names and titles\n- quotes, if you include any\n- facts vs inference\n- whether documents/messages contradict your memory\n- witness names and what they actually observed\n\n## Tone rules\nUse:\n- “I observed…”\n- “At approximately…”\n- “The record shows…”\n- “I was informed that…”\n\nAvoid:\n- motive guessing\n- “obviously,” “clearly,” “everyone knows”\n- emotional language\n- conclusions you can’t prove yet\n\n## Best first-pass structure\n1. **Subject**\n2. **Summary**\n3. **Timeline**\n4. **Impact**\n5. **Evidence**\n6. **Requested action**\n\n## Practical tip\nIf this could become a dispute, write it so a third party can read it and answer:\n- what happened\n- when it happened\n- who did what\n- how you know\n\nIf you want, I can give you a **fill-in-the-blank complaint template** that stays neutral and factual.",
+          "category": "agent_reply",
+          "task_index": 11,
+          "turn": 2,
+          "score": 0.19678270816802979
+        },
+        {
+          "content": "User: Yeah. That’s the level. Tight, specific, no filler.",
+          "category": "user_reply",
+          "task_index": 22,
+          "turn": 5,
+          "score": 0.15284541249275208
+        },
+        {
+          "content": "[Task 26] I’m preparing a short note for a team discussion about a recurring issue that keeps getting brushed aside, and I want it to be clear enough that the next person can verify what actually happened. What details would you include so the sequence of events and the next check are easy to follow?",
+          "category": "task",
+          "task_index": 26,
+          "score": 0.14457660913467407
+        },
+        {
+          "content": "User: Yeah, that’s basically the right list. Tight enough. I’d use that before memory starts drifting.\n\nThe only thing I’d keep extra clear is **who had authority over the area** and **whether anyone told you not to enter before or after**. That’s usually where the story gets twisted later.\n\nA line-by-line incident log template would be useful.",
+          "category": "user_reply",
+          "task_index": 16,
+          "turn": 2,
+          "score": 0.14431872963905334
+        }
+      ]
+    },
+    {
+      "category": "self_model",
+      "dimension": "prudence_self_view",
+      "explanation": "He likely sees himself as cautious, measured, and difficult to fool. His habit of checking systems himself suggests he believes careful scrutiny is a strength and a form of self-protection. He may, however, overrate caution and underestimate how much it can harden into suspicion.",
+      "ground_truth": "Careful and hard to catch off guard",
+      "predicted": "wants to be cautious and verify facts before acting",
+      "slot_fill_reason": "They asked for a tighter, fact-based checklist and emphasized checking records, separating sources, and avoiding guesswork or sloppy inspection.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of being cautious and verifying before acting, but it does not fully capture the stronger sense of being hard to catch off guard or difficult to fool.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "Agent: Yes — for the first version, keep it **tight, factual, and defensible**.\n\n## Include\n- **Exact date/time**\n- **Names, titles, roles**\n- **What you personally saw/heard/did**\n- **What others told you** — clearly labeled as such\n- **Sequence of events**\n- **Specific harm**: safety, cost, delay, damage, policy issue\n- **Immediate response**: who you notified, what you did\n- **Evidence trail**: emails, logs, photos, texts, access records, timestamps\n- **What remains unresolved**\n\n## Verify before sending\n- dates/times against records\n- names and titles\n- quotes, if you include any\n- facts vs inference\n- whether documents/messages contradict your memory\n- witness names and what they actually observed\n\n## Tone rules\nUse:\n- “I observed…”\n- “At approximately…”\n- “The record shows…”\n- “I was informed that…”\n\nAvoid:\n- motive guessing\n- “obviously,” “clearly,” “everyone knows”\n- emotional language\n- conclusions you can’t prove yet\n\n## Best first-pass structure\n1. **Subject**\n2. **Summary**\n3. **Timeline**\n4. **Impact**\n5. **Evidence**\n6. **Requested action**\n\n## Practical tip\nIf this could become a dispute, write it so a third party can read it and answer:\n- what happened\n- when it happened\n- who did what\n- how you know\n\nIf you want, I can give you a **fill-in-the-blank complaint template** that stays neutral and factual.",
+          "category": "agent_reply",
+          "task_index": 11,
+          "turn": 2,
+          "score": 0.21128883957862854
+        },
+        {
+          "content": "User: Mostly fine, but it’s still a little generic. I want a sharper decision tree.\n\nWhat I need is basically:\n- what to check first in the first 5 minutes\n- what counts as “probably okay” vs “don’t trust it”\n- what symptoms point to ATS / relay / battery / charger / inverter / generator, not just “something’s wrong”\n- and one simple test I can do without creating a bigger problem\n\nI’m not looking for theory. I want the obvious failure points, in order, so I can tell whether this was just a normal transfer or the beginning of a real issue.",
+          "category": "user_reply",
+          "task_index": 15,
+          "turn": 1,
+          "score": 0.20347565412521362
+        },
+        {
+          "content": "User: Yeah, the structure is fine, but it’s still pretty generic. I want something I can actually use without guessing.\n\nGive me a tighter checklist by item — like:\n- what to inspect\n- how often\n- what failure signs matter\n- what parts are worth replacing proactively\n- what can just be watched\n\nAnd if you can, split it into **high-risk stuff** first — water, heat, electrical, then the rest. I don’t want a laundry list of obvious nonsense.",
+          "category": "user_reply",
+          "task_index": 4,
+          "turn": 1,
+          "score": 0.1997043639421463
+        },
+        {
+          "content": "[Task 23] I’m putting together a short checklist for inspecting a used piece of equipment before I decide whether to buy it. What are the first things you’d verify so the decision is based on what’s actually there and not just someone’s claim or a sloppy inspection?",
+          "category": "task",
+          "task_index": 23,
+          "score": 0.1915958821773529
+        },
+        {
+          "content": "Agent: Yes — for the first draft, I’d keep it **fact-first, timestamped, and separated by source**.\n\n## Include up front\n- **Exact date/time**\n- **Who was involved**: names, titles, roles\n- **What you personally saw/heard/did**\n- **What you were told by others** — clearly labeled as such\n- **Sequence of events**\n- **Concrete harm**: safety issue, delay, damage, cost, policy breach\n- **Immediate response**: what you did and who you notified\n- **Paper trail**: logs, emails, photos, texts, badge/access records, timestamps\n- **What remains unresolved**\n\n## Verify before sending\nCheck:\n- every date/time against records\n- names, titles, and spellings\n- any direct quotes\n- whether a document, message, or log contradicts your memory\n- whether a witness actually saw the event or only heard about it\n\n## Tone rules\nUse:\n- “I observed…”\n- “At approximately…”\n- “The record shows…”\n- “I was informed that…”\n\nAvoid:\n- motive guessing\n- “obviously,” “clearly,” “everyone knows”\n- emotional or argumentative language\n- conclusions you can’t prove yet\n\n## Best structure\n1. **Subject**\n2. **Summary**\n3. **Timeline**\n4. **Impact**\n5. **Evidence**\n6. **Requested action**\n\n## Practical rule\nWrite it so a third party can answer:\n- what happened\n- when it happened\n- who did what\n- how you know\n\nIf you want, paste the incident details and I’ll turn them into a clean first draft.",
+          "category": "agent_reply",
+          "task_index": 11,
+          "turn": 3,
+          "score": 0.18327108025550842
+        }
+      ]
+    },
+    {
+      "category": "self_model",
+      "dimension": "perfectionism_self_view",
+      "explanation": "He probably regards himself as exacting and unwilling to let loose ends slide. Missing intervals, weak terminals, and skipped tests matter to him because he believes small defects reveal deeper failure. The downside is that he may see his own standards as self-evident and struggle when others prefer “good enough.”",
+      "ground_truth": "Detail-first, not satisfied with sloppy work",
+      "predicted": "high standards, rejects generic or hand-wavy answers",
+      "slot_fill_reason": "They repeatedly said the drafts were “too generic,” wanted tighter checklists, hard pass/no-go rules, and insisted on concrete verification and failure criteria.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of being detail-focused and intolerant of sloppy work, though it is phrased more generally as high standards and does not fully capture the specific self-view of perfectionism.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Yeah. That’s the right framing.\n\nFailure mode, consequence, proof, verification. That’s the actual checklist. The rest is noise.\n\nThe table is usable. I’d probably add one more line though: **what condition would make me reject this option entirely**. Because sometimes the answer is just “if X is present, don’t patch it.”\n\nAnd root fix vs patch — agreed. People love calling a band-aid a repair.\n\nThis is fine as-is.",
+          "category": "user_reply",
+          "task_index": 27,
+          "turn": 2,
+          "score": 0.20899084210395813
+        },
+        {
+          "content": "User: Good start. Not sloppy, at least. But it’s still a little generic.\n\nI’d want a section for:\n- **inspection conditions** — daylight / flashlight, tool cold vs warm, battery charged, no excuses about being rushed\n- **fastener and housing check** — stripped screws, cracked bosses, missing covers, mismatched screws, tool marks\n- **alignment / play** — wobble, shaft play, bearing noise, guard fit, chuck/slip, anything that points to wear\n- **electrical sanity** — arcing smell, burnt insulation, intermittent switch behavior, loose terminals, cord strain relief\n- **maintenance evidence** — clean filter, lubricated points, correct grease/oil, not just wiped down to look nice\n- **seller behavior** — dodging questions, refusing to let you test under load, weird confidence with no proof\n\nAnd I’d split the red flags into **hard pass** vs **needs more testing**. That matters. Some junk is obvious, some is just suspicious.\n\nIf you want, make it format like: **Item / What to look for / Pass-Fail / Notes**. That’s cleaner than a loose bullet list.",
+          "category": "user_reply",
+          "task_index": 25,
+          "turn": 1,
+          "score": 0.20840242505073547
+        },
+        {
+          "content": "User: Yeah, the structure is fine, but it’s still pretty generic. I want something I can actually use without guessing.\n\nGive me a tighter checklist by item — like:\n- what to inspect\n- how often\n- what failure signs matter\n- what parts are worth replacing proactively\n- what can just be watched\n\nAnd if you can, split it into **high-risk stuff** first — water, heat, electrical, then the rest. I don’t want a laundry list of obvious nonsense.",
+          "category": "user_reply",
+          "task_index": 4,
+          "turn": 1,
+          "score": 0.2054351568222046
+        },
+        {
+          "content": "[Task 22] I need to write a short note to a coworker about a recurring problem that keeps getting brushed aside, and I want it to be specific enough that nobody can miss what I’m pointing to. Can you help me shape it so it stays focused on the facts and the next step?",
+          "category": "task",
+          "task_index": 22,
+          "score": 0.20306788384914398
+        },
+        {
+          "content": "User: Closer, but still a little soft. I want it sharpened so I can actually use it on a repair without hand-waving.\n\nWhat I need now:\n- a **2-column checklist** I can run against two options\n- a harder rule for **repeat work risk** — not just “higher/lower,” but what usually means it’ll come back\n- a more concrete line for **verification** — what counts as enough proof, and what doesn’t\n- and a clean cutoff for **acceptable shortcut vs dumb patch**\n\nThe part I don’t want is generic stuff like “low downside” or “maybe.” I already know that. I want the decision to fail fast if the quick option is just masking the problem.\n\nIf you can tighten it, make it look like:\n- **Go** if…\n- **No-go** if…\n- **Verification passes when…**\n- **Verification fails when…**\n\nShort. Usable. No theory.",
+          "category": "user_reply",
+          "task_index": 30,
+          "turn": 2,
+          "score": 0.20229631662368774
+        }
+      ]
+    },
+    {
+      "category": "self_model",
+      "dimension": "social_role_self_view",
+      "explanation": "He appears to see himself as the person who spots what others miss and calls it out. In groups, he likely experiences himself less as a collaborator than as a watcher or critic who prevents avoidable mistakes. That role can be useful, but it also leaves him vulnerable to being seen as difficult or distrustful.",
+      "ground_truth": "The skeptical checker",
+      "predicted": "sees themselves as careful, factual, and dispute-aware",
+      "slot_fill_reason": "They asked for notes to stay tight, factual, timestamped, and defensible, and emphasized authority, evidence, and what can be twisted later.",
+      "score": 0.75,
+      "judge_reason": "The prediction captures the core idea of being careful, skeptical, and alert to disputes, though it does not fully convey the stronger role of actively spotting others' mistakes and functioning as a critic or watcher.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "Agent: Yes — for the first version, keep it **tight, factual, and defensible**.\n\n## Include\n- **Exact date/time**\n- **Names, titles, roles**\n- **What you personally saw/heard/did**\n- **What others told you** — clearly labeled as such\n- **Sequence of events**\n- **Specific harm**: safety, cost, delay, damage, policy issue\n- **Immediate response**: who you notified, what you did\n- **Evidence trail**: emails, logs, photos, texts, access records, timestamps\n- **What remains unresolved**\n\n## Verify before sending\n- dates/times against records\n- names and titles\n- quotes, if you include any\n- facts vs inference\n- whether documents/messages contradict your memory\n- witness names and what they actually observed\n\n## Tone rules\nUse:\n- “I observed…”\n- “At approximately…”\n- “The record shows…”\n- “I was informed that…”\n\nAvoid:\n- motive guessing\n- “obviously,” “clearly,” “everyone knows”\n- emotional language\n- conclusions you can’t prove yet\n\n## Best first-pass structure\n1. **Subject**\n2. **Summary**\n3. **Timeline**\n4. **Impact**\n5. **Evidence**\n6. **Requested action**\n\n## Practical tip\nIf this could become a dispute, write it so a third party can read it and answer:\n- what happened\n- when it happened\n- who did what\n- how you know\n\nIf you want, I can give you a **fill-in-the-blank complaint template** that stays neutral and factual.",
+          "category": "agent_reply",
+          "task_index": 11,
+          "turn": 2,
+          "score": 0.2385876625776291
+        },
+        {
+          "content": "Agent: Yes — for the first draft, I’d keep it **fact-first, timestamped, and separated by source**.\n\n## Include up front\n- **Exact date/time**\n- **Who was involved**: names, titles, roles\n- **What you personally saw/heard/did**\n- **What you were told by others** — clearly labeled as such\n- **Sequence of events**\n- **Concrete harm**: safety issue, delay, damage, cost, policy breach\n- **Immediate response**: what you did and who you notified\n- **Paper trail**: logs, emails, photos, texts, badge/access records, timestamps\n- **What remains unresolved**\n\n## Verify before sending\nCheck:\n- every date/time against records\n- names, titles, and spellings\n- any direct quotes\n- whether a document, message, or log contradicts your memory\n- whether a witness actually saw the event or only heard about it\n\n## Tone rules\nUse:\n- “I observed…”\n- “At approximately…”\n- “The record shows…”\n- “I was informed that…”\n\nAvoid:\n- motive guessing\n- “obviously,” “clearly,” “everyone knows”\n- emotional or argumentative language\n- conclusions you can’t prove yet\n\n## Best structure\n1. **Subject**\n2. **Summary**\n3. **Timeline**\n4. **Impact**\n5. **Evidence**\n6. **Requested action**\n\n## Practical rule\nWrite it so a third party can answer:\n- what happened\n- when it happened\n- who did what\n- how you know\n\nIf you want, paste the incident details and I’ll turn them into a clean first draft.",
+          "category": "agent_reply",
+          "task_index": 11,
+          "turn": 3,
+          "score": 0.20127332210540771
+        },
+        {
+          "content": "[Task 22] I need to write a short note to a coworker about a recurring problem that keeps getting brushed aside, and I want it to be specific enough that nobody can miss what I’m pointing to. Can you help me shape it so it stays focused on the facts and the next step?",
+          "category": "task",
+          "task_index": 22,
+          "score": 0.16709958016872406
+        },
+        {
+          "content": "User: Yeah, that’s basically the right list. Tight enough. I’d use that before memory starts drifting.\n\nThe only thing I’d keep extra clear is **who had authority over the area** and **whether anyone told you not to enter before or after**. That’s usually where the story gets twisted later.\n\nA line-by-line incident log template would be useful.",
+          "category": "user_reply",
+          "task_index": 16,
+          "turn": 2,
+          "score": 0.15747377276420593
+        },
+        {
+          "content": "Agent: Yes — keep it **specific, measurable, and evidence-based**.\n\n## What to include\n- **Your role / scope**\n- **A few concrete examples**\n- **What you did**\n- **What changed because of it**\n- **Any numbers, dates, or outcomes**\n- **Anything you owned end-to-end**\n\n## Good structure\n1. **Context** — what you were responsible for\n2. **Example 1** — problem, action, result\n3. **Example 2** — problem, action, result\n4. **Example 3** — problem, action, result\n5. **Summary** — impact across the cycle\n\n## Keep it factual\nUse:\n- “I handled…”\n- “I identified…”\n- “I resolved…”\n- “This reduced…”\n- “This prevented…”\n\nAvoid:\n- vague praise\n- inflated claims\n- “always” / “never”\n- stuff you can’t back up\n\n## Example format\n> During this cycle, I handled recurring issues on [system/team/process], including [example]. I identified the root cause, coordinated the fix, and confirmed the issue did not recur. This reduced downtime and removed repeat follow-up work.\n\nIf you want, I can help you turn your rough examples into a clean note.",
+          "category": "agent_reply",
+          "task_index": 24,
+          "turn": 1,
+          "score": 0.15578393638134003
+        }
+      ]
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "verbosity_preference",
+      "explanation": "He likely prefers responses that get to the point without extra filler. His style suggests low patience for rambling or polished small talk, especially when he wants to verify something quickly. Too much text would probably feel inefficient unless it directly helps him check a claim or solve a problem.",
+      "ground_truth": "Brief, not padded",
+      "predicted": "prefers concise, concrete, usable formats",
+      "slot_fill_reason": "They asked for a “tight format with concrete bullets” and said the generic version sounded like “HR filler,” indicating a preference for brief, practical detail.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of preferring concise, efficient responses, but it is a bit broader and less directly about being brief and not padded.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "Agent: Yes — for the first version, keep it **tight, factual, and defensible**.\n\n## Include\n- **Exact date/time**\n- **Names, titles, roles**\n- **What you personally saw/heard/did**\n- **What others told you** — clearly labeled as such\n- **Sequence of events**\n- **Specific harm**: safety, cost, delay, damage, policy issue\n- **Immediate response**: who you notified, what you did\n- **Evidence trail**: emails, logs, photos, texts, access records, timestamps\n- **What remains unresolved**\n\n## Verify before sending\n- dates/times against records\n- names and titles\n- quotes, if you include any\n- facts vs inference\n- whether documents/messages contradict your memory\n- witness names and what they actually observed\n\n## Tone rules\nUse:\n- “I observed…”\n- “At approximately…”\n- “The record shows…”\n- “I was informed that…”\n\nAvoid:\n- motive guessing\n- “obviously,” “clearly,” “everyone knows”\n- emotional language\n- conclusions you can’t prove yet\n\n## Best first-pass structure\n1. **Subject**\n2. **Summary**\n3. **Timeline**\n4. **Impact**\n5. **Evidence**\n6. **Requested action**\n\n## Practical tip\nIf this could become a dispute, write it so a third party can read it and answer:\n- what happened\n- when it happened\n- who did what\n- how you know\n\nIf you want, I can give you a **fill-in-the-blank complaint template** that stays neutral and factual.",
+          "category": "agent_reply",
+          "task_index": 11,
+          "turn": 2,
+          "score": 0.2850756049156189
+        },
+        {
+          "content": "[Task 7] I’ve got a messy equipment issue I want to hand off to someone else, but I don’t want the important details getting lost. Can you help me turn my rough notes into a clean troubleshooting write-up with the key symptoms, what was checked, what changed, and the order of events?",
+          "category": "task",
+          "task_index": 7,
+          "score": 0.2601732313632965
+        },
+        {
+          "content": "[Task 11] I need to draft a written complaint about an incident, but I’m not sure how to phrase it so it’s clear, factual, and doesn’t create extra problems for me later. What should I make sure to include in the first version, and what details are worth verifying before I send it?",
+          "category": "task",
+          "task_index": 11,
+          "score": 0.24722564220428467
+        },
+        {
+          "content": "User: Yeah, but that’s still generic. I need something I can actually use without it sounding like HR filler.\n\nGive me a tight format with concrete bullets I can verify, like:\n- issue / failure mode\n- what I checked\n- what I found\n- what changed\n- any date, count, or evidence\n\nAnd it should sound like a performance note, not a self-congratulatory paragraph. If you want, I can give you 2-3 real examples from my work and you can tighten them up.",
+          "category": "user_reply",
+          "task_index": 24,
+          "turn": 1,
+          "score": 0.24000269174575806
+        },
+        {
+          "content": "Agent: Yes — for the first draft, I’d make it **source-tagged, timestamped, and sequence-based**.\n\n## Include\n- **Exact date/time** for each key event\n- **Actor + action** for each step\n- **Source tag inline**\n  - “I observed…”\n  - “X told me…”\n  - “The log shows…”\n- **Paper trail in the timeline**\n  - emails, texts, badge swipes, photos, logs\n- **Concrete harm**\n  - safety issue, delay, damage, cost, policy breach\n- **Immediate follow-up**\n  - what you did, who you notified, what response you got\n- **What remains unresolved**\n\n## Verify before sending\n- every date/time against records\n- names, titles, spellings\n- any quoted language\n- whether logs/messages/photos contradict memory\n- whether a witness actually saw it or just heard about it\n\n## Tone rules\nUse:\n- “I observed…”\n- “At approximately…”\n- “The record shows…”\n- “I was informed that…”\n\nAvoid:\n- motive guessing\n- “obviously,” “clearly,” “everyone knows”\n- emotional language\n- conclusions you can’t prove\n\n## Best structure\n1. **Subject**\n2. **Summary**\n3. **Timeline**\n4. **Impact**\n5. **Evidence**\n6. **Follow-up / requested action**\n\n## Practical rule\nWrite it so a third party can answer:\n- what happened\n- when it happened\n- who did what\n- how you know\n\nIf you want, I can turn that into a **fill-in-the-blank complaint template** you can paste into directly.",
+          "category": "agent_reply",
+          "task_index": 11,
+          "turn": 4,
+          "score": 0.2241918295621872
+        }
+      ]
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "directness_preference",
+      "explanation": "He seems to want help stated plainly, without hedging or sugarcoating. Given his skepticism and fault-finding habits, he would likely trust a direct answer more than a carefully cushioned one. Overly cautious phrasing may read to him as evasive or weak.",
+      "ground_truth": "Blunt and unsoftened",
+      "predicted": "prefers concise, specific, no-fluff answers",
+      "slot_fill_reason": "They repeatedly asked for \"tight, specific, no filler,\" \"short, no fluff,\" and a \"real decision tree\" with concrete checks and stop signs.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of wanting direct, no-fluff communication, but it does not fully capture the stronger bluntness and unsoftened tone in the ground truth.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "Agent: Yes — for the first version, keep it **tight, factual, and defensible**.\n\n## Include\n- **Exact date/time**\n- **Names, titles, roles**\n- **What you personally saw/heard/did**\n- **What others told you** — clearly labeled as such\n- **Sequence of events**\n- **Specific harm**: safety, cost, delay, damage, policy issue\n- **Immediate response**: who you notified, what you did\n- **Evidence trail**: emails, logs, photos, texts, access records, timestamps\n- **What remains unresolved**\n\n## Verify before sending\n- dates/times against records\n- names and titles\n- quotes, if you include any\n- facts vs inference\n- whether documents/messages contradict your memory\n- witness names and what they actually observed\n\n## Tone rules\nUse:\n- “I observed…”\n- “At approximately…”\n- “The record shows…”\n- “I was informed that…”\n\nAvoid:\n- motive guessing\n- “obviously,” “clearly,” “everyone knows”\n- emotional language\n- conclusions you can’t prove yet\n\n## Best first-pass structure\n1. **Subject**\n2. **Summary**\n3. **Timeline**\n4. **Impact**\n5. **Evidence**\n6. **Requested action**\n\n## Practical tip\nIf this could become a dispute, write it so a third party can read it and answer:\n- what happened\n- when it happened\n- who did what\n- how you know\n\nIf you want, I can give you a **fill-in-the-blank complaint template** that stays neutral and factual.",
+          "category": "agent_reply",
+          "task_index": 11,
+          "turn": 2,
+          "score": 0.2319863736629486
+        },
+        {
+          "content": "[Task 7] I’ve got a messy equipment issue I want to hand off to someone else, but I don’t want the important details getting lost. Can you help me turn my rough notes into a clean troubleshooting write-up with the key symptoms, what was checked, what changed, and the order of events?",
+          "category": "task",
+          "task_index": 7,
+          "score": 0.20864751935005188
+        },
+        {
+          "content": "User: Mostly fine, but it’s still a little generic. I want a sharper decision tree.\n\nWhat I need is basically:\n- what to check first in the first 5 minutes\n- what counts as “probably okay” vs “don’t trust it”\n- what symptoms point to ATS / relay / battery / charger / inverter / generator, not just “something’s wrong”\n- and one simple test I can do without creating a bigger problem\n\nI’m not looking for theory. I want the obvious failure points, in order, so I can tell whether this was just a normal transfer or the beginning of a real issue.",
+          "category": "user_reply",
+          "task_index": 15,
+          "turn": 1,
+          "score": 0.1864004135131836
+        },
+        {
+          "content": "User: Yeah. That’s the level. Tight, specific, no filler.",
+          "category": "user_reply",
+          "task_index": 22,
+          "turn": 5,
+          "score": 0.18608982861042023
+        },
+        {
+          "content": "User: Yeah, that’s the right shape. But it’s still pretty generic.\n\nWhat I’d want is the order of checks by system type, because the first 3 things are not the same for HVAC, a breaker issue, a pump, or an appliance. And I don’t want a “just watch it” answer unless you define what actually counts as repeatable vs one-off.\n\nGive me a real decision tree for one category first — electrical or HVAC would be the useful ones. Include:\n- what to inspect first\n- what failure signs are immediate stop signs\n- what’s worth documenting before touching anything\n- when it’s safe to keep observing\n\nShort, no fluff.",
+          "category": "user_reply",
+          "task_index": 18,
+          "turn": 1,
+          "score": 0.17566271126270294
+        }
+      ]
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "format_preference",
+      "explanation": "He would probably respond best to organized, easy-to-scan formats like bullets, steps, or checklists. That matches his preference for documentation and verification, where details can be checked off against evidence. Free-form prose is less useful to him unless it is tightly structured.",
+      "ground_truth": "Checklist-friendly answers",
+      "predicted": "prefers tight, factual, verifiable bullet formats",
+      "slot_fill_reason": "They repeatedly asked for “tight, mechanical, no fluff” notes with concrete bullets like issue, what checked, what found, what changed, and evidence/date/count.",
+      "score": 1.0,
+      "judge_reason": "The prediction matches the ground truth closely by describing a preference for organized, checklist-like, verifiable bullet formats.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Yeah, that format works. Tight, mechanical, no fluff.\n\nI can use:\n- issue / failure mode\n- what I checked\n- what I found\n- what I changed\n- result / evidence\n- date / count / metric\n\nIf I give you the real examples, keep them blunt and verifiable. No HR language, no “instrumental,” no fake polish. Just make them read like something a manager can check against records.",
+          "category": "user_reply",
+          "task_index": 24,
+          "turn": 2,
+          "score": 0.29559487104415894
+        },
+        {
+          "content": "User: Yeah, but that’s still generic. I need something I can actually use without it sounding like HR filler.\n\nGive me a tight format with concrete bullets I can verify, like:\n- issue / failure mode\n- what I checked\n- what I found\n- what changed\n- any date, count, or evidence\n\nAnd it should sound like a performance note, not a self-congratulatory paragraph. If you want, I can give you 2-3 real examples from my work and you can tighten them up.",
+          "category": "user_reply",
+          "task_index": 24,
+          "turn": 1,
+          "score": 0.2895677983760834
+        },
+        {
+          "content": "User: Closer, but still too template-y. I need something I can actually send without sounding like I filled in blanks from a form. Give me one tight version with no brackets, no “if you want,” and no softening. Make it read like a real note: the fault, where it’s happening, the evidence, and the next action. Firmer than this.",
+          "category": "user_reply",
+          "task_index": 22,
+          "turn": 2,
+          "score": 0.2684796452522278
+        },
+        {
+          "content": "[Task 7] I’ve got a messy equipment issue I want to hand off to someone else, but I don’t want the important details getting lost. Can you help me turn my rough notes into a clean troubleshooting write-up with the key symptoms, what was checked, what changed, and the order of events?",
+          "category": "task",
+          "task_index": 7,
+          "score": 0.25442373752593994
+        },
+        {
+          "content": "Agent: Yes — for the first version, keep it **tight, factual, and defensible**.\n\n## Include\n- **Exact date/time**\n- **Names, titles, roles**\n- **What you personally saw/heard/did**\n- **What others told you** — clearly labeled as such\n- **Sequence of events**\n- **Specific harm**: safety, cost, delay, damage, policy issue\n- **Immediate response**: who you notified, what you did\n- **Evidence trail**: emails, logs, photos, texts, access records, timestamps\n- **What remains unresolved**\n\n## Verify before sending\n- dates/times against records\n- names and titles\n- quotes, if you include any\n- facts vs inference\n- whether documents/messages contradict your memory\n- witness names and what they actually observed\n\n## Tone rules\nUse:\n- “I observed…”\n- “At approximately…”\n- “The record shows…”\n- “I was informed that…”\n\nAvoid:\n- motive guessing\n- “obviously,” “clearly,” “everyone knows”\n- emotional language\n- conclusions you can’t prove yet\n\n## Best first-pass structure\n1. **Subject**\n2. **Summary**\n3. **Timeline**\n4. **Impact**\n5. **Evidence**\n6. **Requested action**\n\n## Practical tip\nIf this could become a dispute, write it so a third party can read it and answer:\n- what happened\n- when it happened\n- who did what\n- how you know\n\nIf you want, I can give you a **fill-in-the-blank complaint template** that stays neutral and factual.",
+          "category": "agent_reply",
+          "task_index": 11,
+          "turn": 2,
+          "score": 0.24604906141757965
+        }
+      ]
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "explanation_depth_preference",
+      "explanation": "He likely wants just enough explanation to understand what to do and why it matters. Deep theory is probably only useful if it helps him verify a failure or avoid a mistake. He would likely be impatient with abstract digressions that do not change the next action.",
+      "ground_truth": "Enough to act, not theory-heavy",
+      "predicted": "prefers concise, tightly focused explanations",
+      "slot_fill_reason": "They explicitly asked for “tight, specific, no filler,” “tighter,” “specific, no fluff,” and a version that reads like a real work note with the next step spelled out.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of wanting concise, action-focused explanations, but it does not explicitly capture the nuance that deeper theory is acceptable when it helps verify failures or avoid mistakes.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Yeah. That’s the level. Tight, specific, no filler.",
+          "category": "user_reply",
+          "task_index": 22,
+          "turn": 5,
+          "score": 0.3268490731716156
+        },
+        {
+          "content": "Agent: Yes — for the first version, keep it **tight, factual, and defensible**.\n\n## Include\n- **Exact date/time**\n- **Names, titles, roles**\n- **What you personally saw/heard/did**\n- **What others told you** — clearly labeled as such\n- **Sequence of events**\n- **Specific harm**: safety, cost, delay, damage, policy issue\n- **Immediate response**: who you notified, what you did\n- **Evidence trail**: emails, logs, photos, texts, access records, timestamps\n- **What remains unresolved**\n\n## Verify before sending\n- dates/times against records\n- names and titles\n- quotes, if you include any\n- facts vs inference\n- whether documents/messages contradict your memory\n- witness names and what they actually observed\n\n## Tone rules\nUse:\n- “I observed…”\n- “At approximately…”\n- “The record shows…”\n- “I was informed that…”\n\nAvoid:\n- motive guessing\n- “obviously,” “clearly,” “everyone knows”\n- emotional language\n- conclusions you can’t prove yet\n\n## Best first-pass structure\n1. **Subject**\n2. **Summary**\n3. **Timeline**\n4. **Impact**\n5. **Evidence**\n6. **Requested action**\n\n## Practical tip\nIf this could become a dispute, write it so a third party can read it and answer:\n- what happened\n- when it happened\n- who did what\n- how you know\n\nIf you want, I can give you a **fill-in-the-blank complaint template** that stays neutral and factual.",
+          "category": "agent_reply",
+          "task_index": 11,
+          "turn": 2,
+          "score": 0.29755839705467224
+        },
+        {
+          "content": "[Task 22] I need to write a short note to a coworker about a recurring problem that keeps getting brushed aside, and I want it to be specific enough that nobody can miss what I’m pointing to. Can you help me shape it so it stays focused on the facts and the next step?",
+          "category": "task",
+          "task_index": 22,
+          "score": 0.2578411400318146
+        },
+        {
+          "content": "[Task 7] I’ve got a messy equipment issue I want to hand off to someone else, but I don’t want the important details getting lost. Can you help me turn my rough notes into a clean troubleshooting write-up with the key symptoms, what was checked, what changed, and the order of events?",
+          "category": "task",
+          "task_index": 7,
+          "score": 0.23431651294231415
+        },
+        {
+          "content": "User: Yeah, direction’s fine. But I need it tighter than that. \n\nGive me a version that reads more like a real work note — specific, no fluff, and with the next step spelled out so it doesn’t get waved off. Also keep it a little firmer. Something like: what keeps happening, where it’s happening, what evidence backs it up, and what needs to be checked or fixed next. Not a generic template.",
+          "category": "user_reply",
+          "task_index": 22,
+          "turn": 1,
+          "score": 0.23011496663093567
+        }
+      ]
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "pushback_tolerance",
+      "explanation": "He seems likely to prefer being told when something does not add up, even if the correction is blunt. Because he values fault-finding and certainty, he may actually trust an assistant more if it challenges weak assumptions. The risk is that he could overvalue confrontation and underappreciate softer guidance when nuance matters.",
+      "ground_truth": "Welcomes hard correction",
+      "predicted": "prefers direct, specific pushback and sharper revisions",
+      "slot_fill_reason": "They repeatedly asked for tighter, more specific wording and said generic advice was still too broad, wanting sharper evidence and next-step action.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of welcoming blunt, corrective pushback, though it is phrased more as a preference for direct revisions than an explicit openness to hard correction.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "Agent: Yes — keep it **specific, measurable, and evidence-based**.\n\n## What to include\n- **Your role / scope**\n- **A few concrete examples**\n- **What you did**\n- **What changed because of it**\n- **Any numbers, dates, or outcomes**\n- **Anything you owned end-to-end**\n\n## Good structure\n1. **Context** — what you were responsible for\n2. **Example 1** — problem, action, result\n3. **Example 2** — problem, action, result\n4. **Example 3** — problem, action, result\n5. **Summary** — impact across the cycle\n\n## Keep it factual\nUse:\n- “I handled…”\n- “I identified…”\n- “I resolved…”\n- “This reduced…”\n- “This prevented…”\n\nAvoid:\n- vague praise\n- inflated claims\n- “always” / “never”\n- stuff you can’t back up\n\n## Example format\n> During this cycle, I handled recurring issues on [system/team/process], including [example]. I identified the root cause, coordinated the fix, and confirmed the issue did not recur. This reduced downtime and removed repeat follow-up work.\n\nIf you want, I can help you turn your rough examples into a clean note.",
+          "category": "agent_reply",
+          "task_index": 24,
+          "turn": 1,
+          "score": 0.2477339655160904
+        },
+        {
+          "content": "[Task 22] I need to write a short note to a coworker about a recurring problem that keeps getting brushed aside, and I want it to be specific enough that nobody can miss what I’m pointing to. Can you help me shape it so it stays focused on the facts and the next step?",
+          "category": "task",
+          "task_index": 22,
+          "score": 0.2389320284128189
+        },
+        {
+          "content": "[Task 7] I’ve got a messy equipment issue I want to hand off to someone else, but I don’t want the important details getting lost. Can you help me turn my rough notes into a clean troubleshooting write-up with the key symptoms, what was checked, what changed, and the order of events?",
+          "category": "task",
+          "task_index": 7,
+          "score": 0.21597567200660706
+        },
+        {
+          "content": "User: Yeah, that’s the right shape. But it’s still a little broad.\n\nWhat I’d want is a tighter rule set, something I can actually use in the field without second-guessing it:\n- what counts as acceptable drift\n- how many repeats before it stops being noise\n- what symptoms are automatic stop-work\n- what to log so I can prove the pattern later\n\nAnd the thresholds depend a lot on the equipment. Motor? pump? panel? HVAC? Test gear? Different failure modes, different tolerance. Give me a specific type and I’d want a decision tree, not just general advice.",
+          "category": "user_reply",
+          "task_index": 3,
+          "turn": 1,
+          "score": 0.20707684755325317
+        },
+        {
+          "content": "User: Closer, but still a little generic. I need it to sound like somebody actually wrote it after looking at the problem, not like a cleaned-up summary. Make it sharper and more specific on the evidence and the next step — something like: the fault keeps happening, here’s where, here’s what backs it up, and here’s what needs to be checked or fixed next. No “we need to” fluff, just the action.",
+          "category": "user_reply",
+          "task_index": 22,
+          "turn": 3,
+          "score": 0.20465758442878723
+        }
+      ]
+    }
+  ]
+}

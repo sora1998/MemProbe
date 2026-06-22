@@ -1,0 +1,62 @@
+{
+  "user_id": "user_029",
+  "task": "I’m preparing a short note for a team discussion about a recurring issue that keeps getting brushed aside, and I want it to be clear enough that the next person can verify what actually happened. What details would you include so the sequence of events and the next check are easy to follow?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.55,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Include these, in this order:\n\n1. **What keeps happening**\n2. **Where it’s happening**\n3. **When it happened most recently**\n4. **What you personally saw**\n5. **What the record shows**  \n   - logs  \n   - emails  \n   - photos  \n   - screenshots  \n   - timestamps\n6. **What changed after it happened**\n7. **What was checked already**\n8. **What still needs to be checked or fixed next**\n\n## Keep it factual\nUse:\n- “I observed…”\n- “The log shows…”\n- “This happened again on…”\n- “The next check is…”\n\nAvoid:\n- blame\n- vague summaries\n- “obviously”\n- long explanations\n\n## Simple structure\n- **Issue**\n- **Evidence**\n- **Impact**\n- **Next step**\n\nIf you want, I can turn your rough note into a **tight work message**.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Pretty close, but it’s still a little generic. I’d want the note to force a real trace, not just a summary.\n\nInclude:\n- exact failure mode, not just “issue”\n- asset/system name or location\n- date/time it last happened\n- what was normal right before it failed\n- what I directly observed vs. what someone else reported\n- any logs, alarms, photos, timestamps, service records\n- what was done immediately after\n- whether it cleared, recurred, or got worse\n- what check has not been done yet\n- who is responsible for the next verification\n\nI’d keep it in a sequence like:\n1. Event\n2. Observation\n3. Evidence\n4. Action taken\n5. Current status\n6. Next check\n\nIf the goal is for the next person to verify it, make them able to answer: what failed, when, how we know, and what still hasn’t been ruled out.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Use this order:\n\n1. **Exact failure mode**\n2. **Asset / system / location**\n3. **Last time it happened**\n4. **What was normal right before it failed**\n5. **What you directly observed**\n6. **What someone else reported** — labeled as such\n7. **Logs / alarms / photos / timestamps / service records**\n8. **What was done immediately after**\n9. **Whether it cleared, recurred, or got worse**\n10. **What has not been checked yet**\n11. **Who owns the next verification**\n\n## Keep it traceable\nUse:\n- “I observed…”\n- “The log shows…”\n- “X reported…”\n- “After reset, it…”\n- “The next check is…”\n\n## Clean sequence\n- **Event**\n- **Observation**\n- **Evidence**\n- **Action taken**\n- **Current status**\n- **Next check**\n\n## What makes it useful\nThe next person should be able to answer:\n- what failed\n- when it failed\n- what was normal beforehand\n- how we know\n- what was ruled out\n- what still needs checking\n\nIf you want, I can turn that into a **fill-in work note template**.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s the right skeleton. Still a little too template-y though.\n\nWhat I’d want is a note that forces someone to pin it to a specific failure, not just a generic trace. So I’d make the fields read more like:\n\n1. **Exact failure mode**\n2. **Asset / system / location**\n3. **Date and time last seen**\n4. **What was normal immediately before failure**\n5. **What I personally observed**\n6. **What was reported by someone else**\n7. **Logs / alarms / photos / timestamps / service records**\n8. **Immediate action taken**\n9. **Did it clear, recur, or worsen**\n10. **What has not been ruled out yet**\n11. **Who owns the next verification**\n\nThat last part matters. If nobody owns the next check, the whole thing turns into noise.\n\nIf you want, I’d push it one step further and make a fill-in note with blanks, so it’s hard to hand-wave.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Use this order:\n\n1. **Exact failure mode**\n2. **Asset / system / location**\n3. **Date and time last seen**\n4. **What was normal immediately before failure**\n5. **What I personally observed**\n6. **What was reported by someone else**\n7. **Logs / alarms / photos / timestamps / service records**\n8. **Immediate action taken**\n9. **Did it clear, recur, or worsen**\n10. **What has not been ruled out yet**\n11. **Who owns the next verification**\n\n## Keep it traceable\nUse:\n- “I observed…”\n- “The log shows…”\n- “X reported…”\n- “After reset, it…”\n- “The next check is…”\n\n## Clean sequence\n- **Event**\n- **Observation**\n- **Evidence**\n- **Action taken**\n- **Current status**\n- **Next check**\n\n## What makes it useful\nThe next person should be able to answer:\n- what failed\n- when it failed\n- what was normal beforehand\n- how we know\n- what was ruled out\n- what still needs checking\n\nIf you want, I can turn that into a **fill-in work note template**.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Close. Still a bit soft around the edges.\n\nWhat I’d want next is the actual fill-in version, not another outline. Something like:\n\n1. **Exact failure mode:** ______\n2. **Asset / system / location:** ______\n3. **Date and time last seen:** ______\n4. **What was normal immediately before failure:** ______\n5. **What I personally observed:** ______\n6. **What was reported by someone else:** ______\n7. **Logs / alarms / photos / timestamps / service records:** ______\n8. **Immediate action taken:** ______\n9. **Did it clear, recur, or worsen:** ______\n10. **What has not been ruled out yet:** ______\n11. **Who owns the next verification:** ______\n\nThen a short line under it like:\n\n**Next check:** ______\n\nThat’s the part that stops people from hand-waving. If you want it to force a real trace, the blanks need to make it impossible to skip the sequence. ",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 4,
+      "agent_response": "1. **Exact failure mode:** ______  \n2. **Asset / system / location:** ______  \n3. **Date and time last seen:** ______  \n4. **What was normal immediately before failure:** ______  \n5. **What I personally observed:** ______  \n6. **What was reported by someone else:** ______  \n7. **Logs / alarms / photos / timestamps / service records:** ______  \n8. **Immediate action taken:** ______  \n9. **Did it clear, recur, or worsen:** ______  \n10. **What has not been ruled out yet:** ______  \n11. **Who owns the next verification:** ______  \n\n**Next check:** ______",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s the one.\n\nIt forces the chain instead of letting people hide behind a summary.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    }
+  ]
+}

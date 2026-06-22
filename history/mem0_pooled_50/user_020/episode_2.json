@@ -1,0 +1,36 @@
+{
+  "user_id": "user_020",
+  "task": "My furnace is acting up in a way that isn’t obvious, and I don’t want to start swapping parts blind. What’s the best way to narrow down where the problem is before I waste time or money?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.5,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Best approach: **diagnose by symptoms and checks, not parts swapping**.\n\n### 1) Start with the simple stuff\n- **Thermostat:** set to heat, temp above room temp, batteries good\n- **Power:** furnace switch on, breaker not tripped, service door fully closed\n- **Filter:** dirty/clogged filter can cause a lot of weird behavior\n- **Vents/returns:** make sure airflow isn’t blocked\n\n### 2) Note exactly what it’s doing\nWatch the sequence:\n- Does it **start at all**?\n- Does the **blower run but no heat**?\n- Does it **ignite then shut off**?\n- Does it **short cycle**?\n- Any **blinking error code** on the control board?\n\nThat sequence usually tells you which system is failing:\n- **No start** → thermostat, power, safety switch, control board\n- **Fan runs, no heat** → ignition, gas supply, flame sensor, limit switch\n- **Starts then stops** → flame sensor, airflow, overheating, venting\n- **Short cycling** → filter, airflow, thermostat, limit switch\n\n### 3) Check for obvious safeties\nIf you can do it safely:\n- Look for a **clogged filter**\n- Check if the **condensate drain** is backed up on high-efficiency units\n- Make sure the **intake/exhaust vents** outside aren’t blocked\n- See if the furnace is showing an **error light code**\n\n### 4) Use the furnace’s own clues\n- **Blink codes** are often the fastest way to narrow it down\n- The **owner’s manual** or model number lookup can decode them\n- If it’s not obvious, the code is more useful than guessing\n\n### 5) Don’t replace parts until you confirm the failure\nCommon mistake: replacing igniters, sensors, boards, or motors without proving they’re bad. That gets expensive fast.\n\n### 6) Stop and call a pro if you notice:\n- **Gas smell**\n- **Burning smell or smoke**\n- **Repeated breaker trips**\n- **Cracked heat exchanger suspicion**\n- **Water near electrical parts**\n- **Any issue involving gas valve, burner, or control board diagnostics** if you’re not comfortable testing safely\n\nIf you want, I can help you **triage it step-by-step** if you tell me:\n1. furnace brand/model if you have it,  \n2. what it does when you call for heat, and  \n3. whether there’s a blink code or noise pattern.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s the general idea. But I want it narrower than that. \n\nGive me a plain sequence — what to check first, second, third — so I can tell whether it’s airflow, ignition, limit switch, or the control board without just guessing at parts. And tell me what symptoms point to each one. Short and to the point.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Here’s a **plain first-second-third sequence** to narrow it down without parts-swapping:\n\n## 1) Check airflow first\n**Look for:**\n- Dirty filter\n- Closed/blocked vents or returns\n- Blower running weakly or nonstop\n- Furnace overheating and shutting off\n\n**Points to airflow / limit switch if:**\n- Burner lights, then shuts off after a short time\n- Blower keeps running but heat cuts out\n- You get repeated on/off cycling\n- Any high-temp limit code\n\n**Usually means:** airflow problem, dirty filter, blower issue, or the **limit switch** opening from overheating.\n\n---\n\n## 2) Check ignition next\n**Look for:**\n- Furnace calls for heat\n- Inducer starts\n- You hear clicking but no flame\n- Flame lights, then goes out\n\n**Points to ignition if:**\n- No flame at all, but you hear the startup sequence\n- Igniter glows but gas doesn’t light\n- Flame lights briefly, then shuts off\n- You get an ignition failure code\n\n**Usually means:** igniter, gas supply, flame sensor, or burner issue.\n\n---\n\n## 3) Check control board / safeties last\n**Look for:**\n- No response at all to a heat call\n- Random lockouts\n- Error light code that doesn’t match airflow or ignition\n- Furnace starts only after power reset\n\n**Points to control board / safety circuit if:**\n- Thermostat is calling, but nothing happens\n- Power is present, but sequence never begins\n- Multiple safeties are open with no clear cause\n- Error code points to board or communication fault\n\n**Usually means:** control board, pressure switch, rollout switch, door switch, or wiring.\n\n---\n\n## Quick symptom map\n- **Starts then stops quickly** → airflow / limit switch\n- **Clicks or tries to ignite but no flame** → ignition\n- **Runs blower but no heat** → ignition or gas\n- **No response at all** → power, thermostat, safeties, or control board\n- **Works only after reset** → board or safety lockout\n\n## Rule of thumb\n- **Airflow problems** = most common and easiest to verify\n- **Ignition problems** = next most likely\n- **Control board** = suspect it **only after** airflow and ignition checks don’t fit\n\nIf you want, I can turn this into a **one-page yes/no flowchart** you can follow at the furnace.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "That’s about the shape of it. Short version works.\n\n- **First: airflow** — dirty filter, blocked return, weak blower, closed vents. If it lights then shuts down, or keeps cycling, I’d look here first.\n- **Second: ignition** — inducer runs, clicking/glow, but no flame or flame drops out. That points to igniter, gas, flame sensor.\n- **Third: limit switch** — if it’s overheating and cutting off. Usually comes with short cycling or blower running but heat dropping.\n- **Last: control board** — only after the above don’t fit. No response, random lockouts, weird reset behavior.\n\nSo yeah: airflow first, then ignition, then limit, then board. That’s the order I’d use. Less guessing, less money wasted.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    }
+  ]
+}

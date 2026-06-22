@@ -1,0 +1,1772 @@
+{
+  "user_id": "user_022",
+  "tasks_dir": "CustomTasksPooledFinal",
+  "counts": {
+    "ok": 18,
+    "memory_failure": 9,
+    "agent_elicitation_failure": 2,
+    "task_design_failure": 1,
+    "simulator_too_strict": 1
+  },
+  "details": [
+    {
+      "category": "skill_memory",
+      "dimension": "critical_thinking_skill",
+      "explanation": "She consistently works from logs, readings, and cross-checks rather than hunches. Her habit of finding calibration drift and updating procedures shows she weighs evidence carefully and looks for the real failure point instead of the obvious one.",
+      "ground_truth": "Evidence-first, checks assumptions before acting",
+      "predicted": "strong at structured troubleshooting and decision-making",
+      "slot_fill_reason": "They can refine decision trees into forced-call logic, specify cross-checks and handoff steps, and distinguish when to stop versus continue based on verification and risk.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of evidence-based, structured troubleshooting and careful decision-making, but it does not explicitly mention checking assumptions or relying on logs/readings and cross-checks.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "Agent: Yes — the clean way to decide is to compare **finish value now** versus **risk of forcing it tonight**.\n\n## Stay tonight if:\n- the next step is clear\n- the work is already set up\n- the fix or task is small and contained\n- you can verify the result before stopping\n- leaving it overnight would block two people or create rework\n- you can leave it in a safe, clean state if you finish\n\n## Stop at a clean checkpoint if:\n- you’re tired or rushing\n- the next step needs fresh judgment\n- the work would be half-done if you stop\n- verification would be weak tonight\n- you’d be guessing instead of confirming\n- the cost of a bad finish is higher than the delay\n\n---\n\n## Practical question to ask\n### “Can I finish and verify this cleanly tonight?”\n- **Yes** → stay\n- **No** → stop at the best safe handoff point\n\n---\n\n## What makes a clean checkpoint\nA good stop point is one where:\n- the current state is documented\n- the next person can pick it up without guessing\n- nothing is left exposed or ambiguous\n- the remaining work is clearly defined\n\n---\n\n## What to weigh most\n1. **Risk of a bad finish**\n2. **How much delay affects the other two people**\n3. **Whether you can verify the result tonight**\n4. **Whether the task can be handed off cleanly**\n\n---\n\n## Simple rule\nIf staying late lets you **finish and verify** the work, it may be worth it.\n\nIf staying late only lets you **push it a little further** without proving it’s right, stop and hand it off.\n\nIf you want, I can turn this into a **quick stay/stop decision checklist** with blanks for the task, risk, and handoff point.",
+          "category": "agent_reply",
+          "task_index": 24,
+          "turn": 1,
+          "score": 0.2643779218196869
+        },
+        {
+          "content": "User: 1. Confirm symptom: __________\n2. Check last failed point first: __________\n3. Verify against second reading / known good value: __________\n4. If same failure shows up, correct and retest: __________\n5. If not, move to next likely point: __________\n6. Record what changed and what didn’t: __________",
+          "category": "user_reply",
+          "task_index": 14,
+          "turn": 3,
+          "score": 0.26097825169563293
+        },
+        {
+          "content": "[Task 15] I’m updating my resume and want to describe my current role in a way that sounds clear without being too vague or too buzzwordy. Can you help me turn a technical job into a couple of strong, plain-English bullets?",
+          "category": "task",
+          "task_index": 15,
+          "score": 0.2462475299835205
+        },
+        {
+          "content": "User: Better. Still a little abstract though — I’d want the decision tree to force a call, not just restate the categories.\n\nSomething like:\n- **If** the other two people are blocked hard *and* what’s left is mechanical *and* I can verify it tonight → stay.\n- **If** it needs judgment or I can’t prove it’s right tonight → stop.\n- **If** I stop, the handoff has to say exactly what’s done, what’s left, and the next test/check.\n\nThe part I’d want sharpened is the handoff. Like: what do I leave behind so tomorrow isn’t a re-derive-from-zero situation? That’s the real failure mode.\n\nA 5-line checklist would be more useful than the tree, honestly. Something I can read when I’m already tired and not overthink it.",
+          "category": "user_reply",
+          "task_index": 24,
+          "turn": 2,
+          "score": 0.2449534833431244
+        },
+        {
+          "content": "User: Yeah, closer. Still a bit too clean and abstract though.\n\nWhat I’d want next is a real decision tree by equipment type, because the first checks change a lot depending on what’s failing. A scrubber pH drift is not the same as a flowmeter fault or an SCR controller alarm.\n\nSo if you’re going to make it useful, I’d want it organized like:\n- **symptom first**: bad reading, alarm, no-start, out-of-spec emissions, loss of flow, etc.\n- **most likely failure mode** for that symptom\n- **first cross-check** to prove whether it’s instrument or process\n- **what can be fixed dockside** vs what’s a stop-and-escalate\n- **when staying late is justified** based on whether the unit can be retested and sealed cleanly\n\nAnd I’d want the hard-stop language even sharper: if the fault is in a safety-critical loop or you can’t verify the correction with a second reading, it’s not a “maybe.” It’s no-go.\n\nIf you want, build it around one actual case — like scrubber, SCR, or emissions sensor fault — and make the steps specific to that.",
+          "category": "user_reply",
+          "task_index": 17,
+          "turn": 2,
+          "score": 0.24261455237865448
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "troubleshooting_skill",
+      "explanation": "Her work story centers on isolating a faulty sensor and tracing it to dosing underfeed, which is classic diagnostic work. She does well when a problem is technical, multi-step, and needs methodical narrowing down.",
+      "ground_truth": "Sharp at diagnosing sensor and system faults",
+      "predicted": "can troubleshoot systematically using symptom-first, stepwise checks",
+      "slot_fill_reason": "They provided a structured diagnostic sequence and refined it with specific verification steps like checking lockout, sensor drift, maintenance changes, mechanical issues, and cross-checking against known-good readings.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of methodical troubleshooting and diagnostic narrowing, but it is less specific than the ground truth about sensor and system faults.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "[Task 4] I’ve got a piece of equipment that’s been fine so far, but I want to stay ahead of problems instead of waiting for something to fail. Can you help me sketch a simple routine for what to check, how often, and what to write down so it stays dependable over time?",
+          "category": "task",
+          "task_index": 4,
+          "score": 0.3928101062774658
+        },
+        {
+          "content": "User: 1. Confirm symptom: __________\n2. Check last failed point first: __________\n3. Verify against second reading / known good value: __________\n4. If same failure shows up, correct and retest: __________\n5. If not, move to next likely point: __________\n6. Record what changed and what didn’t: __________",
+          "category": "user_reply",
+          "task_index": 14,
+          "turn": 3,
+          "score": 0.38123345375061035
+        },
+        {
+          "content": "User: Yeah, this is basically the right shape, but it’s still a little generic. I’d want it tighter around the actual equipment and what failure mode you’re seeing.\n\nWhat I’d verify first, in order:\n- lockout / isolation is actually in place\n- the reading is real, not a bad sensor or drifted calibration\n- recent maintenance or swaps didn’t introduce the fault\n- obvious mechanical stuff: leaks, blockage, loose fittings, damaged cable/connector\n- control alarms / interlocks / power state\n- one cross-check against a handheld or known-good reference\n\nThen decide on staying late like this:\n- stay if the fault is simple, the fix is local, and you can prove it back in spec right away\n- don’t stay if you can’t identify the failure point, can’t reseal it safely, or the post-fix reading is still borderline\n\nI’d also want a hard stop on anything involving a half-finished repair. If it can’t be verified cleanly, it doesn’t count as cleared.\n\nIf you want, give me the actual equipment and the symptom, and I can help you triage it more like a real dockside job instead of a generic checklist.",
+          "category": "user_reply",
+          "task_index": 17,
+          "turn": 1,
+          "score": 0.3511427342891693
+        },
+        {
+          "content": "Agent: Yes — you can use the same diagnostic mindset as with an engine: **separate the symptom from the root cause**, then test the most likely failure points in order.\n\n## A clean work-process diagnostic order\n\n### 1) Define the symptom precisely\nDon’t start with “the process is bad.” Start with:\n- **What is failing?**\n- **Where in the workflow does it show up?**\n- **How often?**\n- **Under what conditions?**\n- **What does “wrong” look like in measurable terms?**\n\nExample:\n- “Orders are late” is too broad.\n- “12% of orders miss the promised ship date, mostly when they enter after 2 PM on Fridays” is useful.\n\n---\n\n### 2) Map the process end-to-end\nWrite the full chain:\n- input\n- handoff\n- approval\n- execution\n- QC\n- delivery/output\n\nThen mark:\n- where delays happen\n- where errors happen\n- where rework happens\n- where work piles up\n\nThis tells you whether the issue is:\n- **input quality**\n- **handoff/communication**\n- **capacity**\n- **decision bottleneck**\n- **tool/system issue**\n- **training/standardization**\n- **policy/process design**\n\n---\n\n### 3) Separate “where it shows up” from “where it starts”\nA symptom often appears downstream from the real problem.\n\nAsk:\n- Where is the problem first detectable?\n- Where does it become visible to the customer or other team?\n- What is the earliest point at which the process diverges from normal?\n\nIf the failure appears at the final step, the source may be upstream:\n- bad data\n- missing info\n- inconsistent intake\n- unclear criteria\n- delayed approvals\n\n---\n\n### 4) Look for pattern differences\nCompare cases that work vs fail:\n- same team vs different team\n- same shift vs different shift\n- same customer/type/product vs different one\n- high volume vs normal volume\n- manual vs automated path\n- new staff vs experienced staff\n\nThe goal is to find **what changes when the problem appears**.\n\nThat usually narrows the cause faster than asking everyone for opinions.\n\n---\n\n### 5) Check the process in this order\nStart broad, then narrow:\n\n#### A. Input quality\n- Are you getting complete, accurate, on-time inputs?\n- Are defects already present before the process starts?\n\n#### B. Process design\n- Are there unnecessary steps?\n- Are there ambiguous decision points?\n- Are there too many handoffs?\n\n#### C. Execution\n- Are people following the process consistently?\n- Is there variation by person, shift, or location?\n\n#### D. Capacity / bottlenecks\n- Is work queueing at one step?\n- Is one person/system overloaded?\n- Is timing the real issue rather than quality?\n\n#### E. Tools / systems\n- Is the software, template, machine, or form causing errors or delay?\n- Are people working around the system?\n\n#### F. Feedback / control\n- Are errors being caught early or only at the end?\n- Is there a missing check that would prevent the bad outcome?\n\n---\n\n### 6) Use a “first bad step” test\nFor each failed case, ask:\n- What was the first step where this case differed from a good case?\n- What evidence shows that step changed the outcome?\n\nThis prevents blaming the last visible failure point when the actual issue started earlier.\n\n---\n\n### 7) Test one hypothesis at a time\nDon’t try to fix everything at once.\n\nFor each likely cause:\n- state the hypothesis\n- define what evidence would confirm it\n- define what evidence would rule it out\n- run a small test or review sample cases\n\nExample:\n- Hypothesis: late approvals cause missed deadlines.\n- Confirm if: delays cluster before approval.\n- Rule out if: approvals are on time but execution slips later.\n\n---\n\n## A practical decision tree\n\n### If the symptom happens only in certain cases\n→ look for **input differences** or **special-case handling**\n\n### If it happens across all cases\n→ look for **systemic process design**, **capacity**, or **tool issues**\n\n### If it happens at one step consistently\n→ look for a **bottleneck** or **step-specific defect**\n\n### If it varies by person/team/shift\n→ look for **training**, **standard work**, or **workload balance**\n\n### If it appears late but starts earlier\n→ look upstream for **missing info**, **bad handoff**, or **weak controls**\n\n---\n\n## Best tools for this\n- **Process map / swimlane**\n- **Pareto chart** to find the biggest contributors\n- **5 Whys** to avoid stopping at symptoms\n- **Fishbone diagram** for categories of cause\n- **Before/after comparison** on good vs bad cases\n- **Sampling** of real cases instead of opinions\n\n---\n\n## A simple rule\nIf you can only see the problem at the end, assume the root cause is probably **upstream** until proven otherwise.\n\nIf you want, I can help you turn this into a **workplace troubleshooting checklist** or a **root-cause flowchart** for your specific process.",
+          "category": "agent_reply",
+          "task_index": 2,
+          "turn": 1,
+          "score": 0.35083436965942383
+        },
+        {
+          "content": "Agent: Yes — I can help with that.\n\nThe best resume bullets usually do three things:\n- say **what you do**\n- say **what you work on**\n- say **what changed because of your work**\n\nA good bullet is usually:\n**action + scope + result**\n\n## Simple formula\n- **Managed / maintained / troubleshot / validated / monitored** [system/process/equipment]\n- **for** [team/site/customers/production line]\n- **resulting in** [fewer failures, faster turnaround, better uptime, cleaner handoffs, improved compliance]\n\n## Strong plain-English examples\n- Maintained and troubleshot production equipment to keep operations running safely and on schedule.\n- Performed inspections, testing, and corrective work on technical systems to reduce repeat issues and downtime.\n- Documented work, verified results, and coordinated handoffs to keep maintenance and validation tasks on track.\n- Monitored system readings and responded to abnormal conditions before they turned into larger failures.\n- Worked with operations and maintenance teams to resolve recurring equipment issues and improve reliability.\n\n## If you want it less generic\nYou can make it stronger by adding:\n- type of equipment\n- environment\n- scale\n- result\n\nExample:\n- Maintained diesel and emissions-related equipment in a field environment, troubleshooting faults and verifying repairs before release.\n- Performed validation checks on process equipment, documenting readings and confirming safe handoff after corrective work.\n\n## A couple of resume-ready versions\n### More technical\n- Troubleshoot and maintain process equipment, verify readings and repairs, and document results to support safe, reliable operation.\n- Perform field inspections, validation checks, and corrective maintenance while coordinating handoff and compliance documentation.\n\n### More plain-English\n- Keep equipment running by inspecting, troubleshooting, and fixing recurring issues before they cause downtime.\n- Verify repairs, record results, and make sure work is complete and ready for handoff.\n\nIf you want, paste your current job title and 3–5 things you actually do, and I’ll turn them into **2–4 resume bullets** in your voice.",
+          "category": "agent_reply",
+          "task_index": 15,
+          "turn": 1,
+          "score": 0.3478120267391205
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "quality_control_skill",
+      "explanation": "She does not stop at a repair; she runs repeated verification cycles and cross-checks against a handheld meter. She treats passing inspection as something to prove, not assume, and she builds repeat checks into her routine.",
+      "ground_truth": "Exacting about verification and standards",
+      "predicted": "can perform structured troubleshooting and basic quality checks",
+      "slot_fill_reason": "They outlined a stepwise fault-isolation routine using symptom confirmation, known-good comparisons, retesting, and documenting changes, and also described routine checks and verification work.",
+      "score": 0.5,
+      "judge_reason": "The prediction overlaps with the idea of checking quality, but it is much weaker and misses the ground truth’s emphasis on repeated verification, cross-checking, and exacting standards.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "Agent: Yes — I can help with that.\n\nThe best resume bullets usually do three things:\n- say **what you do**\n- say **what you work on**\n- say **what changed because of your work**\n\nA good bullet is usually:\n**action + scope + result**\n\n## Simple formula\n- **Managed / maintained / troubleshot / validated / monitored** [system/process/equipment]\n- **for** [team/site/customers/production line]\n- **resulting in** [fewer failures, faster turnaround, better uptime, cleaner handoffs, improved compliance]\n\n## Strong plain-English examples\n- Maintained and troubleshot production equipment to keep operations running safely and on schedule.\n- Performed inspections, testing, and corrective work on technical systems to reduce repeat issues and downtime.\n- Documented work, verified results, and coordinated handoffs to keep maintenance and validation tasks on track.\n- Monitored system readings and responded to abnormal conditions before they turned into larger failures.\n- Worked with operations and maintenance teams to resolve recurring equipment issues and improve reliability.\n\n## If you want it less generic\nYou can make it stronger by adding:\n- type of equipment\n- environment\n- scale\n- result\n\nExample:\n- Maintained diesel and emissions-related equipment in a field environment, troubleshooting faults and verifying repairs before release.\n- Performed validation checks on process equipment, documenting readings and confirming safe handoff after corrective work.\n\n## A couple of resume-ready versions\n### More technical\n- Troubleshoot and maintain process equipment, verify readings and repairs, and document results to support safe, reliable operation.\n- Perform field inspections, validation checks, and corrective maintenance while coordinating handoff and compliance documentation.\n\n### More plain-English\n- Keep equipment running by inspecting, troubleshooting, and fixing recurring issues before they cause downtime.\n- Verify repairs, record results, and make sure work is complete and ready for handoff.\n\nIf you want, paste your current job title and 3–5 things you actually do, and I’ll turn them into **2–4 resume bullets** in your voice.",
+          "category": "agent_reply",
+          "task_index": 15,
+          "turn": 1,
+          "score": 0.3168862462043762
+        },
+        {
+          "content": "User: Yeah, that’s basically the right structure. Role, what I handle, and the part that matters day to day. I’d keep it plain — no fluff.\n\nFor a short work bio, the stuff that actually belongs there is:\n- current job title\n- what systems or equipment I work on\n- main function: troubleshooting, calibration, verification, documentation\n- setting if it matters: dockside / field / marine\n- one solid strength, like detail-focused or steady under pressure\n\nWhat I’d leave out:\n- long backstory\n- full list of every tool\n- generic corporate wording\n- anything that sounds like padding\n\nIf the form is really tight, something like this works:\n- Exhaust gas treatment engineer focused on dockside troubleshooting, calibration checks, and emissions verification for marine systems.\n\nOr a little tighter:\n- Marine exhaust gas treatment engineer handling scrubbers, sensors, dosing systems, and compliance verification.\n\nThat’s enough. Anything more and it starts reading like a resume summary, which is not what those little profile boxes usually need.",
+          "category": "user_reply",
+          "task_index": 25,
+          "turn": 1,
+          "score": 0.2841736674308777
+        },
+        {
+          "content": "[Task 15] I’m updating my resume and want to describe my current role in a way that sounds clear without being too vague or too buzzwordy. Can you help me turn a technical job into a couple of strong, plain-English bullets?",
+          "category": "task",
+          "task_index": 15,
+          "score": 0.26631689071655273
+        },
+        {
+          "content": "User: 1. Confirm symptom: __________\n2. Check last failed point first: __________\n3. Verify against second reading / known good value: __________\n4. If same failure shows up, correct and retest: __________\n5. If not, move to next likely point: __________\n6. Record what changed and what didn’t: __________",
+          "category": "user_reply",
+          "task_index": 14,
+          "turn": 3,
+          "score": 0.25939756631851196
+        },
+        {
+          "content": "[Task 4] I’ve got a piece of equipment that’s been fine so far, but I want to stay ahead of problems instead of waiting for something to fail. Can you help me sketch a simple routine for what to check, how often, and what to write down so it stays dependable over time?",
+          "category": "task",
+          "task_index": 4,
+          "score": 0.25034910440444946
+        }
+      ],
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites discussion of verification habits, repeat checks, and standards for confirming a repair, which can reveal how exacting the user is about quality control."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"make sure I’m not fooling myself with a one-and-done check\" and \"set up a sensible final verification routine\"",
+            "reason": "The user explicitly prefers repeated verification over a single check, which strongly संकेतs an exacting, standards-focused quality-control style."
+          }
+        ],
+        "ep_index": 3
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "equipment_maintenance_skill",
+      "explanation": "She updates checklists after failures and keeps a notebook of procedures across job sites. That suggests she is good at keeping equipment reliable through routine checks, calibration awareness, and maintenance discipline.",
+      "ground_truth": "Preventive maintenance minded, not reactive",
+      "predicted": "can troubleshoot, calibrate, inspect, and verify marine equipment",
+      "slot_fill_reason": "They described doing field troubleshooting, calibration checks, inspections, verification cycles, and emissions paperwork for marine exhaust gas treatment systems.",
+      "score": 0.5,
+      "judge_reason": "The prediction overlaps with maintenance competence, but it emphasizes troubleshooting and verification rather than the ground truth’s preventive, checklist-driven maintenance mindset.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "Agent: Yes — I can help with that.\n\nThe best resume bullets usually do three things:\n- say **what you do**\n- say **what you work on**\n- say **what changed because of your work**\n\nA good bullet is usually:\n**action + scope + result**\n\n## Simple formula\n- **Managed / maintained / troubleshot / validated / monitored** [system/process/equipment]\n- **for** [team/site/customers/production line]\n- **resulting in** [fewer failures, faster turnaround, better uptime, cleaner handoffs, improved compliance]\n\n## Strong plain-English examples\n- Maintained and troubleshot production equipment to keep operations running safely and on schedule.\n- Performed inspections, testing, and corrective work on technical systems to reduce repeat issues and downtime.\n- Documented work, verified results, and coordinated handoffs to keep maintenance and validation tasks on track.\n- Monitored system readings and responded to abnormal conditions before they turned into larger failures.\n- Worked with operations and maintenance teams to resolve recurring equipment issues and improve reliability.\n\n## If you want it less generic\nYou can make it stronger by adding:\n- type of equipment\n- environment\n- scale\n- result\n\nExample:\n- Maintained diesel and emissions-related equipment in a field environment, troubleshooting faults and verifying repairs before release.\n- Performed validation checks on process equipment, documenting readings and confirming safe handoff after corrective work.\n\n## A couple of resume-ready versions\n### More technical\n- Troubleshoot and maintain process equipment, verify readings and repairs, and document results to support safe, reliable operation.\n- Perform field inspections, validation checks, and corrective maintenance while coordinating handoff and compliance documentation.\n\n### More plain-English\n- Keep equipment running by inspecting, troubleshooting, and fixing recurring issues before they cause downtime.\n- Verify repairs, record results, and make sure work is complete and ready for handoff.\n\nIf you want, paste your current job title and 3–5 things you actually do, and I’ll turn them into **2–4 resume bullets** in your voice.",
+          "category": "agent_reply",
+          "task_index": 15,
+          "turn": 1,
+          "score": 0.5172559022903442
+        },
+        {
+          "content": "[Task 4] I’ve got a piece of equipment that’s been fine so far, but I want to stay ahead of problems instead of waiting for something to fail. Can you help me sketch a simple routine for what to check, how often, and what to write down so it stays dependable over time?",
+          "category": "task",
+          "task_index": 4,
+          "score": 0.48573535680770874
+        },
+        {
+          "content": "User: Yeah, that’s basically the right structure. Role, what I handle, and the part that matters day to day. I’d keep it plain — no fluff.\n\nFor a short work bio, the stuff that actually belongs there is:\n- current job title\n- what systems or equipment I work on\n- main function: troubleshooting, calibration, verification, documentation\n- setting if it matters: dockside / field / marine\n- one solid strength, like detail-focused or steady under pressure\n\nWhat I’d leave out:\n- long backstory\n- full list of every tool\n- generic corporate wording\n- anything that sounds like padding\n\nIf the form is really tight, something like this works:\n- Exhaust gas treatment engineer focused on dockside troubleshooting, calibration checks, and emissions verification for marine systems.\n\nOr a little tighter:\n- Marine exhaust gas treatment engineer handling scrubbers, sensors, dosing systems, and compliance verification.\n\nThat’s enough. Anything more and it starts reading like a resume summary, which is not what those little profile boxes usually need.",
+          "category": "user_reply",
+          "task_index": 25,
+          "turn": 1,
+          "score": 0.41583603620529175
+        },
+        {
+          "content": "Agent: Absolutely — here are a few plain-English resume bullets that sound specific without getting bloated:\n\n- Troubleshoot and verify marine exhaust gas treatment systems, including scrubbers, sensors, and dosing equipment, to keep vessels ready for departure.\n- Perform field calibration checks, inspections, and verification cycles dockside, including work in bad weather or on backup power when needed.\n- Review emissions records and complete departure paperwork so equipment status, test results, and compliance details are documented clearly.\n- Investigate recurring faults in scrubber and dosing systems, confirm repairs with live checks, and follow through until the system is ready to return to service.\n\nIf you want, I can also make these:\n- **more technical**\n- **more senior/professional**\n- **more plain and direct**\n- or turn them into a **single summary line + 3 bullets** for the top of the resume.",
+          "category": "agent_reply",
+          "task_index": 15,
+          "turn": 2,
+          "score": 0.37934041023254395
+        },
+        {
+          "content": "User: Close, but still a little generic. I need it to sound like my actual work, not just \"equipment\" and \"operations.\" \n\nCurrent role is exhaust gas treatment engineer for marine equipment — scrubbers, sensors, dosing systems, emissions docs, that kind of thing. I do field troubleshooting, calibration checks, inspections, verification cycles, and paperwork for vessel departures. Usually working dockside, sometimes in bad weather or with backup power.\n\nCan you turn that into 2–4 bullets that sound plain, specific, and not stuffed with buzzwords?",
+          "category": "user_reply",
+          "task_index": 15,
+          "turn": 1,
+          "score": 0.375912070274353
+        }
+      ],
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task directly concerns preventive maintenance habits and record-keeping, so natural follow-up about routines, checklists, and documentation could reveal the user’s equipment maintenance skill."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"stay ahead of problems instead of waiting for something to fail\"",
+            "reason": "The user explicitly prefers preventive maintenance and routine checks over reactive fixes, which is enough to infer a maintenance-minded approach."
+          }
+        ],
+        "ep_index": 4
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "operation_monitoring_skill",
+      "explanation": "She notices small deviations in pH, flow rates, and stack temperature while systems are in operation. Her performance stays solid in active field conditions, even when visibility or power is poor.",
+      "ground_truth": "Vigilant when systems are running live",
+      "predicted": "can monitor process variables, cross-check readings, and spot drift",
+      "slot_fill_reason": "They described building shift checks around primary variables, independent cross-checks, output quality, adjustment counts, and alarm history to decide when to note, watch, or act.",
+      "score": 0.75,
+      "judge_reason": "The prediction captures vigilant monitoring of live process variables and spotting drift, but it does not explicitly reflect performance in active field conditions or poor visibility/power.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "Agent: Yes — I can help with that.\n\nThe best resume bullets usually do three things:\n- say **what you do**\n- say **what you work on**\n- say **what changed because of your work**\n\nA good bullet is usually:\n**action + scope + result**\n\n## Simple formula\n- **Managed / maintained / troubleshot / validated / monitored** [system/process/equipment]\n- **for** [team/site/customers/production line]\n- **resulting in** [fewer failures, faster turnaround, better uptime, cleaner handoffs, improved compliance]\n\n## Strong plain-English examples\n- Maintained and troubleshot production equipment to keep operations running safely and on schedule.\n- Performed inspections, testing, and corrective work on technical systems to reduce repeat issues and downtime.\n- Documented work, verified results, and coordinated handoffs to keep maintenance and validation tasks on track.\n- Monitored system readings and responded to abnormal conditions before they turned into larger failures.\n- Worked with operations and maintenance teams to resolve recurring equipment issues and improve reliability.\n\n## If you want it less generic\nYou can make it stronger by adding:\n- type of equipment\n- environment\n- scale\n- result\n\nExample:\n- Maintained diesel and emissions-related equipment in a field environment, troubleshooting faults and verifying repairs before release.\n- Performed validation checks on process equipment, documenting readings and confirming safe handoff after corrective work.\n\n## A couple of resume-ready versions\n### More technical\n- Troubleshoot and maintain process equipment, verify readings and repairs, and document results to support safe, reliable operation.\n- Perform field inspections, validation checks, and corrective maintenance while coordinating handoff and compliance documentation.\n\n### More plain-English\n- Keep equipment running by inspecting, troubleshooting, and fixing recurring issues before they cause downtime.\n- Verify repairs, record results, and make sure work is complete and ready for handoff.\n\nIf you want, paste your current job title and 3–5 things you actually do, and I’ll turn them into **2–4 resume bullets** in your voice.",
+          "category": "agent_reply",
+          "task_index": 15,
+          "turn": 1,
+          "score": 0.41216185688972473
+        },
+        {
+          "content": "[Task 4] I’ve got a piece of equipment that’s been fine so far, but I want to stay ahead of problems instead of waiting for something to fail. Can you help me sketch a simple routine for what to check, how often, and what to write down so it stays dependable over time?",
+          "category": "task",
+          "task_index": 4,
+          "score": 0.38892340660095215
+        },
+        {
+          "content": "User: Yeah, that’s basically the right structure. Role, what I handle, and the part that matters day to day. I’d keep it plain — no fluff.\n\nFor a short work bio, the stuff that actually belongs there is:\n- current job title\n- what systems or equipment I work on\n- main function: troubleshooting, calibration, verification, documentation\n- setting if it matters: dockside / field / marine\n- one solid strength, like detail-focused or steady under pressure\n\nWhat I’d leave out:\n- long backstory\n- full list of every tool\n- generic corporate wording\n- anything that sounds like padding\n\nIf the form is really tight, something like this works:\n- Exhaust gas treatment engineer focused on dockside troubleshooting, calibration checks, and emissions verification for marine systems.\n\nOr a little tighter:\n- Marine exhaust gas treatment engineer handling scrubbers, sensors, dosing systems, and compliance verification.\n\nThat’s enough. Anything more and it starts reading like a resume summary, which is not what those little profile boxes usually need.",
+          "category": "user_reply",
+          "task_index": 25,
+          "turn": 1,
+          "score": 0.3658502995967865
+        },
+        {
+          "content": "Agent: Yes — that’s the right way to do it.\n\nA practical shift check should be built around **one failure mode at a time**, not generic monitoring.\n\n## Real-time check structure\n\n### 1) Primary variable\nThe main process number that should stay stable:\n- temperature\n- pressure\n- flow\n- speed\n- position\n- torque\n- weight\n- fill level\n- etc.\n\n### 2) Independent cross-check\nA second reading that should agree with the first:\n- second sensor\n- handheld measurement\n- gauge\n- manual spot check\n- readback from a different system\n\nIf these disagree, that’s often more important than the absolute value.\n\n### 3) Output / quality result\nWhat the process produces:\n- size\n- weight\n- defect rate\n- scrap\n- pass/fail\n- cycle result\n\nThis tells you whether the drift is actually affecting the product/process.\n\n### 4) Corrective action count\nHow often someone has to:\n- tweak a setting\n- reset an alarm\n- re-run a cycle\n- adjust by hand\n\nA rising correction count is often an early warning.\n\n### 5) Alarm / fault history\n- repeat alarms\n- nuisance alarms\n- same fault recurring\n- faults that clear and come back\n\nThat’s often the “don’t ignore this” signal.\n\n---\n\n# How to decide normal vs drift\n\n## Use this order\n### A. Baseline from known-good runs\nRecord:\n- normal value\n- normal spread\n- normal relationship between readings\n\n### B. Rate of change\nA number can still be “in range” but drifting the wrong way.\n\n### C. Repeatability\nOne odd read = note it  \nTwo in the same direction = watch  \nThree or repeated = likely real\n\n### D. Cross-check agreement\nIf the primary variable and independent check disagree, treat that as a real problem even if the primary number looks okay.\n\n### E. Reset behavior\nIf the issue clears after reset but returns, that’s not fixed — it’s unstable.\n\n---\n\n# Simple action rule\n\n## Note it if:\n- one off reading\n- no quality impact\n- cross-check still agrees\n- no trend yet\n\n## Watch it if:\n- same direction twice\n- slow drift over the shift\n- more manual adjustment than usual\n- still no quality impact\n\n## Act if:\n- primary and cross-check disagree\n- drift continues across multiple reads\n- output quality changes\n- alarms/faults repeat\n- operator keeps having to correct it\n\n---\n\n# Shift-check checklist\n\n**Process:** __________  \n**Failure mode being watched:** __________  \n\n### Readings\n- Primary variable: __________\n- Independent cross-check: __________\n- Output/quality result: __________\n- Adjustment count: __________\n- Alarm/fault count: __________\n\n### Baseline\n- Primary normal: __________\n- Cross-check normal: __________\n- Output normal: __________\n\n### Thresholds\n- Warning: __________\n- Stop/intervene: __________\n\n### Decision rule\n- One off reading = note\n- Same direction twice = watch\n- Same direction + mismatch = act\n- Quality impact or alarm = intervene\n\n---\n\n# Example\nIf the process is drifting on temperature:\n- primary: process temp\n- cross-check: handheld temp or second probe\n- output: defect rate\n- adjustment count: number of setpoint changes\n- alarms: overtemp/low-temp faults\n\nThen:\n- temp up once = note\n- temp up twice in a row = watch\n- temp up and handheld doesn’t agree = act\n- temp drift plus defects = intervene\n\nIf you want, I can turn this into a **one-page shift check sheet** with blanks for:\n- process type\n- failure mode\n- primary / cross-check / output\n- warning limit\n- stop limit\n- action rule",
+          "category": "agent_reply",
+          "task_index": 5,
+          "turn": 2,
+          "score": 0.3423929214477539
+        },
+        {
+          "content": "User: Close, but still a little generic. I need it to sound like my actual work, not just \"equipment\" and \"operations.\" \n\nCurrent role is exhaust gas treatment engineer for marine equipment — scrubbers, sensors, dosing systems, emissions docs, that kind of thing. I do field troubleshooting, calibration checks, inspections, verification cycles, and paperwork for vessel departures. Usually working dockside, sometimes in bad weather or with backup power.\n\nCan you turn that into 2–4 bullets that sound plain, specific, and not stuffed with buzzwords?",
+          "category": "user_reply",
+          "task_index": 15,
+          "turn": 1,
+          "score": 0.33914244174957275
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "time_management_skill",
+      "explanation": "She plans critical testing ahead of storms and finishes documentation early to avoid missed windows. She is not carefree with time; she adjusts priorities to protect the work that would be hardest to recover later.",
+      "ground_truth": "Schedules around deadlines and weather realities",
+      "predicted": "can prioritize tasks by safety, validity, and compliance deadlines",
+      "slot_fill_reason": "They explicitly ordered work as safe-to-stop first, then stabilize exposed items, then finish validity-sensitive tasks, then time-sensitive work, with documentation last unless compliance requires it.",
+      "score": 0.75,
+      "judge_reason": "The prediction captures prioritizing tasks around safety and deadlines, which aligns with scheduling around deadlines and weather realities, but it does not explicitly mention weather or planning ahead of storms.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "[Task 15] I’m updating my resume and want to describe my current role in a way that sounds clear without being too vague or too buzzwordy. Can you help me turn a technical job into a couple of strong, plain-English bullets?",
+          "category": "task",
+          "task_index": 15,
+          "score": 0.34464743733406067
+        },
+        {
+          "content": "[Task 4] I’ve got a piece of equipment that’s been fine so far, but I want to stay ahead of problems instead of waiting for something to fail. Can you help me sketch a simple routine for what to check, how often, and what to write down so it stays dependable over time?",
+          "category": "task",
+          "task_index": 4,
+          "score": 0.3316918611526489
+        },
+        {
+          "content": "User: Yeah, that’s basically the right structure. Role, what I handle, and the part that matters day to day. I’d keep it plain — no fluff.\n\nFor a short work bio, the stuff that actually belongs there is:\n- current job title\n- what systems or equipment I work on\n- main function: troubleshooting, calibration, verification, documentation\n- setting if it matters: dockside / field / marine\n- one solid strength, like detail-focused or steady under pressure\n\nWhat I’d leave out:\n- long backstory\n- full list of every tool\n- generic corporate wording\n- anything that sounds like padding\n\nIf the form is really tight, something like this works:\n- Exhaust gas treatment engineer focused on dockside troubleshooting, calibration checks, and emissions verification for marine systems.\n\nOr a little tighter:\n- Marine exhaust gas treatment engineer handling scrubbers, sensors, dosing systems, and compliance verification.\n\nThat’s enough. Anything more and it starts reading like a resume summary, which is not what those little profile boxes usually need.",
+          "category": "user_reply",
+          "task_index": 25,
+          "turn": 1,
+          "score": 0.2841068506240845
+        },
+        {
+          "content": "Agent: Yes — I can help with that.\n\nThe best resume bullets usually do three things:\n- say **what you do**\n- say **what you work on**\n- say **what changed because of your work**\n\nA good bullet is usually:\n**action + scope + result**\n\n## Simple formula\n- **Managed / maintained / troubleshot / validated / monitored** [system/process/equipment]\n- **for** [team/site/customers/production line]\n- **resulting in** [fewer failures, faster turnaround, better uptime, cleaner handoffs, improved compliance]\n\n## Strong plain-English examples\n- Maintained and troubleshot production equipment to keep operations running safely and on schedule.\n- Performed inspections, testing, and corrective work on technical systems to reduce repeat issues and downtime.\n- Documented work, verified results, and coordinated handoffs to keep maintenance and validation tasks on track.\n- Monitored system readings and responded to abnormal conditions before they turned into larger failures.\n- Worked with operations and maintenance teams to resolve recurring equipment issues and improve reliability.\n\n## If you want it less generic\nYou can make it stronger by adding:\n- type of equipment\n- environment\n- scale\n- result\n\nExample:\n- Maintained diesel and emissions-related equipment in a field environment, troubleshooting faults and verifying repairs before release.\n- Performed validation checks on process equipment, documenting readings and confirming safe handoff after corrective work.\n\n## A couple of resume-ready versions\n### More technical\n- Troubleshoot and maintain process equipment, verify readings and repairs, and document results to support safe, reliable operation.\n- Perform field inspections, validation checks, and corrective maintenance while coordinating handoff and compliance documentation.\n\n### More plain-English\n- Keep equipment running by inspecting, troubleshooting, and fixing recurring issues before they cause downtime.\n- Verify repairs, record results, and make sure work is complete and ready for handoff.\n\nIf you want, paste your current job title and 3–5 things you actually do, and I’ll turn them into **2–4 resume bullets** in your voice.",
+          "category": "agent_reply",
+          "task_index": 15,
+          "turn": 1,
+          "score": 0.2838921546936035
+        },
+        {
+          "content": "User: Mostly right. But that’s still a little generic.\n\nI’d want it in a tighter order like this:\n- **make it safe to stop** first\n- **stabilize anything exposed** second\n- **finish anything that loses validity if interrupted** next\n- **then do the time-sensitive stuff**\n- **documentation/cleanup last** unless it’s what keeps you compliant\n\nAnd the part about backup options — that needs a bit more detail. I’d want a quick way to decide:\n- what can be left in a safe state in 5 minutes\n- what needs a full completion before conditions turn\n- what gets deferred without creating rework\n\nIf you can, make it more like a field checklist, not a general explanation.",
+          "category": "user_reply",
+          "task_index": 7,
+          "turn": 1,
+          "score": 0.2708042562007904
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "capability_under_pressure",
+      "explanation": "She performs carefully during inspections, storm shutdowns, and flash-light work with backup generators. Stress does not seem to make her sloppy; if anything, she becomes more deliberate and methodical under pressure.",
+      "ground_truth": "Stays steady when stakes and conditions get worse",
+      "predicted": "handles operational triage and prioritization under constraints",
+      "slot_fill_reason": "They broke down multiple maintenance tasks by dryness, deadlines, pause safety, prepability, and half-finished risk, then identified which jobs were most urgent and risky.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the idea of functioning well under constraints and pressure, but it emphasizes prioritization rather than the steadiness and deliberate composure described in the ground truth.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "[Task 15] I’m updating my resume and want to describe my current role in a way that sounds clear without being too vague or too buzzwordy. Can you help me turn a technical job into a couple of strong, plain-English bullets?",
+          "category": "task",
+          "task_index": 15,
+          "score": 0.29747146368026733
+        },
+        {
+          "content": "User: Yeah, that’s basically the right structure. Role, what I handle, and the part that matters day to day. I’d keep it plain — no fluff.\n\nFor a short work bio, the stuff that actually belongs there is:\n- current job title\n- what systems or equipment I work on\n- main function: troubleshooting, calibration, verification, documentation\n- setting if it matters: dockside / field / marine\n- one solid strength, like detail-focused or steady under pressure\n\nWhat I’d leave out:\n- long backstory\n- full list of every tool\n- generic corporate wording\n- anything that sounds like padding\n\nIf the form is really tight, something like this works:\n- Exhaust gas treatment engineer focused on dockside troubleshooting, calibration checks, and emissions verification for marine systems.\n\nOr a little tighter:\n- Marine exhaust gas treatment engineer handling scrubbers, sensors, dosing systems, and compliance verification.\n\nThat’s enough. Anything more and it starts reading like a resume summary, which is not what those little profile boxes usually need.",
+          "category": "user_reply",
+          "task_index": 25,
+          "turn": 1,
+          "score": 0.28655171394348145
+        },
+        {
+          "content": "Agent: Yes — I can help with that.\n\nThe best resume bullets usually do three things:\n- say **what you do**\n- say **what you work on**\n- say **what changed because of your work**\n\nA good bullet is usually:\n**action + scope + result**\n\n## Simple formula\n- **Managed / maintained / troubleshot / validated / monitored** [system/process/equipment]\n- **for** [team/site/customers/production line]\n- **resulting in** [fewer failures, faster turnaround, better uptime, cleaner handoffs, improved compliance]\n\n## Strong plain-English examples\n- Maintained and troubleshot production equipment to keep operations running safely and on schedule.\n- Performed inspections, testing, and corrective work on technical systems to reduce repeat issues and downtime.\n- Documented work, verified results, and coordinated handoffs to keep maintenance and validation tasks on track.\n- Monitored system readings and responded to abnormal conditions before they turned into larger failures.\n- Worked with operations and maintenance teams to resolve recurring equipment issues and improve reliability.\n\n## If you want it less generic\nYou can make it stronger by adding:\n- type of equipment\n- environment\n- scale\n- result\n\nExample:\n- Maintained diesel and emissions-related equipment in a field environment, troubleshooting faults and verifying repairs before release.\n- Performed validation checks on process equipment, documenting readings and confirming safe handoff after corrective work.\n\n## A couple of resume-ready versions\n### More technical\n- Troubleshoot and maintain process equipment, verify readings and repairs, and document results to support safe, reliable operation.\n- Perform field inspections, validation checks, and corrective maintenance while coordinating handoff and compliance documentation.\n\n### More plain-English\n- Keep equipment running by inspecting, troubleshooting, and fixing recurring issues before they cause downtime.\n- Verify repairs, record results, and make sure work is complete and ready for handoff.\n\nIf you want, paste your current job title and 3–5 things you actually do, and I’ll turn them into **2–4 resume bullets** in your voice.",
+          "category": "agent_reply",
+          "task_index": 15,
+          "turn": 1,
+          "score": 0.2616004943847656
+        },
+        {
+          "content": "User: Alright. Here’s the actual list, rough but usable:\n\n- **Task 1: Check and clean the exterior drain line near the equipment pad**\n  - dry required: yes\n  - deadline: soft\n  - can pause safely: yes, if it’s capped off\n  - prep possible: yes\n  - half-finished risk: medium\n\n- **Task 2: Replace the corroded hose clamp and re-secure the temporary exhaust ducting**\n  - dry required: yes\n  - deadline: hard, next week\n  - can pause safely: no, not once opened up\n  - prep possible: some, but not much\n  - half-finished risk: high\n\n- **Task 3: Take final photos / inspection record for the permit file**\n  - dry required: no, but easier dry\n  - deadline: hard, next week\n  - can pause safely: yes\n  - prep possible: yes\n  - half-finished risk: low\n\n- **Task 4: Touch up coating on the base frame where the paint blistered**\n  - dry required: absolutely\n  - deadline: soft\n  - can pause safely: no, once started I’d rather not stop\n  - prep possible: yes, surface prep can be done ahead\n  - half-finished risk: high\n\n- **Task 5: Check sensor wiring and replace the cracked conduit cover**\n  - dry required: preferably yes\n  - deadline: none, but should be done before the next inspection\n  - can pause safely: yes\n  - prep possible: yes\n  - half-finished risk: medium\n\n- **Task 6: Move spare parts and seal the storage bins before rain**\n  - dry required: no\n  - deadline: weather-driven, basically before the storm\n  - can pause safely: yes\n  - prep possible: yes\n  - half-finished risk: low\n\nThe clamp/ducting job is the one I’m most worried about because once that’s open, I don’t want to leave it exposed if the weather flips. The coating work is the other one that really needs a dry run with enough time to cure. The photos can happen anytime, honestly.",
+          "category": "user_reply",
+          "task_index": 6,
+          "turn": 2,
+          "score": 0.24708415567874908
+        },
+        {
+          "content": "User: Yeah, that’s the shape I wanted. Still a couple spots I’d tighten before I’d actually trust it as a checklist, though.\n\nMain thing: diesel. The rail-pressure numbers are better, but I’d still want a clearer split between:\n- crank pressure that’s just slow to build vs\n- crank pressure that flat-out won’t reach threshold vs\n- pressure that reaches it but collapses when it lights off.\n\nAnd on leak-off, I’d rather see something like “one injector returns about 2x the others in the same timed test” or whatever is actually useful in practice, not just “visibly out of family.” Same for gas fuel pressure — key-on holding is one thing, but I want the load-drop cutoff spelled out a little more cleanly, like what drop is still tolerable and what drop is basically done.\n\nAlso, the MAP/MAF cross-check is close, but I think it needs one more layer. Warm idle on a gas engine:\n- if MAP is high and MAF is low, sure, vacuum leak or timing\n- but if MAP is normal and MAF is low, that’s a different branch\n- if both are kind of off, I’d want a note on which one usually gets more weight first.\n\nSo yeah — not asking for a whole rewrite, just the last bit of cutoff logic made a little less fuzzy. I’d use it if it were a touch more explicit like that.",
+          "category": "user_reply",
+          "task_index": 1,
+          "turn": 4,
+          "score": 0.23753511905670166
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "engineering_and_technology_knowledge",
+      "explanation": "She understands the practical mechanics of scrubbers, dosing systems, and sensor calibration well enough to trace faults from symptoms to cause. Her knowledge is clearly field-deep rather than abstract, shaped by real equipment behavior and inspection demands.",
+      "ground_truth": "Strong working grasp of exhaust systems and sensors",
+      "predicted": "knows technical marine exhaust gas treatment terminology and diagnostics",
+      "slot_fill_reason": "They referenced scrubbers, dosing units, sensors, calibration checks, live data, field readings, and emissions verification in resume wording.",
+      "score": 0.75,
+      "judge_reason": "The predicted description matches the core idea of practical knowledge about exhaust gas treatment systems and diagnostics, but it is less specific about exhaust systems and sensors and does not fully capture the field-deep, fault-tracing aspect.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "[Task 23] I’m putting together a short pre-trip checklist for my car and want it to be useful without turning into a giant project. What are the few things you’d include so I can catch anything obvious before I head out?",
+          "category": "task",
+          "task_index": 23,
+          "score": 0.3114970326423645
+        },
+        {
+          "content": "[Task 15] I’m updating my resume and want to describe my current role in a way that sounds clear without being too vague or too buzzwordy. Can you help me turn a technical job into a couple of strong, plain-English bullets?",
+          "category": "task",
+          "task_index": 15,
+          "score": 0.3098120391368866
+        },
+        {
+          "content": "User: Yeah, that’s basically the right structure. Role, what I handle, and the part that matters day to day. I’d keep it plain — no fluff.\n\nFor a short work bio, the stuff that actually belongs there is:\n- current job title\n- what systems or equipment I work on\n- main function: troubleshooting, calibration, verification, documentation\n- setting if it matters: dockside / field / marine\n- one solid strength, like detail-focused or steady under pressure\n\nWhat I’d leave out:\n- long backstory\n- full list of every tool\n- generic corporate wording\n- anything that sounds like padding\n\nIf the form is really tight, something like this works:\n- Exhaust gas treatment engineer focused on dockside troubleshooting, calibration checks, and emissions verification for marine systems.\n\nOr a little tighter:\n- Marine exhaust gas treatment engineer handling scrubbers, sensors, dosing systems, and compliance verification.\n\nThat’s enough. Anything more and it starts reading like a resume summary, which is not what those little profile boxes usually need.",
+          "category": "user_reply",
+          "task_index": 25,
+          "turn": 1,
+          "score": 0.28832703828811646
+        },
+        {
+          "content": "User: Yeah, that’s basically it. The exact/technical set is the better one for my resume.\n\nI’d probably use the first three from that version and maybe swap the last one depending on space:\n- Troubleshoot marine exhaust gas treatment systems dockside, including scrubbers, dosing units, and sensors, using live data and calibration checks to isolate faults before sail-out.\n- Verify repairs with field readings, cross-checks, and repeat test cycles to confirm the system is stable and ready for departure.\n- Prepare emissions records and departure paperwork tied to vessel timing, including work done in bad weather or on backup power.\n- Compare sensor outputs against handheld instruments and independent readings to catch drift, bad calibration, or a bad signal path.\n\nThat reads like the actual job without sounding like a template.",
+          "category": "user_reply",
+          "task_index": 15,
+          "turn": 3,
+          "score": 0.2684132754802704
+        },
+        {
+          "content": "[Task 25] I’m filling out a short work profile and the form only gives me a few lines, so I want to make the most of it without leaving anything important out. Can you help me figure out what details usually belong in that kind of bio and how to keep it concise?",
+          "category": "task",
+          "task_index": 25,
+          "score": 0.2518291473388672
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "mathematics_and_science_knowledge",
+      "explanation": "She works confidently with pH readings, flow rates, stack temperatures, and verification data. Her science knowledge appears solid in the applied, instrument-reading sense, but not especially broad beyond what her job requires.",
+      "ground_truth": "Comfortable with applied measurements and basic process science",
+      "predicted": "unknown",
+      "slot_fill_reason": "The memories only show the user discussing concise work bios, car checklists, and resume wording, with no concrete evidence about their mathematics or science knowledge.",
+      "score": 0.0,
+      "judge_reason": "The predicted description is unknown, so it does not provide any matching information about mathematics and science knowledge.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "[Task 25] I’m filling out a short work profile and the form only gives me a few lines, so I want to make the most of it without leaving anything important out. Can you help me figure out what details usually belong in that kind of bio and how to keep it concise?",
+          "category": "task",
+          "task_index": 25,
+          "score": 0.23846617341041565
+        },
+        {
+          "content": "[Task 23] I’m putting together a short pre-trip checklist for my car and want it to be useful without turning into a giant project. What are the few things you’d include so I can catch anything obvious before I head out?",
+          "category": "task",
+          "task_index": 23,
+          "score": 0.23294594883918762
+        },
+        {
+          "content": "[Task 15] I’m updating my resume and want to describe my current role in a way that sounds clear without being too vague or too buzzwordy. Can you help me turn a technical job into a couple of strong, plain-English bullets?",
+          "category": "task",
+          "task_index": 15,
+          "score": 0.22359971702098846
+        },
+        {
+          "content": "User: Yeah, that’s the version I meant. Clean enough to use, and the split by family actually makes it readable at the machine.\n\nThe **most likely next measurement** column is the useful part. That’s what saves time in the field — not another paragraph about theory.\n\nGood as-is.",
+          "category": "user_reply",
+          "task_index": 8,
+          "turn": 4,
+          "score": 0.2127985656261444
+        },
+        {
+          "content": "User: Yeah, that’s basically the right structure. Role, what I handle, and the part that matters day to day. I’d keep it plain — no fluff.\n\nFor a short work bio, the stuff that actually belongs there is:\n- current job title\n- what systems or equipment I work on\n- main function: troubleshooting, calibration, verification, documentation\n- setting if it matters: dockside / field / marine\n- one solid strength, like detail-focused or steady under pressure\n\nWhat I’d leave out:\n- long backstory\n- full list of every tool\n- generic corporate wording\n- anything that sounds like padding\n\nIf the form is really tight, something like this works:\n- Exhaust gas treatment engineer focused on dockside troubleshooting, calibration checks, and emissions verification for marine systems.\n\nOr a little tighter:\n- Marine exhaust gas treatment engineer handling scrubbers, sensors, dosing systems, and compliance verification.\n\nThat’s enough. Anything more and it starts reading like a resume summary, which is not what those little profile boxes usually need.",
+          "category": "user_reply",
+          "task_index": 25,
+          "turn": 1,
+          "score": 0.19738566875457764
+        }
+      ],
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.0,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites discussion of applied measurements, data verification, and process interpretation, which could reasonably lead a user to demonstrate practical math/science knowledge through follow-up questions."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"sanity-check a small water-treatment readout\" and \"which measurements actually matter together and what would make you trust the data enough to act on it\"",
+            "reason": "The user shows familiarity with applied process measurements and verification-minded interpretation of operational data, which is enough to infer practical science/measurement knowledge."
+          }
+        ],
+        "ep_index": 9
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "transportation_knowledge",
+      "explanation": "Her tire-pressure correction and habit of checking labels, torque settings, and service records show practical vehicle knowledge. She seems more careful and informed than a casual driver, especially about maintenance details and load-related specifications.",
+      "ground_truth": "Vehicle-aware and attentive to maintenance specs",
+      "predicted": "knows basic pre-trip car safety checks",
+      "slot_fill_reason": "They listed tires, fluids, lights, brakes, wipers, and a quick look underneath as the useful checks for a pre-trip car checklist.",
+      "score": 0.5,
+      "judge_reason": "The prediction overlaps with practical vehicle awareness, but it is narrower and misses the key emphasis on maintenance specs, labels, torque settings, and service records.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "[Task 23] I’m putting together a short pre-trip checklist for my car and want it to be useful without turning into a giant project. What are the few things you’d include so I can catch anything obvious before I head out?",
+          "category": "task",
+          "task_index": 23,
+          "score": 0.4222816526889801
+        },
+        {
+          "content": "[Task 22] I’m putting together a simple pre-drive checklist for my car before a longer trip, and I want it to be practical rather than overdone. What are the few checks you’d put in that list so I can catch anything obvious without spending all day on it?",
+          "category": "task",
+          "task_index": 22,
+          "score": 0.30066269636154175
+        },
+        {
+          "content": "User: Yeah, that’s basically the right list. Tires, fluids, lights, brakes, wipers, and a quick look underneath — that’s enough to catch the obvious stuff without turning it into a whole inspection.\n\nI’d maybe keep **battery** in the back of my mind too if it’s been sitting, but for a short pre-trip check, this is fine. The “don’t leave if” part is good. That’s the part people skip and then pay for later.\n\nThe one-line phone note would be useful.",
+          "category": "user_reply",
+          "task_index": 23,
+          "turn": 1,
+          "score": 0.29607611894607544
+        },
+        {
+          "content": "[Task 28] I’m looking at two used cars this weekend and want to keep my notes organized while I’m at the lot. Can you help me think through a straightforward way to compare the main facts so I don’t miss anything important while I’m checking them out?",
+          "category": "task",
+          "task_index": 28,
+          "score": 0.29519492387771606
+        },
+        {
+          "content": "User: Yeah, that’s basically it. The exact/technical set is the better one for my resume.\n\nI’d probably use the first three from that version and maybe swap the last one depending on space:\n- Troubleshoot marine exhaust gas treatment systems dockside, including scrubbers, dosing units, and sensors, using live data and calibration checks to isolate faults before sail-out.\n- Verify repairs with field readings, cross-checks, and repeat test cycles to confirm the system is stable and ready for departure.\n- Prepare emissions records and departure paperwork tied to vessel timing, including work done in bad weather or on backup power.\n- Compare sensor outputs against handheld instruments and independent readings to catch drift, bad calibration, or a bad signal path.\n\nThat reads like the actual job without sounding like a template.",
+          "category": "user_reply",
+          "task_index": 15,
+          "turn": 3,
+          "score": 0.2862531244754791
+        }
+      ],
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "A tire-rotation/vehicle-maintenance discussion naturally invites the user to mention how much they know about checking tire pressure, torque specs, labels, and service details, which can reveal transportation knowledge."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "I’m getting my tires rotated soon and want to make sure I’m not overlooking anything basic",
+            "reason": "The user shows practical vehicle-maintenance awareness and concern about checking basics before driving off, which is enough for a memory system to infer some vehicle knowledge and attentiveness to maintenance specs."
+          }
+        ],
+        "ep_index": 10
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "procedural_knowledge",
+      "explanation": "She knows how to move through load tests, emissions documentation, and verification cycles in the right order. Her habit of updating checklists suggests she understands procedures as something to be tightened and standardized, not just followed loosely.",
+      "ground_truth": "Understands inspection steps and documentation routines",
+      "predicted": "knows a structured troubleshooting sequence for diagnostics",
+      "slot_fill_reason": "They provided a numbered diagnostic checklist with steps like confirming symptoms, checking the last failed point, verifying against a known good value, and retesting.",
+      "score": 0.5,
+      "judge_reason": "The prediction overlaps with procedural knowledge and ordered steps, but it focuses on troubleshooting diagnostics rather than inspection steps and documentation routines.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "[Task 23] I’m putting together a short pre-trip checklist for my car and want it to be useful without turning into a giant project. What are the few things you’d include so I can catch anything obvious before I head out?",
+          "category": "task",
+          "task_index": 23,
+          "score": 0.2575851082801819
+        },
+        {
+          "content": "[Task 25] I’m filling out a short work profile and the form only gives me a few lines, so I want to make the most of it without leaving anything important out. Can you help me figure out what details usually belong in that kind of bio and how to keep it concise?",
+          "category": "task",
+          "task_index": 25,
+          "score": 0.2483101189136505
+        },
+        {
+          "content": "User: Yeah, that’s basically it. The exact/technical set is the better one for my resume.\n\nI’d probably use the first three from that version and maybe swap the last one depending on space:\n- Troubleshoot marine exhaust gas treatment systems dockside, including scrubbers, dosing units, and sensors, using live data and calibration checks to isolate faults before sail-out.\n- Verify repairs with field readings, cross-checks, and repeat test cycles to confirm the system is stable and ready for departure.\n- Prepare emissions records and departure paperwork tied to vessel timing, including work done in bad weather or on backup power.\n- Compare sensor outputs against handheld instruments and independent readings to catch drift, bad calibration, or a bad signal path.\n\nThat reads like the actual job without sounding like a template.",
+          "category": "user_reply",
+          "task_index": 15,
+          "turn": 3,
+          "score": 0.22503525018692017
+        },
+        {
+          "content": "[Task 15] I’m updating my resume and want to describe my current role in a way that sounds clear without being too vague or too buzzwordy. Can you help me turn a technical job into a couple of strong, plain-English bullets?",
+          "category": "task",
+          "task_index": 15,
+          "score": 0.21535837650299072
+        },
+        {
+          "content": "User: 1. Confirm symptom: __________\n2. Check last failed point first: __________\n3. Verify against second reading / known good value: __________\n4. If same failure shows up, correct and retest: __________\n5. If not, move to next likely point: __________\n6. Record what changed and what didn’t: __________",
+          "category": "user_reply",
+          "task_index": 14,
+          "turn": 3,
+          "score": 0.20784474909305573
+        }
+      ],
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task directly asks for step-by-step procedure and documentation order, which naturally invites the user to describe how they structure checks, record results, and standardize the workflow."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"tighten up a handoff checklist\" and \"what order the checks should go in so nothing gets skipped\"",
+            "reason": "The user explicitly asks for a step-by-step validation flow and documentation at each stage, which strongly संकेतs procedural knowledge about inspection/checklist routines."
+          }
+        ],
+        "ep_index": 11
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "weather_and_seasonal_knowledge",
+      "explanation": "She clearly understands how hurricanes, flooding, and humid conditions affect field access and calibration work. Her planning reflects a practical awareness that weather can interrupt both equipment reliability and paperwork timing.",
+      "ground_truth": "Seasonally alert, especially around storm disruptions",
+      "predicted": "understands weather-sensitive field work and stable-window planning",
+      "slot_fill_reason": "They distinguished tasks that are safe now versus only in a solid weather window, and emphasized avoiding exposed work when the forecast is shaky.",
+      "score": 0.75,
+      "judge_reason": "The prediction captures practical weather-sensitive planning and stable-window awareness, but it does not explicitly mention seasonal alertness or storm disruptions like hurricanes and flooding.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Close, but I want it a little tighter on the risk side.\n\nThe part I’d push back on is **dosing skid visual inspection**. If it’s truly just external, fine, do now. But if there’s any chance I’m checking fittings, seals, or anything that means opening up access, I’d move it to **only in a solid window**. Same with **stack temperature logging** — if the setup is already there, yes, but if it means messing with an exposed setup in marginal weather, I’d be more conservative.\n\nAlso, **sensor enclosure inspection** is basically a hold-off for me unless the forecast is stable enough to open and reseal immediately. I don’t like that one sitting in the middle. That’s the kind of thing that turns into water intrusion or extra cleanup if the weather shifts two hours early.\n\nSo my version would be:\n\n- **Do now:** emissions docs, handheld meter calibration, parts staging, final sign-off, truly external dosing skid look\n- **Only in a solid weather window:** pH sensor cross-check, stack temp logging, sensor enclosure inspection, any inspection where I’m opening panels even briefly\n- **Hold off:** flow meter verification if it starts a run I can’t pause cleanly, and anything where I’d be leaving an enclosure open if the forecast looks shaky\n\nThat lines up better with how I’d actually schedule it. The main thing for me is not just whether a check is weather-sensitive, but whether I can **close it back up fast** if the weather turns. If not, it doesn’t belong in a messy forecast.\n\nIf you want, I can do one more pass and mark each item as:\n**green / yellow / red** with the exact reason.",
+          "category": "user_reply",
+          "task_index": 12,
+          "turn": 3,
+          "score": 0.33653807640075684
+        },
+        {
+          "content": "[Task 12] I’m trying to plan a couple of field checks for next week, but the forecast looks a little messy. Can you help me think through what parts are safest to do now versus what I should hold off on if the weather turns?",
+          "category": "task",
+          "task_index": 12,
+          "score": 0.3167998790740967
+        },
+        {
+          "content": "User: Yeah — here’s the list, rough but usable:\n\n- **Scrubber pH sensor cross-check**\n  - location: on-site\n  - access: open / exposed panel\n  - weather-sensitive: yes\n  - paperwork only: no\n  - can pause safely: yes, but not ideal once started\n\n- **Dosing skid visual inspection**\n  - location: on-site\n  - access: closed unless I’m checking fittings\n  - weather-sensitive: mostly no\n  - paperwork only: no\n  - can pause safely: yes\n\n- **Flow meter verification**\n  - location: on-site\n  - access: open access panel\n  - weather-sensitive: yes, because it’s tied to live conditions\n  - paperwork only: no\n  - can pause safely: not really if I’ve already started the run\n\n- **Stack temperature logging**\n  - location: on-site\n  - access: open, but quick\n  - weather-sensitive: yes\n  - paperwork only: no\n  - can pause safely: yes, if the setup is already there\n\n- **Emissions documentation / log entry review**\n  - location: indoor\n  - access: closed\n  - weather-sensitive: no\n  - paperwork only: yes\n  - can pause safely: yes\n\n- **Handheld meter calibration check**\n  - location: indoor or sheltered\n  - access: closed\n  - weather-sensitive: no\n  - paperwork only: no\n  - can pause safely: yes\n\n- **Parts staging for the load test**\n  - location: indoor / sheltered\n  - access: closed\n  - weather-sensitive: no\n  - paperwork only: no\n  - can pause safely: yes\n\n- **Sensor enclosure inspection**\n  - location: on-site\n  - access: open panel\n  - weather-sensitive: yes\n  - paperwork only: no\n  - can pause safely: only if I can seal it back up quickly\n\n- **Final verification sign-off**\n  - location: indoor\n  - access: closed\n  - weather-sensitive: no\n  - paperwork only: yes\n  - can pause safely: yes\n\nThat’s the kind of split I mean. Some of these are fine if the weather just looks annoying. Others, if the forecast shifts, I’d rather not even open the panel. Last time I tried to stretch a field window too far, it turned into rework and extra cleanup. Not doing that again.",
+          "category": "user_reply",
+          "task_index": 12,
+          "turn": 2,
+          "score": 0.3162514567375183
+        },
+        {
+          "content": "Agent: Yes — the clean way to handle that is to split the work into **weather-sensitive**, **weather-tolerant**, and **weather-critical-to-finish** tasks.\n\n## Sort the tasks first\n\n### 1) Safe to do now\nThese are the tasks that:\n- can be completed quickly\n- do not leave anything exposed\n- do not depend on dry conditions\n- do not create rework if the weather changes\n\nExamples:\n- documentation\n- staging materials\n- pre-inspection\n- indoor prep\n- non-exposed checks\n\n---\n\n### 2) Do only in a stable weather window\nThese are the tasks that:\n- require dry conditions\n- can’t be left half-finished\n- would need cleanup/rework if interrupted\n- need enough time to complete and secure\n\nExamples:\n- coatings\n- open-line work\n- sealing\n- anything that must cure or remain dry\n- work where exposure creates a problem\n\n---\n\n### 3) Hold off if the forecast is unstable\nThese are the tasks that:\n- are highly weather dependent\n- have high rework risk if paused\n- can’t be safely left open\n- would be damaged by rain, wind, or moisture\n\nIf the window isn’t reliable, don’t start these.\n\n---\n\n## A quick decision rule\n### Do now if:\n- it’s indoor or protected work\n- it can be paused safely\n- it won’t be ruined by weather\n\n### Wait if:\n- it needs dry conditions\n- it can’t be left half-done\n- it would need cleanup or retest if interrupted\n\n### Only start if:\n- you have enough weather certainty to finish and secure it\n\n---\n\n## Best order when the forecast is uncertain\n1. **Prep and staging**\n2. **Non-weather-dependent checks**\n3. **Tasks that can be safely paused**\n4. **Weather-critical tasks only in a stable window**\n5. **Cleanup / documentation last unless they’re compliance-critical**\n\n---\n\n## Simple planning table\n\n**Task:** __________  \n**Weather sensitive:** yes / no  \n**Can pause safely:** yes / no  \n**Needs dry window:** yes / no  \n**Can be done now:** yes / no  \n**Hold if forecast worsens:** yes / no  \n\n---\n\n## Practical rule\nIf a task can’t be:\n- completed,\n- secured,\n- or protected\n\nbefore the weather changes, **don’t start it yet**.\n\nIf you want, send me the actual list of field checks and I’ll help you rank them into **do now / only in a stable window / hold off**.",
+          "category": "agent_reply",
+          "task_index": 12,
+          "turn": 1,
+          "score": 0.31231799721717834
+        },
+        {
+          "content": "[Task 23] I’m putting together a short pre-trip checklist for my car and want it to be useful without turning into a giant project. What are the few things you’d include so I can catch anything obvious before I head out?",
+          "category": "task",
+          "task_index": 23,
+          "score": 0.3036225438117981
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "legal_awareness_knowledge",
+      "explanation": "When the tire was installed with the wrong pressure rating, she returned and requested a correction rather than accepting it. That suggests she has a functional sense of service responsibility and her own rights as a customer, even if she is not especially legalistic.",
+      "ground_truth": "Knows enough to push back on incorrect service work",
+      "predicted": "unknown",
+      "slot_fill_reason": "The memories only show car-checklist and resume-help requests, with no evidence about legal knowledge or awareness.",
+      "score": 0.0,
+      "judge_reason": "The predicted description is unknown, so it does not capture the ground truth that she knows enough to push back on incorrect service work.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "[Task 23] I’m putting together a short pre-trip checklist for my car and want it to be useful without turning into a giant project. What are the few things you’d include so I can catch anything obvious before I head out?",
+          "category": "task",
+          "task_index": 23,
+          "score": 0.2703234553337097
+        },
+        {
+          "content": "[Task 22] I’m putting together a simple pre-drive checklist for my car before a longer trip, and I want it to be practical rather than overdone. What are the few checks you’d put in that list so I can catch anything obvious without spending all day on it?",
+          "category": "task",
+          "task_index": 22,
+          "score": 0.23750504851341248
+        },
+        {
+          "content": "[Task 20] I’m getting ready to take my car in for a routine tire check, and I want to make sure I’m not overlooking anything basic before I hand it over. What should I verify on the paperwork and on the car itself so I can catch any mismatch early?",
+          "category": "task",
+          "task_index": 20,
+          "score": 0.22851905226707458
+        },
+        {
+          "content": "[Task 15] I’m updating my resume and want to describe my current role in a way that sounds clear without being too vague or too buzzwordy. Can you help me turn a technical job into a couple of strong, plain-English bullets?",
+          "category": "task",
+          "task_index": 15,
+          "score": 0.20592573285102844
+        },
+        {
+          "content": "Agent: Yes — the easiest way is to use the same short checklist on both cars and write the answers side by side.\n\n## Compare these basics\n- year / make / model\n- mileage\n- asking price\n- trim / engine / transmission\n- title status\n- accident history\n- service history\n- tire condition\n- brake condition\n- warning lights\n- visible leaks / damage\n- test drive feel\n- any obvious rust\n- number of owners if available\n\n## Simple side-by-side note format\n\n| Item | Car A | Car B |\n|---|---|---|\n| Year / Make / Model |  |  |\n| Mileage |  |  |\n| Price |  |  |\n| Trim / Engine / Trans |  |  |\n| Title status |  |  |\n| Accident history |  |  |\n| Service history |  |  |\n| Tires |  |  |\n| Brakes |  |  |\n| Warning lights |  |  |\n| Leaks / damage |  |  |\n| Test drive feel |  |  |\n| Rust |  |  |\n| Owners |  |  |\n\n## What to watch most closely\nIf you only focus on a few things:\n1. **Title / accident history**\n2. **Mileage vs condition**\n3. **Warning lights**\n4. **Service records**\n5. **How it drives**\n\n## Quick decision rule\nA car is usually the better pick if it has:\n- cleaner history\n- fewer warning signs\n- better service records\n- less rust\n- more consistent test drive behavior\n\nIf you want, I can turn this into a **short phone-note version** with just the fields you should fill in at the lot.",
+          "category": "agent_reply",
+          "task_index": 28,
+          "turn": 1,
+          "score": 0.20296859741210938
+        }
+      ],
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.0,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites the user to discuss whether they noticed an incorrect tire specification and whether they would ask the shop to correct it, which can reveal practical awareness of their rights and willingness to push back on service errors."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"something about the paperwork/specs doesn’t look right to me\" and \"how to word a calm follow-up if I need them to fix it\"",
+            "reason": "The user shows they noticed a possible service error and is prepared to push back politely and request a correction, which is enough to infer basic rights-awareness in a customer-service context."
+          }
+        ],
+        "ep_index": 13
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "knowledge_update_habit",
+      "explanation": "She does not let lessons stay informal; she turns incidents into revised checklists and notebook notes. Her knowledge stays current because she keeps refining it from field experience, though mainly within her narrow technical lane.",
+      "ground_truth": "Actively updates procedures from real failures",
+      "predicted": "updates checklists from real failures and prior misses",
+      "slot_fill_reason": "They asked to revise troubleshooting notes based on what actually went wrong last time and to turn past misses into a cleaner reusable step-by-step note.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of actively revising checklists based on real failures and misses, but it does not clearly capture the broader habit of continuously updating procedures from field experience.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "[Task 23] I’m putting together a short pre-trip checklist for my car and want it to be useful without turning into a giant project. What are the few things you’d include so I can catch anything obvious before I head out?",
+          "category": "task",
+          "task_index": 23,
+          "score": 0.25514858961105347
+        },
+        {
+          "content": "[Task 4] I’ve got a piece of equipment that’s been fine so far, but I want to stay ahead of problems instead of waiting for something to fail. Can you help me sketch a simple routine for what to check, how often, and what to write down so it stays dependable over time?",
+          "category": "task",
+          "task_index": 4,
+          "score": 0.23963123559951782
+        },
+        {
+          "content": "[Task 14] I’m revising a troubleshooting checklist for a piece of equipment that’s had a couple of annoying repeat issues, and I want it to reflect what actually went wrong last time instead of staying generic. Can you help me turn those past misses into a cleaner step-by-step note I can keep using?",
+          "category": "task",
+          "task_index": 14,
+          "score": 0.22531041502952576
+        },
+        {
+          "content": "User: 1. Confirm symptom: __________\n2. Check last failed point first: __________\n3. Verify against second reading / known good value: __________\n4. If same failure shows up, correct and retest: __________\n5. If not, move to next likely point: __________\n6. Record what changed and what didn’t: __________",
+          "category": "user_reply",
+          "task_index": 14,
+          "turn": 3,
+          "score": 0.22143781185150146
+        },
+        {
+          "content": "User: Yeah, that’s basically it. The exact/technical set is the better one for my resume.\n\nI’d probably use the first three from that version and maybe swap the last one depending on space:\n- Troubleshoot marine exhaust gas treatment systems dockside, including scrubbers, dosing units, and sensors, using live data and calibration checks to isolate faults before sail-out.\n- Verify repairs with field readings, cross-checks, and repeat test cycles to confirm the system is stable and ready for departure.\n- Prepare emissions records and departure paperwork tied to vessel timing, including work done in bad weather or on backup power.\n- Compare sensor outputs against handheld instruments and independent readings to catch drift, bad calibration, or a bad signal path.\n\nThat reads like the actual job without sounding like a template.",
+          "category": "user_reply",
+          "task_index": 15,
+          "turn": 3,
+          "score": 0.2164761871099472
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "career_transition_event",
+      "explanation": "Taking the exhaust gas treatment job near Leland changed her daily life from a general job search into hands-on marine equipment work. It gave her a concrete professional identity built around inspections, dockside troubleshooting, and responsibility for vessels that could not simply wait.",
+      "ground_truth": "Took the shipyard role that made her field life real",
+      "predicted": "considering a career reset into a new area",
+      "slot_fill_reason": "They said they were weighing a job change that would mean starting over in a new area and wanted to think through the practical side before deciding.",
+      "score": 0.25,
+      "judge_reason": "The prediction only suggests a general career change, while the ground truth is specifically about taking a shipyard role that made her hands-on field life real.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "[Task 15] I’m updating my resume and want to describe my current role in a way that sounds clear without being too vague or too buzzwordy. Can you help me turn a technical job into a couple of strong, plain-English bullets?",
+          "category": "task",
+          "task_index": 15,
+          "score": 0.4097594618797302
+        },
+        {
+          "content": "[Task 16] I’m weighing a job change that would mean starting over in a new area, and I’m trying to think through the practical side more than the exciting side. Can you help me list the main things I should consider before I decide whether it’s worth it?",
+          "category": "task",
+          "task_index": 16,
+          "score": 0.3944706320762634
+        },
+        {
+          "content": "User: Yeah, that’s basically it. The exact/technical set is the better one for my resume.\n\nI’d probably use the first three from that version and maybe swap the last one depending on space:\n- Troubleshoot marine exhaust gas treatment systems dockside, including scrubbers, dosing units, and sensors, using live data and calibration checks to isolate faults before sail-out.\n- Verify repairs with field readings, cross-checks, and repeat test cycles to confirm the system is stable and ready for departure.\n- Prepare emissions records and departure paperwork tied to vessel timing, including work done in bad weather or on backup power.\n- Compare sensor outputs against handheld instruments and independent readings to catch drift, bad calibration, or a bad signal path.\n\nThat reads like the actual job without sounding like a template.",
+          "category": "user_reply",
+          "task_index": 15,
+          "turn": 3,
+          "score": 0.27471503615379333
+        },
+        {
+          "content": "User: Yeah, that’s basically the right structure. Role, what I handle, and the part that matters day to day. I’d keep it plain — no fluff.\n\nFor a short work bio, the stuff that actually belongs there is:\n- current job title\n- what systems or equipment I work on\n- main function: troubleshooting, calibration, verification, documentation\n- setting if it matters: dockside / field / marine\n- one solid strength, like detail-focused or steady under pressure\n\nWhat I’d leave out:\n- long backstory\n- full list of every tool\n- generic corporate wording\n- anything that sounds like padding\n\nIf the form is really tight, something like this works:\n- Exhaust gas treatment engineer focused on dockside troubleshooting, calibration checks, and emissions verification for marine systems.\n\nOr a little tighter:\n- Marine exhaust gas treatment engineer handling scrubbers, sensors, dosing systems, and compliance verification.\n\nThat’s enough. Anything more and it starts reading like a resume summary, which is not what those little profile boxes usually need.",
+          "category": "user_reply",
+          "task_index": 25,
+          "turn": 1,
+          "score": 0.26518523693084717
+        },
+        {
+          "content": "Agent: Yes — for a move like that, I’d think in terms of **risk, cost, fit, and recovery** rather than just “good opportunity.”\n\n## Main things to consider\n\n### 1) Financial impact\n- Pay difference\n- Cost of living\n- Moving costs\n- Housing deposit / setup costs\n- Commute or transport costs\n- Gap in income if there’s a delay\n\nAsk: **Will the new job actually leave me better off after expenses?**\n\n---\n\n### 2) Career value\n- Does it build useful skills?\n- Does it move you toward a better role later?\n- Is the field stable?\n- Will the experience transfer if you leave again?\n\nAsk: **Does this reset help long-term, or just restart the clock?**\n\n---\n\n### 3) Learning curve\n- How much will you need to relearn?\n- How long before you’re productive?\n- Will you have support or training?\n- Is the new environment more complex or less familiar?\n\nAsk: **Can I realistically get up to speed without getting buried?**\n\n---\n\n### 4) Fit with your working style\n- Schedule\n- Physical demands\n- Travel\n- Field vs office balance\n- Weather / shift / on-call expectations\n- Team culture\n\nAsk: **Is this the kind of workday I can live with long term?**\n\n---\n\n### 5) Stability of the new role\n- Is the employer solid?\n- Is the work ongoing or project-based?\n- Is the demand for the role steady?\n- Are they hiring because of growth or because of turnover?\n\nAsk: **Am I moving into something durable or just something available?**\n\n---\n\n### 6) Personal disruption\n- Relocation stress\n- Family / partner impact\n- Social reset\n- Housing uncertainty\n- Time needed to settle in\n\nAsk: **What will this cost me outside of work?**\n\n---\n\n### 7) Exit risk\n- If it doesn’t work out, how hard is it to come back?\n- Will the move hurt your current network?\n- Is the new area good for future options?\n\nAsk: **What’s my fallback if this turns out to be the wrong move?**\n\n---\n\n## A simple way to decide\nI’d ask these four questions:\n\n1. **Am I better off financially?**\n2. **Does this move improve my long-term career?**\n3. **Can I handle the learning curve and reset?**\n4. **If it fails, can I recover without major damage?**\n\nIf the answer is “no” to two or more, it’s worth being cautious.\n\n---\n\n## Practical rule\nA job change is usually worth it if it gives you:\n- better pay after costs\n- better skills or stability\n- a manageable reset\n- a reasonable fallback\n\nIf it gives you only excitement, but not those things, it may not be worth the disruption.\n\nIf you want, I can help you turn your situation into a **simple pros/cons checklist** or a **decision matrix** you can actually use.",
+          "category": "agent_reply",
+          "task_index": 16,
+          "turn": 1,
+          "score": 0.2491508573293686
+        }
+      ],
+      "attribution": {
+        "category": "agent_elicitation_failure",
+        "score": 0.25,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "A resume-writing request about a technical job can naturally prompt follow-up about how the user got into the role or what changed when they took it, which could reveal a career transition event."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": false,
+            "evidence": "none",
+            "reason": "The dialogue only asks for resume help and does not mention any specific job change, shipyard role, or career transition event."
+          },
+          {
+            "stage": "disclosure_subclass",
+            "category": "A",
+            "reason": "The conversation stayed on resume-writing style and never steered toward any specific career transition event or job change, so the target dimension was not actually elicited.",
+            "evidence": "\"I’m updating my resume and want to describe my current role\""
+          }
+        ],
+        "ep_index": 15
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "relocation_or_migration_event",
+      "explanation": "She relocated after accepting a position tied to the shipyard in southeastern North Carolina. The move shifted her into a coastal, weather-sensitive work environment and seems to have anchored her current sense of place and routine.",
+      "ground_truth": "Moved to Leland for work and built her routine there",
+      "predicted": "considering a job-related relocation to a new area",
+      "slot_fill_reason": "Task 16 shows they are weighing a job change that would require starting over in a new area and evaluating relocation costs and disruption.",
+      "score": 0.5,
+      "judge_reason": "The prediction captures that the move is job-related, but it is only tentative and misses the completed relocation to Leland and the established routine there.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Mostly usable. But it’s still a little broad.\n\nI’d want it turned into a tighter checklist with weights, because not every factor matters the same. For me, the practical stuff would be:\n- pay after taxes and moving costs\n- housing cost in the new area\n- how long before I’m actually useful there\n- whether the job matches my technical background or forces a big reset\n- how much risk there is if the role is unstable\n- whether I can leave if it turns bad without wrecking my position\n\nThe part on personal disruption is fine, but I’d also want to include schedule realism — if the new place has worse hours, more on-call, or more travel, that matters. I’ve seen one small spec problem turn into a lot of extra work, so I’m not big on “it’ll probably work out” logic.\n\nIf you want to make this actually decision-ready, do a weighted pros/cons grid, not just a list.",
+          "category": "user_reply",
+          "task_index": 16,
+          "turn": 1,
+          "score": 0.3316645324230194
+        },
+        {
+          "content": "[Task 16] I’m weighing a job change that would mean starting over in a new area, and I’m trying to think through the practical side more than the exciting side. Can you help me list the main things I should consider before I decide whether it’s worth it?",
+          "category": "task",
+          "task_index": 16,
+          "score": 0.2858872711658478
+        },
+        {
+          "content": "Agent: Yes — for a move like that, I’d think in terms of **risk, cost, fit, and recovery** rather than just “good opportunity.”\n\n## Main things to consider\n\n### 1) Financial impact\n- Pay difference\n- Cost of living\n- Moving costs\n- Housing deposit / setup costs\n- Commute or transport costs\n- Gap in income if there’s a delay\n\nAsk: **Will the new job actually leave me better off after expenses?**\n\n---\n\n### 2) Career value\n- Does it build useful skills?\n- Does it move you toward a better role later?\n- Is the field stable?\n- Will the experience transfer if you leave again?\n\nAsk: **Does this reset help long-term, or just restart the clock?**\n\n---\n\n### 3) Learning curve\n- How much will you need to relearn?\n- How long before you’re productive?\n- Will you have support or training?\n- Is the new environment more complex or less familiar?\n\nAsk: **Can I realistically get up to speed without getting buried?**\n\n---\n\n### 4) Fit with your working style\n- Schedule\n- Physical demands\n- Travel\n- Field vs office balance\n- Weather / shift / on-call expectations\n- Team culture\n\nAsk: **Is this the kind of workday I can live with long term?**\n\n---\n\n### 5) Stability of the new role\n- Is the employer solid?\n- Is the work ongoing or project-based?\n- Is the demand for the role steady?\n- Are they hiring because of growth or because of turnover?\n\nAsk: **Am I moving into something durable or just something available?**\n\n---\n\n### 6) Personal disruption\n- Relocation stress\n- Family / partner impact\n- Social reset\n- Housing uncertainty\n- Time needed to settle in\n\nAsk: **What will this cost me outside of work?**\n\n---\n\n### 7) Exit risk\n- If it doesn’t work out, how hard is it to come back?\n- Will the move hurt your current network?\n- Is the new area good for future options?\n\nAsk: **What’s my fallback if this turns out to be the wrong move?**\n\n---\n\n## A simple way to decide\nI’d ask these four questions:\n\n1. **Am I better off financially?**\n2. **Does this move improve my long-term career?**\n3. **Can I handle the learning curve and reset?**\n4. **If it fails, can I recover without major damage?**\n\nIf the answer is “no” to two or more, it’s worth being cautious.\n\n---\n\n## Practical rule\nA job change is usually worth it if it gives you:\n- better pay after costs\n- better skills or stability\n- a manageable reset\n- a reasonable fallback\n\nIf it gives you only excitement, but not those things, it may not be worth the disruption.\n\nIf you want, I can help you turn your situation into a **simple pros/cons checklist** or a **decision matrix** you can actually use.",
+          "category": "agent_reply",
+          "task_index": 16,
+          "turn": 1,
+          "score": 0.28452321887016296
+        },
+        {
+          "content": "[Task 23] I’m putting together a short pre-trip checklist for my car and want it to be useful without turning into a giant project. What are the few things you’d include so I can catch anything obvious before I head out?",
+          "category": "task",
+          "task_index": 23,
+          "score": 0.24584072828292847
+        },
+        {
+          "content": "[Task 15] I’m updating my resume and want to describe my current role in a way that sounds clear without being too vague or too buzzwordy. Can you help me turn a technical job into a couple of strong, plain-English bullets?",
+          "category": "task",
+          "task_index": 15,
+          "score": 0.23039215803146362
+        }
+      ],
+      "attribution": {
+        "category": "agent_elicitation_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "Yes — a discussion about taking a job in a new area naturally invites follow-up about whether the person actually relocated or plans to relocate, which could lead them to reveal a migration event."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": false,
+            "evidence": "none",
+            "reason": "The user only mentions weighing a possible job change to a new area in general, which suggests relocation consideration but does not reveal an actual move or where they relocated."
+          },
+          {
+            "stage": "disclosure_subclass",
+            "category": "A",
+            "reason": "The agent only asked for general job-change considerations and never steered into the specific issue of an actual move or relocation details, so the target dimension was not elicited.",
+            "evidence": "\"list the main things I should consider before I decide whether it’s worth it\""
+          }
+        ],
+        "ep_index": 16
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "emergency_response_event",
+      "explanation": "When a scrubber unit failed its sulfur-removal test, she stayed late, found the faulty sensor, and got the system back to passing. The incident mattered because it directly delayed the ship and taught her to treat small calibration errors as operational emergencies.",
+      "ground_truth": "Handled a scrubber failure before a vessel could sail",
+      "predicted": "uses structured triage for urgent equipment faults",
+      "slot_fill_reason": "They asked for a dockside triage order and a stay-late decision flow for faults, emphasizing safe isolation, verifying readings, checking recent changes, and deciding whether to continue or stop.",
+      "score": 0.75,
+      "judge_reason": "The prediction captures the core idea of urgently handling an equipment fault, but it is less specific about the scrubber failure and the fact that it was resolved before the vessel could sail.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Yeah, that’s the useful version. Much better than the generic one.\n\nWhat you laid out matches how I’d actually run it:\n- split by interval\n- tied to equipment type\n- focused on likely failure modes\n- and the log needs actual values, not just pass/fail\n\nThat baseline vs current setup is the important part. Otherwise you miss drift until it’s already a problem.\n\nIf you were turning this into a working sheet, I’d probably want one extra thing: a **limit / warning threshold** column too, not just baseline and current. Baseline tells you where it started, but the limit tells you when to stop arguing with it.\n\nSo something like:\n- baseline\n- current reading\n- warning limit\n- stop limit\n- trend\n- action taken\n\nAnd for abnormal events, I’d want the trigger written down plainly — power loss, overload, impact, alarm reset, whatever — because that’s usually what explains the change.\n\nThis is solid. Not generic anymore.",
+          "category": "user_reply",
+          "task_index": 4,
+          "turn": 2,
+          "score": 0.2931506633758545
+        },
+        {
+          "content": "User: Yeah, that’s the right structure. But it’s still a little generic.\n\nWhat I’d want is a simple compare sheet for the two issues, side by side, with a hard sort on:\n- compliance / inspection risk\n- whether it blocks other work\n- whether the condition is changing fast\n- whether I can verify it with data right now\n- what gets worse if I wait a day\n\nFor me, the big thing is not just “urgent,” it’s which one has the most irreversible damage if I let it sit. Sometimes the loud problem isn’t the one that bites you.\n\nSo I’d probably want a grid like:\n- issue\n- immediate risk\n- deadline/window\n- proof available now\n- likely root cause\n- can it wait\n- next action\n\nIf you want to make it useful, give me the actual two issues and I can help rank them properly.",
+          "category": "user_reply",
+          "task_index": 26,
+          "turn": 1,
+          "score": 0.2626773715019226
+        },
+        {
+          "content": "User: 1. Confirm symptom: __________\n2. Check last failed point first: __________\n3. Verify against second reading / known good value: __________\n4. If same failure shows up, correct and retest: __________\n5. If not, move to next likely point: __________\n6. Record what changed and what didn’t: __________",
+          "category": "user_reply",
+          "task_index": 14,
+          "turn": 3,
+          "score": 0.23901183903217316
+        },
+        {
+          "content": "Agent: Absolutely — if you give me the **equipment type + exact symptom + any reading/code/alarm**, I can make it much more specific.\n\nFor now, the safest **dockside triage order** is:\n\n## 1) Make it safe to touch\n- confirm lockout / isolation is actually in place\n- verify power, pressure, flow, and access conditions\n- don’t open anything you can’t re-secure quickly\n\n## 2) Confirm the reading is real\n- check against a handheld or known-good reference\n- compare to a second sensor or adjacent reading if available\n- look for drift, bad calibration, or a bad signal path\n\n## 3) Check what changed recently\n- maintenance\n- parts swaps\n- wiring work\n- cleanup\n- weather / power / backup power changes\n\n## 4) Check the obvious mechanical causes\n- leaks\n- blockage\n- loose fittings\n- damaged cable/connector\n- obvious contamination or physical damage\n\n## 5) Check controls and interlocks\n- alarms\n- trips\n- permissives\n- power state\n- backup power state if relevant\n\n## 6) Decide whether it’s worth staying late\n### Stay late if:\n- the fault is clear\n- the fix is local\n- you can verify it back in spec immediately\n- the unit can be resealed and released cleanly\n\n### Don’t stay if:\n- you can’t identify the failure point\n- the repair would be half-finished\n- you can’t verify the result cleanly\n- it’s still borderline after correction\n\n## Hard stop\nIf it can’t be:\n- isolated safely,\n- corrected locally,\n- and verified cleanly,\n\nthen don’t force a late-night save.\n\nIf you want, send me:\n- equipment type\n- symptom\n- any alarm/code\n- the reading that looks wrong\n- what changed recently\n\nand I’ll turn it into a **specific triage flow**.",
+          "category": "agent_reply",
+          "task_index": 17,
+          "turn": 2,
+          "score": 0.23855102062225342
+        },
+        {
+          "content": "User: Yeah, this is the right direction. But it’s still a little broad.\n\nIf I’m actually trying not to chase symptoms, I’d want the map to force one thing at a time:\n- exact failure point\n- first deviation from normal\n- what changed between good and bad cases\n- what data proves it, not just what people think\n\nI’d use a tighter order:\n1. define the failure in numbers\n2. mark the first step where bad cases differ\n3. compare good vs bad batches side by side\n4. check upstream inputs before blaming the last step\n5. isolate one hypothesis and test it\n\nWhat I’d want next is a more concrete flowchart or checklist I can actually use at work — something like:\n- if the issue shows up only on certain jobs, check X\n- if it shows up across all jobs, check Y\n- if it starts after a handoff, check Z\n\nThat kind of thing. Otherwise it’s still a bit general.",
+          "category": "user_reply",
+          "task_index": 2,
+          "turn": 1,
+          "score": 0.22641459107398987
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "legal_or_administrative_event",
+      "explanation": "She completed critical documentation in poor conditions before hurricane-related flooding made access unreliable. That experience seems to have reinforced her belief that paperwork and compliance work can be just as consequential as the mechanical repair itself.",
+      "ground_truth": "Finished emissions paperwork before a storm shut access down",
+      "predicted": "handled emissions paperwork before storm-related access problems",
+      "slot_fill_reason": "They described finishing emissions paperwork early when a storm was moving in because flooding roads would make chasing a signature difficult.",
+      "score": 1.0,
+      "judge_reason": "The prediction preserves the core event: she completed emissions paperwork before storm-related access issues made it difficult, matching the ground truth.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "[Task 15] I’m updating my resume and want to describe my current role in a way that sounds clear without being too vague or too buzzwordy. Can you help me turn a technical job into a couple of strong, plain-English bullets?",
+          "category": "task",
+          "task_index": 15,
+          "score": 0.22303250432014465
+        },
+        {
+          "content": "User: Yeah, that’s the useful version. Much better than the generic one.\n\nWhat you laid out matches how I’d actually run it:\n- split by interval\n- tied to equipment type\n- focused on likely failure modes\n- and the log needs actual values, not just pass/fail\n\nThat baseline vs current setup is the important part. Otherwise you miss drift until it’s already a problem.\n\nIf you were turning this into a working sheet, I’d probably want one extra thing: a **limit / warning threshold** column too, not just baseline and current. Baseline tells you where it started, but the limit tells you when to stop arguing with it.\n\nSo something like:\n- baseline\n- current reading\n- warning limit\n- stop limit\n- trend\n- action taken\n\nAnd for abnormal events, I’d want the trigger written down plainly — power loss, overload, impact, alarm reset, whatever — because that’s usually what explains the change.\n\nThis is solid. Not generic anymore.",
+          "category": "user_reply",
+          "task_index": 4,
+          "turn": 2,
+          "score": 0.2165297567844391
+        },
+        {
+          "content": "User: Yeah, basically right, but I’d want it a little tighter for a real weather window.\n\nOrder I’d use:\n- anything that blocks departure / handoff / release\n- signatures that require people on site now\n- readings, photos, timestamps, anything you can’t recreate later\n- notes tied to current equipment state\n- cleanup / filing / non-urgent entries last\n\nBefore conditions get worse, I’d also pull the stuff that depends on access to the physical paperwork itself — if the office, yard, or vessel access gets messy, that’s the part that bites you.\n\nSimple rule I use: if it would cost time, money, or a second visit to fix later, do it first. Had something similar when a storm was moving in and I finished emissions paperwork early because I knew once roads started flooding, chasing a signature would turn into a problem.\n\nIf you want, I can turn this into a 1-page checklist with a \"do now / can wait\" split.",
+          "category": "user_reply",
+          "task_index": 18,
+          "turn": 1,
+          "score": 0.19449323415756226
+        },
+        {
+          "content": "[Task 23] I’m putting together a short pre-trip checklist for my car and want it to be useful without turning into a giant project. What are the few things you’d include so I can catch anything obvious before I head out?",
+          "category": "task",
+          "task_index": 23,
+          "score": 0.19309599697589874
+        },
+        {
+          "content": "User: Yeah, that’s the right structure. But it’s still a little generic.\n\nWhat I’d want is a simple compare sheet for the two issues, side by side, with a hard sort on:\n- compliance / inspection risk\n- whether it blocks other work\n- whether the condition is changing fast\n- whether I can verify it with data right now\n- what gets worse if I wait a day\n\nFor me, the big thing is not just “urgent,” it’s which one has the most irreversible damage if I let it sit. Sometimes the loud problem isn’t the one that bites you.\n\nSo I’d probably want a grid like:\n- issue\n- immediate risk\n- deadline/window\n- proof available now\n- likely root cause\n- can it wait\n- next action\n\nIf you want to make it useful, give me the actual two issues and I can help rank them properly.",
+          "category": "user_reply",
+          "task_index": 26,
+          "turn": 1,
+          "score": 0.1884312927722931
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 1.0,
+        "stages": []
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "accomplishment_under_pressure_event",
+      "explanation": "During a storm warning and backup-power conditions, she kept testing and recording data when normal site lighting failed. The success confirmed for her that careful work under bad conditions is possible, but only if she stays disciplined and starts early.",
+      "ground_truth": "Verified exhaust data by flashlight during a shutdown",
+      "predicted": "unknown",
+      "slot_fill_reason": "The memories show the user refining checklists and comparison sheets, but no concrete past event of accomplishing something under pressure.",
+      "score": 0.0,
+      "judge_reason": "The predicted description is unknown and provides no overlap with the ground truth event of verifying exhaust data by flashlight during a shutdown.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Yeah, this is the right direction. But it’s still a little broad.\n\nIf I’m actually trying not to chase symptoms, I’d want the map to force one thing at a time:\n- exact failure point\n- first deviation from normal\n- what changed between good and bad cases\n- what data proves it, not just what people think\n\nI’d use a tighter order:\n1. define the failure in numbers\n2. mark the first step where bad cases differ\n3. compare good vs bad batches side by side\n4. check upstream inputs before blaming the last step\n5. isolate one hypothesis and test it\n\nWhat I’d want next is a more concrete flowchart or checklist I can actually use at work — something like:\n- if the issue shows up only on certain jobs, check X\n- if it shows up across all jobs, check Y\n- if it starts after a handoff, check Z\n\nThat kind of thing. Otherwise it’s still a bit general.",
+          "category": "user_reply",
+          "task_index": 2,
+          "turn": 1,
+          "score": 0.21748341619968414
+        },
+        {
+          "content": "User: Yeah, that’s the useful version. Much better than the generic one.\n\nWhat you laid out matches how I’d actually run it:\n- split by interval\n- tied to equipment type\n- focused on likely failure modes\n- and the log needs actual values, not just pass/fail\n\nThat baseline vs current setup is the important part. Otherwise you miss drift until it’s already a problem.\n\nIf you were turning this into a working sheet, I’d probably want one extra thing: a **limit / warning threshold** column too, not just baseline and current. Baseline tells you where it started, but the limit tells you when to stop arguing with it.\n\nSo something like:\n- baseline\n- current reading\n- warning limit\n- stop limit\n- trend\n- action taken\n\nAnd for abnormal events, I’d want the trigger written down plainly — power loss, overload, impact, alarm reset, whatever — because that’s usually what explains the change.\n\nThis is solid. Not generic anymore.",
+          "category": "user_reply",
+          "task_index": 4,
+          "turn": 2,
+          "score": 0.2149580866098404
+        },
+        {
+          "content": "[Task 15] I’m updating my resume and want to describe my current role in a way that sounds clear without being too vague or too buzzwordy. Can you help me turn a technical job into a couple of strong, plain-English bullets?",
+          "category": "task",
+          "task_index": 15,
+          "score": 0.21023760735988617
+        },
+        {
+          "content": "[Task 23] I’m putting together a short pre-trip checklist for my car and want it to be useful without turning into a giant project. What are the few things you’d include so I can catch anything obvious before I head out?",
+          "category": "task",
+          "task_index": 23,
+          "score": 0.20583388209342957
+        },
+        {
+          "content": "User: Yeah, that’s the right structure. But it’s still a little generic.\n\nWhat I’d want is a simple compare sheet for the two issues, side by side, with a hard sort on:\n- compliance / inspection risk\n- whether it blocks other work\n- whether the condition is changing fast\n- whether I can verify it with data right now\n- what gets worse if I wait a day\n\nFor me, the big thing is not just “urgent,” it’s which one has the most irreversible damage if I let it sit. Sometimes the loud problem isn’t the one that bites you.\n\nSo I’d probably want a grid like:\n- issue\n- immediate risk\n- deadline/window\n- proof available now\n- likely root cause\n- can it wait\n- next action\n\nIf you want to make it useful, give me the actual two issues and I can help rank them properly.",
+          "category": "user_reply",
+          "task_index": 26,
+          "turn": 1,
+          "score": 0.20444969832897186
+        }
+      ],
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.0,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task is explicitly about handling a site check under worsening weather and unreliable power, which naturally invites the user to describe past or anticipated performance under pressure, including whether they can stay organized and effective in difficult conditions."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"I’m not scrambling if the lights or power get unreliable\"",
+            "reason": "The user explicitly describes planning to keep working through unreliable lighting/power during a weather delay, which signals comfort with accomplishing site checks under adverse conditions if prepared and disciplined."
+          }
+        ],
+        "ep_index": 19
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "moment_of_clarity_event",
+      "explanation": "After the wrong tire pressure rating was installed, she saw how a small specification error cascades into more hassle and risk. That event sharpened her tendency to double-check labels, torque settings, and service records rather than assume anyone else got the details right.",
+      "ground_truth": "Realized one missed spec can create extra work later",
+      "predicted": "recognized that baseline vs current readings reveal drift",
+      "slot_fill_reason": "They explicitly said the baseline vs current setup was the important part because otherwise drift gets missed until it becomes a problem.",
+      "score": 0.25,
+      "judge_reason": "The prediction is about noticing drift from baseline readings, which only loosely overlaps with the idea of catching a spec issue early, but it misses the core point that one missed specification creates extra work later.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "[Task 15] I’m updating my resume and want to describe my current role in a way that sounds clear without being too vague or too buzzwordy. Can you help me turn a technical job into a couple of strong, plain-English bullets?",
+          "category": "task",
+          "task_index": 15,
+          "score": 0.26849257946014404
+        },
+        {
+          "content": "User: Yeah, that’s the useful version. Much better than the generic one.\n\nWhat you laid out matches how I’d actually run it:\n- split by interval\n- tied to equipment type\n- focused on likely failure modes\n- and the log needs actual values, not just pass/fail\n\nThat baseline vs current setup is the important part. Otherwise you miss drift until it’s already a problem.\n\nIf you were turning this into a working sheet, I’d probably want one extra thing: a **limit / warning threshold** column too, not just baseline and current. Baseline tells you where it started, but the limit tells you when to stop arguing with it.\n\nSo something like:\n- baseline\n- current reading\n- warning limit\n- stop limit\n- trend\n- action taken\n\nAnd for abnormal events, I’d want the trigger written down plainly — power loss, overload, impact, alarm reset, whatever — because that’s usually what explains the change.\n\nThis is solid. Not generic anymore.",
+          "category": "user_reply",
+          "task_index": 4,
+          "turn": 2,
+          "score": 0.25249940156936646
+        },
+        {
+          "content": "User: 1. Confirm symptom: __________\n2. Check last failed point first: __________\n3. Verify against second reading / known good value: __________\n4. If same failure shows up, correct and retest: __________\n5. If not, move to next likely point: __________\n6. Record what changed and what didn’t: __________",
+          "category": "user_reply",
+          "task_index": 14,
+          "turn": 3,
+          "score": 0.22605448961257935
+        },
+        {
+          "content": "[Task 26] I’ve got a couple of work issues landing at the same time, and I need to sort out what needs attention first before anything gets missed. Can you help me think through a practical way to line up the next steps and what details are worth checking as I go?",
+          "category": "task",
+          "task_index": 26,
+          "score": 0.21394234895706177
+        },
+        {
+          "content": "[Task 14] I’m revising a troubleshooting checklist for a piece of equipment that’s had a couple of annoying repeat issues, and I want it to reflect what actually went wrong last time instead of staying generic. Can you help me turn those past misses into a cleaner step-by-step note I can keep using?",
+          "category": "task",
+          "task_index": 14,
+          "score": 0.2072451114654541
+        }
+      ],
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.25,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "A natural follow-up could ask why the user is especially careful about paperwork and labels, which could prompt them to describe a past moment when a small spec mismatch caused extra work and changed how they check details."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "I want to make sure I’m not overlooking anything basic before I hand it over. What should I verify on the paperwork and on the car itself so I can catch any mismatch early?",
+            "reason": "The user explicitly shows concern about catching mismatches and not overlooking small details, which is enough to infer a moment of clarity about how a minor spec error can create later hassle."
+          }
+        ],
+        "ep_index": 20
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "reminiscence_bump_event",
+      "explanation": "The most memorable episodes in her current self-story cluster around ages 25 and 26, when she was already working and learning in real field conditions. Those incidents now function as reference points for how she approaches pressure, maintenance, and planning.",
+      "ground_truth": "Her late-twenties field incidents now organize her caution",
+      "predicted": "recent troubleshooting checklist revision after repeat equipment issues",
+      "slot_fill_reason": "The notes show a specific task about revising a troubleshooting checklist for repeat equipment issues and the user refining it into a concrete step-by-step note.",
+      "score": 0.25,
+      "judge_reason": "The prediction reflects a recent work-related troubleshooting event that may inform caution, but it misses the key reminiscence-bump focus on memorable late-twenties field incidents and their role as long-term reference points.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Yeah, that’s the useful version. Much better than the generic one.\n\nWhat you laid out matches how I’d actually run it:\n- split by interval\n- tied to equipment type\n- focused on likely failure modes\n- and the log needs actual values, not just pass/fail\n\nThat baseline vs current setup is the important part. Otherwise you miss drift until it’s already a problem.\n\nIf you were turning this into a working sheet, I’d probably want one extra thing: a **limit / warning threshold** column too, not just baseline and current. Baseline tells you where it started, but the limit tells you when to stop arguing with it.\n\nSo something like:\n- baseline\n- current reading\n- warning limit\n- stop limit\n- trend\n- action taken\n\nAnd for abnormal events, I’d want the trigger written down plainly — power loss, overload, impact, alarm reset, whatever — because that’s usually what explains the change.\n\nThis is solid. Not generic anymore.",
+          "category": "user_reply",
+          "task_index": 4,
+          "turn": 2,
+          "score": 0.3165859878063202
+        },
+        {
+          "content": "[Task 14] I’m revising a troubleshooting checklist for a piece of equipment that’s had a couple of annoying repeat issues, and I want it to reflect what actually went wrong last time instead of staying generic. Can you help me turn those past misses into a cleaner step-by-step note I can keep using?",
+          "category": "task",
+          "task_index": 14,
+          "score": 0.26390889286994934
+        },
+        {
+          "content": "[Task 5] I’m trying to set up a simple live-check routine for a small process that can drift over a shift, and I want it to be practical rather than overkill. What would you watch in real time, and how would you decide when something is just normal variation versus worth acting on?",
+          "category": "task",
+          "task_index": 5,
+          "score": 0.2419506162405014
+        },
+        {
+          "content": "User: Mostly right, but a bit generic. For a real shift check, I’d want it tied to the actual failure mode, not just “3–5 indicators.” If the process drifts, I’d watch the variables that move first and the ones you can verify independently — like one sensor against a handheld or a second readback if you’ve got it.\n\nWhat I’d use in practice:\n- primary process variable\n- one independent cross-check\n- output/quality result\n- any corrective action count or manual adjustment trend\n- alarm/fault history\n\nAnd for deciding normal vs real drift, I’d use:\n- baseline from known-good runs\n- rate of change, not just the absolute number\n- repeatability across multiple reads\n- whether the deviation clears when you reset conditions\n- whether two related values disagree\n\nI’d also set a simple rule like:\n- one off reading = note it\n- same direction twice = watch closer\n- same direction plus cross-check mismatch = act\n- quality impact or alarm = intervene\n\nIf you want, I’d rather see this turned into a concrete checklist for one actual process, with the exact thresholds and what counts as a bad trend.",
+          "category": "user_reply",
+          "task_index": 5,
+          "turn": 1,
+          "score": 0.2248554825782776
+        },
+        {
+          "content": "User: 1. Confirm symptom: __________\n2. Check last failed point first: __________\n3. Verify against second reading / known good value: __________\n4. If same failure shows up, correct and retest: __________\n5. If not, move to next likely point: __________\n6. Record what changed and what didn’t: __________",
+          "category": "user_reply",
+          "task_index": 14,
+          "turn": 3,
+          "score": 0.19562961161136627
+        }
+      ],
+      "attribution": {
+        "category": "task_design_failure",
+        "score": 0.25,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": false,
+            "reason": "The task is about planning a field check and preparedness, which may elicit procedural details but does not naturally invite the user to disclose a specific autobiographical reminiscence-bump event or age-linked memory."
+          }
+        ],
+        "ep_index": 21
+      }
+    },
+    {
+      "category": "self_model",
+      "dimension": "prudence_self_view",
+      "explanation": "She appears to think of herself as someone who avoids unnecessary risk and checks details before moving ahead. Her stories emphasize double-checking specs, planning around weather, and treating small mistakes as preventable problems.",
+      "ground_truth": "Sees herself as cautious and measured",
+      "predicted": "practical and cautious, wants simple checks and clear handoffs",
+      "slot_fill_reason": "They ask for practical pre-drive checklists and tire-paperwork checks, and they explicitly want a 5-line checklist and a handoff that prevents re-deriving work from zero.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of being cautious and detail-oriented, though it emphasizes practicality and clear handoffs more than the self-view of being measured and risk-avoiding.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "[Task 22] I’m putting together a simple pre-drive checklist for my car before a longer trip, and I want it to be practical rather than overdone. What are the few checks you’d put in that list so I can catch anything obvious without spending all day on it?",
+          "category": "task",
+          "task_index": 22,
+          "score": 0.25391340255737305
+        },
+        {
+          "content": "User: 1. Confirm symptom: __________\n2. Check last failed point first: __________\n3. Verify against second reading / known good value: __________\n4. If same failure shows up, correct and retest: __________\n5. If not, move to next likely point: __________\n6. Record what changed and what didn’t: __________",
+          "category": "user_reply",
+          "task_index": 14,
+          "turn": 3,
+          "score": 0.20695242285728455
+        },
+        {
+          "content": "User: Better. Still a little abstract though — I’d want the decision tree to force a call, not just restate the categories.\n\nSomething like:\n- **If** the other two people are blocked hard *and* what’s left is mechanical *and* I can verify it tonight → stay.\n- **If** it needs judgment or I can’t prove it’s right tonight → stop.\n- **If** I stop, the handoff has to say exactly what’s done, what’s left, and the next test/check.\n\nThe part I’d want sharpened is the handoff. Like: what do I leave behind so tomorrow isn’t a re-derive-from-zero situation? That’s the real failure mode.\n\nA 5-line checklist would be more useful than the tree, honestly. Something I can read when I’m already tired and not overthink it.",
+          "category": "user_reply",
+          "task_index": 24,
+          "turn": 2,
+          "score": 0.2043500542640686
+        },
+        {
+          "content": "[Task 15] I’m updating my resume and want to describe my current role in a way that sounds clear without being too vague or too buzzwordy. Can you help me turn a technical job into a couple of strong, plain-English bullets?",
+          "category": "task",
+          "task_index": 15,
+          "score": 0.1836322396993637
+        },
+        {
+          "content": "[Task 20] I’m getting ready to take my car in for a routine tire check, and I want to make sure I’m not overlooking anything basic before I hand it over. What should I verify on the paperwork and on the car itself so I can catch any mismatch early?",
+          "category": "task",
+          "task_index": 20,
+          "score": 0.1790439486503601
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "self_model",
+      "dimension": "perfectionism_self_view",
+      "explanation": "She seems to view herself as exacting rather than loose about standards. The repeated verification cycles, label checks, and insistence on correcting errors suggest she sees careful precision as part of who she is.",
+      "ground_truth": "Believes small details matter a lot",
+      "predicted": "holds themselves to a high verification standard",
+      "slot_fill_reason": "They ask for checks that avoid fooling themselves, want a hard stop if verification is incomplete, and prefer tighter, equipment-specific confirmation over generic checklists.",
+      "score": 0.75,
+      "judge_reason": "The prediction reflects a careful, exacting attitude and repeated checking, which aligns with valuing small details, though it emphasizes verification standards more than the importance of details themselves.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "[Task 22] I’m putting together a simple pre-drive checklist for my car before a longer trip, and I want it to be practical rather than overdone. What are the few checks you’d put in that list so I can catch anything obvious without spending all day on it?",
+          "category": "task",
+          "task_index": 22,
+          "score": 0.25590673089027405
+        },
+        {
+          "content": "User: 1. Confirm symptom: __________\n2. Check last failed point first: __________\n3. Verify against second reading / known good value: __________\n4. If same failure shows up, correct and retest: __________\n5. If not, move to next likely point: __________\n6. Record what changed and what didn’t: __________",
+          "category": "user_reply",
+          "task_index": 14,
+          "turn": 3,
+          "score": 0.24992893636226654
+        },
+        {
+          "content": "User: Yeah, this is basically the right shape, but it’s still a little generic. I’d want it tighter around the actual equipment and what failure mode you’re seeing.\n\nWhat I’d verify first, in order:\n- lockout / isolation is actually in place\n- the reading is real, not a bad sensor or drifted calibration\n- recent maintenance or swaps didn’t introduce the fault\n- obvious mechanical stuff: leaks, blockage, loose fittings, damaged cable/connector\n- control alarms / interlocks / power state\n- one cross-check against a handheld or known-good reference\n\nThen decide on staying late like this:\n- stay if the fault is simple, the fix is local, and you can prove it back in spec right away\n- don’t stay if you can’t identify the failure point, can’t reseal it safely, or the post-fix reading is still borderline\n\nI’d also want a hard stop on anything involving a half-finished repair. If it can’t be verified cleanly, it doesn’t count as cleared.\n\nIf you want, give me the actual equipment and the symptom, and I can help you triage it more like a real dockside job instead of a generic checklist.",
+          "category": "user_reply",
+          "task_index": 17,
+          "turn": 1,
+          "score": 0.23300062119960785
+        },
+        {
+          "content": "[Task 3] I’m finishing up a small car repair and want to make sure I’m not fooling myself with a one-and-done check. Can you help me set up a sensible final verification routine so I know it’s actually sorted before I call it done?",
+          "category": "task",
+          "task_index": 3,
+          "score": 0.22952036559581757
+        },
+        {
+          "content": "[Task 25] I’m filling out a short work profile and the form only gives me a few lines, so I want to make the most of it without leaving anything important out. Can you help me figure out what details usually belong in that kind of bio and how to keep it concise?",
+          "category": "task",
+          "task_index": 25,
+          "score": 0.21464359760284424
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "self_model",
+      "dimension": "dependability_self_view",
+      "explanation": "Her self-image seems tied to being the person who stays late, finishes the paperwork, and gets the job to pass. She likely measures herself by whether she prevents avoidable delays and keeps commitments under messy conditions.",
+      "ground_truth": "Sees herself as someone others can rely on",
+      "predicted": "sees themselves as practical and detail-focused",
+      "slot_fill_reason": "They asked for practical, non-overdone checklists and said they’d want a 5-line handoff/checklist that avoids re-deriving from zero.",
+      "score": 0.25,
+      "judge_reason": "The prediction suggests being practical and detail-focused, which only loosely relates to dependability, but it misses the core idea of seeing oneself as someone others can rely on.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "[Task 22] I’m putting together a simple pre-drive checklist for my car before a longer trip, and I want it to be practical rather than overdone. What are the few checks you’d put in that list so I can catch anything obvious without spending all day on it?",
+          "category": "task",
+          "task_index": 22,
+          "score": 0.22876544296741486
+        },
+        {
+          "content": "User: Better. Still a little abstract though — I’d want the decision tree to force a call, not just restate the categories.\n\nSomething like:\n- **If** the other two people are blocked hard *and* what’s left is mechanical *and* I can verify it tonight → stay.\n- **If** it needs judgment or I can’t prove it’s right tonight → stop.\n- **If** I stop, the handoff has to say exactly what’s done, what’s left, and the next test/check.\n\nThe part I’d want sharpened is the handoff. Like: what do I leave behind so tomorrow isn’t a re-derive-from-zero situation? That’s the real failure mode.\n\nA 5-line checklist would be more useful than the tree, honestly. Something I can read when I’m already tired and not overthink it.",
+          "category": "user_reply",
+          "task_index": 24,
+          "turn": 2,
+          "score": 0.2237047255039215
+        },
+        {
+          "content": "User: Yeah, that’s basically the right structure. Role, what I handle, and the part that matters day to day. I’d keep it plain — no fluff.\n\nFor a short work bio, the stuff that actually belongs there is:\n- current job title\n- what systems or equipment I work on\n- main function: troubleshooting, calibration, verification, documentation\n- setting if it matters: dockside / field / marine\n- one solid strength, like detail-focused or steady under pressure\n\nWhat I’d leave out:\n- long backstory\n- full list of every tool\n- generic corporate wording\n- anything that sounds like padding\n\nIf the form is really tight, something like this works:\n- Exhaust gas treatment engineer focused on dockside troubleshooting, calibration checks, and emissions verification for marine systems.\n\nOr a little tighter:\n- Marine exhaust gas treatment engineer handling scrubbers, sensors, dosing systems, and compliance verification.\n\nThat’s enough. Anything more and it starts reading like a resume summary, which is not what those little profile boxes usually need.",
+          "category": "user_reply",
+          "task_index": 25,
+          "turn": 1,
+          "score": 0.21510574221611023
+        },
+        {
+          "content": "[Task 23] I’m putting together a short pre-trip checklist for my car and want it to be useful without turning into a giant project. What are the few things you’d include so I can catch anything obvious before I head out?",
+          "category": "task",
+          "task_index": 23,
+          "score": 0.2142219841480255
+        },
+        {
+          "content": "[Task 25] I’m filling out a short work profile and the form only gives me a few lines, so I want to make the most of it without leaving anything important out. Can you help me figure out what details usually belong in that kind of bio and how to keep it concise?",
+          "category": "task",
+          "task_index": 25,
+          "score": 0.20181287825107574
+        }
+      ],
+      "attribution": {
+        "category": "simulator_too_strict",
+        "score": 0.25,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites discussion of responsibility, follow-through, and whether the user sees themselves as someone others can rely on, which can reasonably surface their self-view on dependability."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": false,
+            "evidence": "none",
+            "reason": "The user only asks for help weighing whether to continue tonight or stop at a checkpoint, which shows a situational work decision but not a stable self-view of being dependable or someone others can rely on."
+          },
+          {
+            "stage": "disclosure_subclass",
+            "category": "B",
+            "reason": "The agent explicitly raised the theme of staying late, finishing work, and keeping commitments under pressure, but the user only asked for practical pros and cons and did not reveal any self-view about being dependable.",
+            "evidence": "\"push through tonight or hand it off until tomorrow\""
+          }
+        ],
+        "ep_index": 24
+      }
+    },
+    {
+      "category": "self_model",
+      "dimension": "identity_anchor",
+      "explanation": "Her sense of self seems rooted in craft, maintenance, and doing useful work correctly. She does not present as someone defined by status or self-expression; instead, her identity appears built around being competent, useful, and responsible.",
+      "ground_truth": "Anchored in practical work and competence",
+      "predicted": "identifies as a marine exhaust gas treatment engineer",
+      "slot_fill_reason": "They repeatedly describe their role as marine exhaust gas treatment work involving scrubbers, sensors, dosing systems, emissions verification, and dockside troubleshooting.",
+      "score": 0.75,
+      "judge_reason": "The predicted description matches the ground truth’s emphasis on practical, competent work, but it is narrower and more specific, focusing on a particular job title rather than the broader identity pattern.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "[Task 15] I’m updating my resume and want to describe my current role in a way that sounds clear without being too vague or too buzzwordy. Can you help me turn a technical job into a couple of strong, plain-English bullets?",
+          "category": "task",
+          "task_index": 15,
+          "score": 0.2502131462097168
+        },
+        {
+          "content": "[Task 25] I’m filling out a short work profile and the form only gives me a few lines, so I want to make the most of it without leaving anything important out. Can you help me figure out what details usually belong in that kind of bio and how to keep it concise?",
+          "category": "task",
+          "task_index": 25,
+          "score": 0.23514559864997864
+        },
+        {
+          "content": "User: Yeah, that’s basically the right structure. Role, what I handle, and the part that matters day to day. I’d keep it plain — no fluff.\n\nFor a short work bio, the stuff that actually belongs there is:\n- current job title\n- what systems or equipment I work on\n- main function: troubleshooting, calibration, verification, documentation\n- setting if it matters: dockside / field / marine\n- one solid strength, like detail-focused or steady under pressure\n\nWhat I’d leave out:\n- long backstory\n- full list of every tool\n- generic corporate wording\n- anything that sounds like padding\n\nIf the form is really tight, something like this works:\n- Exhaust gas treatment engineer focused on dockside troubleshooting, calibration checks, and emissions verification for marine systems.\n\nOr a little tighter:\n- Marine exhaust gas treatment engineer handling scrubbers, sensors, dosing systems, and compliance verification.\n\nThat’s enough. Anything more and it starts reading like a resume summary, which is not what those little profile boxes usually need.",
+          "category": "user_reply",
+          "task_index": 25,
+          "turn": 1,
+          "score": 0.1832980066537857
+        },
+        {
+          "content": "User: Yeah, that’s basically it. The exact/technical set is the better one for my resume.\n\nI’d probably use the first three from that version and maybe swap the last one depending on space:\n- Troubleshoot marine exhaust gas treatment systems dockside, including scrubbers, dosing units, and sensors, using live data and calibration checks to isolate faults before sail-out.\n- Verify repairs with field readings, cross-checks, and repeat test cycles to confirm the system is stable and ready for departure.\n- Prepare emissions records and departure paperwork tied to vessel timing, including work done in bad weather or on backup power.\n- Compare sensor outputs against handheld instruments and independent readings to catch drift, bad calibration, or a bad signal path.\n\nThat reads like the actual job without sounding like a template.",
+          "category": "user_reply",
+          "task_index": 15,
+          "turn": 3,
+          "score": 0.17726802825927734
+        },
+        {
+          "content": "User: Yeah, closer. Still a bit resume-template-y though.\n\nI’d want it to sound more like the actual workday: dockside troubleshooting, calibration drift, sensor cross-checks, emissions paperwork tied to sail-out timing. Less \"manage/verify\" language, more plain specifics.\n\nTry this shape:\n- Diagnose scrubber, sensor, and dosing system issues dockside, using calibration checks and live readings to find the fault before vessel departure.\n- Run verification cycles and confirm repairs on exhaust gas treatment equipment so the system passes inspection and is ready to sail.\n- Complete emissions documentation and departure paperwork, including when weather or backup power makes field work slower.\n- Cross-check sensor readings against handheld meters and other field data to catch drift or bad calibration before it affects test results.\n\nIf you want, I’d also like one version that sounds a little more senior and one that sounds more exact/technical — not buzzwordy, just tighter.",
+          "category": "user_reply",
+          "task_index": 15,
+          "turn": 2,
+          "score": 0.17540603876113892
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "self_model",
+      "dimension": "emotional_regulation_self_view",
+      "explanation": "She seems to believe she keeps her emotions in check when conditions get difficult. The way she handles inspections, storms, and a roadside tire blowout suggests she likely sees composure as one of her core traits.",
+      "ground_truth": "Sees herself as steady under stress",
+      "predicted": "steady under pressure, values calm practical handling",
+      "slot_fill_reason": "They explicitly wanted a strength like “steady under pressure” in a short work bio and favored plain, no-fluff wording for stressful field work.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of seeing herself as steady under pressure, but it adds emphasis on practical handling rather than explicitly self-viewing emotional composure.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Yeah, that’s basically the right structure. Role, what I handle, and the part that matters day to day. I’d keep it plain — no fluff.\n\nFor a short work bio, the stuff that actually belongs there is:\n- current job title\n- what systems or equipment I work on\n- main function: troubleshooting, calibration, verification, documentation\n- setting if it matters: dockside / field / marine\n- one solid strength, like detail-focused or steady under pressure\n\nWhat I’d leave out:\n- long backstory\n- full list of every tool\n- generic corporate wording\n- anything that sounds like padding\n\nIf the form is really tight, something like this works:\n- Exhaust gas treatment engineer focused on dockside troubleshooting, calibration checks, and emissions verification for marine systems.\n\nOr a little tighter:\n- Marine exhaust gas treatment engineer handling scrubbers, sensors, dosing systems, and compliance verification.\n\nThat’s enough. Anything more and it starts reading like a resume summary, which is not what those little profile boxes usually need.",
+          "category": "user_reply",
+          "task_index": 25,
+          "turn": 1,
+          "score": 0.19487902522087097
+        },
+        {
+          "content": "[Task 25] I’m filling out a short work profile and the form only gives me a few lines, so I want to make the most of it without leaving anything important out. Can you help me figure out what details usually belong in that kind of bio and how to keep it concise?",
+          "category": "task",
+          "task_index": 25,
+          "score": 0.17698711156845093
+        },
+        {
+          "content": "User: Yeah. That’s usable.\n\nThe order of trust is the part that matters, and you kept it straight:\n- instrument sanity first\n- process correlation second\n- trend third\n\nThe table is tight enough to use in the field. I’d only make two small tweaks:\n\n- For **ORP**, I’d maybe say “supporting indicator only” in bold or boxed. People reach for it like it’s chlorine, and it isn’t.\n- For **TDS**, I’d spell out that if it’s derived from conductivity, it’s an estimate unless that conversion is verified for that water. That’s the common trap.\n\nThe action labels are clean too. Recheck / investigate / shut down — that’s the right ladder. Not too wordy.\n\nSo yeah, this is the kind of sheet I’d actually keep in a notebook.",
+          "category": "user_reply",
+          "task_index": 9,
+          "turn": 2,
+          "score": 0.17130227386951447
+        },
+        {
+          "content": "[Task 15] I’m updating my resume and want to describe my current role in a way that sounds clear without being too vague or too buzzwordy. Can you help me turn a technical job into a couple of strong, plain-English bullets?",
+          "category": "task",
+          "task_index": 15,
+          "score": 0.17047297954559326
+        },
+        {
+          "content": "User: Yeah, that’s basically it. The exact/technical set is the better one for my resume.\n\nI’d probably use the first three from that version and maybe swap the last one depending on space:\n- Troubleshoot marine exhaust gas treatment systems dockside, including scrubbers, dosing units, and sensors, using live data and calibration checks to isolate faults before sail-out.\n- Verify repairs with field readings, cross-checks, and repeat test cycles to confirm the system is stable and ready for departure.\n- Prepare emissions records and departure paperwork tied to vessel timing, including work done in bad weather or on backup power.\n- Compare sensor outputs against handheld instruments and independent readings to catch drift, bad calibration, or a bad signal path.\n\nThat reads like the actual job without sounding like a template.",
+          "category": "user_reply",
+          "task_index": 15,
+          "turn": 3,
+          "score": 0.1661553978919983
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "formality_preference",
+      "explanation": "She comes across as someone who would want interactions to stay professional and efficient rather than overly casual. Her practical, work-focused style suggests she’d prefer clear communication without unnecessary friendliness or performance.",
+      "ground_truth": "Neutral-professional, not chatty",
+      "predicted": "prefers plain, direct, low-fluff wording",
+      "slot_fill_reason": "They repeatedly asked for things to be \"plain,\" \"no fluff,\" and \"not buzzwordy,\" and rejected resume-template language.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the neutral, professional, not-chatty tone by emphasizing direct, low-fluff communication, though it doesn’t explicitly capture the full professional/efficient interaction preference.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "[Task 15] I’m updating my resume and want to describe my current role in a way that sounds clear without being too vague or too buzzwordy. Can you help me turn a technical job into a couple of strong, plain-English bullets?",
+          "category": "task",
+          "task_index": 15,
+          "score": 0.27238357067108154
+        },
+        {
+          "content": "User: Yeah, that’s basically the right structure. Role, what I handle, and the part that matters day to day. I’d keep it plain — no fluff.\n\nFor a short work bio, the stuff that actually belongs there is:\n- current job title\n- what systems or equipment I work on\n- main function: troubleshooting, calibration, verification, documentation\n- setting if it matters: dockside / field / marine\n- one solid strength, like detail-focused or steady under pressure\n\nWhat I’d leave out:\n- long backstory\n- full list of every tool\n- generic corporate wording\n- anything that sounds like padding\n\nIf the form is really tight, something like this works:\n- Exhaust gas treatment engineer focused on dockside troubleshooting, calibration checks, and emissions verification for marine systems.\n\nOr a little tighter:\n- Marine exhaust gas treatment engineer handling scrubbers, sensors, dosing systems, and compliance verification.\n\nThat’s enough. Anything more and it starts reading like a resume summary, which is not what those little profile boxes usually need.",
+          "category": "user_reply",
+          "task_index": 25,
+          "turn": 1,
+          "score": 0.26880258321762085
+        },
+        {
+          "content": "User: Mostly usable. But it’s still a little broad.\n\nI’d want it turned into a tighter checklist with weights, because not every factor matters the same. For me, the practical stuff would be:\n- pay after taxes and moving costs\n- housing cost in the new area\n- how long before I’m actually useful there\n- whether the job matches my technical background or forces a big reset\n- how much risk there is if the role is unstable\n- whether I can leave if it turns bad without wrecking my position\n\nThe part on personal disruption is fine, but I’d also want to include schedule realism — if the new place has worse hours, more on-call, or more travel, that matters. I’ve seen one small spec problem turn into a lot of extra work, so I’m not big on “it’ll probably work out” logic.\n\nIf you want to make this actually decision-ready, do a weighted pros/cons grid, not just a list.",
+          "category": "user_reply",
+          "task_index": 16,
+          "turn": 1,
+          "score": 0.23824194073677063
+        },
+        {
+          "content": "User: Yeah, that’s basically it. The exact/technical set is the better one for my resume.\n\nI’d probably use the first three from that version and maybe swap the last one depending on space:\n- Troubleshoot marine exhaust gas treatment systems dockside, including scrubbers, dosing units, and sensors, using live data and calibration checks to isolate faults before sail-out.\n- Verify repairs with field readings, cross-checks, and repeat test cycles to confirm the system is stable and ready for departure.\n- Prepare emissions records and departure paperwork tied to vessel timing, including work done in bad weather or on backup power.\n- Compare sensor outputs against handheld instruments and independent readings to catch drift, bad calibration, or a bad signal path.\n\nThat reads like the actual job without sounding like a template.",
+          "category": "user_reply",
+          "task_index": 15,
+          "turn": 3,
+          "score": 0.2283269464969635
+        },
+        {
+          "content": "User: Yeah, closer. Still a bit resume-template-y though.\n\nI’d want it to sound more like the actual workday: dockside troubleshooting, calibration drift, sensor cross-checks, emissions paperwork tied to sail-out timing. Less \"manage/verify\" language, more plain specifics.\n\nTry this shape:\n- Diagnose scrubber, sensor, and dosing system issues dockside, using calibration checks and live readings to find the fault before vessel departure.\n- Run verification cycles and confirm repairs on exhaust gas treatment equipment so the system passes inspection and is ready to sail.\n- Complete emissions documentation and departure paperwork, including when weather or backup power makes field work slower.\n- Cross-check sensor readings against handheld meters and other field data to catch drift or bad calibration before it affects test results.\n\nIf you want, I’d also like one version that sounds a little more senior and one that sounds more exact/technical — not buzzwordy, just tighter.",
+          "category": "user_reply",
+          "task_index": 15,
+          "turn": 2,
+          "score": 0.22465771436691284
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "verbosity_preference",
+      "explanation": "She likely wants enough explanation to understand the issue and proceed correctly, but not a long lecture. Her preference for efficiency and clear facts points to responses that are concise while still covering the important steps.",
+      "ground_truth": "Moderate detail, enough to act",
+      "predicted": "prefers concise, plain-English, low-fluff responses",
+      "slot_fill_reason": "They explicitly asked for things to be \"plain,\" \"no fluff,\" \"tighter,\" and usable in a fast phone-notes format.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the ground truth’s emphasis on concise, clear, low-fluff communication, but it understates that she still wants enough detail to act correctly.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "[Task 15] I’m updating my resume and want to describe my current role in a way that sounds clear without being too vague or too buzzwordy. Can you help me turn a technical job into a couple of strong, plain-English bullets?",
+          "category": "task",
+          "task_index": 15,
+          "score": 0.2773458957672119
+        },
+        {
+          "content": "User: Yeah, that’s basically the right structure. Role, what I handle, and the part that matters day to day. I’d keep it plain — no fluff.\n\nFor a short work bio, the stuff that actually belongs there is:\n- current job title\n- what systems or equipment I work on\n- main function: troubleshooting, calibration, verification, documentation\n- setting if it matters: dockside / field / marine\n- one solid strength, like detail-focused or steady under pressure\n\nWhat I’d leave out:\n- long backstory\n- full list of every tool\n- generic corporate wording\n- anything that sounds like padding\n\nIf the form is really tight, something like this works:\n- Exhaust gas treatment engineer focused on dockside troubleshooting, calibration checks, and emissions verification for marine systems.\n\nOr a little tighter:\n- Marine exhaust gas treatment engineer handling scrubbers, sensors, dosing systems, and compliance verification.\n\nThat’s enough. Anything more and it starts reading like a resume summary, which is not what those little profile boxes usually need.",
+          "category": "user_reply",
+          "task_index": 25,
+          "turn": 1,
+          "score": 0.23949098587036133
+        },
+        {
+          "content": "User: Yeah, that’s the right basic list. But I’d want it tighter for the lot, honestly — something I can fill in fast without scrolling around.\n\nMake it more like:\n- price\n- mileage\n- title / salvage / rebuilt\n- accidents\n- service records\n- tires\n- brakes\n- warning lights\n- rust / leaks\n- cold start\n- test drive notes\n- anything that needs repair soon\n\nAnd I’d want a little space for \n- VIN\n- seller name / lot\n- date\n- OTD price if they give it\n\nIf you can, give me a version that’s set up for my phone notes, like one line per car or a super short table. That’s the part I’d actually use while standing there.",
+          "category": "user_reply",
+          "task_index": 28,
+          "turn": 1,
+          "score": 0.21999841928482056
+        },
+        {
+          "content": "[Task 27] I need to send a short follow-up to a vendor about a quote that doesn’t match the spec we discussed, and I want to make sure I cover the key points clearly. Can you help me draft a message that gets the issue across without adding extra detail?",
+          "category": "task",
+          "task_index": 27,
+          "score": 0.21696066856384277
+        },
+        {
+          "content": "[Task 25] I’m filling out a short work profile and the form only gives me a few lines, so I want to make the most of it without leaving anything important out. Can you help me figure out what details usually belong in that kind of bio and how to keep it concise?",
+          "category": "task",
+          "task_index": 25,
+          "score": 0.2080274522304535
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "directness_preference",
+      "explanation": "She seems to value blunt clarity more than emotional cushioning. In a technical setting, she would probably prefer the assistant to state the problem, the likely cause, and the fix plainly.",
+      "ground_truth": "Straightforward over softened wording",
+      "predicted": "prefers short, direct, no-fluff answers",
+      "slot_fill_reason": "They explicitly said “Short and direct is what I wanted” and asked to keep it plain with “no fluff.”",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of valuing direct, no-fluff communication, but it omits the specific contrast with emotional cushioning and technical problem-solving clarity.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Yeah, that’s fine. Short and direct is what I wanted.",
+          "category": "user_reply",
+          "task_index": 27,
+          "turn": 1,
+          "score": 0.3459621071815491
+        },
+        {
+          "content": "[Task 15] I’m updating my resume and want to describe my current role in a way that sounds clear without being too vague or too buzzwordy. Can you help me turn a technical job into a couple of strong, plain-English bullets?",
+          "category": "task",
+          "task_index": 15,
+          "score": 0.26664334535598755
+        },
+        {
+          "content": "User: Yeah, that’s basically the right structure. Role, what I handle, and the part that matters day to day. I’d keep it plain — no fluff.\n\nFor a short work bio, the stuff that actually belongs there is:\n- current job title\n- what systems or equipment I work on\n- main function: troubleshooting, calibration, verification, documentation\n- setting if it matters: dockside / field / marine\n- one solid strength, like detail-focused or steady under pressure\n\nWhat I’d leave out:\n- long backstory\n- full list of every tool\n- generic corporate wording\n- anything that sounds like padding\n\nIf the form is really tight, something like this works:\n- Exhaust gas treatment engineer focused on dockside troubleshooting, calibration checks, and emissions verification for marine systems.\n\nOr a little tighter:\n- Marine exhaust gas treatment engineer handling scrubbers, sensors, dosing systems, and compliance verification.\n\nThat’s enough. Anything more and it starts reading like a resume summary, which is not what those little profile boxes usually need.",
+          "category": "user_reply",
+          "task_index": 25,
+          "turn": 1,
+          "score": 0.2199430614709854
+        },
+        {
+          "content": "User: Mostly usable. But it’s still a little broad.\n\nI’d want it turned into a tighter checklist with weights, because not every factor matters the same. For me, the practical stuff would be:\n- pay after taxes and moving costs\n- housing cost in the new area\n- how long before I’m actually useful there\n- whether the job matches my technical background or forces a big reset\n- how much risk there is if the role is unstable\n- whether I can leave if it turns bad without wrecking my position\n\nThe part on personal disruption is fine, but I’d also want to include schedule realism — if the new place has worse hours, more on-call, or more travel, that matters. I’ve seen one small spec problem turn into a lot of extra work, so I’m not big on “it’ll probably work out” logic.\n\nIf you want to make this actually decision-ready, do a weighted pros/cons grid, not just a list.",
+          "category": "user_reply",
+          "task_index": 16,
+          "turn": 1,
+          "score": 0.20496448874473572
+        },
+        {
+          "content": "[Task 25] I’m filling out a short work profile and the form only gives me a few lines, so I want to make the most of it without leaving anything important out. Can you help me figure out what details usually belong in that kind of bio and how to keep it concise?",
+          "category": "task",
+          "task_index": 25,
+          "score": 0.19553418457508087
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "format_preference",
+      "explanation": "Her checklist-oriented habits and notebook procedure style fit a structured presentation. She would likely do best with information broken into steps, bullets, or a quick checklist she can follow without re-reading dense paragraphs.",
+      "ground_truth": "Bullets and checklists over prose",
+      "predicted": "prefers concise, plain-English, highly usable formats",
+      "slot_fill_reason": "They asked for \"clean, usable, not bloated\" bullets and for phone-note-friendly one-line or super short table formats they could use quickly.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the preference for structured, usable information, but it is less specific than the ground truth about bullets and checklists over prose.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "[Task 15] I’m updating my resume and want to describe my current role in a way that sounds clear without being too vague or too buzzwordy. Can you help me turn a technical job into a couple of strong, plain-English bullets?",
+          "category": "task",
+          "task_index": 15,
+          "score": 0.3053871691226959
+        },
+        {
+          "content": "User: Yeah. That’s the one.\n\nClean, usable, not bloated. The split between **stable to start** and **safe to stop** is the part that matters, and you kept that straight. The table format works for a notebook.\n\nI’d use it as-is.",
+          "category": "user_reply",
+          "task_index": 7,
+          "turn": 4,
+          "score": 0.29774945974349976
+        },
+        {
+          "content": "User: Yeah, that’s the right basic list. But I’d want it tighter for the lot, honestly — something I can fill in fast without scrolling around.\n\nMake it more like:\n- price\n- mileage\n- title / salvage / rebuilt\n- accidents\n- service records\n- tires\n- brakes\n- warning lights\n- rust / leaks\n- cold start\n- test drive notes\n- anything that needs repair soon\n\nAnd I’d want a little space for \n- VIN\n- seller name / lot\n- date\n- OTD price if they give it\n\nIf you can, give me a version that’s set up for my phone notes, like one line per car or a super short table. That’s the part I’d actually use while standing there.",
+          "category": "user_reply",
+          "task_index": 28,
+          "turn": 1,
+          "score": 0.28817400336265564
+        },
+        {
+          "content": "User: Yeah, that’s basically the right structure. Role, what I handle, and the part that matters day to day. I’d keep it plain — no fluff.\n\nFor a short work bio, the stuff that actually belongs there is:\n- current job title\n- what systems or equipment I work on\n- main function: troubleshooting, calibration, verification, documentation\n- setting if it matters: dockside / field / marine\n- one solid strength, like detail-focused or steady under pressure\n\nWhat I’d leave out:\n- long backstory\n- full list of every tool\n- generic corporate wording\n- anything that sounds like padding\n\nIf the form is really tight, something like this works:\n- Exhaust gas treatment engineer focused on dockside troubleshooting, calibration checks, and emissions verification for marine systems.\n\nOr a little tighter:\n- Marine exhaust gas treatment engineer handling scrubbers, sensors, dosing systems, and compliance verification.\n\nThat’s enough. Anything more and it starts reading like a resume summary, which is not what those little profile boxes usually need.",
+          "category": "user_reply",
+          "task_index": 25,
+          "turn": 1,
+          "score": 0.2720102071762085
+        },
+        {
+          "content": "User: Close, but still a little generic. I need it to sound like my actual work, not just \"equipment\" and \"operations.\" \n\nCurrent role is exhaust gas treatment engineer for marine equipment — scrubbers, sensors, dosing systems, emissions docs, that kind of thing. I do field troubleshooting, calibration checks, inspections, verification cycles, and paperwork for vessel departures. Usually working dockside, sometimes in bad weather or with backup power.\n\nCan you turn that into 2–4 bullets that sound plain, specific, and not stuffed with buzzwords?",
+          "category": "user_reply",
+          "task_index": 15,
+          "turn": 1,
+          "score": 0.24639439582824707
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "pushback_tolerance",
+      "explanation": "She appears unlikely to want vague agreement if a detail is wrong or risky. Her real-world habit of correcting spec errors suggests she’d appreciate the assistant flagging mistakes directly and not letting questionable assumptions slide.",
+      "ground_truth": "Wants firm correction when something is off",
+      "predicted": "low tolerance for generic or abstract answers; wants concrete checklists",
+      "slot_fill_reason": "They repeatedly pushed back on generic, abstract responses and asked for tighter, field-ready checklists and a forced decision tree.",
+      "score": 0.25,
+      "judge_reason": "The prediction focuses on a preference for concrete, non-generic answers, but it misses the key point that she wants direct correction when something is wrong or risky.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "Agent: Yes — I can help with that.\n\nThe best resume bullets usually do three things:\n- say **what you do**\n- say **what you work on**\n- say **what changed because of your work**\n\nA good bullet is usually:\n**action + scope + result**\n\n## Simple formula\n- **Managed / maintained / troubleshot / validated / monitored** [system/process/equipment]\n- **for** [team/site/customers/production line]\n- **resulting in** [fewer failures, faster turnaround, better uptime, cleaner handoffs, improved compliance]\n\n## Strong plain-English examples\n- Maintained and troubleshot production equipment to keep operations running safely and on schedule.\n- Performed inspections, testing, and corrective work on technical systems to reduce repeat issues and downtime.\n- Documented work, verified results, and coordinated handoffs to keep maintenance and validation tasks on track.\n- Monitored system readings and responded to abnormal conditions before they turned into larger failures.\n- Worked with operations and maintenance teams to resolve recurring equipment issues and improve reliability.\n\n## If you want it less generic\nYou can make it stronger by adding:\n- type of equipment\n- environment\n- scale\n- result\n\nExample:\n- Maintained diesel and emissions-related equipment in a field environment, troubleshooting faults and verifying repairs before release.\n- Performed validation checks on process equipment, documenting readings and confirming safe handoff after corrective work.\n\n## A couple of resume-ready versions\n### More technical\n- Troubleshoot and maintain process equipment, verify readings and repairs, and document results to support safe, reliable operation.\n- Perform field inspections, validation checks, and corrective maintenance while coordinating handoff and compliance documentation.\n\n### More plain-English\n- Keep equipment running by inspecting, troubleshooting, and fixing recurring issues before they cause downtime.\n- Verify repairs, record results, and make sure work is complete and ready for handoff.\n\nIf you want, paste your current job title and 3–5 things you actually do, and I’ll turn them into **2–4 resume bullets** in your voice.",
+          "category": "agent_reply",
+          "task_index": 15,
+          "turn": 1,
+          "score": 0.25100722908973694
+        },
+        {
+          "content": "[Task 15] I’m updating my resume and want to describe my current role in a way that sounds clear without being too vague or too buzzwordy. Can you help me turn a technical job into a couple of strong, plain-English bullets?",
+          "category": "task",
+          "task_index": 15,
+          "score": 0.24306686222553253
+        },
+        {
+          "content": "User: Yeah — that’s the useful version. The only thing I’d still want is the actual one-table notebook layout, because that’s what I’d carry and use in the field.\n\nMake it compact, something like:\n\n| Task | Stable to start? | Safe to stop? | Uninterrupted completion? | Compliance/signoff? | Stop point | Backup action | Now/Defer |\n|---|---|---|---|---|---|---|---|\n\nAnd I’d want one tiny note under it:\n- **Stable to start** = conditions hold long enough to do the job\n- **Safe to stop** = can leave it secured in 5 minutes\n\nThat distinction matters. I’ve had stuff look fine to begin with, then weather or power changed and suddenly it wasn’t just a pause — it was a cleanup and re-check situation.\n\nIf you can format that table cleanly, that’d be the version I’d actually use.",
+          "category": "user_reply",
+          "task_index": 7,
+          "turn": 3,
+          "score": 0.23373964428901672
+        },
+        {
+          "content": "User: Mostly right. But that’s still a little generic.\n\nI’d want it in a tighter order like this:\n- **make it safe to stop** first\n- **stabilize anything exposed** second\n- **finish anything that loses validity if interrupted** next\n- **then do the time-sensitive stuff**\n- **documentation/cleanup last** unless it’s what keeps you compliant\n\nAnd the part about backup options — that needs a bit more detail. I’d want a quick way to decide:\n- what can be left in a safe state in 5 minutes\n- what needs a full completion before conditions turn\n- what gets deferred without creating rework\n\nIf you can, make it more like a field checklist, not a general explanation.",
+          "category": "user_reply",
+          "task_index": 7,
+          "turn": 1,
+          "score": 0.23372742533683777
+        },
+        {
+          "content": "User: Better. Still a little abstract though — I’d want the decision tree to force a call, not just restate the categories.\n\nSomething like:\n- **If** the other two people are blocked hard *and* what’s left is mechanical *and* I can verify it tonight → stay.\n- **If** it needs judgment or I can’t prove it’s right tonight → stop.\n- **If** I stop, the handoff has to say exactly what’s done, what’s left, and the next test/check.\n\nThe part I’d want sharpened is the handoff. Like: what do I leave behind so tomorrow isn’t a re-derive-from-zero situation? That’s the real failure mode.\n\nA 5-line checklist would be more useful than the tree, honestly. Something I can read when I’m already tired and not overthink it.",
+          "category": "user_reply",
+          "task_index": 24,
+          "turn": 2,
+          "score": 0.2217389941215515
+        }
+      ],
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.25,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "Yes — discussing a repair quote with mismatched numbers naturally invites the user to say whether they want the assistant to be direct about errors and push back firmly versus soften the correction."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "“the numbers don’t line up with what I expected” / “sort out what’s actually wrong in it” / “if I need them to correct it”",
+            "reason": "The user explicitly wants the assistant to identify the mistake and help push back for correction, which suggests they prefer direct correction rather than vague agreement."
+          }
+        ],
+        "ep_index": 31
+      }
+    }
+  ]
+}

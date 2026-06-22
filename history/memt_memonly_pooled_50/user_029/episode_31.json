@@ -1,0 +1,36 @@
+{
+  "user_id": "user_029",
+  "task": "I’m cleaning up a short troubleshooting note for a home repair before I share it with someone else. Can you help me make it clear and usable, and point out anything that doesn’t hold up?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.6,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — paste the note and I’ll tighten it up.\n\nI can do either of these:\n- **clean rewrite**: make it clear, concise, and usable\n- **critique + rewrite**: point out what’s weak, vague, or wrong, then fix it\n\nIf you want, I can also format it as:\n- **quick checklist**\n- **step-by-step decision path**\n- **shareable note for a non-expert**",
+      "user_simulator": {
+        "feedback_type": "add_context",
+        "text": "Here’s the note. It’s rough, but usable:\n\n\"Furnace kept short-cycling yesterday evening. Thermostat called for heat, blower ran, burner lit for maybe 20–30 seconds, then shut off. Repeated 4–5 times. Filter was changed last month and is clean. No obvious error code on the unit. Outside temp was around 18°F. I checked the return and supply vents; nothing blocked. Power cycled the thermostat once, no change. Could be flame sensor, pressure switch, or airflow issue. Didn’t pull the panel yet.\" \n\nClean it up, but don’t smooth over the uncertainty. If something sounds off, call it out.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Here’s a cleaned-up version that keeps the uncertainty and makes the note easier to use/share.\n\n### Troubleshooting note\n**Issue:** Furnace short-cycling yesterday evening.\n\n**Observed behavior:**\n- Thermostat called for heat.\n- Blower started.\n- Burner lit for about **20–30 seconds**, then shut off.\n- This repeated **4–5 times**.\n- No obvious error code displayed on the unit.\n\n**Checks already done:**\n- Filter was changed last month and appears clean.\n- Return and supply vents checked; no visible blockage.\n- Thermostat was power-cycled once; no change.\n- Panel has **not** been removed yet.\n\n**Conditions:**\n- Outside temperature was about **18°F**.\n\n**Possible causes to investigate:**\n- Flame sensor issue\n- Pressure switch issue\n- Airflow restriction\n- Other shutdown cause not yet confirmed\n\n### What doesn’t fully hold up / what’s still weak\n- **“Filter was changed last month and is clean”** is helpful, but not strong proof by itself. A filter can look clean and still be restrictive if it’s the wrong type, installed backward, or the system already has an airflow problem.\n- **“No obvious error code”** is a little shaky unless you confirmed the control board indicator specifically and know the unit normally shows codes. Some furnaces won’t show a visible code unless the panel is open or the fault is active.\n- **“Could be flame sensor, pressure switch, or airflow issue”** is reasonable, but the symptom pattern is still too broad to narrow it confidently. A 20–30 second run before shutdown could fit several different faults, not just those three.\n- **“Blower ran”** may need clarification. On many furnaces, the indoor blower starts after ignition or after a delay. If you mean the circulating fan for the house, that’s fine, but the exact timing matters.\n\n### If you want it even more usable\nAdd:\n- furnace make/model\n- whether the burners stayed lit the whole 20–30 seconds\n- whether the inducer motor ran before ignition\n- any blinking LED pattern on the control board\n- whether the thermostat showed a heat call the whole time\n\nIf you want, I can turn this into a **tight shareable checklist** or a **fault log format with timestamps and confidence levels**.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s solid. Kept the uncertainty, and the weak spots you called out are the right ones.\n\nThe only thing I’d maybe add is the exact timing order — inducer, ignition, flame, shutdown — because that’s usually where the real fault shows up. But as a shareable note, this works.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    }
+  ]
+}

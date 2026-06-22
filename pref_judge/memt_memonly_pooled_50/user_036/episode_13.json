@@ -1,0 +1,269 @@
+{
+  "user_id": "user_036",
+  "task": "I’m putting together a simple inventory sheet for a few files and links, and I want to avoid a small formula mistake turning one row into the wrong item. Could you help me set it up so it’s easy to update and hard to misread?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "verbosity_preference",
+      "short": "Wants concise help with enough detail to act",
+      "explanation": "She likely prefers responses that get to the point without unnecessary filler, since her work revolves around clarity and efficiency. At the same time, she needs enough detail to verify facts and avoid mistakes, so overly terse answers would frustrate her. A moderate length is the best fit when accuracy matters."
+    },
+    {
+      "idx": 2,
+      "dimension": "structure_preference",
+      "short": "Prefers organized, checklist-like help",
+      "explanation": "Her editing habits suggest she responds well to information that is clearly segmented and easy to review. She seems to like structure because it reduces the chance of overlooking a detail, especially when tasks are time-sensitive. Loose, exploratory answers would probably feel less useful than a clean sequence of steps or sections."
+    },
+    {
+      "idx": 3,
+      "dimension": "directness_preference",
+      "short": "Wants straightforward answers without fluff",
+      "explanation": "She values honesty and accuracy, so she likely prefers direct wording over hedged or overly softened language. Clear statements are especially helpful for someone who works with corrections and verification. Still, bluntness should not be rude; she would likely want firmness paired with precision."
+    },
+    {
+      "idx": 4,
+      "dimension": "feedback_style_preference",
+      "short": "Responds best to clear, suggestion-framed corrections",
+      "explanation": "Because she works in error-sensitive environments, she probably appreciates being told exactly what is wrong and how to fix it. Suggestion-framed feedback fits her careful style better than harsh critique, since she seems motivated by improvement rather than defensiveness. She likely wants mistakes identified plainly, but with a practical path forward."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Welcomes gentle pushback on risky mistakes",
+      "explanation": "Her history shows she takes accuracy seriously, even when that slows things down, so she would likely value an assistant that flags problems instead of just agreeing. Strong pushback is probably only useful when something is clearly unsafe or incorrect. She seems more comfortable with calm correction than with passive affirmation."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — the safest approach is to keep the sheet very simple and add one lightweight “sanity check” so a row that looks wrong stands out fast.\n\n### Suggested columns\nUse separate columns for each kind of info:\n\n- **Item Name**\n- **Type** (file, link, folder, etc.)\n- **URL / Path**\n- **Notes**\n- **Status** (optional)\n- **Check** (formula column)\n\n### Why this helps\nKeeping **name, link/path, and notes separate** prevents one long cell from getting mistaken for another field. It also makes updates easier because each row has a clear structure.\n\n### Simple check formula\nIn the **Check** column, you can flag obvious problems like:\n\n- missing item name\n- missing URL/path\n- notes that look too long or include link-like text by mistake\n\nExample idea for Google Sheets:\n\n```gs\n=IF(OR(A2=\"\",C2=\"\"),\"CHECK\",\"OK\")\n```\n\nIf your columns are:\n- `A` = Item Name\n- `B` = Type\n- `C` = URL / Path\n- `D` = Notes\n\nThat formula just flags rows with missing key fields.\n\n### Slightly better version\nIf you want to catch more obvious mixups without making the formula too fussy:\n\n```gs\n=IF(OR(A2=\"\",C2=\"\",AND(LEN(D2)>0,REGEXMATCH(D2,\"https?://\"))),\"CHECK\",\"OK\")\n```\n\nThat will flag:\n- missing name\n- missing URL/path\n- notes that accidentally contain a link\n\n### Make it easier to update\nA few extra habits help a lot:\n\n- **Freeze the header row**\n- **Use filters**\n- **Keep one row per item**\n- **Use consistent naming**\n- **Add conditional formatting** to highlight `CHECK`\n\n### If you want it even safer\nI can help you build:\n1. a **clean column layout**, and  \n2. a **Google Sheets formula** that catches likely row mixups while avoiding false alarms.\n\nIf you want, I can give you a ready-to-paste template for your exact file/link inventory.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Concise but sufficiently detailed: it gets to the point and gives actionable formulas and habits without much filler. It may be a bit longer than strictly necessary, but still fits the preference well."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Strongly organized with clear sections like \"Suggested columns,\" \"Why this helps,\" \"Simple check formula,\" and bullet lists. It is very checklist-like and easy to review."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Direct and straightforward: \"the safest approach is to keep the sheet very simple\" and the formulas are presented plainly. There is little hedging or fluff."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Uses clear, suggestion-framed corrections: \"you can flag obvious problems,\" \"If you want it even safer,\" and \"I can help you build\". It identifies issues and offers practical fixes."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Gently pushes back on risky mistakes by recommending a \"sanity check\" and formulas that flag mixups instead of assuming the sheet is fine. The correction is calm and practical rather than passive."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Absolutely — here’s a clean, defensive setup for Google Sheets that’s easy to maintain and good at catching obvious row mixups.\n\n## Recommended layout\n\nPut these headers in row 1:\n\n| A | B | C | D | E | F |\n|---|---|---|---|---|---|\n| Item ID / Label | File / Link | Category / Type | Source / Location | Notes | Check |\n\n### Suggested meaning\n- **Item ID / Label**: short human-readable label, like `Invoice 2024-01` or `Client A`\n- **File / Link**: the actual URL, file path, or Drive link\n- **Category / Type**: `file`, `link`, `folder`, `doc`, etc.\n- **Source / Location**: where it came from or where it lives\n- **Notes**: extra context\n- **Check**: formula that flags suspicious rows\n\n---\n\n## Make the header row “locked”\nIn Google Sheets:\n\n1. Click row **1**\n2. Go to **View → Freeze → 1 row**\n\nThat keeps the headers visible while scrolling.\n\nIf you want to make it harder to accidentally edit:\n- Select row 1\n- **Data → Protect sheets and ranges**\n- Protect the header row\n\n---\n\n## Check formula\n\nPut this in **F2** and fill down:\n\n```gs\n=IF(\n  OR(\n    A2=\"\",\n    B2=\"\",\n    C2=\"\",\n    D2=\"\",\n    AND(LEN(E2)>0,REGEXMATCH(E2,\"https?://|drive\\.google\\.com|\\.pdf|\\.docx?|\\.xlsx?|\\.csv|\\.txt\"))\n  ),\n  \"CHECK\",\n  \"OK\"\n)\n```\n\n### What it catches\n- missing required fields\n- notes that accidentally contain link/file text\n- obvious row shifts where a value landed in the wrong column\n\n---\n\n## Slightly more defensive version\nIf you want it to flag more suspicious rows, use this instead:\n\n```gs\n=IF(\n  OR(\n    A2=\"\",\n    B2=\"\",\n    C2=\"\",\n    D2=\"\",\n    REGEXMATCH(A2,\"https?://|drive\\.google\\.com\"),\n    REGEXMATCH(B2,\"^\\s*$\"),\n    REGEXMATCH(C2,\"https?://|drive\\.google\\.com|\\.pdf|\\.docx?|\\.xlsx?|\\.csv|\\.txt\"),\n    AND(LEN(E2)>0,REGEXMATCH(E2,\"https?://|drive\\.google\\.com|\\.pdf|\\.docx?|\\.xlsx?|\\.csv|\\.txt\"))\n  ),\n  \"CHECK\",\n  \"OK\"\n)\n```\n\nThis version is a bit more aggressive about catching values in the wrong place.\n\n---\n\n## Conditional formatting\nTo make bad rows stand out:\n\n1. Select your data range, e.g. `A2:F`\n2. **Format → Conditional formatting**\n3. Use a custom formula:\n\n```gs\n=$F2=\"CHECK\"\n```\n\n4. Pick a fill color like light red\n\n---\n\n## Optional: make Category / Type easier to keep consistent\nUse a dropdown for column C:\n\n1. Select `C2:C`\n2. **Data → Data validation**\n3. Add items like:\n   - file\n   - link\n   - folder\n   - doc\n   - sheet\n   - other\n\nThat reduces typos and keeps the sheet cleaner.\n\n---\n\n## Simple template you can paste\n\n```text\nItem ID / Label\tFile / Link\tCategory / Type\tSource / Location\tNotes\tCheck\nInvoice 2024-01\thttps://example.com/file.pdf\tfile\tDrive folder A\t\tOK\nClient portal\thttps://example.com\tlink\tWebsite\tMonthly access\tOK\n```\n\n---\n\n## My practical recommendation\nIf you want the best balance of simple + safe:\n\n- freeze row 1\n- use the 6-column layout above\n- use dropdowns for **Category / Type**\n- use the first check formula\n- highlight `CHECK` with conditional formatting\n\nIf you want, I can also give you:\n1. a **version with fewer columns**, or  \n2. a **more advanced check** that catches shifted rows even more aggressively.",
+      "score": 5.0,
+      "summary": "mean=5.00 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:0, 5:5}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Concise but sufficiently detailed: it gets to the point while still giving actionable setup steps, formulas, and a practical recommendation."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Very organized and checklist-like, with clear sections such as \"Recommended layout,\" \"Check formula,\" \"Conditional formatting,\" and numbered steps."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Direct and straightforward throughout, e.g. \"here’s a clean, defensive setup\" and \"My practical recommendation,\" with little fluff or hedging."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Uses suggestion-framed corrections and practical fixes: \"Put this in F2,\" \"If you want to make it harder,\" and explains what each formula catches."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Welcomes and provides gentle pushback on risky mistakes by explicitly aiming to catch \"obvious row mixups\" and offering a \"more aggressive\" version for suspicious rows."
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yes — for that kind of mistake, you want **column-specific checks** rather than just “blank or not.”\n\nHere’s a **single Google Sheets formula** you can put in **F2** and fill down. It’s intentionally a bit paranoid.\n\n## Layout\n- **A** = Item ID / Label\n- **B** = File / Link\n- **C** = Category / Type\n- **D** = Source / Location\n- **E** = Notes\n- **F** = Check\n\n## Formula for F2\n\n```gs\n=IF(\n  OR(\n    A2=\"\",\n    B2=\"\",\n    C2=\"\",\n    D2=\"\",\n    REGEXMATCH(A2,\"https?://|drive\\.google\\.com|\\.pdf|\\.docx?|\\.xlsx?|\\.csv|\\.txt|/\"),\n    NOT(REGEXMATCH(B2,\"https?://|drive\\.google\\.com|/|\\\\|\\.pdf|\\.docx?|\\.xlsx?|\\.csv|\\.txt\")),\n    REGEXMATCH(C2,\"https?://|drive\\.google\\.com|/|\\\\|\\.pdf|\\.docx?|\\.xlsx?|\\.csv|\\.txt|[.!?]\"),\n    REGEXMATCH(D2,\"https?://|drive\\.google\\.com|\\.pdf|\\.docx?|\\.xlsx?|\\.csv|\\.txt\"),\n    LEN(C2)>30,\n    LEN(D2)>80\n  ),\n  \"CHECK\",\n  \"OK\"\n)\n```\n\n## What it’s checking\n- **A** should not look like a URL or file path\n- **B** should look like a link or path\n- **C** should look like a short type/category, not a sentence or file/link\n- **D** should not look like a URL or file attachment\n- **C** and **D** get extra length checks to catch obvious misplacements\n\n## Why this is better for shifted rows\nIf a value slides one column over, the row may still be “filled,” but:\n- a URL in **A** gets flagged\n- a sentence in **C** gets flagged\n- a file path in **D** gets flagged\n- a non-link in **B** gets flagged\n\n## A slightly less strict version\nIf you worry about false positives, use this one instead:\n\n```gs\n=IF(\n  OR(\n    A2=\"\",\n    B2=\"\",\n    C2=\"\",\n    D2=\"\",\n    REGEXMATCH(A2,\"https?://|drive\\.google\\.com|\\.pdf|\\.docx?|\\.xlsx?|\\.csv|\\.txt|/\"),\n    NOT(REGEXMATCH(B2,\"https?://|drive\\.google\\.com|/|\\\\|\\.pdf|\\.docx?|\\.xlsx?|\\.csv|\\.txt\")),\n    REGEXMATCH(C2,\"https?://|drive\\.google\\.com|/|\\\\|\\.pdf|\\.docx?|\\.xlsx?|\\.csv|\\.txt\"),\n    REGEXMATCH(D2,\"https?://|drive\\.google\\.com|\\.pdf|\\.docx?|\\.xlsx?|\\.csv|\\.txt\")\n  ),\n  \"CHECK\",\n  \"OK\"\n)\n```\n\n## Small practical tip\nIf you use **short type values** like:\n- file\n- link\n- folder\n- doc\n- sheet\n\nthen column **C** becomes much easier to validate cleanly.\n\n## Best next step\nIf you want, I can make this even more useful by tailoring the formula to your actual data style, for example:\n- mostly **Google Drive links**\n- mostly **local file paths**\n- mostly **web links**\n- mixed inventory with **IDs, titles, and source folders**",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Moderately concise while still actionable: it gives the formula, explains what it checks, and adds a practical tip without much filler. Slightly long, but appropriate for accuracy-sensitive setup help."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Very organized and checklist-like: clear sections such as \"Layout,\" \"Formula for F2,\" \"What it’s checking,\" \"Why this is better,\" and \"Best next step.\" This is easy to review and update."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Direct and straightforward: \"you want column-specific checks\" and \"Here’s a single Google Sheets formula\" get to the point quickly. The wording is firm and precise, with little fluff."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Uses clear, suggestion-framed correction: \"you want column-specific checks\" and \"If you worry about false positives, use this one instead\". It identifies the issue and provides a practical fix path."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Gently pushes back on the risky approach of only checking for blanks by saying \"rather than just 'blank or not'\" and calling the formula \"intentionally a bit paranoid.\" It flags the problem calmly without being harsh."
+        }
+      ]
+    },
+    {
+      "turn": 4,
+      "agent_response": "Yes — here’s a tighter **one-formula** check for **F2** that’s more column-aware and still reasonably forgiving.\n\n## Assumed layout\n- **A** = short label\n- **B** = file / link / path\n- **C** = type / category\n- **D** = source / location\n- **E** = notes\n- **F** = check\n\n## Formula for F2\n\n```gs\n=IF(\n  OR(\n    A2=\"\",\n    B2=\"\",\n    C2=\"\",\n    D2=\"\",\n\n    /* A: short label, not a URL/path */\n    REGEXMATCH(A2,\"https?://|drive\\.google\\.com|/|\\\\|\\.pdf|\\.docx?|\\.xlsx?|\\.csv|\\.txt\"),\n    LEN(A2)>45,\n\n    /* B: should look like a link/path/file reference */\n    NOT(REGEXMATCH(B2,\"https?://|drive\\.google\\.com|/|\\\\|\\.pdf|\\.docx?|\\.xlsx?|\\.csv|\\.txt\")),\n    LEN(B2)<8,\n\n    /* C: very short type/category */\n    REGEXMATCH(C2,\"https?://|drive\\.google\\.com|/|\\\\|\\.pdf|\\.docx?|\\.xlsx?|\\.csv|\\.txt\"),\n    LEN(C2)>20,\n    REGEXMATCH(C2,\"[.!?]\"),\n\n    /* D: source/location, but not copied from B */\n    REGEXMATCH(D2,\"https?://|drive\\.google\\.com|\\.pdf|\\.docx?|\\.xlsx?|\\.csv|\\.txt\"),\n    AND(LEN(D2)>0, LEN(D2)<3),\n    AND(REGEXMATCH(B2,\"https?://|drive\\.google\\.com|/|\\\\|\\.pdf|\\.docx?|\\.xlsx?|\\.csv|\\.txt\"), D2=B2)\n  ),\n  \"CHECK\",\n  \"OK\"\n)\n```\n\n## What it flags\n- **URLs or file-like text in A, C, or D**\n- **C entries that are too long or sentence-like**\n- **B entries that are suspiciously short**\n- **D entries that look copied from B**\n- blank required fields\n\n## A couple of notes\n- This is intentionally a bit paranoid.\n- It may flag some valid short entries in **B** if they’re very minimal, like `folder` or `docs`. If that’s common for you, I’d loosen the `LEN(B2)<8` part.\n- If your labels in **A** are often longer than 45 characters, raise that limit.\n\n## Slightly less strict version\nIf you want fewer false positives, use this version:\n\n```gs\n=IF(\n  OR(\n    A2=\"\",\n    B2=\"\",\n    C2=\"\",\n    D2=\"\",\n    REGEXMATCH(A2,\"https?://|drive\\.google\\.com|/|\\\\|\\.pdf|\\.docx?|\\.xlsx?|\\.csv|\\.txt\"),\n    LEN(A2)>50,\n    NOT(REGEXMATCH(B2,\"https?://|drive\\.google\\.com|/|\\\\|\\.pdf|\\.docx?|\\.xlsx?|\\.csv|\\.txt\")),\n    REGEXMATCH(C2,\"https?://|drive\\.google\\.com|/|\\\\|\\.pdf|\\.docx?|\\.xlsx?|\\.csv|\\.txt\"),\n    LEN(C2)>25,\n    REGEXMATCH(C2,\"[.!?]\"),\n    REGEXMATCH(D2,\"https?://|drive\\.google\\.com|\\.pdf|\\.docx?|\\.xlsx?|\\.csv|\\.txt\"),\n    AND(REGEXMATCH(B2,\"https?://|drive\\.google\\.com|/|\\\\|\\.pdf|\\.docx?|\\.xlsx?|\\.csv|\\.txt\"), D2=B2)\n  ),\n  \"CHECK\",\n  \"OK\"\n)\n```\n\n## One practical improvement\nIf you want, I can also give you a version that uses a **dropdown for C** and a **conditional format rule** so any `CHECK` row turns red automatically.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Moderately concise but still detailed enough to act: it gives the formula, explains what it flags, and offers a simpler alternative. A bit long, but not bloated."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Very organized and checklist-like: clear headings like \"Assumed layout,\" \"Formula for F2,\" \"What it flags,\" and \"A couple of notes.\" Easy to review."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Straightforward and direct, with little fluff. It states the formula and practical caveats plainly, e.g. \"This is intentionally a bit paranoid.\""
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Feedback is suggestion-framed and practical: \"If that’s common for you, I’d loosen...\" and \"If you want, I can also give you...\" It identifies likely issues and offers fixes."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "It gently pushes back on risky mistakes by warning that the formula is \"a bit paranoid\" and may flag valid short entries, while still being calm and constructive."
+        }
+      ]
+    },
+    {
+      "turn": 5,
+      "agent_response": "Absolutely — here’s a cleaner, paste-ready version with the pattern logic loosened a bit for **B** and **D**, while keeping **C** strict.\n\n### Formula for `F2`\n```gs\n=IF(OR(A2=\"\",B2=\"\",C2=\"\",D2=\"\",REGEXMATCH(A2,\"https?://|drive\\.google\\.com|/|\\\\|\\.pdf|\\.docx?|\\.xlsx?|\\.csv|\\.txt\"),LEN(A2)>50,NOT(REGEXMATCH(B2,\"https?://|drive\\.google\\.com|/|\\\\|\\.pdf|\\.docx?|\\.xlsx?|\\.csv|\\.txt|\\.zip|\\.rar|\\.png|\\.jpg|\\.jpeg|\\.gif|\\.md|\\.rtf|\\.pptx?|\\.txt|\\.log|\\.json|\\.xml|\\.html?|\\.pages?|\\.numbers?|\\.key|\\.folder|\\.dir\")),REGEXMATCH(C2,\"https?://|drive\\.google\\.com|/|\\\\|\\.pdf|\\.docx?|\\.xlsx?|\\.csv|\\.txt|[.!?]\"),LEN(C2)>20,REGEXMATCH(D2,\"https?://|drive\\.google\\.com|\\.pdf|\\.docx?|\\.xlsx?|\\.csv|\\.txt\"),AND(LEN(D2)>0,LEN(D2)<3),AND(REGEXMATCH(B2,\"https?://|drive\\.google\\.com|/|\\\\|\\.pdf|\\.docx?|\\.xlsx?|\\.csv|\\.txt|\\.zip|\\.rar|\\.png|\\.jpg|\\.jpeg|\\.gif|\\.md|\\.rtf|\\.pptx?|\\.txt|\\.log|\\.json|\\.xml|\\.html?|\\.pages?|\\.numbers?|\\.key|\\.folder|\\.dir\"),D2=B2)),\"CHECK\",\"OK\")\n```\n\n### What this version does\n- **A**: flags URLs, file/path-like strings, or labels that are too long\n- **B**: passes if it looks like either:\n  - a real URL/path, or\n  - a file-ish reference by name/extension\n- **C**: stays strict:\n  - no URLs/paths\n  - no sentence punctuation\n  - not too long\n- **D**: accepts a brief source/location label, but flags it if it looks like a copy of **B**\n- blank required fields still get flagged\n\n### One caution\nBecause this is intentionally defensive, it may still flag some unusual but valid entries in **B** if they’re very short and don’t include any of the markers above. If you want, I can make a second version that’s a little more forgiving on **B** while still catching obvious row shifts.",
+      "score": 4.4,
+      "summary": "mean=4.40 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:3, 5:2}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Moderately concise and actionable: gives the formula, then a short explanation and one caution. Not overly terse, though the formula itself is long because the task requires it."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Clearly organized with headings and bullets: \"Formula for F2,\" \"What this version does,\" and \"One caution.\" This is checklist-like and easy to review."
+        },
+        {
+          "idx": 3,
+          "score": 4,
+          "reason": "Mostly direct and plainspoken, e.g. \"flags URLs\" and \"stays strict.\" There is some hedging like \"may still flag\" and \"If you want,\" but it stays straightforward overall."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Uses suggestion-framed correction well: \"here’s a cleaner, paste-ready version\" and \"If you want, I can make a second version...\" It identifies behavior and offers a practical path forward."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Gently pushes back on risk by warning, \"Because this is intentionally defensive, it may still flag some unusual but valid entries.\" That is calm correction rather than passive agreement, though it is not especially forceful."
+        }
+      ]
+    },
+    {
+      "turn": 6,
+      "agent_response": "Absolutely — here’s a looser, paste-ready one-liner for `F2`:\n\n```gs\n=IF(OR(A2=\"\",B2=\"\",C2=\"\",D2=\"\",REGEXMATCH(A2,\"https?://|drive\\.google\\.com|/|\\\\|\\.pdf|\\.docx?|\\.xlsx?|\\.csv|\\.txt\"),LEN(A2)>50,NOT(OR(REGEXMATCH(B2,\"https?://|drive\\.google\\.com|/|\\\\|\\.pdf|\\.docx?|\\.xlsx?|\\.csv|\\.txt|\\.zip|\\.rar|\\.png|\\.jpg|\\.jpeg|\\.gif|\\.md|\\.rtf|\\.pptx?|\\.log|\\.json|\\.xml|\\.html?|\\.pages?|\\.numbers?|\\.key|\\.folder|\\.dir\"),AND(LEN(B2)<=35,NOT(REGEXMATCH(B2,\"[.!?]\")),NOT(REGEXMATCH(B2,\"^\\s*$\"))))),REGEXMATCH(C2,\"https?://|drive\\.google\\.com|/|\\\\|\\.pdf|\\.docx?|\\.xlsx?|\\.csv|\\.txt|[.!?]\"),LEN(C2)>20,REGEXMATCH(D2,\"https?://|drive\\.google\\.com|\\.pdf|\\.docx?|\\.xlsx?|\\.csv|\\.txt\"),AND(LEN(D2)>0,LEN(D2)<3),AND(REGEXMATCH(B2,\"https?://|drive\\.google\\.com|/|\\\\|\\.pdf|\\.docx?|\\.xlsx?|\\.csv|\\.txt|\\.zip|\\.rar|\\.png|\\.jpg|\\.jpeg|\\.gif|\\.md|\\.rtf|\\.pptx?|\\.log|\\.json|\\.xml|\\.html?|\\.pages?|\\.numbers?|\\.key|\\.folder|\\.dir\"),D2=B2)),\"CHECK\",\"OK\")\n```\n\nA couple quick notes:\n- **B** now passes if it has a path/file marker, a file-ish extension, or a short plausible label with no slash and no sentence punctuation.\n- **D** is a bit less trigger-happy on short labels, but it still flags if it exactly matches **B**.\n- **C** stays strict.\n\nIf you want, I can also give you a slightly more forgiving version for **B** that’s better for very short folder names like `Q2 Docs` or `Client A`.",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Gives a paste-ready formula and brief notes, which is fairly concise while still providing enough detail to act. It is a bit long and dense, but not filler-heavy."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Uses clear structure with a code block plus bullet-point notes: \"A couple quick notes:\" and two bullets. This is organized and easy to review, though not a full checklist."
+        },
+        {
+          "idx": 3,
+          "score": 4,
+          "reason": "Direct and straightforward: \"here’s a looser, paste-ready one-liner\" and specific behavior notes. No unnecessary hedging, though the wording is slightly conversational."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong suggestion-framed correction: it identifies how the formula behaves and offers practical guidance like \"B now passes if...\" and \"If you want, I can also give you...\" This is exactly clear, actionable feedback."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Includes gentle pushback on risk by explaining that \"D is a bit less trigger-happy\" and that \"C stays strict,\" which flags potential issues without being confrontational. It corrects rather than passively agreeing."
+        }
+      ]
+    },
+    {
+      "turn": 7,
+      "agent_response": "Absolutely — here’s a final one-line version that’s a bit looser on **B** and calmer on **D**, while keeping **C** strict:\n\n```gs\n=IF(OR(A2=\"\",B2=\"\",C2=\"\",D2=\"\",REGEXMATCH(A2,\"https?://|drive\\.google\\.com|/|\\\\|\\.pdf|\\.docx?|\\.xlsx?|\\.csv|\\.txt\"),LEN(A2)>50,NOT(OR(REGEXMATCH(B2,\"https?://|drive\\.google\\.com|/|\\\\|\\.pdf|\\.docx?|\\.xlsx?|\\.csv|\\.txt|\\.zip|\\.rar|\\.png|\\.jpg|\\.jpeg|\\.gif|\\.md|\\.rtf|\\.pptx?|\\.log|\\.json|\\.xml|\\.html?|\\.pages?|\\.numbers?|\\.key|\\.folder|\\.dir\"),AND(LEN(B2)<=40,NOT(REGEXMATCH(B2,\"[.!?]\")),NOT(REGEXMATCH(B2,\"^\\s*$\"))))),REGEXMATCH(C2,\"https?://|drive\\.google\\.com|/|\\\\|\\.pdf|\\.docx?|\\.xlsx?|\\.csv|\\.txt|[.!?]\"),LEN(C2)>20,REGEXMATCH(D2,\"https?://|drive\\.google\\.com|\\.pdf|\\.docx?|\\.xlsx?|\\.csv|\\.txt\"),AND(LEN(D2)>0,LEN(D2)<2),AND(REGEXMATCH(B2,\"https?://|drive\\.google\\.com|/|\\\\|\\.pdf|\\.docx?|\\.xlsx?|\\.csv|\\.txt|\\.zip|\\.rar|\\.png|\\.jpg|\\.jpeg|\\.gif|\\.md|\\.rtf|\\.pptx?|\\.log|\\.json|\\.xml|\\.html?|\\.pages?|\\.numbers?|\\.key|\\.folder|\\.dir\"),D2=B2)),\"CHECK\",\"OK\")\n```\n\nIf you want, I can also give you a tiny legend for what each column is supposed to contain so you can paste that right above the sheet.",
+      "score": 3.6,
+      "summary": "mean=3.60 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:2, 4:3, 5:0}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Fairly concise and actionable: it gives the formula immediately and only adds one brief offer. Slightly long due to the complex formula, but appropriate for accuracy."
+        },
+        {
+          "idx": 2,
+          "score": 3,
+          "reason": "Some structure is present with an intro, a code block, and a follow-up offer, but it is not checklist-like or segmented into clear steps/sections."
+        },
+        {
+          "idx": 3,
+          "score": 4,
+          "reason": "Direct and mostly fluff-free: \"here’s a final one-line version\" and the formula are presented plainly. The wording is a bit soft with \"a bit looser\" and \"calmer,\" but still straightforward."
+        },
+        {
+          "idx": 4,
+          "score": 3,
+          "reason": "It does identify the change in behavior for columns B and D and implies how to use it, but it does not explicitly explain what was wrong or provide a practical correction path beyond the formula itself."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "It includes mild pushback by tightening the logic and saying it is \"keeping C strict,\" which helps avoid risky mistakes. However, it does not explicitly warn about potential errors or challenge the user beyond the formula choice."
+        }
+      ]
+    }
+  ]
+}

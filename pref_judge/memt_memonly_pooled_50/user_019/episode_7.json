@@ -1,0 +1,203 @@
+{
+  "user_id": "user_019",
+  "task": "I’ve got a time-sensitive issue at work, and the next step depends on what the evidence shows. Can you help me map out a clean way to handle it if the situation starts moving faster than expected?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "directness_preference",
+      "short": "Blunt, no fluff",
+      "explanation": "She responds best to straight answers without hedging or performative softness. Her persona is skeptical and exacting, so she likely prefers help that states the issue clearly and gets to the point. Overly cautious wording would probably feel inefficient to her."
+    },
+    {
+      "idx": 2,
+      "dimension": "detail_level_preference",
+      "short": "Enough context to trust the answer",
+      "explanation": "She likely wants the key caveats and failure modes, not a vague headline. Her reliability-oriented mindset suggests she values context when it changes the conclusion or action. She probably dislikes being told something is “fine” without the conditions that make it fine."
+    },
+    {
+      "idx": 3,
+      "dimension": "format_preference",
+      "short": "Bullets and checklists preferred",
+      "explanation": "She seems likely to prefer responses that are easy to audit and act on. A structured format fits her methodical style and makes it easier to spot gaps, exceptions, or weak logic. Dense prose would probably feel slower and less useful."
+    },
+    {
+      "idx": 4,
+      "dimension": "autonomy_support_preference",
+      "short": "Collaborative, but not hand-holding",
+      "explanation": "She likely wants the assistant to work with her rather than dictate to her. She values control and personal autonomy, so prescriptive overreach would be a poor fit. At the same time, she probably appreciates a clear recommendation once the options are laid out."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Welcomes firm pushback",
+      "explanation": "She is likely comfortable being challenged when a claim is weak, risky, or sloppy. Her reliability-first mindset suggests she would rather get corrected than be coddled. Soft agreement without scrutiny would probably reduce her trust in the help."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — the cleanest way is to set up a **fast, evidence-gated decision path** with a **hard stop rule** before you start.\n\n### 1) Define the failure in pass/fail terms\nWrite down:\n- **What exactly counts as “the issue”**\n- **What evidence would confirm it**\n- **What evidence would rule it out**\n\nIf it’s moving quickly, avoid vague “looks better/worse” language.\n\n### 2) Split into 2–3 likely hypotheses\nRank suspects by:\n- **Likelihood**\n- **Cost/time to test**\n- **Impact if wrong**\n\nKeep it small. If the situation is changing fast, a big matrix wastes time.\n\n### 3) Predefine kill criteria\nFor each hypothesis, decide in advance:\n- **What result kills it**\n- **What result keeps it alive**\n\nExample:\n- “If the problem does not correlate with X, then X is not the cause.”\n- “If the issue still appears after Y is removed, Y is not sufficient.”\n\n### 4) Set a hard stop rule\nBefore you act, define:\n- **How long you’ll run the test**\n- **What trend means you stop early**\n- **What condition means you escalate immediately**\n\nThis prevents chasing the problem past the point of useful evidence.\n\n### 5) Use leading indicators, not just final outcome\nIf the process can accelerate, watch the early signals:\n- temperature\n- current\n- pressure\n- rate of change\n- error frequency\n\nThese often tell you where it’s headed before the final failure.\n\n### 6) Decide the next action from the evidence\nUse a simple decision box:\n- **Hypothesis killed** → move to next suspect\n- **Hypothesis supported** → run a confirmatory test\n- **Unclear / drifting fast** → stop, preserve state, escalate\n\n### 7) Keep a one-page log\nTrack:\n- time\n- condition\n- change made\n- observation\n- decision\n- next step\n\nThat keeps the process from turning into hand-waving under pressure.\n\nIf you want, I can turn this into a **one-page decision template** you can use live while the situation is unfolding.",
+      "score": 4.6,
+      "summary": "mean=4.60 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:2, 5:3}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct and blunt: opens with \"the cleanest way is\" and gives concrete steps without hedging or softness."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Provides useful caveats and failure modes, e.g. \"avoid vague 'looks better/worse' language,\" \"big matrix wastes time,\" and \"stop, preserve state, escalate.\""
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured with numbered sections, bullets, and a decision box; easy to audit and act on."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative rather than dictatorial, with actionable guidance and an offer to adapt: \"If you want, I can turn this into a one-page decision template.\" Slightly prescriptive, but not hand-holding."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Includes firm corrective guidance like \"avoid vague\" and \"stop, preserve state, escalate,\" but it doesn't explicitly challenge the user's assumptions or push back on a weak claim."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — use this as a **live, evidence-gated runbook**:\n\n## Fast decision path\n\n### 0) Freeze first\nBefore touching anything:\n- **Stop nonessential changes**\n- **Lock current settings/lot/operator/material/chamber/software version**  \n- **Do not “try a quick fix” yet**\n- **Start a timestamped log**\n\nIf you can’t freeze it, the evidence gets contaminated.\n\n---\n\n### 1) Check first: is the problem still active?\nCollect only the minimum needed to answer:\n- **Pass/fail status**\n- **When it started**\n- **What changed most recently**\n- **Leading indicators**: temp / current / pressure / rate of change / error frequency\n\nDecision:\n- **Active and worsening** → go to escalation path\n- **Active but stable** → continue evidence capture\n- **Not reproducible right now** → preserve state and test the last known trigger only\n\n---\n\n### 2) Lock the variables\nFreeze these unless they are the suspected cause:\n- recipe / setup\n- lot / material\n- operator\n- machine / chamber / tool\n- calibration state\n- environmental conditions\n- timing / dwell / cycle count\n\nRule:\n- **One change at a time**\n- If multiple things changed, **revert to last known good** before testing anything else\n\n---\n\n### 3) Decide what evidence you need\nUse a simple matrix:\n\n| Evidence | If true | If false |\n|---|---|---|\n| Problem tracks with X | X stays in play | X is killed |\n| Problem disappears when Y is removed | Y is likely causal | Y is not sufficient |\n| Leading indicator drifts before failure | drift path confirmed | look elsewhere |\n\nKeep it to **2–3 suspects max**.\n\n---\n\n### 4) When to stop collecting and make the call\nStop and decide when **any** of these are true:\n- you have a **clear correlation**\n- you have a **clean kill** of a hypothesis\n- the process hits the **pre-set stop threshold**\n- the evidence window is being lost by further drift or changes\n\nDon’t keep sampling just because people want more comfort.\n\n---\n\n### 5) Escalation trigger\nEscalate immediately if:\n- the issue is **accelerating**\n- a leading indicator crosses a **pre-set threshold**\n- the process is moving outside the **worst realistic corner case**\n- you can’t preserve the current state long enough to test cleanly\n\nUse a trigger like:\n- “If rate of change doubles”\n- “If temp/current/pressure crosses X”\n- “If another variable changes before we finish capture”\n\n---\n\n### 6) What to document\nOne page, no prose:\n- time started\n- exact failure definition\n- frozen variables\n- suspect list\n- evidence collected\n- what was ruled out\n- what was supported\n- stop/escalation threshold\n- decision made\n- next action\n\n---\n\n## Short decision tree\n**Problem appears**\n→ Freeze variables  \n→ Capture leading indicators + last change  \n→ Ask: “Can I reproduce the trigger without adding noise?”\n- **Yes** → test one suspect at a time\n- **No** → preserve state, log, escalate if window is closing\n\nThen:\n- **Evidence supports suspect** → confirm with worst-case / repeat run\n- **Evidence kills suspect** → move to next\n- **Evidence unclear but drift is increasing** → stop and escalate\n\nIf you want, I can turn this into a **one-page fill-in template** you can use on the floor or in a live meeting.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct and blunt: \"use this as a live, evidence-gated runbook,\" \"Freeze first,\" \"Don’t keep sampling just because people want more comfort.\" No hedging or fluff."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Gives concrete caveats and failure modes: \"If you can’t freeze it, the evidence gets contaminated,\" \"One change at a time,\" \"evidence window is being lost by further drift or changes.\" Enough context to trust the advice."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Highly structured and audit-friendly: numbered sections, bullets, a matrix, and a short decision tree. Easy to scan and act on."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative rather than dictatorial: it lays out options and triggers, and ends with \"If you want, I can turn this into a one-page fill-in template.\" Slightly prescriptive, but still supports user control."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Firm pushback is explicit: \"Do not 'try a quick fix' yet,\" \"Don’t keep sampling just because people want more comfort.\" It challenges sloppy or comfort-seeking behavior directly."
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "agent_response": "### 30-second first pass\n- **Name the failure**\n- **Mark time started**\n- **Freeze current state**\n- **Capture last change**\n- **Check if it’s still moving**\n- **Decide: test / hold / escalate**\n\n---\n\n### Freeze list, in order\n1. **Stop nonessential changes**\n2. **Lock current setup/config**\n3. **Record lot/material/unit ID**\n4. **Record operator / shift**\n5. **Record machine/tool/chamber state**\n6. **Record environment / cycle / timing**\n7. **Block any “quick fix” until evidence is captured**\n\n---\n\n### Stop / escalate rule\n- **Stop collecting** when you have either:\n  - a clear pass/fail answer, or\n  - enough evidence to kill one suspect\n- **Escalate immediately** if:\n  - the issue is getting worse while you’re collecting\n  - the key condition is changing faster than you can record it\n  - you can’t keep the state stable long enough to test cleanly\n\nPlain version: **if the window is closing, stop arguing and escalate.**\n\n---\n\n### Minimal log\n- **Time**\n- **Observed symptom**\n- **Last known change**\n- **Frozen variables**\n- **What was checked**\n- **Result**\n- **Decision**\n- **Next action**\n\n---\n\n### Tiny decision tree\n**Issue appears**\n→ **Freeze state + log last change**\n→ **Can I test cleanly right now?**\n- **Yes** → run one check\n- **No** → hold state and escalate if it’s drifting\n- **Still unclear** → stop, preserve evidence, move to next suspect\n\nIf you want, I can compress this one step further into a **single-screen pocket card** version.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct and blunt: \"Name the failure,\" \"Freeze current state,\" \"Plain version: if the window is closing, stop arguing and escalate.\" No hedging or softness."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Gives concrete caveats and failure modes: \"Escalate immediately if... the issue is getting worse,\" \"the key condition is changing faster than you can record it,\" and \"Stop collecting when... enough evidence to kill one suspect.\""
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Highly structured and scannable: multiple bullet lists, numbered steps, and a \"Tiny decision tree.\" This is exactly checklist-style formatting."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative and action-oriented without being overbearing: it lays out options like \"Can I test cleanly right now?\" and ends with \"If you want, I can compress this...\" It does give a clear recommendation, but not in a hand-holding way."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Firm pushback is explicit: \"stop arguing and escalate\" and \"Block any 'quick fix' until evidence is captured.\" It challenges sloppy or risky action rather than smoothing it over."
+        }
+      ]
+    },
+    {
+      "turn": 4,
+      "agent_response": "### 30-second first pass\n- Name it\n- Time it\n- Freeze it\n- Capture the last change\n- Check if it’s still moving\n- Decide: test / hold / escalate\n\n### Freeze list, top 5\n1. Stop nonessential changes\n2. Lock current setup\n3. Record unit / lot ID\n4. Record machine / chamber / tool state\n5. Record environment and cycle status\n\n### Stop / escalate\n**If the condition is changing faster than you can lock it down, stop and escalate.**\n\n### Minimal log\n- Time\n- Symptom\n- Last change\n- What was frozen\n- Decision\n\n### Tiny decision tree\n**If you can test cleanly now, do one check.  \nIf you can’t, hold state.  \nIf it’s still drifting, stop and escalate.**",
+      "score": 4.6,
+      "summary": "mean=4.60 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:2, 5:3}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct and blunt: \"Name it / Time it / Freeze it\" and \"stop and escalate\". No hedging or softness."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Gives useful context and failure mode handling via \"If the condition is changing faster than you can lock it down\" and the decision tree, though it stays fairly minimal."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured with bullets, numbered list, and a \"Tiny decision tree,\" which is easy to audit and act on."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative and action-oriented rather than dictating a single path: \"If you can test cleanly now, do one check. If you can’t, hold state.\" It gives options plus a recommendation."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Clear firm pushback: \"If the condition is changing faster than you can lock it down, stop and escalate.\" It corrects risky action instead of smoothing it over."
+        }
+      ]
+    },
+    {
+      "turn": 5,
+      "agent_response": "### 30-second first pass\n- Name the failure\n- Time it\n- Stop new changes\n- Grab the last change\n- Check if it’s still moving\n\n### Freeze list\n1. Stop the next change\n2. Lock the current setup\n3. Record the unit / lot\n4. Record the machine / chamber / tool\n5. Record the environment / cycle state\n\n### Stop / escalate\n**If it’s changing faster than you can lock it down, stop and escalate.**\n\n### Minimal log\n- Time\n- Symptom\n- Last change\n- Decision\n\n### Decision tree\n- **Can you test cleanly right now?** Do one check.\n- **Can’t test cleanly?** Hold state.\n- **Still drifting?** Stop and escalate.",
+      "score": 4.4,
+      "summary": "mean=4.40 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:3, 5:2}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct and terse: phrases like \"Name the failure,\" \"Stop new changes,\" and \"If it’s changing faster than you can lock it down, stop and escalate\" get straight to the point with no fluff."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Gives useful context and failure-mode handling via \"Freeze list,\" \"Minimal log,\" and the decision tree. It includes key caveats like \"Can’t test cleanly? Hold state\" and \"Still drifting? Stop and escalate,\" though it stays fairly compressed."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured with bullets, numbered lists, and labeled sections: \"30-second first pass,\" \"Freeze list,\" \"Stop / escalate,\" \"Minimal log,\" and \"Decision tree.\" This is highly scannable and audit-friendly."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative and action-oriented rather than overbearing. It offers a framework and options like \"Can you test cleanly right now?\" and \"Can’t test cleanly? Hold state,\" then gives a clear recommendation to stop/escalate when needed."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "It does push back firmly on unsafe momentum: \"If it’s changing faster than you can lock it down, stop and escalate\" and \"Still drifting? Stop and escalate.\" It corrects the situation without softening the warning."
+        }
+      ]
+    }
+  ]
+}

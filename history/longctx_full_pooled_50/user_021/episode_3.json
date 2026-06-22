@@ -1,0 +1,62 @@
+{
+  "user_id": "user_021",
+  "task": "My dirt bike’s acting weird and I’m trying to figure out if it’s something I can sort out myself or if it’s a bigger headache. What’s the best way to narrow it down without wasting a bunch of time swapping random parts?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.45,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Best way: **don’t swap parts first**. Narrow it down by **symptom bucket → basic checks → isolate fuel / spark / air / compression**.\n\n## Fast triage\nTell yourself which bucket it’s in:\n\n1. **Won’t start at all**\n2. **Starts but dies**\n3. **Runs rough / bogs / cuts out**\n4. **No power / won’t rev**\n5. **Weird noise / smoke / overheating**\n\nThat tells you where to look first.\n\n## Do these checks in order\n### 1) Basic stuff\n- Fresh fuel\n- Kill switch / key / tip-over switch\n- Battery charged if it has one\n- Air filter not clogged\n- Fuel line not pinched\n- Obvious loose plug wires / connectors\n\n### 2) Check spark\nPull the plug, inspect it, and verify spark.\n- **No spark** → ignition, plug, coil, switch, wiring\n- **Weak/intermittent spark** → plug, coil, stator, pickup, bad ground\n\n### 3) Check fuel delivery\n- Does fuel flow from tank/petcock?\n- Is carb bowl full?\n- Is injector priming if EFI?\n- Is fuel old or contaminated?\n\n### 4) Check air intake\n- Air filter clean?\n- Intake boot cracked?\n- Carb boots/clamps loose?\n- Vacuum leaks?\n\n### 5) Check compression\nIf spark and fuel are okay but it still won’t run right, compression matters.\n- Low compression = top-end wear, valves, ring issue, head gasket, etc.\n\n## Quick symptom clues\n- **Starts with choke only** → likely fuel/air mix issue\n- **Backfires through carb/exhaust** → lean, timing, valve issue\n- **Bogs on throttle** → fuel delivery, carb jetting, air leak\n- **Dies when hot** → coil, stator, fuel cap vent, heat-related failure\n- **Hard starting after sitting** → carb varnish, stale fuel, battery, plug\n\n## Don’t waste time on random swaps\nSwap parts only after you’ve checked:\n- spark\n- fuel flow\n- air path\n- compression\n\nOtherwise you can burn hours and still not know anything.\n\n## Best “cheap test” order\n1. Fresh fuel\n2. New/known-good spark plug\n3. Check spark\n4. Verify fuel flow\n5. Inspect air filter/intake\n6. Compression test if needed\n\nIf you want, give me:\n- bike make/model/year\n- 2-stroke or 4-stroke\n- exact symptom\n- what it already does when you try to start it\n\nand I’ll help you narrow it to the likely system fast.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s the right lane, but I’d want it tighter. Like, don’t just say spark/fuel/air — give me the **fastest split test** for the exact symptom so I’m not tearing half the bike apart.\n\nIf it’s a dirt bike, I’d usually go:\n- **does it fire on starting fluid?** -> fuel side\n- **spark plug wet or dry?** -> flooding vs no fuel\n- **spark strong blue or weak orange?** -> ignition side\n- **choke changes anything?** -> carb/air issue\n- **compression feel at kick/start** -> top end / valves\n\nI had one stall and act dead after a muddy ride, and it ended up being a stupid pinched fuel line, not some big engine thing. So I’m trying not to waste time guessing.\n\nGive me the shortest decision tree for:\n- won’t start\n- starts then dies\n- bogs under throttle\n\nand keep it practical, not textbook.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yep — here’s the **fastest practical split test** version.\n\n## 1) Won’t start\n### First split:\n**Does it fire on starting fluid?**\n- **Yes** → fuel delivery / carb / injector problem\n- **No** → spark, compression, or timing problem\n\n### Then:\n**Spark plug wet or dry?**\n- **Dry** → not getting fuel\n- **Wet** → flooding or no spark\n\n### Then:\n**Spark strong blue or weak/no spark?**\n- **Strong blue** → move on to fuel/compression\n- **Weak orange / inconsistent** → ignition side\n\n### Fast checks in order:\n1. kill switch / key / tip-over switch\n2. spark plug out and checked\n3. starting fluid test\n4. plug wet/dry\n5. compression feel\n6. fuel line / carb bowl / petcock / injector prime\n\n---\n\n## 2) Starts then dies\n### First split:\n**Does it stay running on choke?**\n- **Yes** → lean/fuel starvation/air leak\n- **No** → likely spark, idle circuit, or compression issue\n\n### Then:\n**Does it die instantly or after a few seconds/minutes?**\n- **Instantly** → fuel cut, kill switch, bad connection, safety switch\n- **After a bit** → fuel flow, venting, heat-related ignition issue\n\n### Fast checks:\n1. fuel cap vent\n2. fuel line pinched / muddy kink\n3. carb bowl full?\n4. idle screw / clogged pilot jet\n5. spark when hot\n6. air leak at intake boot\n\n---\n\n## 3) Bogs under throttle\n### First split:\n**Does it bog worse with more throttle or recover if you roll it on slowly?**\n- **Worse with snap throttle** → fuel delivery / carb tuning / air leak\n- **Runs better gradually** → likely carb/jetting/fuel flow\n- **Bog + sputter + black smoke** → rich\n- **Bog + flat/hesitates/no power** → lean or weak spark\n\n### Then:\n**Does choke make it better or worse?**\n- **Better with choke** → lean / fuel starvation\n- **Worse with choke** → already rich\n\n### Fast checks:\n1. air filter clogged?\n2. intake boot cracked?\n3. fuel flow enough under load?\n4. pilot/main jet issue\n5. plug color\n6. spark strength under rev\n\n---\n\n## The shortest real-world decision tree\n\n### If it won’t start:\n**starting fluid = yes?**\n- yes → fuel side\n- no → spark/compression side\n\n### If it starts then dies:\n**choke helps?**\n- yes → fuel/air lean issue\n- no → spark, idle circuit, or compression\n\n### If it bogs:\n**choke helps?**\n- yes → lean\n- no / worse → rich or ignition\n\n---\n\n## The 30-second “don’t tear it apart” order\n1. **fresh fuel**\n2. **spark plug wet/dry**\n3. **starting fluid test**\n4. **spark color/strength**\n5. **fuel line + carb bowl + cap vent**\n6. **compression feel**\n\nIf you want, I can turn this into a **one-screen cheat sheet** like:\n\n- **symptom**\n- **first test**\n- **what yes means**\n- **what no means**\n\nso you can use it in the garage without scrolling.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, better. Still want it a little more ruthless though — like the **first 10 seconds** decision tree, not the whole diagnostic sermon.\n\nMake it like:\n- **won’t start** → starting fluid test first, then plug wet/dry, then spark color\n- **starts then dies** → choke test first, then fuel cap vent / bowl / pilot\n- **bogs** → snap throttle vs slow roll, then rich vs lean split\n\nAnd yeah, put the **most likely next check** right after each branch. Not just the category.\n\nSomething like:\n**Won’t start**\n- fires on starting fluid = fuel/carb\n- no fire = spark/compression\n- wet plug = flooding or weak spark\n- dry plug = no fuel\n\nThat kind of thing. I don’t need textbook, just the fastest way to stop guessing.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yep — here’s the **first-10-seconds** version.\n\n## Won’t start\n- **Starting fluid makes it fire** → **fuel/carb side**\n  - next check: fuel line kinked / petcock / carb bowl / injector prime\n- **No fire on starting fluid** → **spark or compression**\n  - next check: plug spark strength\n- **Plug wet** → **flooding or weak spark**\n  - next check: spark color + choke stuck / float needle / injector leaking\n- **Plug dry** → **no fuel**\n  - next check: fuel flow to carb / bowl full / cap vent\n- **Strong blue spark** → move to **fuel/compression**\n  - next check: compression feel / valve timing if 4T\n\n## Starts then dies\n- **Runs on choke** → **lean / fuel starvation**\n  - next check: pilot jet / fuel cap vent / intake leak\n- **Dies even with choke** → **spark, idle circuit, or compression**\n  - next check: spark when hot / idle jet / compression\n- **Dies instantly** → **kill switch / safety switch / fuel cut**\n  - next check: wiring, tip-over, side stand, loose connector\n- **Dies after a few seconds/minutes** → **fuel delivery or heat-related ignition**\n  - next check: tank vent / carb bowl / coil or stator when hot\n\n## Bogs under throttle\n- **Snap throttle bogs, slow roll is better** → **lean or fuel delivery**\n  - next check: clogged pilot/main jet / fuel flow / air leak\n- **Better with choke** → **lean**\n  - next check: fuel restriction / intake leak\n- **Worse with choke** → **rich**\n  - next check: air filter / stuck choke / float level\n- **Black smoke + bog** → **too rich**\n  - next check: air filter / choke / float / jetting\n- **Flat, no pull, no smoke** → **fuel starvation or weak spark**\n  - next check: spark under rev / fuel cap vent / bowl refill\n\n## If you want the absolute shortest version\n- **Won’t start:** starting fluid → plug wet/dry → spark color\n- **Starts then dies:** choke helps? → fuel cap vent / bowl / pilot\n- **Bogs:** snap vs slow roll → choke helps? → rich vs lean\n\n## Most likely next check after each branch\n- **Fuel side:** pinched line, clogged jet, empty bowl, bad vent\n- **Spark side:** plug, cap, coil, kill switch, loose ground\n- **Compression side:** kick feel, valve clearance, top-end wear\n\nIf you want, I can turn this into a **one-page dirt bike cheat sheet** with only:\n**symptom → first test → if yes → if no**.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, closer. Still a little too wordy though.\n\nI want it in the dumb-fast garage format:\n\n**Won’t start**\n- fires on starting fluid → fuel/carb. next: fuel line / petcock / bowl\n- no fire → spark/compression. next: plug spark\n- wet plug → flooding or weak spark. next: choke stuck / float / spark\n- dry plug → no fuel. next: bowl / vent / line\n\n**Starts then dies**\n- runs on choke → lean. next: pilot / vent / intake leak\n- dies with choke too → spark / idle / compression. next: hot spark\n- dies instantly → kill switch / safety / fuel cut. next: wiring / connector\n- dies after a bit → fuel flow / heat issue. next: cap vent / coil\n\n**Bogs**\n- snap bogs, slow roll ok → lean/fuel. next: jets / flow / air leak\n- better with choke → lean. next: restriction\n- worse with choke → rich. next: air filter / float / choke stuck\n- black smoke → rich. next: filter / float / jetting\n- flat no pull → fuel starvation or weak spark. next: spark under rev / bowl refill\n\nThat’s the kind of thing. Just the branch and the next check right there. No extra explanation.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 4,
+      "agent_response": "**Won’t start**\n- fires on starting fluid → fuel/carb. next: fuel line / petcock / bowl\n- no fire → spark/compression. next: plug spark\n- wet plug → flooding or weak spark. next: choke stuck / float / spark\n- dry plug → no fuel. next: bowl / vent / line\n\n**Starts then dies**\n- runs on choke → lean. next: pilot / vent / intake leak\n- dies with choke too → spark / idle / compression. next: hot spark\n- dies instantly → kill switch / safety / fuel cut. next: wiring / connector\n- dies after a bit → fuel flow / heat issue. next: cap vent / coil\n\n**Bogs**\n- snap bogs, slow roll ok → lean/fuel. next: jets / flow / air leak\n- better with choke → lean. next: restriction\n- worse with choke → rich. next: air filter / float / choke stuck\n- black smoke → rich. next: filter / float / jetting\n- flat no pull → fuel starvation or weak spark. next: spark under rev / bowl refill",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s it.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    }
+  ]
+}

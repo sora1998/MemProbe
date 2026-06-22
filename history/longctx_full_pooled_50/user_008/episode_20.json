@@ -1,0 +1,49 @@
+{
+  "user_id": "user_008",
+  "task": "I’m looking at a storm forecast and trying to decide how seriously to take it. Can you help me figure out what signs mean I should get things ready now instead of waiting it out?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.733333333333333,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — use this quick cutoff:\n\n## Get ready now if you see:\n- **Your area named**\n- **Watch turning into a warning**\n- **Track moving toward you**\n- **Wind, rain, or surge going up**\n- **Flood risk in a low spot / basement / bad drainage area**\n- **Power outage risk**\n- **Storm arriving at night**\n- **2+ days of rain** or already soaked ground\n\n## Usually wait if:\n- it’s still far away\n- it’s weakening\n- it’s not aimed at your area\n- it’s just general talk with no local threat\n\n## What “get ready” means\n- charge phone and power bank\n- fill water\n- move papers up high\n- secure loose stuff\n- grab meds, cash, flashlight, radio\n- park car smarter if you can\n\n## Fast rule\n- **My area + warning or worsening track = act**\n- **Far away + weak + no local risk = wait**\n\nIf you want, I can make this into a **3-line storm triage** you can read fast.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s the right idea, but it’s a little too broad. I want the line between *watching* and *acting* sharper.\n\nTell me this plain: what matters most first — flood risk, wind, or the track? And how close is close enough that you stop waiting? I don’t need a speech. Just the cutoff.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 5.0
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — the cutoff is:\n\n## What matters most first\n1. **Flood risk**\n2. **Wind**\n3. **Track**\n\n## Stop waiting when\n- **Your area is named**\n- **Flood watch/warning hits your area**\n- **Wind is forecast to be strong enough to knock out power or throw debris**\n- **The track is moving toward you, not away**\n- **It’s getting worse, not weaker**\n- **You’re low-lying / basement / bad drainage / coast / one-exit setup**\n\n## Close enough to act\n- If it’s **for your county, zone, or block**\n- If the storm is **within about a day**\n- If the forecast is **upgrading** instead of calming down\n- If rain/wind/surge is **enough to cause outages or flooding where you are**\n\n## Simple rule\n- **Flood risk in your spot = act first**\n- **Wind that can cut power = next**\n- **Track toward you = don’t wait**\n\n## If you’re still unsure\nIf the forecast says:\n- **watch → warning**\n- **weak → stronger**\n- **far → closer**\n- **general → your area**\n\n…then you should start getting things ready.\n\nIf you want, I can turn that into a **one-line “wait vs act” rule**.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Better. Still a little mushy on the cutoff.\n\nPlain version: **if flood risk is for your exact area, act first.** That beats track and wind. I’ve seen enough water to know that. Wind gets attention, track gets attention, but water in *your* place is the one that starts the damage.\n\nMy rule: **county or zone mention, and within 24 hours — don’t wait.** If they’re saying watch to warning, or the thing is moving toward you, same deal. If it’s still vague and far out, watch it. But once it names your area and the forecast is tightening up, that’s the line.\n\nSo: **flood risk first, then power-cutting wind, then track.**",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yes — here’s the blunt cutoff:\n\n## Act now if:\n- **Flood risk is for your exact area**\n- **Your county/zone is named**\n- **It’s within 24 hours**\n- **Watch is turning into a warning**\n- **Wind is strong enough to cut power / throw debris**\n- **Track is moving toward you**\n\n## Usually wait if:\n- it’s still vague\n- it’s farther out than a day\n- it’s not aimed at your area\n- it’s weakening\n\n## Order of importance\n1. **Flood risk in your spot**\n2. **Wind that can knock out power**\n3. **Track toward you**\n\n## Fast rule\n- **Your area + flood risk = act**\n- **Your area + power-cutting wind = act**\n- **Your area + tightening forecast = act**\n- **Far away + vague = wait**\n\nIf you want, I can make this into a **3-line storm cutoff** you can read in 5 seconds.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s the cutoff.\n\n**Flood risk in my spot first.** If they name my county or zone and it’s within 24 hours, I’m not waiting around.\n\nThen **wind that can kill power**. Track matters, but only after that.\n\nSo: **named area + flood risk = act.** Anything vague and far out, I watch it.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    }
+  ]
+}

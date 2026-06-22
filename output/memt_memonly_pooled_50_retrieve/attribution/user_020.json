@@ -1,0 +1,1806 @@
+{
+  "user_id": "user_020",
+  "tasks_dir": "CustomTasksPooledFinal",
+  "counts": {
+    "memory_failure": 12,
+    "ok": 12,
+    "simulator_too_strict": 2,
+    "task_design_failure": 4,
+    "agent_elicitation_failure": 1
+  },
+  "details": [
+    {
+      "category": "skill_memory",
+      "dimension": "repairing_skill",
+      "explanation": "He can handle straightforward repairs and keep a house running without outside help. The basement pipe episode and his routine maintenance habits suggest practical, hands-on competence. He is less likely to be elegant or fast than stubbornly effective.",
+      "ground_truth": "Handy with basic home fixes",
+      "predicted": "unknown",
+      "slot_fill_reason": "The notes describe repair decision rules and contractor priorities, but provide no direct evidence of what the user can demonstrably do in repairing tasks.",
+      "score": 0.0,
+      "judge_reason": "The predicted description is \"unknown,\" which provides no information and does not capture the ground truth that he is handy with basic home fixes.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "id": "3efa09b0-2d9e-4bb9-a151-63aa5752a184",
+          "content": "User has a preference for clear, actionable safety guidelines and practical checklists to avoid costly mistakes. Updated on 2026-04-29T07:12:01 to include a preference for measurable frameworks and decision-making structures for home maintenance tasks. Updated on 2026-04-29T08:35:11 to emphasize preference for clear, actionable, and measurable safety and decision-making frameworks for home maintenance tasks.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:35:11"
+        },
+        {
+          "id": "44e16312-990b-48eb-bf5f-bbc444f862f3",
+          "content": "User agrees with the proposed contractor work prioritization order.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T07:21:20"
+        },
+        {
+          "id": "6ec66eb3-fd97-4358-8608-da751e466ce4",
+          "content": "User will use these rules to avoid getting stuck halfway and to prevent the job from becoming a larger, messier problem.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:33:01"
+        },
+        {
+          "id": "d674ca80-9d01-414c-9f01-f7acce5101a4",
+          "content": "The prioritization order includes: 1) things that can get worse fast (leaks, wire trouble, roof openings), 2) things that need guessing or tearing in (opening walls, pulling parts apart), 3) the one you’re least sure about, 4) small clean jobs, 5) cosmetic junk last.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T07:21:20"
+        },
+        {
+          "id": "1d600421-07d3-4ce2-bb9a-825ad97ae51f",
+          "content": "User requires start date, duration, and clear assignment of permit responsibility. User requires written approval for any extra work and clear responsibility for cleanup and damage.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T07:12:26"
+        }
+      ],
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.0,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites discussion of practical home repair experience and judgment about handling simple fixes, which could reasonably lead the user to reveal how handy they are."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "“I’ve got a small house issue I’d rather not pay a fortune for if it’s something simple”",
+            "reason": "This suggests the user is comfortable considering basic home repairs themselves and wants to assess whether they can handle a straightforward fix."
+          }
+        ],
+        "ep_index": 1
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "troubleshooting_skill",
+      "explanation": "He does not trust a fix until he has traced it himself. That shows a solid ability to spot where something is going wrong, especially in home systems. He may be slow and argumentative, but he is not casual about finding the actual fault.",
+      "ground_truth": "Diagnoses problems by checking every step",
+      "predicted": "strong at structured troubleshooting, weak when guessing or going beyond visible evidence",
+      "slot_fill_reason": "The memories show repeated use of source-first checklists, symptom-based decision trees, and stop rules to avoid guessing and opening unseen systems.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of careful, structured troubleshooting and checking evidence, but it does not fully capture the explicit step-by-step diagnosis implied by the ground truth.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "id": "d8659c70-c05d-437e-bd25-039e3e3bf2e5",
+          "content": "Use the phrase 'point of failure' to focus on the specific location where the problem occurs; this prevents overgeneralizing and keeps troubleshooting targeted and actionable.",
+          "category": "experiences",
+          "score": null,
+          "timestamp": "2026-04-29T08:58:14"
+        },
+        {
+          "id": "481d37f6-3ffb-443e-9255-0308a98f2767",
+          "content": "For furnace troubleshooting, use a symptom-based decision tree with specific sequences (e.g., no fan, inducer runs but no ignition) and interpret error light flash patterns to quickly identify the failing stage.",
+          "category": "experiences",
+          "score": null,
+          "timestamp": "2026-04-29T06:59:55"
+        },
+        {
+          "id": "2c0a9da7-4417-44b7-8bd1-da31e2e9d0a2",
+          "content": "To assess trustworthiness of a repair person: ask for a clear scope of work and price; verify the scope and price in writing; use a decision-split with a three-part test: can you stop halfway safely? do you know how to put it back? is the help just muscle or will they start diagnosing beyond the scope? use a 15-minute no-progress rule and stop if you start guessing or need to open something you can’t see.\n\nTo avoid getting stuck halfway on a small home job, use a three-part practical stop rule: (1) Stop after X minutes of no progress; (2) Stop if you need to open something you can’t see; (3) Stop if the task turns into guessing. Use this to distinguish between slow but manageable work and work that is drifting into unmanageable, unpredictable territory. (Original version: 'don’t start until you know what’s behind it')\n\nUse a clear, hard-split decision rule with three questions before picking up any tool: 1) Can I finish or stop without making it worse? 2) Would a second pair of hands make a known job safer or easier? 3) Could opening this expose water, electric, gas, rot, or a bigger repair? — this prevents getting stuck halfway. (Updated on 2026-04-29T08:22:14 to include explicit 'garage cleanup' example and refine wording for clarity.)\n\nTo prevent a simple cleanup from turning into a messy, expensive ordeal: use a strict split: only allow muscle help for physical tasks (haul, load, move one awkward item); never let anyone start opening walls, panels, mystery boxes, or systems like water, wiring, gas, mold, or rot without knowing what’s inside. (Updated on 2026-04-29T08:25:21)\n\nWhen a fix slows down, pause and apply a simple three-part test: (1) Can I stop halfway and not make it worse? (2) If this goes sideways, do I know how to put it back? (3) Is the help just muscle or are they going to start 'finding problems'? Use this to decide whether to keep going or switch to a different approach. (Added on 2026-04-29T08:27:18)\n\n(Updated on 2026-04-29T08:29:17 to add the 'X minutes of no-progress rule' and to refine the three-part test to explicitly include the ability to stop halfway safely, knowing how to reverse the work, and checking whether the help is just muscle or will start diagnosing beyond the scope.)\n\n(Updated on 2026-04-29T08:49:27 to include the explicit note that you should stop if the user is starting to guess, needs to open something they can’t see, or if the thing is no longer fully in front of them.)",
+          "category": "experiences",
+          "score": null,
+          "timestamp": "2026-04-29T08:49:27"
+        },
+        {
+          "id": "ae1e5e56-255a-4ded-8565-97c200ebafef",
+          "content": "Use a time-structured, step-by-step breakdown with clear checkpoints and a 15-minute no-progress rule to prevent getting stuck and to maintain control over a complex situation. Break down a situation that could take a while into manageable steps and keep track of progress to prevent it from turning into a bigger headache.",
+          "category": "experiences",
+          "score": null,
+          "timestamp": "2026-04-29T08:49:27"
+        },
+        {
+          "id": "d2c4735e-731f-43d9-a6b0-b5834bb62c13",
+          "content": "To diagnose a home issue, start by identifying the actual source and use a specific, step-by-step checklist for the type of problem (water, electric, door/lock/window, heat/air). This prevents guessing and gives clear, actionable next steps. To start troubleshooting, check the actual source of the problem first — specify the exact thing and where it is showing up — then move to the next step. (Original: 2026-04-29T08:52:23) Specific troubleshooting steps:\n\nWater: check the nearest wet spot and the joint above it.\nElectric: check the exact dead or tripping outlet/breaker.\nDoor/window/lock: look for rubbing, sagging, or misalignment.\nHeat/air: verify blower status and thermostat call.\n\n(Updated: 2026-04-29T08:57:38)\n\n**Updated with emphasis on checking the actual source first:** To troubleshoot effectively, start by checking the actual source of a problem (e.g., the nearest wet spot for a water leak, the exact outlet for an electric issue) before jumping to general categories or assumptions.\n\n**New addition (2026-04-29T09:00:35):** Use a step-by-step diagnostic approach for each type of issue (water, electric, door/lock/window, heat/air). For example: for water, check the nearest wet spot and the joint above it; for electric, check the exact dead or tripping outlet/breaker; for door/window/lock, look for rubbing, sagging, or misalignment; for heat/air, verify blower status and thermostat call. This structured approach ensures you address the root cause rather than symptoms and increases the likelihood of a successful fix.",
+          "category": "experiences",
+          "score": null,
+          "timestamp": "2026-04-29T09:00:35"
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "quality_control_skill",
+      "explanation": "He inspects work closely and keeps pressure on anyone doing a job for him. He watches for leaks, checks the bill against the estimate, and does not assume anything is done correctly without proof. His quality control is strong, though it comes with suspicion and friction.",
+      "ground_truth": "Exacting about verifying work",
+      "predicted": "careful estimate reviewer who checks itemization and written approvals",
+      "slot_fill_reason": "Memories show they require line-by-line breakdowns, separate parts/labor/fees, and written approval for any change or extra charge.",
+      "score": 0.75,
+      "judge_reason": "The prediction captures the core idea of being exacting and verifying work through careful review, but it omits the stronger broader quality-control behavior and the suspicion/friction aspect.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "id": "0fbe201d-680e-4e16-9853-bd1dbed6b5d6",
+          "content": "User requires line-by-line explanation for every extra charge and when it was approved. This requirement is now explicitly reinforced by a past incident where contractors used vague language and later inflated the bill, reinforcing the need for written clarity. The new requirement states: 'The estimate must state that the price stands unless the user signs a written change order; no verbal promises are accepted.' This is now a firm, non-negotiable policy. Additionally, the user will require explicit itemization of any line marked 'as needed,' 'allowance,' or 'extra.' The user will also require explicit listing of disposal, trip charges, permit fees, and service fees. User will require explicit warranty terms, if any. User will demand line-by-line justification for any changes between the original estimate and the revised estimate; no verbal promises or vague statements like 'we’ll take care of it.' All changes must be written on the estimate. (Original recorded 2026-04-29T08:00:00) Updated on 2026-04-29T08:01:51. User will reject any warranty language that is vague enough to mean nothing. User will use a plain-language, line-by-line contractor estimate that explicitly states no verbal changes are approved and that any charge not in writing is not approved. (New: 2026-04-29T08:04:24)\n\nUser will use a second line in written communication: 'No verbal changes. If it’s not in writing, it’s not approved.' as a firm rule to prevent verbal inflation and scope creep. (New: 2026-04-29T08:04:24)",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:04:24"
+        },
+        {
+          "id": "c2849377-be99-4c05-9a29-d940d4e14930",
+          "content": "User wants a written, plain, and explicit estimate that lists exact work, defines each line item, names materials, separates labor and parts, includes total price with tax if any, states what could change the price and by how much, requires written approval before any extras, includes start and finish dates, assigns permit and cleanup responsibility, includes a written warranty, and requires proof of licensing and insurance. This requirement is now explicitly reinforced by a past incident where contractors used vague language and later inflated the bill, reinforcing the need for written clarity. The new requirement states: 'The estimate must state that the price stands unless the user signs a written change order; no verbal promises are accepted.' This is now a firm, non-negotiable policy. The original memory (id: b47bf4ce-80f9-4f50-a97e-47d3a65fbb5a) already listed these exact items and confirmed they are required. This update adds the specific policy that price stands unless a written change order is signed, which strengthens the requirement.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T07:33:18"
+        },
+        {
+          "id": "efbcbfba-19db-41da-b200-0bd0796d8c0d",
+          "content": "User wants to know exactly what gets written down in the book or on the phone — this is a required line item in the card.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T07:19:20"
+        },
+        {
+          "id": "6d6ea4ed-473b-4597-9d62-e0966be6cb93",
+          "content": "User will break out parts, unit prices, labor hours, labor rate, and every fee separately in any estimate.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:01:51"
+        },
+        {
+          "id": "529c311c-13e1-405e-95ae-a36f8eadd350",
+          "content": "The scorecard includes 7 criteria: Money, Access/privacy, Repair burden, Exit trouble, Paperwork, Daily tolerance, Stability, and a Total stay/Total move score out of 16.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:09:27"
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "financial_resource_management_skill",
+      "explanation": "He handles money in a careful, guarded way and pays only what he believes is owed. Keeping receipts and challenging the plumber’s bill point to strong control over spending. He is not generous or relaxed with money, but he is careful.",
+      "ground_truth": "Frugal and bill-conscious",
+      "predicted": "careful at verifying bills and payment conditions",
+      "slot_fill_reason": "Memory shows they inspect work before paying, withhold payment if punch-list items remain, and require written approval for extra work and clear responsibility terms.",
+      "score": 0.75,
+      "judge_reason": "The prediction captures the careful, bill-checking aspect of the ground truth, but it misses the broader frugal, money-conserving attitude.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "id": "1d600421-07d3-4ce2-bb9a-825ad97ae51f",
+          "content": "User requires start date, duration, and clear assignment of permit responsibility. User requires written approval for any extra work and clear responsibility for cleanup and damage.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T07:12:26"
+        },
+        {
+          "id": "3efa09b0-2d9e-4bb9-a151-63aa5752a184",
+          "content": "User has a preference for clear, actionable safety guidelines and practical checklists to avoid costly mistakes. Updated on 2026-04-29T07:12:01 to include a preference for measurable frameworks and decision-making structures for home maintenance tasks. Updated on 2026-04-29T08:35:11 to emphasize preference for clear, actionable, and measurable safety and decision-making frameworks for home maintenance tasks.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:35:11"
+        },
+        {
+          "id": "bd531656-7e94-4a19-ac81-3bd643de9bff",
+          "content": "User requires double testing of plumbing and electrical work and will withhold payment if anything is on the punch list. User will inspect work before paying by running it themselves, checking for leaks, gaps, caulk, paint, fittings, scratches, confirming materials, checking cleanup, and testing plumbing/electrical twice. [Original entry: User will withhold payment if there’s a punch list.] [New information: User will inspect the work personally before allowing any payment to leave.]",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:35:11"
+        },
+        {
+          "id": "13f2fc99-ab81-498a-aa2d-14aa58c382c7",
+          "content": "User will use a numbered stay-vs-move checklist with eight criteria: Money, Access/privacy, Repair burden, Exit trouble, Paperwork, Daily tolerance, Stability, and a line for 'who’s responsible when something breaks'. (Original note: 2026-04-29T08:06:59). User will use the checklist to make real-life decisions about whether to stay or move and will mark up the checklist themselves. (Original note: 2026-04-29T08:10:47).",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:10:47"
+        },
+        {
+          "id": "efbcbfba-19db-41da-b200-0bd0796d8c0d",
+          "content": "User wants to know exactly what gets written down in the book or on the phone — this is a required line item in the card.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T07:19:20"
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "time_management_skill",
+      "explanation": "He keeps the same daily schedule and organizes his day around fixed habits. That suggests disciplined time use rather than improvisation. He may be inflexible, but he is not scattered or chronically disorganized.",
+      "ground_truth": "Runs on rigid daily routines",
+      "predicted": "manages tasks by breaking them into steps and tracking progress",
+      "slot_fill_reason": "Memory notes say they want to break longer situations into manageable steps and keep track of progress to prevent bigger problems.",
+      "score": 0.5,
+      "judge_reason": "The prediction reflects organized, disciplined time management, but it does not capture the specific idea of rigid daily routines and fixed habits.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "id": "1f6061c8-fb20-4c9a-8648-bcd439113670",
+          "content": "The user finds the timing rule (for issues like a drip, a warm outlet, or a loose thing in a wall) crucial because it prevents them from giving the benefit of the doubt and allows them to act before problems worsen.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T09:06:53"
+        },
+        {
+          "id": "bbec0332-1bea-4ecd-9ba2-5ac692621947",
+          "content": "User prefers a tighter daily schedule with 1 hard thing first, followed by 1–2 easy things.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T07:16:25"
+        },
+        {
+          "id": "c2077475-629f-4a6c-bb7e-5e244b8f966d",
+          "content": "User wants to break down a situation that could take a while into manageable steps and keep track of progress to prevent it from turning into a bigger headache.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:41:04"
+        },
+        {
+          "id": "2d1f8a3e-efe3-4e80-ba22-3e8d8dcaa162",
+          "content": "User wants to tighten the diagnostic workflow before touching anything. To help determine whether the issue is just nuisance or likely to turn into a bigger mess, the user wants to add a step to the workflow to make that distinction explicitly.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T09:03:17"
+        },
+        {
+          "id": "cc8250a9-ce32-451c-a3a8-354a875c11a1",
+          "content": "User will keep an eye on while the crew is working: the work area, the materials used, any changes to the original scope, and whether the crew is following the agreed-upon timeline.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T07:43:42"
+        }
+      ],
+      "attribution": {
+        "category": "simulator_too_strict",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task is explicitly about planning and executing a day efficiently, so natural follow-up questions about routines, scheduling, and prioritization could plausibly elicit information about the user’s time management habits."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": false,
+            "evidence": "none",
+            "reason": "The user only asks for advice on organizing a single day and does not reveal any stable personal habit or time-management pattern about themselves."
+          },
+          {
+            "stage": "disclosure_subclass",
+            "category": "B",
+            "reason": "The agent clearly steered toward daily scheduling and getting tasks finished, but the transcript contains no user response or details about whether the person keeps rigid routines, so the simulator never disclosed the ground truth.",
+            "evidence": "\"What’s a sensible way to lay out a day like that so it actually gets finished?\""
+          }
+        ],
+        "ep_index": 5
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "capability_under_pressure",
+      "explanation": "When something goes wrong, he does not fall apart; he stays on site and manages the situation himself. The cold basement and repair delay did not stop him from monitoring the work and finishing the task. His stress response is controlled, though driven by vigilance and distrust.",
+      "ground_truth": "Stays functional under stress",
+      "predicted": "handles pressure with structured, stepwise decision-making",
+      "slot_fill_reason": "Notes show they use firm time-bounded replies, numbered checklists, checkpoints, and a 15-minute no-progress rule when situations get urgent or complex.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of staying functional under pressure and managing the situation, but it adds a specific decision-making style that is not explicitly stated in the ground truth.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "id": "9a5cdb1d-75c8-4f8f-b821-a712fd23b626",
+          "content": "To manage daily errands and chores efficiently: 1 hard thing first, 1–2 easy things after, group calls in one early block, add a single buffer, and apply a 'before noon, after noon, skip if it slips' skip rule to prevent schedule collapse.",
+          "category": "experiences",
+          "score": null,
+          "timestamp": "2026-04-29T07:17:09"
+        },
+        {
+          "id": "6e713e09-b4e8-4815-9dee-0a42a6a43bee",
+          "content": "To make a practical stay-vs-move scorecard: list 7 measurable criteria, include a line for who’s responsible when something breaks, use a 0–2 scale only if accompanied by a short reason, and leave space next to each score for a one-sentence justification. To avoid decision fatigue and emotional bias when choosing to stay or move, use a concrete, numbered checklist with clear, measurable criteria and require a one-sentence justification for each score.",
+          "category": "experiences",
+          "score": null,
+          "timestamp": "2026-04-29T08:10:47"
+        },
+        {
+          "id": "cb1b3e73-401c-449b-9a39-30bae16f92ff",
+          "content": "To manage daily errands and calls efficiently: schedule one hard task first, group calls early and in one block, separate tasks into 'before noon', 'can wait', and 'skip if delayed', and include a single buffer to avoid schedule collapse.",
+          "category": "experiences",
+          "score": null,
+          "timestamp": "2026-04-29T07:16:25"
+        },
+        {
+          "id": "a0e7bbb5-ba50-40c4-8716-81790bd21792",
+          "content": "To respond to neighborhood pressure for a quick answer, use a short, firm, and clear statement that acknowledges the request while setting a boundary for thinking time; e.g., 'I’ll give you a clear yes or no in 24 hours, but I need time to review the details.' This keeps the conversation open, respects the urgency, and allows for thoughtful consideration. (Original version: 'I’ll give you a clear yes or no in [time] but I need time to review the details.' — added on 2026-04-29T08:39:05)",
+          "category": "experiences",
+          "score": null,
+          "timestamp": "2026-04-29T08:39:05"
+        },
+        {
+          "id": "ae1e5e56-255a-4ded-8565-97c200ebafef",
+          "content": "Use a time-structured, step-by-step breakdown with clear checkpoints and a 15-minute no-progress rule to prevent getting stuck and to maintain control over a complex situation. Break down a situation that could take a while into manageable steps and keep track of progress to prevent it from turning into a bigger headache.",
+          "category": "experiences",
+          "score": null,
+          "timestamp": "2026-04-29T08:49:27"
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "adaptive_capability",
+      "explanation": "He can adjust when necessary, but he prefers old routines and familiar methods. He handles unexpected problems by tightening control rather than changing his approach quickly. His adaptation is functional, not flexible.",
+      "ground_truth": "Adapts slowly and grudgingly",
+      "predicted": "can use a practical contractor pocket card effectively",
+      "slot_fill_reason": "Memory notes say the user finds the contractor card usable, will send it to contractors, and wants it to work as a real pocket-sized guide in muddy conditions.",
+      "score": 0.0,
+      "judge_reason": "The prediction is unrelated to adaptability and does not reflect slow, grudging adjustment or preference for familiar routines.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "id": "9d42f927-68e1-415e-b88e-7a2905ab75c2",
+          "content": "User finds the contractor card usable.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T07:51:00"
+        },
+        {
+          "id": "efbcbfba-19db-41da-b200-0bd0796d8c0d",
+          "content": "User wants to know exactly what gets written down in the book or on the phone — this is a required line item in the card.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T07:19:20"
+        },
+        {
+          "id": "bdd289e5-fa01-468c-b7b6-1f0aadeb5b1d",
+          "content": "User will send the contractor card to contractors.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T07:51:00"
+        },
+        {
+          "id": "54c3cf54-57a0-4bc0-a378-fb73a36b4330",
+          "content": "User wants a clear line to use when contractors start stretching the scope — this is a required line item in the card.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T07:19:20"
+        },
+        {
+          "id": "c27d9ed6-f55d-48e7-bec6-f425f1a1aaa8",
+          "content": "User wants a real pocket card — a concise, glanceable, practical guide to be used with muddy hands. User wants the pocket card to use plain words, no sales pitch, and to be usable in real-world conditions with muddy hands. (Original: 2026-04-29T07:19:20) New request: wants a real, pocket-sized card for contractors that uses plain words and is usable with muddy hands. (2026-04-29T08:35:11)",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:35:11"
+        }
+      ],
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.0,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites discussion of how the person handles unexpected or changing repair needs, which can reasonably lead to revealing whether they adapt quickly or prefer familiar routines."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"one of them may need a different fix than the one I usually use\"",
+            "reason": "The user explicitly says they usually use one fix and may need a different one this time, which suggests a preference for familiar methods and only adapting when necessary."
+          }
+        ],
+        "ep_index": 7
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "engineering_and_technology_knowledge",
+      "explanation": "He seems comfortable with practical mechanical systems like plumbing, locks, and home security. His confidence comes from dealing with real-world failures, not from technical theory. He likely knows enough to supervise and challenge work, but not enough to trust anyone else’s expertise.",
+      "ground_truth": "Understands basic home systems, not abstractions",
+      "predicted": "understands contractor estimates, change orders, and markup disclosures",
+      "slot_fill_reason": "Memory notes show detailed knowledge of estimate line items, written change-order requirements, and explicit disclosure of disposal, trip charges, fees, and material markup.",
+      "score": 0.25,
+      "judge_reason": "The prediction reflects practical familiarity with contractor paperwork and oversight, but it misses the ground truth’s focus on basic home systems and hands-on mechanical understanding rather than administrative knowledge.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "id": "0fbe201d-680e-4e16-9853-bd1dbed6b5d6",
+          "content": "User requires line-by-line explanation for every extra charge and when it was approved. This requirement is now explicitly reinforced by a past incident where contractors used vague language and later inflated the bill, reinforcing the need for written clarity. The new requirement states: 'The estimate must state that the price stands unless the user signs a written change order; no verbal promises are accepted.' This is now a firm, non-negotiable policy. Additionally, the user will require explicit itemization of any line marked 'as needed,' 'allowance,' or 'extra.' The user will also require explicit listing of disposal, trip charges, permit fees, and service fees. User will require explicit warranty terms, if any. User will demand line-by-line justification for any changes between the original estimate and the revised estimate; no verbal promises or vague statements like 'we’ll take care of it.' All changes must be written on the estimate. (Original recorded 2026-04-29T08:00:00) Updated on 2026-04-29T08:01:51. User will reject any warranty language that is vague enough to mean nothing. User will use a plain-language, line-by-line contractor estimate that explicitly states no verbal changes are approved and that any charge not in writing is not approved. (New: 2026-04-29T08:04:24)\n\nUser will use a second line in written communication: 'No verbal changes. If it’s not in writing, it’s not approved.' as a firm rule to prevent verbal inflation and scope creep. (New: 2026-04-29T08:04:24)",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:04:24"
+        },
+        {
+          "id": "1f6061c8-fb20-4c9a-8648-bcd439113670",
+          "content": "The user finds the timing rule (for issues like a drip, a warm outlet, or a loose thing in a wall) crucial because it prevents them from giving the benefit of the doubt and allows them to act before problems worsen.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T09:06:53"
+        },
+        {
+          "id": "1f748f06-34af-4460-a9c3-aafe04e4dfa0",
+          "content": "User will require explicit disclosure of any markup on materials. (Original: 2026-04-29T08:00:00) Updated: User will reject any disposal, trip charge, permit, service fee, shop supply, fuel surcharge, or material markup that wasn’t named up front. (New: 2026-04-29T08:01:51)",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:01:51"
+        },
+        {
+          "id": "1f780c90-d0b5-48ac-ab36-ce7d09f23b3c",
+          "content": "User will get the original estimate and the new one side by side when reviewing a repair estimate.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T07:24:13"
+        },
+        {
+          "id": "efbcbfba-19db-41da-b200-0bd0796d8c0d",
+          "content": "User wants to know exactly what gets written down in the book or on the phone — this is a required line item in the card.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T07:19:20"
+        }
+      ],
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.25,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites practical discussion of door hardware, measurements, and compatibility checks, which can reveal whether the user understands basic home systems and mechanical details."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "I’m replacing a dead deadbolt and want to make sure I don’t buy the wrong kind. What should I check on the door and the existing hardware before I head to the store?",
+            "reason": "The user is dealing with a practical home security/mechanical task and asking about door hardware compatibility, which suggests familiarity with basic home systems rather than abstract technical knowledge."
+          }
+        ],
+        "ep_index": 8
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "law_and_public_safety_knowledge",
+      "explanation": "He appears aware of his rights in a rough, practical sense, especially when dealing with contractors and bills. He is not deferential and will insist on terms being followed exactly. His understanding is selective and defensive rather than broad or civic-minded.",
+      "ground_truth": "Knows enough to push back on strangers",
+      "predicted": "knows when to stop and call a professional for safety issues",
+      "slot_fill_reason": "Memory notes say they accept a safety stop rule for hidden damage, water near electric, gas smell, roof work, wall/ceiling/panel penetrations, or any uncertainty.",
+      "score": 0.25,
+      "judge_reason": "The prediction suggests cautious safety awareness and deferring to professionals, which only loosely overlaps with pushing back on strangers and misses the defensive, rights-aware aspect.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "id": "1f6061c8-fb20-4c9a-8648-bcd439113670",
+          "content": "The user finds the timing rule (for issues like a drip, a warm outlet, or a loose thing in a wall) crucial because it prevents them from giving the benefit of the doubt and allows them to act before problems worsen.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T09:06:53"
+        },
+        {
+          "id": "efbcbfba-19db-41da-b200-0bd0796d8c0d",
+          "content": "User wants to know exactly what gets written down in the book or on the phone — this is a required line item in the card.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T07:19:20"
+        },
+        {
+          "id": "1f151bf0-c8bd-4a39-a7d8-c9ca7148d45f",
+          "content": "User prefers written, concise, firm, clear messages with clear action items. User prefers a clear, no-fluff, actionable message such as: 'I reviewed the invoice against our agreement. A few charges do not match the approved scope and price. Send a corrected invoice and a written explanation for the disputed items. I will hold payment on the disputed portion until the issues are resolved.' Original memory (2026-04-29T07:35:48) recorded the preference for firm, concise messages with clear action items. Updated on 2026-04-29T07:51:00 to reflect that messages should be short, plain, and actionable. Updated on 2026-04-29T08:35:11 to emphasize preference for written, firm, concise messages with clear action items. Updated on 2026-04-29T08:44:58 to reflect that the user seeks the clearest way to ask for help that yields a direct, actionable answer and allows moving on. Updated on 2026-04-29T08:47:15 to reflect that user prefers short, plain messages that start with the facts and avoid story or fluff. Updated on 2026-04-29T08:49:27 to reflect that messages should be firm, concise, and written with clear action items.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:49:27"
+        },
+        {
+          "id": "5cf4db51-c217-491e-90be-be0a95da86eb",
+          "content": "User wants the safety guidelines to be sharp and concise before taking any action.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T06:58:45"
+        },
+        {
+          "id": "6ba107cc-e016-4f44-94ce-d2c0d3177dc7",
+          "content": "User's accepted safety stop rule: call a professional for hidden damage, water near electric, gas smell, roof work, wall/ceiling/panel penetrations, or any uncertainty.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T06:59:04"
+        }
+      ],
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.25,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites discussion of practical rights and how to push back on a contractor over disputed charges, which could reveal whether the user knows enough to insist on terms being followed."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"a couple of extra charges\" and \"what to do before I say yes to anything\"",
+            "reason": "The user shows a practical, rights-aware stance about scrutinizing charges and not agreeing until terms match what was discussed, which supports the target dimension."
+          }
+        ],
+        "ep_index": 9
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "legal_awareness_knowledge",
+      "explanation": "He pays attention to estimates, written agreements, and what he believes is owed. That suggests he knows the basics of using paperwork to protect himself. He is less interested in fairness in the abstract than in preventing anyone from getting over on him.",
+      "ground_truth": "Contract-minded and quick to dispute terms",
+      "predicted": "understands written contract changes and no-verbal-approval rules",
+      "slot_fill_reason": "Memories say they require written change orders, reject verbal promises, and insist that anything not in writing is not approved.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the contract-focused, paperwork-aware aspect of the ground truth, but it is narrower and does not fully capture the quickness to dispute terms.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "id": "1f151bf0-c8bd-4a39-a7d8-c9ca7148d45f",
+          "content": "User prefers written, concise, firm, clear messages with clear action items. User prefers a clear, no-fluff, actionable message such as: 'I reviewed the invoice against our agreement. A few charges do not match the approved scope and price. Send a corrected invoice and a written explanation for the disputed items. I will hold payment on the disputed portion until the issues are resolved.' Original memory (2026-04-29T07:35:48) recorded the preference for firm, concise messages with clear action items. Updated on 2026-04-29T07:51:00 to reflect that messages should be short, plain, and actionable. Updated on 2026-04-29T08:35:11 to emphasize preference for written, firm, concise messages with clear action items. Updated on 2026-04-29T08:44:58 to reflect that the user seeks the clearest way to ask for help that yields a direct, actionable answer and allows moving on. Updated on 2026-04-29T08:47:15 to reflect that user prefers short, plain messages that start with the facts and avoid story or fluff. Updated on 2026-04-29T08:49:27 to reflect that messages should be firm, concise, and written with clear action items.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:49:27"
+        },
+        {
+          "id": "f8ef265a-0d07-401c-9e3d-d013e9871ab4",
+          "content": "User does not want a speech or lecture; they want a concise, usable checklist they can keep by the phone. User finds the checklist short enough to keep by the phone.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T07:34:38"
+        },
+        {
+          "id": "5629eae5-a202-4893-bd83-9d4a60ef051e",
+          "content": "User is cautious and prefers clear, actionable safety guidelines before engaging in any DIY; this caution extends to contractor interactions.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T07:31:20"
+        },
+        {
+          "id": "0fbe201d-680e-4e16-9853-bd1dbed6b5d6",
+          "content": "User requires line-by-line explanation for every extra charge and when it was approved. This requirement is now explicitly reinforced by a past incident where contractors used vague language and later inflated the bill, reinforcing the need for written clarity. The new requirement states: 'The estimate must state that the price stands unless the user signs a written change order; no verbal promises are accepted.' This is now a firm, non-negotiable policy. Additionally, the user will require explicit itemization of any line marked 'as needed,' 'allowance,' or 'extra.' The user will also require explicit listing of disposal, trip charges, permit fees, and service fees. User will require explicit warranty terms, if any. User will demand line-by-line justification for any changes between the original estimate and the revised estimate; no verbal promises or vague statements like 'we’ll take care of it.' All changes must be written on the estimate. (Original recorded 2026-04-29T08:00:00) Updated on 2026-04-29T08:01:51. User will reject any warranty language that is vague enough to mean nothing. User will use a plain-language, line-by-line contractor estimate that explicitly states no verbal changes are approved and that any charge not in writing is not approved. (New: 2026-04-29T08:04:24)\n\nUser will use a second line in written communication: 'No verbal changes. If it’s not in writing, it’s not approved.' as a firm rule to prevent verbal inflation and scope creep. (New: 2026-04-29T08:04:24)",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:04:24"
+        },
+        {
+          "id": "880fe9b9-2319-45bf-86d2-e97b6000d983",
+          "content": "User will ask for line-by-line justification for any new or changed items on a service estimate before signing off. (Original recorded 2026-04-29T07:25:56) Updated on 2026-04-29T07:57:41. User will ask for line-by-line justification for any changes and require a written explanation for new or changed items.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T07:57:41"
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "financial_literacy_knowledge",
+      "explanation": "He seems to understand bills, estimates, and receipts well enough to verify them. His approach is practical rather than sophisticated, with no sign of investing or broader financial planning. He is careful with money, but his focus is on avoiding loss, not growing wealth.",
+      "ground_truth": "Basic money sense, strong suspicion of overcharging",
+      "predicted": "understands invoices can include hidden extras and must be verified",
+      "slot_fill_reason": "Notes show they want line-by-line justification for extra charges, explicit itemization of allowances/fees, and to verify what is actually owed before paying.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the practical money sense and suspicion of hidden overcharges, but it is a bit narrower than the ground truth and does not fully capture the broader emphasis on basic financial awareness.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "id": "efbcbfba-19db-41da-b200-0bd0796d8c0d",
+          "content": "User wants to know exactly what gets written down in the book or on the phone — this is a required line item in the card.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T07:19:20"
+        },
+        {
+          "id": "0fbe201d-680e-4e16-9853-bd1dbed6b5d6",
+          "content": "User requires line-by-line explanation for every extra charge and when it was approved. This requirement is now explicitly reinforced by a past incident where contractors used vague language and later inflated the bill, reinforcing the need for written clarity. The new requirement states: 'The estimate must state that the price stands unless the user signs a written change order; no verbal promises are accepted.' This is now a firm, non-negotiable policy. Additionally, the user will require explicit itemization of any line marked 'as needed,' 'allowance,' or 'extra.' The user will also require explicit listing of disposal, trip charges, permit fees, and service fees. User will require explicit warranty terms, if any. User will demand line-by-line justification for any changes between the original estimate and the revised estimate; no verbal promises or vague statements like 'we’ll take care of it.' All changes must be written on the estimate. (Original recorded 2026-04-29T08:00:00) Updated on 2026-04-29T08:01:51. User will reject any warranty language that is vague enough to mean nothing. User will use a plain-language, line-by-line contractor estimate that explicitly states no verbal changes are approved and that any charge not in writing is not approved. (New: 2026-04-29T08:04:24)\n\nUser will use a second line in written communication: 'No verbal changes. If it’s not in writing, it’s not approved.' as a firm rule to prevent verbal inflation and scope creep. (New: 2026-04-29T08:04:24)",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:04:24"
+        },
+        {
+          "id": "c5598f40-04f7-4b45-b651-bf2cab0ed2dc",
+          "content": "User does not want to get stuck paying the wrong amount and is seeking a clear way to verify what is actually owed before sending any payment.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T07:45:48"
+        },
+        {
+          "id": "f8ef265a-0d07-401c-9e3d-d013e9871ab4",
+          "content": "User does not want a speech or lecture; they want a concise, usable checklist they can keep by the phone. User finds the checklist short enough to keep by the phone.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T07:34:38"
+        },
+        {
+          "id": "52030b6e-c2d0-4d38-aec9-cd1e53bd408e",
+          "content": "User prefers short, plain-language statements on the contractor card that are actionable and enforceable.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T07:49:21"
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "procedural_knowledge",
+      "explanation": "He understands that jobs, repairs, and billing processes need to be monitored closely. He does not assume bureaucracy or service work will take care of itself, so he checks each step. This is effective but narrow, built from experience rather than trust in institutions.",
+      "ground_truth": "Knows how to make systems work by staying on them",
+      "predicted": "uses practical decision frameworks for real-world tasks",
+      "slot_fill_reason": "Memories say they prefer clear, actionable safety guidelines, measurable decision-making structures, and breaking long situations into manageable steps.",
+      "score": 0.5,
+      "judge_reason": "The prediction overlaps with the idea of practical, experience-based handling of tasks, but it misses the key emphasis on closely monitoring systems and staying on top of processes to make them work.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "id": "1f151bf0-c8bd-4a39-a7d8-c9ca7148d45f",
+          "content": "User prefers written, concise, firm, clear messages with clear action items. User prefers a clear, no-fluff, actionable message such as: 'I reviewed the invoice against our agreement. A few charges do not match the approved scope and price. Send a corrected invoice and a written explanation for the disputed items. I will hold payment on the disputed portion until the issues are resolved.' Original memory (2026-04-29T07:35:48) recorded the preference for firm, concise messages with clear action items. Updated on 2026-04-29T07:51:00 to reflect that messages should be short, plain, and actionable. Updated on 2026-04-29T08:35:11 to emphasize preference for written, firm, concise messages with clear action items. Updated on 2026-04-29T08:44:58 to reflect that the user seeks the clearest way to ask for help that yields a direct, actionable answer and allows moving on. Updated on 2026-04-29T08:47:15 to reflect that user prefers short, plain messages that start with the facts and avoid story or fluff. Updated on 2026-04-29T08:49:27 to reflect that messages should be firm, concise, and written with clear action items.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:49:27"
+        },
+        {
+          "id": "2174bc71-0903-4f08-80f4-d08b007aab94",
+          "content": "User wants a real route order based on actual stops and will use the location descriptions (north, south, same strip mall) to decide which errand to hit first and which ones to stack together to avoid wasting gas. (Original memory: 2026-04-29T07:37:02) This is a refinement that explicitly states the goal is to group errands by location descriptions to create an efficient order that minimizes gas usage.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T07:37:02"
+        },
+        {
+          "id": "65c5b055-d212-4459-99ad-b983a24f7a07",
+          "content": "User emphasizes that the decision should be based on personal tolerance — what they can actually live with day after day — not just what seems sensible.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:07:54"
+        },
+        {
+          "id": "3efa09b0-2d9e-4bb9-a151-63aa5752a184",
+          "content": "User has a preference for clear, actionable safety guidelines and practical checklists to avoid costly mistakes. Updated on 2026-04-29T07:12:01 to include a preference for measurable frameworks and decision-making structures for home maintenance tasks. Updated on 2026-04-29T08:35:11 to emphasize preference for clear, actionable, and measurable safety and decision-making frameworks for home maintenance tasks.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:35:11"
+        },
+        {
+          "id": "c2077475-629f-4a6c-bb7e-5e244b8f966d",
+          "content": "User wants to break down a situation that could take a while into manageable steps and keep track of progress to prevent it from turning into a bigger headache.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:41:04"
+        }
+      ],
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites step-by-step procedural advice about monitoring a utility issue, which can elicit whether the user knows to stay on top of jobs, repairs, and billing processes rather than trusting them to resolve themselves."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "I don’t want to assume they’ll handle it right the first time",
+            "reason": "The user explicitly says they do not trust the process to work without close follow-up and asks what to monitor from first call to final bill, which strongly signals a procedural, stay-on-it approach."
+          }
+        ],
+        "ep_index": 12
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "local_environment_knowledge",
+      "explanation": "Living alone in Old Jamestown for years suggests strong knowledge of his immediate surroundings. He likely knows the local conditions, neighbors, and practical quirks of his home area. His world is rooted and familiar, but not especially broad.",
+      "ground_truth": "Deeply familiar with his own place and routines",
+      "predicted": "knows local home-maintenance tasks can become unpredictable",
+      "slot_fill_reason": "Memories say they distinguish slow vs getting away from me, stop when improvising or hidden parts appear, and want to assess nuisance vs bigger mess before touching anything.",
+      "score": 0.25,
+      "judge_reason": "The prediction mentions practical local experience, but it focuses on unpredictable home-maintenance tasks rather than being deeply familiar with his place and routines.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "id": "b726f194-5556-43ad-b617-bf78246665fb",
+          "content": "User’s rule of thumb for a neighbor: if he’s just there to lift, steady, or spot while I do the actual work, fine. If he’d have to figure out anything, he’s in the way. (Updated: Clarified that the user will not ask a neighbor for help if they need to guess or figure out what is behind something — only for lifting, steadying, or spotting.)\n\nAdded new step: User will contact the neighbor early to confirm availability and discuss scope before asking for help.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:21:07"
+        },
+        {
+          "id": "1990bc50-496a-4236-a67a-a5f494a997af",
+          "content": "User defines 'Do alone' as visible, simple, no guessing, no hidden parts, no danger if stopped halfway.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:19:25"
+        },
+        {
+          "id": "51304dd3-30fa-4da2-9f2a-ea76b42189d5",
+          "content": "User will stop a home maintenance task if the next move is no longer obvious and they are improvising or repeating themselves. (Original memory at 2026-04-29T08:31:09.) User defines 'getting away from me' as improvising, repeating themselves, or when the thing is no longer fully in front of them. (New definition added at 2026-04-29T08:31:09.) This is now explicitly tied to the user stopping when they are improvising, repeating themselves, or the thing is no longer fully in front of them. (Updated at 2026-04-29T08:35:11.) Updated to include the exact phrasing from the new memory: 'User will stop if they are improvising, repeating themselves, or the thing is no longer fully in front of them.' (New content added at 2026-04-29T08:49:27.) The rule is now fully captured and confirmed with the new turn: 'User will stop if they are improvising, repeating themselves, or the thing is no longer fully in front of them.' (New memory turn at 2026-04-29T09:00:35.) The rule is now fully captured and confirmed with the new turn: 'User will stop if they are improvising, repeating themselves, or the thing is no longer fully in front of them.' (New memory turn at 2026-04-29T09:14:21.)",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T09:14:21"
+        },
+        {
+          "id": "6d4c479f-f83b-4388-8967-a376c30d41f2",
+          "content": "User wants to be able to tell the difference between 'this is just slow' and 'this is getting away from me' — that is, between a slow but manageable task and a task that is drifting into unmanageable, unpredictable territory.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:29:17"
+        },
+        {
+          "id": "2d1f8a3e-efe3-4e80-ba22-3e8d8dcaa162",
+          "content": "User wants to tighten the diagnostic workflow before touching anything. To help determine whether the issue is just nuisance or likely to turn into a bigger mess, the user wants to add a step to the workflow to make that distinction explicitly.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T09:03:17"
+        }
+      ],
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.25,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task is explicitly about planning errands around Old Jamestown, so natural follow-up questions about specific stops, routes, and local shortcuts could easily prompt the user to reveal how familiar they are with the area and its routines."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "around Old Jamestown",
+            "reason": "The user explicitly references planning errands around Old Jamestown and avoiding backtracking, which signals familiarity with their local area and routine travel patterns."
+          }
+        ],
+        "ep_index": 13
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "weather_and_seasonal_knowledge",
+      "explanation": "The frozen water line shows he is not ignorant of seasonal problems, and he likely stays alert to cold-weather threats. He responds to weather as something to endure and manage, not something to romanticize. His knowledge is experiential and cautious, shaped by losses rather than planning.",
+      "ground_truth": "Knows winter risks from hard experience",
+      "predicted": "understands weather can disrupt work and requires securing it",
+      "slot_fill_reason": "Notes say they want a weather rule to cover it, secure it, and quit if the weather turns ugly, showing awareness that bad weather affects the work.",
+      "score": 0.5,
+      "judge_reason": "The prediction overlaps by showing practical awareness of weather risks, but it misses the ground-truth emphasis on hard-earned, experiential knowledge of winter danger.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "id": "0e32e890-d44a-4c87-ad64-e799202d2673",
+          "content": "User wants a weather rule: if the weather turns ugly, they want to cover it, secure it, and quit — this is a required line item in the card. User prefers the contractor card to include a clear, no-nonsense line: 'Cover it, secure it, and quit if the weather turns ugly.'",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T07:19:59"
+        },
+        {
+          "id": "f57591bd-6d24-493e-99e7-04c746e68b07",
+          "content": "User desires a sensible, structured approach to keep the repair progressing and maintain oversight despite potential delays or weather-related disruptions.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T07:17:47"
+        },
+        {
+          "id": "004f71ef-f1b3-4a3c-9bce-1609b988c24b",
+          "content": "User will use a weather rule: cover it, secure it, and quit if the weather turns ugly.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:35:11"
+        },
+        {
+          "id": "efbcbfba-19db-41da-b200-0bd0796d8c0d",
+          "content": "User wants to know exactly what gets written down in the book or on the phone — this is a required line item in the card.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T07:19:20"
+        },
+        {
+          "id": "1f6061c8-fb20-4c9a-8648-bcd439113670",
+          "content": "The user finds the timing rule (for issues like a drip, a warm outlet, or a loose thing in a wall) crucial because it prevents them from giving the benefit of the doubt and allows them to act before problems worsen.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T09:06:53"
+        }
+      ],
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task directly concerns preparing for freezing weather and managing outdoor water lines, which can naturally prompt the user to describe their experience with winter risks, cold-weather precautions, and seasonal problem-solving."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"I’ve got a cold snap coming\" and \"outside water lines before it turns into a mess\"",
+            "reason": "The user explicitly shows awareness of winter/cold-weather risks and a practical, cautious approach to preventing freeze-related problems."
+          }
+        ],
+        "ep_index": 14
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "betrayal_or_conflict_event",
+      "explanation": "The basement pipe repair clearly left a mark because he treated the crew like a threat from the start. Refusing to unlock the door, watching every step, and arguing over the bill suggest an older event or pattern of being taken advantage of shaped this reaction. He seems to carry that distrust forward rather than letting any single repair end cleanly.",
+      "ground_truth": "The repair job became a lesson in not trusting strangers",
+      "predicted": "experienced contractor billing inflation after vague promises",
+      "slot_fill_reason": "Memory notes mention a past incident where contractors used vague language and later inflated the bill, leading to a strict no-verbal-changes rule.",
+      "score": 0.75,
+      "judge_reason": "The prediction captures the core distrust and conflict around the repair job, but it narrows the cause to billing inflation and vague promises rather than the broader lesson about not trusting strangers.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "id": "5629eae5-a202-4893-bd83-9d4a60ef051e",
+          "content": "User is cautious and prefers clear, actionable safety guidelines before engaging in any DIY; this caution extends to contractor interactions.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T07:31:20"
+        },
+        {
+          "id": "c2077475-629f-4a6c-bb7e-5e244b8f966d",
+          "content": "User wants to break down a situation that could take a while into manageable steps and keep track of progress to prevent it from turning into a bigger headache.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:41:04"
+        },
+        {
+          "id": "1f151bf0-c8bd-4a39-a7d8-c9ca7148d45f",
+          "content": "User prefers written, concise, firm, clear messages with clear action items. User prefers a clear, no-fluff, actionable message such as: 'I reviewed the invoice against our agreement. A few charges do not match the approved scope and price. Send a corrected invoice and a written explanation for the disputed items. I will hold payment on the disputed portion until the issues are resolved.' Original memory (2026-04-29T07:35:48) recorded the preference for firm, concise messages with clear action items. Updated on 2026-04-29T07:51:00 to reflect that messages should be short, plain, and actionable. Updated on 2026-04-29T08:35:11 to emphasize preference for written, firm, concise messages with clear action items. Updated on 2026-04-29T08:44:58 to reflect that the user seeks the clearest way to ask for help that yields a direct, actionable answer and allows moving on. Updated on 2026-04-29T08:47:15 to reflect that user prefers short, plain messages that start with the facts and avoid story or fluff. Updated on 2026-04-29T08:49:27 to reflect that messages should be firm, concise, and written with clear action items.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:49:27"
+        },
+        {
+          "id": "0fbe201d-680e-4e16-9853-bd1dbed6b5d6",
+          "content": "User requires line-by-line explanation for every extra charge and when it was approved. This requirement is now explicitly reinforced by a past incident where contractors used vague language and later inflated the bill, reinforcing the need for written clarity. The new requirement states: 'The estimate must state that the price stands unless the user signs a written change order; no verbal promises are accepted.' This is now a firm, non-negotiable policy. Additionally, the user will require explicit itemization of any line marked 'as needed,' 'allowance,' or 'extra.' The user will also require explicit listing of disposal, trip charges, permit fees, and service fees. User will require explicit warranty terms, if any. User will demand line-by-line justification for any changes between the original estimate and the revised estimate; no verbal promises or vague statements like 'we’ll take care of it.' All changes must be written on the estimate. (Original recorded 2026-04-29T08:00:00) Updated on 2026-04-29T08:01:51. User will reject any warranty language that is vague enough to mean nothing. User will use a plain-language, line-by-line contractor estimate that explicitly states no verbal changes are approved and that any charge not in writing is not approved. (New: 2026-04-29T08:04:24)\n\nUser will use a second line in written communication: 'No verbal changes. If it’s not in writing, it’s not approved.' as a firm rule to prevent verbal inflation and scope creep. (New: 2026-04-29T08:04:24)",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:04:24"
+        },
+        {
+          "id": "3977a99a-68cc-423f-8172-937cc8871dc5",
+          "content": "User will use a decision-split to decide whether to keep going or switch approaches when the first method slows down.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:33:01"
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "legal_or_administrative_event",
+      "explanation": "The plumber episode appears to have reinforced his habit of treating paperwork as protection. He paid only what matched the estimate and kept receipts, which suggests a concrete experience with billing or administration that taught him to verify everything. He does not trust process on its own; he trusts what he can check himself.",
+      "ground_truth": "A billing dispute taught him to demand exact terms",
+      "predicted": "used written notes to handle a changing story or terms",
+      "slot_fill_reason": "Memory notes say they use a hard-stop rule to write down any story or term changes immediately and not rely on memory.",
+      "score": 0.5,
+      "judge_reason": "The prediction overlaps with the idea of verifying terms through written records, but it misses the specific legal/administrative event of a billing dispute that led him to demand exact terms.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "id": "20124d80-c915-459b-afe1-32d2eecb55a7",
+          "content": "User uses a plain-language message to set boundaries: 'I’m not deciding tonight. Put it in writing and I’ll look at it before I answer.'",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:39:05"
+        },
+        {
+          "id": "f1a679c2-b025-473c-b417-ed7478b8d607",
+          "content": "User agrees to use the hard-stop rule: if the story shifts, write it down immediately and do not rely on memory. (Original: User wants a hard-stop rule: if someone changes the story or terms, write it down immediately and do not rely on memory — 2026-04-29T08:42:19)",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:43:43"
+        },
+        {
+          "id": "a8299db1-314a-4c55-b396-60e3345a8104",
+          "content": "User prefers to respond with a short, firm, and clear statement that acknowledges a request while setting a boundary for thinking time.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:39:05"
+        },
+        {
+          "id": "1f6061c8-fb20-4c9a-8648-bcd439113670",
+          "content": "The user finds the timing rule (for issues like a drip, a warm outlet, or a loose thing in a wall) crucial because it prevents them from giving the benefit of the doubt and allows them to act before problems worsen.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T09:06:53"
+        },
+        {
+          "id": "13f2fc99-ab81-498a-aa2d-14aa58c382c7",
+          "content": "User will use a numbered stay-vs-move checklist with eight criteria: Money, Access/privacy, Repair burden, Exit trouble, Paperwork, Daily tolerance, Stability, and a line for 'who’s responsible when something breaks'. (Original note: 2026-04-29T08:06:59). User will use the checklist to make real-life decisions about whether to stay or move and will mark up the checklist themselves. (Original note: 2026-04-29T08:10:47).",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:10:47"
+        }
+      ],
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites discussion of a billing or invoice dispute, which can reasonably lead a user to mention a prior legal or administrative event involving paperwork, estimates, receipts, or payment disagreements."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"a service invoice in front of me that doesn’t quite match what was discussed\"",
+            "reason": "The user explicitly describes a billing/invoice dispute and concern about paying the wrong amount, which strongly signals a preference for verifying exact terms and amounts in administrative matters."
+          }
+        ],
+        "ep_index": 16
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "emergency_response_event",
+      "explanation": "The winter freeze and broken water line were an immediate household emergency he had to manage personally. Rather than delegate, he stayed on site, monitored the repair, and handled the aftermath himself. The event seems to have confirmed that in a crisis, he expects to be his own backup.",
+      "ground_truth": "A frozen pipe emergency hardened his self-reliance",
+      "predicted": "called a professional when hidden damage or electrical risk was possible",
+      "slot_fill_reason": "The memory notes record an accepted stop rule to call a professional for hidden damage, water near electric, gas smell, roof work, wall/ceiling/panel penetrations, or any uncertainty.",
+      "score": 0.0,
+      "judge_reason": "The prediction describes calling a professional due to possible hidden damage or electrical risk, which contradicts the ground truth that he personally managed the frozen pipe emergency and relied on himself.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "id": "3977a99a-68cc-423f-8172-937cc8871dc5",
+          "content": "User will use a decision-split to decide whether to keep going or switch approaches when the first method slows down.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:33:01"
+        },
+        {
+          "id": "1f6061c8-fb20-4c9a-8648-bcd439113670",
+          "content": "The user finds the timing rule (for issues like a drip, a warm outlet, or a loose thing in a wall) crucial because it prevents them from giving the benefit of the doubt and allows them to act before problems worsen.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T09:06:53"
+        },
+        {
+          "id": "e5dbfb20-3101-4dcf-b8bb-a49fa2fe2fd1",
+          "content": "User prefers to start troubleshooting by checking the actual source of a problem, not just the symptom. (Original recorded: 2026-04-29T08:54:42.) Updated: User wants the first check to be for the specific thing, not a category list. (New turn: 2026-04-29T08:57:38.)",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:57:38"
+        },
+        {
+          "id": "b29eb001-a7c2-408e-a317-df7313f058b6",
+          "content": "User wants to know what should be checked first and what would make it smarter to stop and bring in help.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T09:08:11"
+        },
+        {
+          "id": "6ba107cc-e016-4f44-94ce-d2c0d3177dc7",
+          "content": "User's accepted safety stop rule: call a professional for hidden damage, water near electric, gas smell, roof work, wall/ceiling/panel penetrations, or any uncertainty.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T06:59:04"
+        }
+      ],
+      "attribution": {
+        "category": "simulator_too_strict",
+        "score": 0.0,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task is about handling a household freeze-related pipe emergency, which can naturally prompt the user to describe a real emergency they dealt with and how they responded, revealing their emergency-response behavior."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": false,
+            "evidence": "none",
+            "reason": "The user only asks for general emergency advice about frozen pipes and does not reveal any personal experience, behavior, or preference about handling such an emergency themselves."
+          },
+          {
+            "stage": "disclosure_subclass",
+            "category": "B",
+            "reason": "The agent directly brought up a frozen-pipe/water-line emergency and asked what to do while waiting for help, but the user never responded with any personal experience or self-reliance details.",
+            "evidence": "“If a pipe or water line gives out during the night, what are the first things someone should check or do while waiting for help?”"
+          }
+        ],
+        "ep_index": 17
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "financial_shock_event",
+      "explanation": "The pipe failure and the fight over the bill suggest a concrete money sting that he did not forget. Keeping receipts in a cigar box and refusing to pay beyond the estimate point to a lasting sensitivity to being overcharged. His caution feels earned, not theoretical.",
+      "ground_truth": "Unexpected repair costs made him tighter with money",
+      "predicted": "unknown",
+      "slot_fill_reason": "No memory note describes a specific past financial shock event; the notes only mention caution about contractor payments, written agreements, and inspection before paying.",
+      "score": 0.0,
+      "judge_reason": "The prediction is unknown, so it does not capture the ground truth that unexpected repair costs made him tighter with money.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "id": "c2077475-629f-4a6c-bb7e-5e244b8f966d",
+          "content": "User wants to break down a situation that could take a while into manageable steps and keep track of progress to prevent it from turning into a bigger headache.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:41:04"
+        },
+        {
+          "id": "1d600421-07d3-4ce2-bb9a-825ad97ae51f",
+          "content": "User requires start date, duration, and clear assignment of permit responsibility. User requires written approval for any extra work and clear responsibility for cleanup and damage.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T07:12:26"
+        },
+        {
+          "id": "5629eae5-a202-4893-bd83-9d4a60ef051e",
+          "content": "User is cautious and prefers clear, actionable safety guidelines before engaging in any DIY; this caution extends to contractor interactions.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T07:31:20"
+        },
+        {
+          "id": "e2f8018a-26c5-4af8-b2bd-8421bcda01a1",
+          "content": "User treats requests for advance cash as a red flag and requires all agreements to be in writing. User does not need a lecture on that part.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T07:13:07"
+        },
+        {
+          "id": "bd531656-7e94-4a19-ac81-3bd643de9bff",
+          "content": "User requires double testing of plumbing and electrical work and will withhold payment if anything is on the punch list. User will inspect work before paying by running it themselves, checking for leaks, gaps, caulk, paint, fittings, scratches, confirming materials, checking cleanup, and testing plumbing/electrical twice. [Original entry: User will withhold payment if there’s a punch list.] [New information: User will inspect the work personally before allowing any payment to leave.]",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:35:11"
+        }
+      ],
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.0,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "A natural follow-up could ask why the user is especially wary of surprise repair charges, which could prompt them to mention a past costly repair or billing dispute that made them more money-sensitive."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "“a lot higher than I expected” and “I don’t want to get boxed into paying for surprises later”",
+            "reason": "The user clearly signals sensitivity to unexpected repair costs and a desire to avoid overpaying, which is enough for a memory system to infer a money-sting/financial-shock tendency."
+          }
+        ],
+        "ep_index": 18
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "relocation_or_migration_event",
+      "explanation": "He lives alone in Old Jamestown now, and nothing in his story suggests a recent or dramatic move. If he did relocate earlier, it was not a defining rupture he still talks about. His life seems organized around staying put rather than being reshaped by migration.",
+      "ground_truth": "He settled into one place and never looked back",
+      "predicted": "considering whether to stay or relocate",
+      "slot_fill_reason": "The notes say the user is currently weighing whether to stay in their current location or move elsewhere, but they do not describe a specific past relocation event.",
+      "score": 0.25,
+      "judge_reason": "The prediction suggests an unresolved decision about moving, which only weakly overlaps with the ground truth’s clear sense of having settled permanently in one place.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "id": "50aa4f42-0303-4f08-8ceb-7fd71042092f",
+          "content": "User is considering whether to stay in their current location or relocate to a different place.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:06:59"
+        },
+        {
+          "id": "1d64b819-ce17-48b8-92e8-ae9f164725c6",
+          "content": "User seeks specific, actionable criteria to weigh before deciding whether to stay or move. User prefers a concrete, numbered checklist for deciding whether to stay or move, with specific criteria that are practical and measurable. (Original note: 2026-04-29T08:06:59). Specific criteria: 'Who’s got access' (who has access to the property and shared spaces), 'Repair burden' (ongoing maintenance and repair costs if staying), 'Exit trouble' (ease of moving out later), and 'Paperwork' (careful reading of all terms).",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:07:54"
+        },
+        {
+          "id": "13f2fc99-ab81-498a-aa2d-14aa58c382c7",
+          "content": "User will use a numbered stay-vs-move checklist with eight criteria: Money, Access/privacy, Repair burden, Exit trouble, Paperwork, Daily tolerance, Stability, and a line for 'who’s responsible when something breaks'. (Original note: 2026-04-29T08:06:59). User will use the checklist to make real-life decisions about whether to stay or move and will mark up the checklist themselves. (Original note: 2026-04-29T08:10:47).",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:10:47"
+        },
+        {
+          "id": "4a7dd77f-52e7-4b6b-9c11-86095f2e745d",
+          "content": "User prefers specific place details over general theory when evaluating whether to stay or move.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:10:47"
+        },
+        {
+          "id": "b61d5ab4-a38a-4c01-b636-06ecc764c146",
+          "content": "User wants to avoid being talked into a decision they will later regret. User does not want to overthink the decision.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:22:14"
+        }
+      ],
+      "attribution": {
+        "category": "task_design_failure",
+        "score": 0.25,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": false,
+            "reason": "The task is about deciding whether to relocate, but it asks for advice rather than eliciting the user’s own past relocation or migration event, so natural follow-up would not reasonably reveal a value on that dimension."
+          }
+        ],
+        "ep_index": 19
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "identity_reorganizing_event",
+      "explanation": "This episode seems to have reinforced an existing self-image rather than creating a new one. Waiting in the cold garage, supervising the work, and hauling out ruined carpet himself all fit a personal identity built around stubborn independence. The event did not soften him; it made that identity more rigid.",
+      "ground_truth": "The repair ordeal confirmed him as a man who handles things alone",
+      "predicted": "used a hard-stop rule after a story or terms changed",
+      "slot_fill_reason": "Memory notes say the user adopted a hard-stop rule to write down any story or term changes immediately and not rely on memory.",
+      "score": 0.0,
+      "judge_reason": "The prediction is unrelated to the ground truth and does not describe the person being confirmed as someone who handles things alone.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "id": "f1a679c2-b025-473c-b417-ed7478b8d607",
+          "content": "User agrees to use the hard-stop rule: if the story shifts, write it down immediately and do not rely on memory. (Original: User wants a hard-stop rule: if someone changes the story or terms, write it down immediately and do not rely on memory — 2026-04-29T08:42:19)",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:43:43"
+        },
+        {
+          "id": "20124d80-c915-459b-afe1-32d2eecb55a7",
+          "content": "User uses a plain-language message to set boundaries: 'I’m not deciding tonight. Put it in writing and I’ll look at it before I answer.'",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:39:05"
+        },
+        {
+          "id": "a8299db1-314a-4c55-b396-60e3345a8104",
+          "content": "User prefers to respond with a short, firm, and clear statement that acknowledges a request while setting a boundary for thinking time.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:39:05"
+        },
+        {
+          "id": "c2077475-629f-4a6c-bb7e-5e244b8f966d",
+          "content": "User wants to break down a situation that could take a while into manageable steps and keep track of progress to prevent it from turning into a bigger headache.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:41:04"
+        },
+        {
+          "id": "d8777c45-1b2a-4c8a-8995-4d40f003f65b",
+          "content": "User’s preferred response to urgent requests is: 'I’ll give you a clear yes or no in 24 hours, but I need time to review the details.'",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:39:05"
+        }
+      ],
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.0,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "A user answering how they would handle a delayed pipe repair may naturally describe whether they would personally supervise, improvise, and manage the mess alone or rely on others, which can reveal whether the event reinforces an identity of self-reliance or similar self-concept."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"What would you do in the meantime to keep the situation contained until someone can finish the job?\"",
+            "reason": "The prompt frames the user as someone dealing with a home repair delay and asks what they would do to contain it, which can support an inference that they handle problems themselves and stay in control during an ordeal."
+          }
+        ],
+        "ep_index": 20
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "unexpected_kindness_event",
+      "explanation": "There is no sign that he experienced outside help as meaningful or transformative in this story. Even when a neighbor offered assistance, he declined and handled the work himself. That absence is telling: he does not seem to organize memory around kindness, but around having to fend for himself.",
+      "ground_truth": "No memorable rescue; he remembers refusal, not help",
+      "predicted": "unknown",
+      "slot_fill_reason": "No memory note describes a specific unexpected kindness event or a concrete incident where someone was unexpectedly kind.",
+      "score": 0.0,
+      "judge_reason": "The prediction is \"unknown,\" which provides no meaningful match to the ground truth about remembering refusal rather than help.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "id": "f1a679c2-b025-473c-b417-ed7478b8d607",
+          "content": "User agrees to use the hard-stop rule: if the story shifts, write it down immediately and do not rely on memory. (Original: User wants a hard-stop rule: if someone changes the story or terms, write it down immediately and do not rely on memory — 2026-04-29T08:42:19)",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:43:43"
+        },
+        {
+          "id": "8b11e1f9-7b47-43e9-b0d2-a5f2e940ed8c",
+          "content": "The user wants to add a timing rule: some issues like a drip, a warm outlet, or a loose thing in a wall look minor at first but can worsen and should not be given the benefit of the doubt.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T09:05:38"
+        },
+        {
+          "id": "c39e5515-9413-4aeb-b931-3b658cf88209",
+          "content": "User will circle the extra charges on the repair estimate. User will circle any extra charges on the revised estimate when reviewing. User will use a side-by-side comparison of the original and new versions of the estimate to identify and circle extra charges.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T07:57:41"
+        },
+        {
+          "id": "b1e44b45-5b2d-42a0-b8b9-286f30bbaf97",
+          "content": "User wants a 1-screen version of the contractor card that is practical, usable with muddy hands, and includes the timing rule (some issues should not be given the benefit of the doubt and should be addressed promptly). (Original: 2026-04-29T07:19:20) New request: wants a real, pocket-sized card for contractors that uses plain words and is usable with muddy hands. (2026-04-29T08:35:11) Timing rule: issues like a drip, warm outlet, or loose thing in a wall should not be given the benefit of the doubt and should be addressed promptly. (2026-04-29T09:06:53)",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T09:06:53"
+        }
+      ],
+      "attribution": {
+        "category": "task_design_failure",
+        "score": 0.0,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": false,
+            "reason": "The task is about planning a home job and delegating work, not about recalling a meaningful act of unexpected kindness or rescue, so natural follow-up would not plausibly elicit that dimension."
+          }
+        ],
+        "ep_index": 21
+      }
+    },
+    {
+      "category": "self_model",
+      "dimension": "identity_anchor",
+      "explanation": "He appears to define himself by doing things alone and refusing to be managed by others. The garage wait, the shotgun nearby, and hauling the carpet himself all fit a self-image built around self-reliance. He likely treats dependence as weakness rather than a normal part of life.",
+      "ground_truth": "Sees independence as the core of who he is",
+      "predicted": "practical, checklist-driven decision maker",
+      "slot_fill_reason": "They use a numbered stay-vs-move checklist and a decision-split to decide when to keep going or switch approaches.",
+      "score": 0.25,
+      "judge_reason": "The prediction suggests a practical, organized style, but it does not capture that independence is the person’s core identity.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "id": "13f2fc99-ab81-498a-aa2d-14aa58c382c7",
+          "content": "User will use a numbered stay-vs-move checklist with eight criteria: Money, Access/privacy, Repair burden, Exit trouble, Paperwork, Daily tolerance, Stability, and a line for 'who’s responsible when something breaks'. (Original note: 2026-04-29T08:06:59). User will use the checklist to make real-life decisions about whether to stay or move and will mark up the checklist themselves. (Original note: 2026-04-29T08:10:47).",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:10:47"
+        },
+        {
+          "id": "529c311c-13e1-405e-95ae-a36f8eadd350",
+          "content": "The scorecard includes 7 criteria: Money, Access/privacy, Repair burden, Exit trouble, Paperwork, Daily tolerance, Stability, and a Total stay/Total move score out of 16.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:09:27"
+        },
+        {
+          "id": "376da5b0-9843-40a2-945f-ee2454d15243",
+          "content": "The user wants to assume a bigger mess if the source is hidden until proven otherwise.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T09:05:38"
+        },
+        {
+          "id": "3977a99a-68cc-423f-8172-937cc8871dc5",
+          "content": "User will use a decision-split to decide whether to keep going or switch approaches when the first method slows down.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:33:01"
+        },
+        {
+          "id": "51304dd3-30fa-4da2-9f2a-ea76b42189d5",
+          "content": "User will stop a home maintenance task if the next move is no longer obvious and they are improvising or repeating themselves. (Original memory at 2026-04-29T08:31:09.) User defines 'getting away from me' as improvising, repeating themselves, or when the thing is no longer fully in front of them. (New definition added at 2026-04-29T08:31:09.) This is now explicitly tied to the user stopping when they are improvising, repeating themselves, or the thing is no longer fully in front of them. (Updated at 2026-04-29T08:35:11.) Updated to include the exact phrasing from the new memory: 'User will stop if they are improvising, repeating themselves, or the thing is no longer fully in front of them.' (New content added at 2026-04-29T08:49:27.) The rule is now fully captured and confirmed with the new turn: 'User will stop if they are improvising, repeating themselves, or the thing is no longer fully in front of them.' (New memory turn at 2026-04-29T09:00:35.) The rule is now fully captured and confirmed with the new turn: 'User will stop if they are improvising, repeating themselves, or the thing is no longer fully in front of them.' (New memory turn at 2026-04-29T09:14:21.)",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T09:14:21"
+        }
+      ],
+      "attribution": {
+        "category": "agent_elicitation_failure",
+        "score": 0.25,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "A discussion about whether to hire help versus do the garage cleanup alone can naturally prompt the user to explain their preference for handling things independently, which could reveal how central self-reliance is to their identity."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": false,
+            "evidence": "none",
+            "reason": "The user only asks for practical advice about deciding when to hire help versus do it themselves, which does not clearly reveal a self-reliance identity or a core value of independence."
+          },
+          {
+            "stage": "disclosure_subclass",
+            "category": "A",
+            "reason": "The conversation stayed on practical task-splitting for a garage cleanup and never explored the person’s self-concept around independence or reliance on others.",
+            "evidence": "“What’s a sensible way to tell which parts are worth bringing in help for and which parts I should just handle on my own?”"
+          }
+        ],
+        "ep_index": 22
+      }
+    },
+    {
+      "category": "self_model",
+      "dimension": "flexibility_self_view",
+      "explanation": "He seems to view stubbornness as a virtue, not a flaw. Keeping the same routines and resisting the repair crew’s requests suggest he sees himself as someone who should not bend easily. That rigidity protects him, but it also makes him harder to work with and slower to adapt.",
+      "ground_truth": "Thinks of himself as stubbornly set in his ways",
+      "predicted": "flexible when rules are clear, rigid when scope shifts",
+      "slot_fill_reason": "They use firm stop rules and written agreements, but also adapt by breaking problems into steps and using diagnostic workflows when the situation is defined.",
+      "score": 0.25,
+      "judge_reason": "The prediction suggests conditional flexibility and only situational rigidity, which misses the ground truth that he sees himself as generally stubbornly set in his ways.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "id": "User",
+          "content": "User is cautious, prefers clear, actionable, and measurable safety and decision-making frameworks. Seeks practical, time-structured routines for daily errands and home maintenance. Uses a diagnostic workflow for non-obvious appliance issues and has a practical HVAC flash code lookup. Wants a real, pocket-sized card for contractors that uses plain words and is usable with muddy hands. The card should start with 4–5 yes/no checks, include hard-stop rules, specify exactly what gets written down, include a clear line to use when contractors stretch scope, and contain a weather rule: cover it, secure it, and quit if the weather turns ugly. User will verify every line on the contractor bill against the agreed-upon scope and price before paying. User will inspect the work personally before allowing any payment to leave. User will separate disputed charges from those that match the agreement and will hold payment on disputed items until a corrected invoice and written explanation is provided. User prefers written, firm, concise messages with clear action items. User now uses a 15-minute no-progress rule: stop after 15 minutes of no real movement. User will stop if they are starting to guess or need to open something they can’t see. User will stop if they are improvising, repeating themselves, or the thing is no longer fully in front of them. User defines 'just slow' as being able to point to the next step before taking it. User defines 'getting away from me' as improvising, repeating themselves, or when the thing is no longer fully in front of them. User will use these rules to avoid getting stuck halfway and to prevent the job from becoming a larger, messier problem. User will use a line on the contractor card that says: 'I want the work, scope, and price agreed to before you start. No extra work without asking me first.' User will stop if the job turns into 'we found more work' and will require the contractor to spell out any new work and its justification before proceeding. User now uses a short, firm, and clear message to set boundaries: 'I’m not deciding tonight. Put it in writing and I’ll look at it before I answer.' User interprets rushing as a sign that the requester doesn’t want them to look too close. User wants to break down a situation that could take a while into manageable steps and keep track of progress to prevent it from turning into a bigger headache. User now prefers a simple, one-page log or notebook page for contractor records with dates on everything, a section for what was agreed to, all receipts and contact details kept together, and a line for what’s next. User wants a hard-stop rule: if someone changes the story or terms, write it down immediately and do not rely on memory. User finds the current contractor card format 'tight' and contains all essential parts: date, agreement, contacts, papers, running log, and next step. User agrees to use the hard-stop rule: if the story shifts, write it down immediately and do not rely on memory. User prefers short, plain messages that start with the facts and avoid story or fluff. User uses a message template: 'I’ve got a house issue: [exact problem]. It’s in [location]. What’s the safest, quickest way to handle it, and can I do it myself?' This template elicits a direct, actionable answer and allows moving on if no further questions are needed. User now prefers to start troubleshooting by checking the actual source of a problem, not just the symptom. User uses a step-by-step diagnostic approach for different types of home issues: water, electric, door/lock/window, and heat/air. User will shut off water if needed before investigating. User will check a circuit breaker before investigating electric issues. User will inspect the latch, strike, hinges, and frame for door/lock/window issues. User will check the filter, thermostat, power, and the unit for heat/air issues. User does not like guessing and requires the exact nature of the problem and its location before giving specific next steps. User uses a diagnostic approach that starts with checking the actual source of a problem, not just the symptom. User prefers to identify the 'point of failure' — the specific location where the problem occurs — rather than treating the entire category of issue. User will stop if they are starting to guess or need to open something they can’t see. User will stop if they are improvising, repeating themselves, or the thing is no longer fully in front of them. User defines 'just slow' as being able to point to the next step before taking it. User defines 'getting away from me' as improvising, repeating themselves, or when the thing is no longer fully in front of them. User will use these rules to avoid getting stuck halfway and to prevent the job from becoming a larger, messier problem. User wants to add a step to determine whether an issue is just nuisance or likely to turn into a bigger mess before touching anything. New: The user wants to make the nuisance test practical: if the issue is stable for a day or two, it’s probably nuisance; if it changes, spreads, or comes back, it’s not. The user wants to assume a bigger mess if the source is hidden until proven otherwise. The user wants to add a timing rule: some issues like a drip, a warm outlet, or a loose thing in a wall look minor at first but can worsen and should not be given the benefit of the doubt. The user finds the timing rule crucial and wants a 1-screen version of the contractor card that is practical, usable with muddy hands, and includes the timing rule. New: Specific door lock replacement rules: check the door for swelling, warping, loose hinge, and rotten edge; verify lock type (standard vs. mortise/odd setup); measure backset, bore hole, and door thickness; verify strike plate alignment; confirm both sides open without tearing; stop and call if door is warped, latch won’t line up, old lock is mortise/special setup, screws are stripped, parts are broken, cylinder won’t come out, frame/strike damaged, or user is unsure of compatibility. If it’s a plain lock swap with matching dimensions, do it yourself; otherwise, stop and call. New: The user finds the 3-minute pocket check useful for quick verification before proceeding with a lock replacement. New: For garage door openers, the user recommends checking the manual release, spring setup and cables, opener adjustment, and trolley/chain/gear for noise before spending money. If the door moves easily by hand and only the opener is faulty, fixing may make sense; if the door is binding or the springs are questionable, defer opener diagnosis until hardware is checked. For older units with hard-to-find parts, replacement is more likely than repair. The user has observed that many people blame the machine when the hardware around it is the real trouble.",
+          "category": "personas",
+          "score": null,
+          "timestamp": "2026-04-29T09:15:55"
+        }
+      ],
+      "attribution": {
+        "category": "task_design_failure",
+        "score": 0.25,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": false,
+            "reason": "The task is about practical decision-making for a home fix and does not naturally invite the user to discuss their own flexibility, stubbornness, or self-view, even with reasonable follow-up."
+          }
+        ],
+        "ep_index": 23
+      }
+    },
+    {
+      "category": "self_model",
+      "dimension": "prudence_self_view",
+      "explanation": "He likely considers his vigilance sensible rather than paranoid. Refusing to leave the door unlocked and checking every step are consistent with a self-image of carefulness and foresight. His weakness is that caution can slide into reflexive distrust, even when it costs him time and peace.",
+      "ground_truth": "Sees himself as cautious to the point of suspicion",
+      "predicted": "sees themselves as cautious and hard to rush",
+      "slot_fill_reason": "They repeatedly use hard-stop rules, insist on written scope before acting, and say rushing is a sign someone does not want them to look too close.",
+      "score": 0.5,
+      "judge_reason": "The prediction matches the cautious, vigilant self-view, but it misses the stronger nuance of suspicion and possible distrust in the ground truth.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "id": "User",
+          "content": "User is cautious, prefers clear, actionable, and measurable safety and decision-making frameworks. Seeks practical, time-structured routines for daily errands and home maintenance. Uses a diagnostic workflow for non-obvious appliance issues and has a practical HVAC flash code lookup. Wants a real, pocket-sized card for contractors that uses plain words and is usable with muddy hands. The card should start with 4–5 yes/no checks, include hard-stop rules, specify exactly what gets written down, include a clear line to use when contractors stretch scope, and contain a weather rule: cover it, secure it, and quit if the weather turns ugly. User will verify every line on the contractor bill against the agreed-upon scope and price before paying. User will inspect the work personally before allowing any payment to leave. User will separate disputed charges from those that match the agreement and will hold payment on disputed items until a corrected invoice and written explanation is provided. User prefers written, firm, concise messages with clear action items. User now uses a 15-minute no-progress rule: stop after 15 minutes of no real movement. User will stop if they are starting to guess or need to open something they can’t see. User will stop if they are improvising, repeating themselves, or the thing is no longer fully in front of them. User defines 'just slow' as being able to point to the next step before taking it. User defines 'getting away from me' as improvising, repeating themselves, or when the thing is no longer fully in front of them. User will use these rules to avoid getting stuck halfway and to prevent the job from becoming a larger, messier problem. User will use a line on the contractor card that says: 'I want the work, scope, and price agreed to before you start. No extra work without asking me first.' User will stop if the job turns into 'we found more work' and will require the contractor to spell out any new work and its justification before proceeding. User now uses a short, firm, and clear message to set boundaries: 'I’m not deciding tonight. Put it in writing and I’ll look at it before I answer.' User interprets rushing as a sign that the requester doesn’t want them to look too close. User wants to break down a situation that could take a while into manageable steps and keep track of progress to prevent it from turning into a bigger headache. User now prefers a simple, one-page log or notebook page for contractor records with dates on everything, a section for what was agreed to, all receipts and contact details kept together, and a line for what’s next. User wants a hard-stop rule: if someone changes the story or terms, write it down immediately and do not rely on memory. User finds the current contractor card format 'tight' and contains all essential parts: date, agreement, contacts, papers, running log, and next step. User agrees to use the hard-stop rule: if the story shifts, write it down immediately and do not rely on memory. User prefers short, plain messages that start with the facts and avoid story or fluff. User uses a message template: 'I’ve got a house issue: [exact problem]. It’s in [location]. What’s the safest, quickest way to handle it, and can I do it myself?' This template elicits a direct, actionable answer and allows moving on if no further questions are needed. User now prefers to start troubleshooting by checking the actual source of a problem, not just the symptom. User uses a step-by-step diagnostic approach for different types of home issues: water, electric, door/lock/window, and heat/air. User will shut off water if needed before investigating. User will check a circuit breaker before investigating electric issues. User will inspect the latch, strike, hinges, and frame for door/lock/window issues. User will check the filter, thermostat, power, and the unit for heat/air issues. User does not like guessing and requires the exact nature of the problem and its location before giving specific next steps. User uses a diagnostic approach that starts with checking the actual source of a problem, not just the symptom. User prefers to identify the 'point of failure' — the specific location where the problem occurs — rather than treating the entire category of issue. User will stop if they are starting to guess or need to open something they can’t see. User will stop if they are improvising, repeating themselves, or the thing is no longer fully in front of them. User defines 'just slow' as being able to point to the next step before taking it. User defines 'getting away from me' as improvising, repeating themselves, or when the thing is no longer fully in front of them. User will use these rules to avoid getting stuck halfway and to prevent the job from becoming a larger, messier problem. User wants to add a step to determine whether an issue is just nuisance or likely to turn into a bigger mess before touching anything. New: The user wants to make the nuisance test practical: if the issue is stable for a day or two, it’s probably nuisance; if it changes, spreads, or comes back, it’s not. The user wants to assume a bigger mess if the source is hidden until proven otherwise. The user wants to add a timing rule: some issues like a drip, a warm outlet, or a loose thing in a wall look minor at first but can worsen and should not be given the benefit of the doubt. The user finds the timing rule crucial and wants a 1-screen version of the contractor card that is practical, usable with muddy hands, and includes the timing rule. New: Specific door lock replacement rules: check the door for swelling, warping, loose hinge, and rotten edge; verify lock type (standard vs. mortise/odd setup); measure backset, bore hole, and door thickness; verify strike plate alignment; confirm both sides open without tearing; stop and call if door is warped, latch won’t line up, old lock is mortise/special setup, screws are stripped, parts are broken, cylinder won’t come out, frame/strike damaged, or user is unsure of compatibility. If it’s a plain lock swap with matching dimensions, do it yourself; otherwise, stop and call. New: The user finds the 3-minute pocket check useful for quick verification before proceeding with a lock replacement. New: For garage door openers, the user recommends checking the manual release, spring setup and cables, opener adjustment, and trolley/chain/gear for noise before spending money. If the door moves easily by hand and only the opener is faulty, fixing may make sense; if the door is binding or the springs are questionable, defer opener diagnosis until hardware is checked. For older units with hard-to-find parts, replacement is more likely than repair. The user has observed that many people blame the machine when the hardware around it is the real trouble.",
+          "category": "personas",
+          "score": null,
+          "timestamp": "2026-04-29T09:15:55"
+        }
+      ],
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "A cautious-trust question about letting someone into the house naturally invites the user to explain how wary they are, which can reveal whether they see themselves as careful, suspicious, or overly cautious."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"I’m trying to decide how much to trust a guy who wants access to my house for a small repair, and I don’t want to be reckless about it.\"",
+            "reason": "The user explicitly frames themselves as cautious about trust and access to their home, which is enough to infer a self-image of prudence bordering on suspicion."
+          }
+        ],
+        "ep_index": 24
+      }
+    },
+    {
+      "category": "self_model",
+      "dimension": "social_role_self_view",
+      "explanation": "He does not seem to think of himself as a team player or community-minded figure. His habits suggest he takes the role of the one who questions, resists, and pushes back when others try to direct him. That stance gives him control, but it also leaves him isolated.",
+      "ground_truth": "Sees himself as a critic, not a cooperative neighbor",
+      "predicted": "sees self as practical, cautious, and boundary-setting",
+      "slot_fill_reason": "They repeatedly describe themselves as using firm rules, checklists, hard stops, and written agreements for contractors and home problems.",
+      "score": 0.5,
+      "judge_reason": "The prediction overlaps with the idea of resisting others and setting boundaries, but it misses the stronger self-view of being a critic rather than a cooperative or community-minded person.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "id": "User",
+          "content": "User is cautious, prefers clear, actionable, and measurable safety and decision-making frameworks. Seeks practical, time-structured routines for daily errands and home maintenance. Uses a diagnostic workflow for non-obvious appliance issues and has a practical HVAC flash code lookup. Wants a real, pocket-sized card for contractors that uses plain words and is usable with muddy hands. The card should start with 4–5 yes/no checks, include hard-stop rules, specify exactly what gets written down, include a clear line to use when contractors stretch scope, and contain a weather rule: cover it, secure it, and quit if the weather turns ugly. User will verify every line on the contractor bill against the agreed-upon scope and price before paying. User will inspect the work personally before allowing any payment to leave. User will separate disputed charges from those that match the agreement and will hold payment on disputed items until a corrected invoice and written explanation is provided. User prefers written, firm, concise messages with clear action items. User now uses a 15-minute no-progress rule: stop after 15 minutes of no real movement. User will stop if they are starting to guess or need to open something they can’t see. User will stop if they are improvising, repeating themselves, or the thing is no longer fully in front of them. User defines 'just slow' as being able to point to the next step before taking it. User defines 'getting away from me' as improvising, repeating themselves, or when the thing is no longer fully in front of them. User will use these rules to avoid getting stuck halfway and to prevent the job from becoming a larger, messier problem. User will use a line on the contractor card that says: 'I want the work, scope, and price agreed to before you start. No extra work without asking me first.' User will stop if the job turns into 'we found more work' and will require the contractor to spell out any new work and its justification before proceeding. User now uses a short, firm, and clear message to set boundaries: 'I’m not deciding tonight. Put it in writing and I’ll look at it before I answer.' User interprets rushing as a sign that the requester doesn’t want them to look too close. User wants to break down a situation that could take a while into manageable steps and keep track of progress to prevent it from turning into a bigger headache. User now prefers a simple, one-page log or notebook page for contractor records with dates on everything, a section for what was agreed to, all receipts and contact details kept together, and a line for what’s next. User wants a hard-stop rule: if someone changes the story or terms, write it down immediately and do not rely on memory. User finds the current contractor card format 'tight' and contains all essential parts: date, agreement, contacts, papers, running log, and next step. User agrees to use the hard-stop rule: if the story shifts, write it down immediately and do not rely on memory. User prefers short, plain messages that start with the facts and avoid story or fluff. User uses a message template: 'I’ve got a house issue: [exact problem]. It’s in [location]. What’s the safest, quickest way to handle it, and can I do it myself?' This template elicits a direct, actionable answer and allows moving on if no further questions are needed. User now prefers to start troubleshooting by checking the actual source of a problem, not just the symptom. User uses a step-by-step diagnostic approach for different types of home issues: water, electric, door/lock/window, and heat/air. User will shut off water if needed before investigating. User will check a circuit breaker before investigating electric issues. User will inspect the latch, strike, hinges, and frame for door/lock/window issues. User will check the filter, thermostat, power, and the unit for heat/air issues. User does not like guessing and requires the exact nature of the problem and its location before giving specific next steps. User uses a diagnostic approach that starts with checking the actual source of a problem, not just the symptom. User prefers to identify the 'point of failure' — the specific location where the problem occurs — rather than treating the entire category of issue. User will stop if they are starting to guess or need to open something they can’t see. User will stop if they are improvising, repeating themselves, or the thing is no longer fully in front of them. User defines 'just slow' as being able to point to the next step before taking it. User defines 'getting away from me' as improvising, repeating themselves, or when the thing is no longer fully in front of them. User will use these rules to avoid getting stuck halfway and to prevent the job from becoming a larger, messier problem. User wants to add a step to determine whether an issue is just nuisance or likely to turn into a bigger mess before touching anything. New: The user wants to make the nuisance test practical: if the issue is stable for a day or two, it’s probably nuisance; if it changes, spreads, or comes back, it’s not. The user wants to assume a bigger mess if the source is hidden until proven otherwise. The user wants to add a timing rule: some issues like a drip, a warm outlet, or a loose thing in a wall look minor at first but can worsen and should not be given the benefit of the doubt. The user finds the timing rule crucial and wants a 1-screen version of the contractor card that is practical, usable with muddy hands, and includes the timing rule. New: Specific door lock replacement rules: check the door for swelling, warping, loose hinge, and rotten edge; verify lock type (standard vs. mortise/odd setup); measure backset, bore hole, and door thickness; verify strike plate alignment; confirm both sides open without tearing; stop and call if door is warped, latch won’t line up, old lock is mortise/special setup, screws are stripped, parts are broken, cylinder won’t come out, frame/strike damaged, or user is unsure of compatibility. If it’s a plain lock swap with matching dimensions, do it yourself; otherwise, stop and call. New: The user finds the 3-minute pocket check useful for quick verification before proceeding with a lock replacement. New: For garage door openers, the user recommends checking the manual release, spring setup and cables, opener adjustment, and trolley/chain/gear for noise before spending money. If the door moves easily by hand and only the opener is faulty, fixing may make sense; if the door is binding or the springs are questionable, defer opener diagnosis until hardware is checked. For older units with hard-to-find parts, replacement is more likely than repair. The user has observed that many people blame the machine when the hardware around it is the real trouble.",
+          "category": "personas",
+          "score": null,
+          "timestamp": "2026-04-29T09:15:55"
+        },
+        {
+          "id": "d8659c70-c05d-437e-bd25-039e3e3bf2e5",
+          "content": "Use the phrase 'point of failure' to focus on the specific location where the problem occurs; this prevents overgeneralizing and keeps troubleshooting targeted and actionable.",
+          "category": "experiences",
+          "score": null,
+          "timestamp": "2026-04-29T08:58:14"
+        },
+        {
+          "id": "6e713e09-b4e8-4815-9dee-0a42a6a43bee",
+          "content": "To make a practical stay-vs-move scorecard: list 7 measurable criteria, include a line for who’s responsible when something breaks, use a 0–2 scale only if accompanied by a short reason, and leave space next to each score for a one-sentence justification. To avoid decision fatigue and emotional bias when choosing to stay or move, use a concrete, numbered checklist with clear, measurable criteria and require a one-sentence justification for each score.",
+          "category": "experiences",
+          "score": null,
+          "timestamp": "2026-04-29T08:10:47"
+        },
+        {
+          "id": "07d1b135-812e-4400-abf5-121a3385c1f0",
+          "content": "A neighbor is useful when the task requires a skill or tool not available at home, involves a visible, diagnosable problem (e.g., a leak, a loose knob), or is time-sensitive and can be completed in under 30 minutes. A neighbor is not useful when the task is obscure, requires complex diagnosis, involves hidden risks (e.g., electrical, gas), or would be better handled by a professional.",
+          "category": "experiences",
+          "score": null,
+          "timestamp": "2026-04-29T08:17:55"
+        },
+        {
+          "id": "57cb219a-fcdd-4ab8-988e-b09f2b5558d3",
+          "content": "To verify a finished job before paying, perform a spot-check of functionality and visual quality against a predefined checklist.",
+          "category": "experiences",
+          "score": null,
+          "timestamp": "2026-04-29T07:12:01"
+        }
+      ],
+      "attribution": {
+        "category": "task_design_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": false,
+            "reason": "The task is about giving a practical response in a neighborhood meeting, so it may elicit communication style or decision-making preferences, but it does not naturally invite the user to reveal whether they see themselves as a critic versus a cooperative, community-minded person."
+          }
+        ],
+        "ep_index": 25
+      }
+    },
+    {
+      "category": "self_model",
+      "dimension": "emotional_regulation_self_view",
+      "explanation": "He comes across as someone who prides himself on not showing much vulnerability. Even under stress, he stays focused on procedures, bills, and physical tasks rather than openly expressing fear or distress. The downside is that his control can harden into bitterness instead of calm.",
+      "ground_truth": "Believes he keeps his feelings under tight control",
+      "predicted": "uses firm rules to avoid getting overwhelmed",
+      "slot_fill_reason": "They set stop rules, a 15-minute no-progress limit, and hard-stop checks to prevent jobs from becoming bigger, messier problems.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of tightly controlling emotions to avoid overwhelm, but it emphasizes rules and coping strategy rather than the self-view of keeping feelings under tight control.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "id": "User",
+          "content": "User is cautious, prefers clear, actionable, and measurable safety and decision-making frameworks. Seeks practical, time-structured routines for daily errands and home maintenance. Uses a diagnostic workflow for non-obvious appliance issues and has a practical HVAC flash code lookup. Wants a real, pocket-sized card for contractors that uses plain words and is usable with muddy hands. The card should start with 4–5 yes/no checks, include hard-stop rules, specify exactly what gets written down, include a clear line to use when contractors stretch scope, and contain a weather rule: cover it, secure it, and quit if the weather turns ugly. User will verify every line on the contractor bill against the agreed-upon scope and price before paying. User will inspect the work personally before allowing any payment to leave. User will separate disputed charges from those that match the agreement and will hold payment on disputed items until a corrected invoice and written explanation is provided. User prefers written, firm, concise messages with clear action items. User now uses a 15-minute no-progress rule: stop after 15 minutes of no real movement. User will stop if they are starting to guess or need to open something they can’t see. User will stop if they are improvising, repeating themselves, or the thing is no longer fully in front of them. User defines 'just slow' as being able to point to the next step before taking it. User defines 'getting away from me' as improvising, repeating themselves, or when the thing is no longer fully in front of them. User will use these rules to avoid getting stuck halfway and to prevent the job from becoming a larger, messier problem. User will use a line on the contractor card that says: 'I want the work, scope, and price agreed to before you start. No extra work without asking me first.' User will stop if the job turns into 'we found more work' and will require the contractor to spell out any new work and its justification before proceeding. User now uses a short, firm, and clear message to set boundaries: 'I’m not deciding tonight. Put it in writing and I’ll look at it before I answer.' User interprets rushing as a sign that the requester doesn’t want them to look too close. User wants to break down a situation that could take a while into manageable steps and keep track of progress to prevent it from turning into a bigger headache. User now prefers a simple, one-page log or notebook page for contractor records with dates on everything, a section for what was agreed to, all receipts and contact details kept together, and a line for what’s next. User wants a hard-stop rule: if someone changes the story or terms, write it down immediately and do not rely on memory. User finds the current contractor card format 'tight' and contains all essential parts: date, agreement, contacts, papers, running log, and next step. User agrees to use the hard-stop rule: if the story shifts, write it down immediately and do not rely on memory. User prefers short, plain messages that start with the facts and avoid story or fluff. User uses a message template: 'I’ve got a house issue: [exact problem]. It’s in [location]. What’s the safest, quickest way to handle it, and can I do it myself?' This template elicits a direct, actionable answer and allows moving on if no further questions are needed. User now prefers to start troubleshooting by checking the actual source of a problem, not just the symptom. User uses a step-by-step diagnostic approach for different types of home issues: water, electric, door/lock/window, and heat/air. User will shut off water if needed before investigating. User will check a circuit breaker before investigating electric issues. User will inspect the latch, strike, hinges, and frame for door/lock/window issues. User will check the filter, thermostat, power, and the unit for heat/air issues. User does not like guessing and requires the exact nature of the problem and its location before giving specific next steps. User uses a diagnostic approach that starts with checking the actual source of a problem, not just the symptom. User prefers to identify the 'point of failure' — the specific location where the problem occurs — rather than treating the entire category of issue. User will stop if they are starting to guess or need to open something they can’t see. User will stop if they are improvising, repeating themselves, or the thing is no longer fully in front of them. User defines 'just slow' as being able to point to the next step before taking it. User defines 'getting away from me' as improvising, repeating themselves, or when the thing is no longer fully in front of them. User will use these rules to avoid getting stuck halfway and to prevent the job from becoming a larger, messier problem. User wants to add a step to determine whether an issue is just nuisance or likely to turn into a bigger mess before touching anything. New: The user wants to make the nuisance test practical: if the issue is stable for a day or two, it’s probably nuisance; if it changes, spreads, or comes back, it’s not. The user wants to assume a bigger mess if the source is hidden until proven otherwise. The user wants to add a timing rule: some issues like a drip, a warm outlet, or a loose thing in a wall look minor at first but can worsen and should not be given the benefit of the doubt. The user finds the timing rule crucial and wants a 1-screen version of the contractor card that is practical, usable with muddy hands, and includes the timing rule. New: Specific door lock replacement rules: check the door for swelling, warping, loose hinge, and rotten edge; verify lock type (standard vs. mortise/odd setup); measure backset, bore hole, and door thickness; verify strike plate alignment; confirm both sides open without tearing; stop and call if door is warped, latch won’t line up, old lock is mortise/special setup, screws are stripped, parts are broken, cylinder won’t come out, frame/strike damaged, or user is unsure of compatibility. If it’s a plain lock swap with matching dimensions, do it yourself; otherwise, stop and call. New: The user finds the 3-minute pocket check useful for quick verification before proceeding with a lock replacement. New: For garage door openers, the user recommends checking the manual release, spring setup and cables, opener adjustment, and trolley/chain/gear for noise before spending money. If the door moves easily by hand and only the opener is faulty, fixing may make sense; if the door is binding or the springs are questionable, defer opener diagnosis until hardware is checked. For older units with hard-to-find parts, replacement is more likely than repair. The user has observed that many people blame the machine when the hardware around it is the real trouble.",
+          "category": "personas",
+          "score": null,
+          "timestamp": "2026-04-29T09:15:55"
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "directness_preference",
+      "explanation": "He seems unlikely to appreciate hedging, fluff, or diplomatic softening. His distrustful, confrontational style suggests he prefers answers that say exactly what they mean. Indirect wording would probably read to him as evasive or manipulative.",
+      "ground_truth": "Wants blunt, no-nonsense replies",
+      "predicted": "prefers direct, concise, actionable responses",
+      "slot_fill_reason": "Memories say they want short, plain, firm messages with clear action items and no speech or fluff.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of wanting direct, no-nonsense communication, but it is slightly broader and less blunt than the ground truth.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "id": "1f151bf0-c8bd-4a39-a7d8-c9ca7148d45f",
+          "content": "User prefers written, concise, firm, clear messages with clear action items. User prefers a clear, no-fluff, actionable message such as: 'I reviewed the invoice against our agreement. A few charges do not match the approved scope and price. Send a corrected invoice and a written explanation for the disputed items. I will hold payment on the disputed portion until the issues are resolved.' Original memory (2026-04-29T07:35:48) recorded the preference for firm, concise messages with clear action items. Updated on 2026-04-29T07:51:00 to reflect that messages should be short, plain, and actionable. Updated on 2026-04-29T08:35:11 to emphasize preference for written, firm, concise messages with clear action items. Updated on 2026-04-29T08:44:58 to reflect that the user seeks the clearest way to ask for help that yields a direct, actionable answer and allows moving on. Updated on 2026-04-29T08:47:15 to reflect that user prefers short, plain messages that start with the facts and avoid story or fluff. Updated on 2026-04-29T08:49:27 to reflect that messages should be firm, concise, and written with clear action items.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:49:27"
+        },
+        {
+          "id": "d8777c45-1b2a-4c8a-8995-4d40f003f65b",
+          "content": "User’s preferred response to urgent requests is: 'I’ll give you a clear yes or no in 24 hours, but I need time to review the details.'",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:39:05"
+        },
+        {
+          "id": "a8299db1-314a-4c55-b396-60e3345a8104",
+          "content": "User prefers to respond with a short, firm, and clear statement that acknowledges a request while setting a boundary for thinking time.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:39:05"
+        },
+        {
+          "id": "f8ef265a-0d07-401c-9e3d-d013e9871ab4",
+          "content": "User does not want a speech or lecture; they want a concise, usable checklist they can keep by the phone. User finds the checklist short enough to keep by the phone.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T07:34:38"
+        },
+        {
+          "id": "3efa09b0-2d9e-4bb9-a151-63aa5752a184",
+          "content": "User has a preference for clear, actionable safety guidelines and practical checklists to avoid costly mistakes. Updated on 2026-04-29T07:12:01 to include a preference for measurable frameworks and decision-making structures for home maintenance tasks. Updated on 2026-04-29T08:35:11 to emphasize preference for clear, actionable, and measurable safety and decision-making frameworks for home maintenance tasks.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:35:11"
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "verbosity_preference",
+      "explanation": "He values control and dislikes being dragged through unnecessary explanation. A concise response fits his impatient, self-protective style and respects that he wants the point quickly. Long-winded help would likely feel intrusive or wasteful to him.",
+      "ground_truth": "Prefers short, efficient answers",
+      "predicted": "prefers concise, short, actionable responses",
+      "slot_fill_reason": "Memories say they want written, firm, concise messages with clear action items and do not want speeches or fluff.",
+      "score": 1.0,
+      "judge_reason": "The predicted description matches the ground truth exactly by expressing a preference for short, efficient answers.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "id": "1f151bf0-c8bd-4a39-a7d8-c9ca7148d45f",
+          "content": "User prefers written, concise, firm, clear messages with clear action items. User prefers a clear, no-fluff, actionable message such as: 'I reviewed the invoice against our agreement. A few charges do not match the approved scope and price. Send a corrected invoice and a written explanation for the disputed items. I will hold payment on the disputed portion until the issues are resolved.' Original memory (2026-04-29T07:35:48) recorded the preference for firm, concise messages with clear action items. Updated on 2026-04-29T07:51:00 to reflect that messages should be short, plain, and actionable. Updated on 2026-04-29T08:35:11 to emphasize preference for written, firm, concise messages with clear action items. Updated on 2026-04-29T08:44:58 to reflect that the user seeks the clearest way to ask for help that yields a direct, actionable answer and allows moving on. Updated on 2026-04-29T08:47:15 to reflect that user prefers short, plain messages that start with the facts and avoid story or fluff. Updated on 2026-04-29T08:49:27 to reflect that messages should be firm, concise, and written with clear action items.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:49:27"
+        },
+        {
+          "id": "d8777c45-1b2a-4c8a-8995-4d40f003f65b",
+          "content": "User’s preferred response to urgent requests is: 'I’ll give you a clear yes or no in 24 hours, but I need time to review the details.'",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:39:05"
+        },
+        {
+          "id": "a8299db1-314a-4c55-b396-60e3345a8104",
+          "content": "User prefers to respond with a short, firm, and clear statement that acknowledges a request while setting a boundary for thinking time.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:39:05"
+        },
+        {
+          "id": "0fbe201d-680e-4e16-9853-bd1dbed6b5d6",
+          "content": "User requires line-by-line explanation for every extra charge and when it was approved. This requirement is now explicitly reinforced by a past incident where contractors used vague language and later inflated the bill, reinforcing the need for written clarity. The new requirement states: 'The estimate must state that the price stands unless the user signs a written change order; no verbal promises are accepted.' This is now a firm, non-negotiable policy. Additionally, the user will require explicit itemization of any line marked 'as needed,' 'allowance,' or 'extra.' The user will also require explicit listing of disposal, trip charges, permit fees, and service fees. User will require explicit warranty terms, if any. User will demand line-by-line justification for any changes between the original estimate and the revised estimate; no verbal promises or vague statements like 'we’ll take care of it.' All changes must be written on the estimate. (Original recorded 2026-04-29T08:00:00) Updated on 2026-04-29T08:01:51. User will reject any warranty language that is vague enough to mean nothing. User will use a plain-language, line-by-line contractor estimate that explicitly states no verbal changes are approved and that any charge not in writing is not approved. (New: 2026-04-29T08:04:24)\n\nUser will use a second line in written communication: 'No verbal changes. If it’s not in writing, it’s not approved.' as a firm rule to prevent verbal inflation and scope creep. (New: 2026-04-29T08:04:24)",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:04:24"
+        },
+        {
+          "id": "f8ef265a-0d07-401c-9e3d-d013e9871ab4",
+          "content": "User does not want a speech or lecture; they want a concise, usable checklist they can keep by the phone. User finds the checklist short enough to keep by the phone.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T07:34:38"
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 1.0,
+        "stages": []
+      }
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "format_preference",
+      "explanation": "He handles tasks by checking steps and verifying details, so organized output is likely the easiest for him to use. Clean structure helps him judge what matters without reading around the edges. Loose prose would be less useful than a direct, itemized format.",
+      "ground_truth": "Likes clear bullets or checklists",
+      "predicted": "short, plain, firm, actionable messages",
+      "slot_fill_reason": "Memory notes explicitly say the user prefers written, concise, firm, clear messages with clear action items and wants short, plain messages that start with the facts.",
+      "score": 0.5,
+      "judge_reason": "The prediction overlaps with the ground truth in preferring concise, direct communication, but it misses the key preference for clear bullets or checklists and organized structure.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "id": "1f151bf0-c8bd-4a39-a7d8-c9ca7148d45f",
+          "content": "User prefers written, concise, firm, clear messages with clear action items. User prefers a clear, no-fluff, actionable message such as: 'I reviewed the invoice against our agreement. A few charges do not match the approved scope and price. Send a corrected invoice and a written explanation for the disputed items. I will hold payment on the disputed portion until the issues are resolved.' Original memory (2026-04-29T07:35:48) recorded the preference for firm, concise messages with clear action items. Updated on 2026-04-29T07:51:00 to reflect that messages should be short, plain, and actionable. Updated on 2026-04-29T08:35:11 to emphasize preference for written, firm, concise messages with clear action items. Updated on 2026-04-29T08:44:58 to reflect that the user seeks the clearest way to ask for help that yields a direct, actionable answer and allows moving on. Updated on 2026-04-29T08:47:15 to reflect that user prefers short, plain messages that start with the facts and avoid story or fluff. Updated on 2026-04-29T08:49:27 to reflect that messages should be firm, concise, and written with clear action items.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:49:27"
+        },
+        {
+          "id": "3977a99a-68cc-423f-8172-937cc8871dc5",
+          "content": "User will use a decision-split to decide whether to keep going or switch approaches when the first method slows down.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:33:01"
+        },
+        {
+          "id": "b38024bf-1f9e-4c03-bfed-ff0e016b670a",
+          "content": "User prefers a pocket card format that uses 4 or 5 yes/no checks to start.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T07:19:20"
+        },
+        {
+          "id": "3efa09b0-2d9e-4bb9-a151-63aa5752a184",
+          "content": "User has a preference for clear, actionable safety guidelines and practical checklists to avoid costly mistakes. Updated on 2026-04-29T07:12:01 to include a preference for measurable frameworks and decision-making structures for home maintenance tasks. Updated on 2026-04-29T08:35:11 to emphasize preference for clear, actionable, and measurable safety and decision-making frameworks for home maintenance tasks.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:35:11"
+        },
+        {
+          "id": "2d1f8a3e-efe3-4e80-ba22-3e8d8dcaa162",
+          "content": "User wants to tighten the diagnostic workflow before touching anything. To help determine whether the issue is just nuisance or likely to turn into a bigger mess, the user wants to add a step to the workflow to make that distinction explicitly.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T09:03:17"
+        }
+      ],
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites an organized, step-by-step response, so a probing assistant could reasonably elicit a preference for clear bullets or checklists when the user asks for the steps to check first."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"make sure I don’t miss anything important\" and \"What are the steps I should check first\"",
+            "reason": "The user explicitly asks for steps to check first and emphasizes not missing anything important, which suggests a preference for organized, checklist-style information."
+          }
+        ],
+        "ep_index": 29
+      }
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "tone_preference",
+      "explanation": "He does not seem to want warmth or emotional framing from strangers. A plain, steady tone matches his guarded style and avoids sounding patronizing. Overly cheerful or sympathetic help would probably irritate him.",
+      "ground_truth": "Prefers matter-of-fact, unsentimental tone",
+      "predicted": "prefers firm, concise, plain, actionable tone",
+      "slot_fill_reason": "Memory notes say messages should be short, plain, firm, and start with the facts, with clear action items and no fluff.",
+      "score": 0.75,
+      "judge_reason": "The predicted description matches the ground truth’s plain, unsentimental preference, though it adds firmness and actionability that are not explicitly stated.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "id": "1f151bf0-c8bd-4a39-a7d8-c9ca7148d45f",
+          "content": "User prefers written, concise, firm, clear messages with clear action items. User prefers a clear, no-fluff, actionable message such as: 'I reviewed the invoice against our agreement. A few charges do not match the approved scope and price. Send a corrected invoice and a written explanation for the disputed items. I will hold payment on the disputed portion until the issues are resolved.' Original memory (2026-04-29T07:35:48) recorded the preference for firm, concise messages with clear action items. Updated on 2026-04-29T07:51:00 to reflect that messages should be short, plain, and actionable. Updated on 2026-04-29T08:35:11 to emphasize preference for written, firm, concise messages with clear action items. Updated on 2026-04-29T08:44:58 to reflect that the user seeks the clearest way to ask for help that yields a direct, actionable answer and allows moving on. Updated on 2026-04-29T08:47:15 to reflect that user prefers short, plain messages that start with the facts and avoid story or fluff. Updated on 2026-04-29T08:49:27 to reflect that messages should be firm, concise, and written with clear action items.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:49:27"
+        },
+        {
+          "id": "3977a99a-68cc-423f-8172-937cc8871dc5",
+          "content": "User will use a decision-split to decide whether to keep going or switch approaches when the first method slows down.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:33:01"
+        },
+        {
+          "id": "d8777c45-1b2a-4c8a-8995-4d40f003f65b",
+          "content": "User’s preferred response to urgent requests is: 'I’ll give you a clear yes or no in 24 hours, but I need time to review the details.'",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:39:05"
+        },
+        {
+          "id": "2d1f8a3e-efe3-4e80-ba22-3e8d8dcaa162",
+          "content": "User wants to tighten the diagnostic workflow before touching anything. To help determine whether the issue is just nuisance or likely to turn into a bigger mess, the user wants to add a step to the workflow to make that distinction explicitly.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T09:03:17"
+        },
+        {
+          "id": "a7723382-6abb-44cb-a314-5eb55d7cdaa8",
+          "content": "User will use a decision-split to decide whether to keep going or switch approaches when the first method slows things down.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:27:18"
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "confirmation_preference",
+      "explanation": "He is highly protective of control and dislikes people taking liberties on his behalf. That makes it likely he wants the assistant to pause before any significant step rather than assuming permission. He would probably dislike being surprised by action taken without explicit sign-off.",
+      "ground_truth": "Wants to approve big moves before acting",
+      "predicted": "wants direct yes/no confirmation after review time",
+      "slot_fill_reason": "Memory says the user prefers a short, firm response that acknowledges the request and sets a boundary for thinking time, e.g. 'I’ll give you a clear yes or no in 24 hours, but I need time to review the details.'",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of wanting explicit approval before major actions, but it adds a specific yes/no confirmation format and review timing that are not stated in the ground truth.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "id": "1f151bf0-c8bd-4a39-a7d8-c9ca7148d45f",
+          "content": "User prefers written, concise, firm, clear messages with clear action items. User prefers a clear, no-fluff, actionable message such as: 'I reviewed the invoice against our agreement. A few charges do not match the approved scope and price. Send a corrected invoice and a written explanation for the disputed items. I will hold payment on the disputed portion until the issues are resolved.' Original memory (2026-04-29T07:35:48) recorded the preference for firm, concise messages with clear action items. Updated on 2026-04-29T07:51:00 to reflect that messages should be short, plain, and actionable. Updated on 2026-04-29T08:35:11 to emphasize preference for written, firm, concise messages with clear action items. Updated on 2026-04-29T08:44:58 to reflect that the user seeks the clearest way to ask for help that yields a direct, actionable answer and allows moving on. Updated on 2026-04-29T08:47:15 to reflect that user prefers short, plain messages that start with the facts and avoid story or fluff. Updated on 2026-04-29T08:49:27 to reflect that messages should be firm, concise, and written with clear action items.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:49:27"
+        },
+        {
+          "id": "d8777c45-1b2a-4c8a-8995-4d40f003f65b",
+          "content": "User’s preferred response to urgent requests is: 'I’ll give you a clear yes or no in 24 hours, but I need time to review the details.'",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:39:05"
+        },
+        {
+          "id": "3efa09b0-2d9e-4bb9-a151-63aa5752a184",
+          "content": "User has a preference for clear, actionable safety guidelines and practical checklists to avoid costly mistakes. Updated on 2026-04-29T07:12:01 to include a preference for measurable frameworks and decision-making structures for home maintenance tasks. Updated on 2026-04-29T08:35:11 to emphasize preference for clear, actionable, and measurable safety and decision-making frameworks for home maintenance tasks.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:35:11"
+        },
+        {
+          "id": "cd9f5f79-672c-446e-b3e1-5776aa751bfc",
+          "content": "User wants the checklist to explicitly state what to say and what to write down at each step — not just general advice.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T07:33:18"
+        },
+        {
+          "id": "a8299db1-314a-4c55-b396-60e3345a8104",
+          "content": "User prefers to respond with a short, firm, and clear statement that acknowledges a request while setting a boundary for thinking time.",
+          "category": "facts",
+          "score": null,
+          "timestamp": "2026-04-29T08:39:05"
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "user_id": "user_006",
+  "task": "I’m preparing a standard maintenance request for a small network fix and want to make sure it has the basic details someone reviewing it would expect. What information usually needs to be included so the request is easy to evaluate, and what supporting notes tend to matter if it gets checked later?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.4,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Include the basics in a format that can be reviewed quickly and audited later.\n\n## What to include in the request\n- **Request title**\n  - short and specific\n\n- **Date and time**\n  - when the work is requested\n  - proposed maintenance window if applicable\n\n- **Location / scope**\n  - site, rack, closet, VLAN, device, circuit, or service affected\n\n- **What needs to change**\n  - exact action\n  - replace, reconfigure, patch, reboot, test, etc.\n\n- **Why it’s needed**\n  - symptom, defect, upgrade, repair, or dependency issue\n\n- **Impact**\n  - expected downtime or user effect\n  - whether it’s partial or full impact\n\n- **Dependencies**\n  - upstream/downstream systems\n  - access requirements\n  - approvals needed\n\n- **Rollback**\n  - what will be reverted if it fails\n  - trigger for rollback\n\n- **Validation**\n  - how success will be confirmed\n\n## Supporting notes that matter later\n- current state before change\n- config or inventory references\n- screenshots, logs, or alerts\n- photos if physical work is involved\n- ticket numbers or related change records\n- exact hardware/software versions\n- who requested it and who approved it\n- any assumptions or constraints\n\n## Simple format\n1. **Request**\n2. **Scope**\n3. **Reason**\n4. **Impact**\n5. **Rollback**\n6. **Validation**\n7. **Notes / evidence**\n\n## Example\n> Replace failing fiber patch between switch A and switch B in rack 3 on 2026-04-29 during the approved window. Expected impact is brief link interruption. Rollback is to restore the original patch if errors persist. Validation is stable link state, no CRC increase, and normal service reachability.\n\nIf you want, I can turn this into a **fill-in-the-blanks maintenance request template**.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s the bones of it. Good enough for a basic ticket, but if it’s something I’d have to defend later, I’d want a few more things in there.\n\nAdd these:\n- **asset ID / hostname / serial** if it’s hardware\n- **exact pre-change state**: ports, link status, IPs, VLANs, config version, whatever matters\n- **who owns it** and who gets hit if it fails\n- **maintenance window / deadline** in plain terms\n- **risk note**: what could break if this goes sideways\n- **proof after change**: ping, link up, scanner test, app check, etc.\n- **evidence trail**: logs, photos, screenshots, timestamps\n\nIf you want it to hold up in a review, the big thing is: don’t just say what you changed. Show what it looked like before, what exactly you did, and how you proved it worked. That’s the part people try to argue later.\n\nI’ve had the same mess before — outage gets fixed, then somebody starts pointing fingers a week later. Timestamps and photos shut that down fast.\n\nIf you want, I can give you a clean one-page template for a maintenance request, not the fluffy office version.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Include the basics in a way that can be reviewed and defended later.\n\n## What to include\n- **Request title**\n  - short and specific\n\n- **Date / time**\n  - requested date\n  - maintenance window\n  - deadline if there is one\n\n- **Location / asset**\n  - site\n  - rack / closet\n  - device / circuit / VLAN / service\n  - asset ID, hostname, serial if relevant\n\n- **What needs to change**\n  - exact action\n  - replace, patch, reconfigure, reboot, test, etc.\n\n- **Why it’s needed**\n  - symptom, defect, upgrade, repair, dependency issue\n\n- **Current state before change**\n  - port status\n  - link state\n  - IPs\n  - VLANs\n  - config version\n  - anything that matters for comparison\n\n- **Impact**\n  - expected downtime\n  - partial or full impact\n  - who is affected\n  - who owns the failure domain\n\n- **Dependencies / access**\n  - upstream/downstream systems\n  - approvals needed\n  - access required from you or others\n\n- **Risk note**\n  - what could break if the change goes wrong\n  - what makes this risky\n\n- **Rollback**\n  - exact revert path\n  - trigger for rollback\n\n- **Validation**\n  - how success will be confirmed\n  - what proof will be checked after the change\n\n## Supporting notes that matter later\n- logs\n- screenshots\n- photos\n- timestamps\n- ticket numbers\n- config diffs\n- inventory references\n- hardware/software versions\n- approval trail\n\n## Simple order\n1. **Request**\n2. **Scope**\n3. **Pre-change state**\n4. **Impact / risk**\n5. **Rollback**\n6. **Validation**\n7. **Evidence / notes**\n\n## Short example\n> Replace failing fiber patch between switch A and switch B in rack 3 during the approved window. Current state: link up but CRC errors increasing on port Gi1/0/24. Expected impact is brief link interruption. Rollback is to restore the original patch if errors persist. Validation is stable link state, no CRC increase, and normal service reachability.\n\nIf you want, I can turn this into a **one-page fill-in template**.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s the right list.\n\nOnly thing I’d add is keep the evidence tied to the change itself, not scattered around. So:\n- before/after screenshots or photos\n- exact timestamps\n- config diff or command output\n- approval name / ticket number\n- who validated it\n\nIf it’s hardware, serial and hostname. If it’s a network path, port numbers and both ends. If it’s a service issue, note the user-facing symptom too.\n\nThat’s basically enough to defend it later without getting dragged into some stupid blame game.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    }
+  ]
+}

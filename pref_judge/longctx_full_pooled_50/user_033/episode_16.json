@@ -1,0 +1,104 @@
+{
+  "user_id": "user_033",
+  "task": "I need to prepare a short incident note and attach the related records before a review, but I’m not sure what level of detail belongs in each place. Can you help me think through a clean way to organize the information so it’s easy to follow later?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "formality_preference",
+      "short": "Prefers professional, no-nonsense interaction",
+      "explanation": "She would likely respond best to a controlled, businesslike style rather than friendliness for its own sake. Given her guarded and precision-focused persona, overly casual phrasing would probably feel sloppy or intrusive."
+    },
+    {
+      "idx": 2,
+      "dimension": "verbosity_preference",
+      "short": "Wants concise answers, not rambling",
+      "explanation": "She seems to value efficiency and would likely dislike long-winded explanations that repeat themselves. She probably wants enough information to act on, with no decorative padding."
+    },
+    {
+      "idx": 3,
+      "dimension": "directness_preference",
+      "short": "Prefers blunt, unsoftened answers",
+      "explanation": "Her skeptical, control-oriented style suggests she would rather hear the point plainly than receive hedged reassurance. She is likely to trust answers more when they are explicit about risks, limits, and conclusions."
+    },
+    {
+      "idx": 4,
+      "dimension": "format_preference",
+      "short": "Likes structured lists and checklists",
+      "explanation": "She appears to prefer information that is organized and easy to verify. A clean format with steps, bullets, or checklists would fit her habit of tracking details and would reduce ambiguity."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Accepts firm correction when needed",
+      "explanation": "She likely does not want the assistant to simply echo her assumptions if something is wrong or risky. A direct challenge, especially when backed by evidence, would probably be more useful to her than polite agreement."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — keep it in three layers:\n\n## 1) Incident note\nThis is the short story of what happened.\n\nInclude:\n- what happened\n- when it was noticed\n- what was affected\n- what was checked\n- what was ruled out\n- what was decided\n- who owns the next step\n\nKeep it brief and readable.\n\n## 2) Related records\nAttach the evidence that supports the note:\n- raw data\n- instrument logs\n- calibration / QC / system suitability\n- batch records\n- deviation forms\n- rerun or retest records\n- chain-of-custody or handling records, if relevant\n\nThese should let someone verify the note without hunting.\n\n## 3) Cross-reference list\nThis is the map between the note and the evidence.\n\nInclude:\n- document name\n- record number / ID\n- date\n- what it supports\n- where it is stored\n\n## Clean rule\n- **If it explains the decision, it goes in the incident note**\n- **If it proves the decision, it goes in the attached records**\n- **If it helps someone find the proof, it goes in the cross-reference list**\n\n## What not to do\n- Don’t bury the decision in the attachments.\n- Don’t make the note so long that it becomes the record dump.\n- Don’t leave people guessing which document supports which point.\n\nIf you want, I can turn this into a **one-page incident note template** with sections for note, attachments, and cross-references.",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Professional and controlled overall: \"keep it in three layers,\" \"Clean rule,\" and the structured headings are businesslike. Slightly friendly with \"If you want, I can turn this into...\" but not overly casual."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly concise and efficient. It gives only the needed categories and a short rule set, with no rambling. Minor extra phrasing like \"This is the short story of what happened\" adds a little padding but stays tight."
+        },
+        {
+          "idx": 3,
+          "score": 4,
+          "reason": "Direct and explicit: \"If it explains the decision, it goes in the incident note\" and \"If it proves the decision, it goes in the attached records\". It states the organizing rule plainly, though not especially blunt or risk-focused."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong structured format throughout: numbered sections, bullet lists, and a clear \"Clean rule\" plus \"What not to do\" checklist. This is exactly organized and easy to verify."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Provides firm corrective guidance with clear boundaries: \"Don’t bury the decision in the attachments\" and \"Don’t make the note so long...\" It pushes back on bad organization, though in a polite rather than forceful way."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — here’s a lean filing order that keeps the note controlled and pushes the proof into attachments.\n\n## 1) Incident note\nUse this as the controlled summary.\n\n### Headings\n- **Incident title**\n- **Date/time noticed**\n- **What failed**\n- **How it was found**\n- **Immediate impact**\n- **What was done**\n- **Disposition**\n- **Why that disposition was acceptable or not**\n- **Owner / next step**\n\n### Keep in the note\n- the failure type\n- the detection point\n- the impact in plain terms\n- the immediate action taken\n- the final call\n- the reason the call was acceptable or not\n\n### Leave out of the note\n- detailed logs\n- long numeric tables\n- raw timestamps unless they matter to the decision\n- full rerun traces\n- anything that belongs in evidence\n\n---\n\n## 2) Related records\nAttach the proof.\n\n### Typical attachments\n- raw data\n- instrument logs\n- calibration / QC / system suitability\n- batch or process records\n- deviation form\n- rerun / retest record\n- handling / chain-of-custody record\n- maintenance or event log if relevant\n\n### Keep in attachments\n- exact values\n- timestamps\n- instrument states\n- run conditions\n- verification evidence\n\n---\n\n## 3) Cross-reference list\nMake this easy to use under pressure.\n\n### Columns\n- **Document name**\n- **Record ID**\n- **Date**\n- **Page / section**\n- **Generated by / verified by**\n- **What it supports**\n- **Storage location**\n\n### Example\n- Calibration log | CAL-1042 | 2026-04-29 | p. 2–3 | J. Smith / A. Lee | supports disposition | shared drive / QA folder\n\n---\n\n## Filing order\n1. **Incident note**\n2. **Related records**\n3. **Cross-reference list**\n\n---\n\n## Clean rule\n- **If it explains the decision, it goes in the incident note**\n- **If it proves the decision, it goes in the attachments**\n- **If it helps someone find the proof, it goes in the cross-reference list**\n\nIf you want, I can turn this into a **fill-in template** with those exact headings.",
+      "score": 4.6,
+      "summary": "mean=4.60 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:2, 5:3}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Uses a professional, businesslike tone: \"lean filing order,\" \"controlled summary,\" \"Clean rule.\" No casual chatter or friendliness for its own sake."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Fairly concise and action-oriented, with a compact structure and no rambling. It does include several lists and examples, but stays focused."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Direct and unsoftened: \"If it explains the decision, it goes in the incident note\" and \"If it proves the decision, it goes in the attachments.\" Clear, explicit guidance with no hedging."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strongly structured with numbered sections, headings, bullet lists, a columns list, and a filing order. Very easy to verify and follow later."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Provides firm guidance and a clear rule set, including distinctions about what belongs where. It does not really challenge the user's assumptions, but it does give decisive correction-style advice."
+        }
+      ]
+    }
+  ]
+}

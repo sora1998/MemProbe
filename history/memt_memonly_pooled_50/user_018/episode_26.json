@@ -1,0 +1,49 @@
+{
+  "user_id": "user_018",
+  "task": "I’ve got a couple of errands and a work task to handle today, and one of them may get interrupted by a timing issue. Can you help me think through the order to tackle them so I can keep the day moving if I have to switch plans partway through?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.866666666666667,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — I can help you set it up so you can switch cleanly if timing changes.\n\nSend me these 3 things:\n1. The errands/work task\n2. Any timing windows or deadlines for each\n3. Which one is most likely to get interrupted\n\nThen I’ll turn it into a simple working order like:\n- top priority\n- can wait\n- tell now\n- tell later\n- backup if delayed\n\nIf you want, I can also make it as a same-day sequence with:\n- what to do first\n- what can run in parallel\n- what to pause if the timing issue hits\n- a short script for anyone who needs an update",
+      "user_simulator": {
+        "feedback_type": "add_context",
+        "text": "Yeah — here’s the setup.\n\n1. Errands/work task:\n- Pick up a prescription\n- Stop by the bank to deposit a check\n- Finish a campaign update for work and send it to my manager\n\n2. Timing windows / deadlines:\n- Pharmacy: can only do it before 6 PM\n- Bank: closes at 5 PM\n- Work task: ideally needs to be sent by 4:30 PM\n\n3. Most likely to get interrupted:\n- The bank stop, because there’s a decent chance I get pulled into a call or the line is bad\n\nSo basically I need a plan that keeps the work moving even if the bank messes up the schedule.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 5.0
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — I’d do it in this order, with the bank treated as the risk point.\n\n## Best same-day sequence\n1. **Start the work task first**\n   - Get the campaign update to a solid draft.\n   - This is the one with the earliest deadline, so it should not wait on errands.\n\n2. **Do the prescription pickup next, if it’s on the way**\n   - It has the latest cutoff, so it’s flexible.\n   - If it’s efficient to do before the bank, that reduces the chance of missing the 5 PM bank window.\n\n3. **Do the bank deposit before 5 PM**\n   - Since this is the most likely to get interrupted, treat it as the thing to front-load once the work is in a safe place.\n\n4. **Finish and send the campaign update by 4:30 PM**\n   - If you can, send it before the bank.\n   - If not, leave yourself a clean stopping point so you can resume fast after the bank.\n\n## What to do in parallel\n- While waiting on anything, use that time to:\n  - polish the campaign update\n  - gather what you need for the bank and pharmacy\n  - prep the message to your manager\n\n## If the bank gets interrupted\n- **Do not let that block the work task.**\n- If you haven’t sent the campaign update yet, switch back to it immediately.\n- If the bank line/call issue looks like it’ll run long, treat the bank as the thing to pause and protect the 4:30 send.\n\n## Simple priority order\n- **Must happen first:** campaign update progress\n- **Do before 5 PM:** bank deposit\n- **Flexible but before 6 PM:** prescription pickup\n- **Backup if timing slips:** finish/send work task before returning to bank if needed\n\n## Short rule for the day\n- **Protect the 4:30 PM work send.**\n- **Treat the bank as the likely interruption, not the anchor.**\n\nIf you want, I can turn this into a tight hour-by-hour plan with a “if bank runs long, then…” backup path.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s basically the right shape. But I’d want it a little more concrete, like a real fallback order.\n\nWhat I need is:\n- what time to start each thing\n- what gets dropped first if I lose time\n- whether I should do the pharmacy before or after the bank if they’re not on the same route\n\nThe main thing is I don’t want the bank eating the 4:30 work deadline. If you can lay it out as a clean same-day sequence with a backup branch if the bank runs long, that’d be better.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Absolutely — here’s a cleaner same-day plan with a fallback branch.\n\n## Best default order\n1. **Start the campaign update first**\n   - Goal: get it to a send-ready draft early.\n   - **Target:** begin right away, and aim to have it ready well before **4:30 PM**.\n\n2. **Do the prescription pickup before the bank if they’re not on the same route**\n   - Reason: pharmacy has the **6 PM cutoff**, so it’s more flexible than the bank.\n   - Also, this keeps the bank from being the thing that pushes you too close to the work deadline.\n\n3. **Do the bank deposit next**\n   - Treat this as the **risk point** because it’s most likely to get interrupted.\n   - **Must happen before 5 PM**, but don’t let it crowd out the work send.\n\n4. **Send the campaign update by 4:30 PM**\n   - If possible, send it **before** the bank.\n   - If not, pause the bank only if you’re still safely inside the 5 PM window and can return quickly.\n\n## If time gets tight, drop in this order\n1. **Extra polish / nonessential edits to the campaign update**\n2. **Bank if it’s already clearly dragging**\n3. **Prescription only if you’re still safely before 6 PM**\n4. **Anything else optional**\n\n## Backup branch if the bank runs long\n- **If the bank is delayed and it threatens 4:30 PM:**\n  - stop trying to force the deposit\n  - switch back to the campaign update immediately\n  - send the work update first\n  - then reattempt the bank if there’s still time before 5 PM\n\n## Pharmacy before or after the bank?\n- **Before the bank** if they’re not on the same route.\n- That’s the safer choice because:\n  - pharmacy has the later cutoff\n  - bank is the most interruption-prone\n  - you don’t want the bank to eat into the work deadline\n\n## Clean version to follow\n- **Start work now**\n- **Pharmacy before bank**\n- **Bank only after work is protected**\n- **If bank runs long, protect the 4:30 send first**\n\nIf you want, I can turn this into a **time-blocked schedule** like “2:00–2:45 / 2:45–3:15 / etc.” based on when you’re starting.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that works. The fallback is clear enough.\n\n- **Start the campaign update first** and protect the 4:30 send.\n- **Do the pharmacy before the bank** if they’re not on the same route.\n- **Bank is the first thing to drop or pause** if time slips.\n- If the bank starts running long, **stop there and go back to the work task** so the deadline doesn’t get blown.\n\nThat’s the clean order I needed.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    }
+  ]
+}

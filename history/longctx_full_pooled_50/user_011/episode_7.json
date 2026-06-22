@@ -1,0 +1,49 @@
+{
+  "user_id": "user_011",
+  "task": "I’ve got a delivery that’s suddenly got three things going wrong at once: a late client note, a technical hiccup in the export, and not much time left tonight. Can you help me map out the smartest way to get it across the finish line without making a bad call under pressure?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.533333333333332,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — treat it like a **triage problem**, not a “fix everything” problem.\n\n## Order of attack\n\n### 1) Decide what can break delivery\nSort the three issues into:\n- **must fix tonight**\n- **can wait until after delivery**\n- **needs client decision**\n\nIf one item can cause the file to be rejected or unusable, that comes first.\n\n### 2) Handle the export issue first if it affects the final file\nIf the export is broken, wrong, or unstable:\n- fix that before touching creative notes\n- test a short export if possible\n- confirm the file opens and plays\n\nIf the export is only a display/cache issue and the file itself is fine, don’t waste time over-correcting it.\n\n### 3) Separate the late client note\nAsk:\n- is this note a blocker?\n- does it change scope?\n- is it clear enough to act on?\n\nIf it’s not a blocker and not clear, don’t guess. Log it and move on.\n\n### 4) Make one clean decision on the late note\nUse this rule:\n- **blocker** → do it now\n- **scope change** → kick it back\n- **ambiguous** → don’t guess\n\n### 5) Protect the delivery path\nOnce the file is stable:\n- stop making extra edits\n- run a final export check\n- verify runtime, audio, and file playback\n- send the file\n\n## Practical priority\nUsually the order is:\n1. export issue  \n2. true delivery blocker from the client note  \n3. everything else\n\n## Short client message if needed\n> Hi [Client Name] — I’m handling a couple of delivery-side issues tonight and prioritizing the items that affect the final file first. One of the notes needs clarification before I can safely apply it, so I’m holding that unless you want to confirm scope.\n\nIf you want, I can also help you turn this into a **30-minute rescue plan** with exact blocks for the rest of tonight.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, this is the right shape. But I’d want it tighter — like, decision tree tight.\n\nWhat I need next is a concrete split:\n- what qualifies as a true blocker\n- what I can safely defer\n- what I should tell the client *right now* if the note is ambiguous\n\nAlso, for the export hiccup, I need the call between “real file problem” and “stupid cache / preview weirdness” spelled out more clearly. That’s usually where people waste 20 minutes chasing ghosts.\n\nIf you can turn this into a simple tonight-only sequence — 1 / 2 / 3, no fluff — that’d be more useful.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Absolutely — here’s the **tonight-only 1 / 2 / 3** version.\n\n## 1) Decide if it’s a true blocker\nA note or issue is a **true blocker** if it:\n- will make the file unusable or rejected\n- breaks sync, audio, legal text, or required content\n- changes something the client already approved in a way that matters for delivery\n- affects the export itself, not just the timeline\n\nIf it doesn’t do one of those things, it’s probably not a blocker.\n\n## 2) Separate the export problem: real file issue vs cache/preview weirdness\n### Treat it as a real file problem if:\n- the export fails\n- the exported file won’t open\n- the wrong content is in the file\n- audio/video is clearly broken in the export\n- the problem shows up in multiple exports\n\n### Treat it as cache/preview weirdness if:\n- the timeline looks wrong but the export is fine\n- playback is glitchy but the file exports cleanly\n- the issue changes after restart / render / cache clear\n- only the preview is broken, not the actual output\n\n**Rule:** if the export file is bad, fix the file problem first. If the export file is fine, stop chasing the timeline glitch.\n\n## 3) Handle the late client note now\nUse this rule:\n- **true blocker** → do it tonight\n- **scope change** → kick it back\n- **ambiguous** → don’t guess\n\n### What to tell the client right now if it’s ambiguous\n> Hi [Client Name] — I’m at final delivery on this and one of the notes needs clarification before I can apply it safely. I’m holding that item for now so I don’t make the wrong change. If you want it included tonight, please confirm the exact direction.\n\n---\n\n## Tonight-only order of attack\n1. **Check the export first**  \n   Decide if it’s a real file problem or just preview/cache noise.\n\n2. **Classify the client note**  \n   Blocker / scope change / ambiguous.\n\n3. **Only fix what can break delivery**  \n   Everything else waits.\n\n## Hard rule\nIf it’s **not a blocker**, it waits.  \nIf it **changes scope**, it gets kicked back.  \nIf it’s **ambiguous**, don’t guess.\n\nIf you want, I can turn this into a **10-minute rescue checklist** you can follow line by line tonight.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, closer. But I’d still want the decision tree a little harder-edged.\n\nSomething like:\n\n1. **Will this file fail QC / get rejected / be unusable?**\n- yes = fix now\n- no = move on\n\n2. **Is the export actually broken, or is it just preview/cache noise?**\n- if the exported file opens and plays clean, stop touching the timeline\n- if the file itself fails, opens wrong, or has bad A/V in the export, that’s real\n\n3. **Is the client note a blocker, a scope change, or unclear?**\n- blocker = do it\n- scope change = push back\n- unclear = tell them you need exact confirmation before changing anything\n\nWhat I’d still want from you is the part people get wrong under pressure: a very short “if X, then Y” version for the export check. Like, one glance and I know whether to burn time on it or not.\n\nAnd the client line could be even more direct. Something like: “I can’t apply this safely without clarification, so I’m holding it to avoid a bad delivery call.”\n\nIf you can tighten those two pieces, that’s basically the usable version.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Absolutely — here’s the tighter version.\n\n## Tonight-only decision tree\n\n### 1) Will this file fail QC, get rejected, or be unusable?\n- **Yes** → fix now\n- **No** → move on\n\n### 2) Is the export actually broken, or just preview/cache noise?\n- **Export file opens and plays clean** → stop touching the timeline\n- **Export file fails, opens wrong, or has bad audio/video** → real file problem, fix it now\n\n### 3) Is the client note a blocker, a scope change, or unclear?\n- **Blocker** → do it\n- **Scope change** → push back\n- **Unclear** → ask for exact confirmation before changing anything\n\n---\n\n## Export check: one-glance rule\n- **If the exported file opens and plays correctly**: it’s probably not the export.\n- **If the export itself is wrong**: it’s a real problem, not cache noise.\n- **If only the timeline looks wrong**: don’t burn time on it tonight.\n\n---\n\n## What to tell the client\n> I can’t apply this safely without clarification, so I’m holding it to avoid a bad delivery call.\n\nIf you want, I can turn this into a **super-short rescue checklist** with just 5 lines for tonight.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah — that’s basically the usable version. Tight enough.\n\nThe export split is clear now:\n- file opens + plays clean = stop\n- file fails / wrong / bad A/V = fix\n- timeline looks weird but export is fine = ignore tonight\n\nAnd the client line works. Direct, no fluff.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    }
+  ]
+}

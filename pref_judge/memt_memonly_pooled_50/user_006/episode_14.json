@@ -1,0 +1,104 @@
+{
+  "user_id": "user_006",
+  "task": "I’m trying to figure out why a small industrial network cabinet keeps acting up during the afternoon even though nothing obvious changed. If you were troubleshooting that, what would you check first so you can tell whether it’s a gear problem, a ventilation problem, or something tied to the environment?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "verbosity_preference",
+      "short": "Wants responses kept tight and efficient",
+      "explanation": "He values speed, control, and efficiency, so he is unlikely to want long-winded help. He would probably prefer responses that get to the point quickly and avoid unnecessary filler. Overexplaining would feel like wasted time to him."
+    },
+    {
+      "idx": 2,
+      "dimension": "directness_preference",
+      "short": "Prefers blunt answers without softening",
+      "explanation": "His skeptical, competitive style suggests he wants clear, unambiguous guidance rather than hedged language. He would likely see excessive caution as evasive or inefficient. Straight answers fit his preference for control and decisive action."
+    },
+    {
+      "idx": 3,
+      "dimension": "format_preference",
+      "short": "Likes structured, actionable output",
+      "explanation": "He seems most likely to respond well to responses that are organized and easy to execute, such as bullets or checklists. That matches his practical, task-focused mindset. Loose, meandering prose would probably frustrate him."
+    },
+    {
+      "idx": 4,
+      "dimension": "detail_level_preference",
+      "short": "Wants the useful essentials, not padding",
+      "explanation": "He likely wants enough context to act, but not exhaustive background unless it helps him win or avoid mistakes. He is efficiency-driven, so extra caveats only matter when they change the decision. He would probably skip anything that does not affect the outcome."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Accepts pushback only if it is sharp and useful",
+      "explanation": "He is skeptical and self-serving, so he probably does not enjoy moralizing or vague objections. But if the pushback is concrete, efficient, and clearly tied to risk or leverage, he is more likely to respect it. Weak or overly gentle correction would likely be ignored."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "I’d start by separating **power/thermal/environmental** causes from **actual gear/config** issues, because afternoon-only problems often point to heat, load, or marginal power.\n\n### First checks\n1. **Power health**\n   - PSU redundancy status\n   - Any PSU warnings/flaps\n   - **Brownout history** or input-voltage dips\n   - UPS status if present\n\n2. **Thermals / airflow**\n   - Fan state and fan RPM alarms\n   - Cabinet **intake vs exhaust temperatures**\n   - Device internal temps\n   - Any **thermal throttling** or high-temp warnings\n   - Check whether afternoon ambient temp rises enough to push it over the edge\n\n3. **Environment**\n   - Cabinet location: direct sun, nearby heat source, blocked vents, dust buildup\n   - Humidity/condensation if relevant\n   - Door closed/open behavior and whether that changes the issue\n\n### Then check for gear symptoms\n4. **Interface counters on the affected links**\n   - CRC/FCS\n   - input/output errors\n   - discards/drops\n   - resets\n   - pause frames\n   - runts/giants, late collisions if applicable\n\n5. **Optics DOM on fiber links**\n   - Rx power\n   - Tx power\n   - temperature\n   - voltage\n   - bias current  \n   Check **both ends** of the uplink, because marginal optics can look fine until temperature or load rises.\n\n6. **Config deltas**\n   - MTU\n   - speed/duplex\n   - LACP mode\n   - trunk VLANs / native VLAN\n   - routing adjacencies\n   - ACLs\n   - port-security\n   - storm control\n\n### How to interpret it\n- **Temps/power bad, counters clean** → likely ventilation, power, or environment\n- **Counters/errors rise with heat/load** → likely marginal cabling/optics/port hardware\n- **Config mismatch or adjacency drops** → likely configuration issue\n- **Only one device in the cabinet affected** → gear-specific\n- **Everything in the cabinet degrades together** → cabinet power/thermal/environment\n\nIf you want, I can turn this into a **quick afternoon-troubleshooting checklist** you can use on-site in 10 minutes.",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Fairly tight and efficient: it gets to the point with a prioritized checklist and brief interpretation. Minor extra detail remains, but there’s little filler."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly direct and unhedged, e.g. “likely point to heat, load, or marginal power” and clear if/then interpretations. Some softening remains in phrases like “if relevant” and “likely.”"
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable: numbered sections, bullets, and a clear “How to interpret it” summary make it easy to execute."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Focuses on the useful essentials for diagnosis—power, thermals, environment, counters, optics, config—without much padding. A bit more breadth than minimal, but still practical."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Includes pushback in a concrete, useful way: “likely point to heat, load, or marginal power,” “marginal optics can look fine until temperature or load rises,” and clear diagnostic branches. It’s not especially sharp, but it is specific and risk-tied."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — I’d make the first pass **time-correlated**, not just snapshot-based.\n\n### Fastest first checks\n1. **Cabinet temp trend by hour**\n   - Look for a climb leading up to the failure, not just the current reading.\n   - Compare **internal cabinet temp** vs **room/ambient temp** if you have both.\n\n2. **Input power / UPS / PSU history**\n   - Check for afternoon **voltage dips**, PSU alarms, or UPS transfer events.\n   - A weak feed often shows up only when load or heat rises.\n\n3. **Fan state and airflow path**\n   - Fan RPM alarms, degraded fan speed, blocked intake/exhaust, dirty filters.\n   - Also check whether the cabinet door position changes the behavior.\n\n4. **Scope of the failure**\n   - **One port/device** → cable, transceiver, port, or endpoint\n   - **Whole cabinet / multiple devices** → thermal, power, or environment\n\n5. **Error counters during the bad window**\n   - CRC/FCS, drops, discards, flaps, renegotiation, resets\n   - Compare **before vs during** the afternoon issue\n\n6. **Optics DOM if fiber is involved**\n   - Rx/Tx power, temperature, voltage, bias current\n   - Check both ends of the link\n\n### Clean split\n- **Internal cabinet temp rises first** → ventilation / airflow / dust / fan issue\n- **Voltage or PSU events line up with the issue** → power/feed problem\n- **Only one port/device fails** → gear/cable/transceiver\n- **Multiple devices degrade together** → cabinet/environment\n\n### My order in practice\n1. Temp trend\n2. Voltage / PSU / UPS log\n3. Fan / airflow / filter\n4. One device vs whole cabinet\n5. Counters during the failure\n6. Optics DOM if applicable\n\nIf you want, I can turn that into a **5-step decision tree** you can run on-site without thinking too much.",
+      "score": 4.4,
+      "summary": "mean=4.40 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:3, 5:2}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly tight and efficient: starts with \"Fastest first checks\" and gives a concise order. Slightly longer than minimal, but avoids filler."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Fairly direct and unsoftened: uses blunt diagnostic splits like \"Internal cabinet temp rises first → ventilation\" and \"One port/device → cable...\". Some hedging remains in phrases like \"if you have both\" and \"if applicable\"."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable: numbered checklist, \"Clean split,\" and \"My order in practice\" make it easy to execute."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Focuses on essentials that change the diagnosis: temp trend, power history, fan/airflow, scope of failure, counters, optics. Little padding or background."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Includes useful pushback-like distinctions tied to risk/leverage, e.g. \"Voltage or PSU events line up\" and \"Multiple devices degrade together\". It is not confrontational, but the correction is concrete and efficient."
+        }
+      ]
+    }
+  ]
+}

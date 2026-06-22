@@ -1,0 +1,36 @@
+{
+  "user_id": "user_006",
+  "task": "I’m drafting a short reply to a contractor about a network issue that’s being closed out, and I want it to be clear and easy to follow if someone reviews it later. What details would you include so the sequence of events, the work done, and any open questions are all stated plainly?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.300000000000001,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "I’d keep it to a clean, review-friendly structure with these details:\n\n1. **Issue summary**\n   - What was broken or degraded\n   - Which site/device/service was affected\n   - When it started and when it was restored, if known\n\n2. **Sequence of events**\n   - Brief timeline in the order things happened\n   - What was checked first, second, third\n   - Any key observations at each step\n\n3. **Work performed**\n   - Exact actions taken to investigate or fix the issue\n   - Any config changes, cable swaps, reboots, circuit checks, etc.\n   - Who performed the work, if relevant\n\n4. **Evidence / confirmation**\n   - The main evidence that showed the fault\n   - What proved the service was back to normal\n   - Any verification done after the fix\n\n5. **Current status**\n   - Whether the issue is fully resolved or only mitigated\n   - Whether service is stable now\n\n6. **Open questions / follow-up**\n   - Anything still unclear\n   - Any items waiting on the contractor, carrier, or vendor\n   - Next step if more investigation is needed\n\nA simple closing line could be:\n- “Issue resolved and service verified. Remaining questions: [list]. Please confirm if any additional action is required before closure.”\n\nIf you want, I can turn that into a short contractor-facing template you can paste into an email or ticket.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, structure is fine. But for a closure note, I’d tighten it so nobody can wiggle out of it later.\n\nInclude:\n- exact device/site affected\n- timestamp of first symptom and restore time\n- what changed before the failure, if anything\n- what you checked and in what order\n- the actual fault found\n- the fix applied\n- what verified recovery\n- anything still pending, with owner if there is one\n\nI’d also want one line that separates facts from guesses. Like:\n- confirmed: failed SFP / bad fiber / misconfig / overheating\n- unconfirmed: whether anything upstream contributed\n\nThat way if someone reviews it later, the sequence is obvious and the blame doesn’t get muddy.\n\nIf you want, I can turn that into a blunt 4-5 sentence closure format.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — for a closure note, I’d keep it factual, chronological, and explicitly separate **confirmed findings** from **open questions**.\n\nInclude these items:\n\n- **Exact affected device/site**\n- **First symptom timestamp** and **restore time**\n- **Any change or event before the failure**\n- **Checks performed, in order**\n- **Confirmed fault found**\n- **Fix applied**\n- **Recovery verification**\n- **Anything still pending**, with owner if known\n\nA clean format could be:\n\n> **Affected:** [site/device]  \n> **Timeline:** First symptom at [time]. Before failure, [change/event] occurred. We checked [item 1], then [item 2], then [item 3].  \n> **Confirmed:** [actual fault found].  \n> **Action taken:** [fix applied].  \n> **Verification:** [how recovery was confirmed], service restored at [time].  \n> **Pending:** [item], owner: [name/team].  \n> **Note:** Confirmed facts above; anything else is unconfirmed and remains under investigation.\n\nIf you want, I can turn that into a very blunt 4–5 sentence version you can paste directly into the ticket.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s the right shape.\n\nThe **confirmed facts / unconfirmed** split is the part that matters. Stops people from hand-waving later.\n\nOnly thing I’d keep in mind: don’t make the note sound like a theory dump. If you’ve got the actual fault, say it clean. If not, label it as pending and leave the owner on it.\n\nThe template is usable as-is.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    }
+  ]
+}

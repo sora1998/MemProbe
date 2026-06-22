@@ -1,0 +1,36 @@
+{
+  "user_id": "user_006",
+  "task": "I’m putting together a quick prep note for a network change later today, and I want it to be easy to follow while I’m working. What should I make sure is checked before starting, and what sequence would you use for the first few steps?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.5,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Here’s a simple prep checklist and a safe first-step sequence you can use for a network change.\n\n### Before starting, make sure these are checked\n- **Change details are clear**: what is changing, why, when, and who approved it\n- **Scope is defined**: exact devices, interfaces, VLANs, routes, ACLs, firewalls, or services affected\n- **Rollback plan is ready**: known-good config, backup, and clear restore steps\n- **Impact is understood**: who/what may be interrupted, expected downtime, dependencies\n- **Maintenance window confirmed**: all stakeholders know the timing\n- **Access is available**: console, VPN, out-of-band, admin credentials, vendor support if needed\n- **Config backups are taken**: current device configs and any relevant screenshots/exports\n- **Current state is documented**: routing tables, interface status, neighbor adjacencies, alarms, etc.\n- **Monitoring is in place**: so you can confirm success and catch issues quickly\n- **Communication plan is ready**: who to notify before, during, and after\n- **Tools/files are ready**: configs, commands, diagrams, tickets, and notes\n\n### Good sequence for the first few steps\n1. **Announce start of change** to stakeholders or the ticket/channel\n2. **Verify current baseline** on the affected devices/services\n3. **Take final backups / save running state**\n4. **Confirm access paths** in case the main network path fails\n5. **Apply the first low-risk change** or pre-check step\n6. **Validate immediately** after each step before moving on\n\n### A practical rule of thumb\n- Make **one change at a time**\n- **Verify after each step**\n- Keep the **rollback path** open until the change is proven stable\n\nIf you want, I can turn this into a **one-page change checklist** or a **step-by-step runbook template** you can paste into your notes.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, close enough. But I’d want it tighter and more operational.\n\nBefore starting, I’d make sure these are nailed down:\n- exact devices / ports / circuits involved\n- current config backup saved off-box\n- baseline copied: interfaces, routing, adjacencies, alarms, whatever matters\n- rollback already tested in my head, not just written down\n- console or OOB access confirmed\n- maintenance window and approval locked\n- who gets notified if it goes sideways\n\nFirst few steps I’d use:\n1. snapshot baseline\n2. save/export config\n3. verify out-of-band access\n4. make the smallest change first\n5. validate immediately before touching the next piece\n\nIf it’s a risky change, I’d also log timestamps as I go. Last time someone tried to pin an outage on me, the timestamps and work-order trail were the only reason I walked clean. Same idea here — records are leverage.\n\nIf you want, I can turn it into a stripped-down runbook format, like 10 lines max.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "That’s a solid operational version. I’d tighten it just a bit and make the sequence more explicit:\n\n### Pre-checks\n- Exact devices / ports / circuits confirmed\n- Current config backed up off-box\n- Baseline captured: interfaces, routes, adjacencies, alarms, relevant service state\n- Rollback path known and executable\n- Console / OOB access tested\n- Maintenance window and approval confirmed\n- Notification list ready if something breaks\n- Logging/timestamps ready for the change record\n\n### First steps\n1. Capture final baseline\n2. Save/export current config\n3. Confirm OOB/console access\n4. Make the smallest change first\n5. Validate immediately\n6. Log the result and timestamp before continuing\n\nIf you want, I can compress that into a **10-line runbook** you can paste straight into your notes.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s basically it. Tight enough to use.\n\nThe only thing I’d maybe keep explicit is: don’t let “rollback path known” stay theoretical — if I can’t actually get back to known-good fast, I treat the change as higher risk. But the sequence is fine.\n\n10-line runbook would be useful if you want to strip it further.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    }
+  ]
+}

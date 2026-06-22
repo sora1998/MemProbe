@@ -1,0 +1,23 @@
+{
+  "user_id": "user_026",
+  "task": "I need to get a trade through a process with a few moving parts, and I want to make sure I’m not missing a step between the initial request, the internal approval, and the final confirmation. Can you help me lay out a clean sequence for handling it and what I should check at each stage?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 5.0,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — I’d handle it as a simple **request → approval → execution → confirmation** workflow, with a quick check at each handoff so nothing gets lost.\n\n## 1) Initial request\n**Goal:** make sure the trade is actually well-defined.\n\nCheck:\n- **Instrument / security**\n- **Side**: buy / sell / switch / hedge / close\n- **Size**: shares, notional, % of portfolio\n- **Account / book / client**\n- **Timing**: now, later today, staged, contingent\n- **Rationale**: why this trade now\n- **Constraints**: mandate, limits, restricted list, liquidity, tax, settlement issues\n\nOutput:\n- A clean trade ticket or request note with no ambiguity\n\n## 2) Internal approval\n**Goal:** confirm the trade is allowed and still makes sense.\n\nCheck:\n- **Authority**: who can approve it?\n- **Policy / mandate fit**: does it violate any limits?\n- **Risk impact**: exposure, concentration, leverage, sector, duration, FX, etc.\n- **Liquidity / market impact**: can it be done without excessive slippage?\n- **Dependencies**: do you need legal, compliance, PM, or client sign-off?\n- **Exceptions**: any override, waiver, or special condition?\n\nOutput:\n- Explicit approval, or a documented hold / reject / revise\n\n## 3) Execution\n**Goal:** get the trade done as instructed.\n\nCheck:\n- **Final order details** match the approved request\n- **Broker / venue / counterparty**\n- **Order type**: market, limit, algo, block, etc.\n- **Price / spread / timing**\n- **Partial fill handling**\n- **Any stale instructions** or changed market conditions\n\nOutput:\n- Execution report or fill confirmation\n\n## 4) Final confirmation\n**Goal:** verify the trade landed correctly and the records match.\n\nCheck:\n- **Filled quantity / notional**\n- **Average price / commissions / fees**\n- **Settlement date**\n- **Position and cash impact**\n- **Any breaks** versus request or approval\n- **Booking / accounting / operations status**\n\nOutput:\n- Confirmed booking and a note of any exceptions to resolve\n\n---\n\n## Practical rule\nAt each stage, ask:\n1. **Did the instruction change?**\n2. **Did the risk change?**\n3. **Did the approval change?**\n4. **Did the actual fill match the plan?**\n\nIf any answer is “yes,” pause and reconcile before moving on.\n\nIf you want, I can turn this into a **one-page trade workflow checklist** with columns for **stage / check / owner / status / exception**.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that works. Clean enough to use.\n\nThe only thing I’d tighten is the handoff points — that’s where things usually break.\n\n1. **Initial request**\n   - make sure the ticket has the exact security, size, side, account, timing, and any constraint that matters\n   - if anything is vague, stop there; don’t let ops or approval clean up a sloppy ask\n\n2. **Internal approval**\n   - confirm it’s within mandate and authority\n   - check risk, liquidity, and any compliance issue before it gets blessed\n   - if there’s an exception, document it explicitly, not implied\n\n3. **Execution**\n   - confirm the order matches what was approved, not what somebody “meant”\n   - if market conditions move or size changes, get it re-cleared if needed\n\n4. **Final confirmation**\n   - verify fill, avg price, fees, settlement, booking\n   - reconcile any break immediately\n\nThat “did the instruction change / did the risk change / did the approval change / did the fill match” rule is the right discipline. I’d use that.\n\nIf you want, I can turn it into a tighter checklist with owner / status / exception columns, the way a desk actually uses it.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 5.0
+      },
+      "gt_correct": null
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "user_id": "user_029",
+  "task": "I’ve got a messy equipment issue I want to hand off to someone else, but I don’t want the important details getting lost. Can you help me turn my rough notes into a clean troubleshooting write-up with the key symptoms, what was checked, what changed, and the order of events?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.300000000000001,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — send me your rough notes and I’ll turn them into a clean troubleshooting write-up.\n\nIf you want the best result, include whatever you have for:\n- **equipment / asset ID**\n- **symptoms**\n- **when it started**\n- **what was checked**\n- **what changed**\n- **what made it better or worse**\n- **any error codes / readings / photos**\n- **current status**\n\nI can format it as:\n1. **short summary**\n2. **timeline / order of events**\n3. **checks performed**\n4. **results**\n5. **open questions / next steps**\n\nIf you paste the notes here, I’ll clean them up.",
+      "user_simulator": {
+        "feedback_type": "add_context",
+        "text": "Alright. Rough notes:\n\n- Asset: 480V backup pump controller, Panel B-17\n- Started: Monday morning, around 06:20\n- Symptom: unit would energize for a second, then drop out. Contactor chattered. No steady run.\n- First checked: incoming line voltage, control fuse, E-stop chain, overload relay, and the HOA switch. Line voltage was normal. Fuse was good. E-stop circuit showed continuity. Overload wasn’t tripped.\n- What changed: after cycling power and resetting the overload, it ran normally for maybe 10 minutes, then failed again when load came on.\n- What made it worse/better: better when load was disconnected. Worse once the motor tried to start under load.\n- Error codes/readings: no active fault code on the HMI, but the undervoltage LED on the relay flickered. Saw line dip to about 438V during start attempt.\n- Order of events: normal overnight -> first start attempt failed in the morning -> checked basics -> temporary recovery after reset -> repeat failure under load -> isolated to starter/control side, not the pump itself.\n- Current status: left de-energized, tagged out, waiting on replacement relay and a proper load test.\n\nClean that up into something someone else can actually use.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Here’s a clean troubleshooting write-up based on your notes:\n\n---\n\n## Troubleshooting Summary\n**Asset:** 480V backup pump controller, Panel B-17  \n**Start of issue:** Monday morning, approximately 06:20  \n\nThe unit began energizing briefly and then dropping out. The contactor chattered and the pump would not achieve a steady run. No active HMI fault code was present, but the undervoltage LED on the relay flickered during start attempts.\n\n---\n\n## Timeline / Order of Events\n1. Unit was operating normally overnight.\n2. First failed start attempt occurred Monday morning around 06:20.\n3. Basic checks were performed on incoming line voltage, control fuse, E-stop chain, overload relay, and HOA switch.\n4. Line voltage was normal, fuse was good, E-stop circuit had continuity, and overload relay was not tripped.\n5. After cycling power and resetting the overload, the unit ran normally for approximately 10 minutes.\n6. Failure returned when load was applied.\n7. Unit performed better with the load disconnected.\n8. Problem worsened when the motor attempted to start under load.\n9. Unit was isolated to the starter/control side rather than the pump itself.\n\n---\n\n## Checks Performed\n- Incoming line voltage verified\n- Control fuse checked\n- E-stop chain checked for continuity\n- Overload relay checked\n- HOA switch checked\n- Power cycled\n- Overload reset\n- Load disconnected for comparison test\n\n---\n\n## Results\n- Incoming line voltage: normal\n- Control fuse: good\n- E-stop chain: continuous\n- Overload relay: not tripped\n- HMI: no active fault code\n- Undervoltage relay LED: flickering\n- Measured line dip during start attempt: approximately **438V**\n- Temporary recovery after reset: yes, for about 10 minutes\n- Failure under load: yes\n- Failure with load disconnected: improved\n\n---\n\n## Current Status\n- Unit left **de-energized**\n- Tagged out\n- Awaiting replacement relay\n- Proper load test still needed\n\n---\n\n## Working Interpretation\nThe issue appears to be associated with the **starter/control side under load**, with **undervoltage during start** as a likely contributor. The fact that the unit runs temporarily after reset but fails again when load is applied suggests an intermittent control or relay issue rather than a constant hard fault.\n\n---\n\n## Open Questions / Next Steps\n- Confirm whether the undervoltage relay is failing under load or responding correctly to an upstream voltage dip\n- Verify starter/control components under full load\n- Perform load test after replacement relay is installed\n- Check for loose connections or voltage drop in the control/start circuit if failure repeats\n\nIf you want, I can also turn this into a **more formal handoff note** or a **shorter maintenance log entry**.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that works. Clean enough to hand off. The order is intact, checks are separated from the symptoms, and the 438V dip is in there, which matters. I’d use it.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    }
+  ]
+}

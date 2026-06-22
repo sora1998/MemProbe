@@ -1,0 +1,104 @@
+{
+  "user_id": "user_006",
+  "task": "I’m trying to narrow down an annoying network issue at my place: Wi‑Fi looks fine on the surface, but one device keeps dropping at random and the usual reboot stuff hasn’t changed anything. Can you help me build a clean step-by-step way to isolate whether it’s the device, router, cabling, or something in the config?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "verbosity_preference",
+      "short": "Wants responses kept tight and efficient",
+      "explanation": "He values speed, control, and efficiency, so he is unlikely to want long-winded help. He would probably prefer responses that get to the point quickly and avoid unnecessary filler. Overexplaining would feel like wasted time to him."
+    },
+    {
+      "idx": 2,
+      "dimension": "directness_preference",
+      "short": "Prefers blunt answers without softening",
+      "explanation": "His skeptical, competitive style suggests he wants clear, unambiguous guidance rather than hedged language. He would likely see excessive caution as evasive or inefficient. Straight answers fit his preference for control and decisive action."
+    },
+    {
+      "idx": 3,
+      "dimension": "format_preference",
+      "short": "Likes structured, actionable output",
+      "explanation": "He seems most likely to respond well to responses that are organized and easy to execute, such as bullets or checklists. That matches his practical, task-focused mindset. Loose, meandering prose would probably frustrate him."
+    },
+    {
+      "idx": 4,
+      "dimension": "detail_level_preference",
+      "short": "Wants the useful essentials, not padding",
+      "explanation": "He likely wants enough context to act, but not exhaustive background unless it helps him win or avoid mistakes. He is efficiency-driven, so extra caveats only matter when they change the decision. He would probably skip anything that does not affect the outcome."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Accepts pushback only if it is sharp and useful",
+      "explanation": "He is skeptical and self-serving, so he probably does not enjoy moralizing or vague objections. But if the pushback is concrete, efficient, and clearly tied to risk or leverage, he is more likely to respect it. Weak or overly gentle correction would likely be ignored."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Absolutely — here’s a clean, practical way to isolate it without chasing your tail.\n\n## Goal\nFigure out whether the problem follows:\n- **the device**\n- **the router / access point**\n- **the cabling / uplink**\n- **the network config**\n- or **the wireless environment**\n\n---\n\n## 1) Define the symptom precisely\nBefore changing anything, note:\n- **What exactly “drops” means**  \n  - Wi‑Fi disconnects?\n  - Internet stops but Wi‑Fi stays connected?\n  - Only one app/service fails?\n- **How often it happens**\n- **Whether it happens at a specific time**\n- **Whether the device shows weak signal or full signal when it happens**\n\nIf you can, write down:\n- device model\n- OS version\n- router/AP model\n- whether it’s 2.4 GHz, 5 GHz, or 6 GHz\n- whether the device is near the AP or far away\n\n---\n\n## 2) Check if the issue follows the device\nThis is the fastest split test.\n\n### Test A: Same device, different network\nConnect the problem device to:\n- a phone hotspot, or\n- a neighbor/friend’s Wi‑Fi, or\n- another AP in your home if you have one\n\n**Result interpretation:**\n- **Drops on other networks too** → likely the **device**\n- **Only drops on your home network** → likely **router/config/cabling/environment**\n\n### Test B: Different device, same spot\nTake a known-good device and use it in the **same exact location**.\n\n**Result interpretation:**\n- **Other devices also have issues there** → likely **signal/interference/AP placement**\n- **Only the original device fails** → likely **device-specific issue**\n\n---\n\n## 3) Separate Wi‑Fi problems from internet problems\nWhen it “drops,” check two things:\n\n- Does the device still show **connected to Wi‑Fi**?\n- Can it still reach the **router’s local IP**?\n\nIf possible:\n- ping the router (e.g. `ping 192.168.1.1`)\n- then ping something on the internet (e.g. `ping 8.8.8.8`)\n\n**Interpretation:**\n- **Router ping fails** → Wi‑Fi link / AP / device radio issue\n- **Router ping works, internet ping fails** → WAN/router/ISP/DNS issue\n- **Both work but apps fail** → DNS, firewall, routing, or app-specific issue\n\n---\n\n## 4) Eliminate cabling / uplink issues\nIf your router/AP is wired to modem or switch, check:\n\n- Swap the Ethernet cable\n- Try a different router LAN port\n- If there’s a switch, bypass it temporarily\n- Make sure modem/router power supplies are solid\n- Check for loose connectors or damaged cable ends\n\n**Interpretation:**\n- If the problem disappears after cable/port swap, you found the culprit.\n- If nothing changes, cabling is less likely.\n\n---\n\n## 5) Simplify the Wi‑Fi setup\nTemporarily reduce variables:\n\n### Do this:\n- Separate 2.4 GHz and 5 GHz SSIDs if they’re combined\n- Put the device on one band only\n- Turn off mesh band steering / “smart connect” temporarily\n- If you have multiple APs, test with only one active\n\n**Interpretation:**\n- If the issue disappears on one band but not the other, it’s likely **band-specific compatibility/interference**\n- If it only happens with band steering or roaming enabled, it may be a **handoff/config issue**\n\n---\n\n## 6) Check for DHCP / IP assignment issues\nSometimes “dropping” is really a lease/config problem.\n\nLook for:\n- IP address changing unexpectedly\n- duplicate IPs\n- very short DHCP lease times\n- exhausted DHCP pool\n- static IP conflicts\n\n### Quick test:\nSet the device to a **static IP** temporarily outside the DHCP pool.\n\n**Interpretation:**\n- If the issue stops, the problem is likely **DHCP/config**\n- If not, keep digging\n\n---\n\n## 7) Test signal and interference\nEven if Wi‑Fi “looks fine,” the device may be less tolerant than others.\n\nCheck:\n- RSSI / signal strength\n- channel congestion\n- neighboring networks\n- microwave/cordless phone/Bluetooth interference\n- AP placement near metal, TV, mirror, aquarium, or thick walls\n\n### Useful test:\nMove the device within a few feet of the AP.\n\n**Interpretation:**\n- **Works near AP, fails farther away** → signal/attenuation/interference\n- **Fails even next to AP** → device, AP radio, or config\n\n---\n\n## 8) Update or reset the device network stack\nOn the problem device:\n- forget the Wi‑Fi network\n- rejoin it\n- update OS/drivers/firmware\n- disable power-saving features for Wi‑Fi if available\n- if it’s a laptop/PC, update the wireless adapter driver\n\n**Interpretation:**\n- If that helps, it points to **device-side software/driver/power management**\n\n---\n\n## 9) Check router/AP logs\nLook for:\n- deauth/disassoc events\n- DHCP failures\n- authentication failures\n- radar/channel switch events\n- AP reboots\n- WAN drops\n\n**Interpretation:**\n- **Deauth/disassoc** → wireless/auth/config issue\n- **AP rebooting** → router hardware/power issue\n- **WAN drops** → ISP/modem/router uplink issue\n\n---\n\n## 10) Use a clean A/B test matrix\nIf you want the shortest path, use this:\n\n| Test | If it fails | Likely culprit |\n|---|---|---|\n| Same device on hotspot/other Wi‑Fi | Still fails | Device |\n| Other device in same spot | Also fails | Environment/AP placement |\n| Same device near AP | Still fails | Device or AP/config |\n| Different device on same SSID | Fails too | Router/config |\n| Swap Ethernet cable/port | Improves | Cabling/uplink |\n| Static IP test | Improves | DHCP/config |\n| Single-band test | Improves | Band steering/interference |\n\n---\n\n## 11) Best “minimal effort” order\nIf you want the fastest sequence:\n\n1. Test the device on another Wi‑Fi network  \n2. Test another device in the same location  \n3. Move the device right next to the AP  \n4. Try only 2.4 GHz, then only 5 GHz  \n5. Swap cable/port between modem/router/switch  \n6. Check router logs for disconnects  \n7. Try static IP  \n8. Update device Wi‑Fi driver/firmware  \n9. Temporarily disable band steering / mesh roaming  \n\n---\n\n## 12) What to tell me if you want help narrowing it further\nIf you share:\n- device type/model\n- router/AP model\n- whether it’s Wi‑Fi drop vs internet drop\n- 2.4/5/6 GHz\n- how often it happens\n- whether other devices are affected\n- any router log entries\n\n…I can help you turn that into a very specific decision tree for your setup.",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly tight and efficient, with a clear step-by-step flow and little filler. It is somewhat long, but stays focused on the troubleshooting task."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Uses fairly direct language like \"likely the device\" and \"If the issue disappears... you found the culprit.\" It is not especially blunt, but it avoids heavy hedging."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable: numbered steps, subtests, interpretation bullets, and a summary matrix make it easy to execute."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Gives the useful essentials needed to isolate the issue, with practical tests and interpretations. There is some extra detail, but little padding."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Includes pushback in a concrete, useful way, e.g. \"Sometimes 'dropping' is really a lease/config problem\" and specific log checks. It is not moralizing or vague."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — here’s a tighter **first-fault decision tree** you can follow in order.\n\n## 1) Determine what is actually dropping\nWhen it happens, check the problem device immediately:\n\n- **A. Wi‑Fi icon disconnects / SSID disappears / it reconnects**\n  → this is a **Wi‑Fi link problem**\n- **B. Wi‑Fi stays connected, but internet stops**\n  → this is an **IP/DNS/router/WAN problem**\n\nIf you can, do this test:\n- ping the **router’s local IP**\n- ping **8.8.8.8**\n\n### Interpret:\n- **Router ping fails** → device ↔ AP/Wi‑Fi link issue\n- **Router ping works, 8.8.8.8 fails** → router/WAN/DNS/config issue\n- **Both work, but apps fail** → DNS/app/firewall/routing issue\n\n---\n\n## 2) Test the same device on a different network\nConnect the problem device to:\n- a phone hotspot, or\n- a different Wi‑Fi network\n\n### Interpret:\n- **Still drops** → likely **device**\n- **Only drops on your home network** → likely **router/AP/config/cabling/environment**\n\n---\n\n## 3) Test a different device in the same exact spot\nUse a known-good device where the problem device normally sits.\n\n### Interpret:\n- **Other device also has trouble there** → likely **AP placement / interference / signal**\n- **Other device is fine** → points back to the **original device**\n\n---\n\n## 4) Force the problem device onto one band\nTest **2.4 GHz only**, then **5 GHz only** if possible.\n\n### Interpret:\n- **Fails on one band only** → band-specific **compatibility/interference/config**\n- **Fails on both bands** → more likely **device, AP, or general config**\n\n---\n\n## 5) Move the problem device close to the AP/router\nPut it within a few feet of the AP.\n\n### Interpret:\n- **Works close, fails far away** → **signal/interference/placement**\n- **Still fails close in** → **device, AP radio, or config**\n\n---\n\n## 6) Eliminate config and DHCP issues\nDo these one at a time:\n- forget/rejoin the Wi‑Fi\n- temporarily set a **static IP** outside the DHCP pool\n- disable **band steering / smart connect / roaming** if enabled\n\n### Interpret:\n- **Static IP fixes it** → **DHCP/config**\n- **Band steering off fixes it** → **roaming/config**\n- **Forget/rejoin fixes it** → **device profile/corrupt config**\n\n---\n\n## 7) Rule out cabling / uplink\nIf the router/AP is wired:\n- swap Ethernet cable\n- swap router/switch port\n- bypass any switch\n- check modem/router power and link lights\n\n### Interpret:\n- **Problem changes or disappears** → **cabling/uplink**\n- **No change** → cabling less likely\n\n---\n\n## Fast decision summary\n\n### If the device:\n- drops on **other Wi‑Fi too** → **device**\n- only drops on **your network** → **router/AP/config/cabling**\n- works **near AP but not far away** → **signal/interference**\n- fails **only on one band** → **band/config/interference**\n- loses **internet only**, not Wi‑Fi → **router/WAN/DNS/config**\n- improves with **static IP** → **DHCP/config**\n- improves after **cable/port swap** → **cabling/uplink**\n\nIf you want, I can turn this into a one-page **if/then flowchart** you can follow live while testing.",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Keeps it fairly tight and efficient with a concise decision tree and summary, though it’s still somewhat detailed."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly blunt and direct: phrases like \"likely device\" and \"Router ping fails\" give clear guidance, with little hedging."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable: numbered steps, bullet points, and \"Interpret\" sections make it easy to execute."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Focuses on the useful essentials for isolating the fault and avoids deep background, though it includes a few extra tests and explanations."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Pushback is concrete and useful, tied to specific risks like \"DHCP/config,\" \"band steering,\" and \"cabling/uplink,\" without moralizing."
+        }
+      ]
+    }
+  ]
+}

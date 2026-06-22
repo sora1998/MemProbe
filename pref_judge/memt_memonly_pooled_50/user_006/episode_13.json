@@ -1,0 +1,104 @@
+{
+  "user_id": "user_006",
+  "task": "I’m helping a small warehouse team figure out what to prioritize when their network gets flaky during a busy shift. What’s the cleanest way to think about which stations or systems should come first so the whole flow doesn’t get jammed up?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "verbosity_preference",
+      "short": "Wants responses kept tight and efficient",
+      "explanation": "He values speed, control, and efficiency, so he is unlikely to want long-winded help. He would probably prefer responses that get to the point quickly and avoid unnecessary filler. Overexplaining would feel like wasted time to him."
+    },
+    {
+      "idx": 2,
+      "dimension": "directness_preference",
+      "short": "Prefers blunt answers without softening",
+      "explanation": "His skeptical, competitive style suggests he wants clear, unambiguous guidance rather than hedged language. He would likely see excessive caution as evasive or inefficient. Straight answers fit his preference for control and decisive action."
+    },
+    {
+      "idx": 3,
+      "dimension": "format_preference",
+      "short": "Likes structured, actionable output",
+      "explanation": "He seems most likely to respond well to responses that are organized and easy to execute, such as bullets or checklists. That matches his practical, task-focused mindset. Loose, meandering prose would probably frustrate him."
+    },
+    {
+      "idx": 4,
+      "dimension": "detail_level_preference",
+      "short": "Wants the useful essentials, not padding",
+      "explanation": "He likely wants enough context to act, but not exhaustive background unless it helps him win or avoid mistakes. He is efficiency-driven, so extra caveats only matter when they change the decision. He would probably skip anything that does not affect the outcome."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Accepts pushback only if it is sharp and useful",
+      "explanation": "He is skeptical and self-serving, so he probably does not enjoy moralizing or vague objections. But if the pushback is concrete, efficient, and clearly tied to risk or leverage, he is more likely to respect it. Weak or overly gentle correction would likely be ignored."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Think in **flow impact first**, not “which box looks broken.”\n\nA clean way to prioritize is:\n\n1. **Keep the physical path alive**\n   - Check uplinks, transceivers, cabling, link lights, errors.\n   - If transport is shaky, don’t waste time on apps or DNS yet.\n\n2. **Protect the bottleneck stations first**\n   - Prioritize the systems that, if down, **block everyone else**:\n     - shipping/receiving scanners\n     - label printers\n     - WMS terminals\n     - Wi‑Fi APs covering the main work area\n     - core switches or uplinks feeding multiple stations\n\n3. **Use a simple score**\n   - Give each issue points for:\n     - **How many people/processes it blocks**\n     - **How hard it is to work around**\n     - **How fast it can spread or worsen**\n     - **How much time it saves if fixed first**\n   - Fix the highest score first.\n   - If something is low impact and easy to work around, kick it out of the urgent lane.\n\n4. **Verify before expanding scope**\n   - Check counters/trends, optics/DOM if relevant, and recent changes.\n   - Don’t start touching dependent systems until the transport layer is clearly stable.\n\n5. **Have a rollback path**\n   - For any change, know how to undo it quickly.\n   - Use checkpoints so you can stop and reassess before making things worse.\n\nA practical rule of thumb for a warehouse shift:\n\n- **First:** core network path and shared infrastructure\n- **Second:** stations that stop throughput if they fail\n- **Third:** convenience systems and single-user issues\n\nIf you want, I can turn this into a **1-page “warehouse network triage” checklist** or a **simple scoring table** the team can use during incidents.",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Fairly tight and efficient: it gets to the point with a short framework and bullets, though it still includes some extra explanation and examples."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly blunt and direct, e.g. \"Think in flow impact first\" and \"don’t waste time on apps or DNS yet.\" It is clear, though not aggressively blunt."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable: numbered steps, bullets, a simple scoring method, and a rule-of-thumb hierarchy make it easy to execute."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Focuses on essentials that affect the outcome, like \"core network path,\" \"bottleneck stations,\" and \"rollback path.\" There is some added detail, but little padding."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Includes useful pushback in a concrete way, such as \"don’t waste time on apps or DNS yet\" and \"Don’t start touching dependent systems until the transport layer is clearly stable,\" which is sharp and risk-based."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — the cleanest way is to prioritize by **flow blockage**, not by how “broken” something looks.\n\n### Best order in a warehouse shift\n1. **Core path**\n   - uplink\n   - core switch\n   - fiber / transceiver\n   - APs covering the floor\n\n2. **Shared choke points**\n   - WMS\n   - label printers\n   - DHCP\n   - auth\n   - anything every station depends on\n\n3. **High-volume stations**\n   - shipping\n   - receiving\n   - pack-out\n   - staging\n\n4. **Single-user issues**\n   - one desktop\n   - one handheld\n   - one docked PC\n\n### Fast triage rule\nAsk only these 3 questions:\n\n- **Does this stop multiple people right now?**\n- **Is there a workaround, or does the line stall?**\n- **Will it get worse fast if ignored?**\n\nIf the answer is **yes** to the first two, it goes to the top.\n\n### Warehouse-specific rule\nTreat **printer and scanner problems as high priority** if they affect labels or scan flow. Those often look small but can jam an entire lane.\n\n### Simple decision rule\n- **Blocks the whole floor** → fix first\n- **Blocks a lane or team** → fix next\n- **Only hurts one person** → defer if needed\n\nIf you want, I can turn this into a **5-step shift triage checklist** the team can use live.",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Pretty tight and efficient: it gets to the point quickly with short sections and no long background. Slightly more verbose than minimal, but still concise."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly blunt and direct, e.g. \"prioritize by flow blockage\" and \"Blocks the whole floor → fix first.\" It avoids hedging, though the opening \"Yes —\" and explanatory framing soften it a bit."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable: numbered priority list, \"Fast triage rule,\" and a simple decision rule with arrows. Easy to execute."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Focuses on essentials that affect outcome, like \"core path,\" \"shared choke points,\" and \"printer and scanner problems.\" There is a little extra framing, but no major padding."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Pushback is present but useful and concrete: \"prioritize by flow blockage, not by how 'broken' something looks\" and \"printer and scanner problems as high priority\" because they can \"jam an entire lane.\" It is not especially sharp, but it is practical and tied to risk."
+        }
+      ]
+    }
+  ]
+}

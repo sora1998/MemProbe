@@ -1,0 +1,137 @@
+{
+  "user_id": "user_033",
+  "task": "I’ve got a run in progress that’s drifting a little, and I don’t want to let it keep going if it’s headed for junk data. Can you help me think through what I should watch for and when it’s smarter to stop, reset, or keep going?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "formality_preference",
+      "short": "Prefers professional, no-nonsense interaction",
+      "explanation": "She would likely respond best to a controlled, businesslike style rather than friendliness for its own sake. Given her guarded and precision-focused persona, overly casual phrasing would probably feel sloppy or intrusive."
+    },
+    {
+      "idx": 2,
+      "dimension": "verbosity_preference",
+      "short": "Wants concise answers, not rambling",
+      "explanation": "She seems to value efficiency and would likely dislike long-winded explanations that repeat themselves. She probably wants enough information to act on, with no decorative padding."
+    },
+    {
+      "idx": 3,
+      "dimension": "directness_preference",
+      "short": "Prefers blunt, unsoftened answers",
+      "explanation": "Her skeptical, control-oriented style suggests she would rather hear the point plainly than receive hedged reassurance. She is likely to trust answers more when they are explicit about risks, limits, and conclusions."
+    },
+    {
+      "idx": 4,
+      "dimension": "format_preference",
+      "short": "Likes structured lists and checklists",
+      "explanation": "She appears to prefer information that is organized and easy to verify. A clean format with steps, bullets, or checklists would fit her habit of tracking details and would reduce ambiguity."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Accepts firm correction when needed",
+      "explanation": "She likely does not want the assistant to simply echo her assumptions if something is wrong or risky. A direct challenge, especially when backed by evidence, would probably be more useful to her than polite agreement."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — think in terms of **hard stops vs. watch items**.\n\n## Hard stop now\nStop the run and reset/recover if you see any of these:\n\n- **Moving outside spec/acceptance limits**  \n  If the drift is trending toward or beyond your predefined limit, don’t “see how it finishes.”\n\n- **Control failure or unstable QC**\n  - QC out of range\n  - QC trending in one direction across levels\n  - Westgard-type warning patterns if you use them\n\n- **Instrument or reagent problems**\n  - Pump/probe issues\n  - Bubble/clot/carryover flags\n  - Reagent lot instability, depletion, or weird onboard behavior\n  - Calibration shift or failed calibration check\n\n- **Data integrity problems**\n  - Missing data points\n  - Disconnected timestamps\n  - Unexpected reruns, suppressed results, or software anomalies\n  - Anything that makes the run hard to reconstruct cleanly\n\n- **Known deviation / process breach**\n  - Wrong setup\n  - Incorrect sample handling\n  - Temp/incubation/volume issue\n  - Anything that makes the run non-signable without a documented exception\n\n## Keep going only if\nIt’s a **small, explainable drift** and all of the following are true:\n\n- Controls are still acceptable\n- Drift is within your action threshold\n- No instrument flags or reagent issues\n- The trend is stable and understood\n- You have a plan to verify whether it’s real or just noise\n\n## Practical decision rule\nAsk:\n\n1. **Is this drift within my allowed window?**  \n   If no → stop.\n\n2. **Can I explain it with current evidence?**  \n   If no → treat as suspect, don’t just let it run.\n\n3. **Would I be comfortable signing this if it ended right now?**  \n   If no → stop and investigate now.\n\n## Blunt version\nIf it’s **drifting and you already don’t trust it**, that’s usually not a “monitor longer” situation — it’s a **stop, check QC/instrument, and decide whether to restart** situation.\n\nIf you want, tell me:\n- analyte/process,\n- what’s drifting,\n- how far,\n- over what time,\n- and whether QC/flags are clean,\n\nand I’ll help you decide whether this is a **keep-going**, **pause-and-check**, or **hard-stop** situation.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Uses a controlled, businesslike tone: \"think in terms of hard stops vs. watch items,\" \"Practical decision rule,\" and \"Blunt version\". No casual friendliness or padding."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly concise and action-oriented, with compact bullets and a decision rule. Slightly longer than minimal, but not rambling."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Very direct and unsoftened: \"don’t 'see how it finishes,'\" \"don’t just let it run,\" and \"that’s usually not a 'monitor longer' situation — it’s a stop... situation.\" Explicit about risks and conclusions."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong structure throughout: clear headings, bullet lists, numbered questions, and a final categorized offer of \"keep-going,\" \"pause-and-check,\" or \"hard-stop.\""
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Provides firm correction and pushback against complacency: \"If it’s drifting and you already don’t trust it... it’s a stop... situation.\" It does not merely echo the user's concern; it challenges the idea of continuing."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — that’s the right way to think about it.\n\nHere’s a **practical stop / pause / continue tree** in the order I’d use it:\n\n## 1) Is the drift still inside a believable window?\nCompare it to:\n- your **acceptance limit**\n- your **historical baseline**\n- your **usual run-to-run variation**\n\n### Stop now if:\n- it’s **approaching the limit fast**\n- the slope is **larger than normal noise**\n- it’s already outside what you’d be comfortable defending later\n\nIf you’re already thinking “this may be junk,” that’s usually not a “let it finish and hope” situation.\n\n---\n\n## 2) Is it a real trend or just scatter?\nAsk:\n- Is it **monotonic** across time/order?\n- Or just **one bad point** with the rest bouncing around?\n\n### More concerning:\n- steady slope\n- step change after a specific event\n- drift that keeps moving in one direction\n\n### Less concerning:\n- isolated outlier\n- random wobble with no direction\n- no repeatable pattern\n\nA single weird point is usually noise or a one-off.  \nA slope is a process problem until proven otherwise.\n\n---\n\n## 3) Is QC moving the same way?\nThis is the big one.\n\n### If QC is drifting too:\nThat points to:\n- calibration shift\n- reagent issue\n- instrument instability\n- temperature / timing / flow / detector problem\n\nThat’s a **hard stop or pause-and-investigate**.\n\n### If QC is flat but samples drift:\nThen think:\n- sample handling\n- carryover\n- mix-up\n- evaporation\n- matrix/specimen-specific issue\n- order effect\n\nThat may still be bad, but it’s a different problem.\n\n---\n\n## 4) Is the instrument the only thing changing?\nLook for:\n- calibration check shift\n- pressure/flow changes\n- probe/pump issues\n- temperature excursions\n- detector instability\n- flags, alarms, retries, suppressed results\n\n### If yes:\nDon’t keep generating data just to “see what happens.”\nThat usually contaminates the rest of the batch.\n\n---\n\n## 5) Can you salvage the run without poisoning the batch?\nAsk:\n- Can you isolate the affected segment?\n- Can you rerun from a clean point?\n- Can you document a clear cutoff?\n- Or is the whole batch now suspect?\n\n### Salvageable:\n- drift started at a known point\n- you can define the bad segment\n- upstream/downstream data are still clean\n- rerun won’t inherit the same issue\n\n### Not salvageable:\n- unknown start point\n- drift is progressive and spreading\n- rerun would just repeat the same failure\n- cleanup/reset is needed before any more data are meaningful\n\n---\n\n## Practical stop rules\nI’d stop or pause if any of these are true:\n\n- drift is **monotonic and persistent**\n- QC is **moving with the run**\n- instrument status is **changing**\n- you can’t explain the deviation cleanly\n- continuing would make the batch harder to defend later\n\nI’d keep going only if:\n- drift is **small**\n- QC is **stable**\n- no instrument/reagent flags\n- the pattern looks like **noise**\n- you’d still sign the result if it ended now\n\n---\n\n## Blunt version\nIf:\n- the run is drifting,\n- the cause isn’t obvious,\n- and QC or instrument behavior is even slightly suspicious,\n\nthen the smarter move is usually **pause, check, and reset if needed** — not “let it finish and hope it stays inside tolerance.”\n\nIf you want, I can turn this into a **one-page decision tree** with:\n- **green / yellow / red**\n- **stop / continue / rerun**\n- and a short **sign-off note** for documentation.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Uses a controlled, businesslike tone: \"practical stop / pause / continue tree,\" \"Blunt version,\" and avoids casual friendliness."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly concise and action-oriented, with structured sections and short bullets. It is somewhat long, but not rambling or padded."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Direct and unsoftened: \"Stop now if,\" \"That’s a hard stop,\" and \"the smarter move is usually pause, check, and reset if needed\" clearly state conclusions without hedging."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strongly structured with numbered sections, subheads, bullets, and explicit stop/continue criteria, matching a checklist style."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Provides firm correction and clear thresholds instead of echoing uncertainty: \"A slope is a process problem until proven otherwise\" and \"not 'let it finish and hope.'\""
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "agent_response": "Absolutely — here’s a **conservative trigger framework** you can actually use. I’ll keep it blunt and action-based.\n\n## 0) First rule\nIf the run is drifting and you **can’t confidently bound the bad segment**, assume the **whole batch is suspect** until proven otherwise.\n\n---\n\n# 1) WATCH\n**Meaning:** keep the run going, but do not relax.\n\nUse **watch** if all of these are true:\n\n- Drift is **small relative to baseline**\n  - roughly within normal run-to-run variability\n  - not clearly larger than your historical noise\n- Drift is **not monotonic**\n  - points are bouncing around, not marching in one direction\n- QC is **flat**\n  - no same-direction movement across QC levels\n- Instrument behavior is **stable**\n  - no calibration shift, no pressure/flow/temp change, no flags\n- No obvious reagent/sample issue\n- You can still **defend the record** if the run ended right now\n\n### Watch trigger language\n- “Small deviation, no consistent slope, QC stable, instrument stable.”\n- “Continue only with active monitoring.”\n\n### Watch cutoff\nIf it becomes **2–3 consecutive points in one direction**, or QC starts to move, stop calling it watch.\n\n---\n\n# 2) PAUSE AND VERIFY\n**Meaning:** stop advancing the batch until you know whether this is real.\n\nUse **pause and verify** if any of these happen:\n\n## A. Drift exceeds normal noise\n- The shift is **clearly bigger than historical scatter**\n- You can see a **slope**, not just wobble\n- It is no longer something you’d call “background variation”\n\n## B. Trend is forming\n- **2 consecutive points** in the same direction: warning\n- **3 consecutive points** in the same direction: treat as a real trend unless you have a strong reason not to\n- A **step change after a specific event** is more concerning than random scatter\n\n## C. QC is not flat\n- QC is drifting in the same direction as the run\n- QC is trending across levels\n- QC is still technically in range, but the direction matches the run\n\nThat is not “fine.” That is **a process shift until proven otherwise**.\n\n## D. Instrument changed, even if not failed\nPause if you see:\n- calibration check shift\n- pressure/flow change\n- temperature excursion\n- detector response change\n- probe/pump oddity\n- retries, suppressed results, unexplained flags\n\n## E. Salvage may still be possible, but only if you verify now\nThis is the point where you ask:\n- Did the issue start at a **known timestamp / sample / maintenance event**?\n- Can I define a **clean cutoff**?\n- Can I isolate the affected segment?\n\n### Pause and verify action\n- check QC\n- check instrument logs\n- check recent reagent/sample handling\n- identify the first suspect point\n- decide whether the run is still bounded\n\n### Pause-and-verify trigger language\n- “Trend exceeds expected noise; hold and confirm.”\n- “Potential process shift; identify onset before continuing.”\n- “Instrument behavior changed; do not assume benign drift.”\n\n---\n\n# 3) STOP AND QUARANTINE\n**Meaning:** stop generating more data and treat the run as contaminated until corrected.\n\nUse **stop and quarantine** if any of these are true:\n\n## A. Monotonic drift is persistent\n- **3+ consecutive points** in one direction\n- slope continues after a pause/check\n- drift is not flattening\n\n## B. QC moves with the run\n- QC shifts in the same direction\n- QC pattern suggests calibration/reagent/instrument instability\n- QC failure or near-failure with a matching sample trend\n\n## C. Instrument shift is real\n- calibration check failed or clearly moved\n- pressure/flow/temp/detector behavior changed enough to affect validity\n- repeated flags or mechanical instability\n\n## D. You cannot bound the bad segment\nThis is the big one.\n- no clear start point\n- no clean cutoff\n- the issue may have affected earlier and later samples\n- any rerun would inherit the same uncertainty\n\n## E. Continuing would taint the batch\nIf more data will just make the batch harder to defend, stop.\n\n### Stop-and-quarantine trigger language\n- “Persistent directional drift; batch validity uncertain.”\n- “QC/instrument shift indicates probable process failure.”\n- “Cannot define clean unaffected segment; quarantine batch.”\n\n---\n\n# 4) RESTART AFTER CORRECTION\n**Meaning:** only after you’ve fixed the cause and verified stability.\n\nRestart only if you can do all of this:\n\n## Required before restart\n- identify the likely cause\n- correct it\n- confirm instrument is stable\n- confirm QC is back to baseline\n- confirm the trend has stopped\n- establish a new clean starting point\n\n## Restart is reasonable when\n- the issue was localized\n- the bad segment is clearly bounded\n- the correction is verified\n- the new run begins with stable QC and stable instrument behavior\n\n### Restart trigger language\n- “Issue corrected; stability re-established.”\n- “New run started from verified clean state.”\n- “Prior segment excluded due to documented process shift.”\n\n---\n\n# Hard thresholds I’d actually use\nThese are conservative, but useful:\n\n## Drift vs noise\n- **1 weird point** = likely noise / one-off\n- **2 consecutive points same direction** = watch closely\n- **3 consecutive points same direction** = likely real trend\n- **Any slope that is visibly larger than your historical scatter** = pause and verify\n\n## QC\n- **QC flat while samples wobble** = investigate sample-side issues\n- **QC drifts with samples** = process/instrument/reagent issue until proven otherwise\n- **Any QC failure** = stop\n- **QC still in range but clearly trending** = do not ignore\n\n## Instrument\nTreat as a real process shift if you see:\n- calibration movement\n- pressure/flow instability\n- temperature excursion\n- detector response change\n- repeated flags/retries\n- post-maintenance drift starting after a known event\n\n## Salvage cutoff\nYou can salvage part of the batch only if:\n- you can name the **first bad point**\n- everything before it is defensible\n- everything after it is excluded or rerun\n- the correction does not affect the earlier segment\n\nIf you **can’t mark the boundary cleanly**, don’t pretend the batch is partially good.\n\n---\n\n# Simple decision tree\n## Watch\n- small drift\n- no direction\n- QC flat\n- instrument stable\n\n## Pause and verify\n- 2–3 points same direction\n- drift bigger than normal noise\n- QC moving slightly\n- instrument changed but not failed\n- possible salvage if bounded\n\n## Stop and quarantine\n- persistent monotonic drift\n- QC moving with run\n- instrument shift/flags/failure\n- cannot define clean cutoff\n- continuing would taint the batch\n\n## Restart after correction\n- cause identified\n- issue corrected\n- QC/instrument back to baseline\n- new clean run established\n\n---\n\n# Blunt bottom line\nIf the run is **drifting, QC is not clearly flat, or the instrument changed**, you should assume **pause/stop before you assume “still okay.”**\n\nAnd if you **can’t cleanly bound the bad segment**, the safe assumption is:\n**the batch is not salvageable as-is.**\n\nIf you want, I can turn this into a **one-screen checklist** with:\n- **green / yellow / red**\n- exact **action words**\n- and a **sign-off note template** for documentation.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Uses a controlled, businesslike tone: \"conservative trigger framework,\" \"I’ll keep it blunt and action-based,\" and avoids casual friendliness."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly concise and action-oriented, with structured sections and decision rules, though it is fairly long and detailed rather than tightly brief."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Very direct and unsoftened: \"If you can’t confidently bound the bad segment, assume the whole batch is suspect,\" \"That is not 'fine.' That is a process shift until proven otherwise.\""
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strongly structured with numbered sections, bullets, thresholds, and a \"Simple decision tree,\" matching the checklist preference well."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Provides firm correction and pushback against optimistic assumptions, e.g. \"do not assume benign drift\" and \"don’t pretend the batch is partially good.\""
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "user_id": "user_022",
+  "task": "I’m revising a troubleshooting checklist for a piece of equipment that’s had a couple of annoying repeat issues, and I want it to reflect what actually went wrong last time instead of staying generic. Can you help me turn those past misses into a cleaner step-by-step note I can keep using?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.5,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Absolutely — I can help you turn the past failures into a practical, reusable troubleshooting note.\n\nIf you send me:\n1. the equipment name/model,\n2. the repeat issues,\n3. what was missed last time,\n4. what the correct fix ended up being,\n5. any safety or shutdown steps you want included,\n\nI can rewrite it into a clean step-by-step checklist like:\n- symptom\n- likely cause\n- verification step\n- corrective action\n- “don’t skip this” note\n- final confirmation step\n\nIf you want, paste the rough notes or the old checklist and I’ll convert it into a tighter version.",
+      "user_simulator": {
+        "feedback_type": "add_context",
+        "text": "Yeah. Here’s the kind of thing I mean — rough notes from the last couple misses:\n\nEquipment: scrubber dosing skid on a coastal vessel\nRepeat issue: sulfur-removal test failing at dockside inspection\nWhat got missed: one pH sensor had calibration drifted, so the dosing system was underfeeding reagent for hours\nWhat the fix ended up being: replaced the sensor, cross-checked against a handheld meter, then ran three verification cycles\nExtra note: the generic checklist kept jumping straight to reagent level and pump checks, which wasted time\n\nSo I’d want the note to force the sensor check early, not buried halfway down.\n\nAnother one, if that helps:\nEquipment: SCR controller on a tug\nRepeat issue: output looked fine until load test, then readings went off\nMissed last time: nobody checked the label/spec on a replacement part closely enough\nFix: wrong spec part got swapped out, then retested\n\nI need the checklist to be more like: verify sensor/spec first, compare against known-good reading, then only move to dosing/controls. Not a generic ‘inspect system’ list.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Absolutely — here’s a tighter, reusable version that bakes in the actual failure points and forces the critical checks early.\n\n## 1) Scrubber dosing skid — sulfur-removal test failing at dockside inspection\n\n### Troubleshooting note\n1. **Confirm the failure mode**\n   - Verify sulfur-removal test is failing and note the exact reading/result.\n   - Do not start with reagent level or pump checks.\n\n2. **Check pH sensor calibration first**\n   - Inspect the pH sensor for drift, damage, fouling, or expired calibration.\n   - Compare the installed sensor reading against a **handheld meter / known-good reference**.\n\n3. **If sensor reading is off, replace or recalibrate immediately**\n   - Do not continue troubleshooting dosing until sensor accuracy is confirmed.\n   - Replace the sensor if calibration cannot be trusted.\n\n4. **Verify dosing only after sensor validation**\n   - Check reagent level.\n   - Check pump operation and output.\n   - Confirm dosing is responding to the corrected sensor signal.\n\n5. **Run verification cycles**\n   - Perform **three verification cycles** after correction.\n   - Confirm sulfur-removal result is stable across all cycles.\n\n6. **Final confirmation**\n   - Record sensor replacement/calibration result, handheld meter comparison, and cycle outcomes.\n   - Close out only if readings remain consistent and within spec.\n\n### Don’t skip this\n- **Sensor accuracy comes before dosing checks.**\n- If the pH sensor is wrong, the rest of the system can look fine while underfeeding reagent for hours.\n\n---\n\n## 2) SCR controller — output looked fine until load test, then readings went off\n\n### Troubleshooting note\n1. **Verify part/spec first**\n   - Check the replacement part label, part number, and specification against the required component.\n   - Do not assume the installed part is correct.\n\n2. **Compare against known-good reference**\n   - Confirm the component matches the approved spec or a known-good unit.\n   - If there is any mismatch, stop and replace with the correct part.\n\n3. **Confirm sensor/controller readings before load test**\n   - Check baseline output and sensor response.\n   - Make sure readings are consistent at no-load and idle conditions.\n\n4. **Only then perform load test**\n   - Run the load test after part/spec verification.\n   - Watch for drift, offset, or unstable readings under load.\n\n5. **Correct and retest**\n   - If readings go off under load, recheck part spec and sensor alignment before moving to control logic or broader system checks.\n   - Retest after correction.\n\n### Don’t skip this\n- A wrong-spec replacement can look acceptable until the system is stressed.\n- **Verify label/spec before chasing controls or tuning.**\n\n---\n\n## Short reusable template\nIf you want a generic format that still forces the right order, use this:\n\n1. **Confirm the symptom**\n2. **Check sensor / part identity / calibration first**\n3. **Compare to known-good reading or spec**\n4. **Correct any mismatch before checking dosing, pumps, or controls**\n5. **Run verification test(s)**\n6. **Record results and close out only if stable**\n\nIf you want, I can turn these into a **one-page checklist format** with checkbox boxes and a “stop here if failed” layout for crew use.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s basically it. The order is right, and the “don’t start with reagent/pump checks” part is the bit I needed forced up front.\n\nI’d probably keep it even a little more blunt on the sheet itself:\n- verify sensor identity/calibration first\n- compare against handheld / known-good spec\n- stop there if it’s off\n- only then move to reagent, pump, controls\n- retest and log it\n\nAnd the part/spec one is good too. That’s exactly the kind of miss that wastes half a shift because everything downstream looks suspicious when it’s really just the wrong component.\n\nOne thing I’d add, just so it stays usable in the field: a little “if this check fails, do not proceed” line after the first step. People skim. They always do.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    }
+  ]
+}

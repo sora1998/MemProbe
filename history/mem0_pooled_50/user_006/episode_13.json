@@ -1,0 +1,36 @@
+{
+  "user_id": "user_006",
+  "task": "I’m helping a small warehouse team figure out what to prioritize when their network gets flaky during a busy shift. What’s the cleanest way to think about which stations or systems should come first so the whole flow doesn’t get jammed up?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.2,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Think in **flow impact, not device importance**.\n\nA clean way to prioritize is:\n\n1. **Protect the bottleneck first**\n   - Whatever blocks the most downstream work gets highest priority.\n   - In a warehouse, that’s often:\n     - WMS / inventory lookup\n     - label printing\n     - RF scanners / handhelds\n     - shipping/receiving stations\n     - conveyor / sorter control, if present\n\n2. **Triage by “can work continue?”**\n   - **Tier 1: Flow-stoppers**\n     - If this fails, multiple people or stations stall immediately.\n     - Examples: WMS access, DHCP/DNS for critical clients, core switch/uplink, wireless controller, label printer server.\n   - **Tier 2: High-impact stations**\n     - One area slows down, but work can route around it.\n     - Examples: a packing station, one AP covering a zone, one printer.\n   - **Tier 3: Convenience / noncritical**\n     - Nice to have, but not holding the line.\n     - Examples: guest Wi‑Fi, office internet, nonessential dashboards.\n\n3. **Ask three questions**\n   - **How many people are blocked?**\n   - **How much downstream work is waiting on this?**\n   - **Is there a workaround that keeps the line moving?**\n\n4. **Use a simple rule**\n   - **Fix the thing that unblocks the most work with the least time.**\n   - If two issues are similar, choose the one affecting:\n     - the highest-volume station\n     - the earliest step in the process\n     - the least replaceable function\n\n5. **If there’s uncertainty, preserve flow**\n   - Don’t chase the prettiest symptom.\n   - Keep the warehouse moving by restoring the path that supports the most transactions first, even if a less visible system is still flaky.\n\nA practical ranking for a small warehouse usually looks like:\n- **Core connectivity / wireless coverage**\n- **WMS / authentication / DNS / DHCP**\n- **Label printing / scan-to-system path**\n- **Packing / shipping stations**\n- **Back-office or noncritical devices**\n\nIf you want, I can turn this into a **one-page “warehouse network triage” rule** the team can use on shift.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, mostly right. But I’d make it tighter and more operational.\n\nDon’t rank by “device” first. Rank by **process choke point**.\n\nWhat I’d use on shift:\n- **1st:** anything that stops intake / pick / pack / ship from moving\n- **2nd:** anything that blocks label printing, scan validation, or WMS access\n- **3rd:** anything that slows one zone but has a workaround\n- **last:** office junk, guest Wi‑Fi, dashboards, whatever\n\nThe real question is: **what failure cascades fastest?** That’s the one you hit first. If 20 people are waiting on one AP or one switch uplink, that beats some “more important” desktop sitting in the office.\n\nAlso, if they’ve got RF guns and printers, I’d separate:\n- **identity/auth path**\n- **wireless access path**\n- **print path**\n- **WMS/app path**\n\nBecause sometimes the scanner is fine and the actual jam is DNS, DHCP, or the print server. Last time I had a warehouse issue like this, everyone swore it was the scanners. It was a dead transceiver upstream and a printer config problem on the side. People chase the loudest complaint, not the real blocker.\n\nSo yeah: **flow first, blast radius second, workaround third**. That’s the clean way.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Exactly — the cleanest way is to prioritize by **process choke point**, not by device label.\n\nA simple shift-safe rule:\n\n1. **First:** anything that stops **intake / pick / pack / ship** from moving\n2. **Second:** anything that blocks **label printing, scan validation, or WMS access**\n3. **Third:** anything that slows **one zone** but has a workaround\n4. **Last:** office devices, guest Wi‑Fi, dashboards, noncritical stuff\n\nThe key question is:\n\n**What failure cascades fastest?**\n\nIf one AP, switch uplink, printer server, or auth service is blocking 20 people, that goes ahead of a “more important” device with only one user.\n\nFor warehouse flows, it helps to split the path into:\n- **Identity/auth**\n- **Wireless access**\n- **Print path**\n- **WMS/app path**\n\nThat keeps people from blaming the scanner when the real issue is DNS, DHCP, print service, or an upstream link.\n\nA good rule of thumb:\n- **Biggest blast radius first**\n- **Earliest step in the process first**\n- **Least workaround available first**\n\nIf you want, I can turn this into a **very short on-shift priority checklist** for warehouse supervisors.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s the version.\n\nIf I had to make it even tighter for shift use:\n\n- **Stop the line first**\n- **Then the earliest shared dependency**\n- **Then the biggest blast radius**\n- **Then whatever has no workaround**\n\nThat’s it. Not “most important device,” not “loudest complaint.” Process choke point first.\n\nAnd your split is right — **auth, wireless, print, WMS/app**. That’s where the real fault usually hides when everyone is blaming the handhelds.\n\nClean enough to use on the floor.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    }
+  ]
+}

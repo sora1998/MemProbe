@@ -1,0 +1,762 @@
+{
+  "user_id": "user_023",
+  "tasks_dir": "CustomTasksPooledFinal",
+  "counts": {
+    "ok": 11,
+    "memory_failure": 17,
+    "agent_elicitation_failure": 1,
+    "task_design_failure": 2
+  },
+  "details": [
+    {
+      "category": "skill_memory",
+      "dimension": "reading_comprehension_skill",
+      "explanation": "She can extract what matters from written material well enough to use it practically. She does not seem literary or reflective about texts, but she handles school instructions, test content, and message threads with usable accuracy.",
+      "ground_truth": "Reads meaning fast and gets the point",
+      "predicted": "identifies main points and key details in short articles",
+      "slot_fill_reason": "They asked for help finding the main point and relevant details in short articles and for a rule to underline only reasons, examples, facts, results, or steps that support the main idea.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of quickly extracting main points and key details, but it is narrower and less direct than the ground truth’s broader emphasis on getting the point fast in practical reading.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "mathematics_skill",
+      "explanation": "She can work through math when the steps are clear, but her performance drops when she is underprepared or the test format shifts. Her pattern is more about patching gaps than having strong, steady math fluency.",
+      "ground_truth": "Functional at math, but not consistently prepared",
+      "predicted": "can complete school math with structured step-by-step support",
+      "slot_fill_reason": "Multiple memories show they ask for ordered plans for math assignments, checking answers, and handling tricky problems without getting stuck.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the idea that she can do math with structure and support, but it does not fully capture the inconsistency and underpreparedness emphasized in the ground truth.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "critical_thinking_skill",
+      "explanation": "She tends to evaluate situations by what can be verified and what benefits her, rather than by trust or sentiment. She notices patterns, compares sources, and adjusts when facts change, but her reasoning is self-protective rather than generous or ethical.",
+      "ground_truth": "Pragmatic, evidence-minded, and distrustful",
+      "predicted": "can compare options using concrete criteria and red flags",
+      "slot_fill_reason": "They repeatedly asked for mini checklists/tables to compare deals, judge proof, and weigh tradeoffs before deciding.",
+      "score": 0.5,
+      "judge_reason": "The prediction matches the pragmatic, evidence-based comparison style, but it misses the distrustful, self-protective, and ethically limited aspects of the ground truth.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites the user to discuss how they evaluate claims, evidence, tradeoffs, and proof before committing, which can reveal a pragmatic, skeptical, evidence-minded decision style."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"if the proof can’t be checked, count it as weak no matter how good the claim sounds\"",
+            "reason": "The user explicitly prioritizes verifiable evidence over persuasive claims and is focused on hidden costs and lock-in, which strongly signals an evidence-minded, skeptical, pragmatic style."
+          }
+        ],
+        "ep_index": 3
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "learning_strategies_skill",
+      "explanation": "She is good at choosing tactics that fit the immediate goal, like asking for test formats or using prior patterns to prepare. Her weakness is that her strategy is narrow and transactional; she learns what is useful, not necessarily what is complete.",
+      "ground_truth": "Learns by gaming the system and spotting patterns",
+      "predicted": "uses structured study and task-splitting routines",
+      "slot_fill_reason": "Multiple notes show they can apply block-based study plans, checklists, and role-splitting methods for schoolwork and group projects.",
+      "score": 0.25,
+      "judge_reason": "The prediction mentions organized study habits, but it misses the key idea of opportunistically gaming the system and spotting patterns, so the overlap is only marginal.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.25,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites discussion of how the user plans to study for a quiz, which can reasonably lead to revealing tactical, pattern-based learning strategies such as focusing on hinted formats and prioritizing what is most useful."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"if it’s vocab/short answer: first pass on exact terms and wording\" ... \"if it’s math: do the ones with the most steps / easiest stupid mistakes first\" ... \"if it’s multiple choice: hit the stuff you confuse with other units first, then drill the wrong answers\"",
+            "reason": "The user explicitly shows a strategy of tailoring study order to the quiz format, prioritizing likely point-loss areas, confusing pairs, and pattern-based mistakes, which strongly indicates a tactical, goal-driven learning style."
+          }
+        ],
+        "ep_index": 4
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "social_perceptiveness_skill",
+      "explanation": "She watches others closely and picks up on motives well enough to protect herself. She is not socially warm, but she is alert to leverage, risk, and when someone is likely to take advantage of her.",
+      "ground_truth": "Reads people cautiously from a distance",
+      "predicted": "detects social pressure and vague shifts in conversations",
+      "slot_fill_reason": "Memories show they watch for manager tone shifts, last-minute task dumping, cold group-chat replies, and changing directions during class.",
+      "score": 0.5,
+      "judge_reason": "The prediction overlaps with cautious social awareness and noticing subtle cues, but it misses the key idea of reading people from a distance for self-protection and leverage.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites discussion of how the user reads social cues, interprets motives, and judges risk in a group chat, which can reasonably surface their social perceptiveness."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"If it’s only one weird reply, I can ignore it. If they keep doing the cold/skip-me thing and I’m the one keeping it alive, I’m done.\"",
+            "reason": "The user shows cautious social reading from a distance, looking for repeated patterns of coldness, exclusion, and effort imbalance before deciding to disengage."
+          }
+        ],
+        "ep_index": 5
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "financial_resource_management_skill",
+      "explanation": "She handles money with a practical, self-serving mindset and understands immediate tradeoffs well. Her weakness is restraint: she is willing to treat money as an opportunity for short-term gain rather than long-term stability.",
+      "ground_truth": "Money-focused and personally opportunistic",
+      "predicted": "manages small budgets with simple save/spend splits",
+      "slot_fill_reason": "Notes show they allocate birthday cash into set amounts for clothes, game items, snacks, and savings, and adjust by saving when no specific need exists.",
+      "score": 0.25,
+      "judge_reason": "The prediction describes basic budgeting behavior, but it misses the ground truth’s emphasis on opportunistic, short-term, self-serving money management.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.25,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task directly asks for advice about spending versus saving money, so natural follow-up can elicit the user’s practical tradeoffs, short-term priorities, and money-management style."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"I’ve got like maybe $80-ish... I don’t want to blow it on random stuff\" / \"if I don’t have a specific clothes item in mind, don’t force it... shove that money into saved\" / \"Snacks stay tiny or they get stupid fast\"",
+            "reason": "The user clearly shows a practical, short-term, opportunistic approach to money—splitting it into immediate-use, save, and small treat buckets while prioritizing not wasting it on random purchases."
+          }
+        ],
+        "ep_index": 6
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "quality_control_skill",
+      "explanation": "She can verify details and keep track of versions, copies, and what matches what. But her quality control is selective; she is careful when she wants to avoid getting caught, not because she is reliably conscientious.",
+      "ground_truth": "Checks for standards when it benefits her",
+      "predicted": "uses checklists to catch missing details before submitting work",
+      "slot_fill_reason": "Memories show they use a submission checklist (name/date, directions, blanks, right file) and a version-comparison checklist to avoid sloppy mistakes.",
+      "score": 0.5,
+      "judge_reason": "The prediction shows careful checking for missing details, but it misses the key point that she does this selectively when it benefits her rather than as a reliably conscientious habit.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites discussion of how carefully the user checks versions, details, and consistency before submitting, which can plausibly elicit information about their quality control habits."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"I’m worried about turning in the wrong draft or missing something small that would make it look sloppy\"",
+            "reason": "The user explicitly shows concern with comparing versions, matching details, and catching small errors, which supports a selective quality-control tendency."
+          }
+        ],
+        "ep_index": 7
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "engineering_and_technology_knowledge",
+      "explanation": "She uses her phone and school tech routinely and knows enough to manage messages, screenshots, folders, and simple digital sharing. Her understanding looks practical rather than technical; she is a user, not someone who really understands how systems work.",
+      "ground_truth": "Comfortable with phones and basic digital tools",
+      "predicted": "understands basic practical tech and online safety rules",
+      "slot_fill_reason": "They have concrete rules for handling screenshots, private chats, sketchy online offers, and organizing phone screenshots, showing practical knowledge of common digital risks and file handling.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the practical comfort with basic tech tools, but it adds online safety rules and does not explicitly mention routine use of phones, messages, screenshots, folders, or simple sharing.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "law_and_public_safety_knowledge",
+      "explanation": "She understands that rules exist and that getting caught has consequences, but her knowledge is narrow and reactive. She seems to know only the parts of rules that affect her directly, not the broader legal or safety logic behind them.",
+      "ground_truth": "Knows rules mostly through punishment and risk",
+      "predicted": "knows basic privacy and safety rules for sharing content",
+      "slot_fill_reason": "Memories show they avoid forwarding private screenshots, posting content that could get people in trouble, and sharing names, usernames, school info, or faces.",
+      "score": 0.5,
+      "judge_reason": "The prediction overlaps with the idea of knowing rules in a limited, practical way, but it shifts from punishment/risk-based understanding to privacy and content-sharing safety rules, which is a different emphasis.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites discussion of rules, consequences, and what actions are safe or risky, which can reasonably elicit the user’s knowledge of legal/public-safety norms and whether they understand them mainly through punishment and risk."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"Private = don’t forward. Could get someone in trouble = don’t post. Missing context = don’t spread. No clear permission = assume no.\"",
+            "reason": "The user shows a narrow, rule-by-consequence understanding focused on permission, getting in trouble, and avoiding blowback, which matches knowledge learned mainly through risk and punishment rather than broader legal/safety reasoning."
+          }
+        ],
+        "ep_index": 9
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "communications_and_media_knowledge",
+      "explanation": "She has a clear sense that messages, screenshots, and forwarded content can move quickly and escape control. Her view is suspicious and tactical, but she does not treat communication as trustworthy or shared in good faith.",
+      "ground_truth": "Sees information as something that spreads fast and leaks easily",
+      "predicted": "knows how to judge messages by sender, ask, and pressure",
+      "slot_fill_reason": "Memory notes show they use a triage rule for sketchy online offers based on the request itself, sender, and wording, and they avoid forwarding private screenshots or posts.",
+      "score": 0.25,
+      "judge_reason": "The prediction focuses on evaluating messages tactically, but it misses the core idea that information spreads quickly and leaks beyond control.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.25,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task is directly about choosing how to share information in a group chat, which naturally invites discussion of screenshots, forwarding, and how quickly messages can spread or leak."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"screenshots always turn into extra nonsense\" / \"leave out: names, screenshots, and all the side drama\"",
+            "reason": "The user explicitly treats screenshots as something that creates extra mess and wants them omitted, which signals a view that communication content spreads quickly and can leak into drama."
+          }
+        ],
+        "ep_index": 10
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "transportation_knowledge",
+      "explanation": "She understands school-day transportation as a practical system with delays, route problems, and timing changes. Her knowledge is commuter-level and local, shaped by getting where she needs to go rather than by any deeper interest in transit.",
+      "ground_truth": "Knows commuting routines and how delays affect plans",
+      "predicted": "Knows specific school and after-school timing rules",
+      "slot_fill_reason": "Memories show detailed transportation knowledge like school start/leave times, bus delay cutoffs, indoor backup spots, and after-school option timing in Batavia.",
+      "score": 0.5,
+      "judge_reason": "The prediction overlaps with practical school transportation timing, but it misses the key idea of commuting routines and how delays affect plans.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites discussion of commuting timing, delays, route changes, and backup plans, which can reasonably elicit the user’s practical transportation knowledge."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "“School in Batavia usually means the bus/ride can get weird fast” and the timing plan with normal/earliest/latest leave times",
+            "reason": "The user clearly shows practical commuting awareness, including that rides can become delayed or route-dependent and that timing decisions need backup planning."
+          }
+        ],
+        "ep_index": 11
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "geographic_knowledge",
+      "explanation": "She seems grounded in her immediate area and daily routes, with familiarity built from repeated use rather than exploration. Her knowledge is functional and narrow, centered on the places she moves through often.",
+      "ground_truth": "Locally oriented, knows her Batavia routine well",
+      "predicted": "knows Batavia-specific school and after-school logistics",
+      "slot_fill_reason": "Multiple memories mention Batavia, school start/end times, and after-school routes/options there, showing concrete local geographic knowledge.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the ground-truth idea of being locally oriented in Batavia and focused on routine, but it is narrower and emphasizes school logistics rather than the broader daily-route familiarity.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "financial_literacy_knowledge",
+      "explanation": "She clearly knows the difference between having cash and not having it, and she treats money as usable leverage. But her understanding appears limited to short-term gain and simple transactions, not budgeting, saving, or longer-term financial consequences.",
+      "ground_truth": "Understands cash and immediate value, not bigger money sense",
+      "predicted": "understands basic tradeoffs of saving, spending, and cash value",
+      "slot_fill_reason": "Memories show they compare saving vs spending, value cash as buying time and avoiding junk, and judge purchases by real need, repeat use, and hidden costs.",
+      "score": 0.5,
+      "judge_reason": "The prediction matches the ground truth on understanding cash value and some immediate tradeoffs, but it incorrectly suggests broader knowledge of saving and spending rather than limited short-term financial understanding.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites the user to discuss how they think about cash, spending, and tradeoffs, which can reveal whether they understand immediate value versus longer-term money management."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"Holding cash: you’re buying time and avoiding a dumb purchase\" / \"Save wins by default\" / \"Snacks: usually trash value\"",
+            "reason": "The user clearly distinguishes cash as something with immediate usable value and treats spending as a short-term tradeoff, while showing a limited, practical understanding focused on simple transactions and avoiding waste rather than broader financial planning."
+          }
+        ],
+        "ep_index": 13
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "digital_literacy_knowledge",
+      "explanation": "She is comfortable with phones, messaging, photos, and copying or storing files in ways that serve her needs. Her knowledge is routine and practical, with little sign of deeper technical understanding or curiosity.",
+      "ground_truth": "Uses digital tools competently but not deeply",
+      "predicted": "understands basic online safety and scam red flags",
+      "slot_fill_reason": "They repeatedly asked how to judge sketchy online offers, avoid forwarding private screenshots, and treat uncheckable proof as weak.",
+      "score": 0.5,
+      "judge_reason": "The prediction overlaps with practical digital competence, but it focuses on online safety knowledge rather than routine use of phones, messaging, photos, and file handling.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites the user to describe how comfortably they handle phones, photos, and file-moving steps, which can reveal practical digital literacy without requiring deep technical knowledge."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"I’d probably copy first like you said, not move right away. Less chance of screwing it up. If I do it in small batches and check the folder after, that’s fine.\"",
+            "reason": "The user shows practical comfort with basic phone file management and cautious use of copy/move operations, which supports competent but not deeply technical digital literacy."
+          }
+        ],
+        "ep_index": 14
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "betrayal_or_conflict_event",
+      "explanation": "The homework-sharing incident became a concrete lesson that other students would use her if she let them. Being caught after she thought she had controlled the situation made her more guarded and more willing to keep people at arm's length.",
+      "ground_truth": "The copied-homework fallout taught her not to trust classmates",
+      "predicted": "was falsely claimed to agree in a group conflict",
+      "slot_fill_reason": "Memory notes say someone claimed they agreed to something they did not, and the misinformation was being repeated in the group chat.",
+      "score": 0.25,
+      "judge_reason": "The prediction mentions a group conflict and being falsely claimed to agree, but it does not capture the homework-sharing betrayal or the resulting loss of trust in classmates.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.25,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites discussion of a past copying, cheating, or trust-related incident with classmates, which could reasonably lead the user to reveal a betrayal-or-conflict event that shaped how they handle such situations."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "“If they keep pushing after that, then yeah, they’re fishing.”",
+            "reason": "The user describes a classmate repeatedly testing boundaries and trying to get their answers, which signals a conflict/betrayal-like incident involving someone attempting to use them rather than a neutral study interaction."
+          }
+        ],
+        "ep_index": 15
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "moment_of_clarity_event",
+      "explanation": "After the surprise test and the low grade, she had a clear shift in how she thought about school. Getting details from an older classmate showed her that information mattered more than cooperation, and she kept that lesson after the exchange.",
+      "ground_truth": "Realized knowing patterns mattered more than relying on people",
+      "predicted": "Realized vague plans and unclear proof cause problems",
+      "slot_fill_reason": "Multiple memories show the user changed course after sketchy offers, unclear transportation timing, and group-project misinformation, indicating a clarity moment around needing proof and exact boundaries.",
+      "score": 0.25,
+      "judge_reason": "The prediction captures a general lesson about needing clearer information, but it misses the key shift from trusting people/cooperation to valuing patterns and knowledge.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "agent_elicitation_failure",
+        "score": 0.25,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites the user to discuss how they handle unclear instructions and what they rely on when information is incomplete, which could reasonably lead to a reflective moment about realizing that knowing the details matters more than depending on other people."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": false,
+            "evidence": "none",
+            "reason": "The dialogue is about handling fast or changing classroom directions, but it does not reveal a moment of clarity about valuing patterns/information over relying on people."
+          },
+          {
+            "stage": "disclosure_subclass",
+            "category": "A",
+            "reason": "The conversation stayed on generic classroom-direction listening strategies and never steered toward a personal realization about information mattering more than relying on people.",
+            "evidence": "“what words usually mean the teacher is about to change the directions mid-sentence”"
+          }
+        ],
+        "ep_index": 16
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "financial_shock_event",
+      "explanation": "Finding and keeping the wallet money gave her an immediate payoff that reinforced her opportunistic side. The firing that followed did not erase the lesson; it just taught her that short-term gain can come with consequences she has to manage afterward.",
+      "ground_truth": "Keeping the diner cash showed her quick money can outweigh risk",
+      "predicted": "birthday cash felt scarce and needed careful splitting",
+      "slot_fill_reason": "Multiple memories describe the user setting aside about $80 from birthday gifts and repeatedly weighing whether to spend, save, or split it carefully across clothes, a game item, snacks, and savings.",
+      "score": 0.0,
+      "judge_reason": "The predicted description is about scarce birthday cash and budgeting, which contradicts the ground truth about keeping diner cash for quick gain despite risk.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.0,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task is about evaluating a risky cash opportunity, which naturally invites discussion of a concrete financial shock or short-term money event and could lead the user to reveal how they handled or reacted to such a situation."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"$80 cash\", \"today\", \"2–3 hours max\", \"garage + trash only\", and \"paid at the end\"",
+            "reason": "The user explicitly evaluates a small cash job by weighing immediate payoff against limited downside and says it is worth it only if the terms stay fixed, showing a clear preference for quick money over risk when the loss is contained."
+          }
+        ],
+        "ep_index": 17
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "legal_or_administrative_event",
+      "explanation": "Being pulled into the office after the homework incident made the school consequences feel personal and real. She learned the practical side of authority: denial does not matter much when messages and screenshots already exist.",
+      "ground_truth": "Office calls and punishments taught her what gets her in trouble",
+      "predicted": "was called into the office over a school issue",
+      "slot_fill_reason": "A memory note says they were called into the office after a school issue and wanted help preparing answers to prevent escalation.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the office call and school-related trouble, but it omits the punishment/lesson about what gets her in trouble.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "workplace_conflict_event",
+      "explanation": "The wallet incident ended with her losing the job, which made work feel less like responsibility and more like a place to watch for openings. It reinforced her habit of staying quiet, avoiding attention, and protecting herself when she sees an advantage.",
+      "ground_truth": "Getting fired from the diner hardened her self-protective habits",
+      "predicted": "had a tense part-time shift with a manager and coworker pressure",
+      "slot_fill_reason": "Memories describe a tense shift where they watched for a manager acting weird and a coworker trying to offload tasks last minute.",
+      "score": 0.25,
+      "judge_reason": "The prediction mentions workplace tension and pressure, but it misses the key event of being fired from the diner and the resulting hardening of her self-protective habits.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.25,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task is about navigating a tense work shift and handling unexpected events, which naturally invites follow-up about prior workplace incidents or conflicts that shaped the user’s approach."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"protect your own position\" / \"don’t let someone turn a quick favor into your responsibility\"",
+            "reason": "The dialogue clearly signals a workplace where the user is wary of blame, responsibility, and protecting themselves in tense situations, which is consistent with a prior conflict or firing shaping self-protective habits."
+          }
+        ],
+        "ep_index": 19
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "family_crisis_event",
+      "explanation": "When her mother was told about the homework mess, the punishment at home added another layer to the consequences. That family reaction seems to have mattered because it turned the incident into a private loss of access and control, not just a school problem.",
+      "ground_truth": "Her mother finding out cut off her phone privileges",
+      "predicted": "school issue escalated enough to involve the office and worry home fallout",
+      "slot_fill_reason": "Memories say they were called into the office after a school issue and were worried it could complicate things at home with their mom.",
+      "score": 0.5,
+      "judge_reason": "The prediction captures that the school problem led to home consequences, but it misses the specific family crisis event of the mother finding out and cutting off phone privileges.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task explicitly mentions a school problem that could spill over into home consequences, so natural follow-up could reasonably elicit whether a family reaction or crisis event occurred."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "“my mom will turn it into a whole separate thing”",
+            "reason": "The user clearly indicates a home-family escalation involving the mother, which is enough for a memory system to infer a family crisis event even though the exact punishment is not stated."
+          }
+        ],
+        "ep_index": 20
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "relocation_or_migration_event",
+      "explanation": "She does not appear shaped by a major relocation, so this is only weakly present compared with other events. Her life seems organized around the same local routes, bus delays, school spaces, and familiar places, which matters more than any move elsewhere.",
+      "ground_truth": "No real move, just Batavia routines that kept narrowing her world",
+      "predicted": "unknown",
+      "slot_fill_reason": "No episodic memory note describes a relocation or migration event; the notes only mention Batavia as the user's location, not moving there.",
+      "score": 0.0,
+      "judge_reason": "The prediction is \"unknown,\" which provides no meaningful match to the ground truth about no real move and Batavia routines.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "task_design_failure",
+        "score": 0.0,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": false,
+            "reason": "The task is about planning after-school logistics and transit from school, which naturally invites schedule and route details but not a relocation or migration event."
+          }
+        ],
+        "ep_index": 21
+      }
+    },
+    {
+      "category": "self_model",
+      "dimension": "sincerity_self_view",
+      "explanation": "She seems to think honesty is optional when leverage is available, and she likely frames that as being smart rather than fake. Her self-image fits someone who manages appearances and withholds the truth when it protects her interests.",
+      "ground_truth": "Sees herself as strategic, not straightforward",
+      "predicted": "values being straightforward and not fake",
+      "slot_fill_reason": "Multiple notes say they want normal, blunt, non-stiff messages and avoid sounding fake or overly polite in conversations.",
+      "score": 0.0,
+      "judge_reason": "The prediction contradicts the ground truth by portraying her as straightforward and not fake, whereas the ground truth says she sees herself as strategic rather than straightforward.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "task_design_failure",
+        "score": 0.0,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": false,
+            "reason": "The task is about drafting a clear message for a group project and does not naturally call for the user to discuss their own honesty, strategic self-image, or willingness to withhold truth."
+          }
+        ],
+        "ep_index": 22
+      }
+    },
+    {
+      "category": "self_model",
+      "dimension": "fairness_self_view",
+      "explanation": "She does not appear to see herself as a rule-follower or an equal-treater. Her own sense of fairness is likely practical and conditional, with outcomes and advantage mattering more than clean play.",
+      "ground_truth": "Believes fairness is optional if the payoff is good",
+      "predicted": "sees themselves as fair and proof-based",
+      "slot_fill_reason": "They repeatedly insist on proof, clear boundaries, and splitting work based on what’s actually done rather than claims, especially in group projects and deal checks.",
+      "score": 0.0,
+      "judge_reason": "The prediction contradicts the ground truth by portraying the person as fair and evidence-based, whereas the ground truth says fairness is optional when payoff is good.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.0,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "A discussion about dividing work fairly can naturally prompt the user to explain what they consider a fair process, whether equal treatment matters, and whether practical outcomes can justify exceptions, which could reveal their fairness self-view."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"Not by pretending everyone did the same, because they didn’t. If someone wants the easier part, fine, but the split still needs to be fair overall.\"",
+            "reason": "The user explicitly prioritizes practical outcomes over equal treatment and treats fairness as flexible when it helps get the work divided effectively."
+          }
+        ],
+        "ep_index": 23
+      }
+    },
+    {
+      "category": "self_model",
+      "dimension": "sociability_self_view",
+      "explanation": "She presents herself as someone who prefers distance, quiet, and low social exposure. That self-view fits her habit of keeping to herself, using messaging over face-to-face contact, and treating social contact as something to limit.",
+      "ground_truth": "Sees herself as naturally solitary",
+      "predicted": "sees themselves as quiet and keeps to themselves",
+      "slot_fill_reason": "They explicitly said they keep to themselves and want a simple, normal bio reflecting that.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of preferring quiet and keeping to oneself, but it does not fully capture the stronger notion of being naturally solitary.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "self_model",
+      "dimension": "prudence_self_view",
+      "explanation": "She likely sees her caution as a strength, especially around risk, money, and information. At the same time, her prudence is selective: she can be calculating, but she is not reliably restrained when a quick gain looks worth it.",
+      "ground_truth": "Views herself as careful when it counts",
+      "predicted": "careful, rule-based, and risk-averse",
+      "slot_fill_reason": "They repeatedly set hard rules for deals, screenshots, transport, and messages, showing they see themselves as someone who avoids guessing and wants clear boundaries.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea that she sees herself as careful, but it adds stronger general risk-aversion and rule-following than the ground truth, which emphasizes selective prudence rather than consistent restraint.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "self_model",
+      "dimension": "identity_anchor",
+      "explanation": "Her sense of self seems rooted in not needing people and keeping control over what affects her. She likely defines herself less by belonging or morality and more by self-protection, personal advantage, and staying out of other people’s reach.",
+      "ground_truth": "Anchors identity in independence and control",
+      "predicted": "keeps to themselves and wants to seem normal",
+      "slot_fill_reason": "Multiple bio notes say they keep to themselves and want a simple, normal, not fake or cheesy tone.",
+      "score": 0.25,
+      "judge_reason": "The prediction overlaps only slightly with independence by suggesting social distance, but it misses the core idea of identity rooted in control, self-protection, and personal advantage.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.25,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "A personal bio task can naturally prompt the user to describe how they see themselves, and with probing follow-up they may reveal self-defining themes like independence, control, or not needing others."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"I keep to myself mostly\"",
+            "reason": "The user explicitly describes themselves as keeping to themselves and preferring a flat, low-key presentation, which gives a clear signal of identity anchored in independence and not seeking social belonging."
+          }
+        ],
+        "ep_index": 26
+      }
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "formality_preference",
+      "explanation": "She would likely respond best to an assistant that feels unforced and not overly polished. Formal phrasing can read as distant or performative to her, while a straightforward casual style fits her guarded, practical way of engaging.",
+      "ground_truth": "Prefers casual, low-friction help",
+      "predicted": "prefers casual, blunt, low-formality responses",
+      "slot_fill_reason": "Multiple notes say they want messages that sound normal, not fake or overly polite, and prefer blunt, short wording like 'Yeah, I saw it.'",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the casual, low-formality preference, but adds a stronger bluntness that is not explicitly stated in the ground truth.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "verbosity_preference",
+      "explanation": "She seems unlikely to want long preambles or extra explanation unless it directly helps her. A concise response style fits her impatience with unnecessary social padding and her preference for efficient, useful information.",
+      "ground_truth": "Wants short answers that get to the point",
+      "predicted": "prefers concise, short, structured replies",
+      "slot_fill_reason": "Multiple notes say they want super short checklists, concise instructions, and brief responses that avoid extra back-and-forth or fluff.",
+      "score": 1.0,
+      "judge_reason": "The prediction matches the ground truth closely by indicating a preference for concise, short responses that get to the point.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 1.0,
+        "stages": []
+      }
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "directness_preference",
+      "explanation": "She would probably value answers that say the thing plainly instead of hedging or softening it. Her skeptical style suggests she dislikes being talked around, though she may still resist direct moralizing or lecturing.",
+      "ground_truth": "Prefers blunt, no-nonsense responses",
+      "predicted": "prefers blunt, concise, no-back-and-forth replies",
+      "slot_fill_reason": "Multiple memories say they want short, flat, natural messages that end conversations without extra discussion, like 'Yeah, I saw it' and 'I’m not arguing about it.'",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of preferring blunt, direct communication, but it adds brevity and no-back-and-forth rather than explicitly capturing the no-nonsense, plain-speaking preference.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "format_preference",
+      "explanation": "She likely responds better to answers that are easy to scan and act on quickly. A tidy format helps her extract what matters without having to sift through extra fluff or emotional framing.",
+      "ground_truth": "Likes clean, usable formats over long prose",
+      "predicted": "prefers short, structured, natural messages",
+      "slot_fill_reason": "Multiple notes say they want concise checklists/tables, blunt but normal-sounding texts, and responses that avoid fake, stiff, or overly polite wording.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of preferring concise, structured, easy-to-use communication, though it is a bit broader and less explicit about avoiding long prose.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "pushback_tolerance",
+      "explanation": "She probably does not want an assistant that blindly agrees with her, especially if something is risky or likely to fail. But she would likely reject moral lecturing or overexplaining, so pushback works best when it is brief, practical, and clearly justified.",
+      "ground_truth": "Tolerates some pushback, but not preachy correction",
+      "predicted": "low pushback tolerance; prefers brief, final responses",
+      "slot_fill_reason": "Multiple notes say they want concise, flat replies that end discussion and avoid back-and-forth, arguing, or extra questioning.",
+      "score": 0.5,
+      "judge_reason": "The prediction matches the idea that she does not want blind agreement and prefers concise responses, but it misses that she tolerates some justified pushback and specifically rejects preachy correction rather than pushback itself.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "A brief reply-drafting task can naturally prompt the user to specify how much directness, correction, or pushback they want in the wording, which can reveal whether they tolerate concise practical pushback versus overly agreeable or preachy responses."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "“too basic. you just gave generic filler.” / “I’d want one that feels more like I’m done with the conversation without sounding fake polite.”",
+            "reason": "The user clearly prefers pushback that is practical and specific rather than generic or preachy, and they reject overly polite/filler responses."
+          }
+        ],
+        "ep_index": 31
+      }
+    }
+  ]
+}

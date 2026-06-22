@@ -1,0 +1,23 @@
+{
+  "user_id": "user_029",
+  "task": "I’m trying to make sense of a simple battery setup that’s behaving inconsistently, and I want to check my reasoning before I go in circles. If I have two identical batteries and I wire them in series versus parallel, what changes in voltage and current capacity should I expect, and what’s the safest way to think about the load side so I don’t misread the result?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.4,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Here’s the clean way to think about it:\n\n### Series\n- **Voltage adds**\n  - Two identical batteries in series: **Vtotal = V1 + V2**\n  - Example: two 12 V batteries → **24 V**\n- **Current capacity stays the same**\n  - The **Ah capacity does not add** in series\n  - You get the same current capability as one battery, just at higher voltage\n\n### Parallel\n- **Voltage stays the same**\n  - Two identical batteries in parallel: **Vtotal = V1**\n  - Example: two 12 V batteries → **12 V**\n- **Current capacity adds**\n  - The **Ah capacity adds**\n  - Two 100 Ah batteries in parallel → **200 Ah**\n  - You also get lower effective internal resistance, so the load can draw more current more easily\n\n### Safest way to think about the load side\nThe key is: **the load does not “choose” series or parallel behavior — the wiring does**.\n\nSo when you measure or reason about the load:\n1. **Measure the battery bank terminals first**\n   - That tells you what the source really is under the configuration you built.\n2. **Then measure at the load under load**\n   - A no-load reading can look fine even if wiring or connections collapse under current.\n3. **Compare source vs load voltage**\n   - If source voltage is correct but load voltage is wrong, the problem is in the wiring, connections, fuse, switch, or cable path.\n4. **Don’t infer current capacity from voltage**\n   - Higher voltage in series does **not** mean more current capacity.\n   - Higher Ah in parallel does **not** mean higher voltage.\n\n### Quick rule of thumb\n- **Series = more voltage**\n- **Parallel = more runtime/current capacity**\n- **Load sees whatever the wiring presents, not what the battery labels imply**\n\nIf you want, I can also give you a very short “how to test it with a meter” checklist for series vs parallel so you can verify the setup without guessing.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s the right framing.\n\nSeries: voltage adds, Ah doesn’t.\nParallel: voltage stays, Ah adds, and the bank can source more current because the internal resistance drops.\n\nAnd yeah — the load side is where people mess it up. Don’t read a battery label and assume the load is seeing that. Read the actual terminals, then the load under load. No-load numbers can lie pretty easily.\n\nThe only thing I’d add is this: if the batteries aren’t matched pretty closely in state of charge and condition, parallel can get weird fast. Current can slosh between them instead of just going to the load. That’s where you start chasing ghosts.\n\nSo the safe mental model is:\n- series = higher voltage, same capacity\n- parallel = same voltage, higher capacity\n- load sees the wiring and resistance path, not your assumption\n\nThat’s enough to keep from going in circles.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    }
+  ]
+}

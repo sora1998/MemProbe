@@ -1,0 +1,49 @@
+{
+  "user_id": "user_009",
+  "task": "I’m deciding between a couple of practical options for a purchase and I keep going back and forth on how cautious to be. Can you help me sort out a simple way to tell when it’s worth taking the risk versus when I should pass?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.4,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — use a simple risk test.\n\n## Take the risk if:\n- the downside is **limited**\n- you can absorb the loss\n- the upside is **clear**\n- you can exit or reverse it without much pain\n- it won’t tie up money you need soon\n\n## Pass if:\n- the downside is large or unclear\n- the loss would hurt cash flow\n- you can’t unwind it cheaply\n- the upside is vague\n- it blocks a better use of the money later\n\n## Fast rule\nIf the downside can hurt your cash position more than the upside helps, don’t take it.\n\n## Simple check\nAsk:\n- What’s the worst case?\n- Can I afford that?\n- Can I get out if it goes sideways?\n- Is the upside worth the risk?\n\nIf you want, I can turn this into a **yes/no cutoff rule** with numbers.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, direction’s fine, but it’s still pretty generic. I want an actual cutoff I can use fast — like deposit size, cash reserve, resale risk, that kind of thing. Something I can apply without re-litigating it every time. If you can make it numeric, do that.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Use this cutoff.\n\n## Take it if:\n- the **deposit is 10% or less** of the total\n- you still keep at least **3 months of cash reserve** after paying it\n- the downside is **recoverable** or easy to reverse\n- resale / exit risk is low enough that you could absorb a hit\n\n## Pass if:\n- the deposit is **over 10%**\n- it would cut your reserve below **3 months**\n- you can’t unwind it cheaply\n- the downside would be a real cash-flow problem\n- the upside is vague or depends on things going perfectly\n\n## Fast rule\n- **Take** if the risk is small, reversible, and you still have a solid reserve\n- **Pass** if it ties up too much cash or the downside would hurt\n\n## Simple yes/no\n**Yes** if: deposit ≤ 10%, reserve stays ≥ 3 months, and exit is clean.  \n**No** if: deposit > 10%, reserve drops below 3 months, or the downside is hard to unwind.\n\nIf you want, I can turn this into a **one-line decision rule** you can use in the moment.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Closer. I can use that, but 10% is still a little blunt by itself.\n\nMake it more like this:\n- **Take it** if deposit is **5% or less** and I still keep **4+ months** cash after it\n- **Maybe** if deposit is **5–10%** and I stay at **3–4 months** reserve, *only* if resale/exit is solid\n- **Pass** if deposit is **over 10%**, reserve drops **under 3 months**, or I can’t unwind it without eating a loss\n\nI want the cutoff to punish bad liquidity harder than the agent did. That’s the whole point. Also, if you can, add a quick rule for **used assets** versus **services/contracts** — those aren’t the same risk.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Use this.\n\n## Used assets\n- **Take it** if deposit is **5% or less** and you still keep **4+ months** cash after it\n- **Maybe** if deposit is **5–10%** and you stay at **3–4 months** reserve, **only** if resale / exit is solid\n- **Pass** if deposit is **over 10%**, reserve drops **under 3 months**, or you can’t unwind it without eating a loss\n\n## Services / contracts\n- **Take it** if upfront payment is **5% or less** and you keep **4+ months** cash after it\n- **Maybe** if upfront payment is **5–10%** and you stay at **3–4 months** reserve, **only** if the scope is tight and cancellation is clean\n- **Pass** if upfront payment is **over 10%**, reserve drops **under 3 months**, or the contract is hard to exit\n\n## Fast rule\n- **Used assets:** liquidity and resale matter most\n- **Services/contracts:** exit terms and scope control matter most\n\n## Simple line\n**Take** only if the deposit is small, cash reserve stays strong, and the downside is easy to unwind.  \n**Maybe** only in the middle band with solid exit/resale.  \n**Pass** if liquidity gets squeezed or the loss is hard to reverse.\n\nIf you want, I can turn this into a **one-line yes/no rule** for each.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s usable.\n\nUsed assets: basically right. I’d keep the hard line at 5% / 4+ months, maybe band 5–10% only if resale is clean. Anything that drags me under 3 months is a no. I’m not financing somebody else’s timing.\n\nServices/contracts: same liquidity rule, but harder on exit. If cancellation is messy, scope is fuzzy, or they can trap me in change orders, that’s a pass even if the upfront is small. Been there — the problem isn’t the deposit, it’s the drag.\n\nSo the clean cutoff is:\n- **Take**: deposit ≤ 5% and cash stays ≥ 4 months\n- **Maybe**: 5–10% and cash stays 3–4 months, only with strong exit/resale\n- **Pass**: deposit > 10%, cash < 3 months, or unwind costs real money\n\nThat’s the right bias. Liquidity first, always.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    }
+  ]
+}

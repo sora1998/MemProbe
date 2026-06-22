@@ -1,0 +1,75 @@
+{
+  "user_id": "user_023",
+  "task": "I’ve got a little money set aside from birthday stuff and I’m trying not to waste it, but I also don’t want to sit on it forever. Can you help me think through whether I should spend it now, save it, or split it up for a couple things I might actually use?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.2,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — use this quick split:\n\n1. **Need now?**  \n   If you’ll use it soon and it solves a real problem, consider spending.\n\n2. **Better later?**  \n   If nothing urgent is coming up, save it.\n\n3. **Worth it?**  \n   Ask: will I still be glad I bought this in a week?\n\n4. **Split option**  \n   If you want both, set aside:\n   - some to **save**\n   - some to **spend**\n   - only buy what you’d use right away\n\n**Simple rule:**  \nIf it’s a real use, buy it. If it’s just a mood, save it. If you’re torn, split it.",
+      "user_simulator": {
+        "feedback_type": "too_shallow",
+        "text": "Yeah, that’s kind of obvious. I need a better way to decide, not just ‘if you’ll use it, buy it.’ Like, I already know not to blow it on random stuff. I want an actual split that makes sense — how much to keep, how much to spend, and what counts as a good thing to spend on.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Use this split:\n\n- **50% save**\n- **30% spend on something you’ll actually use**\n- **20% hold for later / unexpected stuff**\n\n### Good things to spend on\n- something you’ll use a lot\n- something you’ve wanted for a while\n- something that replaces a real need\n- something small enough that you won’t regret it later\n\n### Bad things to spend on\n- impulse buys\n- stuff you only want because it’s new\n- things you’d forget about in a week\n\n**Rule:** if you can’t name the use, save it. If you can name the use, it can go in the spend part.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Closer, but it’s still kind of generic. 50/30/20 is fine in theory, but I need it tighter than that. Like if I’ve got, say, $40 or $60, what does that actually look like in real numbers? And “something you’ve wanted for a while” is too loose — that can still turn into dumb stuff. Give me a split that works for small money, not some adult-budget advice.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yep — for small money, make it this simple:\n\n### If you have $40\n- **$20 save**\n- **$10 spend**\n- **$10 hold**\n\n### If you have $60\n- **$30 save**\n- **$15 spend**\n- **$15 hold**\n\n### What counts as a good spend\nOnly buy stuff that is:\n- **useful**\n- **cheap enough to not regret**\n- **something you’ll use this week**\n\n### What doesn’t count\n- random wants\n- “might use it later”\n- anything you want just because you saw it\n\n**Shortcut:**  \nIf it’s not useful **this week**, it goes in save/hold.  \nIf you’re unsure, don’t move it into spend.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Closer, but the split is still kinda too neat. Like, $10 on $40 is fine, but I want a rule I can use without doing math every time.\n\nGive me an actual cutoff. Like:\n- under $25 = mostly save\n- $25–$50 = split one way\n- over $50 = split another way\n\nAnd the spend part needs a harder filter than “useful this week.” That’s still sloppy. I want something I can look at and be like: nope, that goes in save, that one can go in spend. Also, if there’s a better way to handle the hold part besides just sitting on it, say that too.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 4,
+      "agent_response": "Yep — use this:\n\n### Cutoff\n- **Under $25:** save most of it\n- **$25–$50:** split it\n- **Over $50:** save more, spend less\n\n### Simple split\n- **Under $25:** 80% save / 20% spend\n- **$25–$50:** 50% save / 25% spend / 25% hold\n- **Over $50:** 60% save / 20% spend / 20% hold\n\n### Spend test\nOnly spend if it is:\n- **something you’d still want after 3 days**\n- **something you’ll use more than once**\n- **something you can name a real use for**\n\nIf it fails any of those, **save it**.\n\n### Better than “hold”\nPut the hold part in a separate spot for:\n- future want\n- backup money\n- something you may buy later if you still want it\n\n**Shortcut:**  \n**3-day test + more than one use = spend.**  \n**If not, save.**",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Closer, but still too mushy.\n\nThe cutoff part is fine-ish. The **spend test** still needs to be stricter. “Still want it after 3 days” and “more than once” are both easy to talk yourself into. I want something I can actually use without debating myself.\n\nTry this instead:\n- **Under $25:** save 3/4, spend 1/4 only if it replaces something real\n- **$25–$50:** save half, hold a quarter, spend a quarter\n- **Over $50:** save most of it, hold some, spend only a small part\n\nAnd for spend, make it pass **all 3**:\n1. **I already planned to buy this before today**\n2. **I’ll use it at least weekly**\n3. **It’s not easy to borrow, share, or substitute**\n\nIf it misses even one, it goes to save or hold.\n\nFor the hold part, better would be a **waiting list** instead of just “sit on it.” Like: write the item down, set a price cap, and if I still want it after a week or two, then it can move from hold to spend. Otherwise it dies there.\n\nThat’s the kind of rule I meant. More like a filter, less like a vibe.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 5,
+      "agent_response": "Yep — use this:\n\n### Cutoff\n- **Under $25:** save 3/4, spend 1/4\n- **$25–$50:** save 1/2, hold 1/4, spend 1/4\n- **Over $50:** save most, hold some, spend a little\n\n### Spend only if all 3 are true\n1. **I planned to buy this before today**\n2. **I’ll use it weekly**\n3. **I can’t easily borrow/share/substitute it**\n\nIf it misses **one**, it goes to **save** or **hold**.\n\n### Hold = waiting list\n- write it down\n- set a price cap\n- wait 1–2 weeks\n- if you still want it, move it to spend\n- if not, drop it\n\n**Rule:** planned + weekly + no easy substitute = spend. Otherwise, save/hold.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s basically the rule I wanted.\n\nThe **all 3** filter is actually usable:\n- planned before today\n- weekly use\n- no easy substitute\n\nAnd the **hold as a waiting list** thing makes way more sense than just parking it somewhere.\n\nSo I’d use it like:\n- **Under $25:** mostly save, tiny spend only if it clears all 3\n- **$25–$50:** split save / hold / spend\n- **Over $50:** save most, hold some, spend a little\n\nThat’s clean enough. No extra fluff.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    }
+  ]
+}

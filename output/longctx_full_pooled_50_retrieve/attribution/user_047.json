@@ -1,0 +1,1850 @@
+{
+  "user_id": "user_047",
+  "tasks_dir": "CustomTasksPooledFinal",
+  "counts": {
+    "memory_failure": 13,
+    "ok": 14,
+    "agent_elicitation_failure": 3,
+    "task_design_failure": 1
+  },
+  "details": [
+    {
+      "category": "skill_memory",
+      "dimension": "reading_comprehension_skill",
+      "explanation": "He reads contracts, forms, and paperwork with unusual care and does not skim. His habit of checking every page and refusing same-day signatures shows he extracts meaning slowly but thoroughly. He is not fast, but he is hard to rush or confuse.",
+      "ground_truth": "Careful, line-by-line reader",
+      "predicted": "can quickly identify useful instructions in dense text",
+      "slot_fill_reason": "They repeatedly described scanning instruction sheets for exact verbs, numbered steps, condition words, and matching diagrams to decide whether to read line by line.",
+      "score": 0.25,
+      "judge_reason": "The prediction suggests quick extraction of instructions from dense text, which misses the ground truth’s emphasis on slow, careful, line-by-line reading and resistance to rushing.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "Agent: Look for the parts that are **specific, numbered, and conditional**.\n\n### Real signal\n- **Numbered steps**\n- **Exact measurements**: “1/4 turn,” “2 screws,” “10 minutes”\n- **If / then language**: “If it doesn’t fit…”\n- **Warnings tied to a step**, not just a general paragraph\n- **Diagrams that match a step**\n- **Parts named exactly**: “bracket A,” “washer B,” not “hardware”\n\n### Probably fluff\n- long intro paragraphs\n- “before you begin” filler that repeats common sense\n- vague advice like “take care” or “handle with caution”\n- generic claims about quality or convenience\n- repeated phrasing with no new action\n\n### Fast test\nIf the sheet gives you:\n- a **clear sequence**\n- **specific actions**\n- **one or two exceptions**\n- **a diagram that actually lines up**\n\nthen it’s worth reading line by line.\n\nIf most of it is:\n- broad advice\n- repeated warnings\n- marketing language\n- no measurements, no sequence, no exceptions\n\nthen the useful part is probably small.\n\n### Short rule\n**Specific numbers, exact parts, and conditional steps = signal.**  \n**Vague advice and repeated common sense = fluff.**\n\nIf you want, I can give you a **30-second “signal vs fluff” checklist** you can use on any instruction sheet.",
+          "category": "agent_reply",
+          "task_index": 28,
+          "turn": 3,
+          "score": 0.26870444416999817
+        },
+        {
+          "content": "User: Yeah. That’s the shape of it. Tight enough to use without playing games with it.\n\nI’d just print it and run down the lines. The only thing I’d add is a box for “read twice if unclear” or something like that, because those instructions love hiding one stupid exception in the middle of a paragraph. But as-is, it does the job.",
+          "category": "user_reply",
+          "task_index": 22,
+          "turn": 2,
+          "score": 0.2532806992530823
+        },
+        {
+          "content": "User: Closer, but still a little too tidy. I wanted the actual tells, not the cleaned-up version.\n\nWhat I’m after is more like:\n- **imperative verbs** in a row — *insert, align, tighten, hold* — that usually means real steps\n- **short numbered lines** with almost no filler around them\n- **condition words** that force you to pay attention — *until, unless, only if, do not*\n- **arrows / labels / callouts** on a diagram that match the sentence right next to it\n- **warnings that affect sequence** — not the nagging kind, the ones that say stop, wait, unplug, drain, flip, whatever\n\nAnd the junk usually has the same smell every time:\n- “for best results”\n- “easy to use”\n- “before you begin” with nothing new in it\n- “read all instructions first” like I’m in kindergarten\n- same point said three times with different words\n\nSo the scan rule I’d actually use is:\n**If the page is mostly commands, limits, measurements, and matching diagrams, read it.**\n**If it’s mostly sales talk, filler, and repeated common sense, skip around until you find the one tight section with real actions.**\n\nThat’s the kind of shortcut I meant.",
+          "category": "user_reply",
+          "task_index": 28,
+          "turn": 4,
+          "score": 0.2509782314300537
+        },
+        {
+          "content": "Agent: Use this quick scan:\n\n### Read line by line if you see:\n- **numbered steps**\n- **exact action verbs**: insert, align, tighten, release, hold, remove\n- **condition words**: if, unless, until, only, do not\n- **diagrams that match the text**\n- **warnings that change the order**\n- **measurements or counts**\n\n### Probably skim if you see:\n- “for best results”\n- “easy to use”\n- “before you begin” with no new info\n- repeated common-sense warnings\n- the same point said three ways\n- long intro text before any real step\n\n### Fast rule\nIf the page has **verbs + numbers + condition words + matching diagram**, it’s worth reading carefully.\n\nIf it mostly has **general advice and filler**, hunt for the one section with actual steps and ignore the rest.\n\n### One-line test\n**Specific action words and conditions = real.**\n**Generic advice and repeated phrasing = fluff.**\n\nIf you want, I can make that into a **tiny 10-second checklist**.",
+          "category": "agent_reply",
+          "task_index": 28,
+          "turn": 4,
+          "score": 0.2500002980232239
+        },
+        {
+          "content": "User: Closer. But I want the quick tells, not the category names.\n\nWhat I mean is stuff like:\n- exact verbs: *insert, align, tighten, hold, release* — that sort of thing\n- numbered steps with no extra prose around them\n- words like *until, unless, only if, do not* — those usually matter\n- diagrams with arrows or part labels that actually match the text\n- repeated warnings that change the order of the job, not the ones that just nag\n\nAnd the junk usually has a certain smell:\n- “for best results”\n- “easy to use”\n- “before you begin” paragraphs that say nothing new\n- generic “read all instructions first” stuff\n- same sentence reworded three times\n\nSo yeah, give me a fast scan rule based on wording and layout. Something I can look at and decide, in a few seconds, whether to bother reading it line by line or just hunt for the one real section.",
+          "category": "user_reply",
+          "task_index": 28,
+          "turn": 3,
+          "score": 0.24622371792793274
+        }
+      ],
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.25,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally involves handling forms and deadlines, so reasonable follow-up questions about how the user reviews paperwork, checks details, and avoids mistakes could reveal whether they read carefully and thoroughly."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"without overlooking anything or having to redo the pile later\"",
+            "reason": "The user explicitly emphasizes careful, thorough processing to avoid missing details, which suggests a line-by-line, not-skimming reading style."
+          }
+        ],
+        "ep_index": 1
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "writing_skill",
+      "explanation": "He can write clearly enough to keep detailed records, copies, and reminders for himself. His writing is practical rather than expressive, built to prevent confusion and preserve control. He uses writing as a tool, not as a craft.",
+      "ground_truth": "Functional writer of records and notes",
+      "predicted": "can write concise, specific instructions and criteria",
+      "slot_fill_reason": "They repeatedly refined wording into short, actionable scan rules using exact verbs, condition words, and layout cues.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the practical, functional aspect of writing clearly and specifically, but it is narrower than the ground truth because it does not fully capture routine record-keeping, copies, and reminders.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "Agent: Use this quick scan:\n\n### Read line by line if you see:\n- **numbered steps**\n- **exact action verbs**: insert, align, tighten, release, hold, remove\n- **condition words**: if, unless, until, only, do not\n- **diagrams that match the text**\n- **warnings that change the order**\n- **measurements or counts**\n\n### Probably skim if you see:\n- “for best results”\n- “easy to use”\n- “before you begin” with no new info\n- repeated common-sense warnings\n- the same point said three ways\n- long intro text before any real step\n\n### Fast rule\nIf the page has **verbs + numbers + condition words + matching diagram**, it’s worth reading carefully.\n\nIf it mostly has **general advice and filler**, hunt for the one section with actual steps and ignore the rest.\n\n### One-line test\n**Specific action words and conditions = real.**\n**Generic advice and repeated phrasing = fluff.**\n\nIf you want, I can make that into a **tiny 10-second checklist**.",
+          "category": "agent_reply",
+          "task_index": 28,
+          "turn": 4,
+          "score": 0.25389087200164795
+        },
+        {
+          "content": "Agent: Look for the parts that are **specific, numbered, and conditional**.\n\n### Real signal\n- **Numbered steps**\n- **Exact measurements**: “1/4 turn,” “2 screws,” “10 minutes”\n- **If / then language**: “If it doesn’t fit…”\n- **Warnings tied to a step**, not just a general paragraph\n- **Diagrams that match a step**\n- **Parts named exactly**: “bracket A,” “washer B,” not “hardware”\n\n### Probably fluff\n- long intro paragraphs\n- “before you begin” filler that repeats common sense\n- vague advice like “take care” or “handle with caution”\n- generic claims about quality or convenience\n- repeated phrasing with no new action\n\n### Fast test\nIf the sheet gives you:\n- a **clear sequence**\n- **specific actions**\n- **one or two exceptions**\n- **a diagram that actually lines up**\n\nthen it’s worth reading line by line.\n\nIf most of it is:\n- broad advice\n- repeated warnings\n- marketing language\n- no measurements, no sequence, no exceptions\n\nthen the useful part is probably small.\n\n### Short rule\n**Specific numbers, exact parts, and conditional steps = signal.**  \n**Vague advice and repeated common sense = fluff.**\n\nIf you want, I can give you a **30-second “signal vs fluff” checklist** you can use on any instruction sheet.",
+          "category": "agent_reply",
+          "task_index": 28,
+          "turn": 3,
+          "score": 0.25343582034111023
+        },
+        {
+          "content": "User: Closer, but still a little too tidy. I wanted the actual tells, not the cleaned-up version.\n\nWhat I’m after is more like:\n- **imperative verbs** in a row — *insert, align, tighten, hold* — that usually means real steps\n- **short numbered lines** with almost no filler around them\n- **condition words** that force you to pay attention — *until, unless, only if, do not*\n- **arrows / labels / callouts** on a diagram that match the sentence right next to it\n- **warnings that affect sequence** — not the nagging kind, the ones that say stop, wait, unplug, drain, flip, whatever\n\nAnd the junk usually has the same smell every time:\n- “for best results”\n- “easy to use”\n- “before you begin” with nothing new in it\n- “read all instructions first” like I’m in kindergarten\n- same point said three times with different words\n\nSo the scan rule I’d actually use is:\n**If the page is mostly commands, limits, measurements, and matching diagrams, read it.**\n**If it’s mostly sales talk, filler, and repeated common sense, skip around until you find the one tight section with real actions.**\n\nThat’s the kind of shortcut I meant.",
+          "category": "user_reply",
+          "task_index": 28,
+          "turn": 4,
+          "score": 0.25247153639793396
+        },
+        {
+          "content": "User: Closer. But I want the quick tells, not the category names.\n\nWhat I mean is stuff like:\n- exact verbs: *insert, align, tighten, hold, release* — that sort of thing\n- numbered steps with no extra prose around them\n- words like *until, unless, only if, do not* — those usually matter\n- diagrams with arrows or part labels that actually match the text\n- repeated warnings that change the order of the job, not the ones that just nag\n\nAnd the junk usually has a certain smell:\n- “for best results”\n- “easy to use”\n- “before you begin” paragraphs that say nothing new\n- generic “read all instructions first” stuff\n- same sentence reworded three times\n\nSo yeah, give me a fast scan rule based on wording and layout. Something I can look at and decide, in a few seconds, whether to bother reading it line by line or just hunt for the one real section.",
+          "category": "user_reply",
+          "task_index": 28,
+          "turn": 3,
+          "score": 0.25030553340911865
+        },
+        {
+          "content": "User: Yeah. That’s the list I’d watch for. Short enough to use.\n\nIf I’m scanning a contract, those are the traps: auto-renewal, price hikes, cancellation notice, early exit fee, unilateral changes, arbitration, waiver, liability limits, extra fees, and anything I have to opt out of. The stuff hidden in the fine print is usually where they get cute.\n\nI’d also check whether the notice has to be in writing, where it has to be sent, and whether they say it counts even if you never actually saw it. That part can matter more than the fancy language.\n\nGood enough.",
+          "category": "user_reply",
+          "task_index": 9,
+          "turn": 2,
+          "score": 0.245173379778862
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "critical_thinking_skill",
+      "explanation": "He weighs documents, risks, and claims with a skeptical eye and assumes there may be a catch. He is good at spotting what matters in paperwork and at not taking reassurance at face value. That said, his caution can harden into reflexive distrust rather than open analysis.",
+      "ground_truth": "Suspicious, evidence-checking thinker",
+      "predicted": "spots real signals in text and filters out fluff",
+      "slot_fill_reason": "They identified specific tells like imperative verbs, numbered lines, condition words, and matching diagrams, and distinguished them from filler and repeated common-sense warnings.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the evidence-checking, signal-spotting aspect of the ground truth, but it misses the skeptical, distrustful stance and the caution about assuming a catch.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Yeah. That’s basically it.\n\nThe only thing I’d add is: don’t let “still manageable” fool you if it’s only manageable because you’re papering over problems every week. That’s not stable, that’s patched.\n\nFor me the real test is:\n- can I keep it without outside help\n- does it still fit my body, not just my pride\n- am I spending time on it that I’d rather not\n- if one thing goes wrong, does it turn into a chain reaction\n\nIf the answer starts leaning the wrong way on two or three of those, I’d call that a sign to simplify.\n\nSo yeah, your list is the right one. The important part is not pretending overhead is something else.",
+          "category": "user_reply",
+          "task_index": 17,
+          "turn": 2,
+          "score": 0.24439820647239685
+        },
+        {
+          "content": "Agent: Use this quick scan:\n\n### Read line by line if you see:\n- **numbered steps**\n- **exact action verbs**: insert, align, tighten, release, hold, remove\n- **condition words**: if, unless, until, only, do not\n- **diagrams that match the text**\n- **warnings that change the order**\n- **measurements or counts**\n\n### Probably skim if you see:\n- “for best results”\n- “easy to use”\n- “before you begin” with no new info\n- repeated common-sense warnings\n- the same point said three ways\n- long intro text before any real step\n\n### Fast rule\nIf the page has **verbs + numbers + condition words + matching diagram**, it’s worth reading carefully.\n\nIf it mostly has **general advice and filler**, hunt for the one section with actual steps and ignore the rest.\n\n### One-line test\n**Specific action words and conditions = real.**\n**Generic advice and repeated phrasing = fluff.**\n\nIf you want, I can make that into a **tiny 10-second checklist**.",
+          "category": "agent_reply",
+          "task_index": 28,
+          "turn": 4,
+          "score": 0.23560366034507751
+        },
+        {
+          "content": "[Task 11] I’ve been feeling a little run down lately, and I’m trying to sort out what’s worth keeping an eye on before I decide whether to change my routine or let it pass. What’s a practical way to track that without turning it into a bigger project than it needs to be?",
+          "category": "task",
+          "task_index": 11,
+          "score": 0.21738317608833313
+        },
+        {
+          "content": "Agent: Look for the parts that are **specific, numbered, and conditional**.\n\n### Real signal\n- **Numbered steps**\n- **Exact measurements**: “1/4 turn,” “2 screws,” “10 minutes”\n- **If / then language**: “If it doesn’t fit…”\n- **Warnings tied to a step**, not just a general paragraph\n- **Diagrams that match a step**\n- **Parts named exactly**: “bracket A,” “washer B,” not “hardware”\n\n### Probably fluff\n- long intro paragraphs\n- “before you begin” filler that repeats common sense\n- vague advice like “take care” or “handle with caution”\n- generic claims about quality or convenience\n- repeated phrasing with no new action\n\n### Fast test\nIf the sheet gives you:\n- a **clear sequence**\n- **specific actions**\n- **one or two exceptions**\n- **a diagram that actually lines up**\n\nthen it’s worth reading line by line.\n\nIf most of it is:\n- broad advice\n- repeated warnings\n- marketing language\n- no measurements, no sequence, no exceptions\n\nthen the useful part is probably small.\n\n### Short rule\n**Specific numbers, exact parts, and conditional steps = signal.**  \n**Vague advice and repeated common sense = fluff.**\n\nIf you want, I can give you a **30-second “signal vs fluff” checklist** you can use on any instruction sheet.",
+          "category": "agent_reply",
+          "task_index": 28,
+          "turn": 3,
+          "score": 0.21618907153606415
+        },
+        {
+          "content": "User: Closer, but still a little too tidy. I wanted the actual tells, not the cleaned-up version.\n\nWhat I’m after is more like:\n- **imperative verbs** in a row — *insert, align, tighten, hold* — that usually means real steps\n- **short numbered lines** with almost no filler around them\n- **condition words** that force you to pay attention — *until, unless, only if, do not*\n- **arrows / labels / callouts** on a diagram that match the sentence right next to it\n- **warnings that affect sequence** — not the nagging kind, the ones that say stop, wait, unplug, drain, flip, whatever\n\nAnd the junk usually has the same smell every time:\n- “for best results”\n- “easy to use”\n- “before you begin” with nothing new in it\n- “read all instructions first” like I’m in kindergarten\n- same point said three times with different words\n\nSo the scan rule I’d actually use is:\n**If the page is mostly commands, limits, measurements, and matching diagrams, read it.**\n**If it’s mostly sales talk, filler, and repeated common sense, skip around until you find the one tight section with real actions.**\n\nThat’s the kind of shortcut I meant.",
+          "category": "user_reply",
+          "task_index": 28,
+          "turn": 4,
+          "score": 0.21490317583084106
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "troubleshooting_skill",
+      "explanation": "He has enough hands-on experience with repairs and maintenance to identify what is wrong in a practical way. He prefers concrete fixes, inspection, and step-by-step diagnosis over guesswork. He is more competent with familiar home issues than with anything highly technical or unfamiliar.",
+      "ground_truth": "Solid at diagnosing household problems",
+      "predicted": "strong at structured troubleshooting and fault-tree narrowing",
+      "slot_fill_reason": "They explicitly describe and use a simple fault-tree approach: identify the thing, symptom, what changed, then test the cheapest likely cause first without random parts swapping.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the practical diagnostic aspect of the ground truth, but it is phrased more generally and does not explicitly emphasize household repair experience or familiarity with common home issues.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Yeah, that’s the general idea. Too broad though.\n\nI’d want a simple fault tree, not a lecture. Start with:\n- what the thing is\n- what it’s doing wrong\n- what it used to do right\n- whether the failure is sudden or gradual\n- anything changed right before it started\n\nThen narrow it by the least expensive test first. No random parts swapping. I’ve done enough of that kind of nonsense over the years. Usually it’s either power, blockage, wear, or one bad connection — not some mysterious chain reaction.\n\nIf you want, give me the actual problem and I’ll help sort it out step by step.",
+          "category": "user_reply",
+          "task_index": 4,
+          "turn": 1,
+          "score": 0.33704495429992676
+        },
+        {
+          "content": "[Task 11] I’ve been feeling a little run down lately, and I’m trying to sort out what’s worth keeping an eye on before I decide whether to change my routine or let it pass. What’s a practical way to track that without turning it into a bigger project than it needs to be?",
+          "category": "task",
+          "task_index": 11,
+          "score": 0.3323442041873932
+        },
+        {
+          "content": "Agent: A sensible way is to **check the simplest, most likely causes first** and narrow it down by observation, not guessing.\n\n### Quick approach\n1. **State the symptom clearly**\n   - What exactly is happening?\n   - What’s not happening?\n   - Is it constant or intermittent?\n\n2. **Check the basics**\n   - Power on/off?\n   - Plug, breaker, switch, battery, water/gas/shutoff, etc.\n   - Any obvious loose connection, blockage, leak, smell, noise, or damage?\n\n3. **Compare “works” vs “doesn’t work”**\n   - Did it fail suddenly or gradually?\n   - Is one part working and another not?\n   - Does it behave differently under different settings?\n\n4. **Change one thing at a time**\n   - Make one small test.\n   - Record what changed.\n   - Don’t swap multiple parts at once or you won’t know what fixed it.\n\n5. **Rule out the easy external causes**\n   - Power source\n   - Settings\n   - Clogged filter/drain/vent\n   - Tripped safety feature\n   - Empty supply / blocked line / disconnected hose\n\n6. **Decide if it’s worth DIY**\n   - Good DIY candidate: simple access, cheap part, clear cause, low risk.\n   - Call someone if: gas, electrical panel, structural damage, major leak, burning smell, or anything unsafe.\n\n### Simple note format\n- **Symptom:**\n- **Checked:**\n- **Result:**\n- **Next test:**\n- **DIY or call:**\n\nIf you want, tell me what household issue it is, and I can help you narrow it down step by step.",
+          "category": "agent_reply",
+          "task_index": 4,
+          "turn": 1,
+          "score": 0.3264198303222656
+        },
+        {
+          "content": "Agent: Use this quick scan:\n\n### Read line by line if you see:\n- **numbered steps**\n- **exact action verbs**: insert, align, tighten, release, hold, remove\n- **condition words**: if, unless, until, only, do not\n- **diagrams that match the text**\n- **warnings that change the order**\n- **measurements or counts**\n\n### Probably skim if you see:\n- “for best results”\n- “easy to use”\n- “before you begin” with no new info\n- repeated common-sense warnings\n- the same point said three ways\n- long intro text before any real step\n\n### Fast rule\nIf the page has **verbs + numbers + condition words + matching diagram**, it’s worth reading carefully.\n\nIf it mostly has **general advice and filler**, hunt for the one section with actual steps and ignore the rest.\n\n### One-line test\n**Specific action words and conditions = real.**\n**Generic advice and repeated phrasing = fluff.**\n\nIf you want, I can make that into a **tiny 10-second checklist**.",
+          "category": "agent_reply",
+          "task_index": 28,
+          "turn": 4,
+          "score": 0.32093745470046997
+        },
+        {
+          "content": "User: Yeah. That’s basically it.\n\nThe only thing I’d add is: don’t let “still manageable” fool you if it’s only manageable because you’re papering over problems every week. That’s not stable, that’s patched.\n\nFor me the real test is:\n- can I keep it without outside help\n- does it still fit my body, not just my pride\n- am I spending time on it that I’d rather not\n- if one thing goes wrong, does it turn into a chain reaction\n\nIf the answer starts leaning the wrong way on two or three of those, I’d call that a sign to simplify.\n\nSo yeah, your list is the right one. The important part is not pretending overhead is something else.",
+          "category": "user_reply",
+          "task_index": 17,
+          "turn": 2,
+          "score": 0.3049272894859314
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "time_management_skill",
+      "explanation": "He keeps a predictable schedule and organizes errands and outings to fit his comfort and energy. After his stroke, he adjusted his timing to avoid heat and long outings, showing he can manage his day around constraints. His style is disciplined, but mostly within a narrow, well-worn routine.",
+      "ground_truth": "Routines his day tightly",
+      "predicted": "uses simple tracking and chunking to manage tasks",
+      "slot_fill_reason": "They asked for practical ways to track feeling run down and to handle chores or instructions without overdoing it, and the replies emphasized brief daily logs, short work blocks, and stop points.",
+      "score": 0.5,
+      "judge_reason": "The prediction suggests some organization and task management, but it misses the key idea that he tightly routines his whole day within a narrow, predictable schedule.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "[Task 11] I’ve been feeling a little run down lately, and I’m trying to sort out what’s worth keeping an eye on before I decide whether to change my routine or let it pass. What’s a practical way to track that without turning it into a bigger project than it needs to be?",
+          "category": "task",
+          "task_index": 11,
+          "score": 0.30074650049209595
+        },
+        {
+          "content": "Agent: Use a **small daily check-in** with just a few fields. Keep it short enough that you’ll actually do it.\n\n### Simple tracker\n- **Date:**\n- **Energy level:** low / okay / good\n- **Sleep:** poor / fair / good\n- **Food / water:** okay / not okay\n- **Anything unusual:** headache, pain, stress, nausea, etc.\n- **What changed today:** meds, exercise, schedule, alcohol, illness, skipped meals\n- **Keep an eye on?** yes / no\n\n### How to use it\n- Fill it out once a day, same time if possible.\n- Don’t write paragraphs.\n- Only note things that changed or stood out.\n- After a few days, look for patterns:\n  - worse after poor sleep\n  - worse when you skip meals\n  - worse on busy days\n  - no clear pattern at all\n\n### Simple rule\nIf it’s **brief, repeatable, and dated**, it’s useful.  \nIf it turns into a diary, it’s too much.\n\nIf you want, I can make this into a **one-page printable log** with blank lines.",
+          "category": "agent_reply",
+          "task_index": 11,
+          "turn": 1,
+          "score": 0.2993035614490509
+        },
+        {
+          "content": "Agent: A plain way to say it:\n\n**People can change over time, and sometimes you only notice it when you look back.**\n\nA few other simple options:\n- **People change, and not always in ways you expect.**\n- **Time changes people more than they notice at the time.**\n- **People don’t stay the same, even when they think they will.**\n\nIf you want, I can give you **3 more versions** in a more casual or more serious tone.",
+          "category": "agent_reply",
+          "task_index": 26,
+          "turn": 1,
+          "score": 0.2967817187309265
+        },
+        {
+          "content": "Agent: Use **small blocks with a stop point**.\n\n### Simple way\n1. **List the chores**\n   - Put the hardest or most annoying ones first if you have the energy.\n   - Put the easy ones later.\n\n2. **Group similar tasks**\n   - Cleaning together\n   - Carrying/lifting together\n   - Paperwork together\n   - Outside tasks together\n\n3. **Work in short blocks**\n   - 20–30 minutes of work\n   - 5–10 minute break\n   - Stop before you’re wiped out\n\n4. **Set a hard limit**\n   - Pick the number of chores or the amount of time you’ll do today.\n   - Don’t keep adding “one more thing.”\n\n5. **Leave one thing for later**\n   - That keeps the day from turning into a marathon.\n\n### Easy rule\n- **Do enough to make progress**\n- **Stop before you hit the wall**\n\nIf you want, I can make you a **simple chore order list** you can fill in by hand.",
+          "category": "agent_reply",
+          "task_index": 15,
+          "turn": 1,
+          "score": 0.28566062450408936
+        },
+        {
+          "content": "[Task 28] I’ve got an instruction sheet for a small household item, and I need to get through it before I start on the job. What’s the best way to handle it so I can move ahead without wasting time?",
+          "category": "task",
+          "task_index": 28,
+          "score": 0.26856696605682373
+        }
+      ],
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task directly asks how to arrange errands to keep the trip manageable, which naturally invites the user to describe planning habits, scheduling preferences, and how tightly they structure their day."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"I’m trying to decide how to arrange them so I’m not out longer than necessary\"",
+            "reason": "The user explicitly prefers organizing errands to minimize time out, which suggests a tightly managed, routine-oriented approach to time management."
+          }
+        ],
+        "ep_index": 5
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "financial_resource_management_skill",
+      "explanation": "He makes practical money decisions and responds to rising costs by downsizing and cutting overhead. The sale of his house and move to a smaller condo show he can adapt finances to protect stability. He is careful rather than generous, and he tends to prioritize security over comfort or status.",
+      "ground_truth": "Frugal, cost-aware planner",
+      "predicted": "can organize bills, autopay, and account records into a workable system",
+      "slot_fill_reason": "They specified concrete binder sections for bills, insurance, contacts, and logs, including current bills, autopay lists, due dates, account numbers, and paid confirmations.",
+      "score": 0.5,
+      "judge_reason": "The prediction overlaps with practical money management and organization, but it misses the key frugal, cost-conscious, security-prioritizing aspect of the ground truth.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "[Task 16] I’m comparing a place that looks workable now, but I want to think through the long-term expenses before I make any decisions. What kinds of costs or changes would you look at first when something starts to feel less manageable over time?",
+          "category": "task",
+          "task_index": 16,
+          "score": 0.2857951819896698
+        },
+        {
+          "content": "Agent: Have these sorted ahead of time:\n\n- **Who can help**\n  - names\n  - phone numbers\n  - what each person can do\n\n- **Essential tasks**\n  - food\n  - meds\n  - trash\n  - bills\n  - rides\n  - appointments\n\n- **Where the important stuff is**\n  - keys\n  - documents\n  - insurance cards\n  - medication list\n  - emergency contacts\n\n- **Backup access**\n  - house key\n  - car key\n  - passwords or a safe way to get them\n  - bank / utility / medical account info if needed\n\n- **Simple instructions**\n  - what needs to be done first\n  - what can wait\n  - who to call for what\n\n- **Supply basics**\n  - meds\n  - food\n  - batteries / chargers\n  - paper / pens\n  - any regular household items you run out of fast\n\n- **Money / payments**\n  - automatic bills\n  - due dates\n  - who can pay what if needed\n\n### Keep it simple\nMake one page with:\n- **Task**\n- **Who handles it**\n- **Phone**\n- **Notes**\n\nIf you want, I can turn that into a **plain one-page backup plan** you can fill in by hand.",
+          "category": "agent_reply",
+          "task_index": 21,
+          "turn": 1,
+          "score": 0.2699495851993561
+        },
+        {
+          "content": "User: Yeah. That’s basically it.\n\nThe only thing I’d add is: don’t let “still manageable” fool you if it’s only manageable because you’re papering over problems every week. That’s not stable, that’s patched.\n\nFor me the real test is:\n- can I keep it without outside help\n- does it still fit my body, not just my pride\n- am I spending time on it that I’d rather not\n- if one thing goes wrong, does it turn into a chain reaction\n\nIf the answer starts leaning the wrong way on two or three of those, I’d call that a sign to simplify.\n\nSo yeah, your list is the right one. The important part is not pretending overhead is something else.",
+          "category": "user_reply",
+          "task_index": 17,
+          "turn": 2,
+          "score": 0.2600097060203552
+        },
+        {
+          "content": "User: Pretty much the right idea. But make it more concrete, less generic.\n\nI’d want it broken into:\n- **daily chores**: trash, mail, dishes, laundry, pet stuff if any\n- **outside errands**: groceries, pharmacy, gas, post office\n- **money**: bills, autopay, due dates, where the paper copies are\n- **health stuff**: meds list, doctor numbers, insurance cards, transportation to appointments\n- **house basics**: keys, alarm codes, shutoff valves, breaker panel, flashlight, batteries\n- **who gets called first** and who does **not** get bothered unless it’s serious\n\nAnd one thing people skip: write down **what not to touch**. Some folks “help” by moving papers or throwing things out. That causes trouble fast.\n\nI’d also keep a short paper copy in the kitchen and another somewhere separate. Not just on a phone. Phones fail, batteries die, people forget passwords. I’ve had enough of that nonsense already.",
+          "category": "user_reply",
+          "task_index": 21,
+          "turn": 1,
+          "score": 0.24846263229846954
+        },
+        {
+          "content": "User: Better. Still a little loose.\n\nI’d want the tabs locked down to something I can live with and not keep fiddling with. Something like:\n\n1. **Front / Index**\n2. **Bills**\n3. **Medical**\n4. **Home**\n5. **Insurance**\n6. **Contacts / Log**\n\nAnd I’d be picky about what stays in the binder:\n- **Front**: index, current month bills, current meds list, active repair or claim notes\n- **Bills**: only current bills, paid confirmations for the current year, autopay list\n- **Medical**: recent visit summaries, referrals, meds list, lab results that matter\n- **Home**: appliance model numbers, manuals for stuff I actually own, repair receipts, warranty pages\n- **Insurance**: current policies, cards, open claims, claim numbers\n- **Contacts / Log**: phone numbers, account numbers, call notes, dates, who said what\n\nWhat gets out:\n- duplicates\n- old paid bills once I’ve kept what I need\n- expired warranties\n- manuals for dead appliances\n- old medical junk that doesn’t affect anything now\n- closed claims after I’ve kept the final paper\n\nI’d also put a hard rule on it: if a paper sits there and doesn’t get used for a year, it gets moved out or shredded. Otherwise it turns into a catch-all. That’s usually how these things rot.\n\nYeah, a simple printable index page would help. Not a fancy one. Just tab, what’s in it, date last checked, and where the backup copy is if there is one.",
+          "category": "user_reply",
+          "task_index": 23,
+          "turn": 2,
+          "score": 0.2419561743736267
+        }
+      ],
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites discussion of budgeting, prioritizing expenses, and making cost-conscious tradeoffs, which can reasonably lead the user to reveal whether they are frugal and how they manage financial resources."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"A few regular household expenses have gone up lately, and I’m trying to get a clearer picture of where the money is going. What’s a straightforward way to sort through them and decide what to keep, change, or drop?\"",
+            "reason": "The user explicitly shows cost-awareness and a desire to review expenses, cut or change items, and manage money pragmatically, which is enough to suggest a frugal, practical financial style."
+          }
+        ],
+        "ep_index": 6
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "repairing_skill",
+      "explanation": "He can handle common DIY repairs and tinkering well enough to maintain a home. His background suggests competence with routine physical fixes, though not necessarily with complex or specialized work. After his stroke, his physical repair ability likely became more limited and less reliable for demanding tasks.",
+      "ground_truth": "Handy with basic home fixes",
+      "predicted": "can diagnose simple faults and prioritize low-cost fixes",
+      "slot_fill_reason": "They described using a fault tree, identifying what changed, and narrowing problems by the least expensive test first instead of random parts swapping.",
+      "score": 0.5,
+      "judge_reason": "The prediction overlaps with being practical about simple repairs, but it emphasizes diagnosis and cost prioritization rather than hands-on home fix ability.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Yeah. That’s basically it.\n\nThe only thing I’d add is: don’t let “still manageable” fool you if it’s only manageable because you’re papering over problems every week. That’s not stable, that’s patched.\n\nFor me the real test is:\n- can I keep it without outside help\n- does it still fit my body, not just my pride\n- am I spending time on it that I’d rather not\n- if one thing goes wrong, does it turn into a chain reaction\n\nIf the answer starts leaning the wrong way on two or three of those, I’d call that a sign to simplify.\n\nSo yeah, your list is the right one. The important part is not pretending overhead is something else.",
+          "category": "user_reply",
+          "task_index": 17,
+          "turn": 2,
+          "score": 0.34068599343299866
+        },
+        {
+          "content": "[Task 11] I’ve been feeling a little run down lately, and I’m trying to sort out what’s worth keeping an eye on before I decide whether to change my routine or let it pass. What’s a practical way to track that without turning it into a bigger project than it needs to be?",
+          "category": "task",
+          "task_index": 11,
+          "score": 0.30117058753967285
+        },
+        {
+          "content": "User: Yeah, that’s the general idea. Too broad though.\n\nI’d want a simple fault tree, not a lecture. Start with:\n- what the thing is\n- what it’s doing wrong\n- what it used to do right\n- whether the failure is sudden or gradual\n- anything changed right before it started\n\nThen narrow it by the least expensive test first. No random parts swapping. I’ve done enough of that kind of nonsense over the years. Usually it’s either power, blockage, wear, or one bad connection — not some mysterious chain reaction.\n\nIf you want, give me the actual problem and I’ll help sort it out step by step.",
+          "category": "user_reply",
+          "task_index": 4,
+          "turn": 1,
+          "score": 0.27649834752082825
+        },
+        {
+          "content": "User: Closer, but still a little too tidy. I wanted the actual tells, not the cleaned-up version.\n\nWhat I’m after is more like:\n- **imperative verbs** in a row — *insert, align, tighten, hold* — that usually means real steps\n- **short numbered lines** with almost no filler around them\n- **condition words** that force you to pay attention — *until, unless, only if, do not*\n- **arrows / labels / callouts** on a diagram that match the sentence right next to it\n- **warnings that affect sequence** — not the nagging kind, the ones that say stop, wait, unplug, drain, flip, whatever\n\nAnd the junk usually has the same smell every time:\n- “for best results”\n- “easy to use”\n- “before you begin” with nothing new in it\n- “read all instructions first” like I’m in kindergarten\n- same point said three times with different words\n\nSo the scan rule I’d actually use is:\n**If the page is mostly commands, limits, measurements, and matching diagrams, read it.**\n**If it’s mostly sales talk, filler, and repeated common sense, skip around until you find the one tight section with real actions.**\n\nThat’s the kind of shortcut I meant.",
+          "category": "user_reply",
+          "task_index": 28,
+          "turn": 4,
+          "score": 0.2704050540924072
+        },
+        {
+          "content": "[Task 29] I’ve got a couple of small home fixes to sort out, and I’m trying to decide how to start without making it more complicated than it needs to be. What would you look at first, and what would you leave alone until later?",
+          "category": "task",
+          "task_index": 29,
+          "score": 0.25654271245002747
+        }
+      ],
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites discussion of DIY repair ability and judgment about handling common home fixes, so a probing assistant could reasonably elicit whether the user is handy with basic repairs."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "“I’ve got a couple of small home fixes piling up — one is a loose hinge and the other is a dripping faucet.”",
+            "reason": "The user explicitly mentions routine DIY home repairs, which is enough to infer basic handyman competence with common fixes."
+          }
+        ],
+        "ep_index": 7
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "procedural_knowledge",
+      "explanation": "He knows how to work through forms, follow-up steps, and administrative hassle without getting lost. He keeps copies, writes things down, and insists on a paper trail so processes stay manageable. He can get by with bureaucracy, but only by narrowing uncertainty and refusing to trust it.",
+      "ground_truth": "Good at bureaucracy when he can control it",
+      "predicted": "knows practical checklists for contracts and appointments",
+      "slot_fill_reason": "They listed specific contract traps to watch for and asked for simple ways to track doctor follow-ups and reminders.",
+      "score": 0.5,
+      "judge_reason": "The prediction overlaps with procedural know-how and practical handling of administrative tasks, but it misses the key idea of being good at bureaucracy only when he can control and verify it.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "[Task 10] I’ve got a doctor follow-up and a couple of appointment reminders to sort out, and I want to make sure I’m not missing anything between the visit, the paperwork, and what happens after. What’s the simplest way to keep it all straight without relying on memory?",
+          "category": "task",
+          "task_index": 10,
+          "score": 0.2819110155105591
+        },
+        {
+          "content": "[Task 11] I’ve been feeling a little run down lately, and I’m trying to sort out what’s worth keeping an eye on before I decide whether to change my routine or let it pass. What’s a practical way to track that without turning it into a bigger project than it needs to be?",
+          "category": "task",
+          "task_index": 11,
+          "score": 0.22204327583312988
+        },
+        {
+          "content": "[Task 29] I’ve got a couple of small home fixes to sort out, and I’m trying to decide how to start without making it more complicated than it needs to be. What would you look at first, and what would you leave alone until later?",
+          "category": "task",
+          "task_index": 29,
+          "score": 0.21714040637016296
+        },
+        {
+          "content": "User: Yeah. That’s the list I’d watch for. Short enough to use.\n\nIf I’m scanning a contract, those are the traps: auto-renewal, price hikes, cancellation notice, early exit fee, unilateral changes, arbitration, waiver, liability limits, extra fees, and anything I have to opt out of. The stuff hidden in the fine print is usually where they get cute.\n\nI’d also check whether the notice has to be in writing, where it has to be sent, and whether they say it counts even if you never actually saw it. That part can matter more than the fancy language.\n\nGood enough.",
+          "category": "user_reply",
+          "task_index": 9,
+          "turn": 2,
+          "score": 0.21539323031902313
+        },
+        {
+          "content": "Agent: **BACKUP PLAN**\n\n**If you don’t know, leave it alone and call first.**\n\n**1. Daily chores**\n- Trash: ____\n- Mail: ____\n- Dishes: ____\n- Laundry: ____\n- Pet care: ____\n\n**2. Outside errands**\n- Groceries: ____\n- Pharmacy: ____\n- Gas: ____\n- Post office: ____\n\n**3. Money**\n- Bills to pay: ____\n- Autopay items: ____\n- Due dates: ____\n- Paper copies kept at: ____\n\n**4. Health stuff**\n- Meds list location: ____\n- Doctor numbers: ____\n- Insurance cards: ____\n- Ride for appointments: ____\n\n**5. House basics**\n- House key: ____\n- Car key: ____\n- Alarm code: ____\n- Shutoff valves: ____\n- Breaker panel: ____\n- Flashlight: ____\n- Batteries: ____\n\n**6. Call first**\n- Name / number: ____\n- Name / number: ____\n\n**7. Do not bother unless serious**\n- Name / number: ____\n- Name / number: ____\n\n**8. Do not touch**\n- Papers: ____\n- Meds: ____\n- Mail: ____\n- Other: ____\n\n**What counts as serious:** ____\n\nIf you want, I can also make this into a **clean one-page version with tighter spacing** for printing.",
+          "category": "agent_reply",
+          "task_index": 21,
+          "turn": 3,
+          "score": 0.21366743743419647
+        }
+      ],
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites discussion of how the user handles forms, follow-up steps, recordkeeping, and bureaucratic ambiguity, which can reasonably elicit their procedural habits and competence."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"What’s the safest way to deal with that so I don’t end up creating more trouble for myself later?\"",
+            "reason": "The user shows a cautious, process-oriented approach to bureaucracy, implying they want to manage forms and follow-up steps carefully to avoid future problems."
+          }
+        ],
+        "ep_index": 8
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "legal_awareness_knowledge",
+      "explanation": "He pays close attention to contracts, disclosures, and terms before committing. He understands enough to delay signing, push back, and avoid being rushed into obligations. His knowledge is practical and defensive rather than broad legal fluency.",
+      "ground_truth": "Paperwork-savvy, but distrustful of signatures",
+      "predicted": "knows to check fine print for hidden legal traps",
+      "slot_fill_reason": "They listed contract traps like auto-renewal, price hikes, cancellation notice, arbitration, waiver, liability limits, and opt-out terms, and emphasized reading notices and fine print carefully.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the practical caution and attention to fine print, but it does not fully capture the stronger distrust of signatures and paperwork-savvy defensiveness in the ground truth.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Yeah. That’s the list I’d watch for. Short enough to use.\n\nIf I’m scanning a contract, those are the traps: auto-renewal, price hikes, cancellation notice, early exit fee, unilateral changes, arbitration, waiver, liability limits, extra fees, and anything I have to opt out of. The stuff hidden in the fine print is usually where they get cute.\n\nI’d also check whether the notice has to be in writing, where it has to be sent, and whether they say it counts even if you never actually saw it. That part can matter more than the fancy language.\n\nGood enough.",
+          "category": "user_reply",
+          "task_index": 9,
+          "turn": 2,
+          "score": 0.26154643297195435
+        },
+        {
+          "content": "User: Yeah. That’s the usable version.\n\nThe utility line and the examples for serious — that’s what was missing before. And the “do not touch” list is right. Papers, receipts, counter stuff — that’s exactly where people start messing things up.\n\nThis one works.",
+          "category": "user_reply",
+          "task_index": 21,
+          "turn": 4,
+          "score": 0.25995028018951416
+        },
+        {
+          "content": "[Task 10] I’ve got a doctor follow-up and a couple of appointment reminders to sort out, and I want to make sure I’m not missing anything between the visit, the paperwork, and what happens after. What’s the simplest way to keep it all straight without relying on memory?",
+          "category": "task",
+          "task_index": 10,
+          "score": 0.2445206493139267
+        },
+        {
+          "content": "[Task 9] I’ve got a service agreement and a couple of pages of fine print sitting here, and I’m trying to decide what I should read carefully before I go any further. What should I look for first so I don’t get stuck with something I didn’t mean to agree to?",
+          "category": "task",
+          "task_index": 9,
+          "score": 0.23596960306167603
+        },
+        {
+          "content": "User: Yeah, that’s the right idea. But I’d want it tighter than that.\n\nMain thing: if they’re asking for the same facts, I’d answer once in the most complete way, then reuse that exact wording everywhere unless one of them clearly says otherwise. No freelancing. No “close enough.”\n\nWhat I’d watch for:\n- exact name / case number / reference number\n- whether one wants originals and the other copies\n- whether one needs a signature under penalty of perjury or whatever they call it\n- deadlines, because those are usually where the trouble starts\n- where each piece goes, since agencies love making two addresses look interchangeable when they aren’t\n\nAnd I’d keep a simple log:\n- date received\n- date mailed or submitted\n- what was sent\n- who it went to\n- tracking number if there is one\n\nLast time I dealt with anything like that after my stroke, the problem wasn’t the form itself. It was the follow-up calls and the same questions coming back later because somebody couldn’t find the first copy. So I keep my own paper trail now. Saves grief.\n\nIf you want, lay out the two instructions side by side and I’ll tell you which parts actually differ.",
+          "category": "user_reply",
+          "task_index": 8,
+          "turn": 1,
+          "score": 0.22433802485466003
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "health_services_knowledge",
+      "explanation": "He understands enough about clinics, insurers, follow-ups, and recovery routines to manage his own care. He knows how to collect information and keep track of appointments, but he does not treat the system as friendly. His knowledge is shaped by caution and self-protection more than confidence in medicine.",
+      "ground_truth": "Informed patient, not a trusting one",
+      "predicted": "knows practical health-service basics and emergency warning signs",
+      "slot_fill_reason": "They listed health-related items like meds lists, doctor numbers, insurance cards, appointment transportation, and serious signs such as chest pain, stroke signs, falls, and missed or confused medicine.",
+      "score": 0.5,
+      "judge_reason": "The prediction overlaps with being practically informed about health services, but it misses the key idea that this knowledge is cautious and self-protective rather than trusting, and it adds emergency warning signs not central to the ground truth.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "[Task 10] I’ve got a doctor follow-up and a couple of appointment reminders to sort out, and I want to make sure I’m not missing anything between the visit, the paperwork, and what happens after. What’s the simplest way to keep it all straight without relying on memory?",
+          "category": "task",
+          "task_index": 10,
+          "score": 0.3555717468261719
+        },
+        {
+          "content": "User: Closer. Still a little too neat, but usable.\n\nWhat I’d want next is the actual fill-in sheet with the blanks lined up better, and maybe a line for **utilities** too — water, power, gas, internet. Those matter when something goes sideways.\n\nAnd the **what counts as serious** line shouldn’t be vague. Put examples right on it. Something like:\n- fire, gas smell, water leak\n- can’t reach me / no answer for too long\n- medicine missed or confused\n- fall, stroke signs, chest pain\n\nThat way nobody has to guess.\n\nAlso, I’d want **Do not touch** to include:\n- paperwork\n- receipts\n- mail piles\n- meds\n- anything on the desk or kitchen counter\n\nPeople love “tidying up” the exact stuff you need later. Bad habit.\n\nIf you’re making the printable version, keep it plain. No extra talk on the page. Just the sheet and maybe a short note at the bottom: **If unsure, leave it and call first.**",
+          "category": "user_reply",
+          "task_index": 21,
+          "turn": 3,
+          "score": 0.3273308277130127
+        },
+        {
+          "content": "User: Pretty much the right idea. But make it more concrete, less generic.\n\nI’d want it broken into:\n- **daily chores**: trash, mail, dishes, laundry, pet stuff if any\n- **outside errands**: groceries, pharmacy, gas, post office\n- **money**: bills, autopay, due dates, where the paper copies are\n- **health stuff**: meds list, doctor numbers, insurance cards, transportation to appointments\n- **house basics**: keys, alarm codes, shutoff valves, breaker panel, flashlight, batteries\n- **who gets called first** and who does **not** get bothered unless it’s serious\n\nAnd one thing people skip: write down **what not to touch**. Some folks “help” by moving papers or throwing things out. That causes trouble fast.\n\nI’d also keep a short paper copy in the kitchen and another somewhere separate. Not just on a phone. Phones fail, batteries die, people forget passwords. I’ve had enough of that nonsense already.",
+          "category": "user_reply",
+          "task_index": 21,
+          "turn": 1,
+          "score": 0.3082704544067383
+        },
+        {
+          "content": "Agent: **BACKUP PLAN**\n\n**If you don’t know, leave it alone and call first.**\n\n**1. Daily chores**\n- Trash: ____\n- Mail: ____\n- Dishes: ____\n- Laundry: ____\n- Pet care: ____\n\n**2. Outside errands**\n- Groceries: ____\n- Pharmacy: ____\n- Gas: ____\n- Post office: ____\n\n**3. Money**\n- Bills to pay: ____\n- Autopay items: ____\n- Due dates: ____\n- Paper copies kept at: ____\n\n**4. Health stuff**\n- Meds list location: ____\n- Doctor numbers: ____\n- Insurance cards: ____\n- Ride for appointments: ____\n\n**5. House basics**\n- House key: ____\n- Car key: ____\n- Alarm code: ____\n- Shutoff valves: ____\n- Breaker panel: ____\n- Flashlight: ____\n- Batteries: ____\n\n**6. Call first**\n- Name / number: ____\n- Name / number: ____\n\n**7. Do not bother unless serious**\n- Name / number: ____\n- Name / number: ____\n\n**8. Do not touch**\n- Papers: ____\n- Meds: ____\n- Mail: ____\n- Other: ____\n\n**What counts as serious:** ____\n\nIf you want, I can also make this into a **clean one-page version with tighter spacing** for printing.",
+          "category": "agent_reply",
+          "task_index": 21,
+          "turn": 3,
+          "score": 0.29573357105255127
+        },
+        {
+          "content": "Agent: Use a **small daily check-in** with just a few fields. Keep it short enough that you’ll actually do it.\n\n### Simple tracker\n- **Date:**\n- **Energy level:** low / okay / good\n- **Sleep:** poor / fair / good\n- **Food / water:** okay / not okay\n- **Anything unusual:** headache, pain, stress, nausea, etc.\n- **What changed today:** meds, exercise, schedule, alcohol, illness, skipped meals\n- **Keep an eye on?** yes / no\n\n### How to use it\n- Fill it out once a day, same time if possible.\n- Don’t write paragraphs.\n- Only note things that changed or stood out.\n- After a few days, look for patterns:\n  - worse after poor sleep\n  - worse when you skip meals\n  - worse on busy days\n  - no clear pattern at all\n\n### Simple rule\nIf it’s **brief, repeatable, and dated**, it’s useful.  \nIf it turns into a diary, it’s too much.\n\nIf you want, I can make this into a **one-page printable log** with blank lines.",
+          "category": "agent_reply",
+          "task_index": 11,
+          "turn": 1,
+          "score": 0.29225409030914307
+        }
+      ],
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites discussion of how the user manages follow-ups, paperwork, reminders, and post-visit routines, which can reasonably elicit their practical knowledge of clinics, appointments, and care coordination."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"I’ve got a doctor follow-up and a couple of appointment reminders to sort out, and I want to make sure I’m not missing anything between the visit, the paperwork, and what happens after.\"",
+            "reason": "The user shows practical knowledge of managing follow-ups, paperwork, and post-visit steps, indicating an informed, self-managing approach to health services."
+          }
+        ],
+        "ep_index": 10
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "health_literacy_knowledge",
+      "explanation": "He appears to understand the basic realities of his body, symptoms, and recovery needs. The way he adapts routines and watches for practical needs suggests he can track what helps and what makes things worse. He is not medically sophisticated, but he is alert to what his health requires.",
+      "ground_truth": "Knows his limits and monitors them closely",
+      "predicted": "knows basic health and emergency planning terms",
+      "slot_fill_reason": "They explicitly listed meds, doctor numbers, insurance cards, transportation, and serious examples like stroke signs, chest pain, and missed medicine.",
+      "score": 0.25,
+      "judge_reason": "The prediction mentions basic health knowledge, but it misses the key idea that he knows his limits and actively monitors them.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "[Task 10] I’ve got a doctor follow-up and a couple of appointment reminders to sort out, and I want to make sure I’m not missing anything between the visit, the paperwork, and what happens after. What’s the simplest way to keep it all straight without relying on memory?",
+          "category": "task",
+          "task_index": 10,
+          "score": 0.32628101110458374
+        },
+        {
+          "content": "User: Closer. Still a little too neat, but usable.\n\nWhat I’d want next is the actual fill-in sheet with the blanks lined up better, and maybe a line for **utilities** too — water, power, gas, internet. Those matter when something goes sideways.\n\nAnd the **what counts as serious** line shouldn’t be vague. Put examples right on it. Something like:\n- fire, gas smell, water leak\n- can’t reach me / no answer for too long\n- medicine missed or confused\n- fall, stroke signs, chest pain\n\nThat way nobody has to guess.\n\nAlso, I’d want **Do not touch** to include:\n- paperwork\n- receipts\n- mail piles\n- meds\n- anything on the desk or kitchen counter\n\nPeople love “tidying up” the exact stuff you need later. Bad habit.\n\nIf you’re making the printable version, keep it plain. No extra talk on the page. Just the sheet and maybe a short note at the bottom: **If unsure, leave it and call first.**",
+          "category": "user_reply",
+          "task_index": 21,
+          "turn": 3,
+          "score": 0.3054090440273285
+        },
+        {
+          "content": "Agent: Use a **small daily check-in** with just a few fields. Keep it short enough that you’ll actually do it.\n\n### Simple tracker\n- **Date:**\n- **Energy level:** low / okay / good\n- **Sleep:** poor / fair / good\n- **Food / water:** okay / not okay\n- **Anything unusual:** headache, pain, stress, nausea, etc.\n- **What changed today:** meds, exercise, schedule, alcohol, illness, skipped meals\n- **Keep an eye on?** yes / no\n\n### How to use it\n- Fill it out once a day, same time if possible.\n- Don’t write paragraphs.\n- Only note things that changed or stood out.\n- After a few days, look for patterns:\n  - worse after poor sleep\n  - worse when you skip meals\n  - worse on busy days\n  - no clear pattern at all\n\n### Simple rule\nIf it’s **brief, repeatable, and dated**, it’s useful.  \nIf it turns into a diary, it’s too much.\n\nIf you want, I can make this into a **one-page printable log** with blank lines.",
+          "category": "agent_reply",
+          "task_index": 11,
+          "turn": 1,
+          "score": 0.29839205741882324
+        },
+        {
+          "content": "User: Pretty much the right idea. But make it more concrete, less generic.\n\nI’d want it broken into:\n- **daily chores**: trash, mail, dishes, laundry, pet stuff if any\n- **outside errands**: groceries, pharmacy, gas, post office\n- **money**: bills, autopay, due dates, where the paper copies are\n- **health stuff**: meds list, doctor numbers, insurance cards, transportation to appointments\n- **house basics**: keys, alarm codes, shutoff valves, breaker panel, flashlight, batteries\n- **who gets called first** and who does **not** get bothered unless it’s serious\n\nAnd one thing people skip: write down **what not to touch**. Some folks “help” by moving papers or throwing things out. That causes trouble fast.\n\nI’d also keep a short paper copy in the kitchen and another somewhere separate. Not just on a phone. Phones fail, batteries die, people forget passwords. I’ve had enough of that nonsense already.",
+          "category": "user_reply",
+          "task_index": 21,
+          "turn": 1,
+          "score": 0.2851119637489319
+        },
+        {
+          "content": "User: Yeah, closer. Still a little too clean. I’d want the actual sheet laid out so someone can use it without thinking.\n\nSomething like:\n\n**BACKUP PLAN**\n\n**1. Daily chores**\n- Trash: ____\n- Mail: ____\n- Dishes: ____\n- Laundry: ____\n- Pet care: ____\n\n**2. Outside errands**\n- Groceries: ____\n- Pharmacy: ____\n- Gas: ____\n- Post office: ____\n\n**3. Money**\n- Bills to pay: ____\n- Autopay items: ____\n- Due dates: ____\n- Paper copies kept at: ____\n\n**4. Health stuff**\n- Meds list location: ____\n- Doctor numbers: ____\n- Insurance cards: ____\n- Ride for appointments: ____\n\n**5. House basics**\n- House key: ____\n- Car key: ____\n- Alarm code: ____\n- Shutoff valves: ____\n- Breaker panel: ____\n- Flashlight: ____\n- Batteries: ____\n\n**6. Call first**\n- Name / number: ____\n- Name / number: ____\n\n**7. Do not bother unless serious**\n- Name / number: ____\n- Name / number: ____\n\n**8. Do not touch**\n- Papers: ____\n- Meds: ____\n- Mail: ____\n- Other: ____\n\nAnd I’d put one short note at the top: **If you don’t know, leave it alone and call first.** That’s the part people skip.\n\nCould also use a tiny “what counts as serious” line. Otherwise somebody decides for themselves, and that’s where the trouble starts.",
+          "category": "user_reply",
+          "task_index": 21,
+          "turn": 2,
+          "score": 0.24209845066070557
+        }
+      ],
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.25,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites discussion of how the user monitors symptoms, notices limits, and decides when to adjust routines, which can reasonably elicit evidence of practical health awareness and self-tracking."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "“I’ve been feeling a little run down lately” and “I’m trying to sort out what’s worth keeping an eye on before I decide whether to change my routine or let it pass”",
+            "reason": "The user shows awareness of bodily state and a practical, self-monitoring approach to deciding what affects their routine, which is enough to infer they knows their limits and watches them closely."
+          }
+        ],
+        "ep_index": 11
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "transportation_knowledge",
+      "explanation": "He knows how to move around town for errands and quiet outings without making a production out of it. His driving is tied to routine and convenience, not exploration or logistics expertise. He likely handles familiar routes well, but avoids unnecessary complexity.",
+      "ground_truth": "Local errand driver with practical route sense",
+      "predicted": "knows common transportation constraints affect trip planning",
+      "slot_fill_reason": "They explicitly asked to sort errands by concrete transport constraints like car problems, ride availability, distance, and heat, showing awareness of how those factors change transportation decisions.",
+      "score": 0.5,
+      "judge_reason": "The predicted description overlaps with practical trip planning and awareness of transportation constraints, but it misses the core idea of a local errand driver with familiar route sense and routine-oriented driving.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "[Task 20] I’ve got a short-term transportation issue that’s making everyday trips harder than usual, and I’m trying to figure out the least complicated way to get through the next couple of weeks. What would you do in that situation?",
+          "category": "task",
+          "task_index": 20,
+          "score": 0.34433820843696594
+        },
+        {
+          "content": "User: Better, but still generic. You’re using examples, not the actual list I asked for. I wanted grocery, pharmacy, doctor visit, shop pickup, whatever else — sorted plain, no hedging.\n\nAnd the car part still matters. Dead battery, flat, AC, brakes, whatever. If you don’t know that, say so. Don’t keep circling it.\n\nSo: give me the real errands in order, and the actual transport problem, then sort them. That’s the useful version.",
+          "category": "user_reply",
+          "task_index": 20,
+          "turn": 5,
+          "score": 0.329683393239975
+        },
+        {
+          "content": "User: Still not it. You’re sorting by category, not by the actual errands I named. I asked for the plain list — grocery, pharmacy, doctor visit, shop pickup — put into buckets, no filler.\n\nAnd on the transport problem, if you don’t know it, say you don’t know it. Don’t keep listing dead battery, flat tire, AC, brakes like that answers anything. It doesn’t.\n\nI wanted the concrete version, not another template dressed up as one.",
+          "category": "user_reply",
+          "task_index": 20,
+          "turn": 6,
+          "score": 0.3167557120323181
+        },
+        {
+          "content": "User: Yeah. Still too general.\n\nThat list is fine as far as it goes, but it’s just the same filter repeated. What I’d want now is the actual breakdown — like:\n- what’s wrong with the car, if it’s the car\n- whether I’ve got one ride option or none\n- how far I’m supposed to go\n- whether heat is part of it or not\n- and which trips are nonnegotiable\n\nWithout that, it’s still just a template. Useful, but not the answer.\n\nIf you want to make it practical, give me the real constraint and the actual errands, one by one. Then it can be cut down.",
+          "category": "user_reply",
+          "task_index": 20,
+          "turn": 2,
+          "score": 0.312465101480484
+        },
+        {
+          "content": "User: Closer, but still mostly a framework.\n\nWhat I’d want now is the actual cut-down list, not the method again. Give me the trips and I’ll sort them into:\n- must do\n- can combine\n- can wait\n- not worth the hassle\n\nAnd if there’s a car problem, spell that out. Flat tire, battery, AC, whatever. Same with rides — one solid option, or none. That changes the answer. Right now it’s still too abstract.",
+          "category": "user_reply",
+          "task_index": 20,
+          "turn": 3,
+          "score": 0.3047158420085907
+        }
+      ],
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites the user to discuss route planning, stop ordering, and practical driving familiarity, which can reasonably elicit information about their transportation knowledge."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"I need to get to a couple of places on the west side of town today... What’s a sensible way to put the stops together so the drive stays straightforward?\"",
+            "reason": "The user shows practical, routine-oriented driving behavior focused on combining local stops efficiently and keeping the route straightforward, which supports a local errand-driver with practical route sense."
+          }
+        ],
+        "ep_index": 12
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "geographic_knowledge",
+      "explanation": "He seems rooted in Covina and the surrounding Southern California environment, with a functional sense of nearby places and practical destinations. His knowledge is local and routine-based rather than broad or travel-oriented. He likely navigates his immediate region well, but does not show interest in wider geography.",
+      "ground_truth": "Knows his local area, not much beyond it",
+      "predicted": "knows west-side route ordering and address sequencing",
+      "slot_fill_reason": "They said to go farthest west first, work back toward home, and write the addresses down in order.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the idea of local, practical geographic knowledge, but it is narrower and more specific than the ground truth’s broader statement about knowing the local area and little beyond it.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "[Task 10] I’ve got a doctor follow-up and a couple of appointment reminders to sort out, and I want to make sure I’m not missing anything between the visit, the paperwork, and what happens after. What’s the simplest way to keep it all straight without relying on memory?",
+          "category": "task",
+          "task_index": 10,
+          "score": 0.23954413831233978
+        },
+        {
+          "content": "[Task 29] I’ve got a couple of small home fixes to sort out, and I’m trying to decide how to start without making it more complicated than it needs to be. What would you look at first, and what would you leave alone until later?",
+          "category": "task",
+          "task_index": 29,
+          "score": 0.22666235268115997
+        },
+        {
+          "content": "User: Yeah. That’s fine. Farthest west first, then work back. Put the slow one early if I have to wait around. And write the addresses down in order — no point pretending memory is better than paper.\n\nThat’s the right way to keep it simple.",
+          "category": "user_reply",
+          "task_index": 12,
+          "turn": 2,
+          "score": 0.2181420922279358
+        },
+        {
+          "content": "User: Yeah, that’s the general idea. But I’d want it a little more practical than that.\n\nIf the west side places are spread out, do the farthest one first and work back toward home. Less chance of getting trapped in traffic and circling around. If one stop is the kind where they make you wait anyway, put that one earlier too. Don’t save the annoying one for last.\n\nI’d line it up like this:\n1. Anything with a set time.\n2. The farthest west stop.\n3. The rest in a clean line back.\n4. Home before the heat or the rush gets worse.\n\nAnd I’d write down the addresses in order before I leave. No sense trusting memory when you don’t have to.\n\nIf you want, give me the actual places and I’ll sort them without making it fancy.",
+          "category": "user_reply",
+          "task_index": 12,
+          "turn": 1,
+          "score": 0.20559053122997284
+        },
+        {
+          "content": "Agent: **BACKUP PLAN**\n\n**If you don’t know, leave it alone and call first.**\n\n**1. Daily chores**\n- Trash: ____\n- Mail: ____\n- Dishes: ____\n- Laundry: ____\n- Pet care: ____\n\n**2. Outside errands**\n- Groceries: ____\n- Pharmacy: ____\n- Gas: ____\n- Post office: ____\n\n**3. Money**\n- Bills to pay: ____\n- Autopay items: ____\n- Due dates: ____\n- Paper copies kept at: ____\n\n**4. Health stuff**\n- Meds list location: ____\n- Doctor numbers: ____\n- Insurance cards: ____\n- Ride for appointments: ____\n\n**5. House basics**\n- House key: ____\n- Car key: ____\n- Alarm code: ____\n- Shutoff valves: ____\n- Breaker panel: ____\n- Flashlight: ____\n- Batteries: ____\n\n**6. Call first**\n- Name / number: ____\n- Name / number: ____\n\n**7. Do not bother unless serious**\n- Name / number: ____\n- Name / number: ____\n\n**8. Do not touch**\n- Papers: ____\n- Meds: ____\n- Mail: ____\n- Other: ____\n\n**What counts as serious:** ____\n\nIf you want, I can also make this into a **clean one-page version with tighter spacing** for printing.",
+          "category": "agent_reply",
+          "task_index": 21,
+          "turn": 3,
+          "score": 0.2018936574459076
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "weather_and_seasonal_knowledge",
+      "explanation": "He understands the practical impact of hot Southern California weather and adjusts his day accordingly. He avoids the worst heat and times errands to stay comfortable, which suggests experience rather than formal knowledge. His awareness is narrow but useful, focused on immediate conditions and personal comfort.",
+      "ground_truth": "Heat-aware and schedules around it",
+      "predicted": "understands weather and heat can affect how they feel",
+      "slot_fill_reason": "They noted feeling off in the afternoon and said it turned out to be food and heat, not a big mystery.",
+      "score": 0.5,
+      "judge_reason": "The prediction captures general awareness that heat affects comfort, but it misses the key behavior of actively scheduling around hot weather to avoid it.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Yeah, that’s the right general idea. But I’d want it even tighter. If it turns into five minutes of scribbling, I won’t keep doing it.\n\nI’d want maybe just:\n- date\n- energy 1 to 5\n- sleep hours\n- any new symptom\n- anything different from usual\n\nThat’s enough to see a pattern without making a project out of it.\n\nOne thing I’d add: note the time of day the run-down feeling shows up. Morning, after lunch, evening. That matters. I’ve had days where I felt off mostly in the afternoon and it turned out to be food and heat, not some big mystery.\n\nIf you want, make me a plain one-page version. No fluff, just boxes I can fill in fast.",
+          "category": "user_reply",
+          "task_index": 11,
+          "turn": 1,
+          "score": 0.31973692774772644
+        },
+        {
+          "content": "Agent: Use a **small daily check-in** with just a few fields. Keep it short enough that you’ll actually do it.\n\n### Simple tracker\n- **Date:**\n- **Energy level:** low / okay / good\n- **Sleep:** poor / fair / good\n- **Food / water:** okay / not okay\n- **Anything unusual:** headache, pain, stress, nausea, etc.\n- **What changed today:** meds, exercise, schedule, alcohol, illness, skipped meals\n- **Keep an eye on?** yes / no\n\n### How to use it\n- Fill it out once a day, same time if possible.\n- Don’t write paragraphs.\n- Only note things that changed or stood out.\n- After a few days, look for patterns:\n  - worse after poor sleep\n  - worse when you skip meals\n  - worse on busy days\n  - no clear pattern at all\n\n### Simple rule\nIf it’s **brief, repeatable, and dated**, it’s useful.  \nIf it turns into a diary, it’s too much.\n\nIf you want, I can make this into a **one-page printable log** with blank lines.",
+          "category": "agent_reply",
+          "task_index": 11,
+          "turn": 1,
+          "score": 0.29398006200790405
+        },
+        {
+          "content": "[Task 10] I’ve got a doctor follow-up and a couple of appointment reminders to sort out, and I want to make sure I’m not missing anything between the visit, the paperwork, and what happens after. What’s the simplest way to keep it all straight without relying on memory?",
+          "category": "task",
+          "task_index": 10,
+          "score": 0.2902102470397949
+        },
+        {
+          "content": "[Task 11] I’ve been feeling a little run down lately, and I’m trying to sort out what’s worth keeping an eye on before I decide whether to change my routine or let it pass. What’s a practical way to track that without turning it into a bigger project than it needs to be?",
+          "category": "task",
+          "task_index": 11,
+          "score": 0.26267337799072266
+        },
+        {
+          "content": "[Task 29] I’ve got a couple of small home fixes to sort out, and I’m trying to decide how to start without making it more complicated than it needs to be. What would you look at first, and what would you leave alone until later?",
+          "category": "task",
+          "task_index": 29,
+          "score": 0.25304698944091797
+        }
+      ],
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites discussion of local weather and heat timing, so a cooperative user could reveal whether they plan around hot conditions and adjust errands accordingly."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "“What’s the simplest way to plan it so I’m not stuck out there when it’s miserable?”",
+            "reason": "The user explicitly shows concern about hot, uncomfortable weather and wants to schedule errands around it, which is enough to infer heat-aware seasonal planning."
+          }
+        ],
+        "ep_index": 14
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "health_crisis_event",
+      "explanation": "His minor stroke while repairing a fence was a clear before-and-after event. It left him with numbness and a lower tolerance for long outings, which changed how he shops, schedules, and prepares at home. He did not become openly grateful or optimistic; he became more controlled and more careful.",
+      "ground_truth": "Stroke forced him to reorganize daily life",
+      "predicted": "had a past health episode that required tracking symptoms and follow-up",
+      "slot_fill_reason": "They asked for a simple daily symptom tracker and noted patterns like afternoon run-down feeling, suggesting a prior health issue they were monitoring over time.",
+      "score": 0.5,
+      "judge_reason": "The prediction mentions a prior health episode with ongoing tracking and follow-up, which overlaps with a stroke-related event, but it misses the key impact of reorganizing daily life and the before-and-after change.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Yeah, that’s the general idea. Too broad though.\n\nI’d want a simple fault tree, not a lecture. Start with:\n- what the thing is\n- what it’s doing wrong\n- what it used to do right\n- whether the failure is sudden or gradual\n- anything changed right before it started\n\nThen narrow it by the least expensive test first. No random parts swapping. I’ve done enough of that kind of nonsense over the years. Usually it’s either power, blockage, wear, or one bad connection — not some mysterious chain reaction.\n\nIf you want, give me the actual problem and I’ll help sort it out step by step.",
+          "category": "user_reply",
+          "task_index": 4,
+          "turn": 1,
+          "score": 0.335514098405838
+        },
+        {
+          "content": "User: Yeah, that’s the right general idea. But I’d want it even tighter. If it turns into five minutes of scribbling, I won’t keep doing it.\n\nI’d want maybe just:\n- date\n- energy 1 to 5\n- sleep hours\n- any new symptom\n- anything different from usual\n\nThat’s enough to see a pattern without making a project out of it.\n\nOne thing I’d add: note the time of day the run-down feeling shows up. Morning, after lunch, evening. That matters. I’ve had days where I felt off mostly in the afternoon and it turned out to be food and heat, not some big mystery.\n\nIf you want, make me a plain one-page version. No fluff, just boxes I can fill in fast.",
+          "category": "user_reply",
+          "task_index": 11,
+          "turn": 1,
+          "score": 0.30096256732940674
+        },
+        {
+          "content": "Agent: Use a **small daily check-in** with just a few fields. Keep it short enough that you’ll actually do it.\n\n### Simple tracker\n- **Date:**\n- **Energy level:** low / okay / good\n- **Sleep:** poor / fair / good\n- **Food / water:** okay / not okay\n- **Anything unusual:** headache, pain, stress, nausea, etc.\n- **What changed today:** meds, exercise, schedule, alcohol, illness, skipped meals\n- **Keep an eye on?** yes / no\n\n### How to use it\n- Fill it out once a day, same time if possible.\n- Don’t write paragraphs.\n- Only note things that changed or stood out.\n- After a few days, look for patterns:\n  - worse after poor sleep\n  - worse when you skip meals\n  - worse on busy days\n  - no clear pattern at all\n\n### Simple rule\nIf it’s **brief, repeatable, and dated**, it’s useful.  \nIf it turns into a diary, it’s too much.\n\nIf you want, I can make this into a **one-page printable log** with blank lines.",
+          "category": "agent_reply",
+          "task_index": 11,
+          "turn": 1,
+          "score": 0.300434410572052
+        },
+        {
+          "content": "[Task 10] I’ve got a doctor follow-up and a couple of appointment reminders to sort out, and I want to make sure I’m not missing anything between the visit, the paperwork, and what happens after. What’s the simplest way to keep it all straight without relying on memory?",
+          "category": "task",
+          "task_index": 10,
+          "score": 0.28042250871658325
+        },
+        {
+          "content": "User: Yeah, that’s the right idea. But I’d want it a little tighter — one page, easy to scan, and room for the paper trail.\n\nI’d use 3 sections:\n\n- **Before the visit**\n  - date/time\n  - doctor/office\n  - what to bring\n  - anything to ask\n\n- **At the visit**\n  - what they said\n  - tests ordered\n  - meds changed\n  - referrals\n  - next appointment\n\n- **After the visit**\n  - forms to keep\n  - copies made\n  - calls to return\n  - deadlines / follow-up date\n\nI’d also add a little box for **“who I spoke to”** and **“reference number”** if insurance gets involved. Learned that one the hard way. Keeps them from pretending the call never happened.\n\nIf you want, make it into a plain printable sheet — no fancy stuff, just boxes I can fill in by hand.",
+          "category": "user_reply",
+          "task_index": 10,
+          "turn": 1,
+          "score": 0.26491719484329224
+        }
+      ],
+      "attribution": {
+        "category": "agent_elicitation_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "A natural follow-up about why the user needs to avoid overdoing chores could reasonably elicit mention of a health crisis or lingering limitation, such as a stroke or other event affecting stamina."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": false,
+            "evidence": "none",
+            "reason": "The user only asks for pacing chores to avoid overexertion, with no mention of any health crisis or lasting change from one."
+          },
+          {
+            "stage": "disclosure_subclass",
+            "category": "A",
+            "reason": "The conversation stayed on general chore pacing and energy management, with no attempt to bring up any health crisis or stroke-related before-and-after change.",
+            "evidence": "\"I’m trying to plan a couple of chores around the house and I don’t want to overdo it\""
+          }
+        ],
+        "ep_index": 15
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "financial_shock_event",
+      "explanation": "Property taxes and maintenance costs climbed until selling the house became the practical answer. That financial pressure forced a major change in living situation and made him more cost-conscious about stability. The experience seems to have reinforced his preference for trimming obligations rather than stretching for more.",
+      "ground_truth": "Rising costs pushed him to downsize",
+      "predicted": "recent household expenses increased unexpectedly",
+      "slot_fill_reason": "The only evidence is a task about several regular household expenses having gone up lately, but no specific shock event or consequence is described.",
+      "score": 0.5,
+      "judge_reason": "The prediction matches the idea of rising expenses causing financial pressure, but it does not clearly capture the key outcome that he downscaled or moved to a smaller, more affordable living situation.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Yeah, that’s the general idea. Too broad though.\n\nI’d want a simple fault tree, not a lecture. Start with:\n- what the thing is\n- what it’s doing wrong\n- what it used to do right\n- whether the failure is sudden or gradual\n- anything changed right before it started\n\nThen narrow it by the least expensive test first. No random parts swapping. I’ve done enough of that kind of nonsense over the years. Usually it’s either power, blockage, wear, or one bad connection — not some mysterious chain reaction.\n\nIf you want, give me the actual problem and I’ll help sort it out step by step.",
+          "category": "user_reply",
+          "task_index": 4,
+          "turn": 1,
+          "score": 0.32982075214385986
+        },
+        {
+          "content": "[Task 6] A few regular household expenses have gone up lately, and I’m trying to get a clearer picture of where the money is going. What’s a straightforward way to sort through them and decide what to keep, change, or drop?",
+          "category": "task",
+          "task_index": 6,
+          "score": 0.27807024121284485
+        },
+        {
+          "content": "User: That’s basically the right idea. I’d want it a little tighter, though.\n\nMake the log with a column for **priority** too, because due date alone isn’t always enough. Some stuff is easy and can go out same day, some needs a callback or a second form, and some can sit. I’d also add **account number / reference number** if there is one. Saves digging later.\n\nSo maybe:\n- Item\n- Priority\n- Date received\n- Due date\n- Action needed\n- Sent / called\n- Who / where\n- Reference or tracking number\n- Proof kept\n- Notes\n\nAnd I’d separate the pile into three stacks:\n1. **Do today**\n2. **Needs a call**\n3. **Needs more reading**\n\nThat last one matters. Some notices look simple and then there’s a line on page 2 that changes the whole thing. Been burned by that before. Not kidding.\n\nIf you want, give me the actual notices in rough form and I’ll sort them into that system.",
+          "category": "user_reply",
+          "task_index": 18,
+          "turn": 1,
+          "score": 0.25691476464271545
+        },
+        {
+          "content": "User: Yeah, that’s basically the right shape. But I’d want it tighter.\n\nWhat I need is a simple paper trail I can trust while I’m going through it — something like:\n- item name\n- deadline\n- action needed\n- whether I already answered it\n- where it’s supposed to go\n- copy kept or not\n\nAnd I’d separate the stack by **date first**, not just urgency words. Some of these notices look harmless until you read the fine print.\n\nIf you want to make it useful, give me a plain checklist or table I can print and write on. Nothing fancy.",
+          "category": "user_reply",
+          "task_index": 1,
+          "turn": 1,
+          "score": 0.2441912442445755
+        },
+        {
+          "content": "[Task 26] A friend is writing about how people seem to change over the years and wants a plain, matter-of-fact line to use in a note. I’m trying to help them phrase it without making it sound dramatic or overly philosophical.",
+          "category": "task",
+          "task_index": 26,
+          "score": 0.2420405149459839
+        }
+      ],
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites discussion of financial pressures, rising costs, and a situation becoming less manageable over time, which could reasonably lead a user to mention a cost-driven downsizing or similar financial shock event."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"I want to think through the long-term expenses before I make any decisions\"",
+            "reason": "The user explicitly focuses on rising long-term costs and managing something becoming less manageable over time, which is enough to infer a financial pressure/shock leading to downsizing or trimming obligations."
+          }
+        ],
+        "ep_index": 16
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "relocation_or_migration_event",
+      "explanation": "The move from a long-owned house to a smaller condo was a disruptive shift in his environment and routines. It was not a romantic new start; it was a constrained adjustment made under pressure. The storage unit, noisy tenant, and thin walls all show how relocation narrowed comfort and increased his need for workaround habits.",
+      "ground_truth": "Moved into a smaller condo after leaving the house",
+      "predicted": "unknown",
+      "slot_fill_reason": "The memories only mention a plain-language writing request and an unrelated household troubleshooting question; there is no concrete relocation or migration event.",
+      "score": 0.0,
+      "judge_reason": "The predicted description is unknown, so it does not capture the relocation event of moving into a smaller condo after leaving the house.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "Agent: A plain way to say it:\n\n**People can change over time, and sometimes you only notice it when you look back.**\n\nA few other simple options:\n- **People change, and not always in ways you expect.**\n- **Time changes people more than they notice at the time.**\n- **People don’t stay the same, even when they think they will.**\n\nIf you want, I can give you **3 more versions** in a more casual or more serious tone.",
+          "category": "agent_reply",
+          "task_index": 26,
+          "turn": 1,
+          "score": 0.27541816234588623
+        },
+        {
+          "content": "User: Yeah, close enough. But it still sounds a little tidy.\n\nI’d want it plainer. More like:\n\n**People change over time, usually without noticing it right away.**\n\nOr:\n\n**People change, and you don’t always see it until later.**\n\nThat first one is probably the cleanest. The rest start sounding like a quote somebody framed on a wall.",
+          "category": "user_reply",
+          "task_index": 26,
+          "turn": 1,
+          "score": 0.2615860104560852
+        },
+        {
+          "content": "[Task 26] A friend is writing about how people seem to change over the years and wants a plain, matter-of-fact line to use in a note. I’m trying to help them phrase it without making it sound dramatic or overly philosophical.",
+          "category": "task",
+          "task_index": 26,
+          "score": 0.24754390120506287
+        },
+        {
+          "content": "Agent: You’re right — I don’t know the actual transport problem from what you gave me, so I shouldn’t pretend I do.\n\n### Sorted plain\n**Must do**\n- doctor visit\n- pharmacy\n- grocery\n\n**Can combine**\n- grocery + pharmacy\n- doctor visit + one nearby stop\n- shop pickup + one nearby stop\n\n**Can wait**\n- whatever else is optional for the next 2 weeks\n\n**Not worth the hassle**\n- extra trips that don’t change anything\n- anything that adds a lot of heat, waiting, or backtracking\n\n### Transport problem\n- **Unknown**\n- If you tell me what it is, I can sort the trips around it properly.\n\nIf you want, send the actual errand list and the transport issue in one line, and I’ll cut it down cleanly.",
+          "category": "agent_reply",
+          "task_index": 20,
+          "turn": 7,
+          "score": 0.21707381308078766
+        },
+        {
+          "content": "[Task 4] I’ve got a household issue that’s acting up and I’d rather not just start swapping parts at random. What’s a sensible way to narrow down what’s actually wrong before I decide whether it’s worth fixing myself or calling it done?",
+          "category": "task",
+          "task_index": 4,
+          "score": 0.21135561168193817
+        }
+      ],
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.0,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task directly asks about a decision to stay put versus downsizing and simplifying, which naturally invites discussion of a past move or relocation experience that could reveal whether the user moved into a smaller condo after leaving a house."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "cut down on space and simplify things",
+            "reason": "The user explicitly discusses deciding whether to stay put or reduce living space, which strongly signals a relocation/downsizing event."
+          }
+        ],
+        "ep_index": 17
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "legal_or_administrative_event",
+      "explanation": "After the stroke, he was pulled into forms, follow-up appointments, and insurer calls that he did not want to repeat. That experience taught him to document everything, preserve records, and limit what he shares. It strengthened his belief that bureaucracy is easiest to survive by controlling the paper trail.",
+      "ground_truth": "Paperwork and insurers taught him to keep copies",
+      "predicted": "reviewed notices and contracts for deadlines and fine-print traps",
+      "slot_fill_reason": "The memories mention sorting papers/notices by priority, due date, reference number, and scanning contracts for auto-renewal, cancellation notice, fees, arbitration, and other fine-print traps.",
+      "score": 0.5,
+      "judge_reason": "The prediction overlaps with the bureaucracy/legal-paperwork theme and careful document review, but it misses the specific idea of keeping copies due to paperwork and insurers.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: That’s basically the right idea. I’d want it a little tighter, though.\n\nMake the log with a column for **priority** too, because due date alone isn’t always enough. Some stuff is easy and can go out same day, some needs a callback or a second form, and some can sit. I’d also add **account number / reference number** if there is one. Saves digging later.\n\nSo maybe:\n- Item\n- Priority\n- Date received\n- Due date\n- Action needed\n- Sent / called\n- Who / where\n- Reference or tracking number\n- Proof kept\n- Notes\n\nAnd I’d separate the pile into three stacks:\n1. **Do today**\n2. **Needs a call**\n3. **Needs more reading**\n\nThat last one matters. Some notices look simple and then there’s a line on page 2 that changes the whole thing. Been burned by that before. Not kidding.\n\nIf you want, give me the actual notices in rough form and I’ll sort them into that system.",
+          "category": "user_reply",
+          "task_index": 18,
+          "turn": 1,
+          "score": 0.24161522090435028
+        },
+        {
+          "content": "User: Yeah. That’s the list I’d watch for. Short enough to use.\n\nIf I’m scanning a contract, those are the traps: auto-renewal, price hikes, cancellation notice, early exit fee, unilateral changes, arbitration, waiver, liability limits, extra fees, and anything I have to opt out of. The stuff hidden in the fine print is usually where they get cute.\n\nI’d also check whether the notice has to be in writing, where it has to be sent, and whether they say it counts even if you never actually saw it. That part can matter more than the fancy language.\n\nGood enough.",
+          "category": "user_reply",
+          "task_index": 9,
+          "turn": 2,
+          "score": 0.2327660620212555
+        },
+        {
+          "content": "Agent: A plain way to say it:\n\n**People can change over time, and sometimes you only notice it when you look back.**\n\nA few other simple options:\n- **People change, and not always in ways you expect.**\n- **Time changes people more than they notice at the time.**\n- **People don’t stay the same, even when they think they will.**\n\nIf you want, I can give you **3 more versions** in a more casual or more serious tone.",
+          "category": "agent_reply",
+          "task_index": 26,
+          "turn": 1,
+          "score": 0.23196890950202942
+        },
+        {
+          "content": "[Task 30] I’ve got a few papers and notices to get through, and I want to keep them from piling up on the table. I’m trying to decide the best way to sort what needs attention first, what can wait, and what can be filed away.",
+          "category": "task",
+          "task_index": 30,
+          "score": 0.23070143163204193
+        },
+        {
+          "content": "[Task 26] A friend is writing about how people seem to change over the years and wants a plain, matter-of-fact line to use in a note. I’m trying to help them phrase it without making it sound dramatic or overly philosophical.",
+          "category": "task",
+          "task_index": 26,
+          "score": 0.21760344505310059
+        }
+      ],
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally concerns notices, follow-up forms, and insurer calls, which can reasonably prompt discussion of past legal or administrative experiences that shaped how the person handles paperwork and records."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"I’m trying to decide the best way to handle them so I can keep track of what’s been sent and what still needs attention.\"",
+            "reason": "The user explicitly shows a preference for managing notices/forms/calls by tracking paperwork and keeping records, which is enough to infer a value around handling legal/administrative events through documentation."
+          }
+        ],
+        "ep_index": 18
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "betrayal_or_conflict_event",
+      "explanation": "The insurer and administrative process did not feel supportive to him, only intrusive and repetitive. While not a dramatic personal betrayal, it clearly deepened his suspicion that people and institutions will ask for more than they give. He responded by becoming more guarded, not by seeking reassurance.",
+      "ground_truth": "Trusted the system less after the insurer hassle",
+      "predicted": "experienced being burned by hidden details in notices and repairs",
+      "slot_fill_reason": "They mentioned being \"burned by that before\" when notices had important details on page 2, and described avoiding random parts swapping from past repair nonsense.",
+      "score": 0.5,
+      "judge_reason": "The prediction overlaps with the idea of feeling let down by a system and becoming more guarded, but it shifts the event to hidden details in notices and repairs rather than the insurer hassle and reduced trust in the system.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "Agent: A plain way to say it:\n\n**People can change over time, and sometimes you only notice it when you look back.**\n\nA few other simple options:\n- **People change, and not always in ways you expect.**\n- **Time changes people more than they notice at the time.**\n- **People don’t stay the same, even when they think they will.**\n\nIf you want, I can give you **3 more versions** in a more casual or more serious tone.",
+          "category": "agent_reply",
+          "task_index": 26,
+          "turn": 1,
+          "score": 0.2670924663543701
+        },
+        {
+          "content": "[Task 26] A friend is writing about how people seem to change over the years and wants a plain, matter-of-fact line to use in a note. I’m trying to help them phrase it without making it sound dramatic or overly philosophical.",
+          "category": "task",
+          "task_index": 26,
+          "score": 0.24478653073310852
+        },
+        {
+          "content": "User: Yeah, close enough. But it still sounds a little tidy.\n\nI’d want it plainer. More like:\n\n**People change over time, usually without noticing it right away.**\n\nOr:\n\n**People change, and you don’t always see it until later.**\n\nThat first one is probably the cleanest. The rest start sounding like a quote somebody framed on a wall.",
+          "category": "user_reply",
+          "task_index": 26,
+          "turn": 1,
+          "score": 0.2259412556886673
+        },
+        {
+          "content": "User: That’s basically the right idea. I’d want it a little tighter, though.\n\nMake the log with a column for **priority** too, because due date alone isn’t always enough. Some stuff is easy and can go out same day, some needs a callback or a second form, and some can sit. I’d also add **account number / reference number** if there is one. Saves digging later.\n\nSo maybe:\n- Item\n- Priority\n- Date received\n- Due date\n- Action needed\n- Sent / called\n- Who / where\n- Reference or tracking number\n- Proof kept\n- Notes\n\nAnd I’d separate the pile into three stacks:\n1. **Do today**\n2. **Needs a call**\n3. **Needs more reading**\n\nThat last one matters. Some notices look simple and then there’s a line on page 2 that changes the whole thing. Been burned by that before. Not kidding.\n\nIf you want, give me the actual notices in rough form and I’ll sort them into that system.",
+          "category": "user_reply",
+          "task_index": 18,
+          "turn": 1,
+          "score": 0.2210066318511963
+        },
+        {
+          "content": "User: Yeah, that’s the general idea. Too broad though.\n\nI’d want a simple fault tree, not a lecture. Start with:\n- what the thing is\n- what it’s doing wrong\n- what it used to do right\n- whether the failure is sudden or gradual\n- anything changed right before it started\n\nThen narrow it by the least expensive test first. No random parts swapping. I’ve done enough of that kind of nonsense over the years. Usually it’s either power, blockage, wear, or one bad connection — not some mysterious chain reaction.\n\nIf you want, give me the actual problem and I’ll help sort it out step by step.",
+          "category": "user_reply",
+          "task_index": 4,
+          "turn": 1,
+          "score": 0.21812082827091217
+        }
+      ],
+      "attribution": {
+        "category": "agent_elicitation_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "A probing assistant could naturally ask about why the claim and letters feel difficult to handle, which could elicit a story about feeling let down or mistrustful of the insurer and administrative process."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": false,
+            "evidence": "none",
+            "reason": "The dialogue only asks for help prioritizing benefits paperwork and does not reveal any reaction of distrust, betrayal, or conflict toward the insurer or system."
+          },
+          {
+            "stage": "disclosure_subclass",
+            "category": "A",
+            "reason": "The agent only asked about organizing benefits claim paperwork and deadlines, without steering toward trust, conflict, or feeling let down by an insurer or institution.",
+            "evidence": "\"I’ve got a benefits claim and a couple of follow-up letters... What’s the most straightforward way to sort through it?\""
+          }
+        ],
+        "ep_index": 19
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "unexpected_kindness_event",
+      "explanation": "When a neighbor offered groceries and rides after his stroke, it was an unexpected offer of practical help. He declined most of it and chose a paid driver instead, which shows he registered the kindness but did not want the dependency. The event mattered mainly because it confirmed his preference for controlled, transactional support over personal favors.",
+      "ground_truth": "Neighbor offered help, but he kept distance",
+      "predicted": "unknown",
+      "slot_fill_reason": "The memories show the user refining wording and organizing notices, but no concrete event of unexpected kindness is described.",
+      "score": 0.0,
+      "judge_reason": "Predicted is unknown, so it does not capture the ground truth that a neighbor offered help but he kept distance.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "Agent: A plain way to say it:\n\n**People can change over time, and sometimes you only notice it when you look back.**\n\nA few other simple options:\n- **People change, and not always in ways you expect.**\n- **Time changes people more than they notice at the time.**\n- **People don’t stay the same, even when they think they will.**\n\nIf you want, I can give you **3 more versions** in a more casual or more serious tone.",
+          "category": "agent_reply",
+          "task_index": 26,
+          "turn": 1,
+          "score": 0.25779587030410767
+        },
+        {
+          "content": "User: Yeah, close enough. But it still sounds a little tidy.\n\nI’d want it plainer. More like:\n\n**People change over time, usually without noticing it right away.**\n\nOr:\n\n**People change, and you don’t always see it until later.**\n\nThat first one is probably the cleanest. The rest start sounding like a quote somebody framed on a wall.",
+          "category": "user_reply",
+          "task_index": 26,
+          "turn": 1,
+          "score": 0.2504502832889557
+        },
+        {
+          "content": "[Task 18] I’ve got a couple of notices and follow-up forms sitting here, along with a few calls I need to make. I’m trying to decide the best way to handle them so I can keep track of what’s been sent and what still needs attention.",
+          "category": "task",
+          "task_index": 18,
+          "score": 0.23047003149986267
+        },
+        {
+          "content": "[Task 26] A friend is writing about how people seem to change over the years and wants a plain, matter-of-fact line to use in a note. I’m trying to help them phrase it without making it sound dramatic or overly philosophical.",
+          "category": "task",
+          "task_index": 26,
+          "score": 0.22246775031089783
+        },
+        {
+          "content": "User: That’s basically the right idea. I’d want it a little tighter, though.\n\nMake the log with a column for **priority** too, because due date alone isn’t always enough. Some stuff is easy and can go out same day, some needs a callback or a second form, and some can sit. I’d also add **account number / reference number** if there is one. Saves digging later.\n\nSo maybe:\n- Item\n- Priority\n- Date received\n- Due date\n- Action needed\n- Sent / called\n- Who / where\n- Reference or tracking number\n- Proof kept\n- Notes\n\nAnd I’d separate the pile into three stacks:\n1. **Do today**\n2. **Needs a call**\n3. **Needs more reading**\n\nThat last one matters. Some notices look simple and then there’s a line on page 2 that changes the whole thing. Been burned by that before. Not kidding.\n\nIf you want, give me the actual notices in rough form and I’ll sort them into that system.",
+          "category": "user_reply",
+          "task_index": 18,
+          "turn": 1,
+          "score": 0.21617263555526733
+        }
+      ],
+      "attribution": {
+        "category": "agent_elicitation_failure",
+        "score": 0.0,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The transportation problem could naturally prompt discussion of unexpected help from others, such as a neighbor or friend offering rides or errands, which can lead the user to reveal how they responded to an unanticipated act of kindness."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": false,
+            "evidence": "none",
+            "reason": "The user only mentions a temporary transportation issue and asks for general advice, with no mention of any unexpected kindness or response to help from others."
+          },
+          {
+            "stage": "disclosure_subclass",
+            "category": "A",
+            "reason": "The agent only asked about transportation logistics and never steered toward an unexpected act of kindness or help from another person.",
+            "evidence": "\"I’ve got a short-term transportation issue... What would you do in that situation?\""
+          }
+        ],
+        "ep_index": 20
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "turning_point_event",
+      "explanation": "The stroke and its aftermath redirected his habits toward caution, preparation, and self-management. Beforehand, he was already routine-minded, but afterward he became more deliberate about emergency numbers, food choices, and limiting strain. It did not transform him into a different person, but it sharpened the life strategy he already preferred.",
+      "ground_truth": "Minor stroke made control feel necessary",
+      "predicted": "unknown",
+      "slot_fill_reason": "The notes show a general troubleshooting approach and a plain phrasing request, but no concrete past event that clearly served as a turning point.",
+      "score": 0.0,
+      "judge_reason": "The predicted description is unknown, so it does not capture the ground truth meaning.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Yeah, that’s the general idea. Too broad though.\n\nI’d want a simple fault tree, not a lecture. Start with:\n- what the thing is\n- what it’s doing wrong\n- what it used to do right\n- whether the failure is sudden or gradual\n- anything changed right before it started\n\nThen narrow it by the least expensive test first. No random parts swapping. I’ve done enough of that kind of nonsense over the years. Usually it’s either power, blockage, wear, or one bad connection — not some mysterious chain reaction.\n\nIf you want, give me the actual problem and I’ll help sort it out step by step.",
+          "category": "user_reply",
+          "task_index": 4,
+          "turn": 1,
+          "score": 0.29387909173965454
+        },
+        {
+          "content": "[Task 26] A friend is writing about how people seem to change over the years and wants a plain, matter-of-fact line to use in a note. I’m trying to help them phrase it without making it sound dramatic or overly philosophical.",
+          "category": "task",
+          "task_index": 26,
+          "score": 0.2781223952770233
+        },
+        {
+          "content": "[Task 11] I’ve been feeling a little run down lately, and I’m trying to sort out what’s worth keeping an eye on before I decide whether to change my routine or let it pass. What’s a practical way to track that without turning it into a bigger project than it needs to be?",
+          "category": "task",
+          "task_index": 11,
+          "score": 0.2758111357688904
+        },
+        {
+          "content": "Agent: A plain way to say it:\n\n**People can change over time, and sometimes you only notice it when you look back.**\n\nA few other simple options:\n- **People change, and not always in ways you expect.**\n- **Time changes people more than they notice at the time.**\n- **People don’t stay the same, even when they think they will.**\n\nIf you want, I can give you **3 more versions** in a more casual or more serious tone.",
+          "category": "agent_reply",
+          "task_index": 26,
+          "turn": 1,
+          "score": 0.25996261835098267
+        },
+        {
+          "content": "[Task 4] I’ve got a household issue that’s acting up and I’d rather not just start swapping parts at random. What’s a sensible way to narrow down what’s actually wrong before I decide whether it’s worth fixing myself or calling it done?",
+          "category": "task",
+          "task_index": 4,
+          "score": 0.21812255680561066
+        }
+      ],
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.0,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "A discussion about a household back-up plan naturally invites the user to explain why they want it, and that can lead to mentioning a health or life event that changed their approach to preparedness and control."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"in case I’m not up to doing everything the usual way for a while\"",
+            "reason": "The user explicitly frames the request around being temporarily unable to manage normally, which strongly suggests a health-related turning point that made planning and self-management feel necessary."
+          }
+        ],
+        "ep_index": 21
+      }
+    },
+    {
+      "category": "self_model",
+      "dimension": "prudence_self_view",
+      "explanation": "He likely sees his caution as a strength, not a weakness. He reads paperwork carefully, delays signatures, and keeps backups because he believes that is the sensible way to protect himself. His self-image leans toward measured control rather than spontaneity.",
+      "ground_truth": "Sees himself as cautious and hard to fool",
+      "predicted": "careful, skeptical, and wary of hidden overhead",
+      "slot_fill_reason": "They repeatedly stress checking for chain reactions, hidden exceptions, and whether something is truly manageable or just patched over.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the cautious, wary self-view and implies being hard to fool, but it adds an odd phrase about hidden overhead and does not explicitly capture the self-image aspect.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Yeah. That’s basically it.\n\nThe only thing I’d add is: don’t let “still manageable” fool you if it’s only manageable because you’re papering over problems every week. That’s not stable, that’s patched.\n\nFor me the real test is:\n- can I keep it without outside help\n- does it still fit my body, not just my pride\n- am I spending time on it that I’d rather not\n- if one thing goes wrong, does it turn into a chain reaction\n\nIf the answer starts leaning the wrong way on two or three of those, I’d call that a sign to simplify.\n\nSo yeah, your list is the right one. The important part is not pretending overhead is something else.",
+          "category": "user_reply",
+          "task_index": 17,
+          "turn": 2,
+          "score": 0.23444628715515137
+        },
+        {
+          "content": "User: Fine. But keep it plain. I want the options laid out clean, with the downside on each one, and what I’d be stuck with if I picked wrong.\n\nThe one that might turn bigger is the only thing I’m worried about. The routine stuff is just routine.\n\nI’m not looking for a pep talk or a sales job. Just the choices, the consequences, and what I should watch for before I sign or commit to anything.",
+          "category": "user_reply",
+          "task_index": 31,
+          "turn": 1,
+          "score": 0.21961775422096252
+        },
+        {
+          "content": "User: Better. Still a little loose.\n\nI’d want the tabs locked down to something I can live with and not keep fiddling with. Something like:\n\n1. **Front / Index**\n2. **Bills**\n3. **Medical**\n4. **Home**\n5. **Insurance**\n6. **Contacts / Log**\n\nAnd I’d be picky about what stays in the binder:\n- **Front**: index, current month bills, current meds list, active repair or claim notes\n- **Bills**: only current bills, paid confirmations for the current year, autopay list\n- **Medical**: recent visit summaries, referrals, meds list, lab results that matter\n- **Home**: appliance model numbers, manuals for stuff I actually own, repair receipts, warranty pages\n- **Insurance**: current policies, cards, open claims, claim numbers\n- **Contacts / Log**: phone numbers, account numbers, call notes, dates, who said what\n\nWhat gets out:\n- duplicates\n- old paid bills once I’ve kept what I need\n- expired warranties\n- manuals for dead appliances\n- old medical junk that doesn’t affect anything now\n- closed claims after I’ve kept the final paper\n\nI’d also put a hard rule on it: if a paper sits there and doesn’t get used for a year, it gets moved out or shredded. Otherwise it turns into a catch-all. That’s usually how these things rot.\n\nYeah, a simple printable index page would help. Not a fancy one. Just tab, what’s in it, date last checked, and where the backup copy is if there is one.",
+          "category": "user_reply",
+          "task_index": 23,
+          "turn": 2,
+          "score": 0.1701260209083557
+        },
+        {
+          "content": "User: Yeah. Still too general.\n\nThat list is fine as far as it goes, but it’s just the same filter repeated. What I’d want now is the actual breakdown — like:\n- what’s wrong with the car, if it’s the car\n- whether I’ve got one ride option or none\n- how far I’m supposed to go\n- whether heat is part of it or not\n- and which trips are nonnegotiable\n\nWithout that, it’s still just a template. Useful, but not the answer.\n\nIf you want to make it practical, give me the real constraint and the actual errands, one by one. Then it can be cut down.",
+          "category": "user_reply",
+          "task_index": 20,
+          "turn": 2,
+          "score": 0.16901284456253052
+        },
+        {
+          "content": "User: Yeah. That’s the shape of it. Tight enough to use without playing games with it.\n\nI’d just print it and run down the lines. The only thing I’d add is a box for “read twice if unclear” or something like that, because those instructions love hiding one stupid exception in the middle of a paragraph. But as-is, it does the job.",
+          "category": "user_reply",
+          "task_index": 22,
+          "turn": 2,
+          "score": 0.16869081556797028
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "self_model",
+      "dimension": "organization_self_view",
+      "explanation": "He seems to view himself as someone who keeps things in order, especially when life gets messy. Writing things down, saving copies, and taping emergency numbers in a cabinet fit a self-image built around preparedness. He may not be neat in a polished sense, but he likely sees himself as functionally organized.",
+      "ground_truth": "Thinks of himself as orderly and prepared",
+      "predicted": "careful, methodical organizer who wants clear tracking systems",
+      "slot_fill_reason": "They asked for a plain checklist/table with item name, deadline, action needed, answer status, destination, and copy kept, and said they separate by date first.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of seeing himself as organized and prepared, but it emphasizes careful tracking systems more than the broader self-view of being orderly in messy situations.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Yeah. That’s basically it.\n\nThe only thing I’d add is: don’t let “still manageable” fool you if it’s only manageable because you’re papering over problems every week. That’s not stable, that’s patched.\n\nFor me the real test is:\n- can I keep it without outside help\n- does it still fit my body, not just my pride\n- am I spending time on it that I’d rather not\n- if one thing goes wrong, does it turn into a chain reaction\n\nIf the answer starts leaning the wrong way on two or three of those, I’d call that a sign to simplify.\n\nSo yeah, your list is the right one. The important part is not pretending overhead is something else.",
+          "category": "user_reply",
+          "task_index": 17,
+          "turn": 2,
+          "score": 0.21897317469120026
+        },
+        {
+          "content": "[Task 9] I’ve got a service agreement and a couple of pages of fine print sitting here, and I’m trying to decide what I should read carefully before I go any further. What should I look for first so I don’t get stuck with something I didn’t mean to agree to?",
+          "category": "task",
+          "task_index": 9,
+          "score": 0.18364521861076355
+        },
+        {
+          "content": "User: Fine. But keep it plain. I want the options laid out clean, with the downside on each one, and what I’d be stuck with if I picked wrong.\n\nThe one that might turn bigger is the only thing I’m worried about. The routine stuff is just routine.\n\nI’m not looking for a pep talk or a sales job. Just the choices, the consequences, and what I should watch for before I sign or commit to anything.",
+          "category": "user_reply",
+          "task_index": 31,
+          "turn": 1,
+          "score": 0.17890304327011108
+        },
+        {
+          "content": "[Task 19] I’ve got a benefits claim and a couple of follow-up letters sitting here, and I’m trying to decide what to answer first so I don’t end up repeating myself or missing a deadline. What’s the most straightforward way to sort through it?",
+          "category": "task",
+          "task_index": 19,
+          "score": 0.16278012096881866
+        },
+        {
+          "content": "User: Yeah, that’s basically the right shape. But I’d want it tighter.\n\nWhat I need is a simple paper trail I can trust while I’m going through it — something like:\n- item name\n- deadline\n- action needed\n- whether I already answered it\n- where it’s supposed to go\n- copy kept or not\n\nAnd I’d separate the stack by **date first**, not just urgency words. Some of these notices look harmless until you read the fine print.\n\nIf you want to make it useful, give me a plain checklist or table I can print and write on. Nothing fancy.",
+          "category": "user_reply",
+          "task_index": 1,
+          "turn": 1,
+          "score": 0.1530454158782959
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "self_model",
+      "dimension": "emotional_dependence_self_view",
+      "explanation": "He appears to believe he should handle problems without leaning on other people. Declining neighbor help and preferring paid, transactional support suggest he values distance over emotional reliance. His self-view likely treats dependence as a liability.",
+      "ground_truth": "Sees himself as emotionally self-contained",
+      "predicted": "prefers self-reliance and low emotional reliance on others",
+      "slot_fill_reason": "They emphasize keeping things manageable without outside help and wanting minimal, practical tracking rather than leaning on others for support.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of being emotionally self-contained and avoiding reliance on others, though it is phrased more as a preference than a self-view.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Yeah. That’s basically it.\n\nThe only thing I’d add is: don’t let “still manageable” fool you if it’s only manageable because you’re papering over problems every week. That’s not stable, that’s patched.\n\nFor me the real test is:\n- can I keep it without outside help\n- does it still fit my body, not just my pride\n- am I spending time on it that I’d rather not\n- if one thing goes wrong, does it turn into a chain reaction\n\nIf the answer starts leaning the wrong way on two or three of those, I’d call that a sign to simplify.\n\nSo yeah, your list is the right one. The important part is not pretending overhead is something else.",
+          "category": "user_reply",
+          "task_index": 17,
+          "turn": 2,
+          "score": 0.2769201993942261
+        },
+        {
+          "content": "Agent: A plain way to say it:\n\n**People can change over time, and sometimes you only notice it when you look back.**\n\nA few other simple options:\n- **People change, and not always in ways you expect.**\n- **Time changes people more than they notice at the time.**\n- **People don’t stay the same, even when they think they will.**\n\nIf you want, I can give you **3 more versions** in a more casual or more serious tone.",
+          "category": "agent_reply",
+          "task_index": 26,
+          "turn": 1,
+          "score": 0.18784789741039276
+        },
+        {
+          "content": "User: Yeah. Still too general.\n\nThat list is fine as far as it goes, but it’s just the same filter repeated. What I’d want now is the actual breakdown — like:\n- what’s wrong with the car, if it’s the car\n- whether I’ve got one ride option or none\n- how far I’m supposed to go\n- whether heat is part of it or not\n- and which trips are nonnegotiable\n\nWithout that, it’s still just a template. Useful, but not the answer.\n\nIf you want to make it practical, give me the real constraint and the actual errands, one by one. Then it can be cut down.",
+          "category": "user_reply",
+          "task_index": 20,
+          "turn": 2,
+          "score": 0.16757521033287048
+        },
+        {
+          "content": "Agent: Use a **small daily check-in** with just a few fields. Keep it short enough that you’ll actually do it.\n\n### Simple tracker\n- **Date:**\n- **Energy level:** low / okay / good\n- **Sleep:** poor / fair / good\n- **Food / water:** okay / not okay\n- **Anything unusual:** headache, pain, stress, nausea, etc.\n- **What changed today:** meds, exercise, schedule, alcohol, illness, skipped meals\n- **Keep an eye on?** yes / no\n\n### How to use it\n- Fill it out once a day, same time if possible.\n- Don’t write paragraphs.\n- Only note things that changed or stood out.\n- After a few days, look for patterns:\n  - worse after poor sleep\n  - worse when you skip meals\n  - worse on busy days\n  - no clear pattern at all\n\n### Simple rule\nIf it’s **brief, repeatable, and dated**, it’s useful.  \nIf it turns into a diary, it’s too much.\n\nIf you want, I can make this into a **one-page printable log** with blank lines.",
+          "category": "agent_reply",
+          "task_index": 11,
+          "turn": 1,
+          "score": 0.16673138737678528
+        },
+        {
+          "content": "User: Yeah, that’s the right general idea. But I’d want it even tighter. If it turns into five minutes of scribbling, I won’t keep doing it.\n\nI’d want maybe just:\n- date\n- energy 1 to 5\n- sleep hours\n- any new symptom\n- anything different from usual\n\nThat’s enough to see a pattern without making a project out of it.\n\nOne thing I’d add: note the time of day the run-down feeling shows up. Morning, after lunch, evening. That matters. I’ve had days where I felt off mostly in the afternoon and it turned out to be food and heat, not some big mystery.\n\nIf you want, make me a plain one-page version. No fluff, just boxes I can fill in fast.",
+          "category": "user_reply",
+          "task_index": 11,
+          "turn": 1,
+          "score": 0.16550004482269287
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "self_model",
+      "dimension": "sociability_self_view",
+      "explanation": "He does not seem to think of himself as someone who naturally seeks out company. His routines, quiet outings, and preference for keeping distance all point to a self-image of limited social appetite. He likely sees social contact as occasional and useful, not central.",
+      "ground_truth": "Sees himself as selective and mostly solitary",
+      "predicted": "sees themselves as reserved and not wanting pep talks",
+      "slot_fill_reason": "They repeatedly ask for plain, no-sales, no-pep-talk answers and focus on practical consequences rather than social reassurance.",
+      "score": 0.5,
+      "judge_reason": "The prediction matches the idea of being reserved and not socially eager, but it misses the key self-view of being selective and mostly solitary.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Yeah. That’s basically it.\n\nThe only thing I’d add is: don’t let “still manageable” fool you if it’s only manageable because you’re papering over problems every week. That’s not stable, that’s patched.\n\nFor me the real test is:\n- can I keep it without outside help\n- does it still fit my body, not just my pride\n- am I spending time on it that I’d rather not\n- if one thing goes wrong, does it turn into a chain reaction\n\nIf the answer starts leaning the wrong way on two or three of those, I’d call that a sign to simplify.\n\nSo yeah, your list is the right one. The important part is not pretending overhead is something else.",
+          "category": "user_reply",
+          "task_index": 17,
+          "turn": 2,
+          "score": 0.24039818346500397
+        },
+        {
+          "content": "[Task 29] I’ve got a couple of small home fixes to sort out, and I’m trying to decide how to start without making it more complicated than it needs to be. What would you look at first, and what would you leave alone until later?",
+          "category": "task",
+          "task_index": 29,
+          "score": 0.17767830193042755
+        },
+        {
+          "content": "[Task 16] I’m comparing a place that looks workable now, but I want to think through the long-term expenses before I make any decisions. What kinds of costs or changes would you look at first when something starts to feel less manageable over time?",
+          "category": "task",
+          "task_index": 16,
+          "score": 0.1742088496685028
+        },
+        {
+          "content": "User: Fine. But keep it plain. I want the options laid out clean, with the downside on each one, and what I’d be stuck with if I picked wrong.\n\nThe one that might turn bigger is the only thing I’m worried about. The routine stuff is just routine.\n\nI’m not looking for a pep talk or a sales job. Just the choices, the consequences, and what I should watch for before I sign or commit to anything.",
+          "category": "user_reply",
+          "task_index": 31,
+          "turn": 1,
+          "score": 0.1714295595884323
+        },
+        {
+          "content": "Agent: A plain way to say it:\n\n**People can change over time, and sometimes you only notice it when you look back.**\n\nA few other simple options:\n- **People change, and not always in ways you expect.**\n- **Time changes people more than they notice at the time.**\n- **People don’t stay the same, even when they think they will.**\n\nIf you want, I can give you **3 more versions** in a more casual or more serious tone.",
+          "category": "agent_reply",
+          "task_index": 26,
+          "turn": 1,
+          "score": 0.15612483024597168
+        }
+      ],
+      "attribution": {
+        "category": "task_design_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": false,
+            "reason": "The task is about organizing a weekly schedule and does not naturally call for discussion of the user’s sociability or self-view, so it is unlikely to elicit that dimension even with follow-up."
+          }
+        ],
+        "ep_index": 25
+      }
+    },
+    {
+      "category": "self_model",
+      "dimension": "self_consistency_self_view",
+      "explanation": "He seems to think of himself as someone who stays the same across situations. His fixed routines, cautious habits, and preference for control suggest he values consistency over reinvention. Even when circumstances changed, he adapted by tightening his habits rather than reworking his identity.",
+      "ground_truth": "Sees himself as steady and predictable",
+      "predicted": "sees self as consistent and careful about follow-through",
+      "slot_fill_reason": "They emphasize keeping exact wording, maintaining a paper trail, and avoiding freelancing because follow-up problems happen when details drift.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of being consistent and steady, but it emphasizes careful follow-through more than the ground truth’s broader sense of being predictable across situations.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Yeah. That’s basically it.\n\nThe only thing I’d add is: don’t let “still manageable” fool you if it’s only manageable because you’re papering over problems every week. That’s not stable, that’s patched.\n\nFor me the real test is:\n- can I keep it without outside help\n- does it still fit my body, not just my pride\n- am I spending time on it that I’d rather not\n- if one thing goes wrong, does it turn into a chain reaction\n\nIf the answer starts leaning the wrong way on two or three of those, I’d call that a sign to simplify.\n\nSo yeah, your list is the right one. The important part is not pretending overhead is something else.",
+          "category": "user_reply",
+          "task_index": 17,
+          "turn": 2,
+          "score": 0.28826749324798584
+        },
+        {
+          "content": "Agent: A plain way to say it:\n\n**People can change over time, and sometimes you only notice it when you look back.**\n\nA few other simple options:\n- **People change, and not always in ways you expect.**\n- **Time changes people more than they notice at the time.**\n- **People don’t stay the same, even when they think they will.**\n\nIf you want, I can give you **3 more versions** in a more casual or more serious tone.",
+          "category": "agent_reply",
+          "task_index": 26,
+          "turn": 1,
+          "score": 0.22423462569713593
+        },
+        {
+          "content": "Agent: Use a **small daily check-in** with just a few fields. Keep it short enough that you’ll actually do it.\n\n### Simple tracker\n- **Date:**\n- **Energy level:** low / okay / good\n- **Sleep:** poor / fair / good\n- **Food / water:** okay / not okay\n- **Anything unusual:** headache, pain, stress, nausea, etc.\n- **What changed today:** meds, exercise, schedule, alcohol, illness, skipped meals\n- **Keep an eye on?** yes / no\n\n### How to use it\n- Fill it out once a day, same time if possible.\n- Don’t write paragraphs.\n- Only note things that changed or stood out.\n- After a few days, look for patterns:\n  - worse after poor sleep\n  - worse when you skip meals\n  - worse on busy days\n  - no clear pattern at all\n\n### Simple rule\nIf it’s **brief, repeatable, and dated**, it’s useful.  \nIf it turns into a diary, it’s too much.\n\nIf you want, I can make this into a **one-page printable log** with blank lines.",
+          "category": "agent_reply",
+          "task_index": 11,
+          "turn": 1,
+          "score": 0.18680888414382935
+        },
+        {
+          "content": "User: Yeah, that’s the right idea. But I’d want it tighter than that.\n\nMain thing: if they’re asking for the same facts, I’d answer once in the most complete way, then reuse that exact wording everywhere unless one of them clearly says otherwise. No freelancing. No “close enough.”\n\nWhat I’d watch for:\n- exact name / case number / reference number\n- whether one wants originals and the other copies\n- whether one needs a signature under penalty of perjury or whatever they call it\n- deadlines, because those are usually where the trouble starts\n- where each piece goes, since agencies love making two addresses look interchangeable when they aren’t\n\nAnd I’d keep a simple log:\n- date received\n- date mailed or submitted\n- what was sent\n- who it went to\n- tracking number if there is one\n\nLast time I dealt with anything like that after my stroke, the problem wasn’t the form itself. It was the follow-up calls and the same questions coming back later because somebody couldn’t find the first copy. So I keep my own paper trail now. Saves grief.\n\nIf you want, lay out the two instructions side by side and I’ll tell you which parts actually differ.",
+          "category": "user_reply",
+          "task_index": 8,
+          "turn": 1,
+          "score": 0.1864883303642273
+        },
+        {
+          "content": "User: Fine. But keep it plain. I want the options laid out clean, with the downside on each one, and what I’d be stuck with if I picked wrong.\n\nThe one that might turn bigger is the only thing I’m worried about. The routine stuff is just routine.\n\nI’m not looking for a pep talk or a sales job. Just the choices, the consequences, and what I should watch for before I sign or commit to anything.",
+          "category": "user_reply",
+          "task_index": 31,
+          "turn": 1,
+          "score": 0.1772061288356781
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "formality_preference",
+      "explanation": "He would likely respond best to a straightforward, respectful tone rather than anything chatty or gushy. His overall style is practical and guarded, so overly casual friendliness may feel intrusive. He probably prefers help that sounds competent and restrained.",
+      "ground_truth": "Prefers plain, no-nonsense help",
+      "predicted": "prefers plain, concise, structured explanations",
+      "slot_fill_reason": "They asked to keep it plain, lay out options cleanly, and focus on commands, limits, measurements, numbered steps, and diagrams while skimming padding.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of preferring plain, no-nonsense help, though it emphasizes concise and structured explanations rather than the guarded, restrained tone implied by the ground truth.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Yeah. That’s the useful version.\n\nThe only thing I’d add is: if the page starts with a blob of “helpful” language and then suddenly gets tight — numbered steps, exact parts, little diagram callouts — that’s usually where the real work is. The rest is just padding.\n\nSo yeah, commands, limits, measurements, matching diagram. Everything else, skim it and don’t get cute.",
+          "category": "user_reply",
+          "task_index": 28,
+          "turn": 5,
+          "score": 0.2825583815574646
+        },
+        {
+          "content": "User: Fine. But keep it plain. I want the options laid out clean, with the downside on each one, and what I’d be stuck with if I picked wrong.\n\nThe one that might turn bigger is the only thing I’m worried about. The routine stuff is just routine.\n\nI’m not looking for a pep talk or a sales job. Just the choices, the consequences, and what I should watch for before I sign or commit to anything.",
+          "category": "user_reply",
+          "task_index": 31,
+          "turn": 1,
+          "score": 0.2756124436855316
+        },
+        {
+          "content": "Agent: Safest way: **treat them as two separate requests until you confirm they’re truly the same.**\n\n### Do this first\n1. **Read both side by side**\n   - Compare:\n     - what information they ask for\n     - due dates\n     - where each one must be sent\n     - whether one is a response and the other is just a notice\n\n2. **Look for differences in wording**\n   - Same topic doesn’t always mean same requirement.\n   - One may want a signature, attachment, or specific format the other doesn’t.\n\n3. **Keep copies of everything**\n   - The form\n   - The letter\n   - Any attachments\n   - What you send back\n\n4. **Answer each one exactly as instructed**\n   - Don’t assume one submission covers both unless it explicitly says so.\n\n5. **If there’s any overlap, use the stricter version**\n   - If one asks for more detail or a different format, follow that.\n\n6. **If the instructions conflict, ask before sending**\n   - Call the listed number or use the official contact.\n   - Write down who you spoke to, when, and what they said.\n\n### Simple rule\n- **Same information, different instructions = separate tasks**\n- **Unclear instructions = verify first**\n- **Never guess on deadlines or mailing addresses**\n\nIf you want, I can give you a **one-page comparison checklist** for the form and letter.",
+          "category": "agent_reply",
+          "task_index": 8,
+          "turn": 1,
+          "score": 0.27537041902542114
+        },
+        {
+          "content": "User: Closer. But I want the quick tells, not the category names.\n\nWhat I mean is stuff like:\n- exact verbs: *insert, align, tighten, hold, release* — that sort of thing\n- numbered steps with no extra prose around them\n- words like *until, unless, only if, do not* — those usually matter\n- diagrams with arrows or part labels that actually match the text\n- repeated warnings that change the order of the job, not the ones that just nag\n\nAnd the junk usually has a certain smell:\n- “for best results”\n- “easy to use”\n- “before you begin” paragraphs that say nothing new\n- generic “read all instructions first” stuff\n- same sentence reworded three times\n\nSo yeah, give me a fast scan rule based on wording and layout. Something I can look at and decide, in a few seconds, whether to bother reading it line by line or just hunt for the one real section.",
+          "category": "user_reply",
+          "task_index": 28,
+          "turn": 3,
+          "score": 0.2643080949783325
+        },
+        {
+          "content": "User: Yeah. That’s the usable version.\n\nThe utility line and the examples for serious — that’s what was missing before. And the “do not touch” list is right. Papers, receipts, counter stuff — that’s exactly where people start messing things up.\n\nThis one works.",
+          "category": "user_reply",
+          "task_index": 21,
+          "turn": 4,
+          "score": 0.2567981481552124
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "verbosity_preference",
+      "explanation": "He seems unlikely to enjoy extended explanations unless they are necessary to get something done. His routine, control-oriented habits suggest he values efficiency over conversation. Long-winded help would probably feel like clutter.",
+      "ground_truth": "Wants concise answers, not long speeches",
+      "predicted": "prefers concise, plain, low-fluff answers",
+      "slot_fill_reason": "They repeatedly asked for the “quick tells,” “keep it plain,” and said to skim padding and avoid pep talks or sales jobs.",
+      "score": 1.0,
+      "judge_reason": "Both descriptions mean the person prefers concise, low-fluff communication rather than long explanations.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Yeah. That’s the useful version.\n\nThe only thing I’d add is: if the page starts with a blob of “helpful” language and then suddenly gets tight — numbered steps, exact parts, little diagram callouts — that’s usually where the real work is. The rest is just padding.\n\nSo yeah, commands, limits, measurements, matching diagram. Everything else, skim it and don’t get cute.",
+          "category": "user_reply",
+          "task_index": 28,
+          "turn": 5,
+          "score": 0.3169887065887451
+        },
+        {
+          "content": "User: Closer. But I want the quick tells, not the category names.\n\nWhat I mean is stuff like:\n- exact verbs: *insert, align, tighten, hold, release* — that sort of thing\n- numbered steps with no extra prose around them\n- words like *until, unless, only if, do not* — those usually matter\n- diagrams with arrows or part labels that actually match the text\n- repeated warnings that change the order of the job, not the ones that just nag\n\nAnd the junk usually has a certain smell:\n- “for best results”\n- “easy to use”\n- “before you begin” paragraphs that say nothing new\n- generic “read all instructions first” stuff\n- same sentence reworded three times\n\nSo yeah, give me a fast scan rule based on wording and layout. Something I can look at and decide, in a few seconds, whether to bother reading it line by line or just hunt for the one real section.",
+          "category": "user_reply",
+          "task_index": 28,
+          "turn": 3,
+          "score": 0.3089725375175476
+        },
+        {
+          "content": "Agent: Look for the parts that are **specific, numbered, and conditional**.\n\n### Real signal\n- **Numbered steps**\n- **Exact measurements**: “1/4 turn,” “2 screws,” “10 minutes”\n- **If / then language**: “If it doesn’t fit…”\n- **Warnings tied to a step**, not just a general paragraph\n- **Diagrams that match a step**\n- **Parts named exactly**: “bracket A,” “washer B,” not “hardware”\n\n### Probably fluff\n- long intro paragraphs\n- “before you begin” filler that repeats common sense\n- vague advice like “take care” or “handle with caution”\n- generic claims about quality or convenience\n- repeated phrasing with no new action\n\n### Fast test\nIf the sheet gives you:\n- a **clear sequence**\n- **specific actions**\n- **one or two exceptions**\n- **a diagram that actually lines up**\n\nthen it’s worth reading line by line.\n\nIf most of it is:\n- broad advice\n- repeated warnings\n- marketing language\n- no measurements, no sequence, no exceptions\n\nthen the useful part is probably small.\n\n### Short rule\n**Specific numbers, exact parts, and conditional steps = signal.**  \n**Vague advice and repeated common sense = fluff.**\n\nIf you want, I can give you a **30-second “signal vs fluff” checklist** you can use on any instruction sheet.",
+          "category": "agent_reply",
+          "task_index": 28,
+          "turn": 3,
+          "score": 0.256100058555603
+        },
+        {
+          "content": "User: Fine. But keep it plain. I want the options laid out clean, with the downside on each one, and what I’d be stuck with if I picked wrong.\n\nThe one that might turn bigger is the only thing I’m worried about. The routine stuff is just routine.\n\nI’m not looking for a pep talk or a sales job. Just the choices, the consequences, and what I should watch for before I sign or commit to anything.",
+          "category": "user_reply",
+          "task_index": 31,
+          "turn": 1,
+          "score": 0.253999263048172
+        },
+        {
+          "content": "User: Yeah. That’s the usable version.\n\nThe utility line and the examples for serious — that’s what was missing before. And the “do not touch” list is right. Papers, receipts, counter stuff — that’s exactly where people start messing things up.\n\nThis one works.",
+          "category": "user_reply",
+          "task_index": 21,
+          "turn": 4,
+          "score": 0.25282201170921326
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 1.0,
+        "stages": []
+      }
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "directness_preference",
+      "explanation": "He appears to prefer information delivered cleanly and without decorative reassurance. Since he distrusts spin and hidden catches, hedging too much may make him more skeptical rather than more comfortable. He likely wants the point stated plainly so he can judge it himself.",
+      "ground_truth": "Likes blunt, unsoftened answers",
+      "predicted": "prefers concise, direct, high-signal guidance",
+      "slot_fill_reason": "They asked for quick tells, fast scan rules, and said to skim padding and focus on the one real section.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core preference for direct, high-signal communication, but it is slightly softer and less explicit about wanting blunt, unsoftened answers.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Closer. But I want the quick tells, not the category names.\n\nWhat I mean is stuff like:\n- exact verbs: *insert, align, tighten, hold, release* — that sort of thing\n- numbered steps with no extra prose around them\n- words like *until, unless, only if, do not* — those usually matter\n- diagrams with arrows or part labels that actually match the text\n- repeated warnings that change the order of the job, not the ones that just nag\n\nAnd the junk usually has a certain smell:\n- “for best results”\n- “easy to use”\n- “before you begin” paragraphs that say nothing new\n- generic “read all instructions first” stuff\n- same sentence reworded three times\n\nSo yeah, give me a fast scan rule based on wording and layout. Something I can look at and decide, in a few seconds, whether to bother reading it line by line or just hunt for the one real section.",
+          "category": "user_reply",
+          "task_index": 28,
+          "turn": 3,
+          "score": 0.25047728419303894
+        },
+        {
+          "content": "User: Yeah. That’s the useful version.\n\nThe only thing I’d add is: if the page starts with a blob of “helpful” language and then suddenly gets tight — numbered steps, exact parts, little diagram callouts — that’s usually where the real work is. The rest is just padding.\n\nSo yeah, commands, limits, measurements, matching diagram. Everything else, skim it and don’t get cute.",
+          "category": "user_reply",
+          "task_index": 28,
+          "turn": 5,
+          "score": 0.24285832047462463
+        },
+        {
+          "content": "[Task 31] I’ve got a couple of routine things to sort out, but one of them could turn into a bigger decision if I handle it the wrong way. Can you help me lay out the options first and hold off on any final recommendation until I’ve looked it over?",
+          "category": "task",
+          "task_index": 31,
+          "score": 0.23252861201763153
+        },
+        {
+          "content": "User: Yeah. That’s the usable version.\n\nThe utility line and the examples for serious — that’s what was missing before. And the “do not touch” list is right. Papers, receipts, counter stuff — that’s exactly where people start messing things up.\n\nThis one works.",
+          "category": "user_reply",
+          "task_index": 21,
+          "turn": 4,
+          "score": 0.22705134749412537
+        },
+        {
+          "content": "Agent: Safest way: **treat them as two separate requests until you confirm they’re truly the same.**\n\n### Do this first\n1. **Read both side by side**\n   - Compare:\n     - what information they ask for\n     - due dates\n     - where each one must be sent\n     - whether one is a response and the other is just a notice\n\n2. **Look for differences in wording**\n   - Same topic doesn’t always mean same requirement.\n   - One may want a signature, attachment, or specific format the other doesn’t.\n\n3. **Keep copies of everything**\n   - The form\n   - The letter\n   - Any attachments\n   - What you send back\n\n4. **Answer each one exactly as instructed**\n   - Don’t assume one submission covers both unless it explicitly says so.\n\n5. **If there’s any overlap, use the stricter version**\n   - If one asks for more detail or a different format, follow that.\n\n6. **If the instructions conflict, ask before sending**\n   - Call the listed number or use the official contact.\n   - Write down who you spoke to, when, and what they said.\n\n### Simple rule\n- **Same information, different instructions = separate tasks**\n- **Unclear instructions = verify first**\n- **Never guess on deadlines or mailing addresses**\n\nIf you want, I can give you a **one-page comparison checklist** for the form and letter.",
+          "category": "agent_reply",
+          "task_index": 8,
+          "turn": 1,
+          "score": 0.22482427954673767
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "format_preference",
+      "explanation": "His paperwork habits suggest he works best with information that is easy to scan and verify. A structured format would suit his need to control details and avoid missing something important. Free-form prose is less likely to be his preferred delivery surface.",
+      "ground_truth": "Prefers bullets and checklists",
+      "predicted": "prefers plain, concise, structured checklists",
+      "slot_fill_reason": "They asked for options laid out clean, numbered steps with no extra prose, and plain printable sheets with only the needed fields.",
+      "score": 1.0,
+      "judge_reason": "The prediction matches the ground truth by indicating a preference for structured, checklist-style information that is easy to scan and verify.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Closer. But I want the quick tells, not the category names.\n\nWhat I mean is stuff like:\n- exact verbs: *insert, align, tighten, hold, release* — that sort of thing\n- numbered steps with no extra prose around them\n- words like *until, unless, only if, do not* — those usually matter\n- diagrams with arrows or part labels that actually match the text\n- repeated warnings that change the order of the job, not the ones that just nag\n\nAnd the junk usually has a certain smell:\n- “for best results”\n- “easy to use”\n- “before you begin” paragraphs that say nothing new\n- generic “read all instructions first” stuff\n- same sentence reworded three times\n\nSo yeah, give me a fast scan rule based on wording and layout. Something I can look at and decide, in a few seconds, whether to bother reading it line by line or just hunt for the one real section.",
+          "category": "user_reply",
+          "task_index": 28,
+          "turn": 3,
+          "score": 0.32496151328086853
+        },
+        {
+          "content": "User: Yeah. That’s the useful version.\n\nThe only thing I’d add is: if the page starts with a blob of “helpful” language and then suddenly gets tight — numbered steps, exact parts, little diagram callouts — that’s usually where the real work is. The rest is just padding.\n\nSo yeah, commands, limits, measurements, matching diagram. Everything else, skim it and don’t get cute.",
+          "category": "user_reply",
+          "task_index": 28,
+          "turn": 5,
+          "score": 0.3214174807071686
+        },
+        {
+          "content": "User: Fine. But keep it plain. I want the options laid out clean, with the downside on each one, and what I’d be stuck with if I picked wrong.\n\nThe one that might turn bigger is the only thing I’m worried about. The routine stuff is just routine.\n\nI’m not looking for a pep talk or a sales job. Just the choices, the consequences, and what I should watch for before I sign or commit to anything.",
+          "category": "user_reply",
+          "task_index": 31,
+          "turn": 1,
+          "score": 0.31704801321029663
+        },
+        {
+          "content": "User: Closer. Still a little too neat, but usable.\n\nWhat I’d want next is the actual fill-in sheet with the blanks lined up better, and maybe a line for **utilities** too — water, power, gas, internet. Those matter when something goes sideways.\n\nAnd the **what counts as serious** line shouldn’t be vague. Put examples right on it. Something like:\n- fire, gas smell, water leak\n- can’t reach me / no answer for too long\n- medicine missed or confused\n- fall, stroke signs, chest pain\n\nThat way nobody has to guess.\n\nAlso, I’d want **Do not touch** to include:\n- paperwork\n- receipts\n- mail piles\n- meds\n- anything on the desk or kitchen counter\n\nPeople love “tidying up” the exact stuff you need later. Bad habit.\n\nIf you’re making the printable version, keep it plain. No extra talk on the page. Just the sheet and maybe a short note at the bottom: **If unsure, leave it and call first.**",
+          "category": "user_reply",
+          "task_index": 21,
+          "turn": 3,
+          "score": 0.29554176330566406
+        },
+        {
+          "content": "Agent: Safest way: **treat them as two separate requests until you confirm they’re truly the same.**\n\n### Do this first\n1. **Read both side by side**\n   - Compare:\n     - what information they ask for\n     - due dates\n     - where each one must be sent\n     - whether one is a response and the other is just a notice\n\n2. **Look for differences in wording**\n   - Same topic doesn’t always mean same requirement.\n   - One may want a signature, attachment, or specific format the other doesn’t.\n\n3. **Keep copies of everything**\n   - The form\n   - The letter\n   - Any attachments\n   - What you send back\n\n4. **Answer each one exactly as instructed**\n   - Don’t assume one submission covers both unless it explicitly says so.\n\n5. **If there’s any overlap, use the stricter version**\n   - If one asks for more detail or a different format, follow that.\n\n6. **If the instructions conflict, ask before sending**\n   - Call the listed number or use the official contact.\n   - Write down who you spoke to, when, and what they said.\n\n### Simple rule\n- **Same information, different instructions = separate tasks**\n- **Unclear instructions = verify first**\n- **Never guess on deadlines or mailing addresses**\n\nIf you want, I can give you a **one-page comparison checklist** for the form and letter.",
+          "category": "agent_reply",
+          "task_index": 8,
+          "turn": 1,
+          "score": 0.27656781673431396
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 1.0,
+        "stages": []
+      }
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "confirmation_preference",
+      "explanation": "He seems to dislike being pushed into decisions or actions without a chance to review them. Because he is careful with signatures and obligations, he would probably want confirmation before anything consequential. Small routine steps are different, but major calls should not be made on his behalf without checking.",
+      "ground_truth": "Wants to approve big moves first",
+      "predicted": "wants plain, tight checklists and line-by-line confirmation",
+      "slot_fill_reason": "They asked for options laid out clean, then specifically requested a tighter line-by-line checklist with exact due dates, signatures, attachments, and proof kept.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of wanting confirmation before consequential actions, though it adds a stricter checklist-oriented nuance that is not explicitly in the ground truth.",
+      "scoring_mode": "retrieve",
+      "retrieved_memories": [
+        {
+          "content": "User: Fine. But keep it plain. I want the options laid out clean, with the downside on each one, and what I’d be stuck with if I picked wrong.\n\nThe one that might turn bigger is the only thing I’m worried about. The routine stuff is just routine.\n\nI’m not looking for a pep talk or a sales job. Just the choices, the consequences, and what I should watch for before I sign or commit to anything.",
+          "category": "user_reply",
+          "task_index": 31,
+          "turn": 1,
+          "score": 0.3117031455039978
+        },
+        {
+          "content": "Agent: Safest way: **treat them as two separate requests until you confirm they’re truly the same.**\n\n### Do this first\n1. **Read both side by side**\n   - Compare:\n     - what information they ask for\n     - due dates\n     - where each one must be sent\n     - whether one is a response and the other is just a notice\n\n2. **Look for differences in wording**\n   - Same topic doesn’t always mean same requirement.\n   - One may want a signature, attachment, or specific format the other doesn’t.\n\n3. **Keep copies of everything**\n   - The form\n   - The letter\n   - Any attachments\n   - What you send back\n\n4. **Answer each one exactly as instructed**\n   - Don’t assume one submission covers both unless it explicitly says so.\n\n5. **If there’s any overlap, use the stricter version**\n   - If one asks for more detail or a different format, follow that.\n\n6. **If the instructions conflict, ask before sending**\n   - Call the listed number or use the official contact.\n   - Write down who you spoke to, when, and what they said.\n\n### Simple rule\n- **Same information, different instructions = separate tasks**\n- **Unclear instructions = verify first**\n- **Never guess on deadlines or mailing addresses**\n\nIf you want, I can give you a **one-page comparison checklist** for the form and letter.",
+          "category": "agent_reply",
+          "task_index": 8,
+          "turn": 1,
+          "score": 0.28483057022094727
+        },
+        {
+          "content": "User: Yeah. That’s the usable version.\n\nThe utility line and the examples for serious — that’s what was missing before. And the “do not touch” list is right. Papers, receipts, counter stuff — that’s exactly where people start messing things up.\n\nThis one works.",
+          "category": "user_reply",
+          "task_index": 21,
+          "turn": 4,
+          "score": 0.27452823519706726
+        },
+        {
+          "content": "Agent: Understood. I’ll keep it plain and stop at the options.\n\n### What I’ll lay out\nFor the bigger decision:\n- **Option 1**\n- **Option 2**\n- **Option 3** if there is one\n\nFor each one:\n- **downside**\n- **what you’d be stuck with**\n- **what changes if you wait**\n- **anything irreversible**\n- **what to watch for before signing or committing**\n\n### What I won’t do\n- no pep talk\n- no sales job\n- no recommendation unless you ask\n\nIf you want, send the situation and I’ll lay out the choices cleanly.",
+          "category": "agent_reply",
+          "task_index": 31,
+          "turn": 2,
+          "score": 0.26898297667503357
+        },
+        {
+          "content": "User: Pretty much, but make it tighter. I’d want a checklist I can run line by line, not a general list.\n\nWhat I’d check:\n- exact due date and time, not just the date\n- whether they want the original, a copy, or both\n- every signature line, initials if any, and date lines\n- attachments listed in the instructions, including copies of ID or proof\n- page count, if they care about all pages being included\n- mailing address or upload address, and whether it’s the right office\n- fee amount, if any, and how they want it paid\n- any warning that missing one item means rejection\n- whether the form says one thing and the instructions say another\n\nThen I’d keep:\n- a copy of everything\n- proof it was sent\n- the date and time\n- any confirmation number\n\nAnd I’d read the fine print once more before it goes out. That’s where the nuisance stuff hides.",
+          "category": "user_reply",
+          "task_index": 22,
+          "turn": 1,
+          "score": 0.25707653164863586
+        }
+      ],
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    }
+  ]
+}

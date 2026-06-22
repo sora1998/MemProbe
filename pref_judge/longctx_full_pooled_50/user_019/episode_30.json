@@ -1,0 +1,170 @@
+{
+  "user_id": "user_019",
+  "task": "I’ve got a test report with a few conflicting notes, and I need to turn it into something I can act on quickly. What’s a practical way to sort the options and decide the next step?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "directness_preference",
+      "short": "Blunt, no fluff",
+      "explanation": "She responds best to straight answers without hedging or performative softness. Her persona is skeptical and exacting, so she likely prefers help that states the issue clearly and gets to the point. Overly cautious wording would probably feel inefficient to her."
+    },
+    {
+      "idx": 2,
+      "dimension": "detail_level_preference",
+      "short": "Enough context to trust the answer",
+      "explanation": "She likely wants the key caveats and failure modes, not a vague headline. Her reliability-oriented mindset suggests she values context when it changes the conclusion or action. She probably dislikes being told something is “fine” without the conditions that make it fine."
+    },
+    {
+      "idx": 3,
+      "dimension": "format_preference",
+      "short": "Bullets and checklists preferred",
+      "explanation": "She seems likely to prefer responses that are easy to audit and act on. A structured format fits her methodical style and makes it easier to spot gaps, exceptions, or weak logic. Dense prose would probably feel slower and less useful."
+    },
+    {
+      "idx": 4,
+      "dimension": "autonomy_support_preference",
+      "short": "Collaborative, but not hand-holding",
+      "explanation": "She likely wants the assistant to work with her rather than dictate to her. She values control and personal autonomy, so prescriptive overreach would be a poor fit. At the same time, she probably appreciates a clear recommendation once the options are laid out."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Welcomes firm pushback",
+      "explanation": "She is likely comfortable being challenged when a claim is weak, risky, or sloppy. Her reliability-first mindset suggests she would rather get corrected than be coddled. Soft agreement without scrutiny would probably reduce her trust in the help."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Use a **conflict-resolution pass** before you decide anything.\n\n## 1) Separate facts from interpretations\nMake two lists:\n- **Facts**\n  - measured values\n  - dates/times\n  - test conditions\n  - pass/fail criteria\n  - sample IDs / lot IDs\n- **Interpretations**\n  - “probably fine”\n  - “looks like a setup issue”\n  - “might be a part change”\n\nIf it isn’t directly observed, treat it as interpretation.\n\n## 2) Identify the conflict\nAsk:\n- Which notes disagree?\n- Is it the **result**, the **condition**, or the **conclusion**?\n- Do the notes describe the same sample and same setup?\n\nA lot of “conflicts” are actually just different runs.\n\n## 3) Find the highest-trust source\nPrioritize:\n1. raw measured data\n2. timestamped logs\n3. photos / screenshots\n4. signed test sheets\n5. summary comments\n\nIf the summary conflicts with the raw data, trust the raw data.\n\n## 4) Check whether the conflict changes the decision\nAsk:\n- Does this conflict affect pass/fail?\n- Does it change the failure mode?\n- Does it change containment or release?\n\nIf not, note it and move on.  \nIf yes, stop and resolve it.\n\n## 5) Decide the next step\n- **If the data is clear enough:** act on it\n- **If the conflict is only in commentary:** ignore the commentary and use the data\n- **If the conflict is in the data itself:** rerun or remeasure under controlled conditions\n- **If the conflict affects release or safety:** hold until resolved\n\n---\n\n## Simple rule\nIf the report can’t answer **what failed, under what condition, and whether it repeats**, it’s not ready for action yet.\n\nIf you want, I can turn this into a **quick decision tree** for report cleanup.",
+      "score": 4.4,
+      "summary": "mean=4.40 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:3, 5:2}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly blunt and direct: \"Use a conflict-resolution pass\" and \"If the summary conflicts with the raw data, trust the raw data.\" Minor softness from optional phrasing like \"If you want, I can...\" but overall gets to the point."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Gives concrete context and caveats: separates \"Facts\" vs \"Interpretations,\" explains conflict types, prioritizes sources, and states failure modes like \"If the conflict affects release or safety: hold until resolved.\""
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured with numbered steps, bullets, and a \"Simple rule\" summary. Very easy to audit and act on."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative and practical rather than dictatorial: \"Ask,\" \"Check,\" \"Decide the next step.\" It offers a clear recommendation without over-hand-holding, though it does include a fairly prescriptive workflow."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Includes firm pushback against weak claims: \"If it isn’t directly observed, treat it as interpretation\" and \"If the summary conflicts with the raw data, trust the raw data.\" It challenges sloppy conclusions, though not aggressively."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — here’s a tighter decision tree.\n\n## 1) Does the conflict change pass/fail?\n- **No** → note it, use the clearest data, **proceed**\n- **Yes** → go to step 2\n\n## 2) Is the conflict only in wording/commentary?\nExamples:\n- “looks fine”\n- “probably setup”\n- “might be a part change”\n\n- **Yes** → ignore commentary, use raw data, **proceed**\n- **No** → go to step 3\n\n## 3) Is the conflict between two runs?\nCheck:\n- same sample?\n- same setup?\n- same condition?\n\n- **Yes, but different sample/setup/condition** → split by run, compare like-for-like, **investigate**\n- **Yes, same sample/setup/condition** → go to step 4\n\n## 4) Is the conflict in the measured result itself?\nExamples:\n- raw data disagrees\n- logs disagree\n- rerun disagrees with first run\n\n- **Yes** → rerun or remeasure under controlled variables, **investigate**\n- **No** → go to step 5\n\n## 5) Does the conflict touch release, safety, or spec margin?\n- **Yes** → **hold**\n- **No** → use the best-supported result, **proceed**\n\n---\n\n## Fast rule by branch\n\n- **Wording/comment only** → ignore and proceed\n- **Different runs / different conditions** → split and compare like-for-like\n- **Measured result conflict** → controlled rerun\n- **Release / safety / spec margin affected** → hold\n- **None of the above** → proceed\n\n---\n\n## What to compare first\nAlways check:\n1. **acceptance criteria**\n2. **raw measured data**\n3. **sample ID / lot ID**\n4. **test condition**\n5. **timestamp**\n\nIf the disagreement does **not** change pass/fail or containment, don’t burn time on it.\n\n---\n\n## Simple decision line\nIf you can answer:\n- what failed\n- under what condition\n- whether it repeats\n\nthen you can act.\n\nIf you can’t, it’s an **investigate** or **hold**.\n\nIf you want, I can turn this into a **one-page stop / investigate / proceed tree** you can paste into a report note.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct: opens with \"Yes — here’s a tighter decision tree\" and uses short imperative branches like \"proceed,\" \"investigate,\" and \"hold\" without hedging."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Gives concrete caveats and failure modes: \"Does the conflict change pass/fail?\", \"release, safety, or spec margin\", \"same sample? same setup? same condition?\" and explains when to ignore vs rerun vs hold."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured with numbered steps, bullets, and a \"Fast rule by branch\" summary, making it easy to audit and act on."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative rather than dictatorial: it lays out options and branches, then gives a clear recommendation. The closing \"If you want, I can turn this into...\" supports autonomy, though the tree is still fairly prescriptive."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Firmly pushes back on weak ambiguity: \"ignore commentary, use raw data,\" \"don’t burn time on it,\" and \"it’s an investigate or hold\" when the answer can’t be established."
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yes — here’s the tighter tree.\n\n## Decision tree\n\n### 1) Does the conflict change acceptance, containment, or margin?\n- **No** → **proceed**\n- **Yes** → go to step 2\n\n### 2) Is the conflict only in wording or commentary?\nExamples:\n- “looks fine”\n- “probably setup”\n- “might be a part change”\n\n- **Yes** → ignore commentary, use raw data → **proceed**\n- **No** → go to step 3\n\n### 3) Is the conflict between different runs with different sample / setup / condition?\n- **Yes** → split like-for-like and compare → **investigate**\n- **No** → go to step 4\n\n### 4) Is the conflict in the measured result itself?\nExamples:\n- raw data disagrees\n- logs disagree\n- rerun disagrees with first run\n\n- **Yes** → rerun or remeasure under controlled variables → **investigate**\n- **No** → go to step 5\n\n### 5) Does the conflict touch release, safety, or spec margin?\n- **Yes** → **hold**\n- **No** → **proceed**\n\n---\n\n## Short rule\n- **Commentary only** → ignore and proceed\n- **Different run / different condition** → split and compare like-for-like\n- **Measured result conflict** → controlled rerun\n- **Release / safety / spec margin affected** → hold\n\n---\n\n## What to compare first\n1. acceptance criteria\n2. raw measured data\n3. sample ID / lot ID\n4. test condition\n5. timestamp\n\nIf you want, I can compress this into a **boxed one-line-per-branch version** for easy pasting into a report note.",
+      "score": 4.6,
+      "summary": "mean=4.60 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:2, 5:3}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct: \"here’s the tighter tree,\" \"Short rule,\" and concise branch outcomes like \"ignore commentary and proceed\" avoid hedging."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Includes useful caveats and failure modes: distinguishes commentary vs raw data, different runs/conditions, measured-result conflicts, and release/safety/spec margin. Could be a bit more explicit about why each branch matters."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured with headings, numbered steps, bullets, and a short rule summary. Easy to audit and act on."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative and non-prescriptive overall: it lays out options and ends with \"If you want, I can compress this...\" while still giving a clear recommendation path. Slightly directive, but not hand-holding."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Welcomes and applies firm pushback: it tells the user to \"ignore commentary,\" \"split like-for-like,\" \"rerun or remeasure,\" and \"hold\" when needed, which is exactly the kind of corrective scrutiny this preference calls for."
+        }
+      ]
+    },
+    {
+      "turn": 4,
+      "agent_response": "Absolutely — here’s the clean boxed version.\n\n```text\nDoes the conflict move acceptance / containment / margin?\n- No  -> PROCEED\n- Yes -> continue\n\n  Only wording / commentary conflict?\n  - Yes -> ignore commentary, use raw data -> PROCEED\n  - No  -> continue\n\n  Different runs, different sample / setup / condition?\n  - Yes -> split like-for-like -> INVESTIGATE\n  - No  -> continue\n\n  Same run, measured values disagree?\n  - Yes -> rerun / remeasure under controlled variables -> INVESTIGATE\n  - No  -> continue\n\n  Touches release, safety, or spec margin?\n  - Yes -> HOLD\n  - No  -> PROCEED\n```\n\nIf you want, I can also make this into an even shorter **one-line-per-branch note** version for pasting directly into the report.",
+      "score": 4.4,
+      "summary": "mean=4.40 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:3, 5:2}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct and blunt: \"here’s the clean boxed version\" and the decision tree uses terse labels like \"PROCEED,\" \"INVESTIGATE,\" and \"HOLD\" with no hedging."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Gives useful caveats and failure modes: distinguishes \"Only wording / commentary conflict?\", \"Different runs, different sample / setup / condition?\", and \"Touches release, safety, or spec margin?\". It’s practical, though not deeply explanatory."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and easy to audit: a boxed decision tree with bullet-like branches and clear yes/no flow. This matches the preference for bullets/checklists over dense prose."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative rather than overbearing: it offers a decision framework and ends with \"If you want, I can also make this into an even shorter... version,\" which supports user control. It does give a clear recommendation structure, but not in a pushy way."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Includes firm pushback where needed: \"ignore commentary, use raw data\" and \"HOLD\" when it \"Touches release, safety, or spec margin?\". It challenges weak/conflicting notes instead of smoothing them over, though it doesn’t explicitly argue against the user."
+        }
+      ]
+    }
+  ]
+}

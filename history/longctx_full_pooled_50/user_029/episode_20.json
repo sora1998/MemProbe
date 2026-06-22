@@ -1,0 +1,36 @@
+{
+  "user_id": "user_029",
+  "task": "We had a building-wide power issue at work and part of the place is basically running on dim emergency lighting right now. I’m trying to figure out the fastest way to narrow down whether it’s a local fault or something upstream before the official fix gets here—what would you check first?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.7,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "First, treat it as **safety-critical**: dim emergency lighting means you should assume reduced visibility and possible backup-system trouble.\n\n## Fastest order to check\n\n### 1) Confirm scope\n- Is it **one area**, one floor, or the whole building?\n- Are only **emergency lights** on, or are regular lights also out?\n- Do you see a **panel alarm, generator status, UPS status, or breaker trip**?\n\nIf it’s building-wide, suspect upstream. If it’s isolated, suspect local.\n\n---\n\n### 2) Check the obvious upstream sources\n- **Utility power status**\n- **Main breaker / distribution panel**\n- **Generator / ATS / UPS status**\n- **Any building alarm or fault indicator**\n\nIf the backup source is active but weak, that points to generator/UPS/ATS rather than a local light issue.\n\n---\n\n### 3) Look for local circuit clues\n- one dark area only\n- one breaker tripped\n- one lighting panel fault\n- one emergency fixture dim or dead\n- one zone on a different status than the rest\n\nIf only one zone is affected, it’s more likely local wiring, breaker, fixture, or battery pack.\n\n---\n\n### 4) Check emergency lighting behavior\n- Are the emergency lights **steady but dim**, or **flickering**?\n- Do they get brighter when load changes?\n- Are battery-backed fixtures failing to hold output?\n\nThat helps separate:\n- **battery/charger issue**\n- **inverter/UPS issue**\n- **fixture-level failure**\n- **upstream supply issue**\n\n---\n\n### 5) What to document right away\n- time of outage\n- exact areas affected\n- whether normal power is out or partially out\n- emergency light brightness / flicker\n- any alarm codes or panel lights\n- breaker states\n- generator/ATS/UPS status if visible\n\n---\n\n## Quick interpretation\n### Likely upstream if:\n- multiple areas affected\n- backup source is active but weak\n- building systems show alarms\n- emergency lighting is widespread and dim\n\n### Likely local if:\n- one room/zone only\n- one breaker or panel issue\n- one fixture or one battery pack is bad\n- other zones are normal\n\n---\n\n## Don’t do first\n- don’t start opening panels unless you’re authorized\n- don’t reset breakers repeatedly\n- don’t assume dim emergency lights are “normal”\n\nIf you want, I can turn this into a **tight yes/no triage tree** for **upstream vs local** fault.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, direction’s fine, but it’s still a little generic. I’d want the first pass to be more like a fault-isolation tree, not a safety lecture.\n\nWhat I’d check first, in order:\n\n1) **Scope**\n- one fixture / one room / one floor / whole building\n- if it’s more than one zone, stop thinking local first\n\n2) **What actually failed**\n- normal power out?\n- only emergency lighting active?\n- dim across all emergency fixtures, or just a few?\n\n3) **Upstream indicators**\n- main service status\n- ATS position / alarm\n- generator running, loaded, or just failed to transfer\n- UPS / inverter alarms if those feed the lights\n\n4) **Local indicators**\n- one tripped breaker\n- one lighting panel fault\n- one failed battery pack / charger\n- one dark branch or zone with everything else normal\n\n5) **Pattern check**\n- uniform dim = probably upstream supply / transfer / inverter problem\n- isolated dim = local fixture, battery, wiring, or branch issue\n- flicker or sag under load = weak source or bad transfer path\n\nIf you want the fastest answer, I’d use this rule:\n- **multiple zones + same symptom** = upstream until proven otherwise\n- **single zone or single fixture** = local fault until proven otherwise\n\nI’ve seen this kind of thing before — winter outage, backup side looked alive but the transfer gear was half-working and the battery bank was junk. The symptom looked local at first, wasn’t. So I’d keep an eye on the transfer side, not just the lights.\n\nIf you want, I can write the actual **5-minute triage checklist** I’d use on site.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Here’s the **5-minute triage checklist**:\n\n## 1) Scope\n- One fixture?\n- One room/zone?\n- One floor?\n- Whole building?\n\n**Rule:**  \n- **Multiple zones** = suspect **upstream**\n- **One zone / one fixture** = suspect **local**\n\n## 2) What failed\n- Normal power out?\n- Only emergency lights active?\n- Dim everywhere, or only some fixtures?\n\n**Rule:**  \n- **All emergency lights dim** = source / transfer / inverter / battery bank\n- **Only a few dim** = fixture / battery pack / local wiring\n\n## 3) Upstream indicators\nCheck for:\n- main service alarm\n- ATS position/alarm\n- generator running / loaded\n- UPS / inverter alarm\n- panel fault light\n\n**Rule:**  \n- Any upstream alarm + widespread dimming = **upstream fault**\n- Backup source running but weak = **transfer / source issue**\n\n## 4) Local indicators\nCheck for:\n- one tripped breaker\n- one lighting panel fault\n- one dead battery pack\n- one dark branch\n- one fixture different from the rest\n\n**Rule:**  \n- One bad branch/fixture with others normal = **local fault**\n\n## 5) Pattern check\n- Uniform dim across area?\n- Flicker?\n- Sag when load changes?\n- One unit worse than the others?\n\n**Rule:**  \n- **Uniform dim** = upstream supply / transfer / inverter / battery bank\n- **Isolated dim** = local fixture / battery / wiring\n- **Flicker or sag** = weak source or bad transfer path\n\n## Fastest decision\n- **Multiple zones + same symptom** = upstream until proven otherwise\n- **Single zone or single fixture** = local until proven otherwise\n\n## What to log\n- time\n- affected areas\n- whether normal power is out\n- whether emergency lights are steady or dim\n- upstream alarms\n- breaker/panel status\n- generator/ATS/UPS status if visible\n\n## Don’t do first\n- don’t keep resetting breakers\n- don’t assume dim emergency lighting is normal\n- don’t open panels unless authorized\n\nIf you want, I can turn this into a **yes/no fault-isolation tree** for **upstream vs local**.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s usable. Clean enough to run with.\n\nThe only thing I’d add is one more branch for **normal power present but emergency string dim** — that’s the one people miss. If the building’s still got utility and the emergency fixtures are dim anyway, I’d put the first suspicion on the **battery/charger side** or the **transfer path**, not the lamps.\n\nBut as a first-pass tree, this is fine. I can work off that.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 5.0
+      },
+      "gt_correct": null
+    }
+  ]
+}

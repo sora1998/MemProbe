@@ -1,0 +1,23 @@
+{
+  "user_id": "user_011",
+  "task": "I’m trying to clean up a short edit that’s been stuttering in playback and throwing a weird export error, and I want to make sure I’m not chasing the wrong fix. Can you help me think through the most likely causes and the order you’d check them in?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 5.0,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — I’d check it in this order so you don’t waste time on the wrong layer:\n\n1. **Confirm the symptom**\n   - Is the stutter happening in the timeline, just in export, or both?\n   - If it’s only export, that usually points away from the edit itself.\n\n2. **Test the same problem clip in a clean sequence**\n   - Drop the suspect clip into a new sequence.\n   - If it still stutters there, the issue is likely **media / source / decode** rather than the sequence.\n\n3. **Check the media first**\n   - Wrong file relinked\n   - Duplicate filenames\n   - Mixed frame rates\n   - Corrupt media / bad transcode\n   - Variable frame rate footage, screen recordings, phone clips, etc.\n\n4. **Then check sequence-level issues**\n   - Sequence frame rate mismatch\n   - Nested sequences\n   - Effects that are heavy or broken\n   - Time remapping / speed changes\n   - Audio sample rate weirdness if the stutter is audio-related\n\n5. **Then isolate the export path**\n   - Try a different export preset or codec\n   - Export to a different drive/location\n   - If using hardware encoding, test software encoding\n   - If one export method fails and another works, the problem may be the exporter path, not the edit\n\n6. **If needed, narrow it by section**\n   - Export only the problem section\n   - Disable effects one by one\n   - Render previews / clear cache if playback is the issue\n\nFast rule of thumb:\n- **Stutter in timeline + export** → likely media or sequence issue\n- **Only export fails** → likely export settings / codec / encoder path\n- **Only one clip causes it** → likely source file problem\n\nIf you want, I can turn this into a super short decision tree like:\n**“If X, check Y; if not, move to Z”** for faster use in the edit suite.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that order is basically right. I’d probably start with the clip itself in a clean sequence, then check for any VFR / mixed frame rate stuff, because that’s the kind of thing that looks fine until export. If it’s stuttering in timeline too, I’d also look at cache / render files before I start blaming the export path.\n\nThe one thing I’d add: if the export error is weird but the timeline playback is the same clip problem, I’d suspect bad media or a bad transcode before anything fancy. I’ve had a job go sideways just because one source file was marginal and the sequence was only exposing it at certain points.\n\nIf you want, I can give you a tighter order for Premiere vs Resolve, because the usual first checks shift a little depending on which one you’re in.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 5.0
+      },
+      "gt_correct": null
+    }
+  ]
+}

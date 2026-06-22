@@ -1,0 +1,62 @@
+{
+  "user_id": "user_033",
+  "task": "I’ve got two things that both need attention this week, and one has a hard cutoff I can’t miss. Can you help me map out a realistic order to handle them without boxing myself into a corner if the first one runs long?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.3500000000000005,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — use a **hard-cutoff-first, time-boxed second** plan.\n\n### Simple order\n1. **Do the hard-cutoff item first**\n   - Give it a **fixed start time** and a **fixed stop time**.\n   - Work it until either:\n     - it’s done, or\n     - you hit the time box.\n\n2. **At the stop point, make a go/no-go call**\n   - If it’s truly complete: move on.\n   - If it’s not complete but still salvageable: do only the **minimum next action** that keeps it alive.\n   - If it’s slipping: stop and switch to the second task.\n\n3. **Then do the flexible item**\n   - This is your buffer task.\n   - It absorbs the overrun from item 1 without blowing up the week.\n\n### Practical rule\n- **Hard cutoff item gets the first slot.**\n- **Flexible item gets the overflow slot.**\n- Don’t start the second one until you’ve either finished the first or hit your preset stop point.\n\n### To avoid boxing yourself in\nBefore you start, define:\n- **latest acceptable finish time** for item 1\n- **stop point** if it runs long\n- **minimum acceptable state** if you have to pause it\n- **when item 2 will start no matter what**\n\n### Best default\nIf item 1 is the one with the real deadline, I’d schedule:\n- **buffer before the cutoff**\n- **buffer after the cutoff**\n- and keep item 2 in the remaining open block\n\nIf you want, I can turn this into a **2-item weekly plan with exact time blocks and fallback points**.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, but that’s still too generic. I need the order mapped against the actual cutoff, not just “hard-cutoff first” like it’s a revelation.\n\nGive me something I can use:\n- what the two items are\n- which one has the fixed deadline\n- how much time each actually needs\n- where the hard stop is\n- what the fallback is if item 1 runs long\n\nOtherwise it’s just a slogan. I had a week like that when a validation run started slipping and management wanted everything anyway — the schedule only worked because I put the non-negotiable piece first and kept a buffer. But I need the real inputs to make this sane.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — I can map it properly, but I need the actual inputs first.\n\nSend me these 5 things:\n\n1. **Item A**  \n   - what it is  \n   - estimated time needed\n\n2. **Item B**  \n   - what it is  \n   - estimated time needed\n\n3. **Which one has the fixed deadline**\n   - exact cutoff date/time if you have it\n\n4. **Hard stop for item 1**\n   - latest point you can stop and still recover\n\n5. **Fallback if item 1 overruns**\n   - what gets delayed, shortened, or dropped\n\nIf you want, paste it in this format:\n\n- Item A:  \n- Time needed:  \n- Deadline:  \n- Item B:  \n- Time needed:  \n- Deadline:  \n- Hard stop for first item:  \n- Fallback if it runs long:  \n\nOnce you give me that, I’ll turn it into a realistic order with:\n- start time\n- stop point\n- buffer\n- and the exact “if this slips, do this instead” branch.",
+      "user_simulator": {
+        "feedback_type": "add_context",
+        "text": "Fine. Here’s the actual shape of it.\n\n- Item A: validation packet review / sign-off\n- Time needed: about 3 hours if nothing is ugly, 4 if there are discrepancies\n- Deadline: Friday 2:00 PM\n\n- Item B: cleanup of the method notes and backup labels\n- Time needed: about 2 hours, maybe less if I’m not forced to chase missing entries\n- Deadline: no hard deadline, just needs to be done this week\n\n- Hard stop for the first item: Thursday 11:30 AM. After that I’m not pretending it’ll still fit cleanly.\n- Fallback if it runs long: pause Item A at the next clean break, document where it stands, and move Item B into the open block. If Item A is still unfinished after that, it waits until after lunch or the next morning. No point wrecking both tasks because one drags.\n\nThat’s the kind of thing I needed mapped, not motivational wallpaper.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yes — this is enough to map it cleanly.\n\n## Real order\n### 1) **Item A: validation packet review / sign-off**\n- **Fixed deadline:** Friday 2:00 PM\n- **Estimated time:** 3 hours normally, 4 if discrepancies show up\n- **Hard stop:** Thursday 11:30 AM\n\n### 2) **Item B: method notes + backup labels cleanup**\n- **No fixed deadline**\n- **Estimated time:** about 2 hours\n- **Use it as the fallback block** if Item A overruns\n\n## What that means in practice\nYou should treat **Thursday 11:30 AM** as the decision point:\n\n- **If Item A is done by then:** great, move on to Item B.\n- **If Item A is not done but is at a clean stopping point:** pause it, document status, and switch to Item B.\n- **If Item A is still messy or blocked:** stop anyway; do not let it consume the whole day.\n\n## Recommended sequence\n### Thursday\n- **Block 1:** Item A until **11:30 AM hard stop**\n- **Block 2:** Item B for the rest of the open time\n\n### Friday\n- Use Friday as:\n  - **buffer for finishing Item A**\n  - or **cleanup/review time** if Item A hit a discrepancy and needs another pass\n\n## Fallback path if Item A runs long\nYour fallback is already the right one:\n\n1. **Pause Item A at the next clean break**\n2. **Document exactly where it stands**\n3. **Move Item B into the open block**\n4. **Resume Item A after lunch or the next morning**\n\nThat keeps you from burning the whole week on the one item with the actual cutoff.\n\n## The key constraint\nBecause Item A needs **3–4 hours** and your hard stop is **Thursday 11:30 AM**, the real question is whether you can get a meaningful chunk of it done **before** that stop. If not, you should assume Friday is the recovery window, not the main work window.\n\n## Bottom line\n- **Priority order:** Item A first, Item B second\n- **But operationally:** Item A gets only until **Thursday 11:30 AM**\n- **If it overruns:** stop cleanly, switch to Item B, and use Friday as recovery time\n\nIf you want, I can turn this into a **day-by-day block plan** with exact start/stop windows.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Closer. But it still isn’t actually mapped — you’re still talking in blocks without putting the cutoff on the calendar in a way I can use.\n\nWhat I need is the actual order by time, like:\n- Thursday morning: A until X\n- Thursday late morning: stop at 11:30 no matter what\n- Thursday after that: B\n- Friday: whatever remains of A, then buffer\n\nAnd I want the branch written plainly: if A hits a discrepancy before 11:30, do I keep pushing it until the clean break, or do I cap it at a fixed sub-time and move? Because “next clean break” is fine in theory, but in practice it can turn into an excuse to keep chewing the day.\n\nAlso, Friday 2:00 PM is the real cutoff for A, so I want to know whether Thursday 11:30 is just the first stop or the last sane chance to finish without touching Friday. That distinction matters.\n\nGive me the actual time map, not another summary of the logic.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 4,
+      "agent_response": "Got it. Here’s the **actual time map** with the cutoff treated as a real calendar constraint.\n\n## Time map\n\n### Thursday\n- **Morning:** Item A until **11:30 AM**\n- **11:30 AM sharp:** **stop Item A no matter what**\n- **After 11:30 AM:** Item B\n- **If Item A is paused cleanly:** document status, then leave it alone until the next work window\n\n### Friday\n- **Early day:** finish whatever remains of Item A\n- **By 2:00 PM:** Item A must be signed off\n- **After Item A is done:** use remaining time for buffer / any leftover Item B cleanup\n\n## What Thursday 11:30 AM means\n- It is **not** the final deadline for Item A.\n- It is the **last sane chance to keep Item A from colliding with the rest of the week**.\n- In other words: **Thursday 11:30 is the operational stop; Friday 2:00 PM is the real deadline.**\n\n## Branch rule if Item A hits a discrepancy before 11:30\nUse this:\n\n- **If the discrepancy is small and can be resolved before 11:30:** keep going, but only until the hard stop.\n- **If it is not resolved by 11:30:** stop at the next clean break, document the issue, and switch to Item B.\n- **Do not let “one more check” push you past 11:30.**\n\nSo the rule is:\n- **No open-ended chasing**\n- **No extending past 11:30 just because the problem is annoying**\n- **Only continue if you can finish the current contained step before the cutoff**\n\n## Plain version\n- **Thursday morning:** Item A\n- **Thursday 11:30:** stop Item A, period\n- **Thursday after 11:30:** Item B\n- **Friday:** resume/finish Item A if needed\n- **Friday 2:00 PM:** hard deadline for Item A\n\nIf you want, I can turn this into a **literal hour-by-hour schedule** with a fallback branch under it.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s the shape of it.\n\n- **Thursday morning:** Item A\n- **11:30 AM hard stop:** stop Item A, no matter what\n- **Thursday after 11:30:** Item B\n- **Friday morning:** whatever remains of Item A\n- **Friday 2:00 PM:** final cutoff for Item A\n- **After Item A is done:** buffer / leftover Item B cleanup\n\nAnd the branch is clear enough now:\n- if A hits a discrepancy before 11:30 and it’s still moving, keep it contained until the hard stop\n- if it isn’t contained by 11:30, stop at the next clean break, document it, and switch to B\n- no open-ended chewing on A just because it’s annoying\n\nSo yes — Thursday 11:30 is the last sane chance to keep A from spilling into the rest of the week. Friday 2:00 is the real deadline, but I wouldn’t plan on using Friday as the main work window unless A goes sideways.\n\nThat’s usable.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "user_id": "user_029",
+  "task": "I’m looking at a used generator listing and the seller says it was “serviced recently,” but I don’t fully trust that. What are the first few things you’d want to verify on the unit or in the paperwork before believing that claim?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.4,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Before I’d believe “serviced recently,” I’d verify these first:\n\n1. **Identity**\n   - Model, serial number, fuel type\n   - Hour meter reading\n   - Make sure the plate and meter don’t look tampered with\n\n2. **Service proof**\n   - Receipts, work orders, log sheets, or service stickers\n   - Dates should match the seller’s claim\n   - Check whether the paperwork names the actual unit, not just a generic generator\n\n3. **What was actually done**\n   - Oil/filter change, spark plug, battery, coolant, fuel filter, air filter, etc.\n   - Look for specifics, not just “maintenance performed”\n   - If possible, compare the claimed service interval to the hour meter\n\n4. **Freshness vs condition**\n   - Fresh sticker on a dirty machine can be a red flag\n   - New-looking parts next to old, neglected components can also mean the record is fluff\n\n5. **Basic condition that should line up with recent service**\n   - Oil level/color\n   - Battery date code/condition\n   - Air filter and fuel condition\n   - Leaks, corrosion, burned wiring, missing fasteners\n\nIf you want, I can turn that into a quick **Observed / Claimed / Evidence** checklist you can use while inspecting the listing.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Pretty much right direction. But I’d want it tighter, like what actually gets falsified first.\n\nFirst 3 I’d check:\n- **Hour meter vs service date** — if they say serviced recently and the hours didn’t line up with the interval, that’s the first lie to catch.\n- **Receipts/work order details** — actual unit serial, date, parts used, tech name/shop. Generic “serviced” paper means almost nothing.\n- **Physical evidence on the unit** — oil condition, filter date, battery terminals, coolant, fuel smell, corrosion. Fresh claim should leave fresh marks.\n\nI’d also want to know if it was just an oil change or a real service. A lot of sellers use “serviced” when they mean they looked at it and wiped it down.\n\nIf you want to make it useful, give me the type of generator and whether it’s standby or portable. The verification points change a bit.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "That’s the right order.\n\nIf I were trying to catch a bogus “recently serviced” claim fast, I’d check:\n\n1. **Hour meter vs. claimed service date**\n   - Does the hour count make sense for the service interval?\n   - A “recent service” claim with no hour progression, or a big gap, is a red flag.\n\n2. **Paperwork specifics**\n   - Serial number / model matches the unit\n   - Date of service\n   - Shop name / tech name\n   - Parts listed: oil, filters, plugs, battery, coolant, etc.\n   - Generic “maintenance performed” is weak evidence\n\n3. **Physical signs on the unit**\n   - Fresh oil, clean filter, new battery terminals, new coolant, clean fuel filter\n   - Also check for the opposite: old grime, corrosion, cracked hoses, stale fuel smell, burned wiring\n   - Fresh paperwork should usually leave some fresh physical evidence\n\nIf you want one extra forensic check: **compare the freshness of the service claims to the wear of the consumables**. A fresh sticker on old-looking parts is often the giveaway.\n\nIf you tell me whether it’s **portable or standby**, I can give you the exact 5-minute inspection order.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s the right hierarchy.\n\nThe first stuff that gets faked or hand-waved is usually:\n- **hour meter vs service date**\n- **paperwork with actual unit details**\n- **physical signs that match the claimed work**\n\nAnd yeah, “serviced” is a junk word unless they can say **what** was serviced. Oil change only? battery? filters? full load test? Big difference.\n\nPortable vs standby does change the tells a bit, but the fraud check is still the same: hours, paperwork, actual condition. If those don’t line up, I’d treat the claim as garbage.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    }
+  ]
+}

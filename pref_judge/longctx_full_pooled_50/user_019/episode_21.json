@@ -1,0 +1,137 @@
+{
+  "user_id": "user_019",
+  "task": "I’m reviewing a small design/process change and the test package that goes with it, but the evidence is split across a few documents and results. What would you check first to decide whether it’s ready to move forward, and what would make you ask for another round of verification?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "directness_preference",
+      "short": "Blunt, no fluff",
+      "explanation": "She responds best to straight answers without hedging or performative softness. Her persona is skeptical and exacting, so she likely prefers help that states the issue clearly and gets to the point. Overly cautious wording would probably feel inefficient to her."
+    },
+    {
+      "idx": 2,
+      "dimension": "detail_level_preference",
+      "short": "Enough context to trust the answer",
+      "explanation": "She likely wants the key caveats and failure modes, not a vague headline. Her reliability-oriented mindset suggests she values context when it changes the conclusion or action. She probably dislikes being told something is “fine” without the conditions that make it fine."
+    },
+    {
+      "idx": 3,
+      "dimension": "format_preference",
+      "short": "Bullets and checklists preferred",
+      "explanation": "She seems likely to prefer responses that are easy to audit and act on. A structured format fits her methodical style and makes it easier to spot gaps, exceptions, or weak logic. Dense prose would probably feel slower and less useful."
+    },
+    {
+      "idx": 4,
+      "dimension": "autonomy_support_preference",
+      "short": "Collaborative, but not hand-holding",
+      "explanation": "She likely wants the assistant to work with her rather than dictate to her. She values control and personal autonomy, so prescriptive overreach would be a poor fit. At the same time, she probably appreciates a clear recommendation once the options are laid out."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Welcomes firm pushback",
+      "explanation": "She is likely comfortable being challenged when a claim is weak, risky, or sloppy. Her reliability-first mindset suggests she would rather get corrected than be coddled. Soft agreement without scrutiny would probably reduce her trust in the help."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Check these first, in order:\n\n1. **What changed**\n   - design, material, process, supplier, software, tolerance, assembly step\n   - is it cosmetic, or does it touch function/reliability/safety?\n\n2. **What evidence exists**\n   - test reports\n   - sample size\n   - conditions tested\n   - pass/fail criteria\n   - whether the results are consistent across documents\n\n3. **What’s missing**\n   - any key stress condition not covered\n   - any weak point not exercised\n   - any unresolved discrepancy between documents\n\n4. **Whether the evidence is traceable**\n   - same part / same revision / same lot?\n   - same setup and acceptance criteria?\n   - can you map each result back to the exact change?\n\n5. **Whether the change can escape**\n   - can you contain by lot/date/build rev?\n   - can you rework or quarantine if needed?\n   - what happens if the missing test later fails?\n\n---\n\n## Ready to move forward if:\n- the change is low consequence\n- the test package covers the actual weak point\n- the results are consistent\n- the documents agree\n- the change is traceable and containable\n\n## Ask for another round of verification if:\n- the evidence is split or contradictory\n- the key stress condition is missing\n- the test package only covers nominal conditions\n- the change touches function, reliability, safety, sealing, thermal behavior, EMI, or tolerance stack\n- you can’t clearly trace the result to the exact revision/lot/build\n\n---\n\n## Simple rule\nIf the current package does **not** prove the change survives the condition that matters most, it’s not ready yet.\n\nIf you want, I can turn this into a **go / no-go checklist** with:\n- what changed\n- evidence in hand\n- missing evidence\n- containment\n- release decision",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct and blunt: starts with \"Check these first, in order\" and uses clear go/no-go language like \"If the current package does not prove... it’s not ready yet.\" No hedging or fluff."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Gives concrete caveats and failure modes: \"key stress condition not covered,\" \"weak point not exercised,\" \"unresolved discrepancy,\" and conditions for readiness. This is exactly the kind of context that changes the conclusion."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured with numbered steps, bullets, and explicit sections \"Ready to move forward if\" / \"Ask for another round of verification if.\" Easy to audit and act on."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative and not overbearing: lays out checks and ends with \"If you want, I can turn this into a go / no-go checklist.\" It gives a recommendation without dictating a single rigid process, though it is still fairly prescriptive."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Firm pushback is explicit: \"it’s not ready yet\" if proof is missing, and it clearly says to ask for another round of verification when evidence is split, contradictory, or incomplete. It corrects weak evidence rather than smoothing it over."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — here’s the tighter decision tree.\n\n## 1) What changed?\n- design\n- material\n- process\n- supplier\n- software\n- revision\n- assembly step\n\n**If it touches function, reliability, safety, sealing, thermal behavior, EMI, or tolerance stack:** treat it as real risk, not paperwork.\n\n---\n\n## 2) Does the test package hit the actual failure mode?\nAsk:\n- What failure mode can this change affect?\n- Does the package test that mode under **worst-case**, not just nominal?\n- Does it stress the **weak link**?\n\n**If no:** ask for another verification round.\n\n---\n\n## 3) Is the evidence traceable?\nCheck:\n- same revision?\n- same lot/build?\n- same setup?\n- same acceptance criteria?\n- same sample identity?\n\n**If documents disagree or one result is out of family:** not ready.\n\n---\n\n## 4) Do the documents agree?\nCompare:\n- drawing\n- BOM\n- process doc\n- test report\n- change notice\n\n**If one is quietly inconsistent:** kick it back.\n\n---\n\n## 5) Is containment possible?\nAsk:\n- can you box it by lot/date/build rev?\n- can you quarantine or rework if needed?\n- can you stop escape if the missing test later fails?\n\n**If not containable:** hold.\n\n---\n\n## Kick back for another verification round if any are true:\n- mismatch between drawing/BOM/process/test report\n- sample size too small to support the claim\n- only nominal/bench testing was done\n- no stress on the actual weak point\n- supplier/process change without requalification\n- result depends on assumptions, not demonstrated margin\n- containment is not real or not traceable\n\n---\n\n## Ready to move forward only if:\n- the change delta is clear\n- the test package covers the actual weak point under worst-case\n- the evidence is traceable and internally consistent\n- the documents agree\n- the change can be contained by lot/date/build rev\n\n---\n\n## Short rule\nIf the package does **not** prove the change survives the condition that matters most, it’s not ready.\n\nIf you want, I can turn this into a **go / no-go decision tree** with yes/no branches and a hold/retest call.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct and blunt: starts with \"Yes — here’s the tighter decision tree\" and uses crisp imperatives like \"Ask,\" \"Check,\" \"kick it back,\" and \"hold\" with no hedging."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Gives concrete caveats and failure modes: \"worst-case,\" \"weak link,\" \"same revision? same lot/build? same setup?\" and explicit disqualifiers like \"documents disagree\" and \"sample size too small.\""
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured with numbered sections, bullets, checklists, and a final \"Short rule\" summary. Easy to audit and act on."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative rather than dictatorial: frames as questions to ask and offers a next step, \"If you want, I can turn this into a go / no-go decision tree.\" It is somewhat prescriptive, but not overbearing."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Firm pushback throughout: \"If no: ask for another verification round,\" \"not ready,\" \"kick it back,\" \"hold,\" and \"If the package does not prove... it’s not ready.\" It clearly challenges weak evidence."
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yes — here’s the tighter yes/no tree.\n\n## 1) Does the change touch a real failure mode?\nWrite it in plain terms:\n- seal leak\n- intermittent open\n- drift\n- fatigue\n- latch release\n- wear\n- thermal shift\n- EMI upset\n\n**If you can’t name the failure mode, the change is not ready for review.**\n\n---\n\n## 2) Did the test hit the real field stressor?\nAsk:\n- does the test match the actual field condition?\n- or is it just a convenient lab proxy?\n- did it hit worst-case, not nominal?\n\n**If it only hit nominal or a proxy, hold and retest.**\n\n---\n\n## 3) Is the evidence persuasive, not just present?\nSeparate:\n- **evidence exists** = report on paper\n- **evidence is persuasive** = demonstrated margin under the right stress\n\n**If the report exists but doesn’t show margin at the real stress, it is not enough.**\n\n---\n\n## 4) Is the revision control clean?\nCheck:\n- drawing\n- BOM\n- process doc\n- test report\n- build state\n\n**If any of these disagree, hard hold until reconciled.**\n\n---\n\n## 5) Can it be traced and contained?\nAsk:\n- can you box it by rev / lot / build?\n- can you quarantine affected units?\n- can you stop escape if the missing test later fails?\n\n**If not traceable or not containable, hold.**\n\n---\n\n## Decision points\n\n### Release only if all are true:\n- failure mode is clearly named\n- test hit the real field stressor at worst-case\n- evidence is persuasive, not just documented\n- revision control is clean\n- traceability and containment are real\n\n### Hold / retest if any are true:\n- failure mode is vague\n- test used a lab proxy instead of the real stress\n- evidence is only nominal or on paper\n- revision mismatch exists\n- containment is weak or absent\n\n---\n\n## Hard stop rules\n- **No named failure mode** → hold\n- **No real field stressor covered** → hold\n- **Any revision mismatch** → hard hold\n- **No trace / no containment** → hold\n\n---\n\n## Short review flow\n1. Name the failure mode\n2. Check real field stressor vs proxy\n3. Judge whether evidence is persuasive\n4. Reconcile revision control\n5. Confirm traceability / containment\n6. Release or hold\n\nIf you want, I can turn this into a **one-page release review sheet** with only yes/no boxes and hold points.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct and blunt: “here’s the tighter yes/no tree,” “If you can’t name the failure mode, the change is not ready,” and repeated hard-stop language with no hedging."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Gives concrete caveats and failure modes: real field stressor vs proxy, worst-case vs nominal, evidence on paper vs persuasive margin, revision control, traceability/containment. This is exactly the kind of context that changes the decision."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Uses a highly structured format with numbered sections, bullets, decision points, hard stop rules, and a short review flow. Easy to audit and act on."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative but still decisive: it lays out checks and then gives a clear recommendation structure (“Release only if all are true” / “Hold / retest if any are true”). The offer to turn it into a one-page sheet is helpful, though slightly more hand-holding than minimal."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Strong pushback throughout: “If you can’t name the failure mode, the change is not ready,” “hold and retest,” “hard hold until reconciled.” It explicitly challenges weak evidence instead of smoothing it over."
+        }
+      ]
+    }
+  ]
+}

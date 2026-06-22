@@ -1,0 +1,104 @@
+{
+  "user_id": "user_033",
+  "task": "I’m trying to sort out a recurring problem in a routine process, but I don’t want to chase the wrong thing. Can you help me lay out a sensible way to separate the real cause from the obvious symptom and decide what to check first?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "formality_preference",
+      "short": "Prefers professional, no-nonsense interaction",
+      "explanation": "She would likely respond best to a controlled, businesslike style rather than friendliness for its own sake. Given her guarded and precision-focused persona, overly casual phrasing would probably feel sloppy or intrusive."
+    },
+    {
+      "idx": 2,
+      "dimension": "verbosity_preference",
+      "short": "Wants concise answers, not rambling",
+      "explanation": "She seems to value efficiency and would likely dislike long-winded explanations that repeat themselves. She probably wants enough information to act on, with no decorative padding."
+    },
+    {
+      "idx": 3,
+      "dimension": "directness_preference",
+      "short": "Prefers blunt, unsoftened answers",
+      "explanation": "Her skeptical, control-oriented style suggests she would rather hear the point plainly than receive hedged reassurance. She is likely to trust answers more when they are explicit about risks, limits, and conclusions."
+    },
+    {
+      "idx": 4,
+      "dimension": "format_preference",
+      "short": "Likes structured lists and checklists",
+      "explanation": "She appears to prefer information that is organized and easy to verify. A clean format with steps, bullets, or checklists would fit her habit of tracking details and would reduce ambiguity."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Accepts firm correction when needed",
+      "explanation": "She likely does not want the assistant to simply echo her assumptions if something is wrong or risky. A direct challenge, especially when backed by evidence, would probably be more useful to her than polite agreement."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — the clean way is to separate **signal, symptom, and likely root cause**.\n\n### Fast triage\n1. **Is it repeatable?**\n   - One-off: treat as noise or a specimen/handling glitch.\n   - Recurrent: assume a process issue until proven otherwise.\n\n2. **Is it clustered or isolated?**\n   - **One item off**: think item-specific failure, handling, or measurement error.\n   - **Several related items move together**: think a shared process, upstream condition, or systematic bias.\n\n3. **Does the direction make sense?**\n   - If the pattern is physiologically/process-wise coherent, it’s more likely real.\n   - If it’s a random mix of unrelated changes, suspect artifact or overinterpretation.\n\n### What to check first\nRanked roughly:\n1. **Specimen / input quality**\n   - wrong container, contamination, dilution, delay, temperature, mix-up\n2. **Measurement / instrument issue**\n   - calibration drift, reagent lot change, probe clog, analyzer bias\n3. **Process / workflow change**\n   - new operator, timing change, transport change, batching, equipment maintenance\n4. **True underlying change**\n   - only after the above are less likely\n\n### Practical rule\n- **If the same abnormal pattern shows up in multiple runs/samples, start with system causes.**\n- **If it’s only one sample or one analyte, start with specimen/assay-specific causes.**\n- **If the numbers are within expected variation, don’t overcall it.**\n\n### Quick decision frame\n- **Small deviation + no pattern** → likely normal variation\n- **Moderate deviation + one item** → sample/assay issue\n- **Moderate deviation + coherent cluster** → process or real condition\n- **Large deviation + repeated across time** → systematic issue or true shift\n\nIf you want, I can turn this into a **one-page if/then flowchart** or a **ranked troubleshooting checklist**.",
+      "score": 4.4,
+      "summary": "mean=4.40 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:3, 5:2}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Uses a professional, controlled tone: \"the clean way,\" \"Fast triage,\" \"Practical rule,\" with no casual friendliness or fluff."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Fairly concise and action-oriented, with compact bullets and a short decision frame. Slightly more explanatory than minimal, but not rambling."
+        },
+        {
+          "idx": 3,
+          "score": 4,
+          "reason": "Direct and explicit: \"assume a process issue until proven otherwise,\" \"start with system causes,\" and clear ranked causes. It is blunt, though not aggressively unsoftened."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong structured format throughout: numbered steps, ranked list, bullets, and a \"Quick decision frame.\" This is highly checklist-like and easy to verify."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Provides firm correction and prioritization rather than echoing assumptions: \"don’t overcall it,\" \"assume a process issue until proven otherwise.\" It pushes back, though in a measured rather than confrontational way."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — the useful way to do this is to **rank the failure points by how well they can fake the pattern you’re seeing**, then test the cheapest/highest-yield ones first.\n\n## Bench-order troubleshooting\n\n### 1) Pre-analytic / input problems first\nThese are the most common “mystery” causes because they can create a believable but false result.\n\nCheck first:\n- **sample ID / mix-up**\n- **timing** relative to collection or process step\n- **storage / transport** delay\n- **temperature excursion**\n- **contamination**\n- **dilution / evaporation / concentration**\n- **improper mixing**\n- **wrong container / tube / matrix**\n\nWhat makes me suspect this:\n- **one-off weirdness**\n- **only one sample or one aliquot off**\n- **different result after fresh collection / fresh prep**\n- **pattern doesn’t reproduce on re-run**\n\n### 2) Method / instrument / assay next\nIf the same issue repeats on the same system, move here.\n\nCheck:\n- **calibration**\n- **drift**\n- **maintenance status**\n- **reagent lot change**\n- **carryover**\n- **probe clog / aspiration issue**\n- **integration / endpoint / signal processing**\n- **QC trend**\n- **system suitability**\n\nWhat makes me suspect this:\n- **same bias across multiple samples**\n- **controls trending the same way**\n- **same issue on the same instrument**\n- **fixes when moved to another analyzer or fresh reagent lot**\n\n### 3) Workflow / human-process changes\nIf the method is fine, look for process changes that can systematically fake a shift.\n\nCheck:\n- **new analyst**\n- **new SOP**\n- **changed sequence / batching**\n- **cleanup differences**\n- **schedule pressure / rushed prep**\n- **transport route changes**\n- **instrument used differently than usual**\n\nWhat makes me suspect this:\n- **problem appears after a process change**\n- **only certain shifts / operators show it**\n- **repeatable by workflow, not by sample**\n\n### 4) True underlying change last\nOnly after the above are weak.\n\nWhat makes me suspect a real change:\n- **reproducible across runs**\n- **reproducible on a different instrument**\n- **reproducible with fresh prep and fresh reagents**\n- **seen by a different analyst**\n- **fits the rest of the data**\n\n## The most useful branching test\nAsk these in order:\n\n1. **Does it repeat on the same instrument?**\n   - no → likely one-off, sample, or handling issue\n   - yes → go on\n\n2. **Does it repeat on a different instrument/method?**\n   - no → method/instrument likely\n   - yes → go on\n\n3. **Does it repeat with fresh prep / fresh reagent lot?**\n   - no → prep/reagent likely\n   - yes → go on\n\n4. **Does it repeat with a different analyst?**\n   - no → workflow/operator issue likely\n   - yes → much more likely a real process shift\n\n## Quick rule of thumb\n- **Single event, no cluster** → think pre-analytic or one-off error\n- **Same pattern across multiple samples/runs** → think method/instrument or workflow\n- **Same pattern across instruments, lots, and analysts** → think real process change\n\n## Practical priority order\nIf you want the shortest high-yield list:\n\n1. **ID / sample integrity**\n2. **Timing / storage / transport / contamination**\n3. **Calibration / QC / drift / reagent lot**\n4. **Carryover / maintenance / system suitability**\n5. **Workflow change / operator / batching**\n6. **True process change**\n\nIf you want, I can turn this into a **6-node if/then decision tree** with the exact checks under each branch.",
+      "score": 4.4,
+      "summary": "mean=4.40 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:3, 5:2}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Uses a controlled, businesslike tone: \"the useful way to do this is to rank the failure points\" and avoids casual friendliness."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly concise and action-oriented, with compact sections and a short priority list, though it is somewhat detailed."
+        },
+        {
+          "idx": 3,
+          "score": 4,
+          "reason": "Direct and explicit: \"go on,\" \"likely method/instrument,\" \"much more likely a real process shift.\" It states conclusions plainly, though not aggressively blunt."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong structured format with numbered sections, bullet lists, branching questions, and a \"Practical priority order\" checklist."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Provides firm correction and diagnostic pushback by separating symptom from cause and saying \"Only after the above are weak\" and \"much more likely a real process shift.\""
+        }
+      ]
+    }
+  ]
+}

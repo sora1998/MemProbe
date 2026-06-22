@@ -1,0 +1,36 @@
+{
+  "user_id": "user_015",
+  "task": "I’m reviewing a couple of branch processes after a recent issue, and I want a practical way to make sure the next round runs more cleanly. Can you help me think through what to check more closely and how to keep approvals from getting missed?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.8,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — use a simple **check / hold / release** approach.\n\n## What to check more closely\n- anything that failed last time\n- anything that needed rework\n- anything that depends on one person only\n- anything with missing docs, notes, or approvals\n- anything that gets rushed at the end of the day\n- anything that tends to get “handed off” without a clear owner\n\n## How to keep approvals from getting missed\n- make the approval step visible\n- assign one owner for each approval\n- check the file before it moves\n- do not assume someone else handled it\n- stop the process if the approval is not there\n\n## Hold it if\n- the file is incomplete\n- the approval is missing\n- the notes are unclear\n- the item was already corrected once\n- the next step would create cleanup later\n\n## Release it if\n- the file is complete\n- the approval is in place\n- the facts match\n- the owner is clear\n- there is no obvious rework risk\n\n## Simple rule\nIf it was a problem last time, check it twice this time.  \nIf an approval matters, don’t let the file move without it.\n\nIf you want, I can turn this into a short branch process review checklist.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s the right direction, but it’s still a little broad.\n\nI’d want it tighter around the stuff that actually bites you in a branch:\n- approval authority: who can sign off, not just who said they would\n- documentation completeness: IDs, income, disclosures, signatures, whatever applies\n- handoff points: where the file leaves one person and lands with another\n- same-day rush items: end of day is where stuff gets sloppy\n- exception files: anything off-standard, because those get missed fastest\n- reworked files: if it got touched once, it needs a fresh look\n\nAnd I’d build one hard control:\n- no move forward unless the approval is documented in the file or system\n\nA checklist is fine, but I’d also want a simple owner column and a status column. That way nobody can hide behind “I thought someone else had it.”\n\nIf you want, I can turn this into a one-page branch QA checklist with owner / status / hold / release fields.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Absolutely — here’s the tighter branch QA version.\n\n## What to check more closely\n- **approval authority**\n  - who can actually sign off\n  - not just who said they would\n- **documentation completeness**\n  - IDs\n  - income\n  - disclosures\n  - signatures\n  - anything else required for that file\n- **handoff points**\n  - where the file changes hands\n  - where things usually get dropped\n- **same-day rush items**\n  - end-of-day work\n  - anything being pushed out fast\n- **exception files**\n  - anything off-standard\n  - anything that needs a note or approval\n- **reworked files**\n  - anything touched once already\n  - anything that came back for correction\n\n## Hard control\n- **No move forward unless the approval is documented in the file or system.**\n\n## Owner / status fields\nUse these on every item:\n- **Owner**\n- **Status**\n- **Hold / Release**\n- **Approval documented?**\n- **Next step**\n\n## Hold it if\n- approval is not documented\n- docs are incomplete\n- the file is off-standard and not explained\n- the handoff is unclear\n- it was already reworked once\n- it’s a rush item and not fully checked\n\n## Release it if\n- approval is documented\n- docs are complete\n- owner is clear\n- status is current\n- there’s no obvious cleanup risk\n\n## Simple branch rule\nIf it’s **off-standard, reworked, or rushed**, it gets a second look.  \nIf the approval isn’t documented, it does not move.\n\nIf you want, I can turn this into a one-page checklist with columns for **Owner / Status / Hold / Release / Approval Doc’d**.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s solid. Tight enough to use.\n\nThat’s basically what I wanted:\n- approval authority\n- docs complete\n- handoff point clear\n- rush items flagged\n- exception files get a second look\n- reworked files don’t just slide through\n- no documented approval, no movement\n\nAnd the owner/status setup is the part that keeps people honest. That’s the control piece.\n\nOne-page checklist with owner / status / hold / release / approval doc’d would be useful. Keep it clean, not some bloated training packet.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    }
+  ]
+}

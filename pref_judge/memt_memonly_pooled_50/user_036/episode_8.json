@@ -1,0 +1,302 @@
+{
+  "user_id": "user_036",
+  "task": "I’m putting together a spreadsheet of a few used electronics listings, and I want a simple way to keep the model, serial number, and condition notes from getting mixed up. Could you help me set up a clean column layout and a quick check for spotting inconsistent entries?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "verbosity_preference",
+      "short": "Wants concise help with enough detail to act",
+      "explanation": "She likely prefers responses that get to the point without unnecessary filler, since her work revolves around clarity and efficiency. At the same time, she needs enough detail to verify facts and avoid mistakes, so overly terse answers would frustrate her. A moderate length is the best fit when accuracy matters."
+    },
+    {
+      "idx": 2,
+      "dimension": "structure_preference",
+      "short": "Prefers organized, checklist-like help",
+      "explanation": "Her editing habits suggest she responds well to information that is clearly segmented and easy to review. She seems to like structure because it reduces the chance of overlooking a detail, especially when tasks are time-sensitive. Loose, exploratory answers would probably feel less useful than a clean sequence of steps or sections."
+    },
+    {
+      "idx": 3,
+      "dimension": "directness_preference",
+      "short": "Wants straightforward answers without fluff",
+      "explanation": "She values honesty and accuracy, so she likely prefers direct wording over hedged or overly softened language. Clear statements are especially helpful for someone who works with corrections and verification. Still, bluntness should not be rude; she would likely want firmness paired with precision."
+    },
+    {
+      "idx": 4,
+      "dimension": "feedback_style_preference",
+      "short": "Responds best to clear, suggestion-framed corrections",
+      "explanation": "Because she works in error-sensitive environments, she probably appreciates being told exactly what is wrong and how to fix it. Suggestion-framed feedback fits her careful style better than harsh critique, since she seems motivated by improvement rather than defensiveness. She likely wants mistakes identified plainly, but with a practical path forward."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Welcomes gentle pushback on risky mistakes",
+      "explanation": "Her history shows she takes accuracy seriously, even when that slows things down, so she would likely value an assistant that flags problems instead of just agreeing. Strong pushback is probably only useful when something is clearly unsafe or incorrect. She seems more comfortable with calm correction than with passive affirmation."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — a simple layout and a small verification routine will help a lot.\n\n### Clean column layout\nUse a fixed order like this:\n\n1. **Listing ID**\n2. **Device Label**  \n   - e.g., “iPhone 13 Pro”, “Dell XPS 13”\n3. **Model Number**\n4. **Serial Number**\n5. **Condition Notes**\n6. **Source / Seller**\n7. **Source Date / Revision**  \n   - helps catch mismatches when comparing versions\n8. **Price**\n9. **Status**  \n   - e.g., listed / sold / pending\n\n### Quick consistency check\nTo spot mixed-up entries fast, freeze a small sample of rows and compare them side-by-side against the source.\n\n#### Suggested check method\n- Pick **5 known listings** that you trust as anchors.\n- For each one, verify:\n  - **Device Label** matches\n  - **Model Number** is in the right row\n  - **Serial Number** has the expected format and length\n  - **Condition Notes** are attached to the correct device\n  - **Source Date / Revision** matches the latest record\n\n### Simple checklist for each row\nUse this when reviewing:\n\n- Row count looks right\n- Column names/order are unchanged\n- Known IDs are in the expected rows\n- Model number matches the device label\n- Serial number is not shifted into condition notes\n- Condition notes are attached to the correct listing\n- Dates/numbers are in the right format\n- Sorting/filtering doesn’t change row alignment\n\n### Extra tip\nIf you have multiple sources, treat the **device label** and any **amended order record** as the main anchor. Use the manual only if it’s specific and clearly newer than the others.\n\nIf you want, I can also give you a ready-to-paste spreadsheet header row or a simple Excel/Google Sheets formula to flag suspicious rows.",
+      "score": 4.6,
+      "summary": "mean=4.60 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:2, 5:3}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Concise but sufficiently detailed: it gives a usable layout and check method without much filler. It’s not ultra-brief, but the length is appropriate for acting on the advice."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Strongly organized with clear sections and lists: \"Clean column layout,\" \"Quick consistency check,\" \"Simple checklist for each row,\" and bullet points make it easy to review."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Straightforward and direct, with no hedging or fluff. Phrases like \"Use a fixed order\" and \"To spot mixed-up entries fast\" are clear and practical."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Feedback is framed as actionable suggestions: \"Suggested check method,\" \"Use this when reviewing,\" and \"Extra tip\" explain what is wrong and how to fix or prevent it."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "It does flag potential problems calmly, e.g. \"helps catch mismatches\" and \"flag suspicious rows,\" which is gentle pushback on risky mistakes. It doesn’t strongly challenge the user, but it does encourage verification over blind agreement."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Absolutely — here’s a tighter setup you can use for used electronics listings.\n\n### Header row\nPaste this as your header row:\n\n**Listing ID | Device Label | Brand | Model Number | Serial Number | Condition Notes | Warranty / Refurb Status | Battery Health | Source / Seller | Source Date / Revision | Price | Status**\n\n### Why this works\n- **Model Number**, **Serial Number**, and **Condition Notes** stay in separate fields so they’re less likely to get mixed together.\n- **Warranty / Refurb Status** and **Battery Health** give you dedicated spots for the common “muddy” details.\n- **Source Date / Revision** helps you catch mismatches if the listing was updated later.\n\n### One simple flag formula\nIf you want a quick check for rows that look suspicious, add a helper column called **Review Flag** and use a formula like this in Google Sheets or Excel:\n\n```excel\n=IF(OR(LEN(E2)<8, ISNUMBER(SEARCH(\"model\",F2)), ISNUMBER(SEARCH(\"serial\",F2)), ISNUMBER(SEARCH(\"battery\",D2))),\"CHECK\",\"\")\n```\n\n### What it catches\n- **Serial Number too short** in column E\n- The word **“model”** showing up in **Condition Notes** by mistake\n- The word **“serial”** showing up in **Condition Notes**\n- The word **“battery”** showing up in **Model Number**\n\n### Better practical rule\nIf you want something more useful for cleanup, use a validation rule like:\n\n- **Serial Number** should be alphanumeric and at least a minimum length\n- **Model Number** should not contain long free-text phrases\n- **Condition Notes** should not contain obvious serial-like strings unless intentionally noted\n\n### Simple manual check\nSort by **Device Label**, then scan:\n- Does the **model number** look like a model number?\n- Does the **serial number** look like a serial number?\n- Do the **condition notes** read like notes, not identifiers?\n- Is **battery health** only filled in when relevant?\n- Is **warranty/refurb status** consistent with the seller/source?\n\nIf you want, I can also give you:\n1. a version of the header row optimized for **Google Sheets**, or  \n2. a stronger formula that flags likely serial/model swaps more reliably.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Concise but sufficiently detailed: it gives a header row, a formula, what it catches, and a manual check without much filler."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Very organized and checklist-like, with clear sections: \"Header row,\" \"Why this works,\" \"One simple flag formula,\" \"What it catches,\" \"Better practical rule,\" and \"Simple manual check.\""
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Straightforward and direct, e.g. \"here’s a tighter setup you can use\" and \"If you want something more useful for cleanup,\" with no unnecessary hedging."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Corrections are framed as practical suggestions: \"use a helper column,\" \"use a validation rule like,\" and \"If you want, I can also give you...\" which clearly explains what to do and how to fix issues."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "It does flag problems and offers a \"quick check for spotting inconsistent entries,\" but the pushback is gentle and limited; it doesn't strongly challenge risky assumptions beyond noting suspicious rows."
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yes — for this kind of sheet, I’d set it up with **clean field separation** plus **one row-level “looks off” check** that’s based on structure, not keywords.\n\n## Header row\nUse this order:\n\n**Listing ID | Device Label | Brand | Model Number | Serial Number | Condition Notes | Warranty / Refurb Status | Battery Health | Source / Seller | Source Date / Revision | Price | Status | Review Flag**\n\n## Google Sheets row-level check\nPut this in **Review Flag** for row 2 and fill down:\n\n```excel\n=IF(OR(\n  LEN(D2)>25,\n  REGEXMATCH(D2,\"[[:space:]]{2,}|[^A-Za-z0-9\\-\\/]\"),\n  REGEXMATCH(E2,\"[[:space:]]|[^A-Za-z0-9\\-]\"),\n  LEN(F2)>120,\n  REGEXMATCH(F2,\"[A-Z0-9]{6,}\")\n),\"CHECK\",\"\")\n```\n\n### What it flags\n- **Model Number** too long for a model field\n- **Model Number** has odd punctuation or extra spacing\n- **Serial Number** contains spaces or invalid punctuation\n- **Condition Notes** are unusually long\n- **Condition Notes** contain an identifier-like string\n\n## Battery Health blank rule\nIf Battery Health should be blank for items where it doesn’t apply, use a helper check like this:\n\n```excel\n=IF(AND(REGEXMATCH(B2,\"(?i)desktop|monitor|printer|router|dock\"), H2<>\"\"),\"BLANK BATTERY\",\"\")\n```\n\nThat flags cases where **Battery Health** is filled in for items that usually don’t have one.\n\nIf you want the stricter version, I can make this into:\n1. a **single conditional formatting rule** that highlights the whole row, or  \n2. a **cleaner serial/model validator** tuned to your actual device types.",
+      "score": 4.6,
+      "summary": "mean=4.60 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:2, 5:3}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Concise but still actionable: it gives a header row, a formula, and brief explanations without much filler. It’s moderately detailed rather than overly terse."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Strongly organized and checklist-like: it uses clear sections like \"Header row,\" \"Google Sheets row-level check,\" and \"What it flags,\" plus a numbered offer for next steps."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Very direct and straightforward, e.g. \"I’d set it up with clean field separation\" and \"Put this in Review Flag\". No fluff or hedging, while still being precise."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Feedback is framed as practical suggestions: \"one row-level 'looks off' check,\" \"What it flags,\" and \"If you want the stricter version, I can make this into...\" It identifies issues and gives a clear path to fix them."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "It gently pushes back on risky mistakes by flagging suspicious entries instead of assuming they’re fine, e.g. \"looks off\" and \"CHECK.\" The tone is calm and corrective, though not especially forceful."
+        }
+      ]
+    },
+    {
+      "turn": 4,
+      "agent_response": "Yes — here’s a cleaner Google Sheets setup that’s less brittle.\n\n## Suggested columns\n**Listing ID | Device Label | Brand | Model Number | Serial Number | Condition Notes | Warranty / Refurb Status | Battery Health | Source / Seller | Source Date / Revision | Price | Status | Review Flag**\n\n## Row-level flag for structural issues\nPut this in **Review Flag** for row 2 and fill down:\n\n```excel\n=IF(OR(\n  LEN(D2)<2,\n  LEN(D2)>20,\n  REGEXMATCH(D2,\"^[A-Za-z0-9]+$\")=FALSE,\n  LEN(E2)<4,\n  REGEXMATCH(E2,\"^[A-Za-z0-9\\-]+$\")=FALSE,\n  LEN(F2)>140,\n  REGEXMATCH(F2,\"[A-Z0-9]{2,}[-\\/]?[A-Z0-9]{2,}[-\\/]?[A-Z0-9]{2,}\")\n),\"CHECK\",\"\")\n```\n\n### What this does\n- Flags **Model Number** if it’s unusually short/long or contains characters outside a normal model-style pattern\n- Flags **Serial Number** if it’s too short or has spaces / odd punctuation\n- Flags **Condition Notes** if they look like they contain an identifier-style string\n\n## Why this is a bit safer\nIt avoids a broad “punctuation is bad” rule, so formats like:\n- `SM-G998U`\n- `A2342`\n- `WH-1000XM5`\n\nshould be fine.\n\n## Better battery rule with a helper list\nInstead of hardcoding device types in the formula, put your **non-battery device types** in a helper sheet.\n\n### Helper sheet\nCreate a sheet named **Lists** and put this in `A2:A`:\n\n- desktop\n- monitor\n- printer\n- router\n- dock\n\nYou can expand that list anytime.\n\n### Battery check formula\nPut this in a helper column if you want to flag bad battery entries:\n\n```excel\n=IF(AND(\n  COUNTIF(Lists!A:A,LOWER(B2))>0,\n  H2<>\"\"\n),\"CHECK BATTERY\",\"\")\n```\n\n## If you want one combined row flag\nYou can combine both checks into one flag column:\n\n```excel\n=IF(OR(\n  LEN(D2)<2,\n  LEN(D2)>20,\n  REGEXMATCH(D2,\"^[A-Za-z0-9]+$\")=FALSE,\n  LEN(E2)<4,\n  REGEXMATCH(E2,\"^[A-Za-z0-9\\-]+$\")=FALSE,\n  LEN(F2)>140,\n  REGEXMATCH(F2,\"[A-Z0-9]{2,}[-\\/]?[A-Z0-9]{2,}[-\\/]?[A-Z0-9]{2,}\"),\n  AND(COUNTIF(Lists!A:A,LOWER(B2))>0,H2<>\"\")\n),\"CHECK\",\"\")\n```\n\n## Small caution\nIf you use **Brand** in column C and **Device Label** in column B, the battery helper should reference the actual device type field you trust most. If your “non-battery” list is based on the label, keep it on **Device Label** instead of Brand.\n\nIf you want, I can make this even cleaner by giving you:\n1. a **conditional formatting rule** that highlights the whole row, or  \n2. a version tuned to your exact device categories.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Moderately concise while still actionable: it gives a column list, formulas, and a caution without much filler. It’s a bit long, but the detail is relevant for verification."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Very organized and checklist-like, with clear sections such as \"Suggested columns,\" \"What this does,\" \"Why this is a bit safer,\" and step-by-step formulas."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Straightforward and direct, e.g. \"here’s a cleaner Google Sheets setup\" and explicit formulas with plain explanations. No unnecessary hedging or fluff."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Uses clear, suggestion-framed corrections: \"Put this in Review Flag,\" \"Instead of hardcoding,\" and \"If you want, I can make this even cleaner.\" It identifies issues and offers practical fixes."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Gently pushes back on risky simplifications, saying \"It avoids a broad 'punctuation is bad' rule\" and adding \"Small caution\" about using the right field for battery checks. The correction is calm and practical."
+        }
+      ]
+    },
+    {
+      "turn": 5,
+      "agent_response": "Yes — here’s a tighter Google Sheets version that stays practical and easier to maintain.\n\n## 1) Whole-row conditional formatting rule\n\nApply this to the full data range, with a custom formula like:\n\n```excel\n=OR(\n  LEN($D2)>20,\n  REGEXMATCH($D2,\"[[:space:]]\"),\n  REGEXMATCH($D2,\"[[:punct:]]{2,}\"),\n  LEN($E2)>30,\n  REGEXMATCH($E2,\"[[:space:]/,]\"),\n  REGEXMATCH($E2,\"[[:punct:]]{2,}\"),\n  LEN($F2)>140,\n  REGEXMATCH($F2,\"[A-Z0-9]{2,}[-\\/]?[A-Z0-9]{2,}[-\\/]?[A-Z0-9]{2,}\")\n)\n```\n\n### What it flags\n- **Model Number** if it starts looking like note text:\n  - too long\n  - contains spaces\n  - has repeated punctuation\n- **Serial Number** if it has:\n  - spaces\n  - slashes or commas\n  - repeated punctuation\n  - unusually long text\n- **Condition Notes** if they contain a serial-like token\n\nThis avoids the generic “alphanumeric blob” problem and is less likely to flag normal model formats like:\n- `SM-G998U`\n- `A2342`\n- `WH-1000XM5`\n\n## 2) Battery blank rule with a named range\n\nCreate a helper sheet with a named range called **NonBatteryTypes** containing things like:\n- desktop\n- monitor\n- printer\n- router\n- dock\n\nThen use this rule for Battery Health:\n\n```excel\n=AND(\n  COUNTIF(NonBatteryTypes,LOWER($B2))>0,\n  $H2<>\"\"\n)\n```\n\nIf that returns TRUE, Battery Health should be blank.\n\n## 3) Recommended setup\nIf you want this clean and reusable:\n\n- **Conditional formatting**: highlight the whole row when the first formula is TRUE\n- **Battery check**: add a separate helper column like `Battery Flag`\n- **Named range**: keep `NonBatteryTypes` editable without changing formulas\n\n## Small note\nIf your **Device Label** values are more descriptive than the brand, use **Device Label** in the battery rule. If they’re not, I’d base it on a more specific category field instead.\n\nIf you want, I can turn this into:\n- a **single copy-paste Sheets template**, or\n- a version with **both flags in helper columns** instead of conditional formatting.",
+      "score": 4.6,
+      "summary": "mean=4.60 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:2, 5:3}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly concise and actionable, with enough detail to use. It does include some extra explanation, but stays focused and practical rather than verbose."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Very organized and checklist-like: numbered sections, subheads, bullet lists, and a clear \"Recommended setup\" summary make it easy to review."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Straightforward and direct, e.g. \"here’s a tighter Google Sheets version\" and concrete formulas without much fluff. The wording is firm and practical."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Gives clear correction-oriented guidance with specific fixes: \"What it flags,\" \"Recommended setup,\" and \"If you want, I can turn this into...\". The feedback is suggestion-framed and practical."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "It does gently push back on a risky setup by noting \"If your Device Label values are more descriptive than the brand, use Device Label... If they’re not, I’d base it on a more specific category field instead.\" This is calm correction, though not especially forceful."
+        }
+      ]
+    },
+    {
+      "turn": 6,
+      "agent_response": "Absolutely — here’s a tighter Google Sheets setup that should behave much better.\n\n## 1) Whole-row conditional formatting rule\nApply this to your data range to highlight the entire row when something looks structurally off:\n\n```excel\n=OR(\n  AND(LEN($D2)>25, REGEXMATCH($D2,\"[[:space:]]|[[:punct:]]{2,}\")),\n  REGEXMATCH($D2,\"[.!?].*[.!?]\"),\n  AND(LEN($E2)>20, REGEXMATCH($E2,\"[[:space:],/]|[[:punct:]]{2,}\")),\n  REGEXMATCH($E2,\"[\\r\\n]\"),\n  REGEXMATCH($F2,\"(^|[^A-Z0-9])[A-Z0-9]{2,}(?:[-\\/][A-Z0-9]{2,}){1,}([^A-Z0-9]|$)\")\n)\n```\n\n### What it’s doing\n- **Model Number (`D`)**\n  - only flags if it’s getting prose-like:\n    - too long and has spaces or repeated punctuation\n    - sentence-style punctuation pattern\n- **Serial Number (`E`)**\n  - flags obvious pasted junk:\n    - spaces, commas, slashes\n    - repeated punctuation\n    - line breaks\n- **Condition Notes (`F`)**\n  - flags if it contains a **serial-like token**\n  - this is stricter than “any mixed alphanumeric chunk,” so it should be less noisy\n\n### Why this is safer\nThis should avoid touching normal model formats like:\n- `SM-G998U`\n- `A2342`\n- `WH-1000XM5`\n\nbecause those are short, structured, and not prose-like.\n\n---\n\n## 2) Battery blank rule with a helper sheet + named range\n\n### Helper sheet setup\nCreate a sheet called **Lists**.\n\nPut your non-battery device types in:\n\n- `Lists!A2:A`\n  - desktop\n  - monitor\n  - printer\n  - router\n  - dock\n\nYou can add more later without changing the formula.\n\n### Create the named range\nIn Google Sheets:\n1. Select `Lists!A2:A`\n2. Go to **Data → Named ranges**\n3. Name it: **NonBatteryTypes**\n\nNow the range is reusable and easier to maintain.\n\n### Battery Health blank rule\nIf you want to flag rows where Battery Health is filled in but shouldn’t be, use:\n\n```excel\n=AND(\n  COUNTIF(NonBatteryTypes,LOWER($B2))>0,\n  $H2<>\"\"\n)\n```\n\nThat assumes **Device Label** is in column `B` and **Battery Health** is in `H`.\n\n---\n\n## 3) If you want a separate helper flag for battery\nYou can also add a helper column like `Battery Flag` with:\n\n```excel\n=IF(AND(COUNTIF(NonBatteryTypes,LOWER($B2))>0,$H2<>\"\"),\"CHECK BATTERY\",\"\")\n```\n\n---\n\n## Notes\nIf your **Device Label** is more descriptive than your brand field, use that for the battery check. If you have a cleaner category field, even better — that’s the best thing to match against `NonBatteryTypes`.\n\nIf you want, I can give you a **single combined row flag** that includes both the structural row check and the battery rule in one formula.",
+      "score": 4.6,
+      "summary": "mean=4.60 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:2, 5:3}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Moderately concise and actionable, with enough detail to use. It does include some extra explanation, but stays focused on the task."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Very organized and checklist-like: numbered sections, subheads, bullets, and step-by-step setup instructions make it easy to review."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Straightforward and direct, e.g. \"here’s a tighter Google Sheets setup\" and clear formula guidance without much fluff."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Uses clear correction/suggestion framing: \"If you want,\" \"you can also,\" and practical formulas that show exactly what to change and how to fix it."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Gently pushes back on risky assumptions by saying the rule is \"stricter than 'any mixed alphanumeric chunk,' so it should be less noisy\" and notes \"If your Device Label is more descriptive... use that.\" It corrects and guides without being harsh."
+        }
+      ]
+    },
+    {
+      "turn": 7,
+      "agent_response": "Absolutely — here’s a tighter version.\n\n## 1) Whole-row conditional formatting\nUse this as the custom formula for the full data range:\n\n```excel\n=OR(\n  AND(LEN($D2)>25, REGEXMATCH($D2,\"[[:space:]]|[[:punct:]]{2,}\")),\n  REGEXMATCH($D2,\"[.!?].*[.!?]\"),\n  AND(LEN($E2)>20, REGEXMATCH($E2,\"[[:space:],/]|[[:punct:]]{2,}\")),\n  REGEXMATCH($E2,\"[\\r\\n]\"),\n  REGEXMATCH($F2,\"(^|[^A-Z0-9])[A-Z0-9]{3,}(?:[-\\/][A-Z0-9]{3,}){1,}([^A-Z0-9]|$)\")\n)\n```\n\n### What changed\n- The **Condition Notes** check is a little stricter now:\n  - it looks for a more serial-like token with **3+ character chunks**\n  - that reduces false flags from short product codes or normal mixed text\n- **Model Number** still only flags when it starts to look like prose or note text\n- **Serial Number** stays focused on obvious pasted junk:\n  - spaces\n  - commas\n  - slashes\n  - repeated punctuation\n  - line breaks\n\n---\n\n## 2) Battery rule with a dedicated device-type field\nYes — better to target a separate category field.\n\n### Add a column\nInsert a **Device Type** column, for example:\n\n**Listing ID | Device Type | Device Label | Brand | Model Number | Serial Number | Condition Notes | Warranty / Refurb Status | Battery Health | Source / Seller | Source Date / Revision | Price | Status**\n\n### Helper sheet + named range\nOn a sheet called **Lists**, put your non-battery types in:\n\n- `A2:A`\n  - desktop\n  - monitor\n  - printer\n  - router\n  - dock\n\nThen create a named range:\n- **Name:** `NonBatteryTypes`\n- **Range:** `Lists!A2:A`\n\n### Battery blank check\nUse this formula:\n\n```excel\n=AND(\n  COUNTIF(NonBatteryTypes,LOWER($B2))>0,\n  $I2<>\"\"\n)\n```\n\nThat assumes:\n- **Device Type** is column **B**\n- **Battery Health** is column **I**\n\n---\n\n## 3) If you want the row highlight to include battery issues too\nYou can combine both checks:\n\n```excel\n=OR(\n  AND(LEN($E2)>25, REGEXMATCH($E2,\"[[:space:]]|[[:punct:]]{2,}\")),\n  REGEXMATCH($E2,\"[.!?].*[.!?]\"),\n  AND(LEN($F2)>20, REGEXMATCH($F2,\"[[:space:],/]|[[:punct:]]{2,}\")),\n  REGEXMATCH($F2,\"[\\r\\n]\"),\n  REGEXMATCH($G2,\"(^|[^A-Z0-9])[A-Z0-9]{3,}(?:[-\\/][A-Z0-9]{3,}){1,}([^A-Z0-9]|$)\"),\n  AND(COUNTIF(NonBatteryTypes,LOWER($B2))>0,$I2<>\"\")\n)\n```\n\nIf you want, I can turn this into a **final column map with the exact row/column letters** so you can paste it into Sheets without adjusting anything.",
+      "score": 4.6,
+      "summary": "mean=4.60 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:2, 5:3}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly concise and actionable: starts with \"Absolutely — here’s a tighter version\" and gives formulas plus brief explanations. It’s a bit long, but still focused enough to act on."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Strongly organized with numbered sections, subheadings, bullet points, and a clear column map. The response is easy to scan and review."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Direct and unfluffy: \"here’s a tighter version,\" \"Yes — better to target a separate category field,\" and concrete formulas without hedging. The wording is straightforward and precise."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Uses clear, suggestion-framed corrections like \"better to target a separate category field\" and explains what changed and why. It identifies issues plainly while offering a practical fix."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "It does gently push back on the battery setup by saying \"better to target a separate category field\" and recommending a helper sheet/named range. The correction is calm and practical, though not especially forceful."
+        }
+      ]
+    },
+    {
+      "turn": 8,
+      "agent_response": "Absolutely — here’s a clean final version with the **column letters mapped** so you can paste it into Google Sheets directly.\n\n## Final column layout\nUse this order:\n\n**A** Listing ID  \n**B** Device Type  \n**C** Device Label  \n**D** Brand  \n**E** Model Number  \n**F** Serial Number  \n**G** Condition Notes  \n**H** Warranty / Refurb Status  \n**I** Battery Health  \n**J** Source / Seller  \n**K** Source Date / Revision  \n**L** Price  \n**M** Status  \n\n---\n\n## 1) Whole-row conditional formatting formula\nApply this to your full data range as a custom formula:\n\n```excel\n=OR(\n  AND(LEN($E2)>25, REGEXMATCH($E2,\"[[:space:]]|[[:punct:]]{2,}\")),\n  REGEXMATCH($E2,\"[.!?].*[.!?]\"),\n  AND(LEN($F2)>20, REGEXMATCH($F2,\"[[:space:],/]|[[:punct:]]{2,}\")),\n  REGEXMATCH($F2,\"[\\r\\n]\"),\n  REGEXMATCH($G2,\"(^|[^A-Z0-9])[A-Z0-9]{4,}(?:[-\\/][A-Z0-9]{4,}){1,}([^A-Z0-9]|$)\"),\n  AND(COUNTIF(NonBatteryTypes,LOWER($B2))>0,$I2<>\"\")\n)\n```\n\n### What it uses\n- **E = Model Number**\n- **F = Serial Number**\n- **G = Condition Notes**\n- **B = Device Type**\n- **I = Battery Health**\n\n### Why this is tighter\n- **Model Number** only gets flagged if it starts looking like prose or note text.\n- **Serial Number** is stricter about obvious pasted junk.\n- **Condition Notes** only flag when they contain a more serial-like token with **4+ character chunks**, which should reduce false positives from normal hyphenated notes.\n- **Battery Health** only gets flagged when the **Device Type** is in your non-battery list.\n\n---\n\n## 2) Battery blank rule only\nIf you want a separate helper flag just for battery issues, use:\n\n```excel\n=AND(\n  COUNTIF(NonBatteryTypes,LOWER($B2))>0,\n  $I2<>\"\"\n)\n```\n\n---\n\n## 3) Helper sheet setup\nCreate a sheet called **Lists** and put your non-battery device types in:\n\n- `Lists!A2:A`\n  - desktop\n  - monitor\n  - printer\n  - router\n  - dock\n\nThen define a named range:\n\n- **Name:** `NonBatteryTypes`\n- **Range:** `Lists!A2:A`\n\n---\n\n## 4) If you want the serial-like check even less eager later\nThe part to tune is this bit:\n\n```excel\nREGEXMATCH($G2,\"(^|[^A-Z0-9])[A-Z0-9]{4,}(?:[-\\/][A-Z0-9]{4,}){1,}([^A-Z0-9]|$)\")\n```\n\nIf you later want it stricter, the easiest change is to require:\n- more chunks, or\n- longer chunks\n\nIf you want, I can give you a **slightly stricter alternate version** of just that one condition so you can compare the two side by side.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Fairly concise while still actionable: it gives the layout, formulas, and setup steps without much filler. It is a bit long, but the detail is relevant for verification."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Strongly organized with clear sections and numbered steps: \"Final column layout,\" \"1) Whole-row conditional formatting formula,\" \"2) Battery blank rule only,\" and \"3) Helper sheet setup.\""
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Direct and straightforward: \"here’s a clean final version,\" \"Use this order,\" and explicit formulas/field mappings. No hedging or fluff."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Uses suggestion-framed corrections and practical guidance, e.g. \"If you want it stricter, the easiest change is...\" and \"If you want, I can give you a slightly stricter alternate version.\""
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Gently pushes back on risky inconsistency detection by explaining why the checks are \"tighter\" and how to make them \"stricter\" later, rather than blindly agreeing. It flags potential false positives and offers a safer path forward."
+        }
+      ]
+    }
+  ]
+}

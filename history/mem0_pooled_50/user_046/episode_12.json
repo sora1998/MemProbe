@@ -1,0 +1,36 @@
+{
+  "user_id": "user_046",
+  "task": "I’m trying to figure out the cheapest way to get home after a late shift when I miss the usual ride. Can you help me compare the options and think through what’s worth waiting for versus when it makes sense to grab a backup ride?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.9,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — I can help you sort it out.\n\nA simple way to decide is to compare:\n\n1. **Cost of waiting**\n   - How long would you be stuck?\n   - Would waiting make you miss sleep, safety, or other plans?\n   - Is there a realistic chance the usual ride still shows up soon?\n\n2. **Cost of the backup ride**\n   - What’s the actual price right now?\n   - Will it surge later if you wait?\n   - Is it still cheaper than the stress/time loss from waiting?\n\n3. **Safety and reliability**\n   - If it’s very late, dark, or you’re tired, that usually pushes toward **getting the backup ride sooner**.\n   - If the backup option is only a little more expensive, it may be worth it to avoid a long wait.\n\nA quick rule of thumb:\n- **Wait** if the usual ride is likely soon and the delay is short.\n- **Grab the backup** if the wait is uncertain, the price is still reasonable, or your safety/energy is getting worse.\n\nIf you want, send me:\n- the usual ride cost or ETA,\n- the backup ride cost,\n- how long you’d have to wait,\n- and whether you’re comparing a taxi, rideshare, bus, or friend,\n\nand I can help you figure out the cheapest sensible choice.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, but I need it laid out a little more real. Like, if I’m standing there after 11 and I’m already tired, a bus that might not come for another half hour is not the same as waiting 10 minutes, you know?\n\nCan you make it into a simple compare thing — like:\n- wait if it’s under X minutes and free\n- grab the backup if it’s over X minutes or the price is only a little more\n- and when the wait starts costing more than the ride\n\nI’m not trying to do math in my head after a shift.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yeah — here’s a simple **no-math-after-shift** version.\n\n## Quick rule\n### **Wait** if:\n- the usual ride is **free**\n- and it’s coming in **10 minutes or less**\n- and you’re still okay standing there\n\n### **Grab the backup** if:\n- the wait is **15 minutes or more**\n- or you’re **tired, cold, unsafe, or just done**\n- or the backup ride is only **a few dollars more** than waiting would “save”\n\n## Simple cutoff\nA good default is:\n\n- **0–10 min:** usually worth waiting\n- **10–15 min:** depends on how tired you are and how reliable it is\n- **15+ min:** usually not worth it after a late shift\n- **30+ min:** almost always take the backup unless it’s truly expensive\n\n## When waiting starts costing more than the ride\nWaiting costs you more when:\n- you’re losing **sleep**\n- you’re stuck in a **bad area**\n- the next option is **uncertain**\n- the backup ride is not much more than the wait is worth\n\nA simple way to think about it:\n- If the backup ride is only **$5–$10 more**, that often beats standing around another 20–30 minutes late at night.\n- If the backup ride is **way more expensive**, then waiting a bit longer may make sense.\n\n## Easy decision ladder\n- **Under 10 minutes:** wait\n- **10–15 minutes:** ask yourself, “Am I actually okay waiting this long?”\n- **Over 15 minutes:** usually take the backup\n- **If you’re exhausted or it’s late and unsafe:** take the backup sooner\n\n## Super simple version\nIf you want one line to use:\n> **Wait a few minutes if it’s free, but if I’m already tired and it’s past 10–15 minutes, I should probably pay a little extra and go.**\n\nIf you want, I can turn this into a **tiny text-message style cheat sheet** you can keep on your phone.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s basically it. The 10–15 minute thing feels right. After a long shift, 20 minutes standing around is already too much if I’m tired and it’s late. And if the backup is only a few bucks more, I’d rather just go home than sit there counting minutes.\n\nThe little cheat sheet would help too, honestly.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 5.0
+      },
+      "gt_correct": null
+    }
+  ]
+}

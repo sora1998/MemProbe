@@ -1,0 +1,36 @@
+{
+  "user_id": "user_021",
+  "task": "I’m looking at a used electronics deal that could be gone soon, and I need to decide whether it’s worth a quick move. What’s the fastest way to check the main details before I act?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.6,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Use this 20-second check:\n\n## Go\n- exact model is clear\n- real photos of the actual item\n- lock status is clear\n- it powers on / works now\n- price still leaves room for one hidden issue\n\n## Ask once\n- missing charger\n- missing serial / IMEI\n- “works” but no proof\n- minor damage that might not matter\n\n## Skip\n- no exact model\n- stock photos only\n- lock status unclear\n- seller dodges basics\n- “untested” / “as-is” without a real discount\n- title doesn’t match the photos\n\n## Fast rule\n- **clear + working + unlocked + priced right = go**\n- **fuzzy + weird + locked = skip**\n\nIf you want, I can turn that into a **go / ask / skip** card.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, basically. But I’d want one more thing in it — check if the account’s clean, not just unlocked. I’ve seen enough busted deals that “works” means nothing if it’s got some weird lock or stolen flag. Make it tighter: model, real pics, powers on, no account lock, price low enough to eat one problem. Then maybe move. If the seller’s dodging any of that, I’m out.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Use this:\n\n## Go\n- exact model\n- real photos\n- powers on\n- **account clean / no lock / no stolen flag**\n- price low enough to absorb one hidden issue\n\n## Ask once\n- missing charger\n- missing serial / IMEI\n- “works” but no proof\n- minor damage that might not matter\n\n## Skip\n- no exact model\n- stock photos\n- lock/account status unclear\n- seller dodges basics\n- title doesn’t match photos\n- “untested” / “as-is” without a real discount\n\n## Fast rule\n**model + real pics + powers on + account clean + cheap enough = go**  \nIf any of the important stuff is fuzzy, **skip**.\n\n",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s the one. Tight enough. Model, real pics, powers on, account clean, price low enough to take a hit — if one of those is fuzzy, I’m not wasting time.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    }
+  ]
+}

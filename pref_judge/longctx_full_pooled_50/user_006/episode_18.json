@@ -1,0 +1,104 @@
+{
+  "user_id": "user_006",
+  "task": "I’ve got a time-sensitive equipment issue in a hot storage area, and I need a plan before it gets worse. If you were walking into that situation, what would you check first and what would you do next to keep things from spiraling while it’s still unstable?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "verbosity_preference",
+      "short": "Wants responses kept tight and efficient",
+      "explanation": "He values speed, control, and efficiency, so he is unlikely to want long-winded help. He would probably prefer responses that get to the point quickly and avoid unnecessary filler. Overexplaining would feel like wasted time to him."
+    },
+    {
+      "idx": 2,
+      "dimension": "directness_preference",
+      "short": "Prefers blunt answers without softening",
+      "explanation": "His skeptical, competitive style suggests he wants clear, unambiguous guidance rather than hedged language. He would likely see excessive caution as evasive or inefficient. Straight answers fit his preference for control and decisive action."
+    },
+    {
+      "idx": 3,
+      "dimension": "format_preference",
+      "short": "Likes structured, actionable output",
+      "explanation": "He seems most likely to respond well to responses that are organized and easy to execute, such as bullets or checklists. That matches his practical, task-focused mindset. Loose, meandering prose would probably frustrate him."
+    },
+    {
+      "idx": 4,
+      "dimension": "detail_level_preference",
+      "short": "Wants the useful essentials, not padding",
+      "explanation": "He likely wants enough context to act, but not exhaustive background unless it helps him win or avoid mistakes. He is efficiency-driven, so extra caveats only matter when they change the decision. He would probably skip anything that does not affect the outcome."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Accepts pushback only if it is sharp and useful",
+      "explanation": "He is skeptical and self-serving, so he probably does not enjoy moralizing or vague objections. But if the pushback is concrete, efficient, and clearly tied to risk or leverage, he is more likely to respect it. Weak or overly gentle correction would likely be ignored."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Treat it as a **stability first, diagnosis second** situation.\n\n## First checks\n1. **Safety**\n   - If there’s any risk to people, stop and clear the area first.\n   - Check for overheating, smoke, smell, swelling, leaks, or exposed power.\n\n2. **Immediate environment**\n   - current temperature\n   - airflow / ventilation\n   - blocked vents\n   - failed fans\n   - door closed/open state\n   - heat sources nearby\n\n3. **Equipment state**\n   - power status\n   - alarms / fault lights\n   - interface or service errors\n   - reboot loops\n   - thermal warnings\n   - battery/PSU warnings if relevant\n\n4. **What changed recently**\n   - load increase\n   - HVAC issue\n   - door left open\n   - moved equipment\n   - new device added\n   - power or cabling change\n\n## What to do next\n1. **Reduce load if possible**\n   - move nonessential load off\n   - shut down noncritical gear in a controlled way if needed\n   - stop anything making heat unnecessarily\n\n2. **Improve cooling immediately**\n   - restore airflow\n   - open access only if it helps and is safe\n   - clear obstructions\n   - verify fans and exhaust paths\n\n3. **Protect the critical path**\n   - keep only essential equipment running\n   - avoid random reboots\n   - avoid moving multiple things at once\n   - don’t make config changes unless they directly reduce risk\n\n4. **Start logging evidence**\n   - temperature readings\n   - fault times\n   - alarms\n   - photos\n   - power/ventilation status\n   - exact sequence of events\n\n## Decision rule\n- If temp is still rising or faults are increasing, **stabilize first**.\n- If you can bring temp down and faults stop, then **diagnose the cause**.\n- If the equipment is already in a bad state and heat is the trigger, **don’t keep it running just to observe it fail**.\n\n## What usually matters most\n- temperature trend, not just current temp\n- whether airflow actually works\n- whether the issue tracks with load or time of day\n- whether faults stop when cooling improves\n\n## Short order\n**Safety → cooling/airflow → reduce load → protect critical gear → log evidence → diagnose root cause**\n\nIf you want, I can turn this into a **hot-area incident checklist** with yes/no branches.",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly tight and efficient: uses short sections like \"First checks\" and \"What to do next\" with a concise summary. Slightly more verbose than necessary, but no major filler."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Direct and unambiguous, e.g. \"stability first, diagnosis second\" and \"don’t keep it running just to observe it fail.\" Some softening remains in safety framing, but overall blunt."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable: numbered lists, clear headings, and a final \"Short order\" sequence. Easy to execute."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Focuses on essentials that affect action—temperature, airflow, load, alarms, recent changes—without deep background. A bit more detail than minimal, but still practical."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Pushback is concrete and useful, not moralizing: \"If temp is still rising... stabilize first\" and \"don’t keep it running just to observe it fail.\" It gives clear risk-based guidance."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Start with **local temperature at the device**, not the room.\n\n## First 5 minutes\n1. **Check the gear itself**\n   - temperature at intake/exhaust if possible\n   - thermal alarms\n   - fan status\n   - PSU alarms\n   - reboot loops or fault lights\n\n2. **Check airflow**\n   - intake blocked?\n   - exhaust blocked?\n   - dead fan?\n   - rack/closet choke point?\n   - door closed trapping heat?\n\n3. **Check power**\n   - UPS/PDU alarms\n   - brownout signs\n   - loose feed / flaky outlet\n   - PSU redundancy lost\n\n4. **Check load**\n   - what can be shut down safely?\n   - nonessential gear first\n   - anything generating extra heat?\n\n## What to do next\n- **If temp is climbing:** reduce load and improve airflow immediately.\n- **If power is unstable:** move to a known-good feed/UPS/PDU if possible.\n- **If one device is first to fail:** isolate that device and protect the rest.\n- **If the whole area is hot but gear temp is normal:** look at environmental cause, not the box.\n\n## Decision point\n- **Heat + rising faults** → stabilize first, diagnose later.\n- **Heat but no faults** → monitor closely and correct airflow/load.\n- **Faults without heat rise** → don’t assume temperature; check power or hardware.\n\n## Evidence to capture\n- device temp\n- ambient temp at the rack\n- fan/PSU alarms\n- timestamps\n- photos of airflow/obstructions\n- which device failed first\n\n## Short order\n**Device temp → airflow path → power quality → load reduction → evidence → root cause**\n\nIf you want, I can turn this into a **site checklist** for a rack, closet, or warehouse cabinet.",
+      "score": 4.4,
+      "summary": "mean=4.40 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:3, 5:2}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Pretty tight and efficient: it gets to the point with a short checklist and no long preamble. Minor extra structure adds a bit of length, but it avoids filler."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly blunt and direct, e.g. \"Start with local temperature at the device\" and \"stabilize first, diagnose later.\" It does use some conditional phrasing like \"If temp is climbing,\" but not in a hedgy way."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable: clear sections like \"First 5 minutes,\" numbered checks, and a concise \"Short order\" summary. Easy to execute."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Focuses on essentials that affect action: device temp, airflow, power, load reduction, evidence. It avoids deep background and keeps only decision-relevant context."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Pushback is present but useful and concrete: \"stabilize first, diagnose later\" and \"don't assume temperature; check power or hardware.\" It is not moralizing or vague, though it is fairly gentle."
+        }
+      ]
+    }
+  ]
+}

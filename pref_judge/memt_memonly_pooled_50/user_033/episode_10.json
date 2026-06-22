@@ -1,0 +1,104 @@
+{
+  "user_id": "user_033",
+  "task": "I’m trying to decide whether a weird result is a real sample problem or something in the instrument chain. Can you help me think through the first few checks and what would make you suspect drift, a bad calibration, or a maintenance issue?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "formality_preference",
+      "short": "Prefers professional, no-nonsense interaction",
+      "explanation": "She would likely respond best to a controlled, businesslike style rather than friendliness for its own sake. Given her guarded and precision-focused persona, overly casual phrasing would probably feel sloppy or intrusive."
+    },
+    {
+      "idx": 2,
+      "dimension": "verbosity_preference",
+      "short": "Wants concise answers, not rambling",
+      "explanation": "She seems to value efficiency and would likely dislike long-winded explanations that repeat themselves. She probably wants enough information to act on, with no decorative padding."
+    },
+    {
+      "idx": 3,
+      "dimension": "directness_preference",
+      "short": "Prefers blunt, unsoftened answers",
+      "explanation": "Her skeptical, control-oriented style suggests she would rather hear the point plainly than receive hedged reassurance. She is likely to trust answers more when they are explicit about risks, limits, and conclusions."
+    },
+    {
+      "idx": 4,
+      "dimension": "format_preference",
+      "short": "Likes structured lists and checklists",
+      "explanation": "She appears to prefer information that is organized and easy to verify. A clean format with steps, bullets, or checklists would fit her habit of tracking details and would reduce ambiguity."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Accepts firm correction when needed",
+      "explanation": "She likely does not want the assistant to simply echo her assumptions if something is wrong or risky. A direct challenge, especially when backed by evidence, would probably be more useful to her than polite agreement."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — I’d start with **immediate verification** before jumping to disposition.\n\n### First few checks\n1. **Confirm whether the result is near the decision boundary**\n   - If it’s **near the cutoff**, treat instrument issues as higher priority.\n   - If it’s a **hard failure**, first rule out **sample identity, method/run validity, and procedural error**.\n\n2. **Check the instrument chain first**\n   - Recent **calibration / verification status**\n   - **Control or system suitability** result\n   - Any **drift pattern** across the run\n   - Recent **maintenance, repairs, or part changes**\n   - Analyst notes for anything unusual during the sequence\n\n3. **Look at the pattern**\n   - **Consistent lag or shift across multiple time points** → suspect **instrument drift** or a unit/system issue\n   - **Clustering by vessel, analyst, or position** → more consistent with **prep or handling error**\n   - **Single odd point with the rest stable** → less likely to be instrument-wide; could be a sample-specific issue\n\n### What suggests each cause\n\n**Instrument drift**\n- Gradual shift over the run\n- Control trending away from target\n- Same direction of bias across multiple points\n- More noticeable on later injections/time points\n\n**Bad calibration**\n- Control fails right after calibration\n- Bias is present immediately and consistently\n- Recent calibration check is out of trend or outside acceptance\n- Result changes after recalibration or verification standard\n\n**Maintenance issue**\n- Problem starts after a repair, part replacement, cleaning, or setup change\n- Intermittent or unstable behavior\n- Noise, erratic response, pressure/flow issues, or other instrument symptoms\n- Multiple samples affected in the same way after the maintenance event\n\n### Practical decision flow\n- **Near cutoff:** check **drift/calibration first**\n- **Hard failure:** check **sample identity, method validity, and procedural errors first**\n- If the result is still suspicious after those checks, move to **hold/quarantine and formal investigation**\n\n### Quick action log format\n- **Status:** Open / Checking / Verified / Hold\n- **Check:** calibration, control, maintenance, run pattern, analyst notes\n- **Result:** pass/fail/observed trend\n- **Next step:** continue, hold, reverify, investigate\n\nIf you want, I can turn this into a **simple yes/no troubleshooting tree** you can use on the bench.",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Professional and controlled overall: \"I’d start with immediate verification\" and the structured headings keep it businesslike. Slightly softened by \"If you want\" and conversational framing, but mostly no-nonsense."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Fairly concise and action-oriented. It gives \"First few checks,\" \"What suggests each cause,\" and a short \"Practical decision flow\" without much padding, though it is not maximally terse."
+        },
+        {
+          "idx": 3,
+          "score": 4,
+          "reason": "Direct and explicit: \"check instrument chain first,\" \"Near cutoff: check drift/calibration first,\" and clear cause-to-sign mapping. It does hedge a bit with conditional language like \"could be\" and \"less likely,\" but the conclusions are plain."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strongly structured with numbered steps, bullet lists, bolded section headers, and a \"Quick action log format.\" This clearly matches a preference for organized, verifiable information."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Shows some firm correction and prioritization, e.g. \"before jumping to disposition\" and \"If the result is still suspicious... move to hold/quarantine and formal investigation.\" It does not explicitly challenge the user's assumptions, but it does give clear corrective guidance."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — here’s a tighter first-pass split that keeps **sample-specific** separate from **systemic/instrument-chain**.\n\n## 1) First question: is this likely the sample, or the system?\n### Lean **sample-specific** first if:\n- only **one vial/unit** is weird\n- the rest of the batch/run looks normal\n- the odd result is **not repeating**\n- there’s a plausible sample issue: mix-up, dilution error, carryover, labeling, bad prep, damaged unit\n\n### Lean **systemic** first if:\n- multiple samples are shifted the **same way**\n- the bias appears **across the run**\n- later injections/timepoints are worse than early ones\n- controls, blanks, or SST are drifting too\n\n## 2) First checks, in order\n1. **Sample identity / prep / chain-of-custody**\n   - wrong vial\n   - mix-up\n   - dilution mistake\n   - carryover\n   - labeling error\n\n2. **Run validity**\n   - controls\n   - blanks\n   - SST\n   - any rule violation\n\n3. **Calibration status**\n   - not just “recently calibrated”\n   - check whether the **verification standard is in trend and within limits**\n   - if the verification is off, calibration is suspect even if it was “recent”\n\n4. **Maintenance / change log**\n   - lamp\n   - pump\n   - column\n   - detector\n   - autosampler\n   - software update\n   - reagent lot\n   - anything touched since the last good run\n\n5. **Pattern across the sequence**\n   - early/late bias\n   - single-position issue\n   - full-ramp shift\n\n## 3) What makes me suspect each cause\n\n### Drift\n- bias grows over time or injections\n- controls slide the same direction\n- the last part of the run is worse than the first\n\n### Bad calibration\n- the problem shows up immediately after calibration\n- verification standard is off right away\n- the same bias repeats after recalibration\n\n### Maintenance issue\n- starts after a repair or component change\n- unstable response\n- noise\n- pressure/flow problems\n- intermittent failures\n- multiple samples go bad the same way after the event\n\n## 4) Near-limit vs obvious failure\nThis is the key filter:\n\n- **Small margin failure / near cutoff:**  \n  instrument-chain issues move up the list fast, because a small drift can flip the call.\n\n- **Way outside spec:**  \n  don’t over-focus on subtle drift; first prove or disprove sample/prep/run validity.\n\n## 5) Practical rule of thumb\n- **One weird result, rest normal:** start with sample identity/prep.\n- **Patterned shift across the run:** start with instrument chain.\n- **Verification/control off right after calibration:** suspect calibration.\n- **Problem starts after something was touched:** suspect maintenance/change event.\n\nIf you want, I can turn this into a **one-page yes/no decision tree** with a hard split between **sample problem** and **system problem**.",
+      "score": 4.4,
+      "summary": "mean=4.40 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:3, 5:2}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Professional and controlled tone throughout: \"tighter first-pass split,\" \"Practical rule of thumb,\" and no casual filler."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly concise and action-oriented, with compact bullets and a short summary. Slightly longer than minimal, but not rambling."
+        },
+        {
+          "idx": 3,
+          "score": 4,
+          "reason": "Direct and explicit about conclusions: \"Lean sample-specific first if\" and \"suspect calibration\" / \"suspect maintenance/change event.\" It is somewhat softened by \"lean\" language rather than fully blunt."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong structured format: numbered sections, nested bullets, and a clear checklist-like sequence of checks."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Provides firm corrective guidance and prioritization, e.g. \"don’t over-focus on subtle drift\" and \"start with sample identity/prep\" vs \"instrument chain.\" It challenges assumptions, though not aggressively."
+        }
+      ]
+    }
+  ]
+}

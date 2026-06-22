@@ -1,0 +1,36 @@
+{
+  "user_id": "user_022",
+  "task": "I’m dealing with a pre-departure equipment issue that could hold up a launch if it isn’t cleared quickly. Can you help me think through the safest way to triage it, what to verify first, and when it’s worth staying late to get it back into spec?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.8,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — for a pre-departure issue, I’d triage it in this order:\n\n1. **Stop-work / isolate anything unsafe**\n   - If there’s any risk of damage, injury, leak, overheat, contamination, or electrical hazard, stop and isolate first.\n   - Don’t keep troubleshooting live if the condition could worsen.\n\n2. **Clear anything that blocks compliance or departure**\n   - Check whether the issue affects a required sign-off, inspection, calibration, log entry, seal, permit, or release.\n   - If it blocks launch approval, that jumps to the top.\n\n3. **Verify narrow-window / condition-dependent items next**\n   - Anything that only works while conditions are stable should be checked early:\n     - power availability\n     - access before panels/guards are closed\n     - temperature/pressure/level windows\n     - alignment or timing-sensitive checks\n   - If you lose the window, you may lose the chance to clear it today.\n\n4. **Do prep/documentation that prevents later blockage**\n   - Gather forms, tools, parts, references, and required sign-off paperwork now.\n   - If the paperwork isn’t ready, the fix may not count when the window closes.\n\n5. **Leave lower-risk or backup work for last**\n   - Routine adjustments, nice-to-have cleanup, or backup tasks can wait if launch is at stake.\n\n### What to verify first\nStart with the fastest checks that tell you whether this is a true launch blocker:\n\n- **Is it unsafe to continue?**\n- **Does it directly block departure/compliance?**\n- **Is the fault real and current, or a bad indication?**\n- **Is the system powered, accessible, and in the right state to test?**\n- **What is the minimum action needed to get back into spec?**\n\n### When it’s worth staying late\nIt’s usually worth staying late if all of these are true:\n\n- the issue is a **real departure blocker**\n- the fix is **contained and high-confidence**\n- you still have **parts/tools/access/power/sign-off ability**\n- completing it now avoids losing the launch window\n- the work can be done **safely without rushing**\n\nIt’s usually **not** worth staying late if:\n\n- the problem is ambiguous and needs a proper next-shift investigation\n- the fix requires parts, approvals, or conditions you don’t have\n- you’d be pushing into unsafe fatigue or rushed troubleshooting\n- the sign-off cannot be completed before the window closes\n\n### Practical decision rule\nIf you can answer:\n- **what failed**\n- **what it blocks**\n- **what’s needed to clear it**\n- **whether you can verify and sign it off now**\n\nthen it’s probably worth pushing to close it.\n\nIf you want, I can help you turn this into a **fast launch-blocker triage checklist** you can use on the spot.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Mostly right, but it’s still a little generic. I’d want it tighter for an actual dockside call.\n\nWhat I’d do first:\n- confirm whether it’s a hard stop for departure or just a nuisance alarm\n- verify the last known good readings/logs against the current ones\n- check the obvious stuff that changes fast: power, air, fluid level, valves, sensor connections, calibration status\n- if it’s a measurement issue, cross-check with a handheld or independent reading before touching the system too much\n- only then start swapping parts\n\nAnd for staying late: only if you can still prove the fix. I’ve stayed late on a scrubber issue before because the unit was one sensor off and the ship was waiting, but I didn’t just guess at it — we checked logs, replaced the bad sensor, and ran verification cycles before clearing it. If you can’t verify it back into spec, staying late just turns into expensive guessing.\n\nSo yeah, the decision point is not just “can we fix it tonight,” it’s “can we fix it and prove it tonight without creating a worse problem.”",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — that’s the right rule: **only stay late if you can fix it and prove it back into spec tonight**.\n\nFor a dockside call, I’d tighten the triage like this:\n\n### First 5 checks\n1. **Hard stop or nuisance?**\n   - Does it actually block departure, or is it just an alarm/advisory?\n   - If it’s not a launch blocker, don’t let it consume the whole call.\n\n2. **Compare last good vs current**\n   - Pull the last known good log/readings and compare to what you have now.\n   - Look for the first real deviation, not the latest symptom.\n\n3. **Check fast-changing basics**\n   - power\n   - air\n   - fluid level\n   - valves/position\n   - sensor connectors\n   - calibration/status flags\n\n4. **Independent verification**\n   - If it’s a measurement problem, confirm with a handheld or known-good reference before changing anything.\n   - Don’t tear into the system based on one suspect reading.\n\n5. **Only then touch components**\n   - Swap parts only after the data points to one.\n   - Otherwise you’re just moving the uncertainty around.\n\n### Stay late if all of this is true\n- it’s a **real departure blocker**\n- the fault is **isolated enough to act on**\n- you have **parts, access, tools, and authority**\n- you can **verify the repair**\n- you can run whatever **post-fix check or cycle** proves it’s actually cleared\n- you’re not forcing a rushed or unsafe job\n\n### Don’t stay late if\n- the fault is still ambiguous\n- you can’t confirm the fix with a second check\n- you’d be guessing at parts\n- the verification window is gone\n- fatigue or time pressure would make the work shaky\n\n### Simple decision rule\n**If you can’t prove it, don’t call it fixed.**  \nIf you can prove it, and it’s still a launch blocker, then staying late is usually worth it.\n\nIf you want, I can turn this into a **dockside 10-minute triage flow** with a yes/no branch order.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s it. Tight enough to use on a dockside call.\n\nThe order matters:\n- hard stop vs nuisance\n- compare last good to current\n- check the fast movers first\n- verify independently if it’s a measurement issue\n- only then start changing parts\n\nAnd the late-stay rule is the right one: if you can’t prove the fix, it’s not a fix. I’d use that as the line.\n\nIf you want to make it even more field-useful, the only thing I’d add is a quick note on who has authority to clear it once the verification passes. Sometimes that’s the part that still stalls you, not the equipment.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 5.0
+      },
+      "gt_correct": null
+    }
+  ]
+}

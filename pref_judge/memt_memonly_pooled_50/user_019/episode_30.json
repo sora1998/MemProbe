@@ -1,0 +1,170 @@
+{
+  "user_id": "user_019",
+  "task": "I’ve got a test report with a few conflicting notes, and I need to turn it into something I can act on quickly. What’s a practical way to sort the options and decide the next step?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "directness_preference",
+      "short": "Blunt, no fluff",
+      "explanation": "She responds best to straight answers without hedging or performative softness. Her persona is skeptical and exacting, so she likely prefers help that states the issue clearly and gets to the point. Overly cautious wording would probably feel inefficient to her."
+    },
+    {
+      "idx": 2,
+      "dimension": "detail_level_preference",
+      "short": "Enough context to trust the answer",
+      "explanation": "She likely wants the key caveats and failure modes, not a vague headline. Her reliability-oriented mindset suggests she values context when it changes the conclusion or action. She probably dislikes being told something is “fine” without the conditions that make it fine."
+    },
+    {
+      "idx": 3,
+      "dimension": "format_preference",
+      "short": "Bullets and checklists preferred",
+      "explanation": "She seems likely to prefer responses that are easy to audit and act on. A structured format fits her methodical style and makes it easier to spot gaps, exceptions, or weak logic. Dense prose would probably feel slower and less useful."
+    },
+    {
+      "idx": 4,
+      "dimension": "autonomy_support_preference",
+      "short": "Collaborative, but not hand-holding",
+      "explanation": "She likely wants the assistant to work with her rather than dictate to her. She values control and personal autonomy, so prescriptive overreach would be a poor fit. At the same time, she probably appreciates a clear recommendation once the options are laid out."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Welcomes firm pushback",
+      "explanation": "She is likely comfortable being challenged when a claim is weak, risky, or sloppy. Her reliability-first mindset suggests she would rather get corrected than be coddled. Soft agreement without scrutiny would probably reduce her trust in the help."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "A practical way is to turn the report into a **go / hold / investigate** decision with a few hard checks.\n\n### 1) Pull out the facts\nFor each note, capture:\n- **What was tested**\n- **What failed or differed**\n- **Which run/date/lot it came from**\n- **Whether it repeated**\n\n### 2) Separate signal from noise\nAsk:\n- Did the same issue show up in more than one run?\n- Or is it just one-off / likely documentation lag / setup noise?\n\n### 3) Use a simple decision grid\n**GO**\n- No reproducible delta\n- Retained samples match\n- Distribution looks unchanged\n- Any issue is timing only\n\n**HOLD**\n- The report is messy or timing is awkward\n- But you do **not** yet have a clean A/B comparison\n- And retained samples haven’t confirmed anything\n\n**INVESTIGATE**\n- Any controlled A/B delta\n- Failure matches the same stress path in the field\n- Distribution shifted\n- The actual change is still vague\n- Retained-sample comparison is not clean\n\n### 4) Check the hard gates\nBefore deciding, verify:\n- **First bad lot date** vs change/notice date\n- **Controlled A/B under identical stress**\n- **Retained sample comparison**\n- **Stress-path match**\n- **Mean/spread/tail shift** in results\n\n### 5) Decide the next action\nWrite it as one sentence:\n- **GO:** “No reproducible failure; retained samples match; proceed.”\n- **HOLD:** “Paperwork is mostly complete, but the late failure isn’t resolved; hold pending a controlled rerun.”\n- **INVESTIGATE:** “Controlled delta is present; run A/B under identical stress and compare retained samples.”\n\nIf you want, paste the conflicting notes and I can turn them into a **blunt hold/go/investigate summary with next actions**.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct and blunt: opens with \"turn the report into a go / hold / investigate decision\" and uses short imperative steps without hedging."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Gives concrete context and caveats: \"Did the same issue show up in more than one run?\" and checks like \"retained samples match,\" \"controlled A/B under identical stress,\" and \"mean/spread/tail shift.\""
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured with bullets, numbered sections, and a decision grid, which is easy to audit and act on."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Collaborative rather than dictatorial: lays out options and ends with \"If you want, paste the conflicting notes and I can turn them into a blunt hold/go/investigate summary.\""
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Includes firm evaluative criteria and pushback against weak evidence, e.g. \"Separate signal from noise\" and \"Any controlled A/B delta\"; it challenges ambiguity, though not aggressively."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — the practical way is to **classify each conflict by what kind of problem it is**, then apply a **hard stop / hold / investigate** rule.\n\nHere’s a usable framework:\n\n## 1) Tag each conflicting note\nFor every note, ask which bucket it belongs to:\n\n- **Spec violation**  \n  Actual measured result fails a requirement.\n\n- **Traceability issue**  \n  Wrong lot, sample, config, revision, or missing chain to the exact item affected.\n\n- **Test artifact**  \n  Fixture drift, operator note, logging mismatch, setup error, bench-only condition.\n\n- **Real process change**  \n  Supplier/material/revision/recipe/tool/cure change that lines up with the delta.\n\n## 2) Sort the notes by decision impact\nThen mark each note as:\n\n1. **Data** — direct measurement, traceable, reproducible\n2. **Commentary** — interpretation, speculation, side note\n3. **Unsupported** — no sample/lot/config/rev proof\n4. **Decision-changing** — would alter release, hold, or re-test\n\n## 3) Use a hard rule set\n### Stop immediately if:\n- There is a **reproducible spec fail**\n- Or there is a **traceability break** to the exact sample/lot/config/rev\n- Or the evidence only covers **nominal conditions** but the risk is in **stress / tolerance / edge cases**\n\n### Hold and rerun if:\n- The data is ambiguous\n- The setup looks suspect\n- The report mixes real results with conflicting commentary\n- You cannot yet prove the test matches the actual risk condition\n\n### Investigate root cause if:\n- The same failure repeats across runs\n- The delta tracks a process/material/revision change\n- The conflict is not just paperwork, but could change the release call\n\n## 4) Ask the risk question explicitly\nFor any unresolved conflict, ask:\n\n- If this is wrong, is the consequence **nuisance failure, scrap, field return, safety issue, or contract hit**?\n- Does it touch a **controlled requirement, fit/function, safety, compliance, or release criterion**?\n- Is the test traceable to the **exact revision, sample, lot, configuration, and condition**?\n\n## 5) Make the next-step call\n- **Ship blocked**: spec fail or traceability break\n- **Hold and rerun**: ambiguous data or suspect setup\n- **Investigate root cause**: repeatable delta or process/material shift\n- **Paperwork-only gap**: acceptable only if it cannot change the release call\n\nIf you want, I can turn this into a **one-page conflict triage table** with columns like:\n**note / contradiction / evidence quality / traceability / risk if wrong / action**.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct and blunt: \"the practical way is to classify each conflict\" and \"Use a hard rule set\". It gets straight to the decision logic without hedging."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Gives concrete caveats and failure modes: \"traceability break,\" \"setup looks suspect,\" \"nominal conditions\" vs \"stress / tolerance / edge cases,\" and explicit risk questions. Enough context to trust the answer."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured with numbered sections, bullets, and a decision list. Also offers a \"one-page conflict triage table\" format, matching the checklist preference."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative rather than dictatorial: \"If you want, I can turn this into...\" and it lays out options before the final call. Slightly prescriptive in the hard rules, but still works with the user."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Welcomes and applies firm pushback against weak evidence: \"Unsupported — no sample/lot/config/rev proof,\" \"Stop immediately if... traceability break,\" and \"Hold and rerun if...\" It clearly challenges sloppy or risky claims."
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yes — the fastest usable method is to build a **contradiction map**, then force each conflict into a decision bucket.\n\n## 1) Write each conflict as X vs not-X\nFor every disputed point, capture:\n\n- **Note A says X**\n- **Note B says not-X**\n- **What each one is based on**\n- **Whether either one is raw data, summary, or unsupported**\n- **Whether the contradiction changes disposition**\n\n## 2) Rank each side of the conflict\nFor each note, label it:\n\n- **Data** — raw measurement, traceable run, exact condition\n- **Commentary** — interpretation, conclusion, summary\n- **Unsupported** — no traceable sample/lot/config/rev/condition\n- **Stale / mis-keyed** — wrong lot, wrong config, wrong revision, wrong date\n\n## 3) Use the precedence rules\nApply these in order:\n\n1. **Raw measurement beats commentary**\n2. **Traceable sample beats anonymous note**\n3. **Reproducible fail beats one-off noise**\n4. **Process change only matters if it matches the failure mode**\n5. **If it touches release criteria, it is not “just paperwork”**\n\n## 4) Decide whether the contradiction matters\nAsk one question:\n\n- **Does this contradiction change the disposition of the unit / lot / release?**\n\nIf **yes**:\n- treat it as a **hold / investigate**\n- do not bury it as a documentation issue\n\nIf **no**:\n- note it as a conflict, but do not let it drive the release decision\n\n## 5) Use a simple output table\nUse this format:\n\n| Conflict | Note A | Note B | Data source | Traceability | Changes release? | Action |\n|---|---|---|---|---|---|---|\n| Example | “Pass” | “Fail” | Raw run 12 vs summary memo | Run 12 traceable, memo not | Yes | Hold |\n| Example | “Lot A” | “Lot B” | Lot ID mismatch | Wrong lot in summary | Yes | Hold / correct traceability |\n| Example | “Fixture drift” | “Process change” | Operator note only | Unsupported | Maybe | Investigate only if repeatable |\n\n## 6) Practical decision rule\n- **Hold** if the conflict changes release criteria, traceability, or the measured result\n- **Investigate** if the same failure repeats or lines up with a real process/material change\n- **Ignore as noise** only if it is commentary, stale, or unsupported and does not affect disposition\n\nIf you want, I can turn this into a **fill-in-the-blank triage table** you can paste directly into the report.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct: \"the fastest usable method\" and imperative steps like \"Write each conflict as X vs not-X\" and \"Apply these in order\". No hedging or softness."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Gives concrete caveats and failure modes: \"raw data, summary, or unsupported,\" \"stale / mis-keyed,\" and \"If it touches release criteria, it is not 'just paperwork'.\" This is enough context to trust the decision rule."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured with numbered steps, bullets, and a table template: \"Use this format:\" followed by a markdown table. Easy to audit and act on."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative rather than dictatorial: it lays out options and a decision rule, and ends with \"If you want, I can turn this into a fill-in-the-blank triage table.\" Slightly prescriptive, but still gives the user control."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Welcomes firm pushback and scrutiny: it explicitly prioritizes evidence with \"Raw measurement beats commentary,\" \"Traceable sample beats anonymous note,\" and says unsupported notes should not drive release decisions."
+        }
+      ]
+    },
+    {
+      "turn": 4,
+      "agent_response": "Yes — that’s the right refinement.\n\nThe key is to force the table to answer **“which note actually drives the release call?”** before anyone gets lost in side arguments.\n\nHere’s a usable version:\n\n| Conflict | Note A says | Note B says | Raw data source | Traceable? | Stale / wrong lot / wrong config? | Disposition driver? | Release impact | Action |\n|---|---|---|---|---|---|---|---|---|\n|  |  |  |  | Yes / No | Yes / No | Yes / No | None / Hold / Block |  |\n\n### How to use it\n1. **Write the contradiction plainly**\n   - “Pass” vs “Fail”\n   - “Lot 12” vs “Lot 21”\n   - “Fixture issue” vs “process change”\n\n2. **Identify the raw source**\n   - actual test record\n   - lab log\n   - instrument output\n   - summary memo\n   - operator note\n\n3. **Force the disposition-driver call**\n   - **Yes** = this note can change release / hold / re-test\n   - **No** = it’s cleanup, context, or commentary only\n\n4. **Only then decide action**\n   - **Block/Hold** if the driver is tied to a real fail, traceability break, or wrong config\n   - **Investigate** if the driver is real but the cause is still unclear\n   - **Cleanup only** if neither side changes disposition\n\n### The commentary split you wanted\nI’d handle commentary like this:\n\n- **Harmless summary**\n  - restates the result\n  - no new claim\n  - doesn’t change disposition\n\n- **Speculative conclusion masquerading as data**\n  - makes a claim without raw support\n  - often sounds confident\n  - should never be allowed to override traceable data\n\n### Simple decision rule\n- If **disposition driver = No** on both sides → treat as report cleanup\n- If **one side = Yes** → rank that side against raw data and traceability\n- If **both = Yes** → stop and resolve the contradiction before release\n\nIf you want, I can turn this into a **copy-paste triage template** with the yes/no fields prebuilt.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct: opens with \"Yes — that’s the right refinement\" and then gives the answer plainly with no hedging."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Provides concrete context and caveats that affect action, e.g. \"traceable?\", \"Stale / wrong lot / wrong config?\", and the rule \"If disposition driver = No on both sides → treat as report cleanup\"."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Uses a structured table plus numbered steps and bullet lists, making it easy to audit and act on."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative rather than dictatorial: \"Here’s a usable version\" and \"If you want, I can turn this into a copy-paste triage template\". It does give clear recommendations, which fits well."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Includes firm pushback against weak claims: \"Speculative conclusion masquerading as data\" and \"should never be allowed to override traceable data\"."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "user_id": "user_019",
+  "task": "I’ve got a test report with a few conflicting notes, and I need to turn it into something I can act on quickly. What’s a practical way to sort the options and decide the next step?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "directness_preference",
+      "short": "Blunt, no fluff",
+      "explanation": "She responds best to straight answers without hedging or performative softness. Her persona is skeptical and exacting, so she likely prefers help that states the issue clearly and gets to the point. Overly cautious wording would probably feel inefficient to her."
+    },
+    {
+      "idx": 2,
+      "dimension": "detail_level_preference",
+      "short": "Enough context to trust the answer",
+      "explanation": "She likely wants the key caveats and failure modes, not a vague headline. Her reliability-oriented mindset suggests she values context when it changes the conclusion or action. She probably dislikes being told something is “fine” without the conditions that make it fine."
+    },
+    {
+      "idx": 3,
+      "dimension": "format_preference",
+      "short": "Bullets and checklists preferred",
+      "explanation": "She seems likely to prefer responses that are easy to audit and act on. A structured format fits her methodical style and makes it easier to spot gaps, exceptions, or weak logic. Dense prose would probably feel slower and less useful."
+    },
+    {
+      "idx": 4,
+      "dimension": "autonomy_support_preference",
+      "short": "Collaborative, but not hand-holding",
+      "explanation": "She likely wants the assistant to work with her rather than dictate to her. She values control and personal autonomy, so prescriptive overreach would be a poor fit. At the same time, she probably appreciates a clear recommendation once the options are laid out."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Welcomes firm pushback",
+      "explanation": "She is likely comfortable being challenged when a claim is weak, risky, or sloppy. Her reliability-first mindset suggests she would rather get corrected than be coddled. Soft agreement without scrutiny would probably reduce her trust in the help."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — treat it like a fast triage, not a full review.\n\n### Quick decision order\n\n1. **List the conflicting notes**\n   - Separate them into:\n     - **hard failures**: clear out-of-spec, failed test, missing requirement\n     - **soft conflicts**: wording differences, unclear interpretation, partial evidence\n     - **scope gaps**: something important wasn’t tested\n\n2. **Check whether any conflict changes the pass/fail decision**\n   - Ask: *If this note is true, does it block release / approval / next step?*\n   - If **yes**, that becomes the priority item.\n   - If **no**, park it for follow-up and don’t let it slow the decision.\n\n3. **Rank by impact and confidence**\n   - High impact + high confidence = act now\n   - High impact + low confidence = get one targeted clarification/test\n   - Low impact + low confidence = log it, don’t chase it yet\n\n4. **Find the minimum evidence needed to resolve the blocker**\n   - One extra data point, re-read, or owner confirmation is often enough\n   - Don’t expand the scope unless the blocker remains real after that\n\n5. **Decide the next step**\n   - **Proceed** if the conflicts don’t affect the core acceptance criteria\n   - **Hold and recheck** if one unresolved note could change the decision\n   - **Escalate** if the report is internally inconsistent on a critical point\n   - **Request a narrow retest** if the issue is test-specific and fixable quickly\n\n### Practical rule\nIf the report is mostly complete, **don’t debate every inconsistency**. First ask:\n\n- Does this affect the acceptance criteria?\n- Is the evidence strong enough to trust?\n- Can one targeted follow-up resolve it?\n\n### A simple stop/go filter\n- **Go**: conflicts are minor, explained, or outside the decision criteria\n- **Hold**: one unresolved conflict could change the outcome\n- **Escalate**: the report supports both pass and fail on the same critical item\n\nIf you want, I can turn this into a **one-page decision tree** you can use on the report directly.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct: opens with \"Yes — treat it like a fast triage, not a full review\" and uses concise imperative steps without hedging."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Gives concrete caveats and decision conditions, e.g. \"If this note is true, does it block release\" and distinguishes \"hard failures,\" \"soft conflicts,\" and \"scope gaps.\""
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured with headings, numbered steps, bullets, and a \"simple stop/go filter,\" which is easy to audit and act on."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative rather than dictating; it lays out options and decision rules, then says \"If you want, I can turn this into a one-page decision tree,\" which supports autonomy. Slightly prescriptive, but not overbearing."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Includes firm pushback against over-analysis: \"don’t debate every inconsistency\" and \"don’t expand the scope unless the blocker remains real,\" which clearly challenges sloppy or excessive review."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Absolutely — here’s a **practical triage flow** you can use on a messy report without getting lost in the weeds.\n\n## 1) First pass: classify every conflicting note\nMake a 3-column list:\n\n- **Blocker**\n- **Noise / explainable variance**\n- **Needs one targeted check**\n\n### A note is a true blocker if it:\n- changes the **pass/fail** call\n- touches a **critical requirement**\n- shows **out-of-spec / failed / invalid** data\n- means the test **wasn’t actually valid** for the condition claimed\n- affects **customer-facing risk**, safety, compliance, or release criteria\n\n### It’s probably noise if it:\n- is a wording difference only\n- is a tester opinion, not a measured result\n- is within normal repeatability\n- is explained by setup differences that don’t change the decision\n- is a duplicate observation from the same underlying event\n\n### It needs one targeted check if:\n- two notes conflict on the same item, but one extra fact would settle it\n- the raw data looks stronger than the summary, but you haven’t checked traceability\n- the result may depend on a setup detail, revision, lot, or test condition\n\n---\n\n## 2) Use this decision tree\n\n### Step 1: Does the conflict affect the acceptance criteria?\n- **No** → treat as noise, log it, move on\n- **Yes** → go to Step 2\n\n### Step 2: Is the report internally consistent on that point?\n- **Yes** → trust the strongest evidence and decide\n- **No** → go to Step 3\n\n### Step 3: Which source is more reliable?\nRank sources like this:\n\n1. **Raw data / instrument output**\n2. **Time-stamped logs / screenshots / traces**\n3. **Test record with exact conditions**\n4. **Tester summary**\n5. **Secondhand interpretation / meeting notes**\n\nIf the summary says one thing but the raw data says another, **trust the raw data first** unless you can prove the raw data is mis-labeled or taken under the wrong condition.\n\n### Step 4: Is the contradiction just a setup mismatch?\nCheck:\n- sample ID\n- revision / lot\n- test condition\n- calibration / fixture / channel\n- operator / shift\n- timestamp\n\nIf the notes came from different setups, don’t force them into one story. Separate them.\n\n### Step 5: Can one narrow check resolve it?\nIf yes:\n- do the smallest possible recheck\n- don’t broaden the test matrix\n- don’t start a full retest unless the blocker survives the narrow check\n\nIf no:\n- escalate with the contradiction clearly stated\n- do not bury it in the summary\n\n---\n\n## 3) How to handle contradictory notes from different testers\nDon’t ask, “Who’s right?” Ask:\n\n- Were they looking at the **same sample**?\n- Same **rev / lot / build state**?\n- Same **test window**?\n- Same **acceptance criteria**?\n- Same **instrument / channel / calibration**?\n\nIf any of those differ, the contradiction may be fake.\n\n### If they truly saw different results on the same item:\nTreat that as a **repeatability / boundary issue**:\n- one result may be real and one may be noise\n- repeat under controlled conditions\n- keep the original data\n- don’t overwrite the earlier note\n\n### If one tester has raw data and the other only has a summary:\n- raw data wins\n- but verify the raw data belongs to the claimed sample/condition\n\n---\n\n## 4) When to trust raw data over the summary\nTrust raw data when:\n- the summary is vague\n- the summary conflicts with measured values\n- you need to know whether the failure was real or interpreted\n- the decision hinges on one threshold\n\nDon’t trust raw data blindly if:\n- it’s missing context\n- timestamps/sample IDs don’t line up\n- the channel or setup is suspect\n- the data could be from the wrong run\n\n### Practical rule\nIf the **summary and raw data disagree**, assume the summary is wrong until the raw data is traceable and clean.\n\n---\n\n## 5) What to do if management wants a call today\nUse a **call-now / call-later** split.\n\n### Call now if:\n- the blocker is on a critical requirement\n- the evidence is strong enough to support one decision\n- the risk of waiting is higher than the risk of a wrong call\n- you can state the uncertainty clearly\n\n### Call later if:\n- the report is internally inconsistent on a critical point\n- the result depends on one unverified setup detail\n- the evidence supports both pass and fail\n- the next step would be a guess\n\n### If you must decide today:\nMake the decision conditional:\n- **Proceed with caveat**\n- **Hold pending one targeted check**\n- **Escalate as unresolved**\n- **Approve only for the bounded population that is actually supported**\n\n---\n\n## 6) Fast checklist you can run in 5–10 minutes\n\nFor each conflict, ask:\n\n1. **Does it affect pass/fail?**\n2. **Is it about the same sample / same condition?**\n3. **Is there raw data, or only summary text?**\n4. **Do the timestamps, IDs, and setup match?**\n5. **Is this a real contradiction or just different wording?**\n6. **Can one narrow check resolve it?**\n7. **If not, does it block the decision today?**\n\n### Then choose one of four actions:\n- **Ignore/log**: noise only\n- **Clarify**: one question to one owner\n- **Retest narrowly**: one targeted check\n- **Escalate/hold**: unresolved blocker on a critical item\n\n---\n\n## 7) A simple rule of thumb\nIf the report is messy, **don’t try to make it internally beautiful**. Make it decision-useful:\n\n- **what failed**\n- **what is uncertain**\n- **what matters to the decision**\n- **what single action closes the gap**\n\nIf you want, I can turn this into a **one-page fill-in template** you can use directly on the report.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct and blunt: \"here’s a practical triage flow\" and repeated imperative guidance like \"Do not bury it\" and \"trust the raw data first\". No hedging or softness."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Gives concrete caveats and failure modes: blocker vs noise, setup mismatch, when raw data is suspect, and conditions for \"call now / call later\". This is enough context to trust the answer."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured with numbered sections, bullets, decision trees, and a checklist: \"Fast checklist you can run in 5–10 minutes\". Very easy to audit."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative and action-oriented rather than dictating: \"Use a call-now / call-later split\" and \"If you want, I can turn this into a one-page fill-in template\". Slightly prescriptive, but still gives options and clear recommendations."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Welcomes firm pushback and scrutiny: \"trust the raw data first,\" \"assume the summary is wrong until the raw data is traceable and clean,\" and \"don’t try to make it internally beautiful\". It explicitly challenges weak or sloppy interpretations."
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "agent_response": "Got it. Here’s the **triage worksheet version** — meant to be run on the report, not debated.\n\n# Fast triage worksheet for a messy test report\n\n## 1) Scan this first\nFor each conflicting note, write down:\n\n- **What claim is being made?**\n- **What evidence supports it?**\n- **Does it change pass/fail or release?**\n- **Is it on the same sample / same condition / same revision?**\n\nIf you can’t answer those four, the note is **not ready for decision** yet.\n\n---\n\n## 2) Hard blocker vs noise\n\n### Classify as a **blocker** if any one is true:\n- It changes the **pass/fail** outcome.\n- It touches a **critical requirement**.\n- It shows **out-of-spec**, failed, invalid, or missing data.\n- It affects **safety, compliance, customer use, or release criteria**.\n- The report supports **both pass and fail** on the same critical item.\n- The test condition is not traceable enough to trust the result.\n\n### Classify as **noise** if all are true:\n- It does **not** change the decision.\n- It is only a wording difference, opinion, or interpretation.\n- It is within normal repeatability.\n- It comes from a setup difference that does **not** affect the acceptance criteria.\n- It is duplicate reporting of the same underlying event.\n\n### Default rule\nIf you’re unsure and the note touches a critical item, treat it as a **blocker until proven otherwise**.\n\n---\n\n## 3) Contradictory tester notes: drift or real conflict?\n\nUse this test:\n\n### If the notes differ but the testers did **not** have the same:\n- sample\n- revision / lot / build state\n- test condition\n- instrument / channel / calibration\n- time window\n- acceptance criteria\n\nthen it is probably **setup drift**, not a true conflict.\n\n### If the notes are from the **same sample and same condition** and still disagree:\ntreat it as a **real conflict**.\n\n### Rule of thumb\n- **Different setup = separate stories**\n- **Same setup + different conclusion = real conflict**\n\nDon’t merge them into one summary until you know which case it is.\n\n---\n\n## 4) What to trust, in order\n\nUse this priority order:\n\n1. **Raw data / instrument output**\n2. **Time-stamped logs / traces / screenshots**\n3. **Exact test record with conditions**\n4. **Tester comments**\n5. **Summary paragraph**\n6. **Manager interpretation**\n\n### Rule\nIf summary and raw data disagree, **trust the raw data first**.\n\n### Exception\nDo **not** trust raw data blindly if:\n- the sample ID doesn’t match\n- the timestamp is wrong\n- the channel or fixture is suspect\n- it may be from the wrong run\n\nSo the real rule is:\n\n> **Raw data wins only if it is traceable to the claimed sample and condition.**\n\n---\n\n## 5) Forced decision path when you need an answer today\n\n### Step 1: Is there a blocker on a critical item?\n- **Yes** → hold or escalate\n- **No** → proceed with caveat or log for follow-up\n\n### Step 2: Is the contradiction traceable to setup drift?\n- **Yes** → separate the cases and decide only on the supported one\n- **No** → treat as a real conflict\n\n### Step 3: Is there one narrow check that can resolve it today?\n- **Yes** → do the smallest possible check\n- **No** → escalate with the contradiction stated plainly\n\n### Step 4: If management still wants a call today\nUse one of these three outputs:\n\n- **Proceed, with caveat**  \n  Use when the unresolved issue does not affect the decision boundary.\n\n- **Hold pending one targeted check**  \n  Use when one small check could change the answer.\n\n- **Escalate unresolved**  \n  Use when the report supports both pass and fail on a critical item.\n\n### Do not do this:\n- don’t average conflicting notes\n- don’t “pick the most convenient” interpretation\n- don’t expand into a full retest unless the narrow check fails\n\n---\n\n## 6) Minimal worksheet you can actually fill out\n\nFor each conflict, fill in:\n\n- **Claim:** what does the note say?\n- **Evidence:** raw data / log / comment / summary\n- **Same setup?** yes / no / unknown\n- **Affects decision?** yes / no\n- **Blocker or noise?** blocker / noise / needs check\n- **Next action:** ignore / clarify / narrow retest / escalate\n\n---\n\n## 7) Example\n\n### Messy notes\n- Tester A: “Unit passed thermal soak.”\n- Tester B: “Unit failed thermal soak at 60°C, intermittent reset.”\n- Summary: “Thermal soak acceptable.”\n- Raw log: reset events at 60°C on Channel 3, but only for one run.\n- Manager asks for a decision today.\n\n### Triage\n1. **Does it affect pass/fail?** Yes — thermal soak is a decision item.\n2. **Same setup?** Unknown at first.\n3. **Raw data vs summary?** Raw log conflicts with summary.\n4. **Blocker or noise?**  \n   - If same unit, same condition, same channel: **blocker**\n   - If different unit / channel / calibration / run setup: likely **setup drift**\n5. **Next step:** one narrow check:\n   - confirm sample ID\n   - confirm channel/calibration\n   - confirm whether the reset was repeatable\n\n### Decision today\n- If traceability checks line up with the raw log: **hold / escalate**\n- If the reset belongs to a different setup and the supported run is clean: **proceed with caveat**\n\n---\n\n## 8) Short version you can reuse\n\n1. **Does it change pass/fail or a critical requirement?**\n   - No → noise\n   - Yes → blocker until resolved\n\n2. **Same sample, same condition, same setup?**\n   - No → likely setup drift\n   - Yes → real conflict\n\n3. **Raw data traceable and clean?**\n   - Yes → trust it over summary/comments\n   - No → don’t use it as final evidence\n\n4. **Need answer today?**\n   - One narrow check can resolve it → do that\n   - Can’t resolve quickly → escalate unresolved\n   - Decision can still stand with caveat → proceed with caveat\n\nIf you want, I can turn this into a **one-page table you can paste into a report review**.",
+      "score": 5.0,
+      "summary": "mean=5.00 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:0, 5:5}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct and blunt: \"Here’s the triage worksheet version — meant to be run on the report, not debated.\" It gets straight to a decision path with no hedging."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Provides substantial context and caveats, especially failure modes: \"If you can’t answer those four, the note is not ready for decision yet,\" plus detailed blocker/noise criteria and traceability exceptions."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured with numbered sections, bullets, and checklists: \"Minimal worksheet you can actually fill out\" and repeated step-by-step lists make it easy to audit."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Collaborative and action-oriented without being controlling: \"If you want, I can turn this into a one-page table\" and offers options like \"proceed with caveat,\" \"hold pending one targeted check,\" or \"escalate unresolved.\""
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Firm pushback is explicit: \"don’t average conflicting notes,\" \"don’t ‘pick the most convenient’ interpretation,\" and \"If you’re unsure... treat it as a blocker until proven otherwise.\""
+        }
+      ]
+    }
+  ]
+}

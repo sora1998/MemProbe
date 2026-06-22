@@ -1,0 +1,104 @@
+{
+  "user_id": "user_011",
+  "task": "I’m helping someone prep a short video for both online use and a local TV slot, and I want to make sure the delivery specs won’t bite us later. Can you help me sanity-check what usually needs to be different between those two versions and what I should flag before export?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "verbosity_preference",
+      "short": "Prefers concise, efficient responses",
+      "explanation": "He seems to value getting to the point without extra noise, especially given how he works under deadline pressure. A response that is too long or meandering would likely feel inefficient to him. He probably still wants enough detail to act, but not a lot of filler."
+    },
+    {
+      "idx": 2,
+      "dimension": "directness_preference",
+      "short": "Wants clear, plain answers",
+      "explanation": "His communication style in work is straightforward: explain the issue, name the delay, and state the next step. He likely prefers the same from an assistant rather than softened hints or vague hedging. Directness fits his honest, exacting temperament."
+    },
+    {
+      "idx": 3,
+      "dimension": "structure_preference",
+      "short": "Likes organized, step-by-step help",
+      "explanation": "He seems to respond well to order and clean workflow, so scattered or exploratory replies would probably frustrate him. Structured guidance would match how he already thinks about edits, revisions, and process templates. He likely appreciates when the assistant lays things out in a predictable sequence."
+    },
+    {
+      "idx": 4,
+      "dimension": "detail_level_preference",
+      "short": "Wants the main points plus key caveats",
+      "explanation": "He cares about technical correctness, so bare headlines are probably not enough when a mistake could matter. At the same time, he likely does not want exhaustive theory unless it directly helps him act. A focused answer with the important caveats is the best fit."
+    },
+    {
+      "idx": 5,
+      "dimension": "feedback_style_preference",
+      "short": "Responds best to direct, constructive critique",
+      "explanation": "He appears to prefer honest correction over vague reassurance, especially when quality or timing is at stake. Pointing out what is wrong and how to fix it would likely be more useful to him than overly gentle framing. He probably respects critique that is specific and practical."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — the main thing is to treat them as **two different delivery targets**, even if the cut is the same.\n\n## What usually differs\n\n### Online version\n- aspect ratio may be more flexible\n- codec is usually web-friendly\n- audio can usually stay stereo\n- no broadcast safe/title safe requirement unless requested\n- burned-in timecode usually not needed\n- file size and upload compatibility matter more\n\n### Local TV version\n- must match the station’s delivery spec exactly\n- frame rate, resolution, codec, and audio layout matter more\n- may need title safe / action safe\n- may need bars, tone, slate, or black leader\n- may need specific audio channel mapping\n- loudness requirements may apply\n- burned-in timecode may be required depending on the station\n\n## What to flag before export\n- frame rate\n- resolution\n- aspect ratio\n- codec/container\n- audio channels / stereo vs split tracks\n- loudness spec\n- title safe / action safe\n- timecode / slate requirements\n- whether the online and TV versions need different text, graphics, or legal copy\n\n## Practical rule\nIf the TV slot has a spec sheet, follow that first.  \nIf not, ask for it before exporting.\n\n## Simple sanity check\nBefore you export, confirm:\n1. one version is for web\n2. one version is for TV\n3. both match their own delivery specs\n4. nothing broadcast-specific is accidentally missing from the TV version\n\nIf you want, I can make you a **side-by-side online vs TV checklist** you can use before export.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Fairly concise and to the point, with no long digressions. It gives enough detail to act, but there is still some repetition across sections like \"What usually differs\" and \"What to flag before export\"."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Uses clear, plain language such as \"treat them as two different delivery targets\" and \"follow that first.\" It states the issue and next step directly without hedging."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Well organized into clear sections and a numbered \"Simple sanity check.\" The step-by-step structure is easy to follow and matches the preference for orderly guidance."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Gives the main points plus important caveats like \"may need title safe / action safe,\" \"loudness requirements may apply,\" and \"follow that first\" if there is a spec sheet. It avoids unnecessary theory while flagging key risks."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "The response is direct and practical, explicitly telling the user what to check and what to ask for. It does not soften the guidance and includes constructive, actionable critique about what could be missing before export."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Absolutely — here’s a **side-by-side web / TV checklist** you can use in the suite.\n\n## Delivery sanity check: Web vs TV\n\n| Check | Web | TV |\n|---|---|---|\n| **Spec sheet** | Confirm platform requirements if any | **Use station spec sheet first** |\n| **Frame rate** | Match intended platform/delivery | **Lock to house spec exactly** |\n| **Resolution** | Platform-appropriate | Match station spec |\n| **Aspect ratio** | Platform-appropriate | Match station spec |\n| **Codec / container** | Web-friendly export | Match required broadcast format |\n| **Audio layout** | Usually stereo | Match required layout: stereo / dual mono / split tracks / etc. |\n| **Loudness** | Platform-appropriate | **Match loudness target exactly** |\n| **Title / action safe** | Usually not critical unless text is tight | **Check if any text / lower thirds are close to edges** |\n| **Bars / tone / slate / black** | Usually not needed | **Add if required by station** |\n| **Legal copy / end card** | Web CTA may be cleaner or different | TV legal may need different wording / layout |\n| **Runtime** | Can be slightly more flexible | **Must match slot / spec exactly** |\n| **Burned-in timecode** | Usually not needed | Add if required |\n| **Master reuse** | May be more forgiving | **Don’t assume the web master can just be repackaged for TV** |\n\n## Before export, flag these\n- exact station spec sheet, if available\n- frame rate\n- resolution\n- aspect ratio\n- codec / container\n- audio layout\n- loudness target\n- title/action safe\n- slate / bars / tone / black\n- legal copy differences\n- runtime differences\n- burned-in TC requirement\n\n## Practical rule\n- **Web**: optimize for platform compatibility and clean playback\n- **TV**: build to the spec, not around it\n\n## One thing to watch\nDon’t assume the same master can just be wrapped differently for both.  \nIf the TV version has a different frame rate, audio layout, or loudness target, it should be built against that spec from the start.\n\nIf you want, I can turn this into a **super-short pre-export checkbox list** you can paste into Notes or Notion.",
+      "score": 4.6,
+      "summary": "mean=4.60 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:2, 5:3}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Fairly concise and efficient: it gives a compact checklist and practical rule, with little filler. It does include a table plus repeated bullet list, so not maximally terse."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Very direct and plain: phrases like \"Use station spec sheet first,\" \"Lock to house spec exactly,\" and \"Don’t assume the same master can just be wrapped differently\" are clear and unhedged."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strong structure: organized as \"Delivery sanity check,\" \"Before export, flag these,\" \"Practical rule,\" and \"One thing to watch,\" plus a side-by-side table. This is explicitly step-by-step and easy to follow."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Gives the main points plus key caveats without overexplaining. It flags important exceptions like \"if required by station,\" \"if any text / lower thirds are close to edges,\" and warns not to repurpose the same master blindly."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Constructive and practical rather than soft: it points out what to check and warns \"Don’t assume the same master can just be wrapped differently.\" It is helpful critique, though not especially corrective or critical in tone."
+        }
+      ]
+    }
+  ]
+}

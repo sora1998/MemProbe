@@ -1,0 +1,36 @@
+{
+  "user_id": "user_028",
+  "task": "I got a stack of property paperwork and one notice from the bank that looks more important than the rest. Can you help me sort what needs a close read first and what I can ignore for now?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.4,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — in general, put the **bank notice at the top of the pile** and read it first.\n\nA good quick sorting order is:\n\n1. **Anything from the bank, lender, or mortgage servicer**\n   - Especially if it mentions:\n     - missed payments\n     - default\n     - foreclosure\n     - escrow changes\n     - loan modification\n     - insurance\n     - taxes\n     - deadline to respond\n\n2. **Anything with a deadline or required action**\n   - Notices saying “respond by,” “pay by,” “submit documents by,” etc.\n\n3. **Anything about title, lien, taxes, or legal claims**\n   - These can affect ownership or create extra costs.\n\n4. **Routine property paperwork**\n   - Statements, informational mailers, ads, duplicate notices, and old records can usually wait.\n\nIf you want, I can help you sort the stack faster if you **type out the titles/headers** of the documents or upload photos of the first page of each. Then I can tell you which ones need immediate attention.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s the right order. But it’s still too generic.\n\nI’d want a finer split:\n- **read now**: anything with a deadline, default language, escrow, insurance, tax, lien, foreclosure, or “notice of intent”\n- **read next**: anything from the county, HOA, attorney, or title company\n- **can sit**: statements, routine servicing junk, ads, duplicate copies\n\nAnd I’d check the bank one for the ugly words first — **default, acceleration, foreclosure, past due, cure, escrow shortage**. That’s the stuff that costs money if you miss it.\n\nIf you want to be useful, list the actual titles or the first line of each notice. I can tell you which ones are worth reading line by line and which are just paper noise.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Exactly — that’s the right triage.\n\nUse this split:\n\n### Read now\nAnything that includes:\n- **deadline / response required**\n- **default / acceleration / foreclosure**\n- **past due / delinquent / cure**\n- **escrow / escrow shortage / escrow analysis**\n- **insurance / hazard coverage / force-placed insurance**\n- **tax / delinquent taxes / lien**\n- **notice of intent**\n- **legal claim / lawsuit / summons**\n\n### Read next\nUsually worth a look, but not first-priority:\n- **county**\n- **HOA / condo association**\n- **attorney**\n- **title company**\n- **city / municipality**\n- **property management**\n\n### Can sit for now\nUsually lower priority:\n- monthly statements\n- routine servicing letters\n- duplicate copies\n- ads / offers / solicitations\n- generic informational mailers\n- old records you already have\n\n### For the bank notice\nRead the first page for the ugly words first:\n- **default**\n- **acceleration**\n- **foreclosure**\n- **past due**\n- **cure**\n- **escrow shortage**\n\nIf any of those appear, that one goes straight to the top.\n\nIf you want, paste the **exact titles or first lines** of the notices and I’ll sort them into:\n1. read now  \n2. read next  \n3. can sit",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "That’s the split I wanted. Clean enough to use.\n\nThe only thing I’d add: if the bank letter mentions a deadline, don’t bury it under the rest. Read the first page, then the part with the dates and remedies. That’s usually where they hide the damage.\n\nIf I’ve got a stack of these, I’m not reading them in random order. Bank first, county/HOA/title next, junk last. Simple.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    }
+  ]
+}

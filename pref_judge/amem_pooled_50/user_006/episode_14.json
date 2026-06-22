@@ -1,0 +1,104 @@
+{
+  "user_id": "user_006",
+  "task": "I’m trying to figure out why a small industrial network cabinet keeps acting up during the afternoon even though nothing obvious changed. If you were troubleshooting that, what would you check first so you can tell whether it’s a gear problem, a ventilation problem, or something tied to the environment?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "verbosity_preference",
+      "short": "Wants responses kept tight and efficient",
+      "explanation": "He values speed, control, and efficiency, so he is unlikely to want long-winded help. He would probably prefer responses that get to the point quickly and avoid unnecessary filler. Overexplaining would feel like wasted time to him."
+    },
+    {
+      "idx": 2,
+      "dimension": "directness_preference",
+      "short": "Prefers blunt answers without softening",
+      "explanation": "His skeptical, competitive style suggests he wants clear, unambiguous guidance rather than hedged language. He would likely see excessive caution as evasive or inefficient. Straight answers fit his preference for control and decisive action."
+    },
+    {
+      "idx": 3,
+      "dimension": "format_preference",
+      "short": "Likes structured, actionable output",
+      "explanation": "He seems most likely to respond well to responses that are organized and easy to execute, such as bullets or checklists. That matches his practical, task-focused mindset. Loose, meandering prose would probably frustrate him."
+    },
+    {
+      "idx": 4,
+      "dimension": "detail_level_preference",
+      "short": "Wants the useful essentials, not padding",
+      "explanation": "He likely wants enough context to act, but not exhaustive background unless it helps him win or avoid mistakes. He is efficiency-driven, so extra caveats only matter when they change the decision. He would probably skip anything that does not affect the outcome."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Accepts pushback only if it is sharp and useful",
+      "explanation": "He is skeptical and self-serving, so he probably does not enjoy moralizing or vague objections. But if the pushback is concrete, efficient, and clearly tied to risk or leverage, he is more likely to respect it. Weak or overly gentle correction would likely be ignored."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "I’d start with **what changes in the afternoon**, not with the gear itself.\n\n### First pass: prove whether it’s heat / environment / load\nCheck these in order:\n\n1. **Cabinet temp and airflow**\n   - internal temp vs room temp\n   - fan operation\n   - blocked vents / clogged filters\n   - hot spots near switches, PSUs, drives, or power supplies\n   - door closed vs open behavior\n\n2. **Power quality**\n   - UPS alarms\n   - brownouts / voltage dips\n   - loose power connections\n   - shared circuits getting loaded up later in the day\n\n3. **Device health indicators**\n   - interface errors, link flaps, CRC/FCS errors\n   - CPU / memory spikes\n   - PSU warnings\n   - transceiver warnings\n   - any port that gets worse as the day goes on\n\n4. **Event timing**\n   - look at logs around the same afternoon window\n   - see if failures line up with temperature rise, machine start-up, sunlight, or nearby equipment\n\n5. **Physical environment**\n   - direct sun on the cabinet\n   - nearby motors, welders, compressors, or heaters\n   - dust buildup\n   - vibration\n   - humidity/condensation\n\n### Quick way to separate the cause\n- **Opens up when the door is open / fan is added** → ventilation/heat\n- **Fails when a specific device or port is under load** → gear or port issue\n- **Fails when nearby equipment starts** → environment or power noise\n- **Fails only in the afternoon, every day** → temperature, solar load, or power/circuit load is the first suspect\n\n### Best first checks, if you want the fastest signal\n- log cabinet temp over time\n- check switch/UPS logs for flaps or warnings\n- inspect fans and filters\n- watch for rising error counters on the worst port\n- compare behavior with the cabinet door open vs closed\n\nIf you want, I can turn this into a **10-minute field checklist** you could use on-site.",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly tight and efficient: starts with \"what changes in the afternoon\" and uses short bullets. Slightly longer than minimal, but still focused."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Direct and unsoftened: \"start with what changes\" and clear if/then diagnostics like \"Opens up when the door is open...\". No hedging or moralizing."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strong structure and actionability: numbered checklist, \"Quick way to separate the cause,\" and \"Best first checks\" make it easy to execute."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Gives the useful essentials without much padding, focusing on temp, power, logs, and environment. A bit of extra breadth, but mostly outcome-driven."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Pushback is concrete and useful, not moralizing: it ties symptoms to likely causes with blunt tests like \"door open vs closed\" and \"fails when nearby equipment starts.\""
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Exactly — I’d start by **proving the pattern**, not by guessing at the cause.\n\nFastest way to separate it:\n\n1. **Pin down the failure window**\n   - exact time it starts\n   - how long it lasts\n   - whether it’s every afternoon or only on hot / loaded days\n\n2. **Correlate temp with symptoms**\n   - cabinet temp at failure time\n   - internal hot spots if you can measure them\n   - compare that to the first error or flap\n\n3. **See what scope the failure has**\n   - one device only = likely gear\n   - one port / one cable = likely interface or cabling\n   - whole cabinet / multiple devices = likely power, ventilation, or environment\n\n4. **Do the quick airflow test**\n   - open the door\n   - add temporary fan / portable cooling\n   - see if it recovers quickly\n\n5. **Check for outside triggers**\n   - sun on the cabinet\n   - nearby motors / welders / compressors starting\n   - power dips when other loads come on\n\nThe key diagnostic is this:\n\n- **Errors follow one piece of gear** → gear problem\n- **Errors follow temperature rise and improve with cooling** → ventilation problem\n- **Errors happen on a schedule tied to the site, not the cabinet** → environment or power problem\n\nIf you want, I can turn that into a **simple decision tree** you can use on-site in a few minutes.",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Pretty tight and efficient: it gets to the diagnostic steps quickly and avoids long background. Minor extra framing like \"Exactly — I’d start by proving the pattern\" and the closing offer add a little filler, but overall it stays concise."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly blunt and direct, with clear if/then guidance like \"one device only = likely gear\" and \"Errors follow temperature rise... = ventilation problem.\" It does use some softening/hedging such as \"likely\" and \"if you can measure it,\" so not a perfect 5."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable: numbered steps, bullets, and a final diagnostic summary. It is easy to execute on-site and clearly organized."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Focuses on the essentials needed to act: timing, temperature, scope, airflow, outside triggers. It avoids deep theory, though the extra examples and closing offer add a bit beyond the bare minimum."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Pushback is concrete and useful rather than moralizing: it says to \"start by proving the pattern, not by guessing at the cause\" and ties checks to specific risks like temperature, power, and airflow. It is not especially sharp, but it is efficient and practical."
+        }
+      ]
+    }
+  ]
+}

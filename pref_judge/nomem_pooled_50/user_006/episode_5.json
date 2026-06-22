@@ -1,0 +1,104 @@
+{
+  "user_id": "user_006",
+  "task": "I’ve got a time-sensitive network change coming up and I want to avoid turning it into a full-blown incident. Can you help me sketch a tight rollout plan with a rollback path, a few checkpoints, and the first things to verify if something starts acting weird mid-change?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "verbosity_preference",
+      "short": "Wants responses kept tight and efficient",
+      "explanation": "He values speed, control, and efficiency, so he is unlikely to want long-winded help. He would probably prefer responses that get to the point quickly and avoid unnecessary filler. Overexplaining would feel like wasted time to him."
+    },
+    {
+      "idx": 2,
+      "dimension": "directness_preference",
+      "short": "Prefers blunt answers without softening",
+      "explanation": "His skeptical, competitive style suggests he wants clear, unambiguous guidance rather than hedged language. He would likely see excessive caution as evasive or inefficient. Straight answers fit his preference for control and decisive action."
+    },
+    {
+      "idx": 3,
+      "dimension": "format_preference",
+      "short": "Likes structured, actionable output",
+      "explanation": "He seems most likely to respond well to responses that are organized and easy to execute, such as bullets or checklists. That matches his practical, task-focused mindset. Loose, meandering prose would probably frustrate him."
+    },
+    {
+      "idx": 4,
+      "dimension": "detail_level_preference",
+      "short": "Wants the useful essentials, not padding",
+      "explanation": "He likely wants enough context to act, but not exhaustive background unless it helps him win or avoid mistakes. He is efficiency-driven, so extra caveats only matter when they change the decision. He would probably skip anything that does not affect the outcome."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Accepts pushback only if it is sharp and useful",
+      "explanation": "He is skeptical and self-serving, so he probably does not enjoy moralizing or vague objections. But if the pushback is concrete, efficient, and clearly tied to risk or leverage, he is more likely to respect it. Weak or overly gentle correction would likely be ignored."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Absolutely — here’s a tight, practical change plan you can adapt for a network change window.\n\n## 1) Pre-change prep\n**Goal:** make rollback fast and reduce surprises.\n\n- **Define scope clearly:** devices, interfaces, VRFs/VLANs, routing protocols, ACLs, NAT, firewall rules, etc.\n- **Capture current state:**\n  - Running config / relevant config snippets\n  - Routing table, ARP/MAC tables, neighbor state\n  - Interface status/errors/utilization\n  - Key service baselines: latency, packet loss, app reachability\n- **Confirm dependencies:** upstream/downstream devices, WAN circuits, DNS, DHCP, auth, monitoring.\n- **Set success criteria:** what “good” looks like after the change.\n- **Have rollback ready and tested mentally:** exact commands, order, and who will execute.\n- **Freeze other changes** during the window if possible.\n- **Notify stakeholders:** maintenance window, expected impact, escalation path.\n\n## 2) Rollout plan\nUse small steps with verification after each one.\n\n### Step A — Pre-stage\n- Load config changes or software images without activating if possible.\n- Validate syntax / commit check / dry run.\n- Confirm backups are stored and accessible.\n\n### Step B — Make the smallest safe change first\n- Apply to the least critical device/segment first if you have that option.\n- Prefer one change domain at a time:\n  - interface\n  - routing\n  - policy/ACL\n  - NAT\n  - firewall\n  - then broader propagation\n\n### Step C — Verify immediately\nAfter each step, check:\n- device health\n- interface/link state\n- routing adjacency / neighbor status\n- reachability to key endpoints\n- logs for new errors or flaps\n\n### Step D — Expand only if stable\n- Move to the next device/segment only after the previous one is clean.\n- Keep a short pause between steps to catch delayed effects.\n\n## 3) Checkpoints\nI’d use these checkpoints:\n\n### Checkpoint 1: Before starting\n- Baseline confirmed\n- Rollback path ready\n- Monitoring open\n- Stakeholders informed\n\n### Checkpoint 2: After first config push / first device\n- No config errors\n- No unexpected interface flaps\n- Neighbors still up\n- Key test traffic passes\n\n### Checkpoint 3: Mid-change\n- No rising error counters\n- No route churn\n- No unusual CPU/memory spikes\n- No service degradation\n\n### Checkpoint 4: End of change\n- All intended changes applied\n- End-to-end tests pass\n- Monitoring clean for a short soak period\n- Documentation updated\n\n## 4) Rollback path\nKeep it simple and deterministic.\n\n- **Trigger conditions for rollback:**\n  - loss of critical reachability\n  - persistent packet loss/latency spike\n  - routing adjacency failure that doesn’t recover quickly\n  - service outage or clear degradation\n  - config/behavior differs from expected and can’t be corrected quickly\n\n- **Rollback method:**\n  - revert to previous config/version\n  - restore backed-up config\n  - remove only the last change if it’s isolated\n  - avoid “partial guessing” unless you’re certain\n\n- **Rollback order:**\n  1. stop further rollout\n  2. revert the most recent change\n  3. verify restoration of baseline\n  4. confirm service recovery\n  5. communicate status\n\n- **Important:** if the change spans multiple devices, roll back in reverse order of deployment.\n\n## 5) If things start acting weird mid-change: first things to verify\nStart with the fastest, highest-signal checks.\n\n### A. Scope of the issue\n- Is it one device, one link, one VLAN/VRF, or everything?\n- Is the issue only on the changed path or broader?\n\n### B. Physical/link layer\n- Interface up/down\n- Speed/duplex mismatch\n- CRC/input errors\n- Drops, discards, flaps\n- Optics/cable status if relevant\n\n### C. Control plane / adjacency\n- Routing neighbors up?\n- STP/MC-LAG/LACP state okay?\n- BGP/OSPF/ISIS sessions stable?\n- Any auth/keepalive failures?\n\n### D. Policy/forwarding\n- ACL/firewall rule hit counts\n- NAT translation behavior\n- Route/policy changes applied as intended\n- FIB/CEF/forwarding table populated correctly\n\n### E. Service impact\n- Can you ping/traceroute key hops?\n- Can you reach the affected app/service?\n- Is DNS/DHCP/auth involved?\n- Are monitoring alerts matching the symptom?\n\n### F. Logs and counters\n- Recent syslog/messages\n- Interface error counters increasing?\n- CPU/memory spikes?\n- Route churn or process restarts?\n\n## 6) Decision rule\nA simple rule helps avoid hesitation:\n- **If it’s a minor, clearly isolated issue:** fix it in place if you understand the cause.\n- **If the issue affects critical traffic, expands in scope, or isn’t quickly explainable:** stop and rollback.\n\n## 7) Communication cadence\n- Announce start\n- Announce each major step\n- Announce any deviation or rollback\n- Announce completion and validation\n\nIf you want, I can turn this into a **one-page change checklist** or a **minute-by-minute runbook template** you can use during the maintenance window.",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly tight and efficient: uses concise sections, bullets, and direct steps. A bit long, but avoids filler and gets to the point."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Generally blunt and unsoftened, e.g. \"stop and rollback\" and \"avoid 'partial guessing'\". Some hedging remains, like \"if possible\" and \"I’d use\"."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable: numbered sections, checkpoints, rollback order, and specific verification lists make it easy to execute."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Focuses on essentials needed to act: scope, baseline, checkpoints, rollback, and first checks. A few extra items like stakeholder notifications and communication cadence add some padding but are still relevant."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Pushback is concrete and useful, not moralizing: \"If the issue affects critical traffic... stop and rollback.\" It gives clear risk-based guidance, though not especially sharp."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Here’s a tight runbook you can paste into the ticket and use live. Replace bracketed items.\n\n---\n\n# Network Change Runbook\n\n## Pre-change checklist\n- [ ] Change scope confirmed: **[device(s)/interface(s)/VRF/VLAN/route/policy]**\n- [ ] Maintenance window active and stakeholders notified\n- [ ] Backups captured:\n  - [ ] running config\n  - [ ] relevant routing/policy snippets\n  - [ ] pre-change interface/neighborship state\n- [ ] Baseline recorded:\n  - [ ] interface status/errors\n  - [ ] routing neighbors\n  - [ ] key app reachability / ping / traceroute\n- [ ] Rollback ready:\n  - [ ] exact revert commands prepared\n  - [ ] prior config/image accessible\n  - [ ] rollback owner assigned\n- [ ] Monitoring open:\n  - [ ] logs\n  - [ ] interface counters\n  - [ ] routing/session state\n  - [ ] app/health checks\n- [ ] No other changes in progress\n- [ ] Success criteria defined:\n  - [ ] [what must be true when done]\n\n---\n\n## Step-by-step rollout order\n1. **Pre-stage only**\n   - Load/prepare config or image\n   - Validate syntax / commit check / dry run\n   - Do **not** activate yet\n\n2. **Apply smallest isolated change first**\n   - Change one thing at a time\n   - Prefer least critical device/segment first\n   - Examples: single interface, then routing, then policy, then broader propagation\n\n3. **Immediate verification**\n   - Check device health\n   - Check interface/link state\n   - Check neighbors/sessions\n   - Check key traffic path\n   - Check logs/counters for new errors\n\n4. **Pause briefly**\n   - Hold for **[2–5 min]** or your normal observation window\n   - Watch for delayed flaps/churn\n\n5. **Proceed only if stable**\n   - Move to next device/segment\n   - Repeat apply → verify → pause\n\n6. **Final validation**\n   - End-to-end traffic passes\n   - No new alerts\n   - Counters stable\n   - Document completion\n\n---\n\n## Hard rollback trigger points\nRollback immediately if any of the following happens:\n- Critical traffic loss or hard outage\n- Packet loss or latency spike that persists beyond **[X minutes]**\n- Routing/session adjacency drops and does not recover quickly\n- Interface/link flaps repeatedly\n- Error counters climb rapidly after the change\n- Scope expands beyond the changed segment\n- Service behavior is clearly worse and cause is not obvious\n- You cannot verify the change is safe within the window\n\n**Rule:** if impact is on production-critical traffic and not clearly isolated, **stop and rollback**.\n\n---\n\n## First 5 checks if traffic goes sideways\n1. **Scope**\n   - Is it one device, one link, one VLAN/VRF, or everything?\n\n2. **Interface/link**\n   - Up/down state\n   - Flaps\n   - CRC/input errors\n   - Drops/discards\n\n3. **Neighbor/session state**\n   - BGP/OSPF/ISIS up?\n   - LACP/STP/MC-LAG stable?\n   - Any session resets or auth failures?\n\n4. **Forwarding/policy**\n   - ACL/firewall/NAT/route-policy applied as intended?\n   - Route present in forwarding table?\n   - Any unexpected deny/hole?\n\n5. **Path/service check**\n   - Ping/traceroute to key next hop and app endpoint\n   - Confirm whether issue is local to changed path or broader\n\n---\n\n## Decision tree: continue / pause / rollback\n**Continue**\n- Change applied cleanly\n- No new errors/flaps\n- Neighbors stable\n- Key traffic passes\n- Counters stable for the observation window\n\n**Pause**\n- Minor anomaly, but impact is unclear\n- Symptoms are isolated and not growing\n- Need more time to confirm whether it’s transient\n- Action: stop further rollout, watch metrics/logs, retest\n\n**Rollback**\n- Critical traffic impacted\n- Issue is spreading\n- Sessions/interfaces keep failing\n- Error counters or loss are worsening\n- Cause is not quickly clear\n- Action: stop rollout, revert last change or restore previous config, verify recovery, then communicate\n\n---\n\nIf you want, I can compress this one notch further into a **single-screen call script** with checkboxes and operator prompts.",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly tight and efficient: it says \"Here’s a tight runbook\" and uses concise bullets/checklists. Slightly long, but still focused and not filler-heavy."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Direct and blunt overall: \"Rollback immediately\" and \"stop and rollback\" are clear. Some softening remains in phrases like \"Pause\" and \"if you want,\" so not maximally blunt."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable: clear sections, numbered steps, checklists, and a decision tree. Easy to execute live."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Gives the useful essentials without much padding: rollout order, rollback triggers, first checks, and decision tree. A bit more expansive than minimal, but still practical."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Pushback is sharp and useful: \"Rule: if impact is on production-critical traffic and not clearly isolated, stop and rollback.\" It gives concrete risk-based correction rather than moralizing."
+        }
+      ]
+    }
+  ]
+}

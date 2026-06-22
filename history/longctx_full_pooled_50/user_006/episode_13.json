@@ -1,0 +1,36 @@
+{
+  "user_id": "user_006",
+  "task": "I’m helping a small warehouse team figure out what to prioritize when their network gets flaky during a busy shift. What’s the cleanest way to think about which stations or systems should come first so the whole flow doesn’t get jammed up?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.8,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Prioritize by **operational dependency**, not by who complains loudest.\n\n## Simple order\n1. **Systems that keep the whole floor moving**\n   - core switch/uplink\n   - Wi‑Fi controller/AP backhaul\n   - ERP/WMS terminal path\n   - barcode scanners / pick stations\n   - label printers\n   - shipping/receiving stations\n\n2. **Systems with the biggest blast radius**\n   - shared VLANs\n   - shared printers\n   - shared authentication\n   - shared VPN/remote access\n   - anything all stations depend on\n\n3. **Systems with time sensitivity**\n   - shipping cutoff systems\n   - inbound receiving windows\n   - pick/pack workflow\n   - dispatch or dock scheduling\n\n4. **Single-user or nonblocking issues**\n   - one workstation\n   - one phone\n   - one noncritical device\n   - anything that can wait without stopping flow\n\n## Practical rule\nAsk:\n- **If this fails, does the line stop?**\n- **If this fails, does everyone else get slower or blocked?**\n- **Is there a workaround?**\n- **Is it time-critical right now?**\n\nIf the answer is “yes, it stops the line,” it goes first.\n\n## Triage order during a busy shift\n1. **Core network path**\n2. **Shared services**\n3. **Station groups that block work**\n4. **Individual devices**\n5. **Nice-to-have fixes**\n\n## What to avoid\n- chasing the loudest complaint first\n- fixing a single printer while the shared uplink is unstable\n- spending time on cosmetic issues during active workflow failure\n\n## Fast warehouse priority rule\n**Keep the shared path alive, then restore the stations that unblock the most work, then clean up the rest.**\n\nIf you want, I can turn this into a **warehouse triage checklist** with “first / second / last” priorities.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s the right frame. But I’d tighten it one step further: rank by **dependency + throughput impact + rollback speed**.\n\nWhat I’d use on-site:\n1. **Core path first** — uplink, core switch, AP backhaul, DHCP/auth if it’s involved.\n2. **Shared blockers next** — anything that holds up multiple scanners, printers, or WMS terminals.\n3. **Bottleneck stations** — dock, shipping cutoff, receiving, label print, pack-out. The stuff that jams the whole flow if it stalls.\n4. **Isolated junk last** — one workstation, one phone, one device with a workaround.\n\nQuick test I’d use:\n- **How many people are waiting on it?**\n- **Can work continue without it for 10–15 minutes?**\n- **Is there a manual fallback?**\n- **Does fixing this restore the most downstream steps?**\n\nIf two issues look similar, take the one with the bigger blast radius or the one that kills the deadline first. I’ve had this exact kind of mess in a warehouse before — the loudest complaint is usually the least useful signal.\n\nIf you want, I can turn this into a dead-simple 1-page triage order for warehouse techs: **red / yellow / green**.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Use this rule:\n\n**Prioritize by dependency, throughput, and deadline risk.**\n\n## Order\n1. **Core path**\n   - uplink\n   - core switch\n   - AP backhaul\n   - DHCP/auth if shared\n\n2. **Shared blockers**\n   - anything affecting multiple scanners, printers, or WMS terminals\n\n3. **Bottleneck stations**\n   - shipping\n   - receiving\n   - dock\n   - pack-out\n   - label printing\n\n4. **Isolated devices**\n   - one workstation\n   - one phone\n   - one noncritical endpoint\n\n## Quick questions\n- How many people are blocked?\n- Does this stop the line or just slow it?\n- Is there a manual workaround?\n- Does fixing it unblock downstream steps?\n\n## Practical rule\nIf it affects **many users**, **high-volume flow**, or **a cutoff/deadline**, it goes first.\n\nIf you want, I can turn this into a **red / yellow / green warehouse triage sheet**.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s it.\n\nDependency + throughput + deadline risk is the clean version. Core path first, shared blockers next, bottlenecks after that, isolated junk last. That’s the whole game.\n\nThe only thing I’d keep sharp is the cutoff piece — if one issue is tied to shipping or receiving windows, it can jump ahead even if it’s not the biggest blast radius. Time wins ties.\n\nRed / yellow / green sheet would be useful.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    }
+  ]
+}

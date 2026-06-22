@@ -1,0 +1,104 @@
+{
+  "user_id": "user_011",
+  "task": "I’m helping someone prep a short video for both online use and a local TV slot, and I want to make sure the delivery specs won’t bite us later. Can you help me sanity-check what usually needs to be different between those two versions and what I should flag before export?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "verbosity_preference",
+      "short": "Prefers concise, efficient responses",
+      "explanation": "He seems to value getting to the point without extra noise, especially given how he works under deadline pressure. A response that is too long or meandering would likely feel inefficient to him. He probably still wants enough detail to act, but not a lot of filler."
+    },
+    {
+      "idx": 2,
+      "dimension": "directness_preference",
+      "short": "Wants clear, plain answers",
+      "explanation": "His communication style in work is straightforward: explain the issue, name the delay, and state the next step. He likely prefers the same from an assistant rather than softened hints or vague hedging. Directness fits his honest, exacting temperament."
+    },
+    {
+      "idx": 3,
+      "dimension": "structure_preference",
+      "short": "Likes organized, step-by-step help",
+      "explanation": "He seems to respond well to order and clean workflow, so scattered or exploratory replies would probably frustrate him. Structured guidance would match how he already thinks about edits, revisions, and process templates. He likely appreciates when the assistant lays things out in a predictable sequence."
+    },
+    {
+      "idx": 4,
+      "dimension": "detail_level_preference",
+      "short": "Wants the main points plus key caveats",
+      "explanation": "He cares about technical correctness, so bare headlines are probably not enough when a mistake could matter. At the same time, he likely does not want exhaustive theory unless it directly helps him act. A focused answer with the important caveats is the best fit."
+    },
+    {
+      "idx": 5,
+      "dimension": "feedback_style_preference",
+      "short": "Responds best to direct, constructive critique",
+      "explanation": "He appears to prefer honest correction over vague reassurance, especially when quality or timing is at stake. Pointing out what is wrong and how to fix it would likely be more useful to him than overly gentle framing. He probably respects critique that is specific and practical."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — the main thing is to treat them as two different delivery targets, even if the cut is the same.\n\n## What usually differs\n\n### 1) Aspect ratio / framing\n- **Online:** often 16:9, but may also need 1:1, 4:5, 9:16, etc.\n- **Local TV:** almost always expects a standard broadcast frame, usually **16:9**, sometimes with safe-area considerations.\n\n**Flag before export:**\n- Any crop/reframe needed\n- Lower-third/title placement staying inside safe areas\n- No critical text too close to edges\n\n### 2) Resolution\n- **Online:** can be a range, commonly 1920x1080, sometimes smaller/larger depending on platform.\n- **TV:** usually wants a specific broadcast resolution, often **1080i/1080p** or sometimes **720p**, depending on station specs.\n\n**Flag before export:**\n- Exact required resolution\n- Whether the station wants **progressive or interlaced**\n- Any scaling artifacts from converting the timeline\n\n### 3) Frame rate\n- **Online:** usually flexible, but should match the source/edit intent.\n- **TV:** must match the station’s required frame rate exactly.\n\n**Flag before export:**\n- Mixed frame rates in the timeline\n- Any accidental conform issues\n- Whether the delivery spec wants **23.98, 24, 25, 29.97, or 30**\n\n### 4) Audio layout\n- **Online:** often stereo is enough.\n- **TV:** may require **stereo**, **split stereo**, or even **separate M&E / full mix / stems**, depending on the slot.\n\n**Flag before export:**\n- Channel mapping\n- Left/right phase issues\n- Loudness spec\n- Whether any channels are silent or swapped\n- Whether the station wants **embedded audio** or separate WAVs\n\n### 5) Loudness / audio standards\n- **Online:** platforms may normalize, but you still want a clean mix.\n- **TV:** often requires a specific loudness target, commonly around **-24 LKFS / LUFS** in broadcast contexts, but the exact spec matters.\n\n**Flag before export:**\n- Peak levels\n- Integrated loudness\n- True peaks\n- Any clipped dialogue/music/sfx\n\n### 6) Codec / file format\n- **Online:** could be H.264, H.265, ProRes, etc.\n- **TV:** often wants a very specific mezzanine or broadcast-friendly format, sometimes ProRes, XDCAM, MXF, or a station-specific wrapper/codec.\n\n**Flag before export:**\n- Container and codec\n- Bit depth\n- Chroma subsampling\n- Whether the station accepts the chosen format\n\n### 7) Graphics / captions / legal text\n- **Online:** may be burned in or delivered as separate caption files.\n- **TV:** may require captions, slates, or legal text in a specific form.\n\n**Flag before export:**\n- Captions required or not\n- Burned-in text vs sidecar captions\n- End card / slate requirements\n- Any legal supers or disclaimers\n\n### 8) Color / legal levels\n- **Online:** usually more forgiving.\n- **TV:** can be strict about broadcast-safe levels.\n\n**Flag before export:**\n- Superwhites / superblacks\n- Illegal RGB or luma excursions\n- Any crushed blacks or clipped highlights\n\n---\n\n## What to flag before export, at minimum\n\nI’d sanity-check these before making either version:\n\n### Timeline / sequence\n- Correct final cut\n- No temp VFX still in the edit\n- No missing slates or placeholder cards\n- No mixed frame rate mistakes\n- No offline media or relink warnings\n- No accidental muted or disabled tracks\n\n### Online export\n- Correct aspect ratio\n- Correct resolution\n- Correct codec/container for upload\n- Audio rendered correctly in stereo\n- Captions/subtitles handled as required\n- File naming matches the intended version\n\n### TV export\n- Exact station spec matched\n- Frame rate and field order correct\n- Audio channel mapping correct\n- Loudness compliant\n- Broadcast-safe video levels\n- Any required slate, bars/tone, countdown, or leader included\n- Delivery wrapper/file naming correct\n\n### Delivery package\n- Final master\n- Separate audio files if required\n- Captions file if required\n- Checksums or QC report if needed\n- Clear version labels so online and TV files can’t get mixed up\n\n---\n\n## Practical way to avoid trouble\nMake a tiny two-column spec sheet:\n\n**Online version**\n- Resolution\n- Codec/container\n- Frame rate\n- Audio format\n- Caption format\n- Filename\n\n**TV version**\n- Resolution\n- Codec/container\n- Frame rate/field order\n- Audio layout\n- Loudness target\n- Legal/safe requirements\n- Filename\n\nIf you want, I can turn this into a compact pre-export checklist you can reuse for both versions.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly concise and to the point, with a practical checklist and no major filler. It is somewhat long, but the structure keeps it efficient."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Very direct and plain: it says to \"treat them as two different delivery targets\" and repeatedly uses concrete flags like \"Exact station spec matched\" and \"Frame rate and field order correct.\""
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strong step-by-step organization with clear sections like \"What usually differs,\" \"What to flag before export,\" and \"Practical way to avoid trouble.\""
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Gives the main points plus important caveats, such as \"progressive or interlaced,\" \"exact station spec,\" and \"broadcast-safe levels,\" without drifting into unnecessary theory."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Constructive and practical throughout, focusing on what could go wrong and how to fix it, e.g. \"Flag before export\" and \"avoid trouble.\""
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Absolutely — here’s a tighter, more delivery-proof version of the checklist, aimed at the things that actually cause rejects or rework.\n\n## Pre-export sanity check: online + local TV\n\n### 1) Confirm the **exact station spec**\nDon’t assume “broadcast-friendly” is enough.\n\nFlag:\n- Required resolution\n- Required frame rate\n- **1080i vs 1080p**\n- If interlaced: **field order**\n- Required codec/container/wrapper\n- Any station-specific naming or upload rules\n\n### 2) Check **audio delivery requirements**\nThis is a common failure point.\n\nFlag:\n- **Stereo vs split stereo vs stems**\n- Whether they want **embedded audio** or **separate WAVs**\n- Channel mapping is correct\n- No swapped L/R\n- No silent channels unless intended\n- Any required mix version, like full mix vs M&E\n\n### 3) Verify **loudness against the station’s numbers**\nUse their actual spec, not a general broadcast target.\n\nFlag:\n- Integrated loudness target\n- True peak limit\n- Any dialogue or program loudness requirement\n- No clipping or overs\n\n### 4) Check **captions / subtitles**\nDon’t assume the same caption method works for both versions.\n\nFlag:\n- **Burned in**\n- **Sidecar file**\n- **Not needed**\n- Caption file format if separate\n- Caption sync and completeness\n\n### 5) Check **safe margins**\nEspecially if there are titles, lower thirds, or any text near the edges.\n\nFlag:\n- Safe action\n- Safe title\n- Lower-third placement\n- Any text that may be too close to the edge on TV\n\n### 6) Check **video levels**\nThis matters if the online grade is a little hot.\n\nFlag:\n- Legal luma/chroma levels\n- No illegal RGB values\n- No crushed blacks or clipped highlights\n- Any overs from graphics, glows, or graded whites\n\n### 7) Lock **filename/version naming**\nThis prevents the wrong file getting uploaded or sent.\n\nFlag:\n- Clear version labels\n- Online vs TV clearly distinguished\n- Date/version suffix if useful\n- No ambiguous “final_final_v3” type naming\n\n---\n\n## Simple version split\n\n### Online version\nFlag:\n- Platform-specific aspect ratio if they need cutdowns\n- Correct export size and codec\n- Captions/subtitles as required by platform\n- Clean filename/version naming\n\n### Local TV version\nFlag:\n- Exact station spec\n- 1080i vs 1080p\n- Field order if interlaced\n- Loudness target in station numbers\n- Audio layout and delivery method\n- Captions method\n- Safe margins\n- Legal/video levels\n- Filename/version naming\n\n---\n\n## Quick practical rule\nIf you’re moving fast, the biggest mistakes are usually:\n- wrong frame rate or interlace/progressive choice\n- wrong audio layout\n- wrong loudness\n- captions in the wrong form\n- graphics too close to the edge\n- file name confusion between versions\n\nIf you want, I can turn this into a **one-page checkbox checklist** you can paste into a doc or production note.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly concise and efficient, with a focused checklist and a short summary. It does add some structure and detail, but avoids meandering and filler."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Very direct and plain: phrases like \"Don’t assume\" and \"Flag:\" give clear, unsoftened guidance. It states exactly what to check without hedging."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly organized into numbered sections and bullet-pointed flags, plus a \"Simple version split\" and \"Quick practical rule.\" This is clearly step-by-step and easy to follow."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Gives the main points plus key caveats that matter for export, such as \"1080i vs 1080p,\" \"field order,\" \"loudness target,\" and \"captions\". It stays practical without overexplaining theory."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "The response is constructively critical and specific about what can go wrong, e.g. \"common failure point\" and \"biggest mistakes are usually\" followed by concrete fixes. It corrects likely issues directly rather than reassuring vaguely."
+        }
+      ]
+    }
+  ]
+}

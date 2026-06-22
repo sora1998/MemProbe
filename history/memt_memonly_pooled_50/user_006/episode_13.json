@@ -1,0 +1,36 @@
+{
+  "user_id": "user_006",
+  "task": "I’m helping a small warehouse team figure out what to prioritize when their network gets flaky during a busy shift. What’s the cleanest way to think about which stations or systems should come first so the whole flow doesn’t get jammed up?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.2,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Think in **flow impact first**, not “which box looks broken.”\n\nA clean way to prioritize is:\n\n1. **Keep the physical path alive**\n   - Check uplinks, transceivers, cabling, link lights, errors.\n   - If transport is shaky, don’t waste time on apps or DNS yet.\n\n2. **Protect the bottleneck stations first**\n   - Prioritize the systems that, if down, **block everyone else**:\n     - shipping/receiving scanners\n     - label printers\n     - WMS terminals\n     - Wi‑Fi APs covering the main work area\n     - core switches or uplinks feeding multiple stations\n\n3. **Use a simple score**\n   - Give each issue points for:\n     - **How many people/processes it blocks**\n     - **How hard it is to work around**\n     - **How fast it can spread or worsen**\n     - **How much time it saves if fixed first**\n   - Fix the highest score first.\n   - If something is low impact and easy to work around, kick it out of the urgent lane.\n\n4. **Verify before expanding scope**\n   - Check counters/trends, optics/DOM if relevant, and recent changes.\n   - Don’t start touching dependent systems until the transport layer is clearly stable.\n\n5. **Have a rollback path**\n   - For any change, know how to undo it quickly.\n   - Use checkpoints so you can stop and reassess before making things worse.\n\nA practical rule of thumb for a warehouse shift:\n\n- **First:** core network path and shared infrastructure\n- **Second:** stations that stop throughput if they fail\n- **Third:** convenience systems and single-user issues\n\nIf you want, I can turn this into a **1-page “warehouse network triage” checklist** or a **simple scoring table** the team can use during incidents.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s the right shape. But I’d make it more brutal and specific for an actual shift.\n\nStart with **throughput blockers**, not “important stuff” in general.\n\nMy order would be:\n- **1. Core path** — uplink, core switch, fiber, APs covering the floor\n- **2. Shared choke points** — WMS, label printers, DHCP, auth, anything every station depends on\n- **3. High-volume stations** — shipping, receiving, pack-out, staging\n- **4. Single-user crap** — one desktop, one handheld, one docked PC\n\nThen score it with 3 questions only:\n- **Does this stop multiple people right now?**\n- **Is there a workaround, or does the line just sit there?**\n- **Will this get worse fast if I ignore it?**\n\nIf the answer is yes to the first two, it jumps the line. Simple.\n\nI’d also add one thing: in a warehouse, **printer and scanner issues can look “small” but kill the whole lane**. I’ve seen that before — one bad transceiver or one bad segment and everyone starts blaming the wrong box. So I’d treat anything tied to labels or scan flow as higher priority than a random office port every time.\n\nIf you want, I can tighten this into a dead-simple incident order of operations, like 5 steps max.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — the cleanest way is to prioritize by **flow blockage**, not by how “broken” something looks.\n\n### Best order in a warehouse shift\n1. **Core path**\n   - uplink\n   - core switch\n   - fiber / transceiver\n   - APs covering the floor\n\n2. **Shared choke points**\n   - WMS\n   - label printers\n   - DHCP\n   - auth\n   - anything every station depends on\n\n3. **High-volume stations**\n   - shipping\n   - receiving\n   - pack-out\n   - staging\n\n4. **Single-user issues**\n   - one desktop\n   - one handheld\n   - one docked PC\n\n### Fast triage rule\nAsk only these 3 questions:\n\n- **Does this stop multiple people right now?**\n- **Is there a workaround, or does the line stall?**\n- **Will it get worse fast if ignored?**\n\nIf the answer is **yes** to the first two, it goes to the top.\n\n### Warehouse-specific rule\nTreat **printer and scanner problems as high priority** if they affect labels or scan flow. Those often look small but can jam an entire lane.\n\n### Simple decision rule\n- **Blocks the whole floor** → fix first\n- **Blocks a lane or team** → fix next\n- **Only hurts one person** → defer if needed\n\nIf you want, I can turn this into a **5-step shift triage checklist** the team can use live.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s basically it.\n\nI’d keep it even tighter though:\n\n1. **Floor-wide blockers first**\n   - core switch\n   - uplink/fiber\n   - APs covering the main floor\n   - DHCP/auth if they’re taking out everyone\n\n2. **Lane killers next**\n   - WMS\n   - label printers\n   - scanners\n   - anything that stops shipping/receiving from moving\n\n3. **High-volume stations**\n   - pack-out\n   - staging\n   - bulk receiving\n\n4. **One-off junk last**\n   - single desktop\n   - one handheld\n   - some random docked PC in an office corner\n\nYour 3-question test is good. I’d just phrase it like this:\n- **How many people are blocked?**\n- **Can they work around it or not?**\n- **Does this snowball fast?**\n\nIf it blocks multiple people and there’s no workaround, it’s already ahead of the line. Doesn’t matter if the issue looks “small.” In a warehouse, a dead printer or scanner can be more damaging than some office port nobody uses.\n\nSo yeah — **impact on flow beats severity on paper**. That’s the rule.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    }
+  ]
+}

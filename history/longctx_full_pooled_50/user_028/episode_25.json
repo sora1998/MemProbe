@@ -1,0 +1,62 @@
+{
+  "user_id": "user_028",
+  "task": "I’m thinking about whether to replace an older appliance now or keep nursing it along a while longer. Can you help me weigh the practical pros and cons so I don’t spend money twice?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.6,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — use this simple test:\n\n## Replace now if:\n- repairs are becoming frequent\n- one repair is close to the cost of replacement\n- it’s inefficient and driving up bills\n- parts are hard to get\n- it’s causing leaks, noise, or safety issues\n- you’d be upset if it failed in the next 6–12 months\n\n## Keep nursing it if:\n- it’s been reliable lately\n- the repair is cheap and simple\n- parts are easy to get\n- it’s not causing secondary damage\n- you can live with a surprise failure for a while\n\n## Ask these questions\n- How old is it?\n- What has already been repaired?\n- What will the next repair likely cost?\n- What happens if it dies at the worst time?\n- Does replacing it now prevent bigger damage or hassle?\n\n## Rule of thumb\nIf you’re paying for repeated repairs on an old unit, you’re often buying time, not value.\n\nIf you want, tell me the **appliance, age, and what’s wrong**, and I’ll help you decide **replace vs keep**.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Pretty generic. I already know the usual list — age, repair cost, parts, all that. The real question is where the cutoff is for the specific appliance and whether the next failure is likely to spill into something worse.\n\nGive me something more useful: a simple way to compare\n- current repair cost\n- likely remaining life\n- energy waste\n- risk of collateral damage\n- and the hassle factor if it quits at the wrong time\n\nIf you can, put it in a quick decision rule. Not a lecture.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Use this quick rule:\n\n## Replace now if\n- the **repair is more than about 30–50% of replacement**\n- the appliance is already **past the point where another major failure would be annoying or damaging**\n- it’s **wasting enough energy** that the monthly cost gap matters\n- a failure would cause **collateral damage** or a real inconvenience\n- you’d be **forced into a bad-time replacement** if it dies soon\n\n## Keep it if\n- the repair is **small and isolated**\n- the unit is **not leaking, overheating, or damaging anything**\n- energy waste is **minor**\n- parts are still easy to get\n- you can absorb a surprise failure without panic\n\n## Simple decision check\nAsk:\n1. **What does the repair cost today?**\n2. **What’s the likely next repair within a year?**\n3. **How much does it cost to keep running each month?**\n4. **If it fails, does it create damage or just inconvenience?**\n5. **Would I rather spend once now than twice later?**\n\n## Practical cutoff\nIf a repair is **big enough to sting** and the appliance is **old enough that the next failure is plausible**, replacement usually wins.\n\nIf you want, tell me the **appliance, age, and repair quote**, and I’ll give you a straight **replace / keep** call.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Closer. Still a bit mushy.\n\nThat 30–50% thing is too loose unless you anchor it to the appliance and the damage risk. I’d want it like this:\n\n- **If the repair is under ~20% of replacement** and the thing is otherwise stable, keep it.\n- **If it’s 30%+**, replacement starts making sense.\n- **If the failure can flood, burn, or wreck nearby stuff**, cut the cutoff lower. I’d treat **15–25%** as the line, maybe even less if the collateral damage is real.\n- **If it’s just inconvenience**, you can nurse it longer.\n- **If the monthly energy waste is material**, count that as part of the repair. Don’t separate it like it’s free.\n\nQuick rule I’d actually use:\n**Repair it if repair cost + 2 years of extra running cost + likely next repair is still clearly below replacement. Otherwise replace.**\n\nThat’s the useful part. The rest is just noise.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Use this rule:\n\n**Repair it if**  \n**repair cost + 2 years of extra running cost + likely next repair** is **clearly below replacement**.\n\n**Replace it if**  \nthe repair is **30%+ of replacement**, or **15–25%** when failure could **flood, burn, or damage nearby stuff**, or when the next failure would be a real hassle.\n\n## Quick cutoff\n- **Under ~20% of replacement** and stable: usually keep it\n- **Around 30%+**: replacement starts making sense\n- **Lower than that** if the downside is water, fire, or collateral damage\n- **Higher tolerance** if it’s just inconvenience\n\n## What to count\n- current repair quote\n- extra energy cost over the next 2 years\n- likely next repair\n- risk of damage if it fails\n\n## Simple decision\nIf the appliance is old, inefficient, and the next failure would be expensive or messy, don’t keep feeding it money.\n\nIf you want, tell me the **appliance, repair quote, replacement cost, and what failure would do**, and I’ll give you a straight **repair / replace** call.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Better. Still a little hand-wavy on the actual cutoff by appliance, though.\n\nWhat I’d want next is the **adjusted threshold by type** — because a water heater, fridge, furnace, washer, and dryer are not the same animal.\n\nSo: give me a short table or rule like this:\n- **furnace / boiler**: replace sooner if efficiency is poor or failure can leave you cold\n- **water heater**: lower threshold because of leak risk\n- **fridge / freezer**: factor food loss and whether a failure is sudden\n- **washer / dryer**: more tolerance if failure is just inconvenience\n\nAnd bake in one more thing: **if the unit is already one major repair into old age, knock the cutoff down again**. That’s the part people skip.\n\nBasically I want the decision rule to say when the 20% line is real, when it should be 15%, and when 30% is still fine. Not a lecture — just the cutoff logic.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 4,
+      "agent_response": "Yes — here’s the cutoff logic by type.\n\n| Appliance | Usual cutoff | Lower it when… | Higher tolerance when… |\n|---|---:|---|---|\n| **Water heater** | **15–25%** | any leak, rust, age, or water damage risk | almost never — failure is usually messy |\n| **Furnace / boiler** | **20–30%** | poor efficiency, repeated repairs, cold-weather failure risk | if repair is minor and heating backup exists |\n| **Fridge / freezer** | **20–30%** | food loss would be costly, compressor issues, old unit | if a failure would be inconvenient but manageable |\n| **Washer** | **20–30%** | leak risk, repeated breakdowns, bad bearings/pumps | if replacement timing is flexible |\n| **Dryer** | **20–30%** | heat/fire risk, vent issues, repeated failures | if it’s just noisy or slow |\n| **Dishwasher** | **20–30%** | leaks, floor damage, cabinet damage | if it’s mostly nuisance and not leaking |\n\n## Rule of thumb\n- **15–20%**: usually keep it unless there’s real damage risk\n- **20–30%**: gray zone; appliance type and failure risk decide it\n- **30%+**: replacement starts making sense fast\n\n## Knock the cutoff down if:\n- it’s already had **one major repair in old age**\n- the next failure could **flood, burn, or spoil food**\n- parts are getting hard to find\n- energy waste is noticeable\n- the unit is old enough that another repair is just buying time\n\n## Quick decision rule\nUse the lower end of the range when:\n- failure causes damage\n- the appliance is old\n- it’s already been repaired before\n\nUse the higher end when:\n- failure is mostly inconvenience\n- the unit is still stable\n- parts are easy to get\n- replacement can wait\n\nIf you want, I can turn this into a **one-line repair/replace rule for each appliance**.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "That’s the right shape. The ranges make sense, and the “knock it down after a major repair” part is the bit people usually skip. Good enough.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    }
+  ]
+}

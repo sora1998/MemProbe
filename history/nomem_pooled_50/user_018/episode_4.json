@@ -1,0 +1,36 @@
+{
+  "user_id": "user_018",
+  "task": "I’m trying to figure out why a campaign handoff keeps going sideways between the email draft, the promo details, and the final send. Can you help me lay out a quick way to spot where the breakdown is happening and what to check first so it doesn’t keep repeating?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 5.0,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — the fastest way is to treat it like a handoff audit and check the same few fields at each stage: **draft → promo brief/details → final send**.\n\n### Quick way to spot where it breaks\nMake a simple 3-column comparison:\n\n| Item | Email draft | Promo details | Final send |\n|---|---|---|---|\n| Offer / CTA |  |  |  |\n| Audience / segment |  |  |  |\n| Send date / time |  |  |  |\n| Subject line / preview |  |  |  |\n| Links / tracking |  |  |  |\n| Creative / copy version |  |  |  |\n| Approval status |  |  |  |\n\nThen look for:\n- **Mismatch** = info changed between stages\n- **Missing** = something never made it into the next step\n- **Late change** = final send updated after approval without re-checking\n- **Ambiguity** = wording that can be interpreted more than one way\n\n### What to check first\nStart with the highest-risk items:\n1. **Offer/CTA** — is the email promoting the same thing the promo brief says?\n2. **Audience/segment** — same recipients, exclusions, and geo rules?\n3. **Timing** — same send date/time, timezone, and embargo?\n4. **Links/tracking** — correct landing page, UTM, and destination?\n5. **Final copy version** — is the send using the approved draft, not an old edit?\n\n### How to tell where the breakdown is happening\n- If the **draft and promo details match** but the **final send is off**, the issue is usually in the **execution step**.\n- If the **promo details differ from the draft**, the issue is usually in the **briefing/approval step**.\n- If the **draft is already wrong**, the issue starts in **initial intake**.\n\n### Simple prevention loop\nBefore each handoff, require a 30-second check:\n- “Does this version match the approved offer?”\n- “Is the audience the same?”\n- “Are the links and timing final?”\n- “Has anything changed since approval?”\n\nIf you want, I can turn this into a **one-page handoff checklist** or a **RACI-style workflow** you can use with your team.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, this is the right framework. I’d want one more layer though — not just *what* to compare, but *where ownership changes*.\n\nUsually the break is one of three spots:\n- **intake** — the original brief was incomplete or vague\n- **revision/approval** — someone changed offer, timing, or audience and didn’t re-verify downstream\n- **build/send** — the final version didn’t match the approved copy or links\n\nWhat I’d check first, in order:\n1. **Source of truth** — what doc actually controls the campaign?\n2. **Last edited by / when** — if the handoff went sideways, there’s usually a late change buried there\n3. **Offer + CTA** — if these are off, everything else is basically noise\n4. **Audience + exclusions** — especially if different teams are pulling from different lists\n5. **Link destination + tracking** — old URL, wrong UTM, wrong landing page, all that\n6. **Approval trail** — did the final send get rechecked after the last update?\n\nThe thing I’d add is a simple rule: if any of those top 3 change after approval, the campaign gets bumped back into review. No exceptions. That’s the part that usually stops the repeat mess.\n\nIf you want, I can turn this into a really short **blame-free troubleshooting checklist** your team can use in Slack or in the campaign sheet.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 5.0
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Absolutely — here’s a short, blame-free version you can use to pinpoint **where ownership changed** and **where the breakdown started**.\n\n## Quick handoff troubleshooting check\n\n### 1) Find the source of truth\nAsk:\n- Which doc or system controls the campaign?\n- Is it the brief, the approved draft, the campaign sheet, or the ESP build?\n\nIf there isn’t one clear source of truth, that’s usually the first failure point.\n\n### 2) Check where ownership changed\nTrack the handoff points:\n- **Intake** → who created the original brief?\n- **Revision/approval** → who changed the offer, timing, or audience?\n- **Build/send** → who implemented the final version?\n\nThe issue is usually at the first point where:\n- someone updated something,\n- but didn’t tell the next owner,\n- or didn’t re-verify the downstream pieces.\n\n### 3) Compare the highest-risk items first\nIn order:\n1. **Offer + CTA**\n2. **Audience + exclusions**\n3. **Send timing**\n4. **Links + tracking**\n5. **Final approved copy vs. sent version**\n\nIf one of those changes after approval, the campaign should go back to review.\n\n---\n\n## Fast diagnosis by failure point\n\n### If the brief was incomplete or vague\nLikely issue: **intake**\n- unclear offer\n- missing audience rules\n- no owner for final approval\n- no source of truth\n\n### If something changed after approval\nLikely issue: **revision/approval**\n- late offer change\n- timing shift\n- audience update\n- no downstream re-check\n\n### If the approved version was correct but the send was wrong\nLikely issue: **build/send**\n- wrong email version\n- old link or UTM\n- incorrect segment loaded\n- final QA missed\n\n---\n\n## Simple rule to stop repeats\nIf **offer, audience, or timing** changes after approval:\n- stop\n- update the source of truth\n- re-approve\n- re-check the build before send\n\n---\n\n## Slack-friendly checklist\nYou could paste this before send:\n\n**Campaign handoff check**\n- [ ] Source of truth confirmed\n- [ ] Offer + CTA match approved version\n- [ ] Audience + exclusions match approved version\n- [ ] Send time/date confirmed\n- [ ] Links + tracking verified\n- [ ] Final send rechecked after last edit\n- [ ] Any post-approval change sent back for review\n\nIf you want, I can turn this into a **super short 5-line version** or a **table with owner / checkpoint / failure signal**.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, this is solid. The owner-change layer is the part people usually skip, and that’s exactly where the mess starts.\n\nThe Slack checklist is usable as-is. Especially the post-approval change rule — that’s the one I’d actually enforce.\n\nIf anything, I’d maybe want the owner/checkpoint/failure-signal table next, just because that’s easier to drop into a campaign sheet. But the checklist itself works.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 5.0
+      },
+      "gt_correct": null
+    }
+  ]
+}

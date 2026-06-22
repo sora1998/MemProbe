@@ -1,0 +1,36 @@
+{
+  "user_id": "user_011",
+  "task": "I’m helping someone prep a short video for both online use and a local TV slot, and I want to make sure the delivery specs won’t bite us later. Can you help me sanity-check what usually needs to be different between those two versions and what I should flag before export?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.699999999999999,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — the main thing is to treat them as **two different delivery targets**, even if the cut is the same.\n\n## What usually differs\n\n### Online version\n- aspect ratio may be more flexible\n- codec is usually web-friendly\n- audio can usually stay stereo\n- no broadcast safe/title safe requirement unless requested\n- burned-in timecode usually not needed\n- file size and upload compatibility matter more\n\n### Local TV version\n- must match the station’s delivery spec exactly\n- frame rate, resolution, codec, and audio layout matter more\n- may need title safe / action safe\n- may need bars, tone, slate, or black leader\n- may need specific audio channel mapping\n- loudness requirements may apply\n- burned-in timecode may be required depending on the station\n\n## What to flag before export\n- frame rate\n- resolution\n- aspect ratio\n- codec/container\n- audio channels / stereo vs split tracks\n- loudness spec\n- title safe / action safe\n- timecode / slate requirements\n- whether the online and TV versions need different text, graphics, or legal copy\n\n## Practical rule\nIf the TV slot has a spec sheet, follow that first.  \nIf not, ask for it before exporting.\n\n## Simple sanity check\nBefore you export, confirm:\n1. one version is for web\n2. one version is for TV\n3. both match their own delivery specs\n4. nothing broadcast-specific is accidentally missing from the TV version\n\nIf you want, I can make you a **side-by-side online vs TV checklist** you can use before export.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, basically. Good starting point, but it’s a little too broad for TV delivery.\n\nWhat I’d flag before export:\n- exact station spec sheet first, if they have one\n- frame rate locked to the house spec\n- resolution and aspect ratio\n- codec/container, not just “web-friendly” vs “broadcast”\n- audio layout: stereo, dual mono, split tracks, whatever they want\n- loudness target, because that’s where people get burned\n- title/action safe if there’s any text lower-third stuff\n- slate / bars / tone / black, if required\n- legal copy and end card differences between web and TV\n- whether the web version needs a cleaner CTA or different runtime\n\nAnd one thing I’d add: don’t assume the same master can just be re-used with a different wrapper. Sometimes the online cut can be a little more forgiving, but the TV version needs to be built against the spec from the start. I’ve had a job where the picture was fine but the frame rate was off by a hair and it would’ve been a problem on playback. Annoying, easy to miss.\n\nIf you want, make it a real checklist format with two columns — web / TV — so it’s actually usable in the suite.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Absolutely — here’s a **side-by-side web / TV checklist** you can use in the suite.\n\n## Delivery sanity check: Web vs TV\n\n| Check | Web | TV |\n|---|---|---|\n| **Spec sheet** | Confirm platform requirements if any | **Use station spec sheet first** |\n| **Frame rate** | Match intended platform/delivery | **Lock to house spec exactly** |\n| **Resolution** | Platform-appropriate | Match station spec |\n| **Aspect ratio** | Platform-appropriate | Match station spec |\n| **Codec / container** | Web-friendly export | Match required broadcast format |\n| **Audio layout** | Usually stereo | Match required layout: stereo / dual mono / split tracks / etc. |\n| **Loudness** | Platform-appropriate | **Match loudness target exactly** |\n| **Title / action safe** | Usually not critical unless text is tight | **Check if any text / lower thirds are close to edges** |\n| **Bars / tone / slate / black** | Usually not needed | **Add if required by station** |\n| **Legal copy / end card** | Web CTA may be cleaner or different | TV legal may need different wording / layout |\n| **Runtime** | Can be slightly more flexible | **Must match slot / spec exactly** |\n| **Burned-in timecode** | Usually not needed | Add if required |\n| **Master reuse** | May be more forgiving | **Don’t assume the web master can just be repackaged for TV** |\n\n## Before export, flag these\n- exact station spec sheet, if available\n- frame rate\n- resolution\n- aspect ratio\n- codec / container\n- audio layout\n- loudness target\n- title/action safe\n- slate / bars / tone / black\n- legal copy differences\n- runtime differences\n- burned-in TC requirement\n\n## Practical rule\n- **Web**: optimize for platform compatibility and clean playback\n- **TV**: build to the spec, not around it\n\n## One thing to watch\nDon’t assume the same master can just be wrapped differently for both.  \nIf the TV version has a different frame rate, audio layout, or loudness target, it should be built against that spec from the start.\n\nIf you want, I can turn this into a **super-short pre-export checkbox list** you can paste into Notes or Notion.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s usable. Tight enough to actually keep in the suite, and the TV column is specific where it needs to be.\n\nThe only thing I’d maybe add is **delivery method** if it matters — file upload portal, email, Aspera, whatever — because that can affect wrapper/codec decisions too. And if the station is picky, **audio channel mapping** deserves its own line, not just a generic audio layout note. That’s the kind of thing that quietly burns time.\n\nBut overall, this is solid. Not too broad, not overcooked.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "user_id": "user_006",
+  "task": "I’m writing up a short handoff for a technical fix I’ve already completed, and I want it to be clear enough that someone else can verify the result or continue the work if needed. What details should I include so the steps, assumptions, and outcome are easy to follow without turning it into a long report?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.466666666666667,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Include only the pieces someone needs to **verify, reproduce, or continue** the work.\n\n## Handoff should cover\n- **What was fixed**\n  - issue, device/service, location\n\n- **What you changed**\n  - exact steps taken\n  - config or hardware changes\n  - any temporary workaround used\n\n- **Assumptions / dependencies**\n  - what had to be true for the fix to work\n  - anything still relying on another system or team\n\n- **Outcome**\n  - what result you got\n  - what is now working\n  - what is still open\n\n- **Verification**\n  - how you confirmed it\n  - logs, screenshots, counters, tests, timestamps\n\n- **Next steps**\n  - anything the next person should do\n  - what to watch for\n  - who owns follow-up\n\n## Good order\n1. Problem\n2. Change made\n3. Assumptions\n4. Result\n5. Proof\n6. Remaining work\n\n## Short example\n> Fixed intermittent packet loss on switch A port 24 by replacing the fiber transceiver and restoring the original VLAN assignment. This assumed the upstream path remained stable and that no other port changes were pending. After the change, link errors stopped and a 15-minute test showed no packet loss. Remaining follow-up is to monitor the port for recurrence and replace the matching spare from the same batch.\n\n## Keep it tight\n- exact device/port/service\n- exact change\n- exact proof\n- exact open item\n\nIf you want, I can turn this into a **5-line handoff template** you can paste and fill in.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Close, but still a little generic. I want a template that’s actually usable in the field — like 5 lines max, with placeholders I can fill fast. Also include the proof part in a way that doesn’t sound fluffy, because half these handoffs get read by people looking for blame, not context.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Use this 5-line handoff:\n\n1. **Issue:** `Fixed [issue] on [device/service] at [location].`\n2. **Change:** `Changed [exact action taken] at [time].`\n3. **Assumptions:** `This depended on [assumption/dependency].`\n4. **Result:** `Outcome was [measured result / what now works].`\n5. **Proof / follow-up:** `Verified with [log/counter/test/screenshot/timestamp]; remaining follow-up is [open item / owner].`\n\n## Example\n1. **Issue:** `Fixed intermittent packet loss on switch A port 24 at the warehouse rack.`\n2. **Change:** `Replaced the fiber transceiver and restored the original VLAN assignment at 14:20.`\n3. **Assumptions:** `This depended on the upstream path remaining stable and no other port changes being active.`\n4. **Result:** `Link errors stopped and traffic remained stable after the change.`\n5. **Proof / follow-up:** `Verified with interface counters and a 15-minute zero-loss test; remaining follow-up is to monitor for recurrence and replace the matching spare from the same batch.`\n\nIf you want, I can make it even more field-ready with **network-specific placeholders** like port, VLAN, route, tunnel, or firewall.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, better. Still a little too clean though. I want it even more field-ready — like something I can drop into a ticket without thinking.\n\nMake the placeholders more specific for network work: port, VLAN, IP, hostname, circuit, log source, test duration. And keep the proof line blunt. No “verified with” fluff if you can tighten it.\n\nBasically: 5 lines, ugly but usable.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Use this:\n\n1. **Issue:** `Fixed [issue] on [hostname/device] [port/interface] at [site/location].`\n2. **Change:** `Changed [exact action] on [port/interface/VLAN/IP/circuit] at [time].`\n3. **Assumptions:** `This depended on [upstream/downstream dependency], [routing/VLAN/peer], and no other changes in progress.`\n4. **Result:** `Current state: [link/route/tunnel/service] is [up/working/stable].`\n5. **Proof / follow-up:** `[log source/counter/test] shows [result] over [test duration]; remaining follow-up is [open item/owner].`\n\n### Example\n1. **Issue:** `Fixed intermittent packet loss on switch-core-1 Gi1/0/24 at warehouse rack 3.`\n2. **Change:** `Replaced the fiber transceiver on Gi1/0/24 and restored VLAN 40 at 14:20.`\n3. **Assumptions:** `This depended on the upstream circuit staying up, VLAN 40 remaining unchanged, and no other port changes in progress.`\n4. **Result:** `Current state: link and traffic are stable.`\n5. **Proof / follow-up:** `Interface counters and syslog show no new errors or flaps over 15 minutes; remaining follow-up is to monitor the spare from the same batch.`\n\nIf you want, I can make a version with **VPN / firewall / routing** placeholders too.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s usable. Tight enough to paste into a ticket without babysitting it.\n\nThe only thing I’d keep in mind is if the blame game is active, the proof line should name the source and the window hard — syslog, interface counters, ping test, whatever — so nobody can spin it later. But the template itself is fine.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    }
+  ]
+}

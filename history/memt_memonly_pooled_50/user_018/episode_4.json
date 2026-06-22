@@ -1,0 +1,36 @@
+{
+  "user_id": "user_018",
+  "task": "I’m trying to figure out why a campaign handoff keeps going sideways between the email draft, the promo details, and the final send. Can you help me lay out a quick way to spot where the breakdown is happening and what to check first so it doesn’t keep repeating?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.8,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — the fastest way is to treat it like a source-of-truth check, then trace where the mismatch starts.\n\n### Quick breakdown spot-check\nStart with these 3 items and compare them across **promo details, landing page, and email draft**:\n\n1. **Promo code exact text**\n2. **Start/end dates**\n3. **CTA destination / linked page**\n\nIf any one of those differs, that’s usually where the handoff broke.\n\n### What to check first\nUse this order:\n\n1. **Confirm promo details are final**\n   - Exact promo code\n   - Exact dates/times\n   - Offer rules / restrictions\n   - CTA destination\n   - UTM / redirect logic if relevant\n\n2. **Update the landing page**\n   - Make sure the page reflects the final promo details\n   - Check links, code placement, and timing\n\n3. **Update email segments**\n   - Verify every segment matches the same promo details\n   - Watch for old dates or old code text\n\n4. **Cross-check all 3**\n   - Promo details\n   - Landing page\n   - Email draft/segments  \n   All three should match before send\n\n### Where handoffs usually break\nMost often it’s one of these:\n- Someone updates the email but not the tracker\n- Dates get changed in one place only\n- Promo code text is finalized late and doesn’t get propagated\n- The landing page is updated, but email still points to old timing or offer\n- A “temporary” version gets sent instead of the final one\n\n### Simple rule to prevent repeats\n**No one changes dates in email without updating the tracker first.**  \nThat keeps the tracker as the source of truth and stops silent drift.\n\n### Fast diagnostic question\nIf something is off, ask:\n**“What was the last place the promo details were confirmed final?”**\n\nThat usually tells you whether the break happened at:\n- promo confirmation,\n- page update,\n- email update,\n- or final send review.\n\nIf you want, I can turn this into a tiny handoff checklist you can reuse every time.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, this is close. I’d tighten it into a simple **breakpoint check** so you can catch the exact handoff that drifted.\n\nWhat I’d check first:\n\n1. **Source doc / tracker**\n   - Is the promo actually final there?\n   - Exact code\n   - Dates/times\n   - Offer terms\n   - CTA link\n\n2. **Email draft**\n   - Does it match the tracker word-for-word on code, dates, and CTA?\n   - Any old version still sitting in the draft?\n\n3. **Landing page / final send assets**\n   - Same code, same timing, same destination\n   - Any redirect or UTM issue\n\n4. **Approval trail**\n   - Who last touched each piece?\n   - Did someone update one asset after the final review already happened?\n\nThe key thing is not just “do they match,” but **where did they stop matching**. That’s usually the real problem.\n\nA simple way to spot it fast:\n- If tracker is right but email is wrong → draft update issue\n- If email is right but landing page is wrong → web update issue\n- If both are right but send still went out wrong → final QA / version control issue\n\nTo keep it from repeating, I’d use one rule:\n**No send approval unless tracker, email, and landing page all match in one final review.**\n\nIf you want, I can turn this into a 5-line checklist you can drop into your workflow.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — here’s a tighter version you can use as a quick **breakpoint check**:\n\n### Breakpoint check\nStart with the **tracker/source doc** and work forward:\n\n1. **Tracker**\n   - Is the promo final here?\n   - Check exact code, dates/times, offer terms, CTA link\n\n2. **Email draft**\n   - Does it match the tracker exactly?\n   - Look for old code, old dates, or an outdated link\n\n3. **Landing page / final assets**\n   - Same code, timing, and destination?\n   - Check redirects and UTMs if they matter\n\n4. **Approval trail**\n   - Who last changed each piece?\n   - Did anything get updated after final review?\n\n### Fast way to find the break\n- **Tracker right, email wrong** → draft update issue\n- **Email right, page wrong** → web/assets issue\n- **Both right, send wrong** → QA or version control issue\n\n### Rule to prevent repeats\n**No send approval unless tracker, email, and landing page all match in one final review.**\n\nIf you want, I can turn this into a super short checklist format you can paste into Slack or your tracker.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, this works. Clean enough to use.\n\nBreakpoint check\n1. Tracker/source doc — final promo, code, dates, terms, CTA\n2. Email draft — exact match to tracker, no old version\n3. Landing page/final assets — same code, timing, destination, redirects/UTMs\n4. Approval trail — who changed what, and when\n\nQuick read:\n- tracker right / email wrong = draft issue\n- email right / page wrong = web/assets issue\n- both right / send wrong = QA or version control issue\n\nRule holds: no send approval unless tracker, email, and landing page all match in one final review.\n\nThat’s the kind of thing that actually catches the drift instead of just describing it.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    }
+  ]
+}

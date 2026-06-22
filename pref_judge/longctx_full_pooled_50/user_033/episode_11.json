@@ -1,0 +1,269 @@
+{
+  "user_id": "user_033",
+  "task": "I’m looking at a small shift in assay readings after a routine calibration change, and I want to make sure I’m not overreacting. Can you help me think through whether the size and direction of the change sound like normal variation, a calibration effect, or something that needs a closer look?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "formality_preference",
+      "short": "Prefers professional, no-nonsense interaction",
+      "explanation": "She would likely respond best to a controlled, businesslike style rather than friendliness for its own sake. Given her guarded and precision-focused persona, overly casual phrasing would probably feel sloppy or intrusive."
+    },
+    {
+      "idx": 2,
+      "dimension": "verbosity_preference",
+      "short": "Wants concise answers, not rambling",
+      "explanation": "She seems to value efficiency and would likely dislike long-winded explanations that repeat themselves. She probably wants enough information to act on, with no decorative padding."
+    },
+    {
+      "idx": 3,
+      "dimension": "directness_preference",
+      "short": "Prefers blunt, unsoftened answers",
+      "explanation": "Her skeptical, control-oriented style suggests she would rather hear the point plainly than receive hedged reassurance. She is likely to trust answers more when they are explicit about risks, limits, and conclusions."
+    },
+    {
+      "idx": 4,
+      "dimension": "format_preference",
+      "short": "Likes structured lists and checklists",
+      "explanation": "She appears to prefer information that is organized and easy to verify. A clean format with steps, bullets, or checklists would fit her habit of tracking details and would reduce ambiguity."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Accepts firm correction when needed",
+      "explanation": "She likely does not want the assistant to simply echo her assumptions if something is wrong or risky. A direct challenge, especially when backed by evidence, would probably be more useful to her than polite agreement."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes. The key is to compare the shift to **three things**:\n\n1. **Expected method variation**\n2. **Direction of the change**\n3. **Whether the shift is isolated or systematic**\n\n## First question: how big is the shift?\nAsk:\n- Is it within the assay’s normal imprecision?\n- Is it within the method’s expected calibration-to-calibration variation?\n- Is it small enough that controls and QC still sit comfortably in range?\n\nIf yes, it may just be normal variation.\n\n## Second question: does the direction make sense?\nLook for:\n- a uniform upward or downward shift across samples\n- a change that matches the calibration adjustment\n- a pattern that affects the whole run, not just one sample\n\nA calibration effect usually looks like a **consistent offset**, not a random scatter.\n\n## Third question: is it systematic?\nCheck whether:\n- multiple samples moved the same way\n- nearest QC moved the same way\n- standards or back-calculated standards shifted\n- the curve fit changed in a way that explains the result\n\nIf the change is only on one sample, that points away from calibration and toward sample-specific or analyte-specific trouble.\n\n## What sounds like normal variation\n- small shift\n- no clear pattern\n- QC still stable\n- repeatability still good\n- no matching change in standards or controls\n\n## What sounds like a calibration effect\n- all results move in the same direction\n- QC shifts with them\n- curve or standards show a corresponding change\n- repeatability is still decent, but the whole run is offset\n\n## What needs a closer look\n- shift is larger than expected method variation\n- direction is consistent but not explained by the calibration change\n- QC is borderline or moving\n- only one analyte changes while others stay stable\n- the shift appears right after calibration and persists\n\n## Practical rule\nIf the change is:\n- **small, stable, and matched by QC/standards** → likely normal calibration variation\n- **consistent across the run** → likely calibration effect\n- **larger than expected or not explained by QC/standards** → investigate further\n\nIf you want, I can turn this into a **decision tree** with:\n- normal variation\n- calibration effect\n- investigate further\n\nas the three endpoints.",
+      "score": 4.4,
+      "summary": "mean=4.40 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:3, 5:2}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Uses a controlled, businesslike tone: \"The key is to compare the shift to three things\" and avoids casual chatter."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Fairly concise and action-oriented, with compact sections and bullets; not rambling, though it does include several repeated checklists."
+        },
+        {
+          "idx": 3,
+          "score": 4,
+          "reason": "Directly states conclusions like \"likely normal variation,\" \"likely calibration effect,\" and \"investigate further\" without much hedging."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong structured format with numbered questions, bullet lists, and a clear \"Practical rule\" summary."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Provides firm distinctions and does not just validate the user's concern; it explicitly says when to \"investigate further\" and when a calibration effect is likely."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — here’s a tighter way to judge it **by numbers and by case**, without turning it into a vague pattern discussion.\n\n## 1) Start with the size of the shift\nCompare the new result to the **prior calibration / historical mean**:\n\n- **< 5% shift**: usually normal calibration noise, if QC is stable\n- **5–10% shift**: borderline; check QC and standards before calling it acceptable\n- **> 10% shift**: treat as a real calibration effect or deviation until proven otherwise\n\nThat’s a practical screen, not a universal law. If your method is tighter or looser, use its validated limits instead.\n\n---\n\n## 2) Use QC movement as the second gate\nLook at the nearest QC and ask how much it moved relative to its own historical mean:\n\n- **QC within its usual range and no clear directional move** → shift may be acceptable\n- **QC moved in the same direction but still within limits** → likely calibration effect, but document it\n- **QC moved outside its expected band or toward a limit** → investigate\n- **QC failed** → stop and recheck, don’t call it normal variation\n\nA useful rule:\n- if the QC shift is about the same direction and scale as the assay shift, that supports calibration noise/effect\n- if the QC is flat while the assay moved, that points away from a broad calibration change\n\n---\n\n## 3) Standards and curve fit are the strongest calibration check\nIf the standards/back-calculated standards shifted, that matters more than a single sample result.\n\n### Treat as likely calibration effect if:\n- standards moved together\n- curve fit changed in a way that explains the offset\n- back-calculated standards are still within acceptance but worse than usual\n- repeatability is still decent\n\n### Treat as investigate/deviation if:\n- standards are ugly\n- back-calculated standards are drifting out of tolerance\n- the curve fit changed but doesn’t match the observed shift\n- the shift is too large for the calibration change you made\n\n---\n\n## 4) Case-based decision rule\n\n### Case A: **Assay result only shifted**\n- QC stable\n- standards stable\n- blank stable\n\n**Interpretation:** likely sample-specific or analyte-specific, not a broad calibration issue.  \n**Action:** recheck sample, matrix, or analyte path.\n\n---\n\n### Case B: **QC also shifted**\n- same direction as the assay\n- still within limits\n\n**Interpretation:** likely calibration effect or mild systematic offset.  \n**Action:** document, compare to historical calibration behavior, and decide whether the shift is within validated acceptance.\n\nIf QC moved too far:\n- **deviation / recheck**\n\n---\n\n### Case C: **Standards shifted**\n- especially if back-calculated standards are worse than usual\n\n**Interpretation:** calibration problem until proven otherwise.  \n**Action:** do not treat as normal variation. Recheck calibration, curve fit, and acceptance criteria.\n\n---\n\n### Case D: **Only one analyte moved**\n- other analytes are clean\n- blank and QC are fine\n\n**Interpretation:** likely analyte-specific issue, not broad calibration drift.  \n**Action:** check analyte stability, detector response, or method-specific bias.\n\n---\n\n## 5) Simple hard rule\n- **< 5% and QC/standards are clean** → usually acceptable variation\n- **5–10%** → verify against QC/standards before accepting\n- **> 10%** or any QC/standard concern → investigate further\n- **Any failed QC or ugly standards** → not normal variation\n\n---\n\n## 6) What not to do\n- Don’t call a shift “normal” just because it’s small if the QC/standards moved with it.\n- Don’t blame calibration if only one analyte changed and everything else is clean.\n- Don’t ignore a uniform shift just because repeatability looks good.\n\nIf you want, I can turn this into a **one-page threshold table** with:\n- result shift\n- QC shift\n- standards/curve status\n- likely call\n- next action",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Professional, businesslike tone: \"by numbers and by case,\" \"practical screen,\" \"hard rule.\" No casual friendliness or fluff."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly concise and action-oriented, with compact bullets and thresholds. Slightly long, but avoids rambling and decorative padding."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Blunt and explicit: \"treat as a real calibration effect or deviation,\" \"do not call it normal variation,\" \"not normal variation.\" Clear conclusions and limits."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong structure throughout: numbered sections, bullet lists, case breakdowns, and a simple hard rule. Very checklist-like."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Provides firm correction and pushback: \"Don’t call a shift 'normal' just because it’s small,\" \"Don’t blame calibration if only one analyte changed.\" It challenges assumptions directly."
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yes — here’s the practical version, tied to **method precision / historical drift** instead of arbitrary percentages.\n\n## Use this rule first\nA shift is only “small” if it is **within the method’s normal calibration-to-calibration variation**.\n\nSo compare against:\n- **historical calibration drift** for that assay\n- **QC imprecision / acceptance band**\n- **standard/back-calculated standard behavior**\n\nIf you don’t have those numbers, don’t invent a threshold — call it **unqualified** and recheck.\n\n---\n\n## Decision table\n\n| Case | Result shift vs historical mean / prior calibration | QC shift vs its mean / limits | Standards / back-calculated standards | Call | Next action |\n|---|---|---|---|---|---|\n| **Run-wide shift, all analytes move same way** | Within historical calibration drift | QC stays within its usual band | Standards clean, curve fit acceptable | **Accept** | Document only |\n| **Run-wide shift, all analytes move same way** | Matches known calibration-to-calibration variation but is bigger than usual | QC moves same direction but still within limits | Standards acceptable but not as clean as usual | **Document only / watch** | Note as calibration effect; compare to prior runs |\n| **Run-wide shift, all analytes move same way** | Larger than historical drift | QC moves with it and is borderline | Standards are borderline or trending worse | **Recheck** | Repeat calibration / rerun QC |\n| **Run-wide shift, all analytes move same way** | Larger than historical drift | QC fails or approaches fail | Standards ugly or fail | **Open deviation** | Do not accept as normal variation |\n| **Only one analyte shifts** | Shifted relative to its own history | QC fine | Standards fine | **Investigate analyte-specific issue** | Check sample, matrix, detector path, analyte stability |\n| **Only one analyte shifts** | Shifted relative to its own history | QC also shifts only in that analyte’s channel/path | Standards for that analyte are borderline/ugly | **Recheck** | Inspect analyte-specific calibration / detector response |\n| **Only one analyte shifts** | Shifted relative to its own history | QC fine | Standards fine | **Do not call calibration drift** | Treat as sample-specific or analyte-specific until proven otherwise |\n\n---\n\n## How to read the table\n\n### Accept\nUse only when:\n- the shift is within the assay’s normal calibration drift\n- QC is stable\n- standards are clean\n- the change is run-wide and not suspiciously selective\n\n### Document only\nUse when:\n- the shift is real but still within expected calibration behavior\n- QC moved with it, but not enough to threaten validity\n- standards are still acceptable, just not pristine\n\n### Recheck\nUse when:\n- the shift is bigger than the method’s normal drift\n- QC is borderline\n- standards/back-calculated standards are getting ugly\n- the result may be real, but you don’t trust it yet\n\n### Open deviation\nUse when:\n- QC fails\n- standards fail\n- the shift is outside historical calibration behavior\n- the run is no longer defensible without exception handling\n\n---\n\n## Clean split: run-wide vs one-analyte\n\n### Run-wide shift\nThink **calibration / system effect** if:\n- multiple analytes move the same way\n- QC follows the same direction\n- standards show the same offset pattern\n\n### One-analyte shift\nThink **sample-specific or analyte-specific** if:\n- only one analyte moves\n- the rest of the panel is clean\n- blank and QC are fine\n- standards for the run are fine\n\nDo **not** call that broad calibration drift unless the affected analyte’s own standards or QC also support it.\n\n---\n\n## Bench rule\nIf you can’t answer these three cleanly, don’t force a call:\n1. **Did the shift match historical calibration drift?**\n2. **Did QC move the same way?**\n3. **Did standards/back-calculated standards stay clean?**\n\nIf the answer is unclear, **recheck**.\n\nIf you want, I can turn this into a **one-page bench card** with just the cases and the action column.",
+      "score": 5.0,
+      "summary": "mean=5.00 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:0, 5:5}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Professional and controlled throughout: \"here’s the practical version,\" \"Use this rule first,\" \"Bench rule.\" No casual friendliness or padding."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Concise and efficient relative to the task: it gives a direct framework, a decision table, and short action rules without rambling."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Blunt and explicit: \"don’t invent a threshold,\" \"Do not call that broad calibration drift,\" \"Open deviation,\" \"If the answer is unclear, recheck.\" It states limits and conclusions plainly."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong structured formatting with bullets, a decision table, section headers, and a final bench rule checklist. Very easy to verify."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Provides firm correction and pushback: \"don’t invent a threshold,\" \"Do not call that broad calibration drift unless...\" and clear escalation criteria instead of echoing assumptions."
+        }
+      ]
+    },
+    {
+      "turn": 4,
+      "agent_response": "| Scenario | Numerical trigger | QC status | Standards status | Call | Action |\n|---|---|---|---|---|---|\n| **Run-wide shift** | Result shift is **≤ historical calibration drift** and **≤ 1× long-term SD** (or within method CV) | QC within **±1 SD** of its mean | Pass | **Accept** | Document only |\n| **Run-wide shift** | Result shift is **> historical drift** but **≤ 2× long-term SD** | QC within **±2 SD** but outside **±1 SD** | Pass or warning only | **Document / watch** | Note calibration effect; compare to prior runs |\n| **Run-wide shift** | Result shift is **> 2× long-term SD** or clearly outside historical calibration behavior | QC at **alert limit** or trending toward it | Warning | **Recheck** | Repeat calibration and nearest QC |\n| **Run-wide shift** | Result shift is large enough to exceed normal method behavior | QC at **action limit** or fails | Warning or fail | **Open deviation** | Do not accept; investigate before release |\n| **One analyte only** | One analyte shifts **> 1× its own long-term SD** while others stay within normal range | QC clean for the run | Standards pass | **Investigate analyte-specific issue** | Check sample, matrix, detector path, analyte stability |\n| **One analyte only** | One analyte shifts **> 2× its own long-term SD** or repeats on rerun | QC still clean or only that channel is off | Standards pass or warning only | **Recheck** | Repeat sample / fresh aliquot; inspect analyte-specific calibration |\n| **One analyte only** | One analyte shifts and the analyte-specific QC/standards also move | QC in that channel at **alert/action** | Standards warning/fail | **Open deviation** | Treat as analyte-path problem, not broad run drift |\n| **Any scenario** | Result shift is within historical drift but QC is not | QC outside **±1 SD** or trending | Warning | **Recheck** | Don’t call it normal until QC is explained |\n| **Any scenario** | Result shift may be small, but standards/back-calculated standards are off | QC may still look okay | **Warning/fail** | **Recheck or deviation** | Standards override a “looks fine” result |\n\nIf you want, I can tighten this one step further into a **pure yes/no bench card** with explicit pass/fail limits filled in as blanks for your method.",
+      "score": 4.4,
+      "summary": "mean=4.40 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:3, 5:2}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Professional and businesslike overall: the response is a structured decision table with terms like \"Open deviation\" and \"Do not accept.\" It is not chatty or casual."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Concise and action-oriented. It gives a compact table and ends with an optional offer to make it even tighter: \"a pure yes/no bench card.\""
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Blunt and explicit. It states clear conclusions such as \"Accept,\" \"Recheck,\" \"Open deviation,\" and \"Do not accept; investigate before release\" without hedging."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strongly structured as a checklist-like table with columns for \"Numerical trigger,\" \"QC status,\" \"Standards status,\" \"Call,\" and \"Action.\" This is highly organized and easy to verify."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Shows willingness to correct and challenge assumptions: \"Don’t call it normal until QC is explained\" and \"Standards override a 'looks fine' result.\" It does not merely agree with the user's framing."
+        }
+      ]
+    },
+    {
+      "turn": 5,
+      "agent_response": "| Scenario | Numerical trigger | QC status | Standards status | Call | Action |\n|---|---|---|---|---|---|\n| **Run-wide shift** | Result shift **≤ [method mean shift across last N calibrations]** and **≤ [1× LTCV]** | **Pass** | **Pass** | **Accept** | Document only |\n| **Run-wide shift** | Result shift **> [method mean shift across last N calibrations]** but **≤ [2× LTCV]** | **Warning** | **Pass** | **Document / watch** | Note calibration effect; compare to prior runs |\n| **Run-wide shift** | Result shift **> [2× LTCV]** or clearly outside historical calibration behavior | **Alert** | **Warning** | **Recheck** | Repeat calibration and nearest QC |\n| **Run-wide shift** | Result shift exceeds normal method behavior | **Fail** | **Fail** | **Open deviation** | Do not accept; investigate before release |\n| **One analyte only** | One analyte shifts **> [1× analyte LTCV]** while other analytes stay normal | **Pass** | **Pass** | **Investigate analyte-specific issue** | Check sample, matrix, detector path, analyte stability |\n| **One analyte only** | One analyte shifts **> [2× analyte LTCV]** or repeats on rerun | **Pass** or **Warning** only in that channel | **Pass** or **Warning** | **Recheck** | Repeat sample / fresh aliquot; inspect analyte-specific calibration |\n| **One analyte only** | One analyte shifts and that analyte’s QC/standards also drift | **Alert** or **Fail** | **Warning** or **Fail** | **Open deviation** | Treat as analyte-path problem, not broad run drift |\n| **Any scenario** | Result shift looks small, but QC is not in pass state | **Warning / Alert / Fail** | — | **Recheck** | Don’t call it normal until QC is explained |\n| **Any scenario** | Result shift may be acceptable, but standards/back-calculated standards are not in pass state | — | **Warning / Fail** | **Recheck or deviation** | Standards override a “looks fine” result |\n\nIf you want, I can turn the placeholders into a **fillable bench card** with blank fields for:\n- **[method mean shift across last N calibrations]**\n- **[LTCV]**\n- **[QC alert limit]**\n- **[QC action limit]**",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Professional and controlled overall: uses a formal decision table and avoids casual language. Slightly softened by “If you want,” but mostly businesslike."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Concise and action-oriented. It gives a compact table with clear triggers and avoids rambling, though it includes several rows and a follow-up offer."
+        },
+        {
+          "idx": 3,
+          "score": 4,
+          "reason": "Fairly blunt and explicit about thresholds and actions: “Do not accept; investigate before release,” “Open deviation,” and “Don’t call it normal until QC is explained.” Not overly hedged."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strongly structured as a checklist/table with clear columns, thresholds, and actions. This directly matches the preference for organized, easy-to-verify information."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Includes firm correction and escalation logic, e.g. “Standards override a ‘looks fine’ result” and “Don’t call it normal until QC is explained.” It does not just echo the user’s framing."
+        }
+      ]
+    },
+    {
+      "turn": 6,
+      "agent_response": "| Scenario | Numerical trigger | QC status | Standards status | Call | Action |\n|---|---|---|---|---|---|\n| **Run-wide shift** | Result shift ≤ **mean absolute shift over last N valid calibrations** and ≤ **1 × LTCV** | **Pass** | **Pass** | **Accept** | Document only |\n| **Run-wide shift** | Result shift > **mean absolute shift over last N valid calibrations** but ≤ **2 × LTCV** | **Warning** | **Pass** | **Document / watch** | Note calibration effect; compare to prior runs |\n| **Run-wide shift** | Result shift > **2 × LTCV** or outside historical calibration behavior | **Alert** | **Warning** | **Recheck** | Repeat calibration and nearest QC |\n| **Run-wide shift** | Result shift exceeds normal method behavior | **Fail** | **Fail** | **Open deviation** | Do not accept; investigate before release |\n| **One analyte only** | One analyte shifts > **1 × analyte LTCV** while other analytes stay normal | **Pass** for that analyte’s QC | **Pass** for that analyte’s standards | **Investigate analyte-specific issue** | Check sample, matrix, detector path, analyte stability |\n| **One analyte only** | One analyte shifts > **2 × analyte LTCV** or repeats on rerun | **Warning** or **Alert** in that analyte’s QC | **Warning** or **Alert** in that analyte’s standards | **Recheck** | Repeat sample / fresh aliquot; inspect analyte-specific calibration |\n| **One analyte only** | One analyte shifts and that analyte’s QC/standards also drift | **Alert** or **Fail** | **Warning** or **Fail** | **Open deviation** | Treat as analyte-path problem, not broad run drift |\n| **Any scenario** | Result shift looks small, but QC is not in pass state | **Warning / Alert / Fail** | — | **Recheck** | Don’t call it normal until QC is explained |\n| **Any scenario** | Result shift may be acceptable, but standards/back-calculated standards are not in pass state | — | **Warning / Fail** | **Recheck or deviation** | Standards override a “looks fine” result |\n\n## Rule for setting the cut points\n- **mean absolute shift over last N valid calibrations** = the average absolute difference between each valid calibration result and the prior accepted calibration result, using the last **N** valid calibrations\n- **LTCV** = long-term coefficient of variation from historical QC or method validation\n- **QC alert limit** = lab-defined alert threshold\n- **QC action limit** = lab-defined action threshold\n\n## How to use it\n- **Pass + pass + pass** → accept\n- **Warning anywhere** → recheck or document/watch depending on the row\n- **Alert or fail in QC/standards** → recheck or open deviation\n- **One analyte only, with its own QC/standards still passing** → investigate, do not call deviation yet\n- **One analyte only, with its own QC/standards warning/alert/fail** → recheck or deviation based on that bucket\n\nIf you want, I can turn this into a **single-page bench card** with the rule definitions under the table.",
+      "score": 4.0,
+      "summary": "mean=4.00 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:1, 4:3, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Professional and businesslike overall: it uses a structured decision table and avoids casual language. Slightly softened by the closing offer, but still controlled and no-nonsense."
+        },
+        {
+          "idx": 2,
+          "score": 3,
+          "reason": "Fairly concise in structure, but the response is still fairly long and detailed for the question. It gives actionable thresholds, yet there is some extra explanatory material and repetition."
+        },
+        {
+          "idx": 3,
+          "score": 4,
+          "reason": "Direct and explicit about thresholds and actions, e.g. \"Recheck,\" \"Open deviation,\" \"Do not accept; investigate before release.\" It does not hedge much, though it is more procedural than blunt."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strongly matches this preference: it is organized as a clean table with clear rows, columns, and bullet rules. The format is highly structured and easy to verify."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "It does provide firm correction and clear escalation rules, such as \"Standards override a 'looks fine' result\" and \"Do not call it normal until QC is explained.\" It challenges assumptions directly, though not aggressively."
+        }
+      ]
+    },
+    {
+      "turn": 7,
+      "agent_response": "| Scenario | Numerical trigger | QC status | Standards status | Call | Action |\n|---|---|---|---|---|---|\n| **Run-wide shift** | Result shift ≤ **mean absolute shift over last N valid calibrations** and ≤ **1 × LTCV** | **Pass** | **Pass** | **Accept** | Document only |\n| **Run-wide shift** | Result shift > **mean absolute shift over last N valid calibrations** but ≤ **2 × LTCV** | **Warning** | **Pass** | **Document / watch** | Note calibration effect; compare to prior runs |\n| **Run-wide shift** | Result shift > **2 × LTCV** or outside historical calibration behavior | **Alert** | **Warning** | **Recheck** | Repeat calibration and nearest QC |\n| **Run-wide shift** | Result shift exceeds normal method behavior | **Fail** | **Fail** | **Open deviation** | Do not accept; investigate before release |\n| **One analyte only** | One analyte shifts > **1 × analyte LTCV** while other analytes stay normal | **Pass** for that analyte’s QC | **Pass** for that analyte’s standards | **Investigate only** | Check sample, matrix, detector path, analyte stability |\n| **One analyte only** | One analyte shifts and that analyte’s QC/standards are **Warning / Alert / Fail** | **Warning / Alert / Fail** in that analyte’s QC | **Warning / Alert / Fail** in that analyte’s standards | **Recheck or deviation** | Use the bucket: Warning → recheck; Alert/Fail → deviation |\n| **Any scenario** | Result shift looks small, but QC is not in **Pass** state | **Warning / Alert / Fail** | — | **Recheck** | Don’t call it normal until QC is explained |\n| **Any scenario** | Result shift may be acceptable, but standards/back-calculated standards are not in **Pass** state | — | **Warning / Fail** | **Recheck or deviation** | Standards override a “looks fine” result |\n\n### Rule definitions\n- **mean absolute shift over last N valid calibrations** = average absolute difference between each valid calibration result and the prior accepted calibration result, using the last **N** valid calibrations\n- **LTCV** = long-term coefficient of variation from historical QC or method validation\n- **QC alert limit** = lab-defined alert threshold\n- **QC action limit** = lab-defined action threshold\n- **Pass / Warning / Alert / Fail** = the lab’s own QC scheme, applied as written in SOP/method acceptance criteria\n\n### Call logic\n- **Pass + Pass + Pass** → **Accept**\n- **Warning anywhere** → **Investigate / recheck**\n- **Alert or Fail in QC or Standards** → **Recheck or deviation**\n- **One analyte only, with its own QC/standards still Pass** → **Investigate only**\n- **One analyte only, with its own QC/standards Warning / Alert / Fail** → **Recheck or deviation** based on that bucket",
+      "score": 5.0,
+      "summary": "mean=5.00 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:0, 5:5}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Professional and businesslike: the response is a structured decision table with no casual phrasing."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Concise and efficient: it gives a compact rule set and avoids rambling or decorative padding."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Blunt and explicit: it states clear calls like \"Accept,\" \"Recheck,\" and \"Open deviation\" without hedging."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong structure: the answer is organized as a table plus bullet-point rule definitions and call logic."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Includes firm correction and escalation logic, e.g. \"Don’t call it normal until QC is explained\" and \"Standards override a 'looks fine' result.\""
+        }
+      ]
+    }
+  ]
+}

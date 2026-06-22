@@ -1,0 +1,49 @@
+{
+  "user_id": "user_027",
+  "task": "I’ve got a translation job that’s getting messy: some wording seems to come from the source text itself, but a few parts may also be off because the file was stitched together from different versions. Can you help me sort out a practical way to identify what needs checking first and what I should fix before I send it back?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.666666666666667,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — a practical way to handle it is to separate **source problems** from **translation problems** before you start fixing anything.\n\nA good order would be:\n\n1. **Identify the source layer first**\n   - Mark anything that looks inconsistent across versions.\n   - Note where the wording may have been stitched together from different drafts.\n   - Flag uncertain spots instead of trying to normalize them immediately.\n\n2. **Check the high-risk items first**\n   - names\n   - dates\n   - numbers\n   - deadlines\n   - defined terms\n   - instructions or obligations\n\n3. **Compare against the source versions**\n   - If a phrase appears in one version but not another, mark it for review.\n   - If the wording changes meaning, tone, or legal force, don’t assume it’s interchangeable.\n\n4. **Separate confirmed text from guesses**\n   - Use a consistent mark for:\n     - confirmed\n     - uncertain\n     - needs review\n     - likely source inconsistency\n\n5. **Fix only what you can support**\n   - If the source is clearly inconsistent, choose the safest wording and note the issue.\n   - If the source itself is unclear, flag it rather than silently smoothing it over.\n\n6. **Do a final pass for consistency**\n   - Once the source issues are tagged, clean up terminology, tense, and formatting in the translation.\n   - Make sure the final version doesn’t hide any unresolved source problems.\n\nA simple working rule: **don’t repair the translation until you know whether the problem is in the source or in the translation.**\n\nIf you want, I can turn that into a short checklist or a table you can use while reviewing the file.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s the right track. I’d want it a little more operational, though — something I can actually use on a messy file without overthinking it.\n\nGive me a simple review sequence, like:\n- what to mark first on the source side\n- what to compare against other versions\n- when to leave a note instead of fixing it\n- and what’s safe to clean up immediately\n\nA checklist or table would be better than a general outline. I’m fine with practical, not fancy.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — here’s a practical version you can use on a messy file.\n\n## Review sequence\n\n### 1) Mark first on the source side\nStart with anything that can change meaning if it’s wrong:\n\n- names\n- dates\n- numbers\n- deadlines\n- amounts\n- defined terms\n- instructions\n- obligations\n- warnings or exceptions\n\nAlso mark:\n- unclear scan spots\n- stitched-together sections\n- margin notes\n- crossed-out text\n- repeated terms that don’t match\n\n### 2) Compare against other versions\nCheck these against each version you have:\n\n- exact wording of key terms\n- sentence order\n- missing or added lines\n- changed numbers or dates\n- any phrase that appears in one version but not another\n\nIf a difference affects meaning, flag it.\n\n### 3) Leave a note instead of fixing it when:\n- the source is unclear\n- you can’t tell whether a margin note is final\n- two versions conflict and you can’t confirm which is correct\n- a term may be inconsistent but could also be intentional\n- the change would affect legal or procedural meaning\n\nUse a note like:\n- **unclear in source**\n- **check against other version**\n- **margin note not confirmed**\n- **possible term inconsistency**\n\n### 4) Safe to clean up immediately\nThese are usually safe if they don’t change meaning:\n\n- punctuation\n- spacing\n- obvious typos in the translation\n- formatting\n- repeated words caused by scanning errors, if clearly accidental\n- consistent capitalization\n- standardizing term usage only when the source meaning is already clear\n\n## Simple working table\n\n| Item | What to look for | Action |\n|---|---|---|\n| Names | Spelling, consistency across versions | Verify first |\n| Dates / numbers | Mismatches, missing digits | Flag immediately |\n| Defined terms | Different wording for same term | Check glossary / source |\n| Instructions | Added or softened wording | Compare carefully |\n| Margin notes | Correction or just annotation | Leave note if unclear |\n| Illegible text | Missing words, uncertain reading | Mark as unclear |\n| Translation cleanup | Typos, punctuation, formatting | Fix if meaning stays the same |\n\n## Quick rule\n- **If it changes meaning, flag it.**\n- **If it only changes presentation, clean it up.**\n- **If you can’t tell, leave a note.**\n\nIf you want, I can turn this into a one-page checklist you can copy straight into your review file.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah. Better. But I’d want the actual review order tighter, like something I can run top to bottom without circling around the same spot twice.\n\nMaybe give it to me as a straight checklist with 3 buckets:\n\n1. **Source triage** — what gets marked first, no debate.\n2. **Cross-check items** — what I compare across versions and what counts as a mismatch.\n3. **Immediate cleanup** — what I can fix on sight because it won’t change meaning.\n\nAnd maybe add one line for each bucket on when to stop and leave a note. That part matters. I don’t want a vague “flag it” rule if it’s something I can actually resolve from the file.\n\nA table is probably still best. Short, not dressed up.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 5.0
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Absolutely — here’s a tighter version in the format you want.\n\n## Review order\n\n| Bucket | What to do first | What counts as a problem | When to stop and leave a note |\n|---|---|---|---|\n| **1. Source triage** | Mark names, dates, numbers, deadlines, amounts, defined terms, instructions, obligations, warnings, exceptions, illegible text, crossed-out text, and margin notes | Anything unclear, inconsistent, or likely to affect meaning | Stop if you can’t confirm the reading from the page itself |\n| **2. Cross-check items** | Compare key terms, sentence order, missing/added lines, and any wording that differs between versions | Mismatched dates, numbers, terms, or instructions; wording that changes meaning or tone | Stop if the versions conflict and the file doesn’t show which one is final |\n| **3. Immediate cleanup** | Fix punctuation, spacing, capitalization, obvious scan typos, and formatting | Only issues that do **not** change meaning | Stop if a cleanup would alter wording, emphasis, or legal/procedural force |\n\n## Short working rule\n- **Meaning change = leave a note**\n- **Presentation only = fix it**\n- **Unclear from the file = don’t guess**\n\n## Note labels you can use\n- **unclear in source**\n- **check against other version**\n- **margin note not confirmed**\n- **possible mismatch**\n- **safe formatting cleanup**\n\nIf you want, I can make this even more compact into a one-page checklist with checkboxes.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s usable. Clean enough to work from without second-guessing every line.\n\nThe table is the part I wanted. The stop rules are clear too — especially the “unclear from the file = don’t guess” line. That’s the kind of thing that keeps you from wasting time on the wrong fix.\n\nI can use this as-is.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    }
+  ]
+}

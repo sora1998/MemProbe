@@ -1,0 +1,104 @@
+{
+  "user_id": "user_006",
+  "task": "I need to write up a clean incident summary for a network problem that already got fixed, but I want it to hold up if someone pushes back later. What should I include so the timeline, evidence, and final cause are clear without making it longer than it needs to be?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "verbosity_preference",
+      "short": "Wants responses kept tight and efficient",
+      "explanation": "He values speed, control, and efficiency, so he is unlikely to want long-winded help. He would probably prefer responses that get to the point quickly and avoid unnecessary filler. Overexplaining would feel like wasted time to him."
+    },
+    {
+      "idx": 2,
+      "dimension": "directness_preference",
+      "short": "Prefers blunt answers without softening",
+      "explanation": "His skeptical, competitive style suggests he wants clear, unambiguous guidance rather than hedged language. He would likely see excessive caution as evasive or inefficient. Straight answers fit his preference for control and decisive action."
+    },
+    {
+      "idx": 3,
+      "dimension": "format_preference",
+      "short": "Likes structured, actionable output",
+      "explanation": "He seems most likely to respond well to responses that are organized and easy to execute, such as bullets or checklists. That matches his practical, task-focused mindset. Loose, meandering prose would probably frustrate him."
+    },
+    {
+      "idx": 4,
+      "dimension": "detail_level_preference",
+      "short": "Wants the useful essentials, not padding",
+      "explanation": "He likely wants enough context to act, but not exhaustive background unless it helps him win or avoid mistakes. He is efficiency-driven, so extra caveats only matter when they change the decision. He would probably skip anything that does not affect the outcome."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Accepts pushback only if it is sharp and useful",
+      "explanation": "He is skeptical and self-serving, so he probably does not enjoy moralizing or vague objections. But if the pushback is concrete, efficient, and clearly tied to risk or leverage, he is more likely to respect it. Weak or overly gentle correction would likely be ignored."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Use a tight structure that makes the **timeline, proof, and cause** easy to defend later.\n\n## Incident summary template\n\n### 1) Header\n- **Incident title**\n- **Date / start time / end time**\n- **Scope**: site, VLAN, core segment, service(s) affected\n- **Severity / impact**\n- **Owner / responders**\n\n### 2) What happened\nOne short paragraph:\n- What broke\n- Who/what was affected\n- How it was detected\n- Whether it was intermittent or total loss\n\n### 3) Timeline\nKeep this as an ordered list with timestamps:\n- **T0** – first symptom observed\n- **T+X** – alerts/logs/counters confirmed issue\n- **T+X** – checks performed\n- **T+X** – root cause isolated\n- **T+X** – fix applied\n- **T+X** – service verified stable\n\nUse only facts. Avoid commentary inside the timeline.\n\n### 4) Evidence\nInclude the minimum proof needed to support the conclusion:\n- **Interface counters**: CRC/FCS, runts/giants, drops, discards, late collisions, input/output errors, pause frames\n- **Event logs** around first symptom: interface resets, STP changes, LACP churn, SFP events, power events, watchdogs\n- **Before/after comparison** if something was changed\n- **Traffic proof** that service returned and stayed healthy\n- **Timing proof** that the link or path was stable long enough to trust it\n\nIf relevant, note:\n- what was **not** seen\n- what was ruled out\n- why you did **not** touch higher-layer services yet\n\n### 5) Root cause\nState it plainly:\n- **Direct cause**\n- **Contributing factors**\n- **Trigger**\n- **Why it caused the outage**\n\nExample format:\n- Direct cause: faulty optic on uplink A\n- Trigger: increasing CRC/FCS errors led to link instability\n- Contributing factor: redundant path also degraded, causing failover churn\n\n### 6) Resolution\n- What was changed\n- By whom\n- When\n- Whether rollback was needed\n- Whether the fix was temporary or permanent\n\n### 7) Validation\nShow how you proved recovery:\n- no flapping\n- no rising errors\n- no loss of signal\n- traffic passing normally\n- stable for the required observation window\n\n### 8) Follow-up actions\nShort list:\n- permanent fix\n- monitoring added\n- replacement scheduled\n- config/process change\n- owner and due date\n\n---\n\n## Keep it short by following these rules\n- Use **facts, timestamps, and counters**, not narrative.\n- Don’t include every troubleshooting step; include only the steps that **changed the conclusion**.\n- Separate **symptom**, **evidence**, **cause**, and **fix**.\n- If there was a change window or last known good state, mention it early.\n- Don’t claim recovery until you have **proof of stability** and **actual traffic**.\n\n---\n\n## One-line example\n“On 2026-04-28 from 09:14–09:42 UTC, users on Site A lost connectivity due to repeated uplink instability caused by a failing optic on core switch SW1; the issue was confirmed by rising CRC/FCS and interface resets in the event log, resolved by replacing the optic, and verified stable after 15 minutes with no flaps, no new errors, and normal traffic flow.”\n\nIf you want, I can turn this into a **one-page incident report template** you can paste into a ticket or postmortem.",
+      "score": 4.6,
+      "summary": "mean=4.60 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:2, 5:3}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very tight and efficient: it says \"Use a tight structure,\" gives a concise template, and explicitly says \"Keep it short\" and \"Don’t include every troubleshooting step.\""
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly direct and blunt, with clear imperatives like \"State it plainly\" and \"Use only facts.\" Minor softening remains in phrases like \"If you want, I can turn this into...\""
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable: numbered sections, bullets, and a clear template for \"timeline,\" \"evidence,\" \"root cause,\" and \"resolution.\""
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Focuses on essentials over padding: \"include the minimum proof needed,\" \"Don’t include every troubleshooting step,\" and \"only the steps that changed the conclusion.\""
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Pushback is handled in a concrete, useful way: it emphasizes defensible evidence, what was ruled out, and why conclusions hold up later. It does not moralize or hedge much, though it is more instructional than explicitly adversarial."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Absolutely — here’s the tighter version I’d use if you want it to be **short, defensible, and hard to argue with later**.\n\n## Minimal incident summary structure\n\n### 1) Summary line\nOne sentence:\n- **What failed**\n- **Where**\n- **When**\n- **Final cause**\n- **How it was fixed**\n\nExample:\n> On 2026-04-28, connectivity for Site A’s core uplink failed due to a defective optic on SW1 Gi1/0/24; service was restored after optic replacement and verified stable for 15 minutes.\n\n### 2) Timeline\nOnly include the moments that changed the conclusion.\n\nFormat:\n- **HH:MM** — first symptom observed by X\n- **HH:MM** — key evidence confirmed\n- **HH:MM** — cause isolated\n- **HH:MM** — fix applied\n- **HH:MM–HH:MM** — validation window passed\n\nKeep it factual. No commentary, no dead ends.\n\n### 3) Evidence\nUse only the proof that supports the final cause.\n\nSplit it into 3 bullets:\n\n- **Symptom evidence:** alerts, flaps, packet loss, user reports, counters increasing\n- **Cause evidence:** the specific log/counter/test result that rules in the failure\n- **Recovery evidence:** counters stopped rising, link stayed up, traffic passed normally\n\nIf you can, include the exact metric or log line, not just “logs showed an issue.”\n\n### 4) Root cause\nOne sentence, direct and specific.\n\nGood:\n- “Repeated CRC/FCS errors and link resets on SW1 Gi1/0/24 were caused by a failing optic.”\n\nAvoid:\n- “Likely hardware issue”\n- “Some network instability”\n- “Probably the uplink”\n\n### 5) Resolution\nJust state:\n- what was changed\n- by whom\n- when\n\nExample:\n> Replaced optic on SW1 Gi1/0/24 at 10:22 UTC.\n\n### 6) Verification\nShow how you proved it stayed fixed:\n- no flapping\n- no new errors\n- traffic normal\n- stable for X minutes\n\nIf there’s a standard observation window, use it.\n\n### 7) Follow-up\nOnly include if there’s real residual risk:\n- replacement pending\n- monitoring added\n- config cleanup\n- vendor ticket open\n\nIf there’s no follow-up, say:\n> No further action required.\n\n---\n\n## What to leave out\n- long troubleshooting narrative\n- every test you ran\n- generic impact language unless quantified\n- speculation\n- “probably,” “likely,” “appears to be”\n\n---\n\n## Best short-form template\n\n> **Summary:** [What failed], at [site/device/interface], from [start] to [end], caused by [root cause], resolved by [fix], verified stable for [window].  \n>\n> **Timeline:**  \n> - [time] first symptom observed  \n> - [time] evidence confirmed  \n> - [time] cause isolated  \n> - [time] fix applied  \n> - [time] validation passed  \n>\n> **Evidence:**  \n> - Symptom: [fact]  \n> - Cause: [fact]  \n> - Recovery: [fact]  \n>\n> **Root cause:** [one sentence]  \n>\n> **Resolution:** [what changed]  \n>\n> **Verification:** [how stability was proven]  \n>\n> **Follow-up:** [if any]\n\nIf you want, I can turn this into a **copy-paste incident report form** with blank fields only.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Keeps it tight: \"Minimal incident summary structure,\" \"Only include the moments that changed the conclusion,\" and \"What to leave out\" all directly support brevity and efficiency."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Very blunt and unsoftened: \"Keep it factual. No commentary,\" \"Avoid: 'Likely hardware issue'\" and \"speculation\" give clear, decisive guidance."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strong structure throughout: numbered sections, bullets, and a \"Best short-form template\" make the output easy to execute."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Focuses on essentials only: \"Use only the proof that supports the final cause,\" \"Only include the moments that changed the conclusion,\" and \"What to leave out\" all match this preference."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Pushback is present and useful: it explicitly rejects weak claims like \"probably\" and \"likely,\" and says to include only evidence that \"rules in the failure.\" It is firm, though not especially sharp or adversarial."
+        }
+      ]
+    }
+  ]
+}

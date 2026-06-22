@@ -1,0 +1,36 @@
+{
+  "user_id": "user_029",
+  "task": "I’m dealing with a building system that’s supposed to be fine on paper, but I don’t trust the last check on it. What would you want to verify first before I accept that it’s actually ready to go?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.6,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "First thing I’d verify is the **utility/source return itself** — not the backup gear.\n\nIn order, I’d want to falsify the whole event as early as possible:\n\n1. **Did normal power actually come back cleanly and stay within spec?**  \n   Check voltage, phase, frequency, and whether it was stable or still marginal.\n\n2. **Did the transfer device make one clean swap?**  \n   No chatter, no rapid retransfer, no weird intermediate state.\n\n3. **Did the backup source start/enable and recover normally?**  \n   For a generator/ATS, inverter, UPS, or battery system, confirm it actually came online the way it should.\n\n4. **Did the output hold under the real load?**  \n   Not just a light/test load — the actual building load.\n\n5. **Then check logs, LEDs, alarms, and event history.**  \n   Those are useful, but I’d treat them as confirmation, not the first proof.\n\nIf you want, I can help you turn that into a short inspection checklist or a note for the record.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Close, but I’d want it tighter. I don’t start with the utility return unless I already trust the transfer path, and I usually don’t.\n\nWhat I’d verify first:\n\n1. **Actual source present and stable** — not just “reported normal.” Voltage, freq, phase if it’s 3φ.\n2. **Transfer device state** — breaker/ATS/relay position, any chatter, any stuck contacts, any abnormal delay.\n3. **Failover / recovery sequence** — did it move once, cleanly, and only once.\n4. **Load under real conditions** — not a bench-friendly no-load story.\n5. **Evidence trail** — alarm log, timestamps, service history, and any skipped intervals.\n\nIf there’s any way to inspect the last test result, I’d want the exact date/time and who signed it off. Paper says “ready” all the time. I care whether it actually cycled and held. If you want, make it a checklist format with pass/fail boxes — that’s the only way it’s useful.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Got it — I’d make the first check the thing that can falsify the whole “ready” claim fastest:\n\n1. **Actual source present and stable**  \n   Verify the source is truly there, within spec, and not just reported as normal.\n\n2. **Transfer device state**  \n   Confirm the ATS/breaker/relay actually moved correctly, with no chatter, stuck contacts, or odd delay.\n\n3. **Failover / recovery sequence**  \n   Check that it changed state once, cleanly, and only once.\n\n4. **Load under real conditions**  \n   Make sure it held the actual building load, not just a light or test load.\n\n5. **Evidence trail last**  \n   Review alarms, logs, timestamps, and signoff history after the physical checks.\n\nIf you want, I can turn that into a tight pass/fail checklist you can use in the field.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s the order I’d use.\n\nStart with the physical state, then the transfer behavior, then the load. Logs last, not first. And if the last test record doesn’t show an actual cycle and hold under load, I wouldn’t call it ready either.\n\nThe checklist version would be useful, but this answer is already in the right shape.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    }
+  ]
+}

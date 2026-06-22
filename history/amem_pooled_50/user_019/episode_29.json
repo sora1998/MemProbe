@@ -1,0 +1,36 @@
+{
+  "user_id": "user_019",
+  "task": "I need to turn a messy set of test notes into something I can send to my team. The notes are scattered across a few runs and I want the message to be clear enough that people can see what happened and what needs attention without digging through everything.",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.6,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Absolutely — I can help turn it into a clean team update.\n\nSend me the notes, and I’ll condense them into a clear message that:\n- states what happened across the runs\n- highlights the key failure or issue\n- separates confirmed facts from open questions\n- calls out what needs attention next\n\nIf you want, paste the notes in rough form and I’ll turn them into a short team-ready summary.",
+      "user_simulator": {
+        "feedback_type": "add_context",
+        "text": "Fine. Here’s the mess, cleaned up enough to work with:\n\n- Run 1: Unit passed baseline functional checks, but after humidity cycling we started seeing intermittent failures.\n- Run 2: Same family of units showed cracked housings / fracture points after environmental stress. Not random. Pattern repeats under moisture exposure.\n- Run 3: I pulled one failed unit apart and found the supplier had changed the gasket compound. Paperwork did not reflect it.\n- Vendor denied any material change at first, but the test data lines up with the material shift.\n- Root cause is still the supplier change, not the test setup. The setup exposed it.\n- Action needed: hold shipment, requalify the lot, and force traceability on the material change before anything else goes out.\n\nIf you want the actual team-facing version, keep it tight and don’t bury the lead: passed bench tests, failed under humidity, root cause traced to an undocumented gasket material change, release should stay blocked until requalification is done.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Here’s a tight team-facing version:\n\n**Test summary:**  \nBench/baseline functional checks passed, but units failed under humidity cycling. The failure pattern repeated across multiple runs and included intermittent faults plus cracked housings/fracture points after environmental stress. Investigation traced the issue to an **undocumented supplier gasket compound change** that was not reflected in the paperwork.\n\n**Current read:**  \nThis appears to be a **real product issue, not a test artifact**. The test setup exposed the weakness; it did not create it. Vendor initially denied a material change, but the failure data aligns with the material shift.\n\n**Action:**  \n- **Hold shipment**\n- **Requalify the affected lot**\n- **Require full material traceability / change control from the supplier**\n- Do not release until the change is validated and the failure mode is covered\n\nIf you want, I can also turn this into:\n1. a more formal email, or  \n2. a one-line status update for Slack/Teams.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that works. Tight enough, and it doesn’t hide the actual problem. Keep the hold/requalify language front and center — that’s the part people try to sand down if you let them.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    }
+  ]
+}

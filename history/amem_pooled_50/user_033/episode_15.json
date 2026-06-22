@@ -1,0 +1,75 @@
+{
+  "user_id": "user_033",
+  "task": "I’ve got a batch issue that looks minor on paper, but the pressure is already on to move it along. Can you help me think through what I should verify before anyone makes a call on it?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.6,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — I’d verify it in this order:\n\n1. **Hard stop / release point**\n   - What exactly is the cutoff for deciding?\n   - Is there a deadline, sign-off point, or spec limit already in play?\n   - If that isn’t clear, don’t let anyone pretend the rest is settled.\n\n2. **Pre-analytic basics**\n   - Sample ID / batch ID\n   - Timing\n   - Storage and transport\n   - Mix-up risk\n   - Contamination\n   - Dilution / prep errors\n   - Temperature excursion\n\n3. **Method / instrument**\n   - Calibration\n   - Drift\n   - Maintenance status\n   - Reagent lot\n   - Carryover\n   - System suitability\n   - Control trend\n\n4. **Workflow changes**\n   - Who ran it\n   - What changed in sequence\n   - Batching / cleanup differences\n   - Rushed prep\n   - New SOP or handoff step\n   - Any override pressure\n\n5. **What the result can actually support**\n   - What happened\n   - What was checked\n   - What was ruled out\n   - What remains open\n\nAnd the key comparisons are:\n\n- same instrument?\n- different instrument?\n- fresh prep / fresh reagent lot?\n- different analyst?\n\nIf pressure is pushing for a call before the hard stop is verified, keep it simple:\n\n- **Provisional only.**\n- **No sign-off until [missing check] is resolved.**\n- **Current data support only an interim answer.**\n- **Decision now would rely on an unverified assumption.**\n\nIf you want, I can turn this into a short decision tree or a one-page checklist.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Close enough, but too generic. I’d want it tighter around the actual failure mode, not a broad lab-safety list.\n\nWhat I’d verify first:\n- exact spec / acceptance criterion and where it was set\n- whether the issue is random, systematic, or tied to one unit/lot/analyst\n- instrument status before the run: calibration, maintenance, suitability, drift trend\n- reagent lot / standard prep / expiry / storage\n- sample chain: ID, prep, hold time, temp, any rerun or dilution changes\n- any recent method change, cleanup, handoff, or override\n- replicate pattern, not just the single result\n\nThen I’d separate it into:\n1. data problem\n2. process problem\n3. real product problem\n\nIf you want this useful, give me the actual symptom — dissolution low, assay shift, OOS impurity, whatever — and I’ll tell you what to check before management starts pushing a release.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — and I’d keep it in that order:\n\n1. **Spec / acceptance criterion**\n   - exact limit\n   - where it was set\n   - whether this is a true fail or just a borderline call\n\n2. **Pattern of the failure**\n   - random vs systematic\n   - tied to one unit, lot, analyst, or instrument\n   - single outlier vs repeated shift\n\n3. **Instrument state before the run**\n   - calibration\n   - maintenance\n   - suitability / system check\n   - drift trend\n   - any carryover or warning flags\n\n4. **Reagent / standard prep**\n   - lot\n   - expiry\n   - storage\n   - prep sequence\n   - dilution or weighing errors\n\n5. **Sample chain**\n   - ID / lot identity\n   - prep\n   - hold time\n   - temperature\n   - rerun changes\n   - any dilution or rework\n\n6. **Recent method / workflow changes**\n   - method tweak\n   - cleanup step\n   - handoff\n   - analyst change\n   - override pressure\n\n7. **Replicate pattern**\n   - does it repeat?\n   - same setup?\n   - fresh prep?\n   - different analyst?\n   - different unit / instrument?\n\nThen force the decision into one of three buckets:\n\n- **data problem**\n- **process problem**\n- **real product problem**\n\nAnd if the call is being pushed early, use language like:\n\n- **Provisional only**\n- **Not final pending [specific check]**\n- **No release until [X] is resolved**\n- **Current data do not separate instrument/process from product**\n\nIf you want, give me the symptom and I’ll turn this into a tighter, failure-mode-specific checklist.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Better. Still a bit orderly for its own sake, but at least it’s closer to how I’d actually triage it.\n\nI’d tighten it one notch more around the failure mode itself, though. For me the first question is: what changed relative to the last acceptable run? That usually sorts the noise from the real problem faster than a generic checklist.\n\nSo I’d want:\n- exact spec / acceptance limit and whether it’s a real fail or just borderline\n- compare to the last passing result: same unit, same analyst, same instrument, same prep?\n- one-off outlier or a shift across replicates / units / lots\n- instrument condition before run: calibration, maintenance, suitability, drift, warnings\n- reagent / standard / solvent lot, expiry, storage, prep sequence\n- sample handling: ID, hold time, temperature, dilution, rerun, rework\n- any method tweak, cleanup change, handoff, or management-driven override\n\nThen I’d ask one blunt thing: does the pattern point to measurement error, process drift, or actual product failure. If you can’t separate those, the call is premature.\n\nIf you want this useful, give me the actual symptom and whether it’s a single result or a pattern. Then I’d cut the checklist down to what matters.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yes — that’s the right way to frame it.\n\nFor this kind of batch issue, I’d start with **what changed versus the last acceptable run**:\n\n- same unit or lot?\n- same analyst?\n- same instrument?\n- same prep sequence?\n- same reagent / standard / solvent lot?\n- same hold time / storage / temperature?\n\nThen I’d separate the failure pattern:\n\n- **single outlier**\n- **repeatable shift**\n- **replicate spread / instability**\n- **lot- or unit-specific effect**\n\nAnd I’d verify the most likely failure points in this order:\n\n1. **Spec / acceptance limit**\n   - exact limit\n   - whether this is truly a fail or just borderline\n\n2. **Change from last good run**\n   - what is different, specifically\n   - if nothing changed, that’s useful too\n\n3. **Instrument state**\n   - calibration\n   - maintenance\n   - suitability / system check\n   - drift\n   - warnings / flags\n\n4. **Reagents / standards**\n   - lot\n   - expiry\n   - storage\n   - prep sequence\n\n5. **Sample handling**\n   - ID\n   - hold time\n   - temperature\n   - dilution\n   - rerun / rework\n\n6. **Workflow changes**\n   - cleanup\n   - handoff\n   - analyst\n   - any override pressure\n\nThen force the conclusion into one of three buckets:\n\n- **measurement error**\n- **process drift**\n- **real product issue**\n\nIf that separation isn’t clear yet, the call is premature.\n\nIf you want, I can turn this into a very short **failure-mode triage checklist** with just the minimum fields you’d actually use at the bench.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah. That’s the right shape, but I’d still want it even tighter — fewer buckets, more triage logic.\n\nWhat I’d actually use is:\n\n- **What changed vs last acceptable run?**\n  - unit / lot\n  - analyst\n  - instrument\n  - prep sequence\n  - reagent / standard lot\n  - hold time / storage / temp\n\n- **What pattern are we seeing?**\n  - one-off outlier\n  - repeatable shift\n  - replicate scatter\n  - only one unit / one lot / one plate / one vial set\n\n- **Does the pattern track with the run condition or the material?**\n  - if it follows the instrument / prep / analyst, suspect measurement or process\n  - if it stays with the lot / unit across setups, suspect product\n\nThen I’d check only the failure points that fit that pattern. No point dragging in every possible lab nuisance if the result is clearly tracking one variable.\n\nIf you want, I’d go one step further and make it into a **decision tree by symptom** — dissolution, assay shift, impurity, content uniformity, whatever. That’s the part that actually saves time.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 4,
+      "agent_response": "Yes — that’s the useful version.\n\nI’d make it:\n\n### 1) What changed vs the last acceptable run?\n- unit / lot\n- analyst\n- instrument\n- prep sequence\n- reagent / standard lot\n- hold time / storage / temp\n\n### 2) What pattern are we seeing?\n- one-off outlier\n- repeatable shift\n- replicate scatter\n- only one unit / lot / plate / vial set\n\n### 3) What does it follow?\n- follows instrument / prep / analyst → suspect measurement or process\n- stays with lot / unit across setups → suspect product\n\nThen only chase the failure points that match that pattern.\n\nIf you want, send me the actual symptom — dissolution, assay shift, impurity, CU, whatever — and I’ll turn this into a tight symptom-specific decision tree.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah. Still missing the part that actually matters: the symptom.\n\nDissolution, assay shift, impurity, CU, OOS/OOE, whatever — they don’t triage the same way. The pattern logic is fine, but I’d want the failure-mode branch, not another generic frame.\n\nIf you’re going to make it useful, give me:\n- the symptom\n- whether it’s a single result or a pattern\n- what changed vs the last acceptable run\n- and whether the result tracks the instrument/prep or the lot/unit\n\nThen I can tighten it to the few checks that actually belong in that case. Otherwise it’s still too broad.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 5,
+      "agent_response": "Exactly — that’s the missing branch.\n\nI’d use this order:\n\n1. **Name the symptom**\n   - dissolution\n   - assay shift\n   - impurity\n   - content uniformity\n   - OOS / OOE\n   - other\n\n2. **Is it a single result or a pattern?**\n   - one-off\n   - repeatable\n   - replicate scatter\n   - tied to one unit / lot / plate / vial set\n\n3. **What changed vs the last acceptable run?**\n   - unit / lot\n   - analyst\n   - instrument\n   - prep sequence\n   - reagent / standard lot\n   - hold time / storage / temp\n\n4. **Does it follow the run or the material?**\n   - follows instrument / prep / analyst → measurement / process issue\n   - stays with lot / unit across setups → product issue\n\nThen you only check the failure points that fit that symptom.\n\nIf you want, give me the actual symptom and I’ll cut this down to the specific triage path for that case.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yes. That’s the branch I wanted.\n\nThat’s tight enough to be useful:\n- name the symptom\n- decide if it’s a one-off or a pattern\n- compare against the last acceptable run\n- see whether it follows the run conditions or the material\n\nThat’s the actual triage logic. The rest is just noise unless the symptom points there.\n\nIf I were using it at the bench, I’d probably strip it even further and just keep the decision order, but this is fine.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    }
+  ]
+}

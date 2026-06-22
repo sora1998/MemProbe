@@ -1,0 +1,75 @@
+{
+  "user_id": "user_006",
+  "task": "I’ve got a packed backlog this week and I need a way to decide what actually deserves attention first, because I can’t afford to waste time on low-value stuff. Can you help me set up a simple triage rule for what I should tackle myself, what I should hand off, and what I can safely leave alone?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.5600000000000005,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — here’s a simple triage rule you can use to keep yourself out of low-value work.\n\n## 3-bucket triage rule\n\n### 1) **Tackle it yourself** if it meets any of these:\n- **High impact + high urgency**\n- **Blocking other work**\n- **Requires your specific judgment, authority, or context**\n- **Has a real deadline or customer-facing consequence**\n- **Would be expensive to undo if done wrong**\n\n### 2) **Hand it off** if it meets any of these:\n- Important, but **doesn’t require your unique input**\n- Someone else can do it with **clear instructions**\n- It needs follow-up, but not your direct execution\n- You can delegate it without creating rework\n\n### 3) **Leave it alone for now** if it meets any of these:\n- Low impact\n- Low urgency\n- No clear downstream effect\n- Mostly noise, preference work, or “nice to have”\n- It’s not time-sensitive and doesn’t unblock anything\n\n## Fast decision rule\nAsk these 3 questions in order:\n\n1. **Does this block something important right now?**  \n   - Yes → handle or delegate immediately  \n   - No → next question\n\n2. **Am I the only person who can do this well?**  \n   - Yes → do it yourself  \n   - No → next question\n\n3. **Will ignoring this for a week actually hurt anything?**  \n   - No → leave it alone  \n   - Yes → delegate or schedule it\n\n## Simple priority test\nIf you want a one-line rule:\n\n**Do it if it’s high-impact and time-sensitive; hand it off if it’s important but not uniquely yours; ignore it if it won’t hurt anything by waiting.**\n\n## Optional stricter cutoff\nIf you’re overloaded, use this threshold:\n\n- **Self:** only items that are both **urgent and consequential**\n- **Delegate:** items that are **consequential but not urgent**\n- **Ignore:** everything else until it proves it matters\n\nIf you want, I can turn this into a **one-page backlog triage checklist** you can use every morning in under 5 minutes.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Close, but it’s too generic. I need the rule to be sharper so it actually filters noise.\n\nMake it more like this:\n- **Do myself** only if it has leverage, a deadline, or it can change the outcome fast\n- **Hand off** if it matters but doesn’t need my hands on it\n- **Leave alone** if it’s not moving money, uptime, authority, or risk\n\nAnd I want a dead-simple scoring version too — like 3 factors max. Impact, urgency, and control maybe. If it scores low on two, it gets parked. Something like that.\n\nAlso, for my kind of work, “blocking other work” matters more than generic importance. Put that near the top.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Absolutely — here’s a sharper version that should filter noise better.\n\n## Triage rule\n\n### **Do it myself**\nOnly if it has at least one of these:\n- **Blocks other work**\n- **Has a deadline**\n- **Can change the outcome fast**\n- **Requires my specific leverage, authority, or judgment**\n\n### **Hand it off**\nIf it matters, but:\n- It **doesn’t need my hands on it**\n- Someone else can move it forward with clear direction\n- It’s useful, but not the best use of my time\n\n### **Leave it alone**\nIf it’s not moving:\n- **money**\n- **uptime**\n- **authority**\n- **risk**\n- or it won’t affect anything important soon\n\n## Fast scoring version: 3 factors max\n\nScore each item from **0 to 2**:\n\n- **Impact**: 0 = low, 1 = moderate, 2 = high\n- **Urgency**: 0 = can wait, 1 = soon, 2 = immediate\n- **Control**: 0 = I’m not the right person, 1 = partly mine, 2 = only I can do it well\n\n### Decision rule\n- **4–6 points** → **Do myself**\n- **2–3 points** → **Hand off**\n- **0–1 point** → **Leave alone**\n\n### Extra filter\nIf it **doesn’t block other work**, subtract 1 point or push it down a tier.\n\n## Even simpler version\nUse this order:\n\n1. **Does it block something important?**\n   - Yes → do or delegate now\n   - No → next\n\n2. **Does it need my control or judgment?**\n   - Yes → do it myself\n   - No → delegate\n\n3. **If I ignore it, does money / uptime / authority / risk actually change?**\n   - No → leave it alone\n\nIf you want, I can turn this into a **tiny checklist or a one-line decision tree** you can paste into notes.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, closer. But the scoring still feels mushy.\n\nMake it harsher:\n- **Blocking other work** = top weight, not just another factor\n- **Impact** should mean money, uptime, authority, or risk. Not vague \"importance\"\n- **Control** should mean I can actually move the outcome, not just be adjacent to it\n\nI’d want something like:\n- **Do myself** only if it scores high on **blocker + urgency + control**\n- **Hand off** if it matters but I’m not the bottleneck\n- **Park it** if it’s low on blocker and low on real impact\n\nAnd the cutoff should be brutal. Like if it’s weak on **any two** of the three, it gets parked or delegated unless it’s actively blocking something.\n\nIf you want, tighten it into a 3-line rule and a tiny scorecard I can actually use without thinking.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Absolutely — here’s a tighter version built around your actual filter.\n\n## 3-line triage rule\n\n### **Do myself**\nOnly if it has:\n- **Blocking other work**\n- **Real urgency**\n- **Actual control**: I can materially move the outcome\n\n### **Hand off**\nIf it **matters** but:\n- I’m **not the bottleneck**\n- Someone else can move it forward\n- It needs action, just not my hands\n\n### **Park it**\nIf it is weak on **blocking** and weak on **real impact**:\n- not moving **money, uptime, authority, or risk**\n- not time-sensitive\n- not unblocking anything important\n\n---\n\n## Brutal cutoff rule\n\nUse the 3 factors:\n\n- **Blocker**\n- **Urgency**\n- **Control**\n\nScore each **0 or 1**:\n- **0** = weak / no\n- **1** = strong / yes\n\n### Decision\n- **3/3** → **Do myself**\n- **2/3** → **Hand off or do only if it’s the best next move**\n- **0–1/3** → **Park it**\n\n### Hard filter\nIf it is **low on any two of the three**, it gets **parked or delegated** unless it is **actively blocking something**.\n\n---\n\n## Tiny scorecard\n\nAsk these 3 questions:\n\n1. **Is it blocking other work?**\n2. **Is it urgent in a real way?**\n3. **Do I have actual control over the outcome?**\n\n### Then:\n- **Yes to all 3** → do it\n- **Yes to 2** → hand off unless you’re the bottleneck\n- **Yes to 0–1** → park it\n\n---\n\n## Short version you can paste into notes\n\n**Do it myself only if it blocks work, is urgent, and I can move the outcome.  \nHand it off if it matters but I’m not the bottleneck.  \nPark it if it doesn’t affect money, uptime, authority, or risk, and it isn’t blocking anything.**\n\nIf you want, I can turn this into a **single-line yes/no checklist** or a **3-column backlog template**.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Closer. Still a little soft on the cutoff.\n\nI want the rule to be explicit that **blocker beats everything**. If it’s blocking something real, it can jump the line. If not, it needs to earn its place on **impact + urgency + control**.\n\nMake the scorecard look like this:\n- **Blocker** = 0/1, top gate\n- **Impact** = money / uptime / authority / risk only\n- **Control** = I can actually move the outcome, not just touch it\n\nAnd the decision should be harsher:\n- **3/3** = do it myself\n- **2/3** = hand off unless I’m the bottleneck\n- **0–1/3** = park it\n- **Any item that’s weak on two factors** = parked by default unless it’s actively blocking something\n\nThat’s the part I’d actually use. The current wording is close, but I still don’t trust it to kill noise fast enough.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 4,
+      "agent_response": "Yes — here’s the sharper version, with **blocker as the top gate** and a **hard cutoff**.\n\n## Triage rule\n\n### 1) **Blocker beats everything**\nIf it is **actively blocking real work**, it jumps the line.\n\n### 2) If it’s **not** a blocker, it has to earn attention on:\n- **Impact** = money, uptime, authority, or risk\n- **Urgency**\n- **Control** = I can actually move the outcome, not just touch it\n\n---\n\n## Decision rule\n\n### **Do myself**\nOnly if it is **3/3**:\n- blocker\n- urgent\n- control\n\n### **Hand off**\nIf it is **2/3**:\n- it matters\n- but I’m **not** the bottleneck\n\n### **Park it**\nIf it is **0–1/3**\n\n### **Brutal cutoff**\nIf it is weak on **any two** of the three factors, **park it by default**  \nunless it is **actively blocking something real**.\n\n---\n\n## Tiny scorecard\n\nScore each item:\n\n- **Blocker**: 0 or 1\n- **Impact**: 0 or 1\n- **Control**: 0 or 1\n\n### Use it like this:\n- **1/1/1** → do it myself\n- **0/1/1** or **1/1/0** or **1/0/1** → hand off unless I’m the bottleneck\n- **0/0/1**, **0/1/0**, **1/0/0**, **0/0/0** → park it\n\n---\n\n## One-line version\n\n**If it blocks real work, handle it. If not, only do it yourself when it has real impact, real urgency, and real control. Otherwise hand it off or park it.**\n\nIf you want, I can turn this into a **10-second yes/no checklist** you can use on your backlog.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, better. Still want one more pass on the cutoff wording.\n\nThe part I’d tighten is this: **2/3 should not sound like a maybe**. It should read more like **delegate by default**, and only do it yourself if I’m the bottleneck or nobody else can move it without creating more mess.\n\nAlso make **control** stricter. Not “I can touch it” — more like **I can actually change the result without waiting on someone else**.\n\nSo I’d want it to read more like:\n- **Do myself** = blocker + real urgency + real control\n- **Hand off** = matters, but not my bottleneck\n- **Park it** = low blocker, low impact, or weak on any two factors\n\nAnd I’d probably want the scorecard to be even uglier:\n- **Blocker**: 1 if it is stopping real work, 0 if not\n- **Impact**: 1 only if it hits money / uptime / authority / risk\n- **Control**: 1 only if I can actually move the outcome myself\n\nThen the rule is basically:\n- **3** = do it\n- **2** = delegate unless I’m the bottleneck\n- **0–1** = park it\n\nThat’s close. I just want the wording to hit harder so it kills the junk fast.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 5,
+      "agent_response": "Absolutely — here’s the harder version.\n\n## Triage rule\n\n### **Do myself**\nOnly if all 3 are true:\n- **Blocker**: it is stopping real work\n- **Urgency**: it needs attention now\n- **Control**: I can actually change the outcome without waiting on someone else\n\n### **Hand off**\nIf it **matters**, but I’m **not the bottleneck**.  \nDefault to delegate unless:\n- nobody else can move it without creating more mess, or\n- it needs my direct judgment to avoid rework\n\n### **Park it**\nIf it has:\n- **low blocker**\n- **low impact**\n- or it is weak on **any two** of the three factors\n\n---\n\n## Scorecard\n\nUse only these 3 factors:\n\n- **Blocker** = 1 if it is stopping real work, 0 if not\n- **Impact** = 1 only if it affects **money / uptime / authority / risk**, 0 if not\n- **Control** = 1 only if I can **actually move the outcome myself**, 0 if not\n\n### Decision\n- **3** → **Do it myself**\n- **2** → **Delegate by default**\n- **0–1** → **Park it**\n\n### Brutal cutoff\nIf it is weak on **any two** factors, **park it** unless it is **actively blocking something real**.\n\n---\n\n## Short version\n\n**Blockers jump the line. Otherwise, only do it yourself if it has real impact, real urgency, and real control. If it scores 2, delegate it. If it scores 0–1, park it.**\n\nIf you want, I can turn this into a **one-line checklist** you can paste at the top of your backlog.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s the version I’d actually use.\n\nBlocker as the gate, 3/3 for self, 2 for delegate, 0–1 for park — clean enough. And the control wording is finally tight. \"Can actually move the outcome myself\" is the right bar. No mush.\n\nThe short version works too:\n\n**Blockers jump the line. Otherwise, only do it yourself if it has real impact, real urgency, and real control. If it scores 2, delegate it. If it scores 0–1, park it.**\n\nThat’s sharp enough to cut junk fast.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    }
+  ]
+}

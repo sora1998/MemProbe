@@ -1,0 +1,170 @@
+{
+  "user_id": "user_009",
+  "task": "I’m trying to untangle a mess from a few vendor emails, invoices, and a half-finished spreadsheet, but the sequence of events is fuzzy. Can you help me turn it into a clean timeline and point out the most likely failure points so I know what to ask next?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "verbosity_preference",
+      "short": "Concise, no wasted words",
+      "explanation": "She would likely prefer responses that get to the point quickly and avoid padding. Her persona is highly pragmatic, so extra prose would read as inefficiency rather than helpfulness. She still wants enough detail to act, but not a long-winded explanation."
+    },
+    {
+      "idx": 2,
+      "dimension": "directness_preference",
+      "short": "Blunt and unsoftened",
+      "explanation": "She seems to value straightforward answers over hedging or polite cushioning. In her world, vague language wastes time and can hide the real issue. She would probably respond best to clear conclusions, explicit risks, and no unnecessary reassurance."
+    },
+    {
+      "idx": 3,
+      "dimension": "format_preference",
+      "short": "Bullets and checklists",
+      "explanation": "She likely prefers information laid out in a compact, actionable format rather than flowing prose. Structured lists fit her control-oriented style and make it easier to compare options or spot gaps. Freeform discussion is less useful to her unless she specifically asks for it."
+    },
+    {
+      "idx": 4,
+      "dimension": "autonomy_support_preference",
+      "short": "Collaborative, but efficient",
+      "explanation": "She probably wants the assistant to work with her, not take over and not just narrate options endlessly. She is likely to value fast back-and-forth when refining a plan, especially if it preserves her control over the final decision. Overly prescriptive help could feel intrusive."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Wants hard pushback on bad moves",
+      "explanation": "She seems likely to respect an assistant that flags weak assumptions, rushed decisions, or hidden downside. Because she treats life as a strategic contest, she would probably see useful pushback as part of good help rather than as rudeness. Soft agreement without scrutiny would be less valuable to her."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — here’s a clean way to do it fast.\n\n## 1) Build the timeline\nPull every item into this order:\n\n- **Date / time**\n- **Who sent it**\n- **What was said / attached**\n- **What changed**\n- **What action was expected**\n- **What actually happened**\n\nUse one line per event. Don’t try to interpret yet.\n\n## 2) Sort into phases\nGroup the events into:\n- **Request / quote**\n- **Approval / confirmation**\n- **Work started**\n- **Change / delay**\n- **Invoice / billing**\n- **Dispute / follow-up**\n\nThis usually exposes where the story breaks.\n\n## 3) Look for failure points\nThe most common weak spots are:\n- **missing approval**\n- **scope changed without written confirmation**\n- **invoice doesn’t match the agreed scope**\n- **dates don’t line up**\n- **spreadsheet numbers don’t match the emails**\n- **someone assumed a verbal yes counted**\n- **deliverable was started before scope was locked**\n\n## 4) Flag the gaps\nMark anything that is:\n- unclear\n- contradictory\n- unsupported by a document\n- dependent on a missing email or attachment\n\nThose are the questions to ask next.\n\n## 5) Questions to ask next\n- What was the **original scope**?\n- Who **approved** it, and when?\n- What **changed** after approval?\n- Was the change **confirmed in writing**?\n- What was the **billing basis**?\n- Which invoice line items map to which scope items?\n- What is still **unresolved**?\n\n## 6) Simple output format\nIf you want, structure it like this:\n\n| Date | Event | Evidence | What changed | Risk |\n|------|-------|----------|--------------|------|\n\nThen add a short summary:\n- **What happened**\n- **Where it likely went off track**\n- **What needs confirmation next**\n\nIf you want, paste the emails/invoice notes here and I’ll turn them into a timeline for you.",
+      "score": 4.4,
+      "summary": "mean=4.40 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:3, 5:2}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly concise and action-oriented: \"here’s a clean way to do it fast,\" short sections, and a compact table format. Slightly more verbose than minimal, but no real padding."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Direct and fairly blunt: \"Don’t try to interpret yet,\" \"The most common weak spots are,\" and explicit failure points. Some softening remains in phrases like \"usually exposes\" and \"If you want.\""
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strong use of bullets, numbered steps, and a table template. The response is clearly structured for scanning and action."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative and efficient: it gives a framework, then invites the user to paste materials for help. It doesn’t take over, though it is somewhat prescriptive in laying out the process."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Provides hard pushback by explicitly naming likely failure points and weak spots like \"missing approval,\" \"scope changed without written confirmation,\" and \"someone assumed a verbal yes counted.\""
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — use this.\n\n## 1) Rank evidence when dates don’t match\nUse this order of trust:\n\n1. **Signed / approved documents**\n2. **Emails with clear commitments or attachments**\n3. **Invoices / POs / billing records**\n4. **Spreadsheet entries**\n5. **Slack / chat / verbal recollections**\n\nIf dates conflict, trust the **document that created the obligation**, not the one that merely mentions it later.\n\n### Rule\n- If an email says “approved” but the invoice date is earlier, the invoice is likely a billing record, not proof of approval.\n- If the spreadsheet conflicts with the email trail, treat the spreadsheet as **supporting evidence only** unless it was the source of record.\n\n---\n\n## 2) When invoice numbers don’t line up with the email trail\nTreat the mismatch as one of four things:\n- **billing lag**: work happened first, invoice came later\n- **partial billing**: invoice covers only part of the scope\n- **renumbering / consolidation**: one invoice replaced several items\n- **error**: wrong line item, wrong project, or wrong date\n\n### What to check\n- Does the invoice reference the same project / PO / SOW?\n- Do the line items map to any email-confirmed scope?\n- Is the invoice total consistent with the quoted amount or change order?\n- Are there duplicate charges or missing items?\n\nIf you can’t map the invoice to a confirmed scope item, flag it as **unmatched**.\n\n---\n\n## 3) What counts as a real failure point vs noise\n\n### Real failure point\nCount it if it affects:\n- **scope**\n- **approval**\n- **timing**\n- **billing**\n- **deliverable ownership**\n- **money owed / money paid**\n\n### Probably noise\nIgnore it for now if it’s:\n- a wording difference with no effect on action\n- a duplicate mention of the same event\n- a typo that doesn’t change meaning\n- a spreadsheet note with no supporting source\n- a date stamp that is clearly from forwarding or file upload, not the actual event\n\n### Quick test\nIf the issue could change **who owed what, when, or for how much**, it’s a real failure point.\n\n---\n\n## 4) How to mark unknowns without guessing\nUse labels, not conclusions.\n\n### Mark each item as one of these:\n- **confirmed**\n- **likely**\n- **unclear**\n- **conflicting**\n- **missing**\n\n### Example\n- **Confirmed:** client approved scope on 3/4\n- **Likely:** work started after approval\n- **Conflicting:** invoice date appears before approval email\n- **Missing:** no written change order\n- **Unclear:** whether extra work was requested verbally\n\n### Rule\nNever fill a gap with a guess. If it’s not supported, label it and move on.\n\n---\n\n## 5) Work grid you can use\n\n| Event / Claim | Best evidence | Trust level | What it affects | Status | Next question |\n|---|---|---:|---|---|---|\n| Scope requested | Email | High | Scope | Confirmed | Was it approved? |\n| Work started | Spreadsheet / note | Low | Timing | Unclear | Any email confirming start? |\n| Invoice issued | Invoice | Medium | Billing | Confirmed | What scope does it map to? |\n| Change requested | Email | High | Scope / cost | Conflicting | Was it approved in writing? |\n| Extra charge | Invoice | Medium | Money owed | Unmatched | Where is the supporting email? |\n\n---\n\n## 6) Fast reconstruction method\nBuild the timeline in this order:\n1. **what was asked**\n2. **what was approved**\n3. **what changed**\n4. **what was done**\n5. **what was billed**\n6. **what is disputed**\n\nThen stop and only mark:\n- confirmed\n- conflicting\n- missing\n- unmatched\n\nIf you want, I can turn your actual emails and invoices into this grid and flag the weak spots.",
+      "score": 4.4,
+      "summary": "mean=4.40 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:3, 5:2}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly concise and action-oriented, with structured rules and a usable grid. A bit wordy, but not padded."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Fairly direct: 'Use this,' 'trust the document that created the obligation,' 'Never fill a gap with a guess.' Some hedging remains ('likely,' 'probably')."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strong match: heavily uses bullets, numbered steps, and a table/grid. Very compact and actionable."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative and efficient: gives a method and ends with 'If you want, I can turn your actual emails and invoices into this grid.' It supports back-and-forth without taking over."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Good pushback: explicitly flags weak evidence, says 'flag it as unmatched,' 'Never fill a gap with a guess,' and distinguishes real failure points from noise."
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yes — use this version.\n\n## 1) Tie-breaker ladder for conflicting records\nWhen two records conflict, rank them like this:\n\n1. **Signed contract / SOW / change order**\n2. **Written approval email from the decision-maker**\n3. **Invoice / PO / billing record**\n4. **Vendor email trail**\n5. **Spreadsheet / tracker**\n6. **Chat / verbal recap / memory**\n\n### Apply it like this\n- Higher source wins **unless** it is clearly about something else.\n- A later note does **not** override an earlier approval unless it’s also approved in writing.\n- If the lower source conflicts with the higher source, mark it as **disputed**, not “wrong” until checked.\n\n---\n\n## 2) Invoice number mess: how to classify it\nUse this decision rule:\n\n### Billing lag\nLikely if:\n- work was clearly approved first\n- invoice came later\n- invoice amount matches the approved scope or a known partial amount\n\n### Renumber / consolidation\nLikely if:\n- invoice references the same project / PO / SOW\n- line items match prior emails\n- one invoice seems to bundle multiple items or replace earlier drafts\n\n### Bad record\nLikely if:\n- invoice has no clean link to the approved scope\n- dates, amounts, or line items don’t map to any confirmed event\n- there are duplicate charges, wrong project references, or unexplained gaps\n\n### Quick rule\nIf you can’t map the invoice to a confirmed approval or scope item in one step, treat it as **bad record or disputed** until proven otherwise.\n\n---\n\n## 3) Failure point split\n\n### Structural failure\nThe process itself broke:\n- no written approval\n- scope changed without signoff\n- work started before approval\n- billing basis was never locked\n- no change control\n\n### Evidence failure\nThe story exists, but the proof is weak:\n- missing email\n- conflicting dates\n- invoice doesn’t match the trail\n- spreadsheet and emails disagree\n- attachment missing\n\n### Noise\nDoesn’t change the actual issue:\n- duplicate mentions\n- formatting differences\n- typos\n- forwarded timestamps\n- minor wording changes with no effect\n\n### Simple test\nIf it changes **who approved what, when, or how much**, it’s structural or evidence failure.  \nIf it doesn’t, it’s noise.\n\n---\n\n## 4) Fast work grid\n\n| Item | Source | Reliability | Conflict type | Impact | Action |\n|---|---|---:|---|---|---|\n| Scope request | Email | High | None / disputed | Scope | Verify approval |\n| Approval | Signed email | High | Conflicting | Authorization | Hold as controlling |\n| Invoice | Billing record | Medium | Mismatch | Money | Map to scope |\n| Spreadsheet entry | Tracker | Low | Conflicting | Timing | Use as support only |\n| Verbal change | Recap email | Low | Missing | Scope / cost | Mark unverified |\n\n---\n\n## 5) Status system\nUse only these:\n\n- **Verified** = backed by the highest available source\n- **Probable** = supported, but not fully locked\n- **Disputed** = two sources conflict\n- **Absent** = should exist, but doesn’t\n- **Irrelevant** = doesn’t affect scope, billing, or timing\n\n### Rule\nDon’t upgrade a status unless a higher source supports it.\n\n---\n\n## 6) Fast reconstruction sequence\nBuild the timeline in this order:\n1. request\n2. approval\n3. changes\n4. work done\n5. invoice\n6. dispute\n\nFor each item, fill:\n- source\n- reliability\n- conflict type\n- impact\n- action\n- status\n\nIf you want, I can turn this into a **blank fill-in grid** you can paste into a note or spreadsheet.",
+      "score": 4.4,
+      "summary": "mean=4.40 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:3, 5:2}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly concise and action-oriented, with structured sections and a short offer at the end. It does include a fair amount of framework text, so not maximally terse, but it avoids padding."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Fairly direct and unsoftened: phrases like \"use this version,\" \"bad record,\" and \"don’t upgrade a status unless\" are blunt. There is some mild hedging with \"likely\" and \"probable,\" so it’s not fully hard-edged."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strong use of bullets, numbered steps, a table, and a status list. The response is highly structured and checklist-like throughout."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative and efficient: it gives a usable framework and ends with \"If you want, I can turn this into a blank fill-in grid.\" It doesn’t overtake the task, though it is somewhat prescriptive in how to do the reconstruction."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "It explicitly pushes back on weak evidence and bad assumptions: \"mark it as disputed,\" \"treat it as bad record or disputed until proven otherwise,\" and \"Don’t upgrade a status unless a higher source supports it.\""
+        }
+      ]
+    },
+    {
+      "turn": 4,
+      "agent_response": "## Tie-breaker ladder\n\nUse this order:\n\n1. **Signed SOW / contract / change order**\n2. **Written approval email from the decision-maker**\n3. **Invoice / PO / billing record**\n4. **Vendor email recap / thread**\n5. **Spreadsheet / tracker**\n6. **Chat / verbal recap / memory**\n\n### Conflict rules\n- If **A is a signed SOW** and **B is an email recap**, **A wins on scope**.\n- If **A is an approval email** and **B is an invoice**, **A wins on authorization**; **B may still control billing** if it is the first billing record tied to the approved scope.\n- If dates conflict, use:\n  1. **event date**\n  2. **sent date**\n  3. **file-created date**\n  \n  unless the later record is the **first record that actually creates the obligation**.\n\n### Practical rule\n- Higher source wins on the thing it actually controls:\n  - **scope**\n  - **approval**\n  - **billing**\n  - **timing**\n- Lower source can still be useful for support, but not for overriding.\n\n---\n\n## Invoice decision tree\n\n1. **Can it be tied to a scope item?**\n   - **No** → classify as **unmatched**\n   - **Yes** → go to 2\n\n2. **Does the amount match the approved scope or a known partial amount?**\n   - **Yes** → go to 3\n   - **No** → go to 4\n\n3. **Does the numbering sequence suggest a normal billing flow?**\n   - **Yes** → check for contradiction in higher source\n   - **No** → check if it looks like a replacement or duplicate\n\n4. **Does the numbering / reference suggest replacement, consolidation, or duplicate?**\n   - **Replacement / consolidation likely** → classify as **probable billing lag or renumber**\n   - **Duplicate / no clean link** → classify as **bad record**\n   - **Unclear** → classify as **disputed**\n\n5. **Does any higher source contradict it?**\n   - **Yes** → keep as **disputed**\n   - **No** → classify based on steps 1–4\n\n### Final invoice classes\n- **Verified** = tied to scope, amount matches, no higher conflict\n- **Probable** = likely billing lag or renumber, but not fully locked\n- **Disputed** = conflicting with higher source or unclear mapping\n- **Absent** = expected invoice trail missing\n- **Irrelevant** = not tied to the issue you’re tracing\n\n---\n\n## Blank work grid\n\n| Item | Source | Reliability | Conflict type | Impact | Why it matters | Action | Status |\n|---|---|---:|---|---|---|---|---|\n|  |  |  |  |  |  |  |  |\n\n### Status options\n- **Verified**\n- **Probable**\n- **Disputed**\n- **Absent**\n- **Irrelevant**\n\n### Fast fill rule\n- **Impact** = scope / approval / timing / billing / ownership / none\n- **Why it matters** = what changes if this item is true\n- **Action** = verify / map / hold / ignore / ask / escalate",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly concise and structured, with compact rules and a blank grid. Some extra detail remains, but it avoids long prose and gets to the point."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Fairly direct and unsentimental: phrases like \"Higher source wins\" and \"classify as bad record\" are blunt. It does use some hedging words like \"likely\" and \"unclear,\" so not maximally unsoftened."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strong use of bullets, numbered steps, and a table. The response is highly checklist-like and easy to scan."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "It supports collaboration by giving a framework the user can apply, including a \"Blank work grid\" and \"Action\" fields like \"verify / map / hold / ignore / ask / escalate.\" It is somewhat prescriptive, but still leaves room for the user to fill in details."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "It does push back on weak evidence and hidden issues with rules like \"Higher source wins\" and classifications such as \"disputed\" or \"bad record.\" It flags contradictions, though it does so in a procedural rather than especially forceful way."
+        }
+      ]
+    }
+  ]
+}

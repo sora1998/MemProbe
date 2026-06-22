@@ -1,0 +1,36 @@
+{
+  "user_id": "user_021",
+  "task": "My dirt bike has a couple small issues at once, and I’m trying to get it rideable again without overdoing it. Can you help me map out the fastest way to check what’s worth fixing first and what I can probably leave alone for now?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.5,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yep — fastest way is to sort it by **rideability** and **likelihood of being the root cause**.\n\n## Fix first\nThese are the stuff that can strand you or make every other check misleading:\n\n- **Won’t start / hard start**\n- **Cuts out under load**\n- **Fuel starvation / flooding**\n- **Air leak / vacuum leak**\n- **Weak spark / plug issue**\n- **Compression / valve issue on 4T**\n- **Chain / brake / tire safety problems**\n\n## Usually leave for later\nIf the bike runs and rides, these can wait:\n\n- cosmetics\n- small leaks that aren’t getting worse\n- sticky controls that still work\n- noisy plastics / mounts\n- worn grips / seat cover\n- minor jetting perfection\n- suspension tuning\n\n## Fast triage order\n### 1) Safety check\nBefore chasing engine problems:\n- brakes\n- tires\n- chain\n- throttle snaps back\n- clutch works\n- no fuel leaks\n\n### 2) Does it start and idle?\n- **No start** → spark, fuel, compression\n- **Starts but won’t idle** → pilot circuit, air leak, valve clearance on 4T\n- **Idles but bogs** → fuel delivery, air leak, ignition under load\n- **Cuts out hot** → heat-related spark issue, fuel cap vent, coil/CDI, 4T valve tightness\n\n### 3) Quick plug read\n- **Dry plug** = likely fuel delivery / carb / injector issue\n- **Wet plug** = flooding, weak spark, or too much choke\n- **Black sooty** = rich\n- **White / blistered** = lean or air leak\n\n### 4) 2T vs 4T\n**2-stroke**\n- check carb, reeds, crank seals, exhaust clogging\n- air leaks matter a lot\n- compression can still be “okay” but not actually good enough to run right\n\n**4-stroke**\n- valve clearance is a big one, especially if hot starts are bad\n- tight valves can mimic carb problems\n- if it runs worse hot than cold, check valves early\n\n## Best way to avoid overdoing it\nOnly fix the thing that:\n1. **prevents riding**\n2. **could be causing multiple symptoms**\n3. **is cheap/easy to verify**\n\nSo if you’ve got, say, a hard start plus bogging:\n- check **plug / spark**\n- check **fuel flow**\n- check **air leak**\n- on 4T, check **valves**\n- only then mess with carb parts\n\nIf you want, I can turn this into a **super short decision tree** like:\n- **won’t start**\n- **starts but bogs**\n- **cuts out hot**\n- **runs but feels weak**\n\nwith **2T / 4T split** and the exact order to check each one.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, but make it tighter. I don’t want a whole lecture — just a quick order that actually saves time.\n\nLike:\n1) safety stuff first\n2) spark/fuel\n3) air leak\n4) compression/valves if it’s a 4T\n5) then carb tune / tiny stuff\n\nAnd split it for **2T vs 4T**, because that matters. If you can, give me a simple “if this symptom, check this first” list. I’m trying not to tear half the bike apart for no reason.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yep — here’s the **fast no-BS order**.\n\n## 1) Safety first\n- brakes\n- tires\n- chain\n- throttle snaps back\n- no fuel leaks\n\n## 2) If it won’t run right, check in this order\n**spark / plug → fuel → air leak → compression / valves (4T) → carb tune**\n\n## 3) Symptom order\n\n### Won’t start\n- **2T:** plug / spark, fuel to carb, choke effect, compression\n- **4T:** plug / spark, fuel, **valve clearance**, compression\n\n**Big tells:**\n- **dry plug** = fuel issue\n- **wet plug** = flooding / weak spark\n- **choke helps** = lean / fuel delivery\n- **hot start sucks on 4T** = check valves early\n\n### Starts but bogs off idle\n- **2T:** pilot jet / air leak / reeds\n- **4T:** pilot jet / air leak / valve clearance\n\n### Bogs mid or full throttle\n- **2T:** main jet / fuel flow / exhaust restriction\n- **4T:** main jet / fuel flow / valve issue if it’s worse hot\n\n### Cuts out hot\n- **2T:** fuel cap vent, coil/CDI, air leak, plug\n- **4T:** **valves first**, then spark / fuel cap vent / coil\n\n## 4) What to leave alone for now\n- perfect jetting\n- cosmetics\n- small seepage that isn’t getting worse\n- suspension tuning\n\nIf you want, I can turn this into a **one-line decision tree** you can screenshot.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s about the right order. Tight enough.\n\n2T:\n- safety stuff\n- spark / plug\n- fuel flow\n- air leak\n- reeds / compression\n- carb tune\n\n4T:\n- safety stuff\n- spark / plug\n- fuel flow\n- air leak\n- valve clearance / compression\n- carb tune\n\nQuick symptom cheat:\n- **won’t start** → plug/spark first\n- **dry plug** → fuel\n- **wet plug** → flooding / weak spark\n- **starts then bogs** → air leak or carb circuit\n- **hot start bad on 4T** → valves first\n- **cuts out hot** → vent / spark / valves\n\nLeave the tiny stuff alone unless the bike already runs and the problem is still there. That's the part people waste time on.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    }
+  ]
+}

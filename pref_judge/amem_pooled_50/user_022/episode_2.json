@@ -1,0 +1,104 @@
+{
+  "user_id": "user_022",
+  "task": "I’ve got a process issue at work that keeps pointing to the wrong place, and I don’t want to chase symptoms. Can you help me map out a clean way to narrow it down without missing the real source?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "formality_preference",
+      "short": "Neutral-professional, not chatty",
+      "explanation": "She comes across as someone who would want interactions to stay professional and efficient rather than overly casual. Her practical, work-focused style suggests she’d prefer clear communication without unnecessary friendliness or performance."
+    },
+    {
+      "idx": 2,
+      "dimension": "verbosity_preference",
+      "short": "Moderate detail, enough to act",
+      "explanation": "She likely wants enough explanation to understand the issue and proceed correctly, but not a long lecture. Her preference for efficiency and clear facts points to responses that are concise while still covering the important steps."
+    },
+    {
+      "idx": 3,
+      "dimension": "directness_preference",
+      "short": "Straightforward over softened wording",
+      "explanation": "She seems to value blunt clarity more than emotional cushioning. In a technical setting, she would probably prefer the assistant to state the problem, the likely cause, and the fix plainly."
+    },
+    {
+      "idx": 4,
+      "dimension": "format_preference",
+      "short": "Bullets and checklists over prose",
+      "explanation": "Her checklist-oriented habits and notebook procedure style fit a structured presentation. She would likely do best with information broken into steps, bullets, or a quick checklist she can follow without re-reading dense paragraphs."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Wants firm correction when something is off",
+      "explanation": "She appears unlikely to want vague agreement if a detail is wrong or risky. Her real-world habit of correcting spec errors suggests she’d appreciate the assistant flagging mistakes directly and not letting questionable assumptions slide."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — I can help with that.\n\nA good way to avoid chasing symptoms is to build a simple **fault-isolation tree**:\n\n1. **Start with the observable symptom**\n   - What exactly is happening?\n   - How often?\n   - Under what conditions?\n   - What changed right before it started?\n\n2. **Separate symptom from cause**\n   - Ask: is this a **one-off failure**, a **repeatable pattern**, or a **downstream effect**?\n   - If multiple things look wrong, identify which one appears first in the timeline.\n\n3. **Check the few highest-value indicators first**\n   - The goal is to find the smallest set of checks that split the problem into distinct branches.\n   - Usually that means:\n     - where the process first diverges\n     - whether the issue is isolated or systemic\n     - whether it follows one person, one machine, one shift, one input, or one location\n\n4. **Use branch logic**\n   - If the problem follows one source consistently, inspect that source.\n   - If it appears across sources, look at the shared step.\n   - If it only happens under certain conditions, compare good vs bad runs under the same conditions.\n\n5. **Test the most likely root causes before the noisy ones**\n   - Common branches:\n     - input/material issue\n     - equipment/tool issue\n     - procedure/work instruction issue\n     - timing/sequence issue\n     - handoff/communication issue\n     - measurement/inspection issue\n\n6. **Confirm with a discriminating test**\n   - Don’t just ask “what could cause this?”\n   - Ask “what result would prove this branch is wrong?”\n   - That keeps you from piling on assumptions.\n\nIf you want, I can turn this into a **compact decision tree** in the same style as the car-diagnostic one:\n- symptom first\n- 2–3 key checks\n- cutoff/pattern\n- next branch\n\nIf you describe the process issue, I’ll map it out tightly.",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly neutral-professional and efficient: \"Yes — I can help with that\" and the structured guidance stay worklike. Slightly conversational with \"If you want\" and \"I’ll map it out tightly,\" but not overly chatty."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Moderate detail with actionable steps. It gives enough to proceed—\"fault-isolation tree,\" numbered steps, and concrete checks—without becoming a long lecture. Could be a bit more concise, but fits well."
+        },
+        {
+          "idx": 3,
+          "score": 4,
+          "reason": "Generally straightforward and plain: \"Separate symptom from cause,\" \"Test the most likely root causes,\" and \"what result would prove this branch is wrong?\" The wording is clear, though not especially blunt."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong match: the response is heavily structured with a numbered list, sub-bullets, and a checklist-like flow. It explicitly offers a \"compact decision tree\" and \"2–3 key checks.\""
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "It does provide firm corrective guidance: \"Don’t just ask 'what could cause this?'\" and \"what result would prove this branch is wrong?\" That said, it doesn’t directly push back on any specific mistaken assumption because none was presented."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Absolutely — here’s a tighter **field checklist / branch tree** you can actually use.\n\n## 1) Start at the first bad point\n**Question:** Where does the process first become different from a good run?\n\n- **If you can name the first bad step:** start there.\n- **If you only see the final failure:** walk backward until you find the first measurable difference.\n- **Hard stop:** don’t blame downstream steps until the first divergence is identified.\n\n---\n\n## 2) Sort the problem into one of 3 buckets\nAt the first bad point, ask:\n\n### A. Bad input?\nCompare the **input to the step** between good and bad runs:\n- same material / file / order / spec?\n- same starting condition?\n- same timing / quantity / version / request?\n\n**Pattern:** the step fails only when the incoming input is different.  \n**Hard stop:** if the input is clearly different and explains the failure, stop blaming the process step itself.\n\n### B. Process drift?\nCompare the **step execution** between good and bad runs:\n- same person / machine / shift / method?\n- same sequence?\n- same timing?\n- same settings / parameters?\n\n**Pattern:** input is the same, but the step behaves differently.  \n**Hard stop:** if the step is being done differently, don’t blame upstream input yet.\n\n### C. Bad measurement?\nCompare the **measurement/inspection** between good and bad runs:\n- same metric?\n- same tool?\n- same calibration?\n- same person measuring?\n- same definition of pass/fail?\n\n**Pattern:** the process looks bad only because the measurement changed or is noisy.  \n**Hard stop:** if the measurement is suspect, don’t keep diagnosing the process until the measurement is verified.\n\n---\n\n## 3) Compare good runs vs bad runs\nFor the same step, compare only the variables that should matter.\n\n### Use this comparison order:\n1. **Input**\n2. **Setting / method**\n3. **Operator / owner**\n4. **Machine / tool**\n5. **Timing / environment**\n6. **Measurement**\n\nIf one of those differs between good and bad runs, that’s your branch.\n\n---\n\n## 4) Branch logic\n### If the same input works sometimes and fails other times:\n→ look at **process drift**  \nCheck:\n- sequence\n- timing\n- settings\n- handoff\n- operator variation\n- machine state\n\n**Quit blaming input** unless you can prove the input is actually different.\n\n---\n\n### If different input fails but good input works:\n→ look at **bad input**\nCheck:\n- source\n- version\n- spec\n- quality\n- contamination / corruption / damage\n- missing prerequisite\n\n**Quit blaming the process** unless the same input also fails.\n\n---\n\n### If the process looks bad only on one gauge / report / inspection method:\n→ look at **bad measurement**\nCheck:\n- calibration\n- repeatability\n- sampling method\n- definition of defect\n- threshold / rounding / timing of measurement\n\n**Quit blaming the process** until the measurement is confirmed.\n\n---\n\n## 5) Hard-stop rules\nUse these to avoid wandering:\n\n- **If the first bad point is not identified, stop and find it.**\n- **If input differs and explains the failure, stop there.**\n- **If the step is being done differently, stop blaming input.**\n- **If the measurement is unstable or inconsistent, stop blaming the process.**\n- **If good and bad runs don’t differ on the suspected variable, drop that branch.**\n\n---\n\n## 6) Minimal worksheet\nFor each good run and bad run, write:\n\n- First bad point:\n- Input to that point:\n- Step method/settings:\n- Operator/machine:\n- Timing/environment:\n- Measurement used:\n- What differs from good run?\n\nIf you want, I can turn this into a **one-page decision tree** with:\n- symptom first\n- 2–3 checks per branch\n- cutoff rules\n- next test at each step\n\nIf you give me the actual process issue, I’ll map it into this format.",
+      "score": 5.0,
+      "summary": "mean=5.00 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:0, 5:5}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Neutral-professional and efficient: uses a practical checklist tone, e.g. \"here’s a tighter field checklist / branch tree you can actually use\" and avoids chatty filler."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Moderate detail with actionable steps: gives a structured 6-part framework, hard-stop rules, and a minimal worksheet without becoming a long lecture."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Very direct and plainspoken: phrases like \"don’t blame downstream steps\" and \"Quit blaming the process\" state the logic bluntly and clearly."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strongly matches bullet/checklist preference: the response is organized into numbered sections, bullets, and a worksheet rather than prose."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Provides firm correction and pushback: repeatedly uses hard stops and explicit corrections such as \"don’t blame upstream input yet\" and \"stop blaming the process\"."
+        }
+      ]
+    }
+  ]
+}

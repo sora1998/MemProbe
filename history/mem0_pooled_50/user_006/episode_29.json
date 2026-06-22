@@ -1,0 +1,36 @@
+{
+  "user_id": "user_006",
+  "task": "I’m putting together a quick prep note for a network change later today, and I want it to be easy to follow while I’m working. What should I make sure is checked before starting, and what sequence would you use for the first few steps?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.2,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Here’s a simple prep/check sequence you can follow before you start:\n\n### Before you begin\n1. **Confirm the baseline**\n   - Record current path, latency, loss, and any key counters on the affected link/device.\n2. **Save a rollback copy**\n   - Export or back up the current config so you can restore quickly.\n3. **Verify access if the main path fails**\n   - Make sure OOB/console access is working.\n4. **Keep a live session open**\n   - Have an SSH/console session ready before making the change.\n5. **Set a clear rollback point**\n   - Decide in advance what will trigger rollback.\n6. **Mute noncritical alerts temporarily**\n   - So you can tell real issues from noise.\n\n### First few steps during the change\n1. **Freeze other work**\n   - Pause unrelated changes and note the start time.\n2. **Apply only one change**\n   - Don’t bundle steps together.\n3. **Wait 30–60 seconds**\n   - Then check:\n   - reachability\n   - link status\n   - counters for stability\n   - next-hop responses\n   - successful pings\n4. **If traffic shifts, pause briefly**\n   - Let routing/convergence settle before deciding.\n5. **Check intended path and service health**\n   - Confirm latency/loss are near baseline and counters look normal.\n\n### If anything looks wrong, check these first\n1. **The last change you made**\n2. **Interface/link state and counters**\n3. **Path validation**  \n   - Is traffic going where you expected?\n\nIf you want, I can turn this into a **tight checklist format** you can paste into your change note.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, close. But I want it tighter and more field-useful.\n\nWhat I’d want checked before touching anything:\n- current config export saved locally and somewhere else\n- baseline: ping/latency/loss, interface errors, route/path, CPU/mem if the box is already hot\n- console/OOB verified, not just assumed\n- rollback step written down, not in your head\n- maintenance window + who’s actually watching it\n- any dependencies: upstream/downstream device, VPN, ACLs, VLANs, whatever the change touches\n\nSequence I’d use first:\n1. snapshot baseline\n2. verify access/rollback\n3. make the smallest change possible\n4. wait for convergence/stability\n5. recheck counters + traffic path\n6. only then move to the next step\n\nI’d also add one thing you skipped: if it’s an industrial or warehouse site, check physical layer stuff first — optics, patching, heat, port flaps. I’ve had an outage that looked like routing garbage and it was a bad transceiver the whole time.\n\nIf you want, I can compress this into a one-page change note template with checkboxes.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Absolutely — here’s a tighter, field-useful version you can paste into a prep note.\n\n## Before touching anything\n- **Save config locally and off-box**\n- **Capture baseline**\n  - ping / latency / loss\n  - interface errors / flaps / counters\n  - route/path\n  - CPU / memory if the device is already busy\n- **Verify console / OOB access**\n  - don’t assume it works\n- **Write down rollback**\n  - exact step, not just “revert if needed”\n- **Confirm window + watcher**\n  - who’s monitoring, and for how long\n- **Check dependencies**\n  - upstream/downstream device\n  - VPN\n  - ACLs\n  - VLANs\n  - any other path the change touches\n- **If physical layer is in play, check it first**\n  - optics / patching / heat / port flaps / DOM if available\n\n## First steps during the change\n1. **Snapshot baseline**\n2. **Verify access and rollback path**\n3. **Make the smallest change possible**\n4. **Wait for convergence / stability**\n5. **Recheck counters + path + traffic**\n6. **Only then move to the next step**\n\n## First things to look at if it misbehaves\n- **What changed last**\n- **Interface state and counters**\n- **Whether traffic is taking the expected path**\n- **Whether the failure is physical, L2, L3, or policy-related**\n\nIf you want, I can turn this into a **super-short checkbox template** for your change ticket.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s it. Tight enough to actually use.\n\nI’d keep it basically like this in the note:\n\n**Before touching anything**\n- save config locally + off-box\n- baseline: ping/latency/loss, interface errors/flaps/counters, route/path, CPU/mem if the box is already hot\n- verify console/OOB\n- write the rollback step down\n- confirm who’s watching the window\n- check dependencies: upstream/downstream, VPN, ACLs, VLANs, anything the change can hit\n- if there’s physical layer risk, check optics/patching/heat/DOM/port flaps first\n\n**First steps**\n1. snapshot baseline\n2. verify access + rollback\n3. smallest change possible\n4. wait for stability/convergence\n5. recheck counters + path + traffic\n6. then move on\n\nThat’s usable. No fluff.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    }
+  ]
+}

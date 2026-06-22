@@ -1,0 +1,36 @@
+{
+  "user_id": "user_006",
+  "task": "I’m preparing a standard maintenance request for a small network fix and want to make sure it has the basic details someone reviewing it would expect. What information usually needs to be included so the request is easy to evaluate, and what supporting notes tend to matter if it gets checked later?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.1,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "A good standard maintenance request for a small network fix usually includes enough detail for someone to understand **what you want done, why, where, when, and how risky it is**.\n\n### Basic information to include\n- **Request title / summary**  \n  A short description of the issue or change.\n\n- **Requester details**  \n  Your name, team, contact info, and any approver or owner if applicable.\n\n- **Location / affected area**  \n  Site, room, rack, VLAN, subnet, device name, or system involved.\n\n- **Problem or reason for the request**  \n  What is broken, degraded, or needs to be updated.\n\n- **Requested action**  \n  Exactly what you want changed or fixed.\n\n- **Affected equipment / services**  \n  Switches, routers, access points, cables, ports, IPs, users, applications, or services impacted.\n\n- **Priority / urgency**  \n  How important it is and whether there is a deadline.\n\n- **Preferred maintenance window**  \n  Date/time when the work should happen, plus any blackout constraints.\n\n- **Expected impact / downtime**  \n  Whether service interruption is expected, how long, and who may be affected.\n\n- **Rollback or fallback plan**  \n  What should be done if the fix fails or causes issues.\n\n- **Validation / success criteria**  \n  How you will confirm the fix worked.\n\n### Supporting notes that matter later\nThese are the details that help if the request is reviewed, audited, or revisited:\n\n- **Background context**  \n  When the issue started, what changed before it happened, and any related tickets/incidents.\n\n- **Troubleshooting already performed**  \n  Tests, checks, logs, screenshots, ping/traceroute results, port status, etc.\n\n- **Dependencies and risks**  \n  Anything else that could be affected, such as upstream/downstream devices or shared services.\n\n- **Change history**  \n  Prior fixes, config changes, or similar issues on the same equipment.\n\n- **References**  \n  Ticket numbers, monitoring alerts, diagrams, asset IDs, or config versions.\n\n- **Approval notes**  \n  Who approved it and any conditions attached.\n\n- **Post-change notes**  \n  What was actually done, outcome, timestamps, and any follow-up needed.\n\nIf you want, I can also turn this into a **simple maintenance request template** you can copy and fill in.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s the skeleton. Missing the stuff that actually saves you later:\n\n- exact device IDs / hostnames\n- circuit or port numbers\n- current config state, if it matters\n- what changed right before the issue\n- timestamps for when it started\n- proof you already checked the obvious junk\n- who gets hit if it fails\n- rollback steps, not just \"we’ll revert\"\n- a clean success check\n\nIf it’s getting reviewed later, logs, screenshots, work order trail, and any before/after config diff matter more than the fluff. I’ve had this exact kind of thing turn into a blame game before — timestamps and photos are what keep it from becoming your problem.\n\nIf you want, I can turn it into a tight maintenance request form with fields in the order I’d actually use.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.0
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Absolutely — for a small network fix, the request is easier to approve and much easier to defend later if it includes the operational details, not just the summary.\n\n### What to include in the request\n- **Request summary**\n  - One-line description of the fix\n\n- **Exact affected asset(s)**\n  - Device IDs, hostnames, circuit IDs, port numbers, IPs, VLANs, rack/room/site\n\n- **Problem statement**\n  - What is failing or degraded, and how it is being observed\n\n- **When it started**\n  - Exact timestamp or best estimate, plus timezone if relevant\n\n- **What changed before it happened**\n  - Any config, cabling, firmware, power, ISP, or user-side changes\n\n- **Current state**\n  - Relevant config state, interface status, alarms, error counters, or symptoms\n\n- **Work already done**\n  - Basic checks already completed so reviewers know this isn’t a guess\n\n- **Requested action**\n  - The specific change or repair needed\n\n- **Who is affected**\n  - Users, teams, services, sites, or applications impacted if it fails\n\n- **Maintenance window**\n  - Preferred date/time and any blackout constraints\n\n- **Risk / impact**\n  - Expected downtime, service interruption, or side effects\n\n- **Rollback plan**\n  - Exact revert steps, not just “we’ll back it out”\n\n- **Success criteria**\n  - Clear test that proves the fix worked\n\n### Supporting notes that help later\n- **Logs / screenshots / photos**\n- **Before-and-after config diff**\n- **Troubleshooting evidence**\n- **Related ticket, incident, or change number**\n- **Approval trail**\n- **Post-change result and timestamps**\n\n### A practical field order\nIf you want it to read cleanly, use this order:\n\n1. Summary  \n2. Affected device / circuit / port  \n3. Problem and start time  \n4. What changed before it started  \n5. Current state / evidence  \n6. Work already performed  \n7. Requested fix  \n8. Impact if unsuccessful  \n9. Rollback steps  \n10. Success check  \n11. Attachments / references  \n\nIf you want, I can turn that into a **copy-paste maintenance request template** with fill-in blanks.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s the usable version.\n\nThe part people miss is the order. Put the identifiers and timing up top, then the evidence, then the action. If I’m reviewing it, I want:\n\n- exact asset IDs / hostnames / port or circuit numbers\n- when it started, with timezone if it matters\n- what changed right before it broke\n- current state: logs, alarms, counters, config snapshot\n- what you already checked so nobody wastes time rerunning basics\n- the exact fix requested\n- who gets burned if it fails\n- rollback steps that are actually executable\n- success criteria that can be verified fast\n- attachments: screenshots, photos, diffs, ticket trail\n\nThat’s the stuff that keeps the request from turning into a blame exercise later.\n\nIf you want the next step, I can give you a clean fill-in form in the order I’d actually use.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    }
+  ]
+}

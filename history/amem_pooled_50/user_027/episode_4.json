@@ -1,0 +1,36 @@
+{
+  "user_id": "user_027",
+  "task": "I’ve got a translation cleanup that’s turning into a bit of a tangle: one source file has inconsistent terms, a couple of scanned pages are hard to read, and there are handwritten corrections in the margins. Can you help me figure out a sensible way to tackle it without missing anything important?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.699999999999999,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — a good way to handle it is to separate the job into a few passes so you don’t mix up uncertainty with actual content.\n\nA sensible workflow:\n\n1. **Make a clean working copy**\n   - Keep the originals untouched.\n   - If possible, name files clearly by source/page number.\n\n2. **Do a first pass for structure**\n   - Mark each page as:\n     - clear scan\n     - faint/partly unreadable\n     - handwritten notes present\n   - Note any missing pages or obvious damage.\n\n3. **Extract the readable text first**\n   - Transcribe only what is legible.\n   - Don’t “fix” wording yet.\n   - For unclear spots, use a placeholder like:\n     - `[illegible]`\n     - `[unclear word]`\n     - `[handwritten note]`\n\n4. **Separate original text from margin corrections**\n   - Treat handwritten changes as edits to review, not automatic replacements.\n   - If a margin note clearly changes a word or phrase, record both:\n     - original text\n     - suggested correction\n\n5. **Build a term list**\n   - List inconsistent terms side by side.\n   - Decide which terms are likely the intended standard form.\n   - Flag anything that could change meaning, especially names, dates, technical terms, or legal/official wording.\n\n6. **Compare against context**\n   - Check surrounding sentences and repeated usage.\n   - If the same term appears several times, consistency may help identify the intended version.\n\n7. **Flag uncertainties instead of guessing**\n   - Anything unreadable or ambiguous should be marked for review.\n   - Better to note “possible X” than silently choose the wrong term.\n\n8. **Do a final consistency pass**\n   - Check spelling, terminology, numbering, dates, and names.\n   - Make sure corrections from margins were applied consistently.\n\nIf you want, I can also help you set up a simple review template for this — something like:\n- page number\n- original text\n- handwritten correction\n- confidence level\n- needs review\n\nIf you paste a sample page or a few messy lines, I can help you sort out the safest wording and what should be flagged.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s the right shape. I’d want one more layer on it, though — a way to track uncertainty without letting it spread.\n\nWhat I usually do:\n- make a page-by-page log\n- separate clear text / doubtful text / margin edits\n- keep a term sheet for anything repeated\n- mark whether a correction is obvious, probable, or just a guess\n\nFor the handwritten stuff, I wouldn’t just treat every margin note the same. Some are real corrections, some are just someone’s later thought or shorthand. If the scan is weak, I’d cross-check against every repeat of that term before changing it.\n\nIf you want, I can lay this out as a simple working template you can actually use while going through the file.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — that’s a good next layer, and it’s exactly how I’d keep the uncertainty contained.\n\nA simple working template could look like this:\n\n### Page log\n| Page | Clear text | Doubtful text | Margin note | Action | Confidence |\n|---|---|---|---|---|---|\n| 1 | … | … | … | keep / review / apply | obvious / probable / guess |\n\n### Term sheet\n| Term as found | Other variants | Likely standard form | Where seen | Notes |\n|---|---|---|---|---|\n| … | … | … | p. 2, 5, 8 | check context |\n\n### Margin note tracker\n| Page | Margin note | Looks like | Treat as | Reason |\n|---|---|---|---|---|\n| 3 | … | correction / comment / shorthand | apply / flag / ignore for now | … |\n\n### Confidence tags\nUse just three levels so it stays usable:\n- **Obvious** — clear correction, safe to apply\n- **Probable** — likely right, but worth a quick cross-check\n- **Guess** — don’t change the base text; flag it\n\n### Rule of thumb\n- **Never overwrite the source reading in your notes**\n- Keep the original text and the proposed correction side by side\n- If a margin note is unclear, treat it as a note, not a correction\n- If the same term appears repeatedly, confirm it against the repeats before standardizing it\n\nIf you want, I can turn this into a one-page fill-in template you can copy into Word or Excel.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s usable. The three confidence levels are about right — obvious, probable, guess — keeps it from getting muddy.\n\nA one-page fill-in template would help. Something I can drop into Word or a spreadsheet without fiddling with it much. If you lay it out with page log, term sheet, and margin tracker all in one place, that’s probably enough.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    }
+  ]
+}

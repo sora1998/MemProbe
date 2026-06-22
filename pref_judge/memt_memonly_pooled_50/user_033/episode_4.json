@@ -1,0 +1,236 @@
+{
+  "user_id": "user_033",
+  "task": "I’ve got a run in progress that’s drifting a little, and I don’t want to let it keep going if it’s headed for junk data. Can you help me think through what I should watch for and when it’s smarter to stop, reset, or keep going?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "formality_preference",
+      "short": "Prefers professional, no-nonsense interaction",
+      "explanation": "She would likely respond best to a controlled, businesslike style rather than friendliness for its own sake. Given her guarded and precision-focused persona, overly casual phrasing would probably feel sloppy or intrusive."
+    },
+    {
+      "idx": 2,
+      "dimension": "verbosity_preference",
+      "short": "Wants concise answers, not rambling",
+      "explanation": "She seems to value efficiency and would likely dislike long-winded explanations that repeat themselves. She probably wants enough information to act on, with no decorative padding."
+    },
+    {
+      "idx": 3,
+      "dimension": "directness_preference",
+      "short": "Prefers blunt, unsoftened answers",
+      "explanation": "Her skeptical, control-oriented style suggests she would rather hear the point plainly than receive hedged reassurance. She is likely to trust answers more when they are explicit about risks, limits, and conclusions."
+    },
+    {
+      "idx": 4,
+      "dimension": "format_preference",
+      "short": "Likes structured lists and checklists",
+      "explanation": "She appears to prefer information that is organized and easy to verify. A clean format with steps, bullets, or checklists would fit her habit of tracking details and would reduce ambiguity."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Accepts firm correction when needed",
+      "explanation": "She likely does not want the assistant to simply echo her assumptions if something is wrong or risky. A direct challenge, especially when backed by evidence, would probably be more useful to her than polite agreement."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes. Use a simple **stop / reset / continue** check so you don’t wait until the data are unusable.\n\n## 1) First decide: is this a hard stop or a borderline drift?\n### Stop immediately if any of these are true:\n- The run is **touching or crossing a limit**\n- You’re **not sure** about sample identity, integrity, or method validity\n- There’s a clear **instrument failure** or control failure\n- The drift is large enough that the result is no longer trustworthy\n\n### Borderline drift:\n- The run is still **inside the limit**, but moving the wrong way\n- The issue is near the decision boundary\n- You’re unsure whether it will stay acceptable\n\n## 2) What to watch for in a drifting run\nCheck the simplest, most likely causes first:\n\n1. **Instrument drift**\n   - Control check trending out\n   - Calibration check weakening\n   - Baseline or response shifting over time\n\n2. **Reagent / consumable age**\n   - Old or unstable reagent\n   - Expired or near-expiry material\n   - Storage condition problems\n\n3. **Handling / setup error**\n   - Timing inconsistency\n   - Sample prep variation\n   - Analyst notes showing unusual steps\n   - Wrong vessel / position / sequence / labeling issue\n\n4. **Environment / process conditions**\n   - Temperature change\n   - Hold-time effects\n   - Vibration, evaporation, airflow, or other setup instability\n\n## 3) Practical decision rule\n### Keep going if:\n- The run is **well inside the limit**\n- Drift is small and stable\n- QC / control checks are still acceptable\n- No identity, integrity, or validity concerns exist\n\n### Reset or pause if:\n- The drift is **getting worse**\n- A control check is trending toward failure\n- You suspect setup, timing, or environmental instability\n- You can correct the issue quickly and re-establish confidence\n\n### Stop and hold if:\n- The run is at or near the cutoff\n- A control fails or instrument drift is confirmed\n- You can’t explain the drift quickly\n- There’s any doubt about data validity\n\n## 4) A fast triage sequence\n1. **Check the current position vs. limit**\n2. **Run or review the control/calibration check**\n3. **Verify reagent age and storage**\n4. **Review analyst notes and setup**\n5. **Decide continue, reset, or hold**\n\n## 5) Rule of thumb\n- **Well inside limit + no QC problem = continue**\n- **Near limit + worsening trend = reset or stop**\n- **At limit, failed control, or uncertainty about validity = stop and hold**\n\nIf you want, I can turn this into a **one-page run sign-off checklist** with hard-stop and borderline sections.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Professional and controlled throughout: \"Use a simple stop / reset / continue check\" and the response stays businesslike, not chatty."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly concise and action-oriented, with compact sections and a clear rule of thumb. Slightly longer than minimal, but not rambling."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Blunt and explicit: \"Stop immediately if any of these are true,\" \"Stop and hold if,\" and \"At limit, failed control, or uncertainty about validity = stop and hold.\""
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong structured formatting with numbered sections, bullet lists, and a checklist-like \"Fast triage sequence.\""
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Provides firm correction and clear thresholds instead of just agreeing, e.g. \"Stop immediately\" and \"At limit... = stop and hold.\""
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — for a **live run**, I’d use a tighter triage like this:\n\n## 1) First question: is the drift **systematic** or **random**?\n### Smells like instrument drift if:\n- The change is **smooth and monotonic** over time\n- Multiple positions / samples shift in the **same direction**\n- The control or baseline moves **gradually**, not in jumps\n- The pattern tracks **time in the run**, not a specific sample\n\n### Smells like prep / handling error if:\n- One sample is **off by itself**\n- The problem appears as an **isolated outlier**\n- There’s a **step change** right after a prep event, vial change, or analyst action\n- Replicates disagree in a way that looks **human, not mechanical**\n\n## 2) What pattern points where\n### Instrument drift pattern\n- Early points look fine, later points slide\n- All replicates or channels trend together\n- Control is still “in range” but **walking toward the edge**\n- Baseline/response/retention shifts are **progressive**\n\n### Prep / handling pattern\n- One vessel, one vial, one tube, or one timepoint is weird\n- The bad result is **not mirrored** elsewhere\n- There’s a mismatch between expected sequence and observed result\n- A single analyst step likely explains it better than the instrument does\n\n### Reagent / standard issue\n- The whole run is **shifted**, but not progressively\n- The issue shows up after a reagent/standard change\n- You see a **batch effect**, not a time trend\n\n## 3) Where I’d draw the line on a slightly off control\nIf the control is only **slightly off**, I would not stop just because it’s outside nominal. I’d stop if it is:\n\n- **Moving the wrong way across consecutive checks**\n- **Within shouting distance of the limit** and the run is still long enough to matter\n- **Consistent with the same directional drift** in the samples\n- **Not explainable by a one-off handling event**\n\nIn practice:  \n- **Slightly off but flat** = watch closely, probably continue  \n- **Slightly off and trending** = pause/reset if you can recover confidence quickly  \n- **Slightly off plus sample trend in same direction** = treat as instrument drift until proven otherwise\n\n## 4) Live-run decision tree\n### Continue if:\n- Drift is small and **stable**\n- Control is only slightly off but **not worsening**\n- The sample pattern does **not** show a run-wide shift\n- You can still trust the remaining data\n\n### Pause / reset if:\n- The control is drifting **toward failure**\n- The trend is **system-wide** and getting worse\n- You just changed something and the pattern changed with it\n- A quick correction could restore confidence\n\n### Stop if:\n- The control is **crossing the line** or clearly headed there\n- The drift is **monotonic and unexplained**\n- The run is now likely to generate data you’ll have to discard anyway\n- You can’t separate instrument drift from bad data generation in real time\n\n## 5) Fastest way to separate causes\nAsk:\n1. **Is it one sample or the whole run?**\n2. **Is it gradual or sudden?**\n3. **Did it start after a specific event?**\n4. **Is the control trending the same way?**\n\nIf the answer is:\n- **whole run + gradual + control trending** → instrument drift\n- **one sample + sudden** → prep/handling\n- **after reagent change + run-wide shift** → reagent/standard issue\n\nIf you want, I can turn this into a **live-run “if/then” tree** with very short branches, like something you could use at the bench in 30 seconds.",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Professional and controlled overall: \"I'd use a tighter triage like this\" and the response stays businesslike. Minor friendliness remains in \"If you want, I can turn this into...\" but it is restrained."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly concise and action-oriented, with compact bullets and decision rules. It is somewhat long, but avoids rambling and decorative padding."
+        },
+        {
+          "idx": 3,
+          "score": 4,
+          "reason": "Direct and explicit: \"I would not stop just because it’s outside nominal\" and clear stop/pause/continue thresholds. It gives blunt conclusions, though not aggressively so."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong structured formatting throughout: numbered sections, subheads, bullets, and a decision tree. This is highly organized and easy to verify."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Provides firm correction and clear thresholds rather than just agreeing with the user's concern, e.g. \"I would not stop just because it’s outside nominal\" and \"Stop if...\". It does challenge assumptions, though in a measured tone."
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yes — for a **live run**, I’d use a blunt triage, not a tidy taxonomy.\n\n## 0) First rule\nIf the run is already **close to a decision limit**, be much less tolerant of drift.  \nIf it’s **not close**, don’t overreact to weak signals.\n\n---\n\n## 1) Immediate stop conditions\n**Stop the sequence now** if any of these are true:\n\n- the control is **outside the actual acceptance limit**\n- the drift is **steady and still worsening**\n- the problem is now affecting **multiple later injections / positions**\n- you can’t tell whether the data are still valid\n- the issue would force you to **defend the run later anyway**\n\nThat last one matters: if you already know you’ll be arguing with the data, stop.\n\n---\n\n## 2) If the control is barely off\nThis is the gray zone.\n\n### Keep going only if all of these are true:\n- the control is **slightly off target**, but still **inside the acceptance limit**\n- the shift is **flat**, not trending worse\n- the samples are **not moving in the same direction**\n- the run is **not near a cutoff**\n- the issue is plausibly a one-off and not a run-wide failure\n\n### Stop or reset if:\n- the control is **slightly off and still drifting**\n- late injections are getting worse than early ones\n- the pattern is **systematic**, not random\n- you’re already near the point where a small additional shift would matter\n\nIn practice:  \n- **slightly off + stable + not near limit** → usually continue  \n- **slightly off + steady slope** → pause/reset if you can still salvage confidence  \n- **slightly off + worsening + near limit** → stop\n\n---\n\n## 3) Late injections / later positions\nIf the drift shows up **mostly late**, assume the run is degrading until proven otherwise.\n\n### More likely instrument / run-condition issue if:\n- early injections look normal, later ones slide\n- the shift is **directional**\n- the same pattern appears across multiple later positions\n- the control follows the same late-run deterioration\n\n### More likely prep / handling noise if:\n- only one late sample is ugly\n- the rest of the late sequence is fine\n- the bad point does **not** match the surrounding trend\n- there was a specific handling event right before it\n\n### Practical line:\n- **one ugly late point** = don’t overcall it yet\n- **several late points moving together** = treat as a real run problem\n- **late control also drifting** = stop or reset\n\n---\n\n## 4) Control outside target but inside historical band\nThis is where people waste time.\n\nIf it is **outside target** but still **inside a wider historical band**, ask:\n\n1. Is it **trending** or just sitting there?\n2. Is the run **near the decision boundary**?\n3. Is the same direction showing up in samples?\n4. Would you trust this run if you had to sign it now?\n\n### My rule:\n- **Outside target, inside historical band, but flat** → may continue if the run is otherwise clean\n- **Outside target, inside historical band, and drifting** → do not ignore it\n- **Outside target plus sample shift plus late-run worsening** → stop\n\nHistorical band is not a free pass. It only buys you time if the run is otherwise stable.\n\n---\n\n## 5) One ugly replicate, rest fine\nTreat that as **handling noise first**, but only briefly.\n\n### Probably just noise if:\n- the bad replicate is **isolated**\n- the other replicates agree well\n- there’s no matching control drift\n- the result still lands **well inside** the limit\n- there’s a plausible one-off explanation\n\n### Probably a real fault if:\n- the ugly replicate repeats on the same sample or position\n- the same analyst step could explain it\n- the replicate issue tracks with a later position or specific event\n- the replicate is ugly **and** the control is already borderline\n\n### Practical line:\n- **one bad replicate, others clean, no trend** → keep running, flag it, verify later\n- **one bad replicate plus run drift** → don’t dismiss it as noise\n- **repeat ugly on the same sample/step** → that’s not random anymore\n\n---\n\n## 6) What I check first, in order\nFor a live run, I’d do this:\n\n1. **Is anything outside the real acceptance limit?**\n2. **Is the drift steady or getting worse?**\n3. **Is it only one point, or is it late-run / run-wide?**\n4. **Did it start after a specific action?**\n5. **Is the control moving the same way?**\n\nIf the answer is:\n- **outside limit** → stop\n- **steady worsening** → stop or reset\n- **late-run cluster** → pause and assess\n- **single isolated ugly point** → keep going, but don’t ignore it\n\n---\n\n## 7) Simple live-run rule\n- **Flat and inside limit** → continue\n- **Slightly off but stable** → continue if not near cutoff\n- **Slightly off and trending** → pause/reset\n- **Any clear worsening or multi-point pattern** → stop\n\nIf you want, I can turn this into a very short **bench-style if/then card** with just 6–8 branches.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Uses a controlled, businesslike tone: \"blunt triage, not a tidy taxonomy,\" \"My rule,\" \"Simple live-run rule.\" No casual friendliness or padding."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly concise and action-oriented, with repeated short rules and summaries. It is somewhat long, but avoids rambling and decorative filler."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Very direct and unsoftened: \"Stop the sequence now,\" \"Historical band is not a free pass,\" \"That’s not random anymore.\" It states conclusions plainly and emphasizes risks."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong structured format with numbered sections, bullets, subheads, and a final if/then rule set. Easy to scan and verify."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Provides firm correction and pushback rather than echoing assumptions: \"do not ignore it,\" \"Historical band is not a free pass,\" \"if you already know you’ll be arguing with the data, stop.\""
+        }
+      ]
+    },
+    {
+      "turn": 4,
+      "agent_response": "Yes. Here’s the blunt live-run version.\n\n## First: what you do not overreact to\nDo **not** stop a run for:\n- one isolated weird point\n- a single slightly off control that is **flat**\n- a late-point wobble that does **not repeat**\n- a result that is outside target but still **clearly inside the wider historical band** and not trending\n\nThose are **watch / verify** items, not automatic kills.\n\n---\n\n## The actual stop lines\n\n### 1) Slope / drift\nIf you have **2 consecutive points in the same direction**, that is a real trend.  \nIf you have **3 points in the same direction**, stop pretending it is noise.\n\n**Operational rule:**\n- **1 point**: ignore unless it is a hard failure\n- **2 points same direction**: verify immediately, don’t call it settled\n- **3 points same direction**: treat as real drift; pause or stop\n\nIf the slope is **steady and the control is only barely off**, you do **not** get to call that “fine” just because it is slow. A steady slope is still drift.\n\n---\n\n### 2) Slightly off control\nThis is the line:\n\n- **Slightly off + flat** = usually finish the sequence, then verify\n- **Slightly off + 2-point slope** = pause and check now\n- **Slightly off + 3-point slope** = stop or reset\n- **Slightly off + near the cutoff** = do not be generous; stop sooner\n\nSo no, a clean sample trend does **not** buy you much if the control is already drifting. It buys you **time**, not confidence.\n\n---\n\n### 3) Late injections / late positions only\nIf the early run is fine and only the late positions drift:\n\n- **1 late point** = could be noise or handling\n- **2 late points in a row** = assume the run is degrading\n- **3 late points in a row** = stop\n\nIf the drift is only late, trust it **less than a run-wide trend**, but do **not** ignore it. Late-only drift is often the first sign of:\n- carryover\n- temperature / evaporation issues\n- instrument instability over time\n- sequence fatigue\n\n**Practical line:**  \nIf the late drift is **repeatable across the last 2–3 injections/positions**, treat it as real until proven otherwise.\n\n---\n\n### 4) One ugly replicate\nUse this rule:\n\n- **1 ugly replicate, rest clean** = probably throwaway / handling noise\n- **2 ugly replicates tied to the same sample or step** = stop and investigate\n- **1 ugly replicate plus any run drift** = do not dismiss it as noise\n- **1 ugly replicate that repeats on rerun** = real problem\n\nIf the ugly replicate is:\n- isolated\n- not linked to a specific step\n- not matched by control drift\n- not near the cutoff\n\nthen it is usually just a bad replicate, not a poisoned sequence.\n\nIf it is ugly **and** the run is already sliding, assume the sequence is compromised.\n\n---\n\n### 5) Control outside target but inside historical band\nThis is what the historical band buys you:\n\nIt buys you **time to finish and verify** if:\n- the control is outside target but still inside the historical band\n- the control is **flat**\n- the rest of the run is not drifting\n- there is no identity / validity / integrity problem\n\nIt does **not** buy you a free pass if:\n- the control is outside target **and** trending\n- the samples are moving the same way\n- you are already near the decision cutoff\n- the same issue repeats in the next check\n\nSo the historical band is not a second acceptance limit. It is a **“don’t panic yet”** band.\n\n---\n\n## Live-run decision tree\n\n### Keep going\nKeep the run going if all of this is true:\n- control is only slightly off and **flat**\n- no more than **1 isolated** ugly replicate\n- no **2-point same-direction** drift\n- late drift, if present, is **not repeating**\n- you are **not near the cutoff**\n\n### Pause and verify\nPause or hold if:\n- control is slightly off **and** showing a slope\n- you have **2 points** moving the same way\n- late positions are starting to slide\n- one replicate is ugly and you are not sure whether it is isolated\n- control is outside target but inside historical band and you need to confirm it is not worsening\n\n### Stop / reset\nStop if:\n- **3 consecutive points** show the same directional drift\n- control is outside target **and** still moving\n- late drift is repeating across **2–3 positions**\n- a bad replicate repeats\n- the run is close to the cutoff and the data are sliding\n- you already know you would not defend the sequence later\n\n---\n\n## Short version\n- **1 bad point**: probably noise\n- **2 bad points in a row**: verify now\n- **3 bad points in a row**: stop\n- **slightly off control + flat**: finish and verify\n- **slightly off control + slope**: pause or stop\n- **late-only drift**: trust it less, but 2–3 repeating late points is real\n- **historical band**: buys you time, not immunity\n\nIf you want, I can turn this into a **one-page live-run flowchart** with just yes/no branches and no explanation text.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Uses a controlled, businesslike tone: \"Here’s the blunt live-run version\" and avoids friendliness or fluff."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly concise and action-oriented, with repeated short rules and a \"Short version\" summary, though it is still fairly detailed."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Very direct and unsoftened: \"Do not stop,\" \"stop pretending it is noise,\" \"do not be generous; stop sooner,\" and clear stop lines."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong structure throughout: headings, numbered sections, bullet lists, and a \"decision tree\" plus \"Short version.\""
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Provides firm correction and pushback against bad assumptions, e.g. \"you do not get to call that 'fine'\" and \"historical band is not a second acceptance limit.\""
+        }
+      ]
+    },
+    {
+      "turn": 5,
+      "agent_response": "Yes — the ugly bench rule is:\n\n## Gray zone rule\n### If the control is **a hair outside target** but still **clearly inside the real failure limit**\n- **and it is flat**: finish the sequence, then verify\n- **and it has a slope**: do **not** ignore it; pause or stop if the run is still long enough that the drift could matter\n\nSo:  \n**outside target alone does not kill the run**.  \n**outside target + movement does.**\n\n## What “near the cutoff” means in practice\nUse this rough line:\n\n- **Not near cutoff** = you could tolerate a small additional shift and still defend the run\n- **Near cutoff** = one more small shift could flip the call, or you’d have to argue hard to keep it\n\nIf you’re in that second zone, be stricter:\n- a control that is only a little off is **not** harmless anymore\n- late drift becomes more important\n- one ugly replicate matters more\n\n## Late drift on only the last 2 injections\nMy bench rule:\n\n- **Last 2 injections only, early run clean, no repeat yet** → **flag it, let it finish, don’t overcall it**\n- **Last 2 injections plus a similar control wobble** → treat as real drift, not just noise\n- **Last 2 injections and it repeats on the next point / next run** → stop trusting the set\n\nSo no, **2 late injections by itself usually does not poison the whole run**.  \nIt’s enough to make me **watch the rest closely**, but not enough to kill the sequence unless:\n- the trend continues,\n- the control is also moving,\n- or you’re already near the decision limit.\n\n## Short version\n- **Hair outside target, flat, nowhere near failure limit** → finish and verify\n- **Hair outside target, moving** → pause/stop depending on how much run is left\n- **Last 2 injections drifting only** → flag, don’t panic\n- **Last 2 injections drifting + control wobble** → assume real problem\n- **Any of this near the cutoff** → be much less forgiving\n\nIf you want, I can compress this into a **3-line bench rule** you could actually paste into a run worksheet.",
+      "score": 4.6,
+      "summary": "mean=4.60 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:2, 5:3}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Professional, controlled tone: “Yes — the ugly bench rule is,” “My bench rule,” and the structured, matter-of-fact wording are businesslike rather than chatty."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly concise and action-oriented. It gives a compact rule set and a “Short version,” though it still includes some elaboration and repetition."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Direct and unsoftened: “do not ignore it; pause or stop,” “outside target + movement does,” and “stop trusting the set” are blunt conclusions with little hedging."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong structure: clear headings (“Gray zone rule,” “What ‘near the cutoff’ means in practice”), bullets, and a “Short version” checklist-like summary."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "It does push back on the premise instead of just agreeing: “2 late injections by itself usually does not poison the whole run.” It also gives conditions for when to be stricter, though the challenge is moderate rather than forceful."
+        }
+      ]
+    },
+    {
+      "turn": 6,
+      "agent_response": "Yes — that’s the right cut.\n\n### Ugly bench rule\n- **Flat, bad-ish control**: live with it for now if it’s still clearly inside the real failure limit. Don’t kill the run on that alone.\n- **Bad-ish control + any slope**: stop treating it like noise. If there’s still meaningful sequence left, pause and verify before you let it keep drifting.\n- **Late-only drift on the last 2 injections**: warning, not verdict. Usually **flag and finish**.\n- It becomes a verdict when:\n  - the **next point joins the drift**, or\n  - the **control starts leaning the same way**, or\n  - it **repeats** on the next run.\n\n### Short version\n- **Flat = tolerate and finish**\n- **Moving = verify or stop**\n- **2 late points = watch it**\n- **2 late points + repeat/control agreement = real problem**\n\nIf you want, I can turn this into a very short **bench card** with just the stop / pause / finish lines.",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly professional and controlled: phrases like \"the right cut\" and the structured rule set keep it businesslike, though \"Ugly bench rule\" is a bit casual."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Fairly concise and action-oriented, with a \"Short version\" summary. It does not ramble, though it still gives a few explanatory bullets."
+        },
+        {
+          "idx": 3,
+          "score": 4,
+          "reason": "Direct and blunt: \"stop treating it like noise,\" \"warning, not verdict,\" and \"real problem\" state conclusions plainly with little hedging."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strongly structured with headings and bullets: \"Ugly bench rule,\" \"Short version,\" and a clear stop/pause/finish style checklist."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "It does push back with firm criteria instead of just agreeing, e.g. \"stop treating it like noise\" and defining when it \"becomes a verdict.\""
+        }
+      ]
+    }
+  ]
+}

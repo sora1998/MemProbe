@@ -1,0 +1,36 @@
+{
+  "user_id": "user_018",
+  "task": "I’m putting together a small campaign page that needs to work on both mobile and desktop, and I want to sanity-check the setup before I share it. Can you help me think through what usually needs to be verified so the page, form, and tracking behave as expected across devices?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.9,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Absolutely — I’d sanity-check it in this order so you catch the stuff that usually breaks across devices:\n\n### 1) Content accuracy\n- Headline, offer, dates, and any promo details match the source of truth\n- Any disclaimers, pricing, or eligibility language is current\n- Images/icons render correctly and aren’t cropped oddly on mobile\n\n### 2) Page behavior\n- Page loads cleanly on mobile and desktop\n- Layout doesn’t break at common breakpoints\n- Buttons, menus, accordions, and sticky elements work as intended\n- Fonts, spacing, and image scaling look right on smaller screens\n\n### 3) Form setup\n- All required fields are present and labeled clearly\n- Validation works for bad input and missing fields\n- Success and error states display properly\n- Submission goes to the right destination\n- Autocomplete, keyboard use, and tap targets behave well on mobile\n\n### 4) Links and routing\n- All links go to the correct destination\n- UTM parameters are consistent\n- Any redirects or button paths work on both devices\n- If there’s a thank-you page, it loads correctly after submit\n\n### 5) Tracking\n- Analytics tags fire on page load and form submit\n- Conversion event fires once and only once\n- Source/medium values are consistent\n- Any pixels or pixels tied to the form are firing properly\n- Test in a real browser, not just the draft or preview\n\n### 6) Final QA\n- Check on at least one iPhone-sized and one desktop-sized view\n- Test in the live/staging page, not only the design mock\n- Confirm the page is the current version and nothing stale is still linked\n- Do one quick end-to-end test: open page → submit form → verify confirmation → verify tracking\n\nIf you want, I can turn this into a tighter **pre-launch checklist** with a **must-fix vs nice-to-verify** split.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, this is the right direction. But I’d want it a little more operational — like a real launch checklist, not just categories.\n\nWhat I’d still want called out:\n- responsive breakpoints specifically: mobile, tablet, desktop\n- form validation on both tap and keyboard input\n- tracking details: pageview, form submit, thank-you page, and whether it double-fires\n- browser check: Safari on iPhone at minimum, plus Chrome desktop\n- load speed / obvious layout shift, because that’s where mobile pages get sloppy fast\n- any CTA buttons above the fold and whether they stay visible / clickable\n\nIf you turn it into must-fix vs nice-to-verify, that’s probably the most useful version for me.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Absolutely — here’s a more operational version.\n\n## Must-fix before launch\nThese are the things that can break the page or make the tracking unreliable:\n\n### 1) Responsive layout\n- Check **mobile, tablet, desktop** breakpoints\n- Make sure the layout doesn’t collapse, overlap, or crop key content\n- Verify **CTA buttons above the fold** stay visible and clickable\n- Confirm sticky elements don’t cover form fields or buttons\n\n### 2) Form behavior\n- Required fields are clearly labeled\n- Validation works for:\n  - missing fields\n  - bad email/phone formats\n  - error states on submit\n- Test both:\n  - **tap input on mobile**\n  - **keyboard input on desktop**\n- Confirm submit goes to the right destination\n- Success message or thank-you flow appears correctly\n\n### 3) Tracking\n- Confirm **pageview** fires once\n- Confirm **form submit** fires once\n- Confirm **thank-you page** tracking fires if that’s part of the flow\n- Check for **double-firing** on refresh, back button, or repeated submit\n- Make sure UTM/source values are preserved if they matter\n\n### 4) Browser/device sanity check\n- Test at minimum:\n  - **Safari on iPhone**\n  - **Chrome on desktop**\n- If possible, also spot-check one Android browser\n- Make sure the page behaves the same in live/staging, not just preview\n\n### 5) Performance / visual stability\n- Page loads reasonably fast on mobile\n- No obvious layout shift while the page loads\n- Images don’t jump, crop badly, or push the CTA out of view\n\n---\n\n## Nice to verify\nThese are still worth checking, but they’re less likely to block launch:\n\n- Tablet-specific spacing and stacking\n- Secondary browsers like Firefox or Edge\n- Autofill behavior on form fields\n- Minor animation timing\n- Social/share preview if the page will be linked externally\n- Accessibility basics like contrast and tap target size\n- Scroll position after form submit or CTA click\n\n---\n\n## Quick launch order\nIf you want a simple sequence:\n\n1. Check content and CTA placement  \n2. Test mobile/tablet/desktop breakpoints  \n3. Test form input + validation  \n4. Test submit + thank-you flow  \n5. Verify tracking fires once  \n6. Check Safari iPhone + Chrome desktop  \n7. Do one end-to-end live test\n\nIf you want, I can turn this into a **1-page checkbox checklist** you can copy straight into a doc or task list.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, this is solid. That’s basically the launch checklist I’d want.\n\nThe only thing I’d maybe add is a quick line for **sticky header / sticky CTA not blocking the form on mobile**, since that’s the one annoying issue that sneaks in. But otherwise this is usable as-is.\n\nIf I’m doing final QA, I’d run it in this order:\n1. Mobile first, then desktop\n2. Safari on iPhone + Chrome on desktop\n3. Pageview / submit / thank-you tracking\n4. Check for double-fires after refresh or back button\n5. Make sure CTA stays visible and clickable above the fold\n6. Watch for any layout shift or slow load on mobile\n\nSo yeah — good version.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 5.0
+      },
+      "gt_correct": null
+    }
+  ]
+}

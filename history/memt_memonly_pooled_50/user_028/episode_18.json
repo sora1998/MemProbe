@@ -1,0 +1,49 @@
+{
+  "user_id": "user_028",
+  "task": "It’s cold out and I’ve got a furnace issue plus a plumbing leak that doesn’t look small. What’s the smartest way to handle the first hour so I don’t make it worse while I figure out whether I need to call someone?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.333333333333333,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Here’s the safest first-hour plan, in order:\n\n1. **Stop anything that could worsen the leak**\n   - If there’s active dripping or a puddle, **shut off the water to that line/appliance** if you can do it safely.\n   - If water is near electrical outlets, the furnace, or a breaker panel, **keep clear and don’t touch anything wet/electrical**.\n\n2. **Treat the furnace as “do not poke around” until basic checks are done**\n   - Check **thermostat settings**.\n   - Check the **furnace switch** and **breaker**.\n   - Check the **filter** and make sure the **door panel is seated**.\n   - Look for **burning smell, scorch marks, water around the unit, or repeated breaker trips**.\n   - If any of those red flags are present, **call a technician right away**.\n\n3. **If the furnace still doesn’t behave after those basics, stop**\n   - Don’t open panels or mess with wiring.\n   - If it’s clicking, short-cycling, or blowing cold after the basic checks, that’s a good point to **call for help** rather than turning it into a project.\n\n4. **For the plumbing leak, decide if it’s an emergency**\n   - **Puddle under a heater/tank, active spray, or steady leak = call a plumber now.**\n   - If it’s a slow seep and you’ve already shut the water off, you can wait briefly, but don’t ignore it.\n\n5. **Keep the house from getting worse**\n   - Put down towels/buckets.\n   - Move anything valuable away from the leak.\n   - If heat is uncertain, close off unused rooms and keep people away from the wet area.\n\n6. **Make the call decision early**\n   - If the leak is not small, and the furnace has any red flags, the smart move is usually **call both a plumber and HVAC tech sooner rather than later**.\n   - Since it’s cold, delaying can turn a manageable issue into an emergency bill.\n\nIf you want, I can help you do a **10-minute triage** by asking just the key furnace and leak questions to tell you whether this is “call now” or “safe to monitor briefly.”",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Mostly right. But I’d want the decision tree tighter, because “call both sooner rather than later” is too loose when there’s water and no heat.\n\nWhat I’d do in the first hour:\n\n- **Water first.** Find the shutoff for the leaking line or the main if you can’t isolate it fast. If it’s near the furnace or any electrical, don’t stand in it fiddling around.\n- **Furnace basics only.** Thermostat, breaker, service switch, filter, door panel. That’s it. If it smells burnt, trips the breaker, or has water around it, stop there.\n- **Figure out if the leak is pressurized or just condensation.** If it’s a split pipe or active drip that’s growing, that’s plumber now. If it’s just a little condensate from the furnace area, different story.\n- **Protect the house.** Buckets, towels, move stuff, and if the heat is iffy keep the occupied rooms closed off.\n\nWhat’s missing is the **one question that matters most**: is the water coming from a supply line/main pipe, or from the furnace/condensate side? That changes everything.\n\nIf you want to make it useful, ask me for a blunt triage list and I’ll give you the exact yes/no checks without the fluff.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.0
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Got it. Here’s the tighter first-hour decision tree, with the **one question that matters most** built in:\n\n## First question\n**Is the water coming from a pressurized supply line/main pipe, or from the furnace/condensate side?**\n\n### If you don’t know yet\nTreat it as **pressurized until proven otherwise**.\n\n---\n\n## First hour: do this in order\n\n### 1) Stop the water source if you can do it safely\n- **Active leak from a pipe, fitting, supply line, or unknown source:**  \n  Shut off the **nearest isolation valve** or the **main water shutoff**.\n- **If you can’t reach it without standing in water or crossing wet electrical areas:**  \n  Don’t risk it. Back out and call for help.\n\n### 2) Check the furnace only at the basic level\nOnly do:\n- thermostat\n- furnace switch\n- breaker\n- filter\n- door panel seated properly\n\nStop immediately if:\n- you smell burning\n- the breaker trips again\n- there’s water around the furnace cabinet\n- you see scorch marks or obvious electrical issues\n\n### 3) Identify the leak type\nUse this split:\n\n#### A. **Pressurized leak**\nSigns:\n- steady drip that continues with water on\n- spray, stream, or growing puddle\n- leak from supply pipe, valve, hose, or main line\n- water keeps coming even if furnace is off\n\n**Action:** plumber now.\n\n#### B. **Condensate / furnace-side water**\nSigns:\n- water near the furnace but not from a supply line\n- clear, slow drip from condensate drain/tube\n- high-efficiency furnace with condensate line\n- leak seems tied to furnace operation\n\n**Action:** if it’s clearly condensate and not a growing flood, you may be able to monitor briefly after basic checks.  \nIf it’s pooling, backing up, or reaching electrical parts: call HVAC now.\n\n---\n\n## Red-line rule\nIf **water is near electrical** or **the furnace is affected by water**, don’t keep troubleshooting.  \nThat’s the point to stop and call.\n\n---\n\n## Practical call decision\n- **Pressurized leak + no heat:** call **plumber first** if the leak is active or growing.\n- **Furnace water/condensate issue + no heat:** call **HVAC first**.\n- **Unknown source + water near furnace/electrical:** treat as urgent and call one or both after shutting water off if possible.\n\n---\n\n## What not to do\n- Don’t open furnace panels beyond the filter/door check.\n- Don’t dry out electrical parts with the furnace still energized.\n- Don’t keep resetting a tripping breaker.\n- Don’t assume “small leak” if the source is unknown.\n\nIf you want, I can turn this into a **10-question yes/no triage** that ends with exactly one of:\n**“shut off water and call plumber,” “call HVAC,” “call both,” or “safe to monitor briefly.”**",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Better. Still a little too many branches, but the core is right.\n\nWhat I’d want next is the **hard cutoff version** — not 10 questions, more like 5 yes/no checks that end the argument.\n\nSomething like:\n- Is the leak coming from a supply line/main? yes = plumber now.\n- Is there any water at the furnace cabinet or electrical? yes = stop and call.\n- Is the furnace just dead after thermostat/switch/breaker/filter/door? yes = HVAC.\n- Is it condensate only and not spreading? maybe monitor briefly.\n- If you can’t tell where it’s coming from in 2 minutes, treat it as pressurized.\n\nThat’s the part I’d actually use when the house is cold and wet. Tight, no sermon.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Here’s the hard-cutoff version:\n\n### 5 yes/no checks\n\n1. **Is the leak from a supply line, main pipe, valve, or anything pressurized?**  \n   **Yes:** shut off water and call a plumber now.\n\n2. **Is there any water at the furnace cabinet, under it, or near electrical parts?**  \n   **Yes:** stop troubleshooting and call for help.\n\n3. **Did the furnace stay dead after thermostat, switch, breaker, filter, and door-panel checks?**  \n   **Yes:** call HVAC.\n\n4. **Does it look like condensate only, and it’s not spreading?**  \n   **Yes:** you can monitor briefly, but don’t ignore it.\n\n5. **Can’t tell where the water is coming from in 2 minutes?**  \n   **Yes:** treat it as pressurized and shut off water.\n\n### Bottom line\n- **Pressurized leak = plumber now**\n- **Water near furnace/electrical = stop**\n- **Furnace dead after basics = HVAC**\n- **Unknown source = assume worst**\n\nIf you want, I can turn that into a one-line “if this, then that” version you can keep on your phone.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s usable.\n\n- **Pressurized leak?** plumber now.\n- **Water at furnace or anything electrical?** stop.\n- **Furnace dead after thermostat/switch/breaker/filter/door?** HVAC.\n- **Can’t tell the source fast?** assume worst and shut off water.\n\nThat’s the sort of thing I’d actually keep. The one-line phone version would be fine too, but this already does the job.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    }
+  ]
+}

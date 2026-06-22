@@ -1,0 +1,36 @@
+{
+  "user_id": "user_029",
+  "task": "I’ve got a piece of equipment that’s been acting a little off on and off, and I don’t want to wait until it fully dies before I react. What’s a good way to keep an eye on it and decide when it’s just noise versus when it’s worth stopping to investigate?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.5,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Good approach: **watch for pattern, not just a single weird event**.\n\nA simple way to handle it:\n\n1. **Define the normal**\n   - What does it usually sound/feel/do?\n   - Temp, vibration, cycle time, amperage, pressure, flow, etc. if you can measure it.\n\n2. **Track the symptom**\n   - When it happens\n   - How long it lasts\n   - What load/conditions it’s under\n   - Whether it clears on its own or gets worse\n\n3. **Treat it as real if it’s repeatable**\n   - Same symptom showing up under the same conditions\n   - Increasing frequency\n   - Getting louder/stronger/longer\n   - Any change in output, performance, or protection trips\n\n4. **Ignore one-offs unless they leave evidence**\n   - A single blip with no repeat and no impact is probably noise\n   - But if it leaves a mark—trip, alarm, unusual temp, smell, visible wear—that’s worth looking at\n\n5. **Set a stop line**\n   Investigate now if you get:\n   - protection trips\n   - overheating\n   - abnormal vibration/noise that’s getting worse\n   - performance drop\n   - repeated resets needed to keep it running\n\n6. **Don’t swap parts blindly**\n   First confirm the cause. If it’s an airflow/overheat-type issue, check the basics before replacing anything:\n   - dirty filter\n   - blocked return\n   - closed registers/dampers\n   - weak airflow\n   - dirty coil / fan issue\n\nIf you want, I can turn this into a **tiny “watch vs investigate” checklist** you can use on the spot.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s the right idea, but it’s still pretty broad.\n\nI want it tighter — like a real decision rule. Something I can actually use when it’s half-bad, half-fine.\n\nGive me:\n- what to log\n- how often to check it\n- what counts as drift vs a real fault\n- and a hard stop line so I’m not guessing\n\nIf you can, make it like a short checklist or threshold table. Not a lecture.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Here’s a tighter rule you can actually use.\n\n## 1) What to log\nKeep it to **5 fields max**:\n\n- **Timestamp**\n- **Symptom**: noise, temp, vibration, short cycle, slow start, etc.\n- **Condition**: load, ambient temp, startup/shutdown, after warm-up, etc.\n- **Measured value**: temp / amps / pressure / vibration / cycle time\n- **Impact**: normal, minor nuisance, reduced output, trip/shutdown\n\nIf you can’t measure it, write down:\n- **when it happened**\n- **how long it lasted**\n- **whether it repeated**\n- **whether it changed performance**\n\n## 2) How often to check\nUse this schedule:\n\n- **Every time it acts up**: log the event\n- **Daily** if it’s happening more than once a week\n- **Weekly** if it’s rare but recurring\n- **Immediately after a bad event**: recheck once it returns to normal\n\nIf it’s a machine that runs in cycles, check:\n- **start of cycle**\n- **mid-cycle**\n- **end of cycle**\n- and **right after the symptom appears**\n\n## 3) Drift vs real fault\n### Call it **drift** if:\n- it changes **less than 10%** from normal\n- it happens **once or twice**\n- it **self-clears**\n- no performance loss\n- no alarms/trips\n- no new sound/smell/heat/vibration trend\n\n### Call it a **real fault** if:\n- it repeats under the **same condition**\n- it’s getting **worse, longer, louder, hotter, or more frequent**\n- it causes **output drop**\n- it needs a **reset/restart** to recover\n- it trips a **limit, alarm, or protection**\n- the measured value is outside normal by **more than 10–15%** or outside the maker’s spec\n\n## 4) Hard stop line\nStop and investigate if any of these happen:\n\n- **2 identical bad events in a row**\n- **3 bad events in a week**\n- **any trip, alarm, or shutdown**\n- **performance drops noticeably**\n- **temperature, pressure, current, or vibration exceeds normal by 15%+**\n- **symptom lasts longer each time**\n- **you can reproduce it on demand**\n\n## 5) Simple decision table\n\n| What you see | Action |\n|---|---|\n| One-off blip, no impact, no repeat | Log it, watch it |\n| Same issue twice under same conditions | Investigate |\n| Getting worse over time | Investigate now |\n| Any trip/alarm/shutdown | Stop and investigate |\n| Output drops or unit struggles | Stop and investigate |\n| Value outside normal by 15%+ | Investigate |\n| Needs reset to recover | Investigate |\n\n## 6) Quick rule of thumb\nIf it’s:\n- **random** and **doesn’t affect output** = probably noise  \n- **repeatable** or **progressive** = real fault  \n- **causing a trip or forcing a reset** = stop\n\nIf you want, I can turn this into a **one-line pocket checklist** you can paste into notes or a maintenance log.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, this is usable.\n\nThe 2-in-a-row / 3-in-a-week stop line is the part I’d actually keep. The 15% threshold is fine as a default, but I’d still compare it to the unit’s own baseline and spec if I have it — some gear gets ugly before 10%, some doesn’t.\n\nThe 5 fields max is good. I’d probably add one more if it’s electrical: **load at the time** or % of rated load, because half the junk only shows up under load.\n\nThat table is about right. Tight enough to use without turning it into a science project.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    }
+  ]
+}

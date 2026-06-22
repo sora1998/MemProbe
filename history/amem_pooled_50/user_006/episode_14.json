@@ -1,0 +1,36 @@
+{
+  "user_id": "user_006",
+  "task": "I’m trying to figure out why a small industrial network cabinet keeps acting up during the afternoon even though nothing obvious changed. If you were troubleshooting that, what would you check first so you can tell whether it’s a gear problem, a ventilation problem, or something tied to the environment?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.2,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "I’d start with **what changes in the afternoon**, not with the gear itself.\n\n### First pass: prove whether it’s heat / environment / load\nCheck these in order:\n\n1. **Cabinet temp and airflow**\n   - internal temp vs room temp\n   - fan operation\n   - blocked vents / clogged filters\n   - hot spots near switches, PSUs, drives, or power supplies\n   - door closed vs open behavior\n\n2. **Power quality**\n   - UPS alarms\n   - brownouts / voltage dips\n   - loose power connections\n   - shared circuits getting loaded up later in the day\n\n3. **Device health indicators**\n   - interface errors, link flaps, CRC/FCS errors\n   - CPU / memory spikes\n   - PSU warnings\n   - transceiver warnings\n   - any port that gets worse as the day goes on\n\n4. **Event timing**\n   - look at logs around the same afternoon window\n   - see if failures line up with temperature rise, machine start-up, sunlight, or nearby equipment\n\n5. **Physical environment**\n   - direct sun on the cabinet\n   - nearby motors, welders, compressors, or heaters\n   - dust buildup\n   - vibration\n   - humidity/condensation\n\n### Quick way to separate the cause\n- **Opens up when the door is open / fan is added** → ventilation/heat\n- **Fails when a specific device or port is under load** → gear or port issue\n- **Fails when nearby equipment starts** → environment or power noise\n- **Fails only in the afternoon, every day** → temperature, solar load, or power/circuit load is the first suspect\n\n### Best first checks, if you want the fastest signal\n- log cabinet temp over time\n- check switch/UPS logs for flaps or warnings\n- inspect fans and filters\n- watch for rising error counters on the worst port\n- compare behavior with the cabinet door open vs closed\n\nIf you want, I can turn this into a **10-minute field checklist** you could use on-site.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, mostly right. But I’d be more aggressive about proving the pattern first, not just poking at a list.\n\nFirst thing I’d check:\n- exact time the issue starts\n- cabinet temp at that moment\n- whether the failure is on one device, one port, or the whole box\n- whether opening the door / adding airflow changes anything fast\n\nIf it’s only afternoons, I’d suspect heat or load before I blame hardware. In industrial cabinets that usually means:\n- fan dying\n- filter clogged\n- ambient temp climbing\n- sun hitting the enclosure\n- power getting ugly when other equipment kicks on\n\nWhat I’d want next is a tighter split:\n1. **gear problem** — errors stay with one switch, one PSU, one transceiver, one port\n2. **ventilation problem** — temp rises, then errors appear, and it improves when cooled\n3. **environment problem** — same time every day, tied to nearby machines, sun, vibration, or circuit load\n\nSo yeah, your list is fine, but the real move is: log temp + error counters together and see which one moves first. That tells you who’s lying.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Exactly — I’d start by **proving the pattern**, not by guessing at the cause.\n\nFastest way to separate it:\n\n1. **Pin down the failure window**\n   - exact time it starts\n   - how long it lasts\n   - whether it’s every afternoon or only on hot / loaded days\n\n2. **Correlate temp with symptoms**\n   - cabinet temp at failure time\n   - internal hot spots if you can measure them\n   - compare that to the first error or flap\n\n3. **See what scope the failure has**\n   - one device only = likely gear\n   - one port / one cable = likely interface or cabling\n   - whole cabinet / multiple devices = likely power, ventilation, or environment\n\n4. **Do the quick airflow test**\n   - open the door\n   - add temporary fan / portable cooling\n   - see if it recovers quickly\n\n5. **Check for outside triggers**\n   - sun on the cabinet\n   - nearby motors / welders / compressors starting\n   - power dips when other loads come on\n\nThe key diagnostic is this:\n\n- **Errors follow one piece of gear** → gear problem\n- **Errors follow temperature rise and improve with cooling** → ventilation problem\n- **Errors happen on a schedule tied to the site, not the cabinet** → environment or power problem\n\nIf you want, I can turn that into a **simple decision tree** you can use on-site in a few minutes.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s the right split.\n\nIf I were on-site, I’d do it like this:\n- timestamp when it starts\n- log cabinet temp at the same time\n- note scope: one port, one device, or the whole cabinet\n- do the door-open / temporary fan test and watch how fast it reacts\n\nIf the temp moves first and the errors follow, it’s ventilation or heat soak. If one switch, PSU, or transceiver keeps throwing the same failure no matter what, that’s gear. If it hits at the same hour every day and tracks with other equipment kicking on, then it’s the site — sun, load, vibration, or ugly power.\n\nThe part you said about proving the pattern first is the real move. Otherwise people waste time swapping hardware and chasing ghosts.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    }
+  ]
+}

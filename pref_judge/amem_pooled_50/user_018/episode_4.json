@@ -1,0 +1,104 @@
+{
+  "user_id": "user_018",
+  "task": "I’m trying to figure out why a campaign handoff keeps going sideways between the email draft, the promo details, and the final send. Can you help me lay out a quick way to spot where the breakdown is happening and what to check first so it doesn’t keep repeating?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "directness_preference",
+      "short": "Wants straight answers",
+      "explanation": "He values clear communication and efficiency, so he likely prefers responses that get to the point quickly. He probably does not want a lot of hedging or filler when he is trying to make a decision or fix something. Directness fits his practical, work-focused style."
+    },
+    {
+      "idx": 2,
+      "dimension": "verbosity_preference",
+      "short": "Prefers concise help",
+      "explanation": "His work style suggests he wants information delivered without unnecessary length. He tends to focus on what is actionable, so shorter responses with only the needed context will likely feel most useful. Long explanations may be acceptable only when the problem is genuinely complex."
+    },
+    {
+      "idx": 3,
+      "dimension": "pacing_preference",
+      "short": "Likes chunked guidance",
+      "explanation": "He seems best served by help that comes in manageable steps rather than a flood of information at once. His real-world problem solving is practical and sequential, so chunked guidance would match how he likely works through tasks. Too many steps upfront could slow him down."
+    },
+    {
+      "idx": 4,
+      "dimension": "format_preference",
+      "short": "Likes bullets and checklists",
+      "explanation": "He appears to prefer organized, efficient presentation over free-form prose. Bullets or checklists would fit his need to compare options, track tasks, and avoid missing details. This format also matches his practical approach to work and decisions."
+    },
+    {
+      "idx": 5,
+      "dimension": "tone_preference",
+      "short": "Prefers calm, matter-of-fact tone",
+      "explanation": "He seems to respond best to steady, non-dramatic communication. A matter-of-fact tone fits his practical optimism and his preference for reliability over emotional flair. He likely wants encouragement, but not at the expense of clarity."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — I’d look at it as a simple handoff audit and check the failure point in this order:\n\n1. **Promo details first**\n   - Is the promo code, timing, and offer still current?\n   - Any overlap with an old code or old terms?\n   - Is there one clear source of truth?\n\n2. **Email draft vs. approved promo**\n   - Does the final copy match the promo exactly?\n   - Check headline, CTA, dates, exclusions, and code usage.\n   - Look for any last-minute edits that didn’t get propagated.\n\n3. **Final send setup**\n   - Correct segment selected?\n   - Right version of the email loaded?\n   - Links, UTMs, and code placement all correct?\n\n4. **Timing / handoff gap**\n   - Did the draft get approved before the promo changed?\n   - Was the send scheduled off an outdated version?\n   - Did anyone confirm the final version before launch?\n\nQuick way to spot the breakdown:\n- **If the promo is wrong everywhere** → source-of-truth problem\n- **If the email copy is right but send is wrong** → build/scheduling problem\n- **If send is right but results are off** → segmentation or link tracking problem\n- **If everyone has a different version** → handoff/approval process problem\n\nWhat to check first:\n- **Promo validity and timing**\n- **Final approved copy**\n- **Send version + segment**\n- **A last pre-send QA pass**\n\nIf you want, I can turn this into a tighter **“must-check / nice-to-check” handoff checklist** you can reuse.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Gets straight to the point with a clear diagnostic order: \"I’d look at it as a simple handoff audit\" and then lists the failure points directly."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly concise and actionable; it avoids long explanation and focuses on \"What to check first\". Slightly more detailed than minimal, but still efficient."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strong chunking: the response breaks the problem into numbered steps and a short \"Quick way to spot the breakdown\" section, which makes it easy to follow sequentially."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Uses bullets and checklists throughout, including numbered sections and a final \"What to check first\" list, matching the preference for organized presentation."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Tone is calm and matter-of-fact, with practical phrasing like \"simple handoff audit\" and no dramatic or emotional language."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Absolutely — here’s a tighter triage version you can actually use.\n\n## Quick handoff triage: where the break starts\n\n### 1) Source of truth issue\n**Use this when:** promo details keep changing, or different people are working off different info.\n\n**First checks**\n- Who last updated the promo details?\n- Is there one approved source for:\n  - offer\n  - code\n  - dates/timing\n  - exclusions\n  - segment rules\n- Did anyone update the promo after the email draft was already in motion?\n\n**Red flag**\n- Email, brief, and send file all disagree on the promo.\n\n---\n\n### 2) Approval / version control issue\n**Use this when:** the promo was correct at one point, but the final send doesn’t match the approved version.\n\n**First checks**\n- Was the email draft updated after approval?\n- Is the final copy the same version that was signed off?\n- Were any last-minute edits made in Slack/email that never made it into the final file?\n- Does the approved copy match the send-ready version line for line?\n\n**Red flag**\n- “Approved” version and “sent” version are not the same file or same text.\n\n---\n\n### 3) Build / scheduling issue\n**Use this when:** the copy is right, but the send still goes out wrong.\n\n**First checks**\n- Does the send file/version match the approved copy?\n- Was the correct date/time scheduled?\n- Was the right template/module used?\n- Were links, UTMs, and code placement built correctly?\n- Was there a resend, duplicate, or old version still sitting in the platform?\n\n**Red flag**\n- The draft looks fine, but the live send uses the wrong build or schedule.\n\n---\n\n### 4) Segmentation / QA issue\n**Use this when:** the right email was built, but the wrong people got it or it wasn’t checked properly.\n\n**First checks**\n- Was the correct segment selected?\n- Did the final QA get done by someone other than the builder?\n- Was the test send reviewed on mobile and desktop?\n- Did the segment rules match the promo rules?\n- Any suppression / exclusion list issues?\n\n**Red flag**\n- The email is correct, but the audience or final check was wrong.\n\n---\n\n## Fast decision tree\n\n- **Promo details are inconsistent everywhere** → **source of truth issue**\n- **Promo is right, but the approved version changed or got lost** → **approval / version control issue**\n- **Approved copy is right, but the live send is wrong** → **build / scheduling issue**\n- **Send is built correctly, but wrong audience or missed QA** → **segmentation / QA issue**\n\n---\n\n## First 4 checks I’d run every time\n1. **Who last touched the promo details?**\n2. **Does the email draft match the approved promo exactly?**\n3. **Does the send file/version match the approved copy?**\n4. **Was final QA done by someone other than the builder?**\n\nIf you want, I can turn this into a super short **copy-paste checklist** or a **yes/no decision tree** format.",
+      "score": 5.0,
+      "summary": "mean=5.00 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:0, 5:5}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Gets straight to the point with a clear triage structure: \"here’s a tighter triage version\" and a direct decision tree."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Concise and actionable; it avoids long explanation and focuses on \"First checks\" and \"First 4 checks I’d run every time.\""
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly chunked into manageable sections: \"1) Source of truth issue,\" \"2) Approval / version control issue,\" etc., plus a \"Fast decision tree.\""
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Uses bullets, checklists, and labeled sections throughout, e.g. \"First checks\" and \"Red flag,\" matching the preference for organized presentation."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Tone is calm and matter-of-fact, with practical phrasing like \"Use this when\" and \"Red flag,\" without emotional language or drama."
+        }
+      ]
+    }
+  ]
+}

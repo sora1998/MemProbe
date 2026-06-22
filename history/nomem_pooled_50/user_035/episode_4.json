@@ -1,0 +1,49 @@
+{
+  "user_id": "user_035",
+  "task": "I think I may have run into something suspicious with a recent bank message, and I don’t want to overreact or ignore it. Could you help me sort out the safest next steps and what I should check first?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.6000000000000005,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Absolutely — the safest approach is to treat it as suspicious until you verify it.\n\n### What to do first\n1. **Don’t click any links or open attachments** in the message.\n2. **Don’t reply** to the message, even if it looks legitimate.\n3. **Contact your bank using a known-good method**:\n   - the number on the back of your card,\n   - the official banking app,\n   - or the bank’s website you type in yourself.\n4. **Check your accounts directly** for:\n   - unfamiliar transactions,\n   - new payees,\n   - changed contact details,\n   - login alerts or password reset notices.\n5. **Save the message**:\n   - take screenshots,\n   - note the sender number/email,\n   - keep the full text in case you need to report it.\n\n### If it looks like phishing\nWatch for:\n- urgency or threats (“account locked,” “verify now”),\n- spelling/formatting oddities,\n- a suspicious link or shortened URL,\n- requests for passwords, PINs, one-time codes, or card details,\n- a sender address that’s close but not exact.\n\n### If you already clicked or entered info\nDo this immediately:\n1. **Call your bank/fraud team now** using the official number.\n2. **Change your online banking password** from a trusted device.\n3. **Enable or review 2-factor authentication** if available.\n4. **Watch for unauthorized activity** and set up alerts.\n5. If you entered card details, ask the bank whether **the card should be frozen/replaced**.\n\n### If money may be involved\n- Ask the bank to **freeze or flag the account/card** if needed.\n- Request a **fraud case/reference number**.\n- Keep a record of times, amounts, and who you spoke with.\n\nIf you want, paste the message text here (remove any personal info), and I can help you assess whether it looks like phishing.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "That’s the right track, but I’d want a little more help spotting the red flags. I’m not sure if this is just a routine bank notice or one of those pressure messages.\n\nIf I paste the wording, can you tell me exactly what parts look off — like the link, the sender, or the wording?",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — paste the wording, and I can help you spot the red flags.\n\nPlease **remove or blur personal details** first:\n- your name\n- account number\n- full phone number\n- full email address\n- any one-time codes\n- any full link if it contains your account info\n\nWhat I can look for:\n- **sender mismatch**: display name vs actual email/number\n- **link issues**: odd domain, misspellings, shortened links, extra subdomains\n- **pressure tactics**: urgency, threats, “act now”\n- **request type**: asks for password, PIN, code, card info, or remote access\n- **writing clues**: awkward grammar, unusual formatting, generic greeting\n- **brand clues**: bank name slightly misspelled or a lookalike domain\n\nIf you want, send:\n1. the **exact text**\n2. the **sender address/number**\n3. the **link text or URL** as shown\n\nThen I’ll tell you what looks suspicious and what looks normal.",
+      "user_simulator": {
+        "feedback_type": "add_context",
+        "text": "Sure. Here’s the wording, with my name and anything personal taken out:\n\nFrom: “Security Alert” <alerts@mybank-security.com>\n\nText: “We noticed unusual activity on your account. For your protection, please verify your information within 24 hours or your access may be restricted. Tap here to review: https://mybank-security.com.verify-login.info/update\n\nIf you did not request this, please call our fraud team immediately at 1-800-555-0147.”\n\nThat link looks off to me, but I’m not sure what all to make of it.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yes — this has multiple strong phishing red flags.\n\n### What looks off\n1. **Sender domain is suspicious**\n   - `alerts@mybank-security.com`\n   - If your real bank is “MyBank,” this is likely **not** the bank’s official domain. Attackers often use lookalike domains with words like “security,” “alert,” or “verify.”\n\n2. **The link is very suspicious**\n   - `https://mybank-security.com.verify-login.info/update`\n   - The real domain here is **`verify-login.info`**, not `mybank-security.com`.\n   - Anything before the first single `/` in a URL is the domain; this is a classic trick to make a link look legitimate.\n   - Also, `mybank-security.com` appears only as a subdomain, which is meant to mislead.\n\n3. **Urgency / pressure**\n   - “verify your information within 24 hours or your access may be restricted”\n   - That’s a common scare tactic used in phishing.\n\n4. **Generic wording**\n   - “We noticed unusual activity” without any specifics is common in scam messages.\n   - Real banks often give you a clearer path through the app or official website rather than pushing you to click a text link.\n\n5. **Phone number may still be fake**\n   - Even though it says to call fraud team, the number could be spoofed or not match the bank’s real fraud line.\n   - Don’t use the number from the message to verify it.\n\n### What to do now\n- **Do not click the link.**\n- **Do not call the number in the message.**\n- Open your bank’s **official app** or go to the bank’s website by typing it yourself.\n- Check for:\n  - login alerts\n  - new payees\n  - recent transactions\n  - changed contact info\n- If you want confirmation, call the **number on the back of your card** or the official number from the bank’s real website.\n\n### Best interpretation\nThis looks **very likely to be phishing**.\n\nIf you want, I can also help you break down the URL step by step so you can spot this kind of trick faster next time.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Mmm-hmm. That’s exactly the kind of thing I’d want to catch before touching it. The link is the big giveaway, and that sender address doesn’t sit right either. I’m glad you pointed out the part about the real domain being `verify-login.info` — that’s the sort of detail I’d look for now.\n\nI’d treat it as a scam and use only the bank app or the number on the back of the card. I had a phone scam a while back, so I’m extra careful with anything that pushes me to act fast. Same trick, really — urgency and a fake sense of authority.\n\nIf you’ve got more of these, I’d like the quick way to check the link and sender without having to puzzle over every one.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    }
+  ]
+}

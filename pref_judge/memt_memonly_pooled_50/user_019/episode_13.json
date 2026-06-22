@@ -1,0 +1,104 @@
+{
+  "user_id": "user_019",
+  "task": "I’m reviewing a vendor quote and the wording around acceptance and warranty is vague enough that I don’t want to sign off casually. What are the main things I should look for before I agree to anything, and when would you treat it as a red flag instead of just a wording cleanup?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "directness_preference",
+      "short": "Blunt, no fluff",
+      "explanation": "She responds best to straight answers without hedging or performative softness. Her persona is skeptical and exacting, so she likely prefers help that states the issue clearly and gets to the point. Overly cautious wording would probably feel inefficient to her."
+    },
+    {
+      "idx": 2,
+      "dimension": "detail_level_preference",
+      "short": "Enough context to trust the answer",
+      "explanation": "She likely wants the key caveats and failure modes, not a vague headline. Her reliability-oriented mindset suggests she values context when it changes the conclusion or action. She probably dislikes being told something is “fine” without the conditions that make it fine."
+    },
+    {
+      "idx": 3,
+      "dimension": "format_preference",
+      "short": "Bullets and checklists preferred",
+      "explanation": "She seems likely to prefer responses that are easy to audit and act on. A structured format fits her methodical style and makes it easier to spot gaps, exceptions, or weak logic. Dense prose would probably feel slower and less useful."
+    },
+    {
+      "idx": 4,
+      "dimension": "autonomy_support_preference",
+      "short": "Collaborative, but not hand-holding",
+      "explanation": "She likely wants the assistant to work with her rather than dictate to her. She values control and personal autonomy, so prescriptive overreach would be a poor fit. At the same time, she probably appreciates a clear recommendation once the options are laid out."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Welcomes firm pushback",
+      "explanation": "She is likely comfortable being challenged when a claim is weak, risky, or sloppy. Her reliability-first mindset suggests she would rather get corrected than be coddled. Soft agreement without scrutiny would probably reduce her trust in the help."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Before you sign, I’d check for these **must-clarify items**:\n\n1. **Acceptance basis**\n   - What exact standard, drawing, spec, or known-good reference defines pass/fail?\n   - If it says “acceptable quality” or “industry standard” without naming the basis, that’s too vague.\n\n2. **Test condition**\n   - Is acceptance based on the **right condition**: actual operating load, temperature, duty cycle, environment, etc.?\n   - Watch for bench-only language when the real failure shows up under stress.\n\n3. **Run length / coverage**\n   - Is the test long enough to expose the failure mode?\n   - Short confirmation runs can create false passes, especially for intermittent, thermal, vibration, humidity, or alignment-related issues.\n\n4. **Conditional checks**\n   - Are all the “only if…” checks included?\n   - Examples: alignment, torque, thermal soak, packaging/storage state, orientation, calibration state, mating parts.\n\n5. **Evidence required**\n   - What proof do they owe you for acceptance?\n   - Look for specific evidence fields: measurements, photos, traceability, test logs, serials, lot numbers, and who verified what.\n\n6. **Reopen / rework trigger**\n   - If the issue returns, what forces it back open?\n   - You want an explicit threshold, not “we’ll monitor it.”\n\n7. **Warranty scope**\n   - What exactly is covered, for how long, under what use conditions, and what is excluded?\n   - Vague exclusions can hollow out the warranty.\n\n8. **Change control**\n   - Can they substitute materials, process, supplier, packaging, or test method without telling you?\n   - If yes, that’s a risk unless changes are tied to requalification.\n\n## Treat it as a red flag, not just wording cleanup, if you see:\n- **No named acceptance basis** at all\n- **“Or equivalent” / “industry standard”** with no reference standard\n- **Acceptance by appearance only** for a functional item\n- **Test conditions that don’t match the real failure path**\n- **Short or incomplete test coverage** that can miss intermittent issues\n- **Missing conditional checks** for known failure drivers\n- **Warranty language that conflicts with the quote/spec**\n- **No reopen rule** if the defect reappears\n- **Broad disclaimers** that effectively make the warranty meaningless\n- **Uncontrolled vendor changes** to material/process/supplier/packaging\n\n## Practical rule\nIf the wording is vague **but fixable by naming the standard and test conditions**, that’s usually a cleanup item.\n\nIf it leaves you unable to answer:\n- **What exactly counts as pass?**\n- **Under what condition was it proven?**\n- **What evidence will they provide?**\n- **What happens if it fails again?**\n\nthen I’d treat it as a **sign-off blocker**, not a wording issue.\n\nIf you want, I can turn this into a **1-page quote review checklist** with hard stops at the top and evidence fields in the middle.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct and blunt: \"Before you sign, I’d check for these must-clarify items\" and \"that’s too vague\" / \"I’d treat it as a sign-off blocker\". No hedging or fluff."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Gives concrete caveats and failure modes: \"bench-only language when the real failure shows up under stress,\" \"Short confirmation runs can create false passes,\" and specific evidence/warranty/change-control issues."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Uses a highly structured format with numbered sections, bullets, and a checklist-style \"Practical rule\" plus a red-flag list."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative rather than dictatorial: \"If you want, I can turn this into a 1-page quote review checklist\" and lays out options/criteria before recommending a blocker. Slightly prescriptive, but not hand-holding."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Firm pushback is explicit: \"that’s too vague,\" \"Treat it as a red flag,\" and \"sign-off blocker, not a wording issue\". It clearly challenges weak wording instead of smoothing it over."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — I’d make the line much sharper:\n\n## Hard-stop rule\nTreat it as a **red flag / do not sign** if any of these are true:\n\n- **No exact acceptance basis**\n  - no spec, drawing, revision, test method, or named standard\n- **Test envelope is undefined or wrong**\n  - load / temp / duty / humidity / vibration / orientation / storage state not stated\n- **“Industry standard,” “equivalent,” or “acceptable” is doing the work**\n  - without a reference you can actually check\n- **Evidence is not mandatory**\n  - no numbers, serials, traceability, or sign-off trail\n- **Warranty is vague enough to be optional**\n  - no start date, duration, remedy, or clear exclusions\n- **They can change materials/process/supplier/test method silently**\n  - or only need to “notify” after the fact\n- **No reopen trigger**\n  - if it fails again, there’s no explicit obligation to rework or re-open\n\n## Wording cleanup only if:\nIt’s already clear **what counts as pass/fail**, and the problem is just that the quote is sloppy about:\n- formatting\n- missing revision numbers\n- incomplete evidence fields\n- awkward warranty phrasing\n- minor ambiguity that can be fixed by naming the exact standard and conditions\n\n## Practical decision rule\nAsk yourself:\n\n1. **Can I tell exactly what was tested?**\n2. **Can I tell under what conditions it was tested?**\n3. **Can I tell what evidence I’ll get?**\n4. **Can I tell what happens if it fails again?**\n5. **Can they change the thing without forcing requalification?**\n\nIf the answer to any of those is **no**, and the vendor won’t tighten it in writing, I’d treat that as a **sign-off blocker**, not a wording cleanup.\n\n## My blunt version\n- **Fix wording** = the meaning is solid, the document is just messy.\n- **Don’t sign** = the wording is vague in a way that gives them room to argue later.\n\nIf you want, I can turn this into a **yes/no quote review gate** you can use line-by-line.",
+      "score": 5.0,
+      "summary": "mean=5.00 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:0, 5:5}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct and blunt: \"I’d make the line much sharper,\" \"Hard-stop rule,\" \"do not sign,\" and \"My blunt version\". No hedging or softness."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Gives concrete caveats and failure modes: exact acceptance basis, test envelope, evidence, warranty terms, silent changes, reopen trigger, plus a practical decision rule with five checks."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured with headings and bullets: \"Hard-stop rule,\" \"Wording cleanup only if,\" \"Practical decision rule,\" and a numbered checklist. Easy to audit."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Collaborative without hand-holding: it lays out criteria and asks the user to apply them, then offers \"If you want, I can turn this into a yes/no quote review gate\" rather than dictating a single rigid answer."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Firm pushback is explicit: \"red flag / do not sign,\" \"sign-off blocker,\" and \"Fix wording\" vs \"Don’t sign\". It clearly challenges weak/vague vendor language instead of smoothing it over."
+        }
+      ]
+    }
+  ]
+}

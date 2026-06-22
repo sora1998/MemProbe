@@ -1,0 +1,36 @@
+{
+  "user_id": "user_029",
+  "task": "I’m cleaning up a short troubleshooting note for a home repair before I share it with someone else. Can you help me make it clear and usable, and point out anything that doesn’t hold up?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.6,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — paste the note and I can:\n\n- **clean it up** so it reads clearly\n- **tighten the sequence**\n- **separate observed facts from assumptions**\n- **flag anything weak, vague, or unsupported**\n- **point out missing details** that matter for troubleshooting\n\nA good troubleshooting note usually needs:\n- **symptom**\n- **location / unit**\n- **when it started**\n- **what was checked**\n- **what was found**\n- **what changed**\n- **current status**\n- **next step**\n\nIf you send the rough version, I’ll mark:\n- what holds up\n- what’s shaky\n- what should be reworded\n- what’s missing",
+      "user_simulator": {
+        "feedback_type": "add_context",
+        "text": "Alright, here’s the note:\n\n\"Basement sump pump started cycling every 30–45 seconds during heavy rain on Tuesday night. I checked the pit and found water level rising above the float cutoff even when the pump was off. Outlet had power, cord looked intact, but the check valve was warm and there was a faint grinding noise from the pump housing. I shut off power and cleaned some debris from the pit screen, but the cycling didn’t stop after restart. By morning the pit was filling faster than the pump could clear it, and there was a small amount of seepage along the wall seam near the northwest corner. I haven’t opened the pump yet.\"\n\nThe part that may not hold up: \"water level rising above the float cutoff even when the pump was off\" — that needs a time reference or a clearer observation. Otherwise it reads like a conclusion, not a direct check.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — the note is mostly solid. The main weak spot is exactly what you flagged: **“water level rising above the float cutoff even when the pump was off”** needs a clearer observation or time reference.\n\n## What holds up\n- **Timing:** heavy rain on Tuesday night\n- **Symptom:** cycling every 30–45 seconds\n- **Checks:** outlet had power, cord looked intact\n- **Additional clue:** warm check valve, faint grinding noise\n- **Action taken:** shut off power, cleaned debris from pit screen\n- **Result:** cycling continued after restart\n- **Follow-up condition:** pit filling faster by morning\n- **Secondary effect:** seepage along wall seam near northwest corner\n- **Current status:** pump not opened yet\n\n## What’s shaky\n- **“water level rising above the float cutoff even when the pump was off”**\n  - reads like a conclusion\n  - better if it’s tied to a direct observation:\n    - “I observed the water level at [time] above the float cutoff while the pump was off”\n    - or “After the pump stopped, the water level continued rising past the float cutoff within X minutes”\n\n## Cleaned-up version\n> Basement sump pump started cycling every 30–45 seconds during heavy rain on Tuesday night. I checked the pit and observed the water level above the float cutoff while the pump was off. The outlet had power and the cord looked intact, but the check valve was warm and there was a faint grinding noise from the pump housing. I shut off power and cleaned debris from the pit screen, but the cycling continued after restart. By morning, the pit was filling faster than the pump could clear it, and there was a small amount of seepage along the wall seam near the northwest corner. I have not opened the pump yet.\n\n## What I’d tighten further if you want it stronger\nAdd:\n- **approximate time of first cycle**\n- **whether the grinding happened only when running or also when idle**\n- **whether the check valve was warm because of recent discharge or unusually hot**\n- **whether the seepage was new or pre-existing**\n\n## Bottom line\nThe note is usable, but the one sentence about the float cutoff should be rewritten as a **direct observation with a time anchor** so it doesn’t read like inference.\n\nIf you want, I can turn it into a **more formal troubleshooting note** or a **shorter handoff version**.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s solid. Cleaned up enough to hand off, and you caught the weak line right. The rewrite reads like an observation instead of a guess.\n\nOnly thing I’d still watch: “check valve was warm” is okay, but if whoever gets this is picky, they may ask warm compared to what. Same with the seepage — if it’s new, say new. If not, don’t imply it.\n\nBut overall, usable. Tight enough.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    }
+  ]
+}

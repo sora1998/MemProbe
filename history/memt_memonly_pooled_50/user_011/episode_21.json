@@ -1,0 +1,49 @@
+{
+  "user_id": "user_011",
+  "task": "I’m in the middle of a project that’s been hit by a few unrelated issues at once: one file problem, some incomplete notes, and a couple of late changes. Can you help me sort out a practical order for handling it so I can keep moving without losing track of anything?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.666666666666667,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — the cleanest way is to **stabilize first, then reconcile drift**.\n\n### 1) Stabilize the current state\nDo this before touching anything else:\n- **Make one backup**\n- **Freeze the current project state**\n- Identify the **most stable / approved version** as your source of truth\n- If one file is broken or missing, **replace it with a known-good copy or placeholder** so the project stays movable\n\n### 2) Build a quick mismatch tracker\nMake a simple list with 3 buckets:\n- **Confirmed**\n- **Unconfirmed**\n- **Client-changed / late changes**\n\nFor each issue, note:\n- what changed\n- where it came from\n- whether it’s approved\n- whether it affects export\n\n### 3) Reconcile the drift\nNow sort the messy parts:\n- **Incomplete notes** → collect into one note tracker\n- **Late changes** → compare against the last approved version\n- **File problem** → verify the replacement or isolate the bad file\n- **Folder labels / export names** → standardize them once the content is settled\n\n### 4) Verify the project before export\nQuick checks:\n- frame rate\n- duration\n- audio\n- captions/slate if relevant\n- export settings\n- compare against the last approved cut\n\n### 5) Handoff prep\nKeep:\n- a **clean master**\n- a **short changelog**\n- a note about the file issue and what was done\n\nIf you want, I can turn this into either:\n1. a **bare-bones cleanup checklist**, or  \n2. a **client update** that says what’s stabilized, what changed, and what still needs confirmation.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s the right shape. But I’d want it a little tighter, more operational.\n\nStart with the file issue first if it blocks opening or relinking. Then freeze the current state and make a clean backup. After that, separate the notes into:\n- confirmed\n- unconfirmed\n- client change\n\nLate changes go against the last approved version, not the current messy one. Otherwise you end up chasing ghosts.\n\nWhat I’d still want from you is a more exact order for the note cleanup and change review. Like:\n1. what to check first if the file is broken\n2. how to log incomplete notes without duplicating them\n3. when to stop reconciling and move to export prep\n\nThat last part matters. I’ve had jobs where I kept “cleaning” the project and just burned time. So I’d want a hard cutoff for when the project is stable enough to move.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — I’d handle it in this order:\n\n### 1) Fix the blocking file issue first\nIf the file problem stops opening, relinking, or playback:\n- identify whether it’s **missing, corrupt, or wrong version**\n- replace it with a **known-good copy**\n- if you can’t fix it immediately, **isolate it and keep the project movable**\n\nDon’t touch notes or late changes until the project can actually open and run.\n\n### 2) Freeze the current state and back it up\nOnce the project is workable:\n- make **one clean backup**\n- freeze the current version\n- treat that as the working reference\n\n### 3) Log notes without duplicating them\nUse one tracker and keep each note to a single line:\n- **confirmed**\n- **unconfirmed**\n- **client change**\n\nFor each item, record:\n- what it is\n- where it came from\n- whether it affects picture/export\n- whether it’s already reflected in the project\n\nIf a note appears in more than one place, **link back to the same tracker entry instead of rewriting it**.\n\n### 4) Review late changes against the last approved version\nDon’t compare them to the messy current state.\n- pull the **last approved version**\n- check each late change against that\n- mark whether it’s already applied, still pending, or needs confirmation\n\n### 5) Stop reconciling once the project is stable enough\nMove to export prep when:\n- the file issue is resolved or safely isolated\n- notes are sorted into the 3 buckets\n- late changes are matched against the approved version\n- anything unresolved is clearly marked, not still being debated\n\n### Hard cutoff\nIf you’ve gone through the list once and the remaining items are only:\n- minor wording questions\n- non-blocking clarifications\n- things that don’t affect the export\n\nthen stop cleaning and prep the export.\n\nIf you want, I can turn this into a **5-line working checklist** you can keep open while you clean it up.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, closer. I’d still tighten the cutoff a bit more.\n\nThe order should be:\n1. confirm the file is either fixed or safely bypassed so the project opens cleanly\n2. make the backup / freeze the working state\n3. log notes once, in one tracker only\n4. compare late changes to the last approved version\n5. stop when the remaining items are non-blocking and clearly tagged\n\nFor the note cleanup, I’d do it like this:\n- read all notes once\n- write each one into the tracker only once\n- if the same thing shows up again, add a cross-reference instead of a new entry\n- mark each item as confirmed, unconfirmed, or client change\n- flag whether it affects picture, audio, or export\n\nWhat I’d want even more is the actual hard stop rule. Something like: if it doesn’t affect opening, relinking, picture lock, audio sync, or export settings, it waits. Otherwise you’ll keep polishing forever.\n\nSo yeah — the shape is right, but I’d want that stop rule stated as a plain workflow rule, not just “non-blocking clarifications.”",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yes — I’d make the workflow rule explicit:\n\n### Practical order\n1. **Fix or bypass the file issue first** so the project opens cleanly\n2. **Make one backup and freeze the working state**\n3. **Read all notes once and log each item only once** in a single tracker\n4. **Compare late changes to the last approved version**\n5. **Stop reconciling when the remaining items are non-blocking and clearly tagged**\n\n### Note cleanup rule\n- Write each note **once**\n- If it comes up again, add a **cross-reference**, not a duplicate\n- Mark each item as:\n  - **confirmed**\n  - **unconfirmed**\n  - **client change**\n- Flag whether it affects:\n  - **picture**\n  - **audio**\n  - **export**\n\n### Hard stop rule\nIf it **doesn’t affect**:\n- opening the project\n- relinking\n- picture lock\n- audio sync\n- export settings\n\nthen it waits.\n\nThat’s the line. If an item touches one of those five areas, deal with it now. If it doesn’t, tag it and move on.\n\nIf you want, I can turn this into a **tight 1-page working checklist** you can use while cleaning the project.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s the rule I wanted.\n\nThe hard stop is clean now: if it doesn’t affect opening, relinking, picture lock, audio sync, or export settings, it waits. That’s usable.\n\nAnd the order makes sense:\n1. fix or bypass the file issue so the project opens cleanly\n2. backup / freeze the working state\n3. log notes once in one tracker\n4. compare late changes to the last approved version\n5. stop when the rest is tagged and non-blocking\n\nThat’s tight enough to run with.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    }
+  ]
+}

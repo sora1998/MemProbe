@@ -1,0 +1,23 @@
+{
+  "user_id": "user_006",
+  "task": "I’m trying to figure out why a small industrial network cabinet keeps acting up during the afternoon even though nothing obvious changed. If you were troubleshooting that, what would you check first so you can tell whether it’s a gear problem, a ventilation problem, or something tied to the environment?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.2,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Check the **time pattern first**, then the cabinet itself.\n\n## 1) Confirm the symptom pattern\n- Does it fail only in the afternoon?\n- Does it recover later?\n- Is it tied to heat, sunlight, machine cycles, or nearby equipment turning on?\n\nIf it’s time-linked, suspect **environment** before config.\n\n## 2) Check cabinet temperature and airflow\nLook at:\n- internal temp\n- fan operation\n- blocked vents\n- dirty filters\n- cable bundles blocking airflow\n- hot spots near switches, PSUs, or PoE gear\n\n### If you see:\n- temp rising before failures\n- fans ramping or failing\n- gear throttling or rebooting\n- repeated thermal warnings\n\n→ suspect ventilation or ambient heat.\n\n## 3) Check hardware health\nLook for:\n- PSU warnings\n- link flaps\n- port errors\n- CRC/FCS increases\n- device reboots\n- storage/controller alarms if present\n\n### If you see:\n- errors increasing as the cabinet heats up\n- devices dropping only when load or temperature rises\n\n→ suspect gear that is marginal under heat.\n\n## 4) Check the environment\nLook for:\n- direct sun on the cabinet\n- nearby ovens, motors, compressors, forklifts, or welders\n- dust buildup\n- humidity or condensation\n- vibration\n- power quality issues\n- EMI/noise from adjacent equipment\n\n### If you see:\n- failures lining up with machinery cycles\n- power dips\n- repeated interference patterns\n- condensation or dust ingress\n\n→ suspect environment, not the network config.\n\n## 5) Split tests\n- open the cabinet temporarily and see if symptoms ease\n- move a fan or improve airflow\n- log temperature vs failure time\n- swap in known-good hardware if possible\n- move one device to a cooler or cleaner spot if practical\n\n## 6) What to rule out early\n- config changes\n- routing\n- VLANs\n- VPN/tunnel issues\n\nIf the problem is strongly time/temperature correlated, config is usually not the first suspect.\n\n## 7) Best quick clue\nIf the cabinet acts up when it gets warmer and settles when it cools, that’s usually:\n- ventilation\n- thermal load\n- marginal gear\n- or environment\n\nIf you want, I can turn this into a **field checklist** with “if X, check Y next.”",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s the right order. Time pattern first, then temp/airflow, then hardware, then outside factors. That’s basically how I’d attack it too.\n\nThe only thing I’d tighten is this: don’t just look at the cabinet, correlate it with a hard number. Internal temp, ambient temp, and when the errors start. If the switch starts throwing CRCs or link flaps right as the cabinet climbs a few degrees, that’s not “mystery network,” that’s heat exposure or a weak part showing itself.\n\nAnd I’d check the power feed early too. Afternoon issues can be load-related — HVAC kicking, compressors, whatever on the same circuit. I’ve seen a setup look like a bad switch when it was really sagging voltage under peak building load. Same kind of thing: blame shows up at the gear, cause is upstream.\n\nSo yeah: log temp, inspect vents/fans/filter, watch port errors and reboots, then check sunlight / nearby machinery / power quality. If opening the cabinet or giving it airflow makes it settle down, you already know where the leverage is.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    }
+  ]
+}

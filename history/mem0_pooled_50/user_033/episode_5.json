@@ -1,0 +1,49 @@
+{
+  "user_id": "user_033",
+  "task": "I’ve got two things that both need attention this week, and one has a hard cutoff I can’t miss. Can you help me map out a realistic order to handle them without boxing myself into a corner if the first one runs long?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.3999999999999995,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — the safest way is to treat the hard-cutoff item as the scheduling anchor and build the other task around it with a buffer, not back-to-back time.\n\nA practical order:\n\n1. **Identify the hard cutoff first**\n   - Put the non-negotiable deadline on the calendar.\n   - Work backward and mark the latest safe start time.\n   - Add a buffer for review, fixes, and any unexpected delay.\n\n2. **Do the task with the hard cutoff first, but only up to a defined stopping point**\n   - Set a clear “stop if not done by X” time.\n   - Decide in advance what counts as good enough to submit vs. what would force a delay.\n   - Avoid letting it expand into the rest of the day.\n\n3. **Place the second task in the remaining buffer or immediately after**\n   - If the first task finishes early, use the extra time on the second.\n   - If it runs long, the second task should still have a protected slot later in the week.\n   - Don’t schedule the second task so tightly that it depends on the first going perfectly.\n\n4. **Build a fallback**\n   - If the first task slips, what gets dropped, delegated, or postponed?\n   - If the hard-cutoff item is the one with risk, make sure there’s a “minimum viable completion” version ready.\n\nA simple rule:\n- **Hard cutoff item gets priority**\n- **Second item gets a protected buffer slot**\n- **No plan should require both to go perfectly**\n\nIf you want, I can help you turn this into a concrete two-task schedule with:\n- estimated durations,\n- buffer time,\n- latest safe start time,\n- and a fallback plan if the first one overruns.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, the structure’s fine, but it’s still too generic. I need something I can actually use.\n\nGive me a concrete order with time blocks and a buffer, not just “priority” talk. I want:\n- hard cutoff item\n- latest start time\n- buffer before the cutoff\n- where the second task fits if the first runs long\n- what gets dropped first if the day goes sideways\n\nIf you want, make it in a table. Keep it tight.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Absolutely — here’s a usable template you can drop your two tasks into.\n\n| Item | Time block | Purpose | Notes |\n|---|---:|---|---|\n| **Task 1: hard-cutoff item** | **Start at latest safe start time** → **hard cutoff minus buffer** | Do the critical work | Do **not** let this expand past the buffer |\n| **Buffer before cutoff** | **Hard cutoff minus 60–90 min** | Review, fix issues, submit, contingency | Protect this time; it is not work time |\n| **Task 2: second item** | **After Task 1 if it finishes early, or later in the day / next available block** | Use remaining time productively | Only starts if Task 1 is stable or complete |\n| **Fallback / spillover block** | **Last block of the day or next morning** | Catch what didn’t fit | Keep this as the “if things go sideways” slot |\n\n### Concrete order\n1. **Do Task 1 first**\n2. **Stop Task 1 at the buffer boundary**\n3. **Use the buffer for review / submission / cleanup only**\n4. **If Task 1 finishes early, start Task 2**\n5. **If Task 1 runs long, defer Task 2 to the fallback block**\n\n### What gets dropped first if the day goes sideways\n1. **Nice-to-have polish**\n2. **Task 2 noncritical parts**\n3. **Extra review beyond what’s needed to safely submit**\n4. **Anything that would eat into the hard-cutoff buffer**\n\n### Rule of thumb\n- **Hard-cutoff item gets the morning/first block**\n- **Buffer stays untouched**\n- **Second task only gets time if the first one is under control**\n\nIf you give me:\n- the hard cutoff time,\n- rough duration for each task,\n- and whether the cutoff is same-day or end-of-week,\n\nI can turn this into a real schedule with actual clock times.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Closer. Still not actually concrete enough.\n\nNeed it in clock time, like:\n\n| Item | Time |\n|---|---|\n| Task 1 | 8:00–10:30 |\n| Buffer | 10:30–11:15 |\n| Task 2 | 11:15–12:30 |\n\nAnd I need the fallback spelled out, not just “defer it.” Something like:\n- if Task 1 overruns by 30 min, Task 2 gets cut to the first 45 min only\n- if it overruns by more than 30 min, Task 2 moves to tomorrow\n- if the cutoff slips, drop the low-value parts first\n\nRight now it’s still a template. I want an actual order I can follow today, with the buffer protected.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yes — here’s the concrete version in clock time, with the buffer protected and a real fallback.\n\n### Default plan\n\n| Item | Time |\n|---|---|\n| **Task 1: hard-cutoff item** | **8:00–10:30** |\n| **Buffer / review / submit** | **10:30–11:15** |\n| **Task 2** | **11:15–12:30** |\n\n### Order to follow\n1. **Start Task 1 at 8:00**\n2. **Stop Task 1 at 10:30 no matter what**\n3. **Use 10:30–11:15 only for buffer work**: review, fixes, submission, handoff\n4. **Start Task 2 at 11:15 only if Task 1 is stable**\n5. **If Task 1 is still shaky at 10:30, Task 2 does not start that block**\n\n### Fallback rules\n- **If Task 1 overruns by up to 30 min:**  \n  Task 2 gets **cut to 11:45–12:30 only**.\n\n- **If Task 1 overruns by more than 30 min:**  \n  **Task 2 moves to tomorrow**.\n\n- **If the cutoff starts slipping:**  \n  Drop in this order:\n  1. polish / formatting\n  2. optional extras\n  3. low-value parts of Task 2\n  4. anything that eats into the buffer\n\n### Non-negotiable rule\n- **Do not steal from the buffer.**\n- The buffer is for rescue, not for more work.\n\nIf you want, I can turn this into a version with your actual cutoff time and your two task durations.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s the first one that’s actually usable.\n\nI can work with 8:00–10:30 / 10:30–11:15 / 11:15–12:30, and the fallback rules are clear enough. Buffer stays protected, which is the whole point.\n\nThe only thing I’d change is the cutoff wording — if Task 1 is the hard deadline item, I’d rather see the stop time tied to the actual cutoff, not just “no matter what.” But the structure is fine.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    }
+  ]
+}

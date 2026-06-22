@@ -1,0 +1,104 @@
+{
+  "user_id": "user_006",
+  "task": "I’ve got a messy outage situation and want a sane recovery plan, not a guess: if a core network segment goes down and a couple dependent services start failing after that, how would you break it apart and bring things back in the right order? I’m looking for a practical approach I could actually follow under pressure.",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "verbosity_preference",
+      "short": "Wants responses kept tight and efficient",
+      "explanation": "He values speed, control, and efficiency, so he is unlikely to want long-winded help. He would probably prefer responses that get to the point quickly and avoid unnecessary filler. Overexplaining would feel like wasted time to him."
+    },
+    {
+      "idx": 2,
+      "dimension": "directness_preference",
+      "short": "Prefers blunt answers without softening",
+      "explanation": "His skeptical, competitive style suggests he wants clear, unambiguous guidance rather than hedged language. He would likely see excessive caution as evasive or inefficient. Straight answers fit his preference for control and decisive action."
+    },
+    {
+      "idx": 3,
+      "dimension": "format_preference",
+      "short": "Likes structured, actionable output",
+      "explanation": "He seems most likely to respond well to responses that are organized and easy to execute, such as bullets or checklists. That matches his practical, task-focused mindset. Loose, meandering prose would probably frustrate him."
+    },
+    {
+      "idx": 4,
+      "dimension": "detail_level_preference",
+      "short": "Wants the useful essentials, not padding",
+      "explanation": "He likely wants enough context to act, but not exhaustive background unless it helps him win or avoid mistakes. He is efficiency-driven, so extra caveats only matter when they change the decision. He would probably skip anything that does not affect the outcome."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Accepts pushback only if it is sharp and useful",
+      "explanation": "He is skeptical and self-serving, so he probably does not enjoy moralizing or vague objections. But if the pushback is concrete, efficient, and clearly tied to risk or leverage, he is more likely to respect it. Weak or overly gentle correction would likely be ignored."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Here’s a practical way to handle it under pressure: **stabilize first, then restore dependencies in order, then verify service by service**. The key is to avoid “fixing” things in parallel without knowing which failures are primary vs. secondary.\n\n## 1) First: stop the bleeding\nBefore recovery, make the situation controllable.\n\n- **Declare the incident and assign roles**\n  - One person leads.\n  - One person handles comms.\n  - One person investigates.\n  - One person coordinates changes/restarts.\n\n- **Freeze non-essential changes**\n  - No deploys, config edits, scaling changes, or “quick fixes” unless approved by the incident lead.\n\n- **Preserve evidence**\n  - Capture current alerts, timestamps, recent changes, logs, and dependency status.\n  - If you may need root cause later, don’t restart everything blindly yet.\n\n## 2) Separate primary failure from cascade failures\nIf a **core network segment is down**, treat that as the likely root cause until proven otherwise.\n\nAsk:\n- What exactly is down?\n  - Link, switch, router, VLAN, firewall, DNS path, load balancer, interconnect?\n- What services depend on that segment?\n  - Databases, message queues, auth, storage, API gateways, internal service-to-service traffic?\n- Which alerts appeared **after** the network event?\n  - Those are probably downstream symptoms.\n\nA useful rule:\n- **Fix the infrastructure layer first**\n- Then **restore shared dependencies**\n- Then **restore application services**\n- Then **validate end-user paths**\n\n## 3) Build a dependency order\nUse a simple stack like this:\n\n1. **Physical/network foundation**\n   - Power, links, routing, switching, ACLs, VPN, DNS, LB health, connectivity between zones\n\n2. **Shared platform services**\n   - Identity/auth, secrets, DNS resolution, service discovery, storage, database, queue, cache\n\n3. **Core application services**\n   - APIs, workers, schedulers, internal services\n\n4. **Edge/user-facing services**\n   - Web frontends, gateways, mobile endpoints, integrations\n\nIf you don’t know the full dependency graph, restore in this order:\n- **network connectivity**\n- **name resolution**\n- **shared data stores**\n- **message systems**\n- **critical app services**\n- **non-critical services**\n\n## 4) Recover in small, verifiable steps\nDon’t do a big “restart everything” blast unless you’re sure the network is healthy.\n\nFor each layer:\n- Confirm it’s healthy from at least two viewpoints if possible.\n- Bring up one component at a time.\n- Wait for health checks to pass.\n- Check logs/metrics for a minute or two before moving on.\n\nExample sequence:\n1. Restore core network segment.\n2. Verify routing, DNS, and connectivity between critical nodes.\n3. Confirm database/storage/queue access.\n4. Restart or re-enable dependent services in dependency order.\n5. Verify application health checks.\n6. Validate user journeys and external integrations.\n\n## 5) Use a decision tree for the dependent services\nFor each failing service, ask:\n\n- **Does it fail because it can’t reach a dependency?**\n  - If yes, fix the dependency first.\n- **Did it crash or enter a bad state during the outage?**\n  - If yes, restart only after the dependency is healthy.\n- **Is it healthy but traffic is still failing?**\n  - Check load balancer, DNS, firewall, certificates, routing, or stale caches.\n- **Is it still unhealthy after dependencies are restored?**\n  - Treat as a separate service issue, not part of the network outage.\n\n## 6) Bring services back in the right order\nA common safe order:\n\n1. **Core network / connectivity**\n2. **DNS / service discovery**\n3. **Databases / storage / queues**\n4. **Authentication / secrets / config services**\n5. **Internal APIs and workers**\n6. **Frontends / gateways**\n7. **Batch jobs / non-critical background tasks**\n8. **Integrations / exports / reporting**\n\nIf there’s a service that others depend on, bring that one up first even if it’s not user-facing.\n\n## 7) Verify at each stage\nDon’t assume “up” means “working.”\n\nCheck:\n- Health endpoints\n- Error rates\n- Latency\n- Connection pool saturation\n- Queue backlog\n- Replication status\n- DNS resolution\n- End-to-end transaction test\n\nA good rule is:\n- **component healthy**\n- **dependency reachable**\n- **business transaction succeeds**\n\n## 8) Watch for recovery traps\nCommon problems during recovery:\n- **Thundering herd**: everything reconnects at once and overloads the restored segment.\n- **Stale DNS / cached routes**\n- **Split brain / failover confusion**\n- **Stuck retries** causing traffic storms\n- **Partial restoration** where some nodes are up but not all paths work\n- **Config drift** from emergency edits\n\nMitigations:\n- Stagger restarts\n- Rate-limit retries if possible\n- Clear or refresh stale state carefully\n- Validate failover/failback behavior before declaring success\n\n## 9) When to stop and escalate\nPause and escalate if:\n- The network issue is unresolved after basic checks.\n- You can’t confirm the dependency chain.\n- A restart makes things worse.\n- You suspect data corruption, split-brain, or failover inconsistency.\n- Recovery requires risky changes without a rollback.\n\n## 10) A simple incident checklist you can follow\nUse this under pressure:\n\n- [ ] Declare incident, assign roles\n- [ ] Freeze changes\n- [ ] Identify primary outage vs downstream failures\n- [ ] Restore core network segment\n- [ ] Verify routing/DNS/connectivity\n- [ ] Confirm shared dependencies are reachable\n- [ ] Restart/re-enable dependent services one by one\n- [ ] Validate health checks and logs\n- [ ] Test end-to-end user flows\n- [ ] Watch for rebound issues\n- [ ] Communicate status and ETA updates\n- [ ] After recovery, do a postmortem and dependency map update\n\n## 11) The core principle\n**Don’t recover by symptom. Recover by dependency order.**  \nIf the network is the root cause, fixing app services first usually wastes time and can make the outage noisier.\n\nIf you want, I can turn this into a **one-page incident runbook** or a **step-by-step recovery flowchart** you can use live during an outage.",
+      "score": 4.0,
+      "summary": "mean=4.00 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:1, 4:3, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 3,
+          "reason": "Fairly concise and action-oriented, but still fairly long with many sections and repeated guidance, which is more than a tight, efficient answer."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly direct and blunt, e.g. \"Fix the infrastructure layer first\" and \"Don’t recover by symptom.\" Some hedging remains with phrases like \"if possible\" and \"treat as likely root cause until proven otherwise.\""
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable: numbered steps, bullets, checklist, and a clear order of operations make it easy to execute under pressure."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Focuses on essentials needed to act, like dependency order, verification, and recovery traps, though it includes some extra explanatory material and multiple repeated frameworks."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Pushback is concrete and useful, not moralizing: e.g. \"Don’t do a big ‘restart everything’ blast\" and warnings about \"thundering herd\" and \"split brain\" tied to specific risks."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Here’s the **under-fire version**: a tight order of operations with **decision points** so you can tell root cause from fallout fast.\n\n## 0) Rule of thumb\nIf the **core segment is down**, assume every dependent failure is **secondary** until you prove otherwise.\n\nDon’t touch app services first unless the network is already confirmed healthy.\n\n---\n\n## 1) First 5 minutes: check the core segment in this order\n\n### A. Is the segment actually down, or just partially broken?\nCheck:\n- link state / interface up-down\n- switch/router port status\n- VLAN / trunk / LACP status\n- routing adjacency / next hop reachability\n- firewall / ACL changes\n- power / device health if the box is involved\n\n### Decision:\n- **If the segment is hard down**: fix the segment first. Do not restart dependent services yet.\n- **If the segment is up but traffic still fails**: look for routing, ACL, DNS, LB, or asymmetric path issues.\n- **If only one path is bad**: treat it as partial connectivity, not full recovery.\n\n### B. Verify from two sides\nCheck connectivity:\n- from inside the segment\n- from a dependent service or adjacent network\n\n### Decision:\n- **Both sides fail the same way**: core path is still broken.\n- **One side works, one doesn’t**: likely routing/ACL/firewall asymmetry or partial failover issue.\n\n---\n\n## 2) Decide whether dependent failures are fallout\nFor each failing service, ask:\n\n### A. Did it start failing after the network event?\n- If yes, assume fallout.\n\n### B. What is the failure mode?\n- **timeouts / connection refused / no route / DNS failure** → usually dependency fallout\n- **crash loops / bad config / app exception** → may be a separate service issue\n- **healthy but unreachable** → likely network, DNS, LB, or firewall\n\n### C. Can it reach its dependency now?\nCheck the service’s direct dependencies:\n- database\n- queue\n- cache\n- auth/secrets\n- DNS\n- service discovery\n\n### Decision:\n- **Cannot reach dependency** → leave the service alone for now.\n- **Can reach dependency but still failing** → service may need restart or separate fix.\n- **Only one instance is bad** → don’t restart the whole fleet; isolate that node.\n\n---\n\n## 3) When to restart vs leave alone\n\n### Leave it alone if:\n- the core segment is still unstable\n- the service is failing because a dependency is still down\n- you haven’t confirmed whether it’s a network issue or app issue\n- the service is still serving some traffic correctly\n- restarting would create more noise than signal\n\n### Restart only if:\n- the network path is confirmed healthy\n- the dependency it needs is reachable\n- the service is still unhealthy after connectivity is restored\n- logs show it’s stuck, wedged, or in a bad state from the outage\n- it’s a single service/node, not a broad systemic failure\n\n### Decision:\n- **Dependency still broken** → do not restart; fix dependency first.\n- **Dependency healthy, service unhealthy** → restart one instance or one service at a time.\n- **Restart causes immediate failure again** → stop; you’ve likely found a missing dependency or config issue.\n\n---\n\n## 4) Recovery order that won’t waste time\n\n### Layer 1: Core network\nRestore:\n- link\n- switch/router path\n- routing\n- ACL/firewall\n- DNS path if it’s part of the segment\n\n**Verify before moving on:**\n- ping/traceroute or equivalent from both sides\n- route table / adjacency stable\n- no packet loss on the path\n- basic DNS resolution if needed\n\n---\n\n### Layer 2: Shared dependencies\nBring back:\n- DNS / service discovery\n- database\n- storage\n- queue / broker\n- cache\n- auth / secrets\n\n**Verify before moving on:**\n- each dependency is reachable\n- health checks pass\n- one real read/write or request works\n- no replication/split-brain issue\n- no backlog explosion\n\n---\n\n### Layer 3: Dependent services\nBring up:\n- internal APIs\n- workers\n- schedulers\n- middleware\n\n**Order:**\n- services others depend on first\n- then leaf services\n\n**Verify before moving on:**\n- service health endpoint\n- successful dependency calls\n- error rate drops\n- no retry storm\n- no connection pool exhaustion\n\n---\n\n### Layer 4: User-facing edge\nBring up:\n- gateways\n- web frontends\n- load-balanced entry points\n- external integrations\n\n**Verify before moving on:**\n- end-to-end user transaction works\n- LB is routing correctly\n- no stale DNS or cached endpoint issue\n- external path is clean\n\n---\n\n## 5) The fastest way to avoid chasing the wrong layer\n\nUse this decision loop:\n\n### Step 1\n**Is the core segment fully healthy?**\n- No → stop and fix network.\n- Yes → continue.\n\n### Step 2\n**Can a dependent service reach its direct dependency?**\n- No → dependency layer still broken.\n- Yes → continue.\n\n### Step 3\n**Is the service failing because it’s unhealthy, or just unreachable?**\n- Unreachable → network/DNS/LB/firewall.\n- Unhealthy → app/service state issue.\n\n### Step 4\n**Did the service recover automatically once the dependency came back?**\n- Yes → leave it alone.\n- No → restart one instance/service, not the whole fleet.\n\n### Step 5\n**Did the restart improve it?**\n- Yes → continue with the next service in order.\n- No → stop and re-check dependency chain.\n\n---\n\n## 6) Practical “don’t waste 20 minutes” signals\n\n### Likely fallout:\n- failures start right after the network event\n- multiple unrelated services fail at once\n- errors are timeouts / no route / DNS failures\n- restarting services doesn’t help before network is fixed\n\n### Likely separate issue:\n- one service fails while others recover\n- app logs show config/auth/code errors\n- dependency is reachable but the service still won’t start\n- only one node or one AZ is bad\n\n---\n\n## 7) Minimal live checklist\n\n1. Confirm core segment status\n2. Check routing / ACL / path / DNS\n3. Verify from both sides of the segment\n4. Identify which service failures are pure connectivity vs app-state failures\n5. Restore shared dependencies first\n6. Wait for dependency health to stabilize\n7. Restart only services still unhealthy after dependencies are back\n8. Verify one layer at a time\n9. Move to user-facing services last\n\n---\n\n## 8) Simple rule for restart decisions\n**If the service is failing because it can’t reach something, don’t restart it yet.**  \n**If it can reach everything it needs and still fails, restart one instance and observe.**\n\nIf you want, I can turn this into a **one-page “if/then” outage flowchart** you can keep open during an incident.",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly tight and efficient: phrases like \"Here’s the under-fire version\" and \"Minimal live checklist\" keep it focused, though it is still fairly long."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Direct and blunt overall: \"Don’t touch app services first\" and \"If the core segment is down, assume every dependent failure is secondary\" are clear, decisive statements, with little hedging."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable: numbered sections, bullets, and repeated \"Decision:\" blocks make it easy to execute under pressure."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Gives the essentials without much padding, focusing on checks, decisions, and recovery order; some repetition and extra explanation keep it from being perfect."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Pushback is concrete and useful rather than moralizing: e.g. \"Don’t touch app services first unless the network is already confirmed healthy\" and \"If the service is failing because it can’t reach something, don’t restart it yet.\""
+        }
+      ]
+    }
+  ]
+}

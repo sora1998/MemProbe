@@ -1,0 +1,104 @@
+{
+  "user_id": "user_019",
+  "task": "I’m looking at a release that’s basically ready, but there’s still one unresolved issue that could let bad units through if we rush it. How would you think through whether to hold the schedule or take the hit and fix it first?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "directness_preference",
+      "short": "Blunt, no fluff",
+      "explanation": "She responds best to straight answers without hedging or performative softness. Her persona is skeptical and exacting, so she likely prefers help that states the issue clearly and gets to the point. Overly cautious wording would probably feel inefficient to her."
+    },
+    {
+      "idx": 2,
+      "dimension": "detail_level_preference",
+      "short": "Enough context to trust the answer",
+      "explanation": "She likely wants the key caveats and failure modes, not a vague headline. Her reliability-oriented mindset suggests she values context when it changes the conclusion or action. She probably dislikes being told something is “fine” without the conditions that make it fine."
+    },
+    {
+      "idx": 3,
+      "dimension": "format_preference",
+      "short": "Bullets and checklists preferred",
+      "explanation": "She seems likely to prefer responses that are easy to audit and act on. A structured format fits her methodical style and makes it easier to spot gaps, exceptions, or weak logic. Dense prose would probably feel slower and less useful."
+    },
+    {
+      "idx": 4,
+      "dimension": "autonomy_support_preference",
+      "short": "Collaborative, but not hand-holding",
+      "explanation": "She likely wants the assistant to work with her rather than dictate to her. She values control and personal autonomy, so prescriptive overreach would be a poor fit. At the same time, she probably appreciates a clear recommendation once the options are laid out."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Welcomes firm pushback",
+      "explanation": "She is likely comfortable being challenged when a claim is weak, risky, or sloppy. Her reliability-first mindset suggests she would rather get corrected than be coddled. Soft agreement without scrutiny would probably reduce her trust in the help."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Use a **risk-to-release** call, not a schedule call.\n\n## 1) Define the unresolved issue\nState:\n- what failed\n- how it failed\n- whether it repeats\n- what lot/serial/build it affects\n\nIf that isn’t clear, it stays open.\n\n## 2) Ask whether bad units could escape\nIf the issue could let bad units through:\n- can you **contain** them now?\n- can you **identify** them by lot/date/build rev/serial?\n- can you **block shipment** until sorted?\n\nIf not, the risk is high.\n\n## 3) Decide if the issue is understood\n- **Understood and bounded** → maybe release with containment\n- **Unresolved** → hold\n- **Repeatable and not bounded** → stop\n\n## 4) Check what the hit really is\nCompare:\n- schedule delay\n- rework cost\n- scrap risk\n- field failure risk\n- customer impact\n- liability\n\nIf the cost of rushing is bigger than the schedule hit, don’t rush.\n\n## 5) Use a simple rule\n### Hold the schedule if:\n- the issue is unresolved\n- bad units could escape\n- containment is not verified\n- or the failure is repeatable and not bounded\n\n### Take the schedule hit and fix it first if:\n- the unresolved issue could plausibly ship defects\n- you can’t prove containment\n- or the downstream cost of escape is worse than the delay\n\n---\n\n## What to ask in the room\n1. What exactly is unresolved?\n2. Can bad units escape?\n3. Can we identify and block them?\n4. Is containment real now, not planned?\n5. What is the cost of delay vs escape?\n6. Who owns the risk if we proceed?\n\n---\n\n## Practical rule\nIf you’re deciding between schedule and quality, assume **quality wins** unless the issue is clearly bounded and contained.\n\nIf you want, I can turn this into a **hold vs proceed decision tree** with yes/no branches.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct: \"Use a risk-to-release call, not a schedule call\" and \"If that isn’t clear, it stays open.\" No hedging or fluff."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Gives concrete caveats and failure modes: containment, identifiability, repeatability, boundedness, cost of escape vs delay. Not a vague headline."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Highly structured with numbered sections, bullets, and a checklist-style \"What to ask in the room\" plus a \"Practical rule.\""
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative and decision-supportive rather than dictating: it lays out criteria and asks questions, then offers \"If you want, I can turn this into a hold vs proceed decision tree.\" It does give a clear recommendation, which fits well."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Firm pushback is explicit: \"assume quality wins unless the issue is clearly bounded and contained\" and \"If not, the risk is high.\" It challenges rushing rather than soft-pedaling."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — here’s the short release-review version.\n\n## Release review decision criteria\n\n### 1) Is the failure mode understood?\n- **No** → **Hold**\n- **Yes** → go to 2\n\n### 2) Can it be reproduced on demand?\n- **Yes** → treat as real; go to 3\n- **No** → go to 3, but keep evidence open\n\n### 3) Can bad units still escape?\nCheck:\n- process gap\n- test gap\n- operator miss\n- supplier drift\n- incomplete inspection\n\n- **Yes** → go to 4\n- **No** → release may be possible if bounded\n\n### 4) Is hard containment proven now?\n- **No** → **Hold**\n- **Yes** → go to 5\n\n### 5) Can you trace and block affected units?\nCheck:\n- lot\n- date code\n- serial\n- build rev\n\n- **No** → **Hold**\n- **Yes** → go to 6\n\n### 6) Worst credible field outcome\nAsk:\n- what happens if a bad unit escapes?\n- customer impact\n- safety impact\n- liability\n- rework / recall / downtime\n\n- **Severe** → **Hold**\n- **Bounded and low consequence** → possible **Proceed with containment**\n\n---\n\n## Hard rules\n- **Unresolved failure mode** → hold\n- **Repeatable failure** → treat as real\n- **Containment not proven** → hold\n- **Cannot trace/block bad units** → hold\n- **Worst credible field outcome is bad** → hold\n\n---\n\n## Room language\nUse this:\n> “If we can’t explain it, reproduce it, contain it, and trace it, we don’t release it.”\n\n---\n\n## Decision split\n- **Proceed** only if the issue is understood, bounded, and contained now\n- **Hold** if any of those are missing\n- **Stop** if the failure is repeatable and not bounded\n\nIf you want, I can turn this into a **one-page yes/no review card** with only the branch questions and outcomes.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct: starts with “Yes — here’s the short release-review version” and uses blunt rules like “Unresolved failure mode → hold” and “Containment not proven → hold.”"
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Gives concrete decision criteria and caveats: failure mode, reproducibility, escape paths, containment, traceability, and worst credible field outcome. This is enough context to trust the recommendation."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured with headings, numbered steps, bullets, and a decision split. It is explicitly checklist-like and easy to audit."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative rather than dictatorial: lays out criteria and says “If you want, I can turn this into a one-page yes/no review card,” while still giving a clear recommendation. Slightly prescriptive, but not hand-holding."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Welcomes firm pushback and correction: “Unresolved failure mode → hold,” “Repeatable failure → treat as real,” and “Worst credible field outcome is bad → hold” are explicit, unsentimental challenges to rushing."
+        }
+      ]
+    }
+  ]
+}

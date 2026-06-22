@@ -1,0 +1,36 @@
+{
+  "user_id": "user_006",
+  "task": "I’ve got a time-sensitive equipment issue in a hot storage area, and I need a plan before it gets worse. If you were walking into that situation, what would you check first and what would you do next to keep things from spiraling while it’s still unstable?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.2,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "I’d treat it like a **stabilize first, diagnose second** situation.\n\n### First 5 minutes: confirm scope and stop the bleeding\n- **Note the exact time** the issue started or worsened\n- **Check ambient temp** in the hot area and, if possible, the equipment temp\n- **Figure out scope**: one unit, one rack/cabinet, or the whole area\n- **Look for active alarms/error counters** so you know what changed first\n- **Check whether anything is still getting worse**: fans slowing, temps climbing, repeated resets, load spikes\n\n### Immediate actions to keep it from spiraling\n- **Reduce heat load if you can**\n  - move nonessential load out\n  - power down anything safe to defer\n  - spread load if there’s an alternate path/device\n- **Improve airflow now**\n  - open access if that’s allowed and safe\n  - clear blocked vents/filters\n  - add temporary cooling or a fan if it helps and won’t create another problem\n- **Protect the most critical gear first**\n  - if one device is clearly the hot spot, isolate it or shift traffic away from it\n  - if this is storage, make sure you’re not pushing it past a point where data integrity is at risk\n- **Avoid random swaps right away**\n  - don’t start replacing parts until you know whether the failure follows the device or follows the heat\n\n### What I’d check next\n- **Does the temp change first, then the errors?**\n  - if yes, that points to heat/airflow/environment\n- **Does the same unit keep failing no matter where it sits?**\n  - that points more to gear\n- **Is it tied to a time of day or nearby activity?**\n  - that suggests ambient heat, sun, load, or power issues\n\n### Quick decision split\n- **Temp rises first, errors follow** → ventilation/environment problem\n- **One unit or one component keeps failing** → gear problem\n- **It only happens under load or when other equipment starts** → power/load interaction\n\n### If you need a simple on-the-spot checklist\n1. Time of failure\n2. Ambient temp\n3. Device temp\n4. Scope of impact\n5. Current alarms/errors\n6. Any airflow changes\n7. Any load changes\n8. Whether cooling or opening access improves it quickly\n\nIf you want, I can turn this into a **10-minute field checklist** you can use on site.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Close, but I’d want it tighter and more operational. What I’d check first is:\n\n1. **Is anything actively getting hotter right now**\n   - ambient temp\n   - inlet/exhaust temp if I’ve got it\n   - fan behavior\n   - alarms / thermal throttling / resets\n\n2. **What’s the scope**\n   - one unit\n   - one rack/closet\n   - the whole room / storage area\n\n3. **What changed right before it started**\n   - load spike\n   - failed fan\n   - blocked airflow\n   - power event\n   - door left shut / HVAC weak\n\nThen I’d move to containment:\n- **reduce load** on the hottest or most critical gear\n- **get airflow back** fast, even if it’s temporary\n- **move traffic off the failing piece** if there’s any path around it\n- **document everything** as I go, because if this turns into a blame game, the timestamps matter\n\nI’d also watch for the ugly signs: repeated reboots, smell, discoloration, fan noise changing, or one device heating way faster than the rest. That’s usually the real fault, not the area in general.\n\nLast time I had something like this, it wasn’t the ISP or the “bad rack” everybody wanted to blame — it was a transceiver cooking itself and a closet with trash airflow. So I’d be looking for the actual source, not the loudest complaint.\n\nIf you want, give me the exact equipment type and whether it’s storage media, network gear, or power gear, and I’ll narrow the first-pass checks.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yep — that’s the right order.\n\nI’d make it **three moves**:\n\n### 1) Prove what’s heating\n- ambient temp\n- inlet/exhaust temp if available\n- fan status / fan speed\n- thermal alarms, throttling, resets\n- whether one unit is hotter than the rest\n\n### 2) Prove the scope\n- one device\n- one rack/closet\n- whole room/storage area\n\n### 3) Prove the trigger\n- load spike\n- blocked airflow\n- fan failure\n- power event\n- door/HVAC issue\n- something else starting up at the same time\n\n### Then contain it\n- reduce load on the hottest/most critical gear\n- restore airflow immediately if you can\n- shift traffic away from the failing device/path\n- keep a timestamped log of what you changed\n\n### Red flags I’d treat as urgent\n- repeated resets/reboots\n- fan noise changing\n- smell / discoloration\n- one unit heating much faster than the others\n- thermal throttling or hard shutdowns\n\nIf you want the fastest useful next step, I’d do this:\n1. record temps now\n2. note what’s failing\n3. see whether opening access / adding airflow changes it within minutes\n4. decide whether it’s **gear**, **airflow**, or **site conditions**\n\nIf you tell me the equipment type, I’ll narrow it to the exact first checks.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s the right split.\n\nThree checks, no wandering:\n\n1. **What’s heating now**\n- ambient\n- inlet/exhaust if you’ve got it\n- fan speed / fan noise\n- thermal alarms, throttling, resets\n- whether one unit is the outlier\n\n2. **How far it’s spread**\n- one device\n- one rack/closet\n- whole room / storage area\n\n3. **What changed right before it started**\n- load spike\n- blocked airflow\n- fan failure\n- power blip\n- HVAC weak / door shut / something new kicked on\n\nThen contain it:\n- cut load on the hottest or most critical gear\n- restore airflow immediately if you can\n- move traffic off the bad path/device\n- keep a timestamped log of every change\n\nRed flags I’d treat as urgent:\n- repeated resets\n- changing fan noise\n- smell / discoloration\n- one unit heating way faster than the rest\n- throttling or hard shutdowns\n\nFastest useful sequence:\n1. record temps now\n2. note the exact failure\n3. see if airflow changes the behavior within minutes\n4. decide if it’s gear, airflow, or site conditions\n\nThat’s the clean version. If you want, I can turn it into a 60-second field checklist.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    }
+  ]
+}

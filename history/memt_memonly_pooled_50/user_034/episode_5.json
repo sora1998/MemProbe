@@ -1,0 +1,36 @@
+{
+  "user_id": "user_034",
+  "task": "I’m dealing with two unrelated issues at once: one appointment needs to be moved, and another piece of paperwork came back with an error. I need to figure out what to handle first so I don’t create more problems later.",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.9,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Handle the **appointment move first**, then the paperwork error.\n\nWhy:\n- The appointment is time-sensitive and can create a chain reaction if it’s not adjusted quickly.\n- Paperwork errors are important, but they usually don’t get worse minute-to-minute unless there’s a deadline attached.\n\nA simple order:\n1. **Move the appointment**\n   - Send the quick reschedule message now.\n   - Lock in the new time before anything else shifts.\n\n2. **Fix the paperwork**\n   - Check what’s wrong.\n   - Correct it or flag it for follow-up.\n\nIf the paperwork has an immediate deadline or could block the appointment, then flip the order. Otherwise, go:\n**time-sensitive scheduling first, paperwork second.**\n\nIf you want, I can help you make a 2-step decision rule for situations like this.",
+      "user_simulator": {
+        "feedback_type": "too_shallow",
+        "text": "Yeah, kinda obvious. Appointment first only if it’s actually the thing that’ll spiral on you today. If the paperwork error is tied to a deadline, licensing, payment, or could block the reschedule, then that’s the first fire. Otherwise, sure, move the appointment and clear the paper after.\n\nWhat I’d want is a quick rule, not the generic version:\n- if one item has a hard deadline or can stop the other one, do that first\n- if not, do the thing that affects other people’s schedules first\n- if both are urgent, handle the one with the biggest downstream mess first\n\nIf you want to make it useful, give me the two exact issues and I’ll tell you which one is the real first move.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Use this quick rule:\n\n1. **If one issue can block the other, do that first**\n   - deadline\n   - licensing/compliance\n   - payment\n   - anything that could stop the reschedule or create a bigger problem\n\n2. **If neither blocks the other, do the schedule issue first**\n   - because it affects other people’s time immediately\n\n3. **If both are urgent, do the one with the bigger downstream mess first**\n   - the one that creates more follow-up, delays, or cleanup if it sits\n\nSo in plain terms:\n- **blocking issue first**\n- otherwise **appointment first**\n- if tied, **worst ripple effect first**\n\nIf you want, give me the two exact issues and I’ll tell you the order in one line.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s the rule.\n\n- blocking issue first\n- otherwise appointment first\n- if both are hot, biggest downstream mess first\n\nClean enough. No extra fluff.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 5.0
+      },
+      "gt_correct": null
+    }
+  ]
+}

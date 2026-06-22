@@ -1,0 +1,49 @@
+{
+  "user_id": "user_029",
+  "task": "I’m reviewing a small equipment handoff and want to make sure nothing important was missed before I sign off on it. What would you look at first to confirm the work was actually completed and not just recorded as done?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.533333333333333,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "First thing: **verify the end condition in person, not the paperwork**.\n\nA good order is:\n\n1. **Visual proof of completion**\n   - Is the equipment actually back together, powered, and in the stated final state?\n   - Look for installed parts, restored covers/panels, labels, cleanup, and any obvious unfinished work.\n\n2. **Functional proof**\n   - Run it or observe it operating.\n   - Confirm the specific thing that was supposed to be fixed now behaves normally.\n\n3. **Evidence that matches the claim**\n   - Check photos, test readings, logs, or sign-off notes.\n   - Make sure they support the finished state, not just the intent to do the work.\n\n4. **Any exceptions or follow-up items**\n   - Open items, missing parts, temporary fixes, or deferred steps should be clearly called out.\n\n5. **Only then compare against the handoff record**\n   - If the record says “done” but you can’t see the finished condition or operating proof, treat it as unverified.\n\nIf you want, I can turn this into a **tight yes/no sign-off checklist** you can use on the spot.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s the right order. But I’d tighten it more around failure modes.\n\nFirst thing I’d look at is: **what exact evidence proves the handoff state changed**. Not “looks done,” but:\n- installed parts present\n- fasteners/covers back in place\n- power/restoration state correct\n- any seals, tags, or lockouts removed as expected\n- no temporary bypass still hiding in there\n\nThen I’d want the **operational check under the actual condition that matters**. If it only passed in a benign state, that’s weak. I’d ask:\n- did it run at load\n- did alarms clear and stay clear\n- are readings stable, not just one good snapshot\n- does it fail when you cycle it back through start/stop or power loss, if that’s relevant\n\nAlso, I don’t trust a handoff unless the **test record matches the sequence**, not just the result. Time, operator, settings, ambient conditions if they matter. Too many people record the outcome and skip the context.\n\nSo yeah, your list is fine. I’d just put more weight on: **physical state first, then functional proof, then test conditions and exceptions**. That’s where the fake “done” usually slips through.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "First thing: **verify the physical state changed in a way that can’t be faked by paperwork**.\n\nI’d check, in this order:\n\n1. **Installed state**\n   - Correct parts actually present\n   - Covers/panels back on\n   - Fasteners, seals, tags, lockouts, bypasses all in the expected final state\n\n2. **Operational proof**\n   - It was run in the condition that matters, not just powered on\n   - The original fault is gone and stays gone through a real cycle\n\n3. **Record match**\n   - Test notes, timestamps, settings, and conditions line up with what was observed\n   - Any exceptions or temporary fixes are explicitly called out\n\nIf the **physical state** and the **operating state** both check out, you’ve got real completion. If either one is missing, treat it as **not verified yet**.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s basically it. I’d push one notch harder on the failure-mode side though.\n\nThe part I’d watch closest is whether the **final state is actually irreversible without opening it back up**. Paperwork can say a cover’s on, but I want to see:\n- correct parts installed\n- fasteners torqued/secured if that matters\n- seals/tamper marks intact or replaced properly\n- lockout/tagout cleared only when it should be\n- no jumper, bypass, or temporary patch still in the path\n\nThen on the operating check, I’d want the **worst relevant condition**, not the easy one. If it only works at idle or no-load, that’s not much proof. Cycle it, load it, power-fail it, whatever actually stresses the failure mode.\n\nAnd yeah, record match matters, but I’d rank it after the physical and functional proof. If the notes are perfect but the hardware is still wrong, the record is just decoration.\n\nSo my version is: **physical final state, real operating proof under the relevant stress, then record consistency**. If any one of those is weak, I wouldn’t sign off.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "First thing I’d look at is the **physical final state** — the part that would be hard to fake without reopening it.\n\nCheck, in this order:\n\n1. **Correct parts actually installed**\n2. **Covers/panels back on and secured**\n3. **Fasteners/seals/tamper marks/lockouts in the expected final state**\n4. **No jumper, bypass, or temporary patch still in place**\n\nThen I’d verify **operational proof under the relevant stress**, not just a benign run:\n\n- run it in the condition that actually matters\n- cycle it if cycling is part of the failure mode\n- confirm the original problem stays gone\n\nOnly after that would I compare the **record**:\n\n- timestamps\n- operator\n- settings\n- ambient conditions if relevant\n- exceptions or temporary fixes\n\nIf the **physical state** and **stress-tested operation** both check out, it’s probably real completion. If either one is weak, I’d treat it as **not verified yet**.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s the order I’d use too.\n\nPhysical final state first — the stuff you can’t fake without opening it back up. Then stress the thing under the condition that actually matters. Record comes last. If the hardware is wrong, the paperwork is just fiction.\n\nThat’s solid.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    }
+  ]
+}

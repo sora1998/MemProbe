@@ -1,0 +1,137 @@
+{
+  "user_id": "user_006",
+  "task": "I’ve got a time-sensitive network change coming up and I want to avoid turning it into a full-blown incident. Can you help me sketch a tight rollout plan with a rollback path, a few checkpoints, and the first things to verify if something starts acting weird mid-change?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "verbosity_preference",
+      "short": "Wants responses kept tight and efficient",
+      "explanation": "He values speed, control, and efficiency, so he is unlikely to want long-winded help. He would probably prefer responses that get to the point quickly and avoid unnecessary filler. Overexplaining would feel like wasted time to him."
+    },
+    {
+      "idx": 2,
+      "dimension": "directness_preference",
+      "short": "Prefers blunt answers without softening",
+      "explanation": "His skeptical, competitive style suggests he wants clear, unambiguous guidance rather than hedged language. He would likely see excessive caution as evasive or inefficient. Straight answers fit his preference for control and decisive action."
+    },
+    {
+      "idx": 3,
+      "dimension": "format_preference",
+      "short": "Likes structured, actionable output",
+      "explanation": "He seems most likely to respond well to responses that are organized and easy to execute, such as bullets or checklists. That matches his practical, task-focused mindset. Loose, meandering prose would probably frustrate him."
+    },
+    {
+      "idx": 4,
+      "dimension": "detail_level_preference",
+      "short": "Wants the useful essentials, not padding",
+      "explanation": "He likely wants enough context to act, but not exhaustive background unless it helps him win or avoid mistakes. He is efficiency-driven, so extra caveats only matter when they change the decision. He would probably skip anything that does not affect the outcome."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Accepts pushback only if it is sharp and useful",
+      "explanation": "He is skeptical and self-serving, so he probably does not enjoy moralizing or vague objections. But if the pushback is concrete, efficient, and clearly tied to risk or leverage, he is more likely to respect it. Weak or overly gentle correction would likely be ignored."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Absolutely — here’s a tight, war-room style rollout plan you can use for a time-sensitive network change, with rollback and mid-change triage.\n\n## 0) First: what exact rack type is this change for?\nTo tailor the first three checks properly, tell me which one this is:\n- **Access switch**\n- **Distribution**\n- **Firewall**\n- **Storage path**\n\nUntil then, I’ll give you a generic plan you can adapt.\n\n---\n\n## 1) Pre-change prep\n1. **Define the change scope**\n   - What is being changed?\n   - Which devices, VLANs, routes, ACLs, NATs, links, or paths are affected?\n   - What is explicitly out of scope?\n\n2. **Set success criteria**\n   - What must remain working during and after the change?\n   - Define “done” in one sentence.\n   - Define “stable enough”:\n     - No new errors for **10 minutes**\n     - No increase in interface drops/errors, session resets, route flaps, or alarms\n     - End-to-end traffic tests pass twice in a row\n\n3. **Capture baseline**\n   - Interface status\n   - Error counters\n   - Routing table / adjacencies\n   - Firewall/session state if relevant\n   - Latency/loss to key endpoints\n   - Current alarms and logs\n\n4. **Prepare rollback**\n   - Exact rollback steps written out\n   - Config backup saved and verified\n   - Old config or previous state ready to restore\n   - Console/OOB access confirmed\n   - Who can approve rollback if needed\n\n5. **Announce a change window**\n   - Freeze other changes\n   - Identify a single decision-maker\n   - Have a live comms channel open\n\n---\n\n## 2) Rollout plan\n### Step 1 — Pre-check\n- Confirm device health is green enough to proceed\n- Confirm backup exists\n- Confirm rollback path is tested or at least executable\n- Confirm monitoring is live\n\n**Go / no-go checkpoint**\n- If baseline is already unstable, **stop and fix that first**\n- If you cannot explain the rollback in under 60 seconds, **do not start**\n\n### Step 2 — Make the smallest possible change\n- Apply the minimal unit of change first\n- Avoid bundling unrelated changes\n- Prefer one device, one link, one policy, or one route set at a time\n\n### Step 3 — Validate immediately\nCheck:\n- Device stays reachable\n- No sudden spike in CPU/memory/errors\n- No interface flaps\n- No route/neighbor/session churn\n- Key application or path test passes\n\n**Stable enough to continue?**\n- Yes, if:\n  - Control-plane is intact\n  - No critical alarms\n  - Traffic is flowing normally\n  - Metrics are flat for 5–10 minutes\n- No, if:\n  - Errors are rising\n  - Latency jumps materially\n  - Sessions are resetting\n  - Any dependency starts flapping\n\n### Step 4 — Expand carefully\n- Move to the next item only after the prior one is stable enough\n- Keep changes isolated\n- Re-check after each step\n\n---\n\n## 3) Rollback triggers\nRollback immediately if any of these happen:\n- Loss of management access\n- Traffic blackhole or major packet loss\n- Routing adjacency collapse or repeated flaps\n- Firewall session failures or NAT issues\n- Interface errors/drops increasing rapidly\n- Storage path/path failover instability\n- Services unavailable longer than your tolerance\n\n### Clear rollback threshold\nIf the change causes **persistent user impact for more than 3–5 minutes** and the issue is not clearly self-resolving, **rollback rather than wait**.\n\nIf the environment is critical, use a stricter rule:\n- **One bad validation cycle = stop**\n- **Two bad indicators at once = rollback**\n- **Any sign of cascading failure = rollback immediately**\n\n---\n\n## 4) If something acts weird mid-change: first things to verify\n### First 3 checks\n1. **Did the change actually apply the way you expected?**\n   - Confirm intended config/state\n   - Check for partial application or syntax fallback\n\n2. **Did control-plane health change?**\n   - Routing neighbors, spanning tree, HA state, firewall cluster state, link-state changes\n\n3. **Did data-plane symptoms appear?**\n   - Interface errors/drops\n   - Latency/loss\n   - Session resets\n   - Packet forwarding anomalies\n\n### Then check\n4. **Recent logs and alarms**\n5. **Dependency health**\n   - Upstream/downstream devices\n   - DNS, auth, WAN, storage, or adjacent policies\n6. **Traffic path confirmation**\n   - Is traffic taking the intended path?\n   - Is failover working, or is it stuck?\n\n---\n\n## 5) Decision tree for triage\n- **If config is wrong:** fix or rollback\n- **If config is right but behavior is wrong:** inspect dependencies and pathing\n- **If behavior is unstable and worsening:** rollback\n- **If behavior is stable but degraded:** hold, monitor 5–10 minutes, then decide\n- **If behavior is stable and clean:** proceed to next step\n\n---\n\n## 6) Simple runbook template\nUse this live:\n\n1. Baseline recorded\n2. Backup verified\n3. Rollback ready\n4. Change applied\n5. Immediate validation\n6. Hold 5–10 minutes\n7. If stable enough, proceed\n8. If not, rollback\n9. Final validation\n10. Close out and document\n\n---\n\nIf you tell me the exact rack type — **access switch, distribution, firewall, or storage path** — I’ll turn this into a more precise first-three-checks checklist and a tighter rollback path for that layer.",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly tight and efficient: it says \"here’s a tight, war-room style rollout plan\" and uses bullets/checkpoints. It is a bit longer than necessary and includes extra framing, but avoids major filler."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Generally direct and blunt: \"If you cannot explain the rollback in under 60 seconds, do not start\" and \"rollback immediately\" are clear. Some hedging remains, like \"stable enough\" and \"if the environment is critical,\" so not fully blunt."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable: numbered sections, bullets, go/no-go checkpoints, rollback triggers, and a decision tree. Very easy to execute."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Focuses on essentials needed to act: baseline, rollback, checkpoints, first checks. There is some extra scaffolding and repeated guidance, but little true padding."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Pushback is concrete and useful rather than moralizing: \"If you cannot explain the rollback in under 60 seconds, do not start\" and \"rollback rather than wait\" tie directly to risk. It is somewhat gentle in tone, but still practical and sharp enough."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Got it. I need the **exact rack type** first so I can tighten the first checks and rollback path correctly:\n\n- **Access switch**\n- **Distribution**\n- **Firewall**\n- **Storage path**\n\nOnce you give me that, I’ll return a live-run format with:\n\n1. **Pre-checks**\n2. **Go / no-go**\n3. **Rollback trigger**\n4. **First 3 things to verify if it starts drifting**\n\nI’ll keep it tight and layer-specific.",
+      "score": 3.6,
+      "summary": "mean=3.60 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:2, 4:3, 5:0}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Pretty tight and efficient: it says \"I’ll keep it tight\" and avoids long explanation, but it does add an extra clarification step instead of immediately giving the rollout plan."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Direct and blunt overall: \"I need the exact rack type first\" is clear and unsoftened. Minor hedge in \"so I can tighten\" but no real evasiveness."
+        },
+        {
+          "idx": 3,
+          "score": 4,
+          "reason": "Structured output is strong: it uses a bullet list of options and a numbered list of deliverables (\"Pre-checks,\" \"Go / no-go,\" \"Rollback trigger,\" etc.)."
+        },
+        {
+          "idx": 4,
+          "score": 3,
+          "reason": "It gives the essentials of the format, but not the actual rollout essentials the user asked for. The response is more of a gatekeeping question than a useful minimal plan."
+        },
+        {
+          "idx": 5,
+          "score": 3,
+          "reason": "There is some useful pushback in asking for the \"exact rack type\" to tailor the plan, but it is not yet concrete risk-based pushback; it’s more a prerequisite than sharp corrective guidance."
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "agent_response": "Understood. Here’s a **live-run firewall rollout plan** for an **external-edge HA pair (active/passive)**, tuned for a **WAN handoff change**.\n\n---\n\n# Firewall Change Runbook\n\n## 1) Pre-checks\nDo these **before** touching the active unit.\n\n1. **Confirm HA state**\n   - Active/passive roles are correct\n   - Peer is healthy and synced\n   - No split-brain, no recent failover churn\n\n2. **Confirm OOB access**\n   - You can reach both units via OOB\n   - Console or equivalent fallback is available\n   - You know exactly how to get back in if WAN dies\n\n3. **Capture baseline**\n   - Current active unit\n   - HA sync status\n   - Session count\n   - CPU/memory\n   - WAN interface status\n   - Route table / default route\n   - NAT policy status\n   - Key security policy status\n   - Current alarms/logs\n\n4. **Back up config**\n   - Save running config\n   - Export backup off-box\n   - Confirm you can restore it, not just that it exists\n\n5. **Validate upstream/downstream dependencies**\n   - WAN handoff device is up\n   - ISP handoff looks clean\n   - Next-hop / gateway is reachable\n   - Internal side is stable enough that you won’t confuse symptoms\n\n6. **Define the rollback point**\n   - Exact previous config version identified\n   - Failover method known\n   - Criteria for “stable enough” to fail back already agreed\n\n---\n\n## 2) Go / No-Go\n### Go only if all are true:\n- HA pair is healthy and synced\n- OOB access works\n- Backup is complete and verified\n- WAN handoff is currently stable\n- You can describe rollback in one minute\n- No unexplained interface errors, route flaps, or session churn\n\n### No-go if any are true:\n- HA is degraded or unsynced\n- The active unit is already unstable\n- WAN handoff is flaky before the change\n- You do not have a clean rollback config\n- OOB access is not confirmed\n- You cannot safely fail over or recover if the active unit misbehaves\n\n---\n\n## 3) Change execution\n### Preferred path\n1. **If possible, make the change on the active unit**\n2. **If not safe, fail over first**\n3. **Apply the smallest possible change**\n4. **Validate immediately**\n5. **Hold and watch**\n6. **Only then proceed or fail back**\n\n### Immediate post-change validation\nCheck:\n- WAN interface comes up cleanly\n- Default route / next-hop is correct\n- NAT is translating as expected\n- Policies are matching as expected\n- Sessions are establishing normally\n- No HA sync break\n- No unexpected alarms\n\n---\n\n## 4) Rollback trigger\nRollback immediately if any of these happen:\n\n- WAN handoff drops or oscillates\n- Loss of outbound or inbound connectivity\n- Session establishment fails broadly\n- NAT stops translating or translates incorrectly\n- Default route disappears or points wrong\n- HA sync breaks\n- Failover becomes unstable\n- Errors, drops, or resets increase rapidly\n- You see partial recovery followed by drift back into failure\n\n### Practical threshold\nIf the change causes **persistent WAN impact for more than 3–5 minutes** and it is **not clearly self-correcting**, **rollback**.\n\nIf the firewall is still reachable but traffic is degraded, do **not** wait for it to “settle” unless the trend is clearly improving.\n\n---\n\n## 5) Rollback path\nRollback means:\n\n1. **Restore the previous config**\n2. **Re-validate sessions, policies, NAT**\n3. **Confirm WAN handoff is stable**\n4. **Only then consider failback**\n\n### Rollback sequence\n1. Restore previous known-good config on the affected unit\n2. Confirm config sync behavior\n3. Verify:\n   - WAN link is up\n   - Default route is correct\n   - NAT is working\n   - Security policies are matching\n   - Sessions are passing\n   - No new alarms\n3. Hold and observe for stability\n4. If the standby is healthy and the active unit is stable again, **fail back only if stable enough**\n\n### Fail back only if:\n- WAN has been clean for a short observation window\n- Session behavior is normal\n- No fresh alarms\n- HA sync is healthy again\n- Traffic tests pass twice in a row\n\n---\n\n## 6) First 3 things to verify if it starts drifting\nIf behavior gets weird mid-change, check these in this order:\n\n### 1. WAN handoff state\n- Link up/down\n- Speed/duplex/negotiation\n- Errors, drops, CRCs, flaps\n- Upstream reachability\n- Default route / gateway health\n\n### 2. Policy/NAT correctness\n- Did the intended policy actually match?\n- Is NAT translating correctly?\n- Is traffic hitting an unexpected rule?\n- Any address/object mismatch?\n- Any asymmetric path caused by the change?\n\n### 3. HA and session behavior\n- Is the active unit still active?\n- Did sync break?\n- Are sessions resetting or failing to establish?\n- Is failover happening or flapping?\n- Is the standby actually healthy enough to take over?\n\n---\n\n## 7) “Stable enough” definition\nMove forward only if all are true:\n\n- WAN link is steady\n- No new interface errors or flaps\n- Sessions are flowing normally\n- NAT and policy hits look correct\n- HA remains in sync\n- No new critical alarms\n- Traffic tests pass twice in a row\n- Metrics are flat for a short observation window\n\nIf any of those drift, **hold or rollback**.\n\n---\n\n## 8) Live decision tree\n- **WAN handoff broken or unstable:** rollback first\n- **Config wrong:** restore previous config\n- **Config right, behavior wrong:** check NAT/policy/route/HA\n- **Active unit unstable but standby healthy:** fail over only if the standby is trusted\n- **Both units unstable or HA untrusted:** restore core path by hand only if failover is unavailable or untrusted\n- **Recovered and stable:** observe, then fail back only if stable enough\n\n---\n\nIf you want, I can turn this into a **one-page war-room checklist** with checkboxes and a **minute-by-minute execution order** for the firewall change window.",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly tight and efficient, with a concise runbook and bullets. Slightly longer than minimal, but avoids filler and gets to the point."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Generally direct and blunt: phrases like \"Go only if all are true\" and \"rollback immediately\" are clear. Some softening remains in conditional language like \"If you want\" and \"stable enough.\""
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable: numbered sections, checklists, go/no-go criteria, rollback triggers, and a decision tree make it easy to execute."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Focuses on essentials needed to act—pre-checks, rollback path, checkpoints, first verifications—without much background. A bit more detail than strictly necessary, but still practical."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Pushback is concrete and useful rather than moralizing, e.g. \"No-go if any are true\" and \"rollback immediately\" with specific risk triggers. It is firm, though not especially sharp."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "user_id": "user_009",
+  "task": "I need a quick way to sanity-check a report before I send it out to a client. Can you help me build a simple pre-send checklist so I don’t miss anything obvious or hand over something sloppy?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.5,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — use this pre-send checklist.\n\n## Pre-send checklist\n\n### 1) Does it answer the ask?\n- Did I respond to the actual question?\n- Did I include the decision, recommendation, or next step they need?\n- Did I leave out anything the client explicitly asked for?\n\n### 2) Are the facts clean?\n- Are names, dates, and numbers correct?\n- Do the figures match across the report?\n- Are sources consistent?\n- Did I avoid unsupported claims?\n\n### 3) Is the scope controlled?\n- Did anything creep in that wasn’t requested?\n- Did I clearly separate facts, assumptions, and opinions?\n- Did I flag anything incomplete or uncertain?\n\n### 4) Is it readable?\n- Is the structure easy to follow?\n- Are headings clear?\n- Can the client find the main point fast?\n- Did I remove unnecessary detail?\n\n### 5) Is the tone right?\n- Is it professional and direct?\n- Did I avoid sounding uncertain where I’m not?\n- Did I avoid overpromising?\n\n### 6) Did I check the basics?\n- Spelling and grammar\n- Broken links / missing attachments\n- Correct file name / version\n- Correct recipient\n- Correct date and formatting\n\n## Final 30-second check\nBefore sending, ask:\n- If I were the client, would this answer my question?\n- Is there anything here that could be read as a mistake or assumption?\n- If they challenge it, can I point to the source quickly?\n\nIf you want, I can turn this into a **one-line yes/no version** you can run in under a minute.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, usable. But I’d want it tighter — less generic, more like a real gate before sendout.\n\nMake it into a 10-second pass/fail list:\n- wrong client / wrong version\n- numbers match everywhere\n- every claim has a source or is clearly labeled as assumption\n- no missing attachment / broken link / bad filename\n- no stray fluff, no extra scope\n- conclusion is blunt and actually answers the ask\n- anything risky or incomplete is flagged\n- formatting clean enough to skim fast\n\nThat’s the part that saves time. The current version is fine, just a little soft around the edges. If you want, turn it into a hard yes/no checklist with boxes, not questions.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "## 10-second pre-send gate\n\n- [ ] Wrong client / wrong version\n- [ ] Numbers match everywhere\n- [ ] Every claim has a source or is clearly marked as an assumption\n- [ ] No missing attachment / broken link / bad filename\n- [ ] No stray fluff / no extra scope\n- [ ] Conclusion is blunt and answers the ask\n- [ ] Anything risky or incomplete is flagged\n- [ ] Formatting is clean and easy to skim\n\n## Pass rule\n- **Pass:** all boxes checked\n- **Fail:** any box unchecked\n\n## If it fails\nFix the issue before sending. If it’s a scope, source, or numbers problem, don’t send until it’s resolved or clearly flagged.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s the gate I meant. Tight enough to use, no fluff. I’d run that every time before sendout.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    }
+  ]
+}

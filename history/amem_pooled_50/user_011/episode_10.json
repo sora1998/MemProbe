@@ -1,0 +1,36 @@
+{
+  "user_id": "user_011",
+  "task": "I need a simple way to clean up a growing pile of project files before it turns into a mess. Can you help me set up a folder and naming approach that makes it easier to find the right version later and keep exports straight?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.6,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — keep it simple and rigid.\n\n## Folder structure\nUse one main project folder, then separate **working**, **exports**, and **archive**:\n\n```text\nProject_Name/\n  01_Working/\n  02_Media/\n  03_Exports/\n  04_Documents/\n  05_Archive/\n```\n\nIf you want it a little tighter for post work:\n\n```text\nProject_Name/\n  01_Project_Files/\n  02_Source_Media/\n  03_Exports/\n  04_Notes_QC/\n  05_Archive/\n```\n\n## Naming rule\nUse the same pattern everywhere:\n\n```text\nProject_Client_Description_YYYYMMDD_rev01\n```\n\nExample:\n```text\nAcme_InterviewCut_20260429_rev01\nAcme_InterviewCut_20260429_rev02\n```\n\nFor exports, make the version obvious:\n\n```text\nProject_Client_Description_YYYYMMDD_rev01_MASTER\nProject_Client_Description_YYYYMMDD_rev01_H264\nProject_Client_Description_YYYYMMDD_rev01_QC\n```\n\n## Simple rules to keep it clean\n- **Never** overwrite a previous version\n- Put **working files** and **final exports** in different folders\n- Use **rev01, rev02, rev03** instead of “final_final”\n- Add the **date** if you expect multiple versions over time\n- Keep one folder for **approved exports only**\n- Move old or risky files into **Archive**, don’t leave them in the active folder\n\n## A practical setup\n```text\nProject_Name/\n  01_Project_Files/\n    Project_Name_rev01.prproj\n    Project_Name_rev02.prproj\n  02_Source_Media/\n  03_Exports/\n    WIP/\n    Client_Review/\n    Final/\n  04_Notes_QC/\n  05_Archive/\n```\n\n## Best habit\nBefore you make changes, save a new revision:\n- duplicate the project\n- rename it with the next rev number\n- export into the matching export folder\n\nIf you want, I can turn this into a **one-page folder template** you can copy for every project.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, this is basically the right shape. I’d want one more layer of discipline though — the naming needs to be a little more specific so it doesn’t get sloppy after a few revisions.\n\nWhat I’d do:\n- keep the project root dead simple\n- separate **project files**, **source**, **exports**, **notes/QC**, **archive**\n- use one revision convention everywhere\n\nSomething like:\n\n```text\nProject_Name/\n  01_Project_Files/\n  02_Source_Media/\n  03_Exports/\n    01_WIP/\n    02_Client_Review/\n    03_Final/\n  04_Notes_QC/\n  05_Archive/\n```\n\nFor naming, I’d avoid stuffing too much into the filename unless you really need it. I’d go with:\n\n```text\nClient_Project_rev01_20260429\n```\n\nThen for exports:\n\n```text\nClient_Project_rev01_20260429_MASTER\nClient_Project_rev01_20260429_H264\nClient_Project_rev01_20260429_QC\n```\n\nA couple things I’d add:\n- don’t mix date formats — pick one and keep it\n- don’t use “final” unless it’s actually final-final\n- if there are multiple deliverables, add a short suffix: `16x9`, `9x16`, `captioned`, whatever\n- archive old review exports instead of leaving them in the active export folder\n\nI’ve had the exact problem where everything starts out neat and then suddenly there are six versions of the same cut and nobody can tell which one got sent. The fix is mostly just being boring and consistent.\n\nIf you want, I can give you a tighter version for **premiere project folders specifically** — with autosaves, exports, and gfx all separated cleanly.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — the key is to make it boring and consistent.\n\n## Simple folder structure\nKeep the root clean, then split by function:\n\n```text\nProject_Name/\n  01_Project_Files/\n  02_Source_Media/\n  03_Exports/\n    01_WIP/\n    02_Client_Review/\n    03_Final/\n  04_Notes_QC/\n  05_Archive/\n```\n\n## Naming convention\nUse one pattern everywhere:\n\n```text\nClient_Project_rev01_20260429\n```\n\nFor exports, add only what matters:\n\n```text\nClient_Project_rev01_20260429_MASTER\nClient_Project_rev01_20260429_H264\nClient_Project_rev01_20260429_QC\n```\n\nIf needed, add a short deliverable tag:\n\n```text\nClient_Project_rev02_20260429_16x9\nClient_Project_rev02_20260429_9x16\nClient_Project_rev02_20260429_captioned\n```\n\n## Rules to keep it from getting sloppy\n- Pick **one date format** and never change it\n- Use **rev01, rev02, rev03** for project versions\n- Don’t use “final” until it’s truly final\n- Never overwrite a previous export\n- Keep review exports out of the final folder\n- Move old versions to **Archive** instead of leaving them active\n\n## Best habit\nEvery time you make a meaningful change:\n1. save a new project revision\n2. export to the matching export folder\n3. keep QC notes in one place\n4. archive anything outdated\n\nIf you want, I can turn this into a **copy-paste template** for Premiere, Resolve, or general post folders.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s solid. The only thing I’d tighten is the revision rule so it doesn’t drift.\n\nI’d use this:\n\n```text\nClient_Project_20260429_rev01\nClient_Project_20260429_rev02\nClient_Project_20260429_rev03\n```\n\nThen exports stay tied to that exact revision:\n\n```text\nClient_Project_20260429_rev03_MASTER\nClient_Project_20260429_rev03_H264\nClient_Project_20260429_rev03_9x16\n```\n\nThat way the date marks the work period, and `rev` tells you the actual version. Cleaner than mixing the two in a weird way.\n\nFor the folders, your structure is the right one. I’d just keep the export subfolders strict:\n- `01_WIP` = internal only\n- `02_Client_Review` = anything sent out for notes\n- `03_Final` = only approved deliverables\n\nOne extra thing I’d add: keep a tiny text file in `04_Notes_QC/` with the send history. Just simple stuff like:\n- what was delivered\n- when\n- to whom\n- which revision\n\nThat saves a lot of guessing later when somebody asks, “which file did we actually send?”\n\nSo yeah — this is the kind of system that works because it’s a little boring on purpose. That’s usually the point.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    }
+  ]
+}

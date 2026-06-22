@@ -1,0 +1,36 @@
+{
+  "user_id": "user_033",
+  "task": "I’m sorting out a routine handoff where a process note and a few related records need to be passed along cleanly because someone may ask about them later. Can you help me think through what belongs in the file, what should stay attached to the sample or case record, and how to keep the sequence clear?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.4,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — I’d keep it very simple and split it into three buckets:\n\n### 1) Put in the handoff file\nThis is the short, readable summary someone can scan later:\n- what the issue/process was\n- what happened\n- what was checked\n- current status\n- open question / next owner\n- date and your name\n\n### 2) Keep attached to the sample/case record\nAnything that proves the sequence or supports the note:\n- sample IDs / case IDs\n- original note or observation\n- related log entries\n- QC or check results\n- rerun / follow-up results\n- instrument or workflow flags\n- chain-of-custody or transfer record if relevant\n\n### 3) Keep the sequence clear\nOrder it by what happened, not by who touched it:\n1. initial observation\n2. immediate check\n3. follow-up check / rerun\n4. outcome\n5. handoff / next step\n\nA good rule:  \n- **file = summary**\n- **record = evidence**\n- **sequence = timeline**\n\nIf you want, I can turn your notes into a clean handoff template with:\n- **Summary**\n- **Attached records**\n- **Action log**\n- **Next owner**",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Mostly fine. But it’s still a little generic.\n\nWhat I’d want added: which document is the controlling record, and what absolutely stays with the sample/case so nobody can “summarize away” the ugly part later. Also version/date control. That matters more than the neat little buckets.\n\nI’d use:\n- **handoff note**: short summary, decision, status, next owner\n- **case record**: source data, raw observations, QC/check results, rerun data, transfer/chain-of-custody, anything that would support an audit\n- **sequence**: timestamped, in order, no editorializing\n\nAnd I’d be explicit about who owns the next action. Otherwise people pretend it’s “in review” forever.\n\nIf you want, give me the actual note structure you’re using and I’ll tighten it up so it doesn’t get cute or vague.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — I’d make it more explicit and less “bucket-y”:\n\n- **Controlling record:** the **case record** should be the source of truth.\n- **Handoff note:** only the short summary, current status, decision, and next owner.\n- **Must stay with the case/sample record:** raw observations, source data, QC/check results, rerun/follow-up data, transfer/chain-of-custody, and anything that would let someone reconstruct the sequence later.\n- **Version/date control:** every note or attachment should be dated, versioned if revised, and tied to the case/sample ID.\n- **Sequence:** keep it timestamped and chronological, with no cleanup that removes the messy part.\n\nIf you want a tight rule:  \n**If it explains how the conclusion was reached, it stays with the case record.**  \n**If it just tells the next person what to do, it goes in the handoff note.**\n\nAnd yes — make the next owner explicit by name if you can. “In review” is how things disappear.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s the right shape.\n\n- **Controlling record:** case record, not the handoff note.\n- **Handoff note:** summary, decision, current status, next owner. Nothing more.\n- **Stays with the sample/case:** raw observations, source data, QC/check results, reruns, transfer/chain-of-custody, and anything needed to reconstruct the ugly part later.\n- **Version/date control:** every revised note dated, versioned if needed, tied to the case/sample ID.\n- **Sequence:** chronological, timestamped, no editorial cleanup.\n\nThat line — *if it explains how the conclusion was reached, it stays with the case record* — is the useful one. The rest is just bookkeeping.\n\nAnd yes, name the next owner. “In review” is where accountability goes to die.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "user_id": "user_019",
+  "task": "I’m looking at a release that’s basically ready, but there’s still one unresolved issue that could let bad units through if we rush it. How would you think through whether to hold the schedule or take the hit and fix it first?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.8,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Use a **risk-to-release** call, not a schedule call.\n\n## 1) Define the unresolved issue\nState:\n- what failed\n- how it failed\n- whether it repeats\n- what lot/serial/build it affects\n\nIf that isn’t clear, it stays open.\n\n## 2) Ask whether bad units could escape\nIf the issue could let bad units through:\n- can you **contain** them now?\n- can you **identify** them by lot/date/build rev/serial?\n- can you **block shipment** until sorted?\n\nIf not, the risk is high.\n\n## 3) Decide if the issue is understood\n- **Understood and bounded** → maybe release with containment\n- **Unresolved** → hold\n- **Repeatable and not bounded** → stop\n\n## 4) Check what the hit really is\nCompare:\n- schedule delay\n- rework cost\n- scrap risk\n- field failure risk\n- customer impact\n- liability\n\nIf the cost of rushing is bigger than the schedule hit, don’t rush.\n\n## 5) Use a simple rule\n### Hold the schedule if:\n- the issue is unresolved\n- bad units could escape\n- containment is not verified\n- or the failure is repeatable and not bounded\n\n### Take the schedule hit and fix it first if:\n- the unresolved issue could plausibly ship defects\n- you can’t prove containment\n- or the downstream cost of escape is worse than the delay\n\n---\n\n## What to ask in the room\n1. What exactly is unresolved?\n2. Can bad units escape?\n3. Can we identify and block them?\n4. Is containment real now, not planned?\n5. What is the cost of delay vs escape?\n6. Who owns the risk if we proceed?\n\n---\n\n## Practical rule\nIf you’re deciding between schedule and quality, assume **quality wins** unless the issue is clearly bounded and contained.\n\nIf you want, I can turn this into a **hold vs proceed decision tree** with yes/no branches.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, direction’s right. But it’s still a little generic.\n\nWhat I’d want in the room is a tighter gate, like:\n\n- Is the failure mode actually understood, or are we just naming symptoms?\n- Can we reproduce it on demand?\n- What’s the escape path for a bad unit — process, test gap, operator miss, supplier drift?\n- Do we have hard containment, not \"we’ll watch it\"?\n- If we ship now, what’s the worst credible field outcome, not the optimistic one?\n\nI’d also split the decision into two buckets:\n\n- **Can bad units still get through?** If yes, stop.\n- **If they do get through, can we catch/trace them before customer impact?** If no, stop harder.\n\nBasically: if the issue is unresolved and the containment is not proven, I’d hold. Schedule pain is real, but it’s usually the cheaper failure mode. I’ve sat through enough of the \"just ship it\" nonsense to know the paperwork doesn’t care once the bad parts are in the field.\n\nIf you want to make it useful, give me a version I can drop into a release review — short decision criteria, not the philosophy.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — here’s the short release-review version.\n\n## Release review decision criteria\n\n### 1) Is the failure mode understood?\n- **No** → **Hold**\n- **Yes** → go to 2\n\n### 2) Can it be reproduced on demand?\n- **Yes** → treat as real; go to 3\n- **No** → go to 3, but keep evidence open\n\n### 3) Can bad units still escape?\nCheck:\n- process gap\n- test gap\n- operator miss\n- supplier drift\n- incomplete inspection\n\n- **Yes** → go to 4\n- **No** → release may be possible if bounded\n\n### 4) Is hard containment proven now?\n- **No** → **Hold**\n- **Yes** → go to 5\n\n### 5) Can you trace and block affected units?\nCheck:\n- lot\n- date code\n- serial\n- build rev\n\n- **No** → **Hold**\n- **Yes** → go to 6\n\n### 6) Worst credible field outcome\nAsk:\n- what happens if a bad unit escapes?\n- customer impact\n- safety impact\n- liability\n- rework / recall / downtime\n\n- **Severe** → **Hold**\n- **Bounded and low consequence** → possible **Proceed with containment**\n\n---\n\n## Hard rules\n- **Unresolved failure mode** → hold\n- **Repeatable failure** → treat as real\n- **Containment not proven** → hold\n- **Cannot trace/block bad units** → hold\n- **Worst credible field outcome is bad** → hold\n\n---\n\n## Room language\nUse this:\n> “If we can’t explain it, reproduce it, contain it, and trace it, we don’t release it.”\n\n---\n\n## Decision split\n- **Proceed** only if the issue is understood, bounded, and contained now\n- **Hold** if any of those are missing\n- **Stop** if the failure is repeatable and not bounded\n\nIf you want, I can turn this into a **one-page yes/no review card** with only the branch questions and outcomes.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s usable.\n\nThe only line I’d actually take into the room is this:\n\n> If we can’t explain it, reproduce it, contain it, and trace it, we don’t release it.\n\nThat’s the gate. Everything else is just detail behind it.\n\nI’d maybe tighten one thing so it doesn’t get hand-waved:\n\n- **Failure mode understood** = not just symptoms, actual mechanism\n- **Hard containment proven now** = not planned, not “should work,” actually in place\n- **Trace/block** = specific enough that a bad unit can’t wander through on paperwork alone\n\nAnd if the worst credible field outcome is safety or a painful recall, I’m not interested in heroic schedule math. Hold it.\n\nShort version is fine. Not fluffy. Good enough to use.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    }
+  ]
+}

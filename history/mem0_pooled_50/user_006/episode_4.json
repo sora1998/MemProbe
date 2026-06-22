@@ -1,0 +1,36 @@
+{
+  "user_id": "user_006",
+  "task": "I need to write up a clean incident summary for a network problem that already got fixed, but I want it to hold up if someone pushes back later. What should I include so the timeline, evidence, and final cause are clear without making it longer than it needs to be?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.6,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Use a short, evidence-first structure that makes the sequence and proof obvious. Keep it tight, but make every claim traceable.\n\n## Incident summary template\n\n### 1) Header\n- **Incident ID / title**\n- **Date / start–end time**\n- **Impact summary**: what was broken, who/what was affected\n- **Severity / priority**\n- **Owner / responders**\n\n### 2) What happened\nOne short paragraph:\n- What failed\n- Where it failed\n- What users or systems observed\n- When it started and when service was restored\n\n### 3) Timeline of events\nKeep this as the backbone. Use exact timestamps and only material events.\n\nFormat:\n- **HH:MM** — Baseline state captured: interface status, neighbor table, power/temp, logs, screenshots\n- **HH:MM** — Symptom observed: loss of reachability / errors / flap\n- **HH:MM** — Checks performed: ping, traceroute, counters, config diff, physical inspection\n- **HH:MM** — Root cause identified\n- **HH:MM** — Fix applied\n- **HH:MM** — Service restored\n- **HH:MM** — Monitoring confirmed stable\n\nIf possible, note **who did what** at each step.\n\n### 4) Evidence collected\nList only the evidence that supports the conclusion:\n- Timestamped logs\n- Interface state screenshots / CLI output\n- Ping / traceroute results\n- Counters / errors / flaps\n- Config diffs\n- Photos of physical setup\n- Power / temperature / neighbor state\n- Any failover decision or dependency handoff\n\n### 5) Root cause\nState it plainly in one or two sentences:\n- **Direct cause**: the actual fault\n- **Contributing factors**: anything that made it worse or harder to spot\n- Avoid speculation; if something is unproven, say so\n\nExample:\n> Root cause was a failed uplink module causing interface loss on switch X. No evidence indicated upstream provider or application-layer fault. Recovery was completed after module replacement and link verification.\n\n### 6) Resolution\nBriefly explain:\n- What was changed\n- Why that fixed the issue\n- How you verified recovery\n\n### 7) Final status\n- Service restored at **HH:MM**\n- Scope of impact resolved / residual issues if any\n- Monitoring period and outcome\n\n### 8) Follow-ups\nOnly include real actions:\n- Preventive fix\n- Monitoring improvement\n- Documentation update\n- Open vendor case, if relevant\n\n## How to keep it short\n- Use bullets, not narrative\n- Put details in the timeline, not in the summary paragraph\n- Include only evidence that proves the cause or the fix\n- If the issue was ultimately a dependency, say that clearly and stop there once network was ruled out\n- Don’t restate the same fact in multiple sections\n\n## Good rule of thumb\nIf someone challenges the write-up later, they should be able to answer:\n1. **What failed?**\n2. **When did it fail and recover?**\n3. **What evidence proves that?**\n4. **Why was the root cause concluded?**\n5. **What fixed it?**\n\nIf you want, I can turn this into a **one-page incident report template** you can reuse.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, but keep it tighter than that. I don’t need a little essay template.\n\nWhat should be in it, bare minimum:\n- exact start time / restore time\n- what was impacted\n- what you checked, in order\n- the one piece of evidence that actually proves the fault\n- the fix\n- how you verified it stayed up\n- final cause, stated cleanly, no guessing\n\nIf there’s blame floating around, the timeline has to make it obvious you ruled out the wrong things before landing on the real fault. Logs, screenshots, counters, config diff, photo if physical gear was involved — only the ones that matter. Not a dump.\n\nI’d want it in this order:\n1. Incident header\n2. 3–6 line summary\n3. Timeline\n4. Evidence\n5. Root cause / resolution\n6. Final status\n\nAnd don’t repeat the same fact in three sections. That’s where people start poking holes. If you want, I can give you a stripped-down version you can actually paste into a ticket.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — keep it to this:\n\n## 1) Incident header\n- Incident ID / title\n- Start time / restore time\n- Impacted service(s) / users\n- Severity\n- Owner\n\n## 2) 3–6 line summary\n- What broke\n- Where it broke\n- What was impacted\n- When it started\n- When it was restored\n- Final cause in one sentence\n\n## 3) Timeline\nOnly the events that matter, in order:\n- **HH:MM** — First abnormal symptom observed\n- **HH:MM** — Checks performed\n- **HH:MM** — Wrong causes ruled out\n- **HH:MM** — Root cause identified\n- **HH:MM** — Fix applied\n- **HH:MM** — Service restored\n- **HH:MM** — Stability confirmed\n\nIf blame is possible, make sure the timeline shows:\n- the first bad log/counter time\n- what was checked before the fix\n- what evidence ruled out the wrong layer or dependency\n\n## 4) Evidence\nOnly include the proof that mattered:\n- one key log or screenshot\n- relevant counters / interface state\n- config diff if config-related\n- ping/traceroute if needed\n- photo only if physical hardware mattered\n\n## 5) Root cause / resolution\n- **Root cause:** one clean statement, no speculation\n- **Resolution:** what changed and why it fixed it\n- **Verification:** how you confirmed it stayed stable\n\n## 6) Final status\n- Restored at **HH:MM**\n- Stable for **X minutes/hours**\n- Any follow-up action, if real\n\n### Rule to keep it tight\nIf a detail does not help prove:\n- when it started,\n- what failed,\n- what was ruled out,\n- what fixed it,\n- or why the final cause is correct,\n\nleave it out.\n\nIf you want, I can turn this into a **copy-paste incident summary block** with placeholders.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s the right cut. Tight enough to use, not padded.\n\nIf you want the bare minimum structure, it’s basically:\n\n1. **Header** — incident ID, start/restore time, impact, owner\n2. **Summary** — 3–6 lines max, final cause included\n3. **Timeline** — only the sequence that proves what happened\n4. **Evidence** — just the one or two items that actually matter\n5. **Root cause / resolution** — one clean cause, one clean fix, one verification line\n6. **Final status** — restored, stable, any real follow-up\n\nAnd yeah — if blame is in play, the timeline has to show the dead ends first, then the proof that ruled them out. Otherwise people start poking at it.\n\nI can also give you a copy-paste version with placeholders if you want it even more stripped down.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "user_id": "user_006",
+  "task": "I’m looking at a tricky network change that has to happen soon, and I want to avoid creating extra work if something goes sideways. What would be the first few checks or preparations you’d make before starting?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.266666666666667,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Before a risky network change, I’d do these first:\n\n1. **Clarify the exact change and scope**\n   - What’s changing, where, and what systems/users could be affected?\n   - Confirm the maintenance window and expected impact.\n\n2. **Review the current state**\n   - Capture configs, routing tables, ACLs, firewall rules, VLANs, and relevant interface statuses.\n   - Note any existing issues so you don’t confuse them with change-related problems.\n\n3. **Check dependencies and upstream/downstream impacts**\n   - Identify connected services, critical apps, VPNs, DNS/DHCP, load balancers, WAN links, and monitoring.\n   - Make sure you know what might break if the change partially succeeds.\n\n4. **Have a rollback plan ready**\n   - Define exactly how to revert.\n   - Verify you have backups of configs and any required credentials/access.\n\n5. **Validate access and tooling**\n   - Confirm console/OOB access if needed.\n   - Make sure you can reach devices, have change permissions, and have monitoring/logging open.\n\n6. **Communicate and coordinate**\n   - Let stakeholders know timing, expected impact, and how to report issues.\n   - If others depend on the network, make sure they’re on standby.\n\n7. **Test on paper first**\n   - Walk through the steps and failure cases mentally or in a lab.\n   - Identify “what if this command fails?” before you execute anything.\n\nIf you want, I can turn this into a **pre-change checklist** or a **runbook template** you can use for the actual maintenance.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s the generic version. I want the stuff that actually saves you when it starts getting ugly.\n\nFirst few checks I’d do:\n- **Baseline the current state** — interfaces, errors, ARP/MAC tables, routing table, VPNs, whatever’s relevant. Screenshot or dump it. If it breaks later, you need proof of what “normal” was.\n- **Verify rollback is real, not theoretical** — config backup, copy of the old image if you’re touching firmware, console/OOB access, and credentials tested before the window starts.\n- **Check for dirty conditions already there** — packet loss, flapping links, high temp, bad optics, weird alerts. I don’t want to be blamed for a problem that was already cooking.\n- **Map the blast radius** — what depends on the box/path you’re changing. Not just obvious users, but scanners, VPN clients, upstream/downstream devices, anything that’ll get hit if traffic shifts.\n- **Confirm change path and permissions** — exact commands, exact order, who has approval, who can stop it if needed. No improvising mid-change unless you enjoy making a mess.\n\nIf you want, I can tighten that into a real pre-change sequence like: **before / during / if it fails / rollback**. That’s the version that matters.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.0
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "That’s the right mindset. The first few things I’d do are the ones that give you **proof, control, and a clean exit** if the change goes bad:\n\n1. **Capture a hard baseline**\n   - Interfaces, errors/discards, ARP/MAC tables, routes, VPN status, CPU/memory, logs, optics, and any relevant app/path checks.\n   - Save timestamps and outputs so you can compare later.\n\n2. **Make rollback executable, not just documented**\n   - Confirm you have the old config/image, a tested restore path, and console/OOB access.\n   - If rollback needs another person or another system, verify that now.\n\n3. **Check for pre-existing trouble**\n   - Look for flaps, packet loss, high utilization, bad transceivers, temp alarms, unstable neighbors, existing alerts.\n   - If something is already unstable, you want that recorded before you touch anything.\n\n4. **Identify the exact blast radius**\n   - What traffic, users, services, VPNs, routing peers, or downstream devices will be affected if this partially succeeds or fails?\n   - Know the “most likely ugly outcome,” not just the happy path.\n\n5. **Confirm you can stop or reverse quickly**\n   - Clear change steps, approval path, and who has authority to pause/abort.\n   - Have monitoring open and someone watching if the impact is customer-facing.\n\nIf you want, I can turn that into a **10-minute pre-change checklist** or a **step-by-step change/rollback runbook**.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, closer. Still a little clean-cut for how it actually goes when it’s about to blow up.\n\nWhat I’d add right before touching anything:\n- **Prove the baseline is clean enough to trust** — not just a dump. Check for flaps, CRCs, drops, temp, optics power, neighbor state, old alerts. If the box is already sick, your change gets blamed.\n- **Test the rollback path once, not in theory** — if I can’t get to console/OOB, or I don’t have the old config/image right there, I’m not calling that a rollback plan.\n- **Know the dependency chain cold** — upstream, downstream, backup path, anything weird like scanners, label printers, VPN users, remote vendors. The ugly part is always the thing nobody mentioned.\n- **Freeze a point-in-time record** — timestamps, screenshots, config hash if you’ve got it, work order notes. If there’s a dispute later, that’s leverage.\n- **Have the exact failure threshold** — what condition makes you stop, revert, or escalate. No “we’ll see how it looks.” That’s how people turn a small problem into a night shift.\n\nIf you want, I’d rather turn this into a **real pre-change sequence with stop points** than a generic checklist. That’s the part people screw up.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Exactly. The “saves you when it’s ugly” version is less about being thorough and more about being **able to prove, stop, and recover fast**.\n\nI’d frame the first checks like this:\n\n1. **Trust the baseline**\n   - Confirm the device/path is actually healthy enough to change.\n   - Look for flaps, CRCs, drops, temp/optics issues, neighbor instability, and active alerts.\n   - If it’s already unstable, document it before you touch anything.\n\n2. **Make rollback instantly usable**\n   - Old config/image in hand.\n   - Console/OOB access confirmed.\n   - Credentials tested.\n   - If rollback needs another dependency, verify it now.\n\n3. **Know the dependency chain**\n   - Upstream/downstream devices, failover path, VPNs, DNS/DHCP, scanners, printers, vendors, anything odd that rides the path.\n   - Identify what will fail first if the change is partial.\n\n4. **Freeze proof of current state**\n   - Timestamped screenshots/outputs, config backup, route tables, interface stats, logs.\n   - Enough to compare “before” vs “after” without guessing.\n\n5. **Define stop/revert triggers**\n   - Specific thresholds: packet loss, session drops, neighbor loss, app failure, latency jump, link errors, etc.\n   - Decide in advance what makes you pause, revert, or escalate.\n\nIf you want, I can turn that into a **real-world change window checklist** with a **“stop here if X happens”** column.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s the part that actually matters.\n\nIf I were doing it for real, the first checks are basically:\n\n- **Baseline the path hard** — not just “looks up.” I want interface errors, CRCs, drops, neighbor state, optics power/temp, routing adjacencies, active alerts, and anything already flapping. If it’s dirty before the change, I want that on record.\n- **Make rollback executable** — old config/image sitting there, console or OOB tested, creds verified, and any extra dependency for rollback checked now. If I can’t revert fast, I’m not touching it.\n- **Map the ugly dependencies** — upstream, downstream, backup path, VPN, DNS/DHCP, scanners, printers, vendor junk, whatever rides that segment. The thing that bites you is usually the one nobody mentioned.\n- **Freeze proof** — timestamped outputs, screenshots, config backup, route table, logs. Enough to prove what “normal” was before anyone starts pointing fingers.\n- **Set the stop line** — exact condition that makes you pause, revert, or escalate. Not vibes. Packet loss threshold, session drops, neighbor loss, app failures, whatever actually matters.\n\nThat’s the real sequence. If you want, I can give you the ugly version as a **change-window checklist with stop/revert triggers** instead of this clean summary.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    }
+  ]
+}

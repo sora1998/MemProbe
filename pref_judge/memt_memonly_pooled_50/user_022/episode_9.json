@@ -1,0 +1,137 @@
+{
+  "user_id": "user_022",
+  "task": "I’m trying to sanity-check a small water-treatment readout and I don’t want to overreact to one number. Can you help me think through which measurements actually matter together and what would make you trust the data enough to act on it?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "formality_preference",
+      "short": "Neutral-professional, not chatty",
+      "explanation": "She comes across as someone who would want interactions to stay professional and efficient rather than overly casual. Her practical, work-focused style suggests she’d prefer clear communication without unnecessary friendliness or performance."
+    },
+    {
+      "idx": 2,
+      "dimension": "verbosity_preference",
+      "short": "Moderate detail, enough to act",
+      "explanation": "She likely wants enough explanation to understand the issue and proceed correctly, but not a long lecture. Her preference for efficiency and clear facts points to responses that are concise while still covering the important steps."
+    },
+    {
+      "idx": 3,
+      "dimension": "directness_preference",
+      "short": "Straightforward over softened wording",
+      "explanation": "She seems to value blunt clarity more than emotional cushioning. In a technical setting, she would probably prefer the assistant to state the problem, the likely cause, and the fix plainly."
+    },
+    {
+      "idx": 4,
+      "dimension": "format_preference",
+      "short": "Bullets and checklists over prose",
+      "explanation": "Her checklist-oriented habits and notebook procedure style fit a structured presentation. She would likely do best with information broken into steps, bullets, or a quick checklist she can follow without re-reading dense paragraphs."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Wants firm correction when something is off",
+      "explanation": "She appears unlikely to want vague agreement if a detail is wrong or risky. Her real-world habit of correcting spec errors suggests she’d appreciate the assistant flagging mistakes directly and not letting questionable assumptions slide."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — for a small water-treatment readout, I’d treat it like a **tight check**, not a “react to every number” situation.\n\n## What matters together\nStart with just:\n\n1. **Primary PV**  \n   - The main process value you’re trying to hold\n   - Example: pH, turbidity, chlorine residual, conductivity, ORP, level\n\n2. **One upstream driver**\n   - The thing most likely to explain the PV\n   - Example: feed flow, inlet pressure, chemical dose rate, pump speed, valve position\n\n3. **Controller mode / alarm state**\n   - Auto/manual, alarm active, interlock, permissive, fault\n\n4. **Recent change**\n   - Anything that changed recently:\n   - chemical drum change\n   - pump swap\n   - filter backwash\n   - valve adjustment\n   - maintenance\n   - sensor cleaning/calibration\n\n## What would make me trust the data\nI’d trust it more if the reading is:\n\n- **Consistent across 2–3 checks in the same direction**\n  - not just one spike or dip\n- **Matched by the upstream condition**\n  - if PV changed, did flow/dose/pressure also change?\n- **Stable in the controller state**\n  - no hidden manual mode, alarm, or bypass\n- **Plausible relative to recent changes**\n  - if nothing changed upstream, a big PV jump is more suspicious\n- **Confirmed by a second simple check if available**\n  - handheld meter, local gauge, test strip, sample grab, or another transmitter\n\n## Simple rule for action\n- **One bad point alone:** don’t overreact unless it’s extreme\n- **2–3 readings in the same direction:** start investigating\n- **Worsening trend or alarm confirmation:** act\n\n## Quick sanity-check sequence\nUse this order:\n\n1. **Is the PV truly off?**\n2. **Is the upstream driver explaining it?**\n3. **Is the controller in the expected mode?**\n4. **Did anything recently change?**\n5. **Can I confirm with one physical check?**\n\n## Example\nIf turbidity is high:\n- check turbidity PV\n- check filter differential pressure or flow\n- check backwash status / valve position\n- check whether a backwash or chemical change happened recently\n- confirm with a grab sample or handheld if possible\n\nIf those all line up over a few checks, I’d trust it enough to act.\n\nIf you want, I can turn this into a **one-line field checklist** you can use at the panel.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Neutral-professional and efficient: \"tight check\" and structured guidance, with no chatty filler."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Moderate detail: gives enough to act on with \"What matters together,\" \"What would make me trust the data,\" and a \"Quick sanity-check sequence,\" without becoming a long lecture."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Straightforward wording throughout, e.g. \"don’t overreact unless it’s extreme\" and \"start investigating\"; it states the logic plainly."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strongly formatted as bullets and numbered steps: \"What matters together,\" \"What would make me trust the data,\" and \"Quick sanity-check sequence.\""
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Provides firm correction and clear thresholds like \"One bad point alone: don’t overreact\" and \"2–3 readings in the same direction: start investigating,\" though it is firm rather than sharply corrective."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — that’s the right way to think about it.\n\nFor a small water-treatment readout, I’d use **specific pairings**, not “one PV plus anything.”\n\n## The useful pairings\n\n### 1) **pH**\nTrust it more when you have:\n- **pH**\n- **acid/caustic dose rate** or pump stroke/speed\n- **flow**\n- **recent probe cleaning/calibration**\n- optionally **temperature compensation**\n\nWhat it tells you:\n- pH moves with dose and flow in a believable way\n- a lone pH jump with no dose/flow change is suspicious\n- if it was just cleaned/calibrated, a weird point may be sensor-related\n\n---\n\n### 2) **Turbidity**\nTrust it more when you have:\n- **turbidity**\n- **filter DP**\n- **backwash status**\n- **flow**\n- **sample line condition** / flush status\n- recent maintenance on the sensor or sample line\n\nWhat it tells you:\n- high turbidity should make sense with filter loading, breakthrough, or post-backwash settling\n- one spike with flat DP and no process change is often noise, air, or sample-line trouble\n- if backwash just happened, a temporary blip may not mean real process failure\n\n---\n\n### 3) **Conductivity**\nTrust it more when you have:\n- **conductivity**\n- **temperature** or temp compensation status\n- **rinse/flush status**\n- **feed change** or blend change\n- **valve position** or source change\n\nWhat it tells you:\n- conductivity should track source/feed changes in a believable way\n- a sudden step with no valve/feed change is suspicious\n- if temp compensation is off or the line was just flushed, the number may not be trustworthy yet\n\n---\n\n### 4) **ORP / chlorine residual**\nTrust it more when you have:\n- **ORP or residual**\n- **chemical dose**\n- **flow**\n- **contact time / tank level** if available\n- recent probe cleaning/calibration\n\nWhat it tells you:\n- residual should generally follow dose and flow conditions\n- a jump without dose change is worth doubting\n- immediate post-maintenance readings are often the least trustworthy\n\n---\n\n### 5) **Level / pressure / flow**\nTrust it more when you have:\n- **the reading**\n- **valve or pump state**\n- **upstream/downstream condition**\n- **recent mode change**\n- **local gauge or second transmitter**, if available\n\nWhat it tells you:\n- if the mechanical state doesn’t match the reading, suspect the sensor\n- if two measurements disagree, the one with the weaker physical explanation is the one I’d doubt first\n\n---\n\n## What I’d trust it on\nYour list is solid:\n\n- **same number across more than one sample interval**\n- **matches the mechanical state**\n- **no recent maintenance/calibration/valve change**\n- **one quick cross-check** if available\n\nThat’s the right threshold to avoid overreacting.\n\n## My quick rule\nIf:\n- the value is off,\n- but **all related tags are flat**,\n- and there was **no recent change**,\n- and it **doesn’t repeat** on the next sample,\n\nthen I’d treat it as **noise or sensor trouble first**, not a process upset.\n\nIf you want, send me the actual tags and a few values, and I’ll sort them into:\n- **must-watch together**\n- **likely noise**\n- **enough to act on**",
+      "score": 5.0,
+      "summary": "mean=5.00 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:0, 5:5}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Neutral-professional and efficient; it stays work-focused and avoids chatty filler. Phrases like \"That’s the right way to think about it\" are mild, but overall the tone is practical and technical."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Moderate detail with actionable guidance. It gives enough context to act on, using concise sections like \"The useful pairings\" and \"My quick rule\" without becoming a long lecture."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Straightforward and direct. It plainly says things like \"a lone pH jump... is suspicious\" and \"I’d treat it as noise or sensor trouble first,\" which is blunt clarity rather than softened wording."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong use of structure: numbered sections, bullets, and a quick rule/checklist format. This is clearly easier to scan and follow than prose."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "It gives firm correction and risk-aware pushback, e.g. \"a sudden step with no valve/feed change is suspicious\" and \"the one I’d doubt first.\" It does not just agree; it flags questionable readings directly."
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yes — here’s the tighter field version.\n\n## Simple rule\nTrust a tag less when it:\n- **doesn’t match its companion tags**\n- **doesn’t repeat on the next sample**\n- **has no mechanical/process change that explains it**\n- **moves by more than normal noise, not just a tiny wiggle**\n\n## Decision rules by tag pair\n\n### 1) **pH**\n**Watch with:** dose rate, flow, probe cleaning/calibration, temp comp\n\n**Probably real if:**\n- pH changes and **dose changes too**\n- pH changes and **flow changes enough to explain it**\n- the new value **holds for 2 samples**\n- the change is in the same direction you’d expect from the dose/flow shift\n\n**Probably noise / sensor issue if:**\n- pH moves but **dose and flow are flat**\n- it’s **one odd point only**\n- it snaps back on the next sample\n- probe was just cleaned/calibrated and the reading is still settling\n\n**Act on it if:**\n- the mismatch **repeats on 2 consecutive samples**\n- or the pH shift is large enough to matter for control/spec, even if you’re not sure why yet\n\n---\n\n### 2) **Turbidity**\n**Watch with:** filter DP, backwash status, flow, sample line/flush condition\n\n**Probably real if:**\n- turbidity rises and **DP is rising too**\n- turbidity rises and **backwash is overdue or failed**\n- the higher reading **persists for 2 samples**\n- you also see a process change like higher flow or filter upset\n\n**Probably noise / sample issue if:**\n- turbidity spikes once but **DP is flat**\n- backwash just happened\n- sample line may be dirty, air-bound, or flushing\n- it disappears on the next sample\n\n**Act on it if:**\n- the high turbidity **repeats**\n- or it’s high enough to violate your limit on the first repeatable sample\n\n---\n\n### 3) **Conductivity**\n**Watch with:** temperature/temp comp, feed/source change, rinse/flush status, valve position\n\n**Probably real if:**\n- conductivity steps when the **feed/source/valve changes**\n- the change **holds across 2 samples**\n- temp compensation is stable and the shift still makes sense\n\n**Probably noise / bad sample if:**\n- conductivity jumps with **no source or valve change**\n- it happens right after a **flush/rinse**\n- it’s a single point and the next sample is back to normal\n\n**Act on it if:**\n- the step repeats\n- or the change is large enough that it can’t be explained by temp alone\n\n---\n\n### 4) **ORP / chlorine residual**\n**Watch with:** dose, flow, contact time/tank level, probe maintenance\n\n**Probably real if:**\n- residual moves with **dose**\n- the change fits a **flow or contact-time** shift\n- it stays changed for **2 samples**\n\n**Probably noise / sensor issue if:**\n- it moves but **dose didn’t**\n- probe was just cleaned/calibrated\n- one bad point disappears on the next read\n\n**Act on it if:**\n- the mismatch repeats\n- or the residual is outside your control range on a second read\n\n---\n\n### 5) **Level / pressure / flow**\n**Watch with:** pump/valve state, upstream/downstream condition, local gauge, second transmitter\n\n**Probably real if:**\n- the reading matches the **equipment state**\n- two instruments agree\n- the change holds across **2 samples**\n\n**Probably sensor issue if:**\n- the reading doesn’t fit the valve/pump state\n- a local gauge disagrees hard\n- it’s a one-off blip\n\n**Act on it if:**\n- the mismatch repeats\n- or the discrepancy is big enough that the equipment state and the tag clearly cannot both be true\n\n---\n\n## Practical “bad enough mismatch” rule\nI’d use this:\n\n### Don’t trust it yet if:\n- it’s **only one sample**\n- companion tags are flat\n- there was **recent maintenance, calibration, valve change, backwash, flush, or source change**\n- the value is only a **small drift** and not outside normal noise\n\n### Start trusting it as real if:\n- it repeats on **2 consecutive samples**\n- the change is **consistent with the mechanical state**\n- the mismatch is still there after one simple cross-check\n- the magnitude is big enough to matter for control or spec\n\n### Act immediately if:\n- the tag is **outside a hard limit**\n- or it repeats and the companion tags support it\n- or the mechanical state says the tag is the only thing that can be wrong\n\n## Field shorthand\n- **1 bad point:** suspect noise\n- **2 same-direction points:** start believing it\n- **3 same-direction points or a hard limit:** act\n- **tag disagrees with the machine:** trust the machine first, then the tag\n\nIf you want, I can turn this into a compact **tag / companion / real / noise / act** table you can keep on one screen.",
+      "score": 5.0,
+      "summary": "mean=5.00 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:0, 5:5}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Neutral-professional and efficient: opens with “here’s the tighter field version” and stays workmanlike, with no chatty filler."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Moderate detail with actionable guidance: gives concise rules, then a practical “Don’t trust / Start trusting / Act immediately” summary and shorthand."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Straightforward and blunt: uses direct phrases like “trust the machine first” and “Act immediately if,” with little hedging."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong structured formatting: organized into headings, bullets, decision rules by tag pair, and a final shorthand list."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Firm correction and pushback: explicitly says “Don’t trust it yet,” “Probably noise / sensor issue,” and “trust the machine first,” rather than softening uncertainty."
+        }
+      ]
+    }
+  ]
+}

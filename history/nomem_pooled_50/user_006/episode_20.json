@@ -1,0 +1,36 @@
+{
+  "user_id": "user_006",
+  "task": "I’m writing up a short handoff for a technical fix I’ve already completed, and I want it to be clear enough that someone else can verify the result or continue the work if needed. What details should I include so the steps, assumptions, and outcome are easy to follow without turning it into a long report?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.4,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Include just enough for someone else to **reproduce, verify, or pick up the work** without needing to ask you follow-up questions. A good short handoff usually has these parts:\n\n### 1) What was fixed\n- Brief problem statement\n- Where it happened (system/service/component)\n- Why it mattered\n\n### 2) Scope and context\n- What environment this was done in: prod/staging/dev, host, version, branch, ticket number\n- Any related dependencies or systems affected\n- What was **not** changed\n\n### 3) Steps taken\n- Short, ordered list of the actual fix steps\n- Include commands run, config changes, code changes, or deployments\n- Mention any rollback or backup steps if relevant\n\n### 4) Assumptions\n- Anything you assumed while fixing it\n- Preconditions that were true during the fix\n- Constraints or shortcuts you used\n\n### 5) Verification / outcome\n- How you confirmed it worked\n- Expected result and actual result\n- Checks performed, logs reviewed, tests passed, metrics, screenshots, etc.\n- If possible, include before/after evidence\n\n### 6) Remaining risks or follow-up\n- Anything that still needs monitoring\n- Known limitations or edge cases\n- Next steps if the issue recurs\n\n### 7) References\n- Links to ticket, PR, commit, dashboard, runbook, or docs\n- Relevant file paths or config keys\n\n## A simple format you can use\n```text\nSummary:\n- Fixed [issue] in [system/component].\n\nContext:\n- Environment:\n- Ticket/PR:\n- Impact:\n\nSteps taken:\n1.\n2.\n3.\n\nAssumptions:\n- \n- \n\nVerification:\n- \n- \n\nOutcome:\n- \n\nFollow-up / risks:\n- \n- \n\nReferences:\n- \n- \n```\n\n## Tips to keep it short\n- Use bullets, not paragraphs\n- Write in past tense for completed work\n- Include exact identifiers where useful, but skip narrative detail\n- Focus on what someone needs to verify or continue, not the whole story\n\nIf you want, I can also turn this into a **1-paragraph handoff template** or a **fillable checklist**.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Pretty close. I’d want it tighter and more verification-focused, not just a generic template.\n\nWhat I’d include:\n- exact system/component\n- what failed, in one line\n- what changed, in order\n- what I checked to prove it was fixed\n- anything still risky / unresolved\n- links or IDs if there’s a ticket, commit, log, config, whatever\n\nWhat I’d skip unless it matters:\n- long background\n- obvious stuff like “I investigated the issue”\n- filler narrative\n\nIf you want, make it more like this:\n\nSummary:\n- Fixed [issue] on [host/service].\n\nCause:\n- [actual root cause, not the symptoms]\n\nActions:\n1. [step]\n2. [step]\n3. [step]\n\nVerification:\n- [command/check/result]\n- [before/after evidence]\n\nNotes:\n- Assumptions made\n- Anything not changed\n- Known risk / follow-up\n\nThat’s enough for someone to verify it or pick it up without reading a novel.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — that’s the right level of detail.\n\nA tight, verification-focused handoff should usually include:\n\n- **System/component**: exactly where the fix was applied\n- **Failure in one line**: what was broken\n- **Root cause**: the actual cause, not the symptoms\n- **Actions taken**: ordered, concrete steps\n- **Verification**: what you checked to prove it worked, with results\n- **Risks / open items**: anything still unresolved or worth monitoring\n- **References**: ticket, commit, logs, config, dashboard, etc.\n\nA clean format:\n\n```text\nSummary:\n- Fixed [issue] on [host/service/component].\n\nCause:\n- [Root cause]\n\nActions:\n1. [Step]\n2. [Step]\n3. [Step]\n\nVerification:\n- [Command/check/result]\n- [Before/after evidence]\n\nNotes:\n- [Assumption made]\n- [What was not changed]\n- [Known risk or follow-up]\n\nReferences:\n- [Ticket/PR/commit/log/config link]\n```\n\nIf you want, I can also turn this into a **super-short 5-line version** for quick Slack/incident handoffs.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s the useful version.\n\nTight handoff, verification-first:\n- exact system/component\n- one-line failure\n- root cause\n- ordered actions taken\n- what proved it was fixed\n- any unresolved risk / what wasn’t changed\n- ticket/commit/log/config refs\n\nThe 5-line version is probably enough most of the time:\n\nSummary:\n- Fixed [issue] on [host/service/component].\n\nCause:\n- [root cause]\n\nActions:\n1. [step]\n2. [step]\n3. [step]\n\nVerification:\n- [check/result]\n- [before/after evidence]\n\nNotes:\n- [assumption]\n- [not changed / risk / follow-up]\n\nThat’s compact and actually useful. No fluff.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    }
+  ]
+}

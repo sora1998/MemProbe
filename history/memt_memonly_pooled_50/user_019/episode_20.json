@@ -1,0 +1,49 @@
+{
+  "user_id": "user_019",
+  "task": "I’m looking at a release that’s basically ready, but there’s still one unresolved issue that could let bad units through if we rush it. How would you think through whether to hold the schedule or take the hit and fix it first?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.6,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "I’d treat this as a **gate decision**, not a “best effort” cleanup.\n\n### 1) Lock the issue down in writing\nBefore deciding, capture:\n- **Exact unresolved test / defect**\n- **Sample IDs / lot or serial split**\n- **Acceptance criteria**\n- **What’s missing**\n- **Why it’s missing**  \nThis keeps the discussion anchored to facts, not urgency.\n\n### 2) Ask the release-impact questions\nUse these in order:\n\n1. **Is it tied to a release-driving requirement?**  \n   If yes, it matters.\n\n2. **Is the gap due to an ongoing test or just a muddy result?**  \n   Ongoing / unresolved data is riskier than a clean pass.\n\n3. **Does it change the pass/fail state of the lot?**  \n   If it can flip the lot from pass to fail, it’s a gate issue.\n\n4. **Can the risk be bounded with retained samples, controls, or prior lots?**  \n   If you can’t bound it, you don’t really know the risk.\n\n### 3) Use the decision rule\n- **HOLD** if the open item touches the release gate and **can’t be bounded**\n- **CONDITIONAL HOLD** only if the missing piece is **narrowly scoped** and everything else is closed\n- **GO** only if it’s clearly non-impacting and the evidence is complete enough to support that\n\n### 4) Practical bias\nIf you believe rushing could let bad units through, that’s usually a **hold** unless you can show:\n- the issue is not tied to a release criterion,\n- the rest of the evidence is closed,\n- and the residual risk is bounded and acceptable.\n\n### 5) How I’d say it in the room\n> “Open item is X. It affects Y release criterion / it does not. Closed evidence says Z. Residual risk is A. Disposition is hold / conditional hold / ship.”\n\nIf you want, I can turn your specific case into a **one-line hold/conditional-hold/go recommendation** using that format.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, direction is right. But I’d want it tighter — not just a generic gate talk.\n\nWhat’s the unresolved issue, exactly? And is it a real pass/fail hole or just annoying paperwork / one missing data point? Because those are not the same thing.\n\nI’d think in this order:\n- does it touch a spec or customer requirement\n- can it actually let a bad unit escape\n- can you bound it with existing data, or are you guessing\n- what’s the cost of delay vs the cost of a field failure\n\nIf it can let bad units through, I’d lean hold. I’ve already seen what happens when people want to “just ship it” and assume the paperwork will catch up — it doesn’t. That’s how you end up arguing with reality later.\n\nIf you want, give me the actual unresolved item and I’ll tell you whether it smells like hold, conditional hold, or ship.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "I’d decide it by one question first:\n\n**Can the unresolved issue change the pass/fail call on a unit that would otherwise ship?**\n\nIf yes, I’d treat it as a **hold** unless you can **bound the risk** with evidence.\n\nA tighter way to think about it:\n\n1. **Is it a real technical hole or just incomplete documentation?**  \n   - Missing paperwork, but the underlying test is done and traceable = usually not a stop.\n   - Missing data that affects acceptance = stop.\n\n2. **Can a bad unit realistically escape because of this gap?**  \n   If the answer is even “maybe,” that’s usually enough to pause.\n\n3. **Is the risk bounded or unknown?**  \n   - Bounded: limited lot, known scope, prior history, retained samples, clear rationale.\n   - Unknown: intermittent behavior, incomplete test coverage, no clean containment.\n\n4. **What’s worse here: delay or escape?**  \n   If a field failure would be expensive, safety-related, or hard to catch later, the bar for shipping should be high.\n\nMy default rule would be:\n\n- **Hold** if the issue touches a release criterion or could let a bad unit through\n- **Conditional hold** only if the gap is narrow, well-bounded, and explicitly accepted\n- **Ship** only if it’s clearly non-impacting and you can defend that with evidence\n\nThe trap is letting “basically ready” override the one thing that still matters. If the unresolved item can still move a unit from good to bad, it’s not just cleanup — it’s a release decision.\n\nIf you want, I can help you turn your specific issue into a **hold / conditional hold / ship** call in 3–4 lines.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, closer. But I’d tighten it one notch more — not the generic release rubric, the actual decision hinge.\n\nI’d frame it like this:\n\n- **If the unresolved item can change a unit’s disposition, hold.**\n- **If it cannot change disposition and the gap is only documentation, don’t block release on that alone.**\n- **If you can’t prove which of those two it is, treat it like a hold.**\n\nThat’s the part people dodge. They act like “missing data” and “missing evidence for acceptance” are both just paperwork. They’re not. One is clerical. The other is a hole in the release call.\n\nSo I’d ask:\n1. Does this item affect the acceptance criterion directly?\n2. If not, does it still weaken the evidence enough that you can’t defend the call?\n3. Can you bound the escape risk with actual data, not optimism?\n\nIf the answer to 1 or 2 is yes, or 3 is no, I’d stop the release. I’ve had exactly this kind of thing before — the batch looked fine until the stress condition exposed the weak point. Once you know there’s a real escape path, “mostly ready” is just noise.\n\nIf you want, I can turn that into a very blunt **hold / conditional hold / ship** rule tree.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "I’d use a very blunt hinge:\n\n**If the unresolved item can change the unit’s disposition, hold.**  \n**If it cannot change disposition and it’s only documentation, don’t block release on that alone.**  \n**If you can’t prove which of those it is, treat it as a hold.**\n\nThat’s the decision point.\n\nA tighter version:\n\n1. **Does it affect acceptance directly?**  \n   If yes, hold.\n\n2. **If not, does it still weaken the evidence enough that you can’t defend the release call?**  \n   If yes, hold.\n\n3. **Can you bound the escape risk with actual data, not optimism?**  \n   If no, hold.\n\nSo the rule is basically:\n\n- **Disposition can change = hold**\n- **Paperwork only = don’t block**\n- **Can’t tell which = hold**\n\nIf you want, I can turn that into a one-line release gate rule you can drop into a checklist or sign-off form.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s the hinge.\n\nNot “is it annoying,” not “is the packet basically done.”\n\nIt’s:\n- **can this unresolved item change disposition?** → hold\n- **is it only clerical/documentation?** → don’t block on that alone\n- **can’t prove which bucket it’s in?** → hold\n\nThat’s clean enough to use in a room without all the hand-waving. If you want a slightly harder version for sign-off language, I’d say:\n\n**Release only if the open item cannot affect unit acceptance and the residual risk is explicitly bounded. Otherwise, hold.**\n\nThat’s probably the version people hate because it removes the wiggle room. Which is usually the point.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    }
+  ]
+}

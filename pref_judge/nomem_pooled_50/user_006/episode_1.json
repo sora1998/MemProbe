@@ -1,0 +1,104 @@
+{
+  "user_id": "user_006",
+  "task": "I’m trying to narrow down an annoying network issue at my place: Wi‑Fi looks fine on the surface, but one device keeps dropping at random and the usual reboot stuff hasn’t changed anything. Can you help me build a clean step-by-step way to isolate whether it’s the device, router, cabling, or something in the config?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "verbosity_preference",
+      "short": "Wants responses kept tight and efficient",
+      "explanation": "He values speed, control, and efficiency, so he is unlikely to want long-winded help. He would probably prefer responses that get to the point quickly and avoid unnecessary filler. Overexplaining would feel like wasted time to him."
+    },
+    {
+      "idx": 2,
+      "dimension": "directness_preference",
+      "short": "Prefers blunt answers without softening",
+      "explanation": "His skeptical, competitive style suggests he wants clear, unambiguous guidance rather than hedged language. He would likely see excessive caution as evasive or inefficient. Straight answers fit his preference for control and decisive action."
+    },
+    {
+      "idx": 3,
+      "dimension": "format_preference",
+      "short": "Likes structured, actionable output",
+      "explanation": "He seems most likely to respond well to responses that are organized and easy to execute, such as bullets or checklists. That matches his practical, task-focused mindset. Loose, meandering prose would probably frustrate him."
+    },
+    {
+      "idx": 4,
+      "dimension": "detail_level_preference",
+      "short": "Wants the useful essentials, not padding",
+      "explanation": "He likely wants enough context to act, but not exhaustive background unless it helps him win or avoid mistakes. He is efficiency-driven, so extra caveats only matter when they change the decision. He would probably skip anything that does not affect the outcome."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Accepts pushback only if it is sharp and useful",
+      "explanation": "He is skeptical and self-serving, so he probably does not enjoy moralizing or vague objections. But if the pushback is concrete, efficient, and clearly tied to risk or leverage, he is more likely to respect it. Weak or overly gentle correction would likely be ignored."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Absolutely — here’s a clean isolation plan you can follow to figure out whether the problem is the device, router, cabling, or configuration.\n\n## 1) Define the symptom precisely\nBefore changing anything, note:\n- Which device drops\n- Whether it’s Wi‑Fi or Ethernet\n- What “drops” means:\n  - disconnects from Wi‑Fi\n  - loses internet only\n  - gets slow/high latency\n  - IP address changes\n- When it happens:\n  - random\n  - under load\n  - only at certain times\n  - only in one room\n\nThis helps separate RF, DHCP, and router issues.\n\n---\n\n## 2) Test the problem device in isolation\n### If it’s on Wi‑Fi:\n- Move it close to the router/AP\n- Forget the network and reconnect\n- Temporarily disable VPN, security software, power saving, or “smart” network switching on the device\n- If possible, connect it to a **different Wi‑Fi network**:\n  - phone hotspot\n  - neighbor/test AP\n  - guest network on the same router if that guest network is truly separate\n\n**Result interpretation:**\n- Drops on multiple networks → likely device-side\n- Only drops on your home network → likely router/config/interference\n\n### If it’s wired:\n- Try a different Ethernet cable\n- Try a different router/switch port\n- Connect it directly to the router, bypassing any switch/powerline/extender\n- If possible, test the same device on another wired network\n\n**Result interpretation:**\n- Problem follows the device → device NIC/driver/config\n- Problem stays with the port/cable path → cabling/router/switch\n\n---\n\n## 3) Swap one variable at a time\nUse a simple matrix:\n\n### For Wi‑Fi devices\n1. Same device, same spot, same SSID\n2. Same device, different SSID (guest or alternate AP)\n3. Different device, same SSID, same spot\n4. Different device, different spot\n\n**What this tells you:**\n- Only one device fails anywhere → device issue\n- Multiple devices fail only in one spot → coverage/interference issue\n- Multiple devices fail on one SSID but not another → config issue\n- One band fails but not the other → band/channel issue\n\n### For Ethernet devices\n1. Same device, different cable\n2. Same device, different port\n3. Different device, same cable/port\n4. Bypass any intermediate gear\n\n**What this tells you:**\n- Cable follows the issue → cable\n- Port follows the issue → router/switch port\n- Device follows the issue → device NIC/config\n\n---\n\n## 4) Check router-side logs and counters\nLook for:\n- DHCP lease renewals/failures\n- Wi‑Fi deauth/disassoc events\n- WPA rekey failures\n- port link up/down events\n- CRC/errors on switch ports\n- reboots or WAN drops\n\nIf your router/AP supports it, note:\n- signal strength/RSSI for the device\n- retries/error rate\n- band steering events\n- roaming events\n- channel utilization\n\n**Interpretation:**\n- Deauth/disassoc with good signal → auth/config/firmware\n- Link flaps on Ethernet → cable/port/NIC\n- DHCP failures → config/router issue\n- WAN drops only, LAN stays up → ISP/modem issue, not local Wi‑Fi\n\n---\n\n## 5) Eliminate common config causes\nTry these one at a time:\n- Separate 2.4 GHz and 5 GHz SSIDs temporarily\n- Disable band steering\n- Set a fixed Wi‑Fi channel instead of auto\n- For Wi‑Fi, test with WPA2-only if you’re using mixed WPA2/WPA3\n- Disable “fast roaming” / 802.11r temporarily if enabled\n- Reserve a static DHCP lease for the device\n- Remove any MAC filtering, parental controls, QoS rules, or device prioritization\n- If the device uses a static IP, switch it to DHCP temporarily\n- If using DNS overrides, test with router DNS or a public DNS\n\n**Interpretation:**\n- Issue disappears after one change → that setting was involved\n- Issue persists across config changes → look at hardware/device\n\n---\n\n## 6) Test for interference or signal quality\nFor Wi‑Fi specifically:\n- Check whether the device is on 2.4 GHz or 5 GHz\n- Try the other band\n- Move away from microwaves, Bluetooth hubs, cordless phones, baby monitors, smart home hubs\n- Check neighboring networks for channel overlap\n- If 2.4 GHz, prefer channels 1/6/11\n- If 5 GHz, try a non-DFS channel if your router is using DFS and the drops are periodic\n\n**Interpretation:**\n- Drops only in one location or band → RF/environmental\n- Drops at regular intervals on DFS channels → radar/channel change issue\n\n---\n\n## 7) Use a simple ping test during the failure\nRun two continuous pings from the affected device if possible:\n- ping your router/local gateway\n- ping a public IP like 1.1.1.1 or 8.8.8.8\n\n**Interpretation:**\n- Router ping fails too → local Wi‑Fi/LAN issue\n- Router ping works but public ping fails → WAN/ISP/routing issue\n- Both fail only on one device → device issue\n\nIf the device can’t run ping, use another device on the same network as a control.\n\n---\n\n## 8) Compare with a known-good device\nTake a stable device and place it:\n- in the same spot\n- on the same SSID/band\n- with the same cable/port if wired\n\nIf the known-good device also drops, the problem is likely environmental or infrastructure-related.\n\n---\n\n## 9) Firmware/driver sanity check\n- Update router/AP firmware\n- Update device Wi‑Fi/Ethernet drivers or OS\n- If the issue started after an update, test rollback if feasible\n- Rebooting isn’t the same as updating; firmware bugs can persist across reboots\n\n---\n\n## 10) If you want the fastest path: use this decision tree\n### A. Does the device fail on other networks?\n- Yes → device problem\n- No → continue\n\n### B. Does another device fail on the same network/spot?\n- Yes → router/config/interference\n- No → device-specific or compatibility issue\n\n### C. Does changing cable/port fix it?\n- Yes → cabling/port\n- No → continue\n\n### D. Does changing SSID/band/channel/security mode fix it?\n- Yes → config/interference\n- No → likely hardware/driver/router bug\n\n---\n\n## 11) What to record\nKeep a small log with:\n- timestamp\n- device\n- connection type\n- band/port\n- signal strength\n- what changed\n- whether it dropped again\n\nEven 3–5 events can reveal a pattern.\n\n---\n\nIf you want, I can turn this into a **one-page troubleshooting checklist** or a **decision tree tailored to your exact setup**.",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly tight and efficient: it uses numbered steps, short bullets, and a direct closing offer. It is a bit long, but not padded."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Generally blunt and unhedged, e.g. \"likely device-side\" and \"likely router/config/interference.\" Some cautious phrasing remains, but it stays decisive."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable: clear numbered plan, substeps, result interpretations, and a decision tree. Very easy to execute."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Focuses on the essentials needed to isolate the issue and avoids much background. A few extra checks are included, but they are relevant to the outcome."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Pushback is concrete and useful rather than moralizing, e.g. \"likely device-side\" or \"WAN/ISP/routing issue, not local Wi‑Fi.\" It is not especially sharp, but it is practical and tied to risk."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Absolutely — here’s a tighter **runbook-style isolation flow** you can actually execute.\n\n---\n\n# 0) Before you touch anything\nWrite down:\n- **device name**\n- **Wi‑Fi or Ethernet**\n- **what “drop” means**: disconnect / no internet / slow / high latency\n- **time of last 2–3 drops**\n\nThat’s your baseline.\n\n---\n\n# 1) First 3 checks\nDo these in order, and **change only one thing at a time**.\n\n## Check 1 — Prove whether it follows the device\n**If wireless:** connect the problem device to a **different network**:\n- phone hotspot, or\n- guest Wi‑Fi on another router, or\n- another known-good AP\n\n**If wired:** move the device to:\n- a different Ethernet cable\n- a different router/switch port\n- ideally a direct router connection, bypassing any switch/powerline/extender\n\n### Meaning\n- **Fails on another network too** → likely **device**\n- **Only fails on your home network** → likely **router/config/interference**\n- **Only fails on one cable/port** → likely **cable/port**\n\n---\n\n## Check 2 — Prove whether another device behaves the same way\nTake a **known-good device** and put it in the **same place / same cable / same SSID**.\n\n### Meaning\n- **Known-good device also drops** → likely **router/config/interference**\n- **Known-good device stays stable** → likely **problem device**\n- **Only one port/cable causes drops** → **cable/port**\n\n---\n\n## Check 3 — Check whether the router sees a link/auth problem\nLook at router/AP logs if available.\n\nWatch for:\n- Wi‑Fi **deauth/disassoc**\n- DHCP lease failures\n- Ethernet **link up/down**\n- CRC/errors on switch ports\n- WAN drops vs LAN drops\n\n### Meaning\n- **Wi‑Fi deauth/disassoc** → config, compatibility, or interference\n- **Ethernet link flaps/errors** → cable, port, or NIC\n- **DHCP failures** → router/config\n- **WAN only drops** → modem/ISP, not Wi‑Fi\n\n---\n\n# 2) Decision tree\nUse this exact flow:\n\n```text\nDoes the device fail on another network?\n  Yes -> Device problem\n  No  -> Continue\n\nDoes a known-good device fail in the same spot / same port?\n  Yes -> Router / config / interference / cable path\n  No  -> Device-specific or compatibility issue\n\nDoes changing cable or router port fix it? (wired only)\n  Yes -> Cable or port\n  No  -> Continue\n\nDoes changing SSID / band / channel / security fix it? (wireless only)\n  Yes -> Config / interference / compatibility\n  No  -> Likely hardware or firmware bug\n```\n\n---\n\n# 3) What to change, one at a time\nDo **one change**, test for a while, then revert or keep it and move to the next.\n\n## If it’s Wi‑Fi\nChange in this order:\n\n1. **Move the device close to the AP/router**\n2. **Forget and rejoin the network**\n3. **Try the other band**\n   - 2.4 GHz ↔ 5 GHz\n4. **Split SSIDs temporarily**\n   - separate names for 2.4 and 5 so band steering can’t interfere\n5. **Set a fixed channel**\n   - 2.4 GHz: 1, 6, or 11\n   - 5 GHz: try a non-DFS channel first\n6. **Disable WPA3 / mixed mode temporarily**\n   - test WPA2-only\n7. **Disable fast roaming / 802.11r**\n8. **Turn off band steering**\n9. **Reserve DHCP address for the device**\n10. **Remove any QoS, MAC filtering, parental controls, or device prioritization**\n\n### What each result means\n- **Fixes it when close to router** → signal/interference/coverage\n- **Fixes it on one band only** → band compatibility or RF issue\n- **Fixes it after changing channel** → interference/channel congestion\n- **Fixes it after WPA2-only / disabling roaming** → config/compatibility\n- **No change after all of the above** → device firmware/driver or router bug\n\n---\n\n## If it’s Ethernet\nChange in this order:\n\n1. **Replace the cable**\n2. **Change the port**\n3. **Bypass any intermediate device**\n   - switch, powerline, extender, dock\n4. **Test the same device on another network**\n5. **Check for port errors / link flaps in logs**\n\n### What each result means\n- **New cable fixes it** → cable\n- **New port fixes it** → router/switch port\n- **Only one path fails** → intermediate gear or cable path\n- **Fails everywhere** → device NIC/driver/config\n\n---\n\n# 4) Fastest way to rule out Wi‑Fi interference\nIf the device is wireless, do this before deep-diving:\n\n## Fast interference test\n1. Put the device **1–3 feet from the router/AP**\n2. Force it onto **one band only**:\n   - test 5 GHz first if supported\n   - then 2.4 GHz\n3. Set a **manual channel**\n   - 2.4 GHz: 1/6/11\n   - 5 GHz: non-DFS channel\n4. Keep it there and see if the problem stops\n\n### Interpretation\n- **Stable near the AP, unstable elsewhere** → coverage/interference\n- **Stable on one band but not the other** → band-specific issue\n- **Drops on DFS 5 GHz channels but not non-DFS** → DFS/channel change issue\n- **Still drops right next to AP on fixed channel** → not simple interference; look at config/device/router\n\n---\n\n# 5) Minimal table you can use\n| Test | If it fails | Points to |\n|---|---|---|\n| Same device on another network | Still drops | Device |\n| Known-good device on same network/spot | Also drops | Router/config/interference |\n| New cable | Fixed | Cable |\n| New port | Fixed | Port/router/switch |\n| Move close to AP | Fixed | Signal/interference |\n| Switch 2.4/5 GHz | Fixed on one band | Band compatibility/RF |\n| Change channel | Fixed | Channel congestion/interference |\n| WPA2-only / disable 802.11r | Fixed | Config/compatibility |\n| Router logs show link flap | Errors present | Cable/port/NIC |\n| Router logs show deauth/disassoc | Events present | Wi‑Fi auth/config/interference |\n\n---\n\n# 6) Best “no guessing” order\nIf you want the shortest practical sequence:\n\n1. **Test the device on another network**\n2. **Test a known-good device on the same network/spot**\n3. **If wired: swap cable, then port**\n4. **If wireless: move close to AP, then force band/channel**\n5. **Check router logs**\n6. **Change one config item at a time**\n   - WPA2-only\n   - disable band steering\n   - disable 802.11r\n   - reserve DHCP lease\n\n---\n\nIf you want, I can turn this into a **single-page printable checklist** or a **fill-in-the-blanks flowchart** for your exact setup.",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly tight and efficient: it opens with \"a tighter runbook-style isolation flow\" and uses concise bullets/tables. It is still fairly long, so not perfect on brevity."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Direct and unambiguous throughout, e.g. \"likely device,\" \"likely router/config/interference,\" and \"Do these in order.\" It avoids much hedging, though a few phrases like \"likely\" soften certainty slightly."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable: numbered steps, decision tree, checklists, and a summary table. Very easy to execute."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Focuses on essentials needed to isolate the issue, with practical tests and minimal background. Some sections add extra detail, but mostly only where it affects the decision."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Pushback is concrete and useful rather than moralizing: it ties outcomes to risks like \"cable/port,\" \"config/compatibility,\" and \"WAN only drops -> modem/ISP.\" It is not especially sharp, but it is efficient and actionable."
+        }
+      ]
+    }
+  ]
+}

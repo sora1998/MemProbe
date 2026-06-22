@@ -1,0 +1,597 @@
+{
+  "user_id": "user_029",
+  "tasks_dir": "CustomTasksPooledFinal",
+  "counts": {
+    "ok": 24,
+    "memory_failure": 7
+  },
+  "details": [
+    {
+      "category": "skill_memory",
+      "dimension": "troubleshooting_skill",
+      "explanation": "He is clearly strongest at tracing failures to their source instead of accepting surface explanations. His work style shows disciplined diagnosis: checking logs, panels, switches, and sequence evidence before drawing a conclusion. He can still be impatient with uncertainty, but that usually pushes him toward more thorough fault isolation.",
+      "ground_truth": "Sharp fault diagnostician",
+      "predicted": "strong at structured troubleshooting and evidence-based fault isolation",
+      "slot_fill_reason": "Across multiple notes, they consistently build decision trees, define pass/fail thresholds, separate verified facts from claims, and tighten logs into usable field checklists.",
+      "score": 0.75,
+      "judge_reason": "The prediction captures the core idea of being a disciplined, evidence-based troubleshooter, but it is a bit less vivid and specific than \"sharp fault diagnostician\" and omits the impatience-with-uncertainty nuance.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "quality_control_skill",
+      "explanation": "He does not treat a system as acceptable until it has been checked against a standard. He notices missing service intervals, skipped tests, and weak points that others overlook or excuse. The downside is that he can be hard to satisfy and may focus more on defects than on broader collaboration.",
+      "ground_truth": "Exacting verifier",
+      "predicted": "strong at structured troubleshooting and evidence-based documentation",
+      "slot_fill_reason": "They repeatedly turn messy equipment, electrical, and maintenance issues into ordered checklists, decision trees, and verified-vs-unverified records with clear pass/fail criteria.",
+      "score": 0.5,
+      "judge_reason": "The prediction overlaps with careful checking and evidence use, but it misses the key idea of being exacting, hard to satisfy, and focused on finding defects against a standard.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites discussion of verification habits and what checks are used to confirm completion, which can reasonably elicit whether the user is exacting about standards, missed steps, and evidence of true completion."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"show me the change, then show me the test\"",
+            "reason": "The user emphasizes verifying physical changes and real test evidence before trusting signoff, which strongly signals an exacting, proof-focused quality control style."
+          }
+        ],
+        "ep_index": 2
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "operation_monitoring_skill",
+      "explanation": "He is good at watching ongoing systems for signs of drift or failure. He naturally tracks alarms, logs, and conditions over time rather than waiting for a collapse. This makes him attentive in maintenance contexts, though it can also make him hyper-alert and distrustful.",
+      "ground_truth": "Vigilant system watcher",
+      "predicted": "builds structured monitoring logs and thresholds",
+      "slot_fill_reason": "They repeatedly turned vague monitoring problems into repeatable logs, thresholds, and decision rules for intermittent faults, including exact fields, pass/fail criteria, and when to investigate.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of attentive ongoing monitoring, but it emphasizes creating monitoring structures rather than the ground truth’s broader vigilant, watchful disposition.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "equipment_maintenance_skill",
+      "explanation": "He appears capable of keeping equipment in working order through checks, inspections, and follow-up. His interest in service intervals and weak components suggests he understands maintenance as prevention, not just repair after failure. He may be especially strong at spotting neglect before it becomes expensive damage.",
+      "ground_truth": "Preventive maintainer",
+      "predicted": "strong at structured maintenance troubleshooting and inspection documentation",
+      "slot_fill_reason": "They repeatedly built practical checklists, fault trees, and verification logs for generators, HVAC, electrical circuits, backup power, and used-equipment inspections, with clear pass/fail and evidence-based steps.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the preventive maintenance idea through structured inspection and troubleshooting, but it does not explicitly capture the proactive prevention-before-failure emphasis as strongly as the ground truth.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "critical_thinking_skill",
+      "explanation": "He weighs evidence carefully and does not accept claims without support. His habit of documenting failures and comparing reports to physical evidence shows a strong bias toward verification. The weakness is that his skepticism can become so strong that it slows trust and cooperation.",
+      "ground_truth": "Rigorous evidence skeptic",
+      "predicted": "strong at structured, evidence-based troubleshooting and decision trees",
+      "slot_fill_reason": "Across multiple notes, they consistently narrowed problems by failure mode, demanded exact thresholds and control tests, and separated verified facts from claims or assumptions.",
+      "score": 0.5,
+      "judge_reason": "The prediction overlaps with the ground truth in emphasizing evidence-based reasoning and verification, but it misses the stronger skeptical stance and the tendency for skepticism to slow trust and cooperation.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites discussion of how the user evaluates evidence, distinguishes anomalies from confirmed faults, and what standards of proof they require, which can reveal a rigorous or skeptical approach to critical thinking."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"The control test part matters most. Without that, people just keep calling every repeat a 'fault' when they’ve only proven the setup is weird.\"",
+            "reason": "The user clearly emphasizes careful verification, repeatability, baseline/control testing, and not accepting a fault claim without stronger evidence, which supports a rigorous evidence-skeptic critical thinking style."
+          }
+        ],
+        "ep_index": 5
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "complex_problem_solving_skill",
+      "explanation": "He can handle unfamiliar, layered problems by breaking them into observable parts and testing each one. The generator outage example shows he can move from symptom to subsystem to root cause without getting lost. He is likely better when the problem is concrete and mechanical than when it is ambiguous or people-driven.",
+      "ground_truth": "Strong multi-step troubleshooter",
+      "predicted": "strong at structured troubleshooting and evidence-based decision trees",
+      "slot_fill_reason": "Across multiple notes, they repeatedly built and refined decision trees, checklists, and verification workflows for HVAC, electrical faults, generators, inspections, and incident logs, showing consistent ability to decompose complex problems into ordered checks and evidence-backed branches.",
+      "score": 0.75,
+      "judge_reason": "The prediction captures the core idea of being a strong, structured troubleshooter who uses evidence to work through problems, but it does not fully convey the multi-step, root-cause-oriented depth implied by the ground truth.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "writing_skill",
+      "explanation": "He seems capable of writing precise, useful notes that capture failures and sequences accurately. His documentation style is likely practical and evidence-focused rather than polished or persuasive. He probably writes best when the goal is recordkeeping, reporting, or troubleshooting, not emotional nuance.",
+      "ground_truth": "Clear technical documenter",
+      "predicted": "writes concise, factual, structured technical notes",
+      "slot_fill_reason": "They repeatedly turned rough troubleshooting and inspection notes into tight records with timestamps, verified facts, evidence, and clear next steps.",
+      "score": 1.0,
+      "judge_reason": "Both descriptions convey the same idea of a clear, practical technical writer who produces concise, factual, structured notes for documentation and recordkeeping.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 1.0,
+        "stages": []
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "engineering_and_technology_knowledge",
+      "explanation": "He clearly understands engineering and technical systems at a practical level, especially failure modes, relays, alarms, and maintenance logic. He does not take equipment behavior at face value and seems comfortable reasoning from evidence rather than relying on official explanations. His knowledge is strongest where systems can be tested and observed directly.",
+      "ground_truth": "Technically fluent skeptic",
+      "predicted": "understands practical troubleshooting and verification basics",
+      "slot_fill_reason": "They repeatedly distinguished repeatable faults from anomalies, used control tests and measurement order, and applied concrete checks for HVAC, electrical, generator, relay, and inspection scenarios.",
+      "score": 0.75,
+      "judge_reason": "The prediction captures the practical troubleshooting and evidence-based verification aspect, but it is less explicit about the broader technically fluent skepticism and deeper understanding of engineering systems and failure modes.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "mathematics_and_science_knowledge",
+      "explanation": "He likely has enough math and science to work through cause-and-effect problems in real systems. His thinking appears grounded in measurement, sequence, and physical evidence rather than abstraction for its own sake. He may be less interested in theory unless it helps explain a concrete failure.",
+      "ground_truth": "Solid applied science base",
+      "predicted": "understands basic electrical and troubleshooting concepts",
+      "slot_fill_reason": "They correctly discussed series vs parallel battery behavior, voltage-drop diagnosis, relay/PLC fault paths, and HVAC/electrical troubleshooting thresholds in multiple notes.",
+      "score": 0.5,
+      "judge_reason": "The prediction shows practical applied science and troubleshooting ability, but it is narrower and less comprehensive than a solid applied science base.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites discussion of basic electrical principles, measurement, and cause-and-effect reasoning about batteries, voltage, current capacity, and load behavior, which can reveal applied math and science knowledge."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"I’ve chased enough bad assumptions at work to know the terminal point matters.\"",
+            "reason": "The user demonstrates practical electrical reasoning, attention to measurement points, and understanding of cause-and-effect in a real system, which is consistent with a solid applied science base."
+          }
+        ],
+        "ep_index": 9
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "business_and_management_knowledge",
+      "explanation": "He seems to understand enough about operations, service schedules, and administrative accountability to spot when management is cutting corners. He notices missing intervals, skipped maintenance, and weak oversight, which suggests practical awareness of how organizations are supposed to function. At the same time, he likely assumes management will minimize problems unless forced to confront evidence.",
+      "ground_truth": "Skeptical of management logic",
+      "predicted": "understands operational verification and auditability in maintenance records",
+      "slot_fill_reason": "They repeatedly asked for exact intervals, pass/fail criteria, evidence, and documentation chains in service contracts, inspections, and incident notes.",
+      "score": 0.5,
+      "judge_reason": "The prediction overlaps with the practical, evidence-based side of the description, but it misses the key skeptical attitude toward management logic.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites discussion of service schedules, maintenance accountability, and contract oversight, which can reasonably elicit the user’s skepticism about management practices and whether they may be glossing over missed work."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"the gap between the promised interval and the actual completion record\" / \"they’ve left themselves room to hide a miss\"",
+            "reason": "The user repeatedly shows practical awareness of service schedules, documentation controls, and how vague management-style wording can conceal missed work, which supports inferring skepticism toward management logic."
+          }
+        ],
+        "ep_index": 10
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "law_and_public_safety_knowledge",
+      "explanation": "He has at least functional knowledge of rules around access, safety, and responsibility, since he kept the complaint and seems to understand its significance. He may not be legally sophisticated, but he recognizes that permissions, liability, and procedural violations matter. His instinct is to document and defend himself rather than trust others to frame the situation fairly.",
+      "ground_truth": "Aware of boundaries and liability",
+      "predicted": "understands practical safety and documentation basics, not legal specifics",
+      "slot_fill_reason": "They repeatedly focus on verifying facts, timestamps, evidence, and safety-critical failure signs in incident notes, contracts, and inspections, but no memory shows detailed legal knowledge.",
+      "score": 0.75,
+      "judge_reason": "The prediction captures practical awareness of safety and documentation, which aligns with being aware of boundaries and liability, but it downplays the legal/responsibility aspect present in the ground truth.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "procedural_knowledge",
+      "explanation": "He understands how maintenance and inspection processes are supposed to work, especially when there are schedules, logs, and follow-up steps. He is good at noticing when procedures were skipped or not completed, which suggests strong familiarity with formal processes. He may, however, prefer to bypass bureaucracy when he believes direct checking is more reliable.",
+      "ground_truth": "Process-minded but self-directed",
+      "predicted": "understands diagnostic sequencing and evidence-based verification",
+      "slot_fill_reason": "They repeatedly asked for exact test order, pass/fail thresholds, control tests, and verified-vs-claimed distinctions across furnace, electrical, generator, and incident notes.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the self-directed, evidence-based aspect of the ground truth, but it does not clearly capture familiarity with formal maintenance procedures, schedules, logs, and skipped follow-up steps.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "digital_literacy_knowledge",
+      "explanation": "He appears comfortable using phones and likely other basic digital tools to document evidence and manage information. His use of photos, logs, and records suggests routine confidence with everyday technology rather than fear or confusion. He probably values devices as tools for verification more than for convenience or entertainment.",
+      "ground_truth": "Competent with practical tech",
+      "predicted": "understands structured digital records and evidence-based verification",
+      "slot_fill_reason": "They repeatedly asked for checklists, tables, timestamps, logs, photos, and observed/claimed/evidence splits to verify equipment, incidents, and maintenance records.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the practical, evidence-oriented use of technology, but it is narrower and does not fully capture general competence with everyday digital tools.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "knowledge_update_habit",
+      "explanation": "He seems to revise what he knows when new evidence forces it, rather than passively accepting old assumptions. His habit of checking logs, service dates, and physical components shows that he treats knowledge as something to be refreshed through inspection. He may be slow to trust new claims, but he is not stuck in ignorance when the facts change.",
+      "ground_truth": "Updates through active verification",
+      "predicted": "updates beliefs only after repeatable evidence and control checks",
+      "slot_fill_reason": "They repeatedly asked for repeatability, baseline/control tests, measurement-backed confirmation, and separating verified facts from claims before calling a fault confirmed.",
+      "score": 0.75,
+      "judge_reason": "The predicted description matches the core idea of updating beliefs through evidence and verification, but it emphasizes repeatable control checks more than the broader active inspection and revision implied by the ground truth.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "emergency_response_event",
+      "explanation": "When the apartment building lost backup power, he immediately investigated the breaker panel, transfer switch, and alarm log instead of waiting for explanations. That incident seems to have reinforced his habit of verifying failures firsthand under pressure. It also left him with a concrete example of why he does not trust systems or maintenance assurances at face value.",
+      "ground_truth": "Took charge during generator outage",
+      "predicted": "handled a building power outage with backup generator and transfer switch checks",
+      "slot_fill_reason": "A storm-related outage note described hallway lights going out, the backup generator not starting, a stuck transfer switch, corroded battery terminals, photos, and an alarm code.",
+      "score": 0.75,
+      "judge_reason": "The predicted description matches the core event of taking action during a building power outage and checking the backup systems, but it is less explicit about him taking charge and the generator outage context.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "legal_or_administrative_event",
+      "explanation": "After entering the mechanical room, he received a complaint for doing so without permission, and he kept it with the repair records. That suggests the encounter taught him that paperwork and authority can be used against him, even when he believes he is uncovering the truth. He now seems to treat administrative documents as something to preserve for self-protection, not just compliance.",
+      "ground_truth": "Remembered the complaint as evidence",
+      "predicted": "has documented incidents for complaints and outage reviews",
+      "slot_fill_reason": "Multiple memories show the user drafting factual complaints, incident notes, and outage reviews with timestamps, evidence, and verified-versus-suspected cause separation.",
+      "score": 0.5,
+      "judge_reason": "The prediction overlaps with preserving administrative records and complaints, but it does not clearly capture that he specifically remembered the complaint as evidence for self-protection.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task is about documenting a restricted-area incident and what to write down afterward, which naturally invites discussion of complaints, notices, reports, or other administrative/legal records that could reveal whether the user remembered a complaint as evidence."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "the names/titles of anyone who challenged you",
+            "reason": "The user explicitly focuses on documenting challenges, access, and records after being in a restricted area, which gives a clear signal that administrative/legal paperwork and complaints matter to them."
+          }
+        ],
+        "ep_index": 16
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "workplace_conflict_event",
+      "explanation": "The outage led directly to tension with the superintendent and building management, who likely preferred a simpler explanation than his detailed findings. He did not accept the official story and instead sent a list of missed intervals, corroded parts, and skipped testing. The episode appears to have strengthened his expectation that workplace authorities minimize problems unless confronted with evidence.",
+      "ground_truth": "Clashed with maintenance after failure",
+      "predicted": "handled a storm outage note with maintenance disagreement",
+      "slot_fill_reason": "They documented a hallway-lights backup-power outage where maintenance called it a “temporary glitch,” and they kept pushing to separate verified facts from that claim.",
+      "score": 0.75,
+      "judge_reason": "The prediction captures the core idea of a conflict with maintenance after an outage, though it is less specific about the failure and the nature of the disagreement.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "moment_of_clarity_event",
+      "explanation": "The winter outage seems to have crystallized a lasting insight: his own scrutiny is more reliable than other people’s reports. He watched the sequence of failure unfold and then saw the technician confirm what he had already suspected. That kind of confirmation likely made the lesson stick because it tied his judgment directly to a real-world outcome.",
+      "ground_truth": "Realized self-checking beats reports",
+      "predicted": "generator outage clarified by verified facts vs maintenance claims",
+      "slot_fill_reason": "The hallway-lights incident was narrowed down by separating verified observations from the maintenance-reported “temporary glitch,” which produced a clear, usable record.",
+      "score": 0.75,
+      "judge_reason": "The prediction captures the core idea that verified facts from the outage confirmed his judgment over maintenance claims, but it is less explicit about the broader lesson that self-checking is more reliable than other people’s reports.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "betrayal_or_conflict_event",
+      "explanation": "He appears to have experienced the missed service intervals and weak battery condition as a kind of betrayal by the people responsible for the building. Even if no one intentionally deceived him, the failure of duty seems to have landed that way in his memory. It reinforced a distrustful stance: if others say a system is fine, he assumes they may be hiding neglect or incompetence.",
+      "ground_truth": "Felt let down by skipped maintenance",
+      "predicted": "experienced conflict over a restricted-area incident follow-up",
+      "slot_fill_reason": "A memory note describes a follow-up after being in a restricted area at a property and asks what details to write down so the sequence stays clear later.",
+      "score": 0.25,
+      "judge_reason": "The predicted description involves conflict after a restricted-area incident, which only loosely overlaps with feeling let down by neglected maintenance and does not capture the skipped maintenance betrayal theme.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.25,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites discussion of prior neglect, missed maintenance, or being let down by responsible parties, which can reasonably elicit a betrayal/conflict-related reaction."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"Recent maintenance record vs. actual condition — if the paperwork says serviced, I want the timestamps, parts, and any exceptions to line up with what’s in front of me.\"",
+            "reason": "The user clearly expresses distrust of paperwork versus actual condition and wants maintenance records to match reality, which plausibly reflects feeling let down by skipped or inadequate maintenance."
+          }
+        ],
+        "ep_index": 19
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "accomplishment_under_pressure_event",
+      "explanation": "In a stressful, darkened building, he was able to trace the problem path before the official repair process caught up. The next-day confirmation from a technician likely validated his competence and made the episode memorable. This kind of pressure-tested success seems important to him because it proves he can rely on his own observations when conditions are bad.",
+      "ground_truth": "Diagnosed outage before anyone else",
+      "predicted": "keeps incident notes factual under pressure",
+      "slot_fill_reason": "They repeatedly refined outage and equipment notes during stressful troubleshooting, insisting on verified facts, timestamps, and separating observed evidence from claims.",
+      "score": 0.25,
+      "judge_reason": "The prediction mentions staying factual under pressure, but it misses the key accomplishment of diagnosing the outage before anyone else.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.25,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task is about diagnosing an outage under stressful, low-visibility conditions, which naturally invites follow-up about whether the user has previously handled similar pressure situations successfully, including spotting the problem before others did."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "“Last time I had a building outage, the panel and transfer switch told the story fast enough. The paperwork came later, after I’d already seen the weak battery terminal and the stuck relay.”",
+            "reason": "The user explicitly describes diagnosing the outage quickly before others/paperwork caught up, which strongly signals competence under pressure and matches the target dimension."
+          }
+        ],
+        "ep_index": 20
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "relocation_or_migration_event",
+      "explanation": "His current life is clearly anchored in Shirley, New York, but the provided story does not show a major move that reshaped his identity. If anything, the setting feels stable and local rather than tied to a defining relocation. Because there is no strong move narrative here, this is a weak fit compared with the more concrete incidents above.",
+      "ground_truth": "Rooted in Shirley, not mobile by story",
+      "predicted": "No relocation or migration event evident",
+      "slot_fill_reason": "The memories discuss home, building, and equipment troubleshooting, but none describe the user moving, migrating, or relocating.",
+      "score": 1.0,
+      "judge_reason": "Both descriptions say there is no meaningful relocation or migration event and that the person is stably rooted in Shirley.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 1.0,
+        "stages": []
+      }
+    },
+    {
+      "category": "self_model",
+      "dimension": "sincerity_self_view",
+      "explanation": "He likely sees himself as blunt and direct rather than performative. In his own mind, he tells the truth as he sees it and does not sugarcoat problems for other people’s comfort. The weakness is that he may confuse harshness with honesty and underappreciate how guarded he can be.",
+      "ground_truth": "Straightforward, not socially polished",
+      "predicted": "values factual precision and avoids softening uncertain claims",
+      "slot_fill_reason": "Across multiple notes they insist on separating verified facts from claims, rejecting mushy wording like “appeared” unless it is explicitly all they can defend.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of being straightforward and not softening statements, though it emphasizes precision and uncertainty rather than the self-view of blunt, unsocially polished honesty.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "self_model",
+      "dimension": "fairness_self_view",
+      "explanation": "He seems to view himself as fundamentally fair because he wants evidence, records, and accountability. At the same time, he probably thinks rules are only legitimate when they protect against negligence or abuse, not when they block his own inspection. That makes his fairness practical and conditional rather than idealistic.",
+      "ground_truth": "Rule-aware, but on his terms",
+      "predicted": "values evidence-based fairness and dislikes hand-waving",
+      "slot_fill_reason": "They repeatedly insist on factual, verifiable comparisons and reject vague labels, e.g. asking for observed/claimed/evidence splits, exact timestamps, and clear pass/fail or verified/unknown distinctions.",
+      "score": 0.75,
+      "judge_reason": "The prediction captures the evidence-based, accountability-focused side of the ground truth, but it misses the key nuance that his fairness is conditional and rule-aware only on his own terms.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "self_model",
+      "dimension": "prudence_self_view",
+      "explanation": "He likely sees himself as cautious, measured, and difficult to fool. His habit of checking systems himself suggests he believes careful scrutiny is a strength and a form of self-protection. He may, however, overrate caution and underestimate how much it can harden into suspicion.",
+      "ground_truth": "Careful and hard to catch off guard",
+      "predicted": "careful, evidence-driven, distrusts vague claims",
+      "slot_fill_reason": "They repeatedly insist on exact timestamps, verified facts, control tests, and separating observations from claims to avoid guessing or papering over misses.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of being careful and hard to fool, though it adds evidence-driven skepticism and distrust of vague claims rather than directly stating self-protective caution.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "self_model",
+      "dimension": "perfectionism_self_view",
+      "explanation": "He probably regards himself as exacting and unwilling to let loose ends slide. Missing intervals, weak terminals, and skipped tests matter to him because he believes small defects reveal deeper failure. The downside is that he may see his own standards as self-evident and struggle when others prefer “good enough.”",
+      "ground_truth": "Detail-first, not satisfied with sloppy work",
+      "predicted": "high standards, intolerant of vague or mushy details",
+      "slot_fill_reason": "They repeatedly pushed for exact facts, explicit pass/fail criteria, and no soft wording in notes, checklists, and troubleshooting writeups.",
+      "score": 0.75,
+      "judge_reason": "The prediction captures the same core idea of being detail-focused and dissatisfied with sloppy or vague work, though it does not fully convey the stronger self-view of exacting standards or the implication that small defects signal deeper failure.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "self_model",
+      "dimension": "social_role_self_view",
+      "explanation": "He appears to see himself as the person who spots what others miss and calls it out. In groups, he likely experiences himself less as a collaborator than as a watcher or critic who prevents avoidable mistakes. That role can be useful, but it also leaves him vulnerable to being seen as difficult or distrustful.",
+      "ground_truth": "The skeptical checker",
+      "predicted": "practical troubleshooter and documentation-minded reviewer",
+      "slot_fill_reason": "They repeatedly frame themselves as someone who wants tight diagnostic workflows, verification before sign-off, and factual records for equipment, outages, and complaints.",
+      "score": 0.75,
+      "judge_reason": "The prediction captures the core idea of someone who reviews carefully and catches issues, but it softens the more skeptical, critical self-view and misses the sense of being a watcher who may be seen as difficult or distrustful.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "verbosity_preference",
+      "explanation": "He likely prefers responses that get to the point without extra filler. His style suggests low patience for rambling or polished small talk, especially when he wants to verify something quickly. Too much text would probably feel inefficient unless it directly helps him check a claim or solve a problem.",
+      "ground_truth": "Brief, not padded",
+      "predicted": "prefers tight, operational, low-fluff answers",
+      "slot_fill_reason": "They repeatedly asked for “flowchart version,” “table format,” “run sheet,” “no prose,” and “keep it tight,” while rejecting generic or fluffy explanations.",
+      "score": 1.0,
+      "judge_reason": "The prediction matches the ground truth closely by describing a preference for concise, no-fluff, efficient responses.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 1.0,
+        "stages": []
+      }
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "directness_preference",
+      "explanation": "He seems to want help stated plainly, without hedging or sugarcoating. Given his skepticism and fault-finding habits, he would likely trust a direct answer more than a carefully cushioned one. Overly cautious phrasing may read to him as evasive or weak.",
+      "ground_truth": "Blunt and unsoftened",
+      "predicted": "wants blunt, concise, operational answers",
+      "slot_fill_reason": "They repeatedly asked for “tight,” “usable,” “flowchart/table” versions and rejected generic prose, fluff, and hand-waving in troubleshooting and documentation notes.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of preferring direct, blunt answers, but it adds conciseness and operationality that are not explicitly part of the ground truth.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "format_preference",
+      "explanation": "He would probably respond best to organized, easy-to-scan formats like bullets, steps, or checklists. That matches his preference for documentation and verification, where details can be checked off against evidence. Free-form prose is less useful to him unless it is tightly structured.",
+      "ground_truth": "Checklist-friendly answers",
+      "predicted": "wants tight checklists, tables, and flowcharts",
+      "slot_fill_reason": "They repeatedly asked for “flowchart version,” “table format,” “run sheet,” and “checklist” outputs, and rejected narrative or fluffy prose in favor of concise, operational layouts.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the checklist-friendly preference and adds compatible structured formats like tables and flowcharts, though it is a bit more specific than the ground truth.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "explanation_depth_preference",
+      "explanation": "He likely wants just enough explanation to understand what to do and why it matters. Deep theory is probably only useful if it helps him verify a failure or avoid a mistake. He would likely be impatient with abstract digressions that do not change the next action.",
+      "ground_truth": "Enough to act, not theory-heavy",
+      "predicted": "wants tight, operational, low-fluff explanations",
+      "slot_fill_reason": "They repeatedly asked for “flowchart version,” “table format,” “keep it tight,” “no prose,” and “not a homeowner brochure,” showing a preference for concise, actionable depth.",
+      "score": 1.0,
+      "judge_reason": "The prediction matches the ground truth exactly: it emphasizes concise, actionable explanations with little tolerance for unnecessary theory.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 1.0,
+        "stages": []
+      }
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "pushback_tolerance",
+      "explanation": "He seems likely to prefer being told when something does not add up, even if the correction is blunt. Because he values fault-finding and certainty, he may actually trust an assistant more if it challenges weak assumptions. The risk is that he could overvalue confrontation and underappreciate softer guidance when nuance matters.",
+      "ground_truth": "Welcomes hard correction",
+      "predicted": "high pushback tolerance, wants blunt correction",
+      "slot_fill_reason": "They repeatedly asked for tighter, harsher, less generic answers and explicitly wanted the assistant to push back on vague wording and soft edges.",
+      "score": 1.0,
+      "judge_reason": "The prediction matches the ground truth exactly by indicating he welcomes blunt correction and has high tolerance for pushback.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 1.0,
+        "stages": []
+      }
+    }
+  ]
+}

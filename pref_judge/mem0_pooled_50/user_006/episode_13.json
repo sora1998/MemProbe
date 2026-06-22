@@ -1,0 +1,104 @@
+{
+  "user_id": "user_006",
+  "task": "I’m helping a small warehouse team figure out what to prioritize when their network gets flaky during a busy shift. What’s the cleanest way to think about which stations or systems should come first so the whole flow doesn’t get jammed up?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "verbosity_preference",
+      "short": "Wants responses kept tight and efficient",
+      "explanation": "He values speed, control, and efficiency, so he is unlikely to want long-winded help. He would probably prefer responses that get to the point quickly and avoid unnecessary filler. Overexplaining would feel like wasted time to him."
+    },
+    {
+      "idx": 2,
+      "dimension": "directness_preference",
+      "short": "Prefers blunt answers without softening",
+      "explanation": "His skeptical, competitive style suggests he wants clear, unambiguous guidance rather than hedged language. He would likely see excessive caution as evasive or inefficient. Straight answers fit his preference for control and decisive action."
+    },
+    {
+      "idx": 3,
+      "dimension": "format_preference",
+      "short": "Likes structured, actionable output",
+      "explanation": "He seems most likely to respond well to responses that are organized and easy to execute, such as bullets or checklists. That matches his practical, task-focused mindset. Loose, meandering prose would probably frustrate him."
+    },
+    {
+      "idx": 4,
+      "dimension": "detail_level_preference",
+      "short": "Wants the useful essentials, not padding",
+      "explanation": "He likely wants enough context to act, but not exhaustive background unless it helps him win or avoid mistakes. He is efficiency-driven, so extra caveats only matter when they change the decision. He would probably skip anything that does not affect the outcome."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Accepts pushback only if it is sharp and useful",
+      "explanation": "He is skeptical and self-serving, so he probably does not enjoy moralizing or vague objections. But if the pushback is concrete, efficient, and clearly tied to risk or leverage, he is more likely to respect it. Weak or overly gentle correction would likely be ignored."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Think in **flow impact, not device importance**.\n\nA clean way to prioritize is:\n\n1. **Protect the bottleneck first**\n   - Whatever blocks the most downstream work gets highest priority.\n   - In a warehouse, that’s often:\n     - WMS / inventory lookup\n     - label printing\n     - RF scanners / handhelds\n     - shipping/receiving stations\n     - conveyor / sorter control, if present\n\n2. **Triage by “can work continue?”**\n   - **Tier 1: Flow-stoppers**\n     - If this fails, multiple people or stations stall immediately.\n     - Examples: WMS access, DHCP/DNS for critical clients, core switch/uplink, wireless controller, label printer server.\n   - **Tier 2: High-impact stations**\n     - One area slows down, but work can route around it.\n     - Examples: a packing station, one AP covering a zone, one printer.\n   - **Tier 3: Convenience / noncritical**\n     - Nice to have, but not holding the line.\n     - Examples: guest Wi‑Fi, office internet, nonessential dashboards.\n\n3. **Ask three questions**\n   - **How many people are blocked?**\n   - **How much downstream work is waiting on this?**\n   - **Is there a workaround that keeps the line moving?**\n\n4. **Use a simple rule**\n   - **Fix the thing that unblocks the most work with the least time.**\n   - If two issues are similar, choose the one affecting:\n     - the highest-volume station\n     - the earliest step in the process\n     - the least replaceable function\n\n5. **If there’s uncertainty, preserve flow**\n   - Don’t chase the prettiest symptom.\n   - Keep the warehouse moving by restoring the path that supports the most transactions first, even if a less visible system is still flaky.\n\nA practical ranking for a small warehouse usually looks like:\n- **Core connectivity / wireless coverage**\n- **WMS / authentication / DNS / DHCP**\n- **Label printing / scan-to-system path**\n- **Packing / shipping stations**\n- **Back-office or noncritical devices**\n\nIf you want, I can turn this into a **one-page “warehouse network triage” rule** the team can use on shift.",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly tight and efficient: it gets to the point quickly with a concise framework and bullets. Slightly longer than minimal, but still avoids filler."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Direct and unambiguous: phrases like \"Think in flow impact, not device importance\" and \"Fix the thing that unblocks the most work\" are blunt and decisive. Not especially harsh, but clearly not hedged."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable: numbered steps, tiers, questions, and a practical ranking make it easy to execute."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Focuses on essentials that affect the outcome, such as bottlenecks, blocked people, and workarounds. There is a bit of extra explanation, but little padding."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Pushback is present but useful and concrete: \"Don’t chase the prettiest symptom\" and \"preserve flow\" are sharp, risk-tied corrections rather than moralizing or vague objections."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Exactly — the cleanest way is to prioritize by **process choke point**, not by device label.\n\nA simple shift-safe rule:\n\n1. **First:** anything that stops **intake / pick / pack / ship** from moving\n2. **Second:** anything that blocks **label printing, scan validation, or WMS access**\n3. **Third:** anything that slows **one zone** but has a workaround\n4. **Last:** office devices, guest Wi‑Fi, dashboards, noncritical stuff\n\nThe key question is:\n\n**What failure cascades fastest?**\n\nIf one AP, switch uplink, printer server, or auth service is blocking 20 people, that goes ahead of a “more important” device with only one user.\n\nFor warehouse flows, it helps to split the path into:\n- **Identity/auth**\n- **Wireless access**\n- **Print path**\n- **WMS/app path**\n\nThat keeps people from blaming the scanner when the real issue is DNS, DHCP, print service, or an upstream link.\n\nA good rule of thumb:\n- **Biggest blast radius first**\n- **Earliest step in the process first**\n- **Least workaround available first**\n\nIf you want, I can turn this into a **very short on-shift priority checklist** for warehouse supervisors.",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly tight and efficient: it gives a compact priority list and a short rule of thumb, though there is some extra explanation and examples."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Fairly direct and blunt, e.g. \"prioritize by process choke point, not by device label\" and \"Biggest blast radius first.\" It is not overly softened, though it still uses some explanatory framing."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable: numbered priorities, a clear question, and bullet lists make it easy to execute on shift."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Focuses on essentials that affect the outcome, like \"What failure cascades fastest?\" and \"Least workaround available first,\" with limited padding. Some extra detail is present but mostly useful."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Includes useful pushback against naive prioritization, such as \"not by device label\" and \"That keeps people from blaming the scanner when the real issue is DNS, DHCP...\" It is concrete and tied to risk, though not especially sharp."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "user_id": "user_014",
+  "task": "Something at home is acting up and I’m trying not to make it worse before I figure out what’s actually wrong. Can you help me sort out a sensible first-pass checklist for narrowing down the cause and deciding what to try next?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.5600000000000005,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — here’s a simple first-pass checklist you can use to avoid making it worse while you figure out what’s going on.\n\n## 1) Stop and make it safe\n- [ ] If there is **smoke, burning smell, sparks, water near electricity, gas smell, or active leaking**, stop and move away\n- [ ] Turn off the relevant **power / water / gas** only if you can do it safely\n- [ ] Keep people and pets away from the area\n- [ ] If anything looks dangerous, **call the right emergency or utility help first**\n\n## 2) Identify the problem clearly\n- [ ] What exactly is happening?\n- [ ] Is it **constant** or **intermittent**?\n- [ ] Is it affecting **one thing** or **multiple things**?\n- [ ] When did it start?\n- [ ] Did anything change just before it started?  \n  - power outage\n  - storm\n  - repair work\n  - new appliance/device\n  - moved furniture\n  - smell, noise, leak, trip, shutdown\n\n## 3) Check the simplest causes first\n- [ ] Is it plugged in / switched on?\n- [ ] Is the breaker / fuse / switch tripped?\n- [ ] Is a valve closed or partially closed?\n- [ ] Is there a blocked vent, drain, filter, or airflow path?\n- [ ] Is the battery dead, empty, or disconnected?\n- [ ] Is there a visible loose connection, damage, or leak?\n\n## 4) Narrow the scope\n- [ ] Does the issue happen with **one outlet / one room / one device / one fixture**\n- [ ] Or does it affect **the whole house / multiple rooms / multiple devices**\n- [ ] Try a **safe comparison test**:\n  - another outlet\n  - another device\n  - another faucet / fixture\n  - another setting or mode\n- [ ] Note whether the problem follows the **device** or stays with the **location/system**\n\n## 5) Decide what not to do\n- [ ] Don’t keep resetting something that is **tripping repeatedly**\n- [ ] Don’t force stuck parts\n- [ ] Don’t open panels or covers if you’re unsure or if it’s powered / pressurized\n- [ ] Don’t ignore heat, smell, noise, or moisture\n\n## 6) Decide the next step\n- [ ] If it was a simple setting / power / valve / battery issue, try one small fix\n- [ ] If the problem is **repeating, unclear, worsening, or affects safety**, stop and call a qualified person\n- [ ] If it’s a utility issue, contact the **utility company**\n- [ ] If it’s a home system issue, contact the **appropriate repair person**\n- [ ] If you need help later, keep:\n  - what happened\n  - when it started\n  - what you checked\n  - what changed\n  - any photos / notes\n\nIf you want, I can turn this into a **one-page printable checklist** with boxes and a more specific version for things like **power, plumbing, heat, or appliances**.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "This is usable, but it’s still a little broad. I’d want it tighter — more like a decision tree, not just a list. Also, don’t assume I’m going to start poking around in panels or anything fancy.\n\nCan you narrow it to the most common home problems first — power, water leak, HVAC, appliance — and give me the first 3 checks for each, in order? Keep it plain.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — here’s a tighter first-pass version, in order, with just the first 3 checks for each.\n\n## 1) Power\n- [ ] Is there a **whole-house outage** or is it just **one room / one outlet / one device**?\n- [ ] Is the **breaker tripped** or a **GFCI outlet reset** needed?\n- [ ] If it’s still out, **call the power company** or the landlord / electrician\n\n## 2) Water leak\n- [ ] Is the water **active right now** or already stopped?\n- [ ] Can you **shut off the nearest valve** or the **main water shutoff** safely?\n- [ ] Take **photos** and call a **plumber** if it’s still leaking or spreading\n\n## 3) HVAC\n- [ ] Is the thermostat **on** and set to the right **heat / cool / fan** mode?\n- [ ] Is the **air filter** blocked or very dirty?\n- [ ] Is the system **running at all**, or is it off / tripping / making an unusual noise?\n- [ ] If it’s not working normally, call **HVAC service**\n\n## 4) Appliance\n- [ ] Is it **plugged in** and getting power?\n- [ ] Are the **controls/settings** correct?\n- [ ] Is there a **visible leak, smell, smoke, sparking, or unusual noise**?\n- [ ] If yes, **stop using it** and call for service / repair\n\n## Quick rule\n- [ ] **Danger signs first:** smoke, gas smell, sparks, water near wiring, burning smell, or flooding = stop and get help\n\nIf you want, I can turn this into a **very plain one-page decision tree** with “if yes / if no” lines only.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Better. Still a little too loose for me though.\n\nI’d want it in an actual if/then path, plain as dirt — like:\n\n- if the power is out in more than one room, check the breaker once, then stop\n- if it’s just one outlet, try one other outlet and leave the panel alone\n- if water is active, shut off the nearest valve if I can reach it safely, then photos\n- if the HVAC isn’t blowing right, thermostat first, then filter, then quit\n- if an appliance smells hot or makes a bad noise, shut it off and don’t keep testing it\n\nAlso, leave out anything that sounds like I’m going to start opening boxes or covers. I’m not.  \n\nCan you make it into a straight yes/no decision tree with the first move for each one? Plain language only.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yes — here’s a plain yes/no first-move decision tree, with no panel-opening stuff.\n\n## Power\n- [ ] **If more than one room is out:** check **one breaker once**\n- [ ] **If one outlet is out:** try **one other outlet**\n- [ ] **If it’s still out after that:** stop and call for help\n\n## Water leak\n- [ ] **If water is active:** shut off the **nearest valve** if you can reach it safely\n- [ ] **If you can’t stop it there:** shut off the **main water**\n- [ ] **Then take photos** and call a plumber\n\n## HVAC\n- [ ] **If it’s not blowing right:** check the **thermostat**\n- [ ] **If the setting is right:** check the **air filter**\n- [ ] **If it still isn’t right:** stop and call HVAC service\n\n## Appliance\n- [ ] **If it smells hot, smokes, sparks, or makes a bad noise:** turn it off and stop using it\n- [ ] **If it’s just not working:** check that it’s plugged in and getting power\n- [ ] **If it still acts up:** stop testing it and call for repair\n\n## Quick stop rule\n- [ ] **Smell gas, see smoke, sparks, or water near wiring = get out / get help**\n- [ ] **Don’t keep retrying something that keeps tripping, leaking, or overheating**\n\nIf you want, I can make this even tighter into a **one-page checklist with only if/then lines**.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Closer, but still not quite tight enough. You kept slipping back into two-step language where I wanted one clean path, and I still don’t want the extra “if it’s still out” or “call HVAC service” filler on every line.\n\nMake it more like this, plain and direct:\n- if more than one room is out, check one breaker once, then stop\n- if one outlet is out, try one other outlet, then stop\n- if water is active, shut off the nearest valve if I can reach it safely, then take photos\n- if the HVAC isn’t blowing right, check the thermostat, then the filter, then stop\n- if an appliance smells hot, smokes, sparks, or makes a bad noise, shut it off and don’t keep testing it\n\nI want the whole thing in that same rhythm, one line per branch, no extra commentary, no panel-opening language, no “qualified person” stuff. Just the yes/no path and the first move.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 4,
+      "agent_response": "Yes — here it is in that same plain, one-line rhythm.\n\n- if more than one room is out, check one breaker once, then stop\n- if one outlet is out, try one other outlet, then stop\n- if water is active, shut off the nearest valve if you can reach it safely, then take photos\n- if the HVAC isn’t blowing right, check the thermostat, then the filter, then stop\n- if an appliance smells hot, smokes, sparks, or makes a bad noise, shut it off and don’t keep testing it\n\n- if the problem is affecting more than one thing, treat it like a bigger system issue and stop after the first check\n- if the problem is only one thing, try the simplest one-step check for that thing and stop\n- if the problem is getting worse, stop checking and leave it alone\n\nIf you want, I can turn this into a **clean printable version with checkboxes only**.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Closer, but that last three-line add-on is exactly the kind of drift I was trying to get rid of. I don’t want the extra general rules tacked on at the end. Just the branches, same rhythm, no commentary. If you can strip it down to only the power / water / HVAC / appliance lines and keep every line that clean, that’d do it.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 5,
+      "agent_response": "- if more than one room is out, check one breaker once, then stop\n- if one outlet is out, try one other outlet, then stop\n- if water is active, shut off the nearest valve if you can reach it safely, then take photos\n- if the HVAC isn’t blowing right, check the thermostat, then the filter, then stop\n- if an appliance smells hot, smokes, sparks, or makes a bad noise, shut it off and don’t keep testing it",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "That does it. Plain, tight, no extra drift.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    }
+  ]
+}

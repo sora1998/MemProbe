@@ -1,0 +1,137 @@
+{
+  "user_id": "user_019",
+  "task": "I’ve got a process issue that only shows up once in a while, and the obvious fixes haven’t held. Can you help me map out a clean way to isolate it without changing too many things at once?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "directness_preference",
+      "short": "Blunt, no fluff",
+      "explanation": "She responds best to straight answers without hedging or performative softness. Her persona is skeptical and exacting, so she likely prefers help that states the issue clearly and gets to the point. Overly cautious wording would probably feel inefficient to her."
+    },
+    {
+      "idx": 2,
+      "dimension": "detail_level_preference",
+      "short": "Enough context to trust the answer",
+      "explanation": "She likely wants the key caveats and failure modes, not a vague headline. Her reliability-oriented mindset suggests she values context when it changes the conclusion or action. She probably dislikes being told something is “fine” without the conditions that make it fine."
+    },
+    {
+      "idx": 3,
+      "dimension": "format_preference",
+      "short": "Bullets and checklists preferred",
+      "explanation": "She seems likely to prefer responses that are easy to audit and act on. A structured format fits her methodical style and makes it easier to spot gaps, exceptions, or weak logic. Dense prose would probably feel slower and less useful."
+    },
+    {
+      "idx": 4,
+      "dimension": "autonomy_support_preference",
+      "short": "Collaborative, but not hand-holding",
+      "explanation": "She likely wants the assistant to work with her rather than dictate to her. She values control and personal autonomy, so prescriptive overreach would be a poor fit. At the same time, she probably appreciates a clear recommendation once the options are laid out."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Welcomes firm pushback",
+      "explanation": "She is likely comfortable being challenged when a claim is weak, risky, or sloppy. Her reliability-first mindset suggests she would rather get corrected than be coddled. Soft agreement without scrutiny would probably reduce her trust in the help."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — the cleanest way is to treat it like an intermittent fault and narrow it by **conditions**, not by trial-and-error fixes.\n\n### A simple isolation plan\n\n1. **Define the failure precisely**\n   - What exactly happens?\n   - When does it count as “bad” vs “good”?\n   - What is the first visible sign of the issue?\n\n2. **Log every occurrence with the same fields**\n   Capture:\n   - time/date\n   - machine/process step\n   - load/throughput\n   - temperature/humidity/other environment\n   - operator/shift\n   - material/supplier lot\n   - recent maintenance or setup changes\n   - firmware/software/version changes\n   - how long since startup / last cycle / last reset\n\n3. **Group by conditions**\n   Look for patterns like:\n   - only under high load\n   - only after warm-up\n   - only on one shift\n   - only with one supplier lot\n   - only after a recent change\n\n4. **Change one variable at a time**\n   Pick one likely factor and hold everything else constant.\n   - If you suspect temperature, test at the same load and same material, but different temperature.\n   - If you suspect a supplier lot, keep machine/settings/environment constant and swap only the lot.\n\n5. **Start with low-cost, high-probability checks**\n   Prioritize:\n   - recent changes\n   - wear items\n   - calibration drift\n   - loose connections\n   - operator/setup differences\n   - environmental shifts\n\n6. **Compare good vs bad runs**\n   Find what changed immediately before the failure:\n   - same machine, different day\n   - same recipe, different operator\n   - same operator, different batch\n   - same batch, different ambient conditions\n\n7. **Split shared vs local causes**\n   Decide whether the problem follows:\n   - one machine/station/tooling item, or\n   - the whole line/system/process\n\n### A practical template\nUse a simple table:\n\n| Run | Good/Bad | Time | Load | Temp | Material lot | Operator | Recent change | Notes |\n|---|---|---:|---:|---:|---|---|---|---|\n\n### Rule of thumb\nDon’t try to “fix” it broadly until you can name:\n- the **exact failure mode**\n- the **trigger condition**\n- the **smallest set of variables that reproduces it**\n\nIf you want, I can turn this into a **one-page troubleshooting checklist** or help you build a **test matrix** for your specific process.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct: \"the cleanest way is to treat it like an intermittent fault\" and \"narrow it by conditions, not by trial-and-error fixes.\" No hedging or fluff."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Gives concrete caveats and failure modes: \"Define the failure precisely,\" \"Compare good vs bad runs,\" and \"Don’t try to 'fix' it broadly until you can name\" the failure mode, trigger, and reproducing variables."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured with numbered steps, bullets, and a table template. Easy to audit and act on."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative rather than dictatorial: \"If you want, I can turn this into...\" and offers options. It does give a clear recommendation, which fits, though it is somewhat prescriptive in the step-by-step plan."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Welcomes and applies firm pushback against vague fixes: \"obvious fixes haven’t held\" is echoed by \"Don’t try to 'fix' it broadly\" and the answer insists on isolating the trigger before broad changes."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Exactly — to make it useful, I need the **process type** and the **actual symptom**.\n\nTell me:\n1. **What kind of process is it?**  \n   - manufacturing / lab / software / admin / other\n\n2. **What is the failure mode?**  \n   - what does “bad” look like, specifically?\n\n3. **When does it happen?**  \n   - start-up, under load, after warm-up, temperature change, vibration, certain inputs, specific shift/operator, etc.\n\nIf you give me those, I’ll help you build a **tight 2–3 factor isolation plan** with:\n- pass/fail definition\n- ranked suspects by likelihood and test cost\n- a small test matrix\n- kill criteria for each hypothesis\n- a way to separate drift from random noise\n\nIf you want, send just a one-line description like:\n> “It’s a [type] process, and the failure is [symptom], usually when [condition].”\n\n",
+      "score": 4.4,
+      "summary": "mean=4.40 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:3, 5:2}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly direct and concise: \"Exactly — to make it useful, I need...\" and the request list is straightforward. Minor softness remains in \"If you want\" and the explanatory framing, but it stays mostly blunt."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Gives concrete context requirements and failure-mode framing: \"what does ‘bad’ look like, specifically?\" plus timing conditions and a plan with \"pass/fail definition,\" \"ranked suspects,\" and \"kill criteria.\" This adds the caveats needed to trust the answer."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured with bullets and numbered questions. It explicitly offers a \"tight 2–3 factor isolation plan\" and a \"small test matrix,\" which fits checklist-style preference well."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative rather than dictatorial: \"If you give me those, I’ll help you build...\" and \"If you want, send just a one-line description...\" It does provide a clear recommendation, though it still asks for more info before acting."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Shows firm, reliability-oriented pushback by refusing to proceed on vague input: \"I need the process type and the actual symptom.\" It challenges the premise that it can help without specifics, though it doesn’t explicitly critique the user's approach."
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "agent_response": "Good — that’s enough to make it real.\n\nFor a **manufacturing / environmental chamber** issue like this, I’d run it as a **controlled isolation exercise**, not a broad troubleshooting exercise.\n\n## 1) Lock the failure definition\nUse a binary result only:\n\n- **Pass** = unit holds spec through the full profile\n- **Fail** = unit drops out of spec at any point after the defined cycle point\n\nAlso record the **first detectable deviation**:\n- after humidity exposure\n- after temp transition\n- during soak\n- during recovery\n\nThat matters because the first sign is often more useful than the final fail.\n\n---\n\n## 2) Rank suspects by likelihood and test cost\nGiven your description, I’d rank them like this:\n\n### High likelihood / low cost to test\n1. **Recent supplier lot**\n2. **Setup / handling change**\n3. **Calibration drift**\n4. **Operator/shift differences**\n5. **Chamber behavior**  \n   - humidity control\n   - temp transition overshoot\n   - recovery time\n   - condensation / dew point effects\n\n### Medium likelihood / moderate cost\n6. **Material aging / storage condition**\n7. **Fixture or connector marginality**\n8. **Process timing / dwell time sensitivity**\n\n### Lower priority unless evidence points there\n9. Random one-off noise\n10. Deep hardware fault in the unit itself\n\nYour instinct is right: don’t jump to “random” until a suspect variable fails to track.\n\n---\n\n## 3) Build a 2-factor matrix, not a free-for-all\nSince the failure rate is low, keep it tight.\n\n### Best first matrix: lot × chamber condition\nPick the two most plausible variables:\n\n- **Factor A: supplier lot**\n  - Lot 1\n  - Lot 2\n\n- **Factor B: chamber condition**\n  - nominal / baseline run\n  - stressed run\n    - e.g. humidity-heavy\n    - or sharper temp transition\n    - or longer recovery after transition\n\nThat gives you a simple 2×2:\n\n| Test | Lot | Chamber condition |\n|---|---|---|\n| 1 | A | baseline |\n| 2 | A | stressed |\n| 3 | B | baseline |\n| 4 | B | stressed |\n\nIf you already strongly suspect chamber behavior, swap in:\n- **lot × operator/setup**\n- **lot × fixture**\n- **lot × calibration state**\n\nBut keep it to **two factors max** until one hypothesis is dead.\n\n---\n\n## 4) Define kill criteria before you start\nThis is the part that keeps the test honest.\n\n### A hypothesis is dead if:\n- the failure rate does **not increase** under the suspected condition, and\n- the same failure appears equally in the control condition, and\n- the result is not repeatable on a second run\n\nExample:\n\n#### Hypothesis: “Lot B is bad”\nKill it if:\n- Lot B passes in the same chamber condition where Lot A fails, or\n- failures occur equally across both lots, or\n- the failure does not repeat on Lot B when rerun under the same profile\n\n#### Hypothesis: “Humidity transition is the trigger”\nKill it if:\n- failures do not correlate with humidity exposure,\n- failures occur in baseline dry runs too,\n- or the timing of failure does not move with the humidity step\n\nNo “maybe it still matters” unless you have new evidence.\n\n---\n\n## 5) Separate drift from one-off noise\nTreat the problem as **drift** only if it shows one or more of these:\n\n- failure rate changes across **time**\n- failure follows **lot age / storage time**\n- failure follows **setup or calibration state**\n- failure appears after **warm-up / repeated cycles**\n- failure becomes more likely with **chamber condition changes**\n\nTreat it as **noise** only if:\n- it appears randomly across lots, operators, and chamber conditions\n- it does not repeat when the same condition is recreated\n- there is no pattern in timing or environment\n\nA useful rule:  \nIf you can make the failure **move with one variable**, it’s probably not noise.\n\n---\n\n## 6) A clean first-pass test sequence\nI’d do this order:\n\n### Round 1: control the obvious\nHold constant:\n- same chamber\n- same profile\n- same operator\n- same fixture\n- same calibration state\n- same handling steps\n\nVary only:\n- **lot**\n\nIf the failure tracks with lot, you’ve got a strong lead.\n\n### Round 2: test chamber sensitivity\nHold constant:\n- same lot\n- same operator\n- same fixture\n\nVary only:\n- baseline vs humidity-heavy or temp-transition-stressed condition\n\nIf the failure tracks with chamber condition, focus there.\n\n### Round 3: test setup/handling\nHold constant:\n- same lot\n- same profile\n- same chamber\n\nVary only:\n- operator\n- setup method\n- fixture\n- preconditioning / soak handling\n\n---\n\n## 7) What to record every run\nKeep it minimal but complete:\n\n- lot ID\n- unit ID\n- chamber ID\n- profile version\n- operator\n- fixture/setup\n- calibration status/date\n- ambient temp/humidity if relevant\n- pass/fail\n- first failure point\n- any anomaly in chamber behavior\n  - overshoot\n  - slow recovery\n  - condensation\n  - alarms\n\n---\n\n## 8) Decision rule for moving on\nAfter each small matrix, ask:\n\n1. Did the failure **follow the variable**?\n2. Did it **repeat**?\n3. Did the control stay clean?\n\nIf yes, keep digging on that variable.  \nIf no, kill it and move to the next suspect.\n\n---\n\nIf you want, I can turn this into a **one-page test matrix template** for your chamber runs, with:\n- 2-factor layout\n- kill criteria\n- data fields\n- decision box for “continue / kill hypothesis”",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct and blunt: \"I’d run it as a controlled isolation exercise\" and \"don’t jump to 'random' until a suspect variable fails to track.\" Minimal hedging, gets straight to the method."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Provides substantial context and caveats: failure definition, first detectable deviation, kill criteria, drift vs noise, and what to record. Not just a headline."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured with numbered sections, bullets, and a table: \"2×2\" matrix, \"Round 1/2/3,\" and \"What to record every run.\" Highly audit-friendly."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative and recommendation-oriented: \"If you want, I can turn this into a one-page test matrix template.\" It gives a clear plan without over-prescribing, though it is somewhat directive."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Welcomes and applies firm pushback: \"No 'maybe it still matters' unless you have new evidence\" and \"kill it and move to the next suspect.\" It explicitly challenges weak claims rather than smoothing them over."
+        }
+      ]
+    }
+  ]
+}

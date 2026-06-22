@@ -1,0 +1,137 @@
+{
+  "user_id": "user_006",
+  "task": "I’ve got a time-sensitive network change coming up and I want to avoid turning it into a full-blown incident. Can you help me sketch a tight rollout plan with a rollback path, a few checkpoints, and the first things to verify if something starts acting weird mid-change?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "verbosity_preference",
+      "short": "Wants responses kept tight and efficient",
+      "explanation": "He values speed, control, and efficiency, so he is unlikely to want long-winded help. He would probably prefer responses that get to the point quickly and avoid unnecessary filler. Overexplaining would feel like wasted time to him."
+    },
+    {
+      "idx": 2,
+      "dimension": "directness_preference",
+      "short": "Prefers blunt answers without softening",
+      "explanation": "His skeptical, competitive style suggests he wants clear, unambiguous guidance rather than hedged language. He would likely see excessive caution as evasive or inefficient. Straight answers fit his preference for control and decisive action."
+    },
+    {
+      "idx": 3,
+      "dimension": "format_preference",
+      "short": "Likes structured, actionable output",
+      "explanation": "He seems most likely to respond well to responses that are organized and easy to execute, such as bullets or checklists. That matches his practical, task-focused mindset. Loose, meandering prose would probably frustrate him."
+    },
+    {
+      "idx": 4,
+      "dimension": "detail_level_preference",
+      "short": "Wants the useful essentials, not padding",
+      "explanation": "He likely wants enough context to act, but not exhaustive background unless it helps him win or avoid mistakes. He is efficiency-driven, so extra caveats only matter when they change the decision. He would probably skip anything that does not affect the outcome."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Accepts pushback only if it is sharp and useful",
+      "explanation": "He is skeptical and self-serving, so he probably does not enjoy moralizing or vague objections. But if the pushback is concrete, efficient, and clearly tied to risk or leverage, he is more likely to respect it. Weak or overly gentle correction would likely be ignored."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — here’s a tight, pressure-friendly rollout plan.\n\n## 1) Before you touch anything\n- **Freeze other changes** in the same window.\n- **Baseline the live state**:\n  - alarms\n  - interface error counters\n  - CPU / memory\n  - temps / fan / power\n  - any flaps in the last hour\n- **Confirm rollback is real**:\n  - console / OOB access works\n  - config backup is current\n  - exact rollback steps are written down\n  - you know who can execute it if you’re busy\n- **Identify one known-good end-to-end path** you can test after the change.\n\n## 2) Rollout order\n1. **Make the smallest safe change first**\n2. **Validate immediately**\n3. **Pause before expanding scope**\n4. **Only proceed if the first path is clean**\n\nDon’t batch multiple risky changes together. If something fails, you want one likely cause, not five.\n\n## 3) Checkpoints during the change\nAt each checkpoint, confirm:\n- device is still reachable\n- no new critical alarms\n- no rising interface errors / drops / CRCs\n- no link flaps\n- no unexpected CPU or memory spike\n- routing / adjacency / STP / LACP state is stable, if relevant\n- the known-good client or path still passes traffic\n\nIf the checkpoint is “green” only in dashboards but no real traffic has moved, treat that as **not validated**.\n\n## 4) If it starts acting weird mid-change, check these first\nIn this order:\n\n1. **Did the change actually apply as intended?**\n   - config diff\n   - commit / save status\n   - running vs intended state\n\n2. **Is the failure local or upstream/downstream?**\n   - interface state\n   - neighbor state\n   - route / adjacency changes\n   - dependent service health\n\n3. **Look for hardware / link symptoms**\n   - link flaps\n   - transceiver warnings\n   - CRC/FCS errors\n   - power / thermal alarms\n\n4. **Check for config drift or a bad dependency**\n   - VLAN / trunk / ACL / route / policy mismatch\n   - one service green, actual path broken\n\n5. **If a recent change lines up with the problem, rollback that first**\n   - don’t keep piling on fixes while the system is unstable\n\n## 5) Rollback rule\nRollback if:\n- the known-good path fails\n- errors are increasing\n- the device is unstable\n- you can’t prove the change is safe within the window\n\nRollback should restore the last known-good config and then re-validate the same traffic path you used before.\n\n## 6) Post-change verification\nProve:\n- the intended traffic path works\n- it stays up for a few minutes, not just one ping\n- no counters are climbing\n- no new alarms appeared\n- dependent services are actually passing traffic\n\nIf you want, I can turn this into a **one-page runbook format** you can use live during the window.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very tight and efficient: starts with \"here’s a tight, pressure-friendly rollout plan\" and uses concise bullets/checkpoints with little filler."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Direct and blunt throughout: \"Don’t batch multiple risky changes together,\" \"treat that as not validated,\" and \"Rollback if...\" give clear, unsoftened guidance."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strong structure and actionability: numbered sections, bullet lists, ordered troubleshooting steps, and explicit rollback rules make it easy to execute."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Focuses on essentials needed to act: baseline, checkpoints, first checks, rollback rule, and post-change verification without unnecessary background."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Pushback is concrete and useful rather than moralizing: e.g. \"treat that as not validated\" and \"don’t keep piling on fixes\". It is not especially sharp, but it is practical and risk-tied."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Absolutely — here’s the tighter, operational version.\n\n## Live change sheet\n\n### 1) Pre-checks — hard go/no-go\n**Go only if all are true:**\n- [ ] Change window approved and no overlapping changes\n- [ ] Console / OOB access confirmed\n- [ ] Current config backed up and verified\n- [ ] Rollback steps written and tested on paper\n- [ ] Known-good traffic path identified\n- [ ] Baseline captured: interface counters, alarms, CPU/memory, link state, routing/adjacency state\n- [ ] Anyone who might need to help is reachable\n- [ ] You know the exact stop point if validation fails\n\n**No-go if any are true:**\n- Missing rollback path\n- No OOB access\n- Baseline already unstable\n- Unclear intended end state\n- No way to verify real traffic, only dashboards\n\n---\n\n### 2) Change window order\nUse this order and don’t skip around:\n\n1. **Capture final baseline**\n2. **Apply the smallest change**\n3. **Verify immediately**\n4. **Hold at the checkpoint**\n5. **Expand only if the first step is clean**\n6. **Re-verify after each step**\n7. **Stop and rollback if any trigger is hit**\n\n---\n\n### 3) Rollback triggers\nRollback immediately if any of these happen:\n\n- Known-good traffic path fails\n- Device becomes unreachable from OOB or management\n- Link flaps repeat\n- Error counters rise materially after the change\n- Routing / adjacency / LACP / STP state does not converge as expected\n- CPU / memory spikes and stays elevated\n- Config does not match intended state\n- Dependent service breaks and the cause is not obvious\n- Validation fails twice in a row\n- You cannot prove the change is safe within the window\n\nIf you want this stricter, define “materially” before the window, for example:\n- any new CRC/FCS increase\n- any repeated flaps\n- any adjacency that drops and does not recover within the expected timer\n- any traffic loss on the known-good path\n\n---\n\n### 4) Step-by-step run order\n**T-15 to T-5 min**\n- Confirm access\n- Capture baseline screenshots / outputs\n- Save config copy\n- Confirm rollback command / file / restore method\n- Confirm test source and test destination\n\n**T0**\n- Announce start\n- Apply the first change only\n\n**T+1 to T+3**\n- Check device reachability\n- Check intended config state\n- Check interface state and counters\n- Check relevant protocol state for the gear type\n- Run the known-good traffic test\n\n**T+3 to T+5**\n- If clean, proceed to next step\n- If not clean, stop and assess against rollback triggers\n\n**Each later step**\n- Repeat the same pattern:\n  - apply one step\n  - verify\n  - hold\n  - only continue if stable\n\n---\n\n### 5) First things to verify by gear type\n\n#### Router / switch\nCheck first:\n- interface admin/oper state\n- error counters: CRC/FCS, drops, discards\n- neighbor state\n- route table / default route / next hop\n- protocol adjacency if relevant\n- recent flaps\n- config diff vs intended\n\n#### L2 switch / trunk change\nCheck first:\n- trunk status\n- VLAN membership\n- STP state\n- MAC learning on expected VLANs\n- port errors / flaps\n- neighbor on both sides of the link\n\n#### LACP / port-channel\nCheck first:\n- member links all up\n- bundle state is consistent on both ends\n- hashing / active members look correct\n- no mismatch in speed/duplex/VLAN/trunk settings\n- no member flaps\n\n#### Firewall / policy change\nCheck first:\n- rule hit / deny counters\n- session establishment\n- NAT translation if used\n- path symmetry if relevant\n- logs for drops tied to the test flow\n\n#### Core uplink / edge handoff\nCheck first:\n- physical link state\n- optics / transceiver readings\n- errors and flaps\n- upstream/downstream neighbor state\n- end-to-end traffic test from known-good source\n\n---\n\n### 6) Evidence capture\nCapture these at every checkpoint:\n\n- timestamp\n- operator\n- exact change applied\n- config diff or command output\n- screenshots of counters / state\n- test result from known-good source\n- any alarms or log lines\n- rollback decision, if triggered\n\nUse a simple format:\n\n| Time (UTC) | Step | Observation | Source | Result |\n|---|---|---|---|---|\n| 12:03:11 | Baseline | CRC counters at 0 | CLI output | OK |\n| 12:05:02 | Change 1 | VLAN applied | config diff | OK |\n| 12:05:40 | Verify | Ping + app test passed | test host / screenshot | OK |\n\n---\n\n### 7) Post-checks\nBefore closing the window:\n- known-good traffic path still passes\n- counters are stable\n- no new alarms\n- no flaps\n- no hidden dependency failures\n- config saved if required\n- evidence captured and time-stamped\n\n---\n\nIf you want, I can turn this into a **copy-paste change sheet template** with blanks for:\n- device name\n- exact commands\n- rollback command\n- checkpoints\n- owner\n- timestamps\n- evidence links",
+      "score": 4.4,
+      "summary": "mean=4.40 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:3, 5:2}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly tight and efficient: it says \"the tighter, operational version\" and uses concise bullets/checklists. Slightly long, but still focused and not filler-heavy."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Very direct and blunt: \"Go only if all are true,\" \"No-go if any are true,\" \"don’t skip around,\" and \"Stop and rollback if any trigger is hit\" are clear, unsoftened instructions."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable: organized into numbered sections, checklists, step-by-step order, gear-type checks, and a table template. Easy to execute."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Gives the useful essentials without much padding, focusing on pre-checks, rollback triggers, checkpoints, and first verifications. A bit comprehensive, but mostly practical rather than exhaustive."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Pushback is concrete and useful rather than moralizing: it defines hard no-go conditions and specific rollback triggers tied to risk, e.g. \"Device becomes unreachable\" and \"Error counters rise materially.\""
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "agent_response": "Absolutely — here’s the **blank live change sheet** version, with **hard stop thresholds** and **gear-specific first checks in order**.\n\n---\n\n# Live Network Change Sheet\n\n## 0) Change metadata\n- **Change ID:** __________\n- **Ticket / CAB ID:** __________\n- **Device / Circuit / Service:** __________\n- **Site:** __________\n- **Change owner:** __________\n- **Approver:** __________\n- **Start time (UTC):** __________\n- **Planned end time (UTC):** __________\n- **Rollback owner:** __________\n\n---\n\n## 1) Hard go / no-go pre-checks\n\n### GO only if all are true\n- [ ] Change approved and window active\n- [ ] No overlapping changes on same device / circuit / service\n- [ ] Console or OOB access confirmed\n- [ ] Current config backup taken and verified\n- [ ] Rollback path confirmed and ready\n- [ ] Baseline captured\n- [ ] Known-good test source and destination confirmed\n- [ ] Required people reachable\n- [ ] Exact first step written down\n- [ ] Exact stop point written down\n\n### NO-GO if any are true\n- [ ] No rollback path\n- [ ] No OOB / console access\n- [ ] Baseline already unstable\n- [ ] Unknown intended end state\n- [ ] No real traffic test available\n- [ ] Config backup missing or stale\n- [ ] Critical alarms already active\n\n---\n\n## 2) Baseline capture\nRecord **before** any change:\n\n- **Time (UTC):** __________\n- **Current alarms:** __________\n- **Interface status:** __________\n- **Error counters:** __________\n- **CPU / memory:** __________\n- **Temp / fan / PSU:** __________\n- **Recent flaps:** __________\n- **Neighbor / adjacency state:** __________\n- **Config diff / running vs saved:** __________\n- **Known-good path test result:** __________\n\n---\n\n## 3) Exact commands to run for baseline\n\n### Router\n1. `show interfaces`  \n2. `show ip route` / `show ipv6 route`  \n3. `show ip ospf neighbor` / `show ip bgp summary` / relevant adjacency command  \n\n### Switch\n1. `show interfaces status`  \n2. `show interfaces counters errors`  \n3. `show spanning-tree`  \n\n### Firewall\n1. `show interface`  \n2. `show session all` / relevant session command  \n3. `show log` / policy hit counters  \n\n### LACP / Port-channel\n1. `show etherchannel summary` / `show lacp neighbor`  \n2. `show interfaces port-channel`  \n3. `show interfaces counters errors`  \n\n### If your gear has different syntax, replace these with the vendor-equivalent commands and do not improvise during the window.\n\n---\n\n## 4) Rollout steps\n\n| Step # | Planned action | Start time (UTC) | End time (UTC) | Owner | Result | Hard stop? | Evidence |\n|---|---|---:|---:|---|---|---|---|\n| 1 | __________ | __________ | __________ | __________ | __________ | ☐ Yes ☐ No | __________ |\n| 2 | __________ | __________ | __________ | __________ | __________ | ☐ Yes ☐ No | __________ |\n| 3 | __________ | __________ | __________ | __________ | __________ | ☐ Yes ☐ No | __________ |\n| 4 | __________ | __________ | __________ | __________ | __________ | ☐ Yes ☐ No | __________ |\n\n---\n\n## 5) Hard rollback triggers\n\nRollback immediately if **any** of these are true:\n\n### Connectivity / reachability\n- Device unreachable from OOB / console path fails\n- Known-good test path fails for **2 consecutive tests**\n- Management access drops for **more than 30 seconds**\n- Neighbor / adjacency fails to recover within expected timer\n\n### Interface / physical\n- Any link flap occurs **more than 1 time** after the change\n- New CRC / FCS / input error count increases by **1 or more** on a clean baseline\n- Interface discards / drops increase by **more than 5%** over baseline in the first **5 minutes**\n- Port-channel member drops or bundle goes degraded\n- STP port state changes unexpectedly and does not settle within **2 minutes**\n\n### Routing / control plane\n- Any adjacency drops and does not re-establish within **2 minutes**\n- Route to the known-good destination disappears or changes unexpectedly\n- Default route / next hop changes unexpectedly\n- CPU stays above **85% for 5 minutes**\n- Memory stays above **90% for 5 minutes**\n\n### Firewall / policy\n- Expected session does not establish after **2 attempts**\n- Deny counters increase on the test flow\n- NAT translation fails for the test flow\n- Path symmetry breaks if required for the service\n\n### Operational\n- Validation fails twice in a row\n- You cannot prove the change is safe within the window\n- The actual state does not match the intended state after the step\n- A new critical alarm appears\n\n---\n\n## 6) Gear-specific first 3 checks\n\n### Router — first 3 checks, in order\n1. **Reachability / interface state**\n   - Is the target interface up/up?\n   - Is OOB still reachable?\n2. **Routing / adjacency**\n   - Did the expected neighbor stay up?\n   - Did the route to the test destination remain present?\n3. **Counters / path test**\n   - Any new errors, drops, or flaps?\n   - Does the known-good traffic test pass?\n\n### Switch — first 3 checks, in order\n1. **Port state**\n   - Is the access or trunk port up?\n   - Is the correct VLAN present?\n2. **STP / MAC learning**\n   - Is STP forwarding as expected?\n   - Is MAC learning happening on the right VLAN/port?\n3. **Counters / end-to-end test**\n   - Any CRC/FCS, discards, or flaps?\n   - Does the known-good client path pass traffic?\n\n### Firewall — first 3 checks, in order\n1. **Interface / session reachability**\n   - Are the relevant interfaces up?\n   - Can you still reach management?\n2. **Policy hit / deny behavior**\n   - Is the expected rule matching?\n   - Are denies climbing on the test flow?\n3. **Session / NAT / app test**\n   - Does the session establish?\n   - Does NAT translate correctly?\n   - Does the app or test flow complete?\n\n### LACP / Port-channel — first 3 checks, in order\n1. **Member link status**\n   - Are all expected members up?\n   - Is the bundle active on both ends?\n2. **Bundle consistency**\n   - Same speed / duplex / VLAN / trunk settings on both ends?\n   - Any suspended or individual members?\n3. **Traffic / counters**\n   - Is hashing distributing traffic as expected?\n   - Any member flaps or errors?\n   - Does the known-good test path pass?\n\n---\n\n## 7) Checkpoint row format\n\nUse one row per checkpoint:\n\n| Time (UTC) | Step | What changed | What was verified | Source | Result | Hard stop? |\n|---|---|---|---|---|---|---|\n| __________ | __________ | __________ | __________ | CLI / dashboard / screenshot / test host | Pass / Fail | Yes / No |\n\n---\n\n## 8) Evidence capture\nCapture at each checkpoint:\n\n- exact timestamp\n- command output\n- config diff\n- screenshot\n- counter snapshot\n- log line / alarm\n- test result\n- rollback decision, if any\n\n### Evidence log\n| Time (UTC) | Evidence type | What it shows | File / link | Owner |\n|---|---|---|---|---|\n| __________ | Screenshot | __________ | __________ | __________ |\n| __________ | CLI output | __________ | __________ | __________ |\n| __________ | Config diff | __________ | __________ | __________ |\n| __________ | Counter snapshot | __________ | __________ | __________ |\n\n---\n\n## 9) Rollback path\n- **Rollback command / restore path:** __________\n- **Config file / snapshot name:** __________\n- **Who executes rollback:** __________\n- **Expected rollback time:** __________\n- **Post-rollback validation:** __________\n\n### Rollback validation\n- [ ] Device reachable\n- [ ] Known-good traffic path restored\n- [ ] Counters stable\n- [ ] No new critical alarms\n- [ ] Relevant adjacency / STP / LACP / policy state restored\n\n---\n\n## 10) Post-checks\n- [ ] Intended change still present\n- [ ] Known-good traffic path works\n- [ ] Stable for **5–10 minutes**\n- [ ] No new alarms\n- [ ] No new flaps\n- [ ] No rising error counters\n- [ ] Config saved if required\n- [ ] Evidence attached\n- [ ] Closeout timestamp recorded\n\n---\n\nIf you want, I can turn this into a **single-page fillable version** with tighter spacing and fewer words so it’s usable live in the window.",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly tight and efficient, with a practical template format. It is still fairly long, but it avoids filler and gets to the point with checklists and tables."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Uses direct language like \"GO only if all are true\" and \"Rollback immediately if any of these are true,\" which is blunt and unambiguous. Some wording is a bit softened by explanatory framing, but overall it is decisive."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable: numbered sections, checklists, tables, and ordered first checks. This is exactly the kind of organized output that is easy to execute."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Focuses on essentials needed to run the change safely: pre-checks, checkpoints, rollback, and first checks. There is some extra scaffolding and vendor examples, but little padding beyond what supports execution."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Includes pushback in a sharp, useful way via hard no-go criteria and rollback triggers tied to concrete risks like access loss, adjacency failure, and error increases. It avoids moralizing and keeps objections operational."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "user_id": "user_006",
+  "task": "I’m dealing with a contractor who says the issue is probably fixed, but the details keep changing and I want to document the next step clearly. What should I include in a short reply so the scope, timing, and responsibility are all on record?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.6,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Keep it short, factual, and specific.\n\n## Include:\n- **what issue is being discussed**\n- **what they say is fixed**\n- **what is still open or unconfirmed**\n- **next step**\n- **date/time**\n- **who is responsible for the next action**\n- **what proof will confirm completion**\n\n## Simple structure\n1. Reference the issue\n2. State the current claim\n3. State what is not yet confirmed\n4. Define the next step\n5. Put timing and ownership on record\n\n## Example\n> To confirm, the issue under discussion is [issue]. You indicated it is probably fixed, but the current status is still unconfirmed. Please proceed with [next step] by [date/time] and confirm completion with [proof]. Please also confirm who is responsible for follow-up if the issue recurs.\n\n## If you want it a little firmer\n> Please confirm the current status in writing, including what was changed, when it was changed, and what evidence shows the issue is resolved. If there is still uncertainty, state the next action and who owns it.\n\n## What to avoid\n- “probably” without follow-up\n- vague language like “looks good”\n- no date\n- no owner\n- no proof requirement\n\nIf you want, I can turn this into a **2–3 sentence message** you can send as-is.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Close, but I want it tighter. Give me an actual 2–3 sentence version I can send, with the issue, the claimed fix, the next step, deadline, owner, and what counts as proof. No generic template stuff. I need wording that doesn’t leave room for them to wiggle out later.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Here’s a tight version you can send:\n\n> The issue under discussion is [issue]. You said it is probably fixed, but it is not yet confirmed on my side. Please complete [next step] by [date/time], confirm who owns follow-up if it recurs, and send the proof of completion: [specific proof, e.g. photo/log/test result].\n\nIf you want it slightly firmer:\n\n> The issue under discussion is [issue]. You indicated it is probably fixed, but I have not confirmed resolution yet. Please complete [next step] by [date/time], confirm the responsible owner for follow-up, and provide [specific proof] showing the issue is resolved.\n\n",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Still too soft. I need it to lock them in, not sound like a suggestion. Give me one version that names the issue, says their claimed fix is unconfirmed, assigns the next action to them, sets the deadline, and says exactly what proof I’ll accept. No brackets, no filler.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "The issue is [issue], and your claimed fix is still unconfirmed. Please complete [next action] by [deadline], and send [accepted proof] showing the issue is resolved; you remain responsible for follow-up if it recurs.",
+      "user_simulator": {
+        "feedback_type": "add_context",
+        "text": "No brackets. I need a real sendable line, not placeholders. Make it sound like I’m assigning the action to them, not asking nicely, and spell out the proof in the same sentence so they can’t dodge it. Something like: The issue is the intermittent packet loss on the main switch, your claimed fix is still unconfirmed, you are to replace the failed transceiver and verify stable traffic by 3:00 PM today, and I will accept the work only when you send the before-and-after logs plus a screenshot showing zero packet loss for a 15-minute test.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 4,
+      "agent_response": "The issue is the intermittent packet loss on the main switch, your claimed fix is still unconfirmed, you are to replace the failed transceiver and verify stable traffic by 3:00 PM today, and I will accept the work only when you send the before-and-after logs plus a screenshot showing zero packet loss for a 15-minute test.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s the right shape. Tight, specific, and it pins them to logs instead of hand-waving.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "user_id": "user_006",
+  "task": "I’m looking at a tricky network change that has to happen soon, and I want to avoid creating extra work if something goes sideways. What would be the first few checks or preparations you’d make before starting?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.2,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Before you touch anything, I’d set up the change so you can fail fast, prove what changed, and roll back cleanly.\n\n### First preparations\n1. **Write the before state in plain terms**\n   - What the network looks like now\n   - What should be different after the change\n   - Any dependencies or “must not break” paths\n\n2. **Have a rollback path ready**\n   - Exact config to restore\n   - Who can execute it\n   - How long rollback should take\n   - What condition triggers rollback\n\n3. **Define checkpoints**\n   - Pre-change validation\n   - Immediate post-change validation\n   - 10–15 minute stability check\n   - Final verification before closing\n\n4. **Confirm maintenance scope**\n   - Devices, interfaces, VLANs, tunnels, routes, ACLs, etc.\n   - Make sure everyone agrees on what is and isn’t in scope\n\n5. **Collect a known-good snapshot**\n   - Current configs\n   - Interface status\n   - Routing table / neighbor state\n   - Any relevant logs or counters\n\n### First things to verify if it starts acting weird\nStart with the basics in this order:\n\n1. **Physical layer first**\n   - Link up/down\n   - Errors, drops, flaps\n   - Speed/duplex only if it’s not fiber-locked\n\n2. **L2 consistency**\n   - MTU mismatch\n   - Trunk/native VLAN mismatch\n   - Port-channel consistency if applicable\n\n3. **Access/control features**\n   - ACLs\n   - Port-security\n   - Storm-control\n\n4. **If tunnels are involved, check them after physical stability**\n   - Tunnel MTU / encapsulation\n   - VLAN/ACL dependencies\n   - Phase 1/2 status\n   - DPD\n   - NAT\n   - Route symmetry\n\n### Practical tip\nIf the network starts behaving oddly mid-change, don’t chase every symptom at once. First confirm whether the issue is:\n- **link-level**\n- **VLAN/L2**\n- **policy/filtering**\n- **tunnel/routing**\n\nThat keeps you from burning time in the wrong layer.\n\nIf you want, I can turn this into a tight **change checklist + rollback checklist** you can use during the maintenance window.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s the right order, but I’d make it tighter before a real change window.\n\nFirst few things I’d do:\n- pull a clean baseline: config, neighbors, routes, interface counters, logs\n- verify the exact blast radius, not the vague one people say in meetings\n- pre-stage rollback, not just \"have one\" — know the commands and who can hit them\n- check any dependency that can make the change look broken when it isn’t: upstream/downstream, ACLs, tunnels, MTU, port-channel, whatever actually sits in the path\n- set a hard success/fail point before you start, so you’re not arguing after the fact\n\nWhat I’d add is the evidence piece. I keep timestamps, screenshots, and work-order notes because if it goes sideways, memory is useless and somebody will try to pin it on you. Learned that the hard way. \n\nIf you want, give me the actual change type — VLAN move, switch replacement, firewall rule, fiber cutover, routing tweak — and I’ll give you the first 5 checks in the order I’d actually run them.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Absolutely — for a real change window, I’d make the first checks very concrete and evidence-based.\n\n## First 5 pre-change checks\n1. **Baseline the current state**\n   - Config backup\n   - Neighbor state\n   - Routing table\n   - Interface status\n   - Interface counters\n   - Relevant logs\n\n2. **Verify the real blast radius**\n   - Exact devices/interfaces/VLANs/tunnels/routes in scope\n   - Upstream/downstream dependencies\n   - Anything that could make the change *look* broken without actually being the cause\n\n3. **Pre-stage rollback**\n   - Exact rollback commands/config\n   - Who can execute it\n   - How long it should take\n   - What condition triggers rollback\n\n4. **Check dependency traps**\n   - ACLs / policy filters\n   - MTU / MSS issues\n   - Port-channel consistency\n   - Tunnel health if involved\n   - Anything in the path that can mask the real problem\n\n5. **Set pass/fail criteria before starting**\n   - What “success” looks like\n   - What failure looks like\n   - When you stop and roll back\n   - Who signs off\n\n## Evidence to capture\nFor each step, I’d keep:\n- **timestamp**\n- **command output**\n- **screenshot or export**\n- **work-order note**\n- **before/after comparison**\n\n## If you want the shortest possible hard checklist, I’d use:\n- **PASS/FAIL/NOT TESTED**\n- **Evidence:** required on every item\n- **Rollback ready:** yes/no\n- **Go/no-go decision:** explicit before touching anything\n\nIf you want, I can turn this into a **gate-style pre-change checklist** with PASS/FAIL/NOT TESTED and an evidence field for each item.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s basically the right spine.\n\nI’d just strip it to a gate list:\n- clean baseline captured\n- blast radius confirmed\n- rollback already staged, not theoretical\n- dependency traps checked\n- pass/fail declared before the first command\n\nAnd yeah, evidence on every step. Timestamped. Otherwise when it breaks, everybody suddenly gets creative.\n\nIf you want, I can turn it into a one-page go/no-go sheet you can actually use in the window.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    }
+  ]
+}

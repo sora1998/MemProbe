@@ -1,0 +1,62 @@
+{
+  "user_id": "user_037",
+  "task": "I’ve got a school thing coming up where I can either jump in fast or wait and watch for a bit, and I need to decide what makes the most sense. Can you help me think through the situation so I know what to do first and what to keep an eye on?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.25,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — I can help with that.\n\nA simple way to decide is:\n\n1. **Check the risk of acting fast**\n   - Is this something where a quick move could cause a mistake, confusion, or draw attention?\n   - If yes, it may be better to pause and watch first.\n\n2. **Check whether waiting changes the outcome**\n   - If waiting gives you more information, more time to confirm what’s happening, or a better chance to choose a safe/stable option, that usually points toward waiting briefly.\n\n3. **Look for the first safe, staff-visible option**\n   - Since you’ve said you want to stay in staff-visible places, the first move should be toward one of those: **front lobby, library if open, counselor, attendance desk, or an approved teacher’s classroom**.\n\n4. **Keep your first step small**\n   - Don’t overcommit right away.\n   - Start with the option that keeps you visible and lets you reassess after a minute or two.\n\n5. **Avoid the choices that make you harder to notice or harder to help**\n   - Don’t move to places that aren’t staff-visible.\n   - Don’t choose a spot just because it feels hidden or separate.\n\nIf you want, I can help you build a **quick decision rule** like:\n- “If X happens, I do Y first.”\n- “If I’m unsure, I wait in [safe place] for 2–5 minutes and then reassess.”\n\nIf you tell me the situation in general terms, I can help you sort out what to watch for and what the safest first move is.",
+      "user_simulator": {
+        "feedback_type": "add_context",
+        "text": "Yeah, but it’s not really just “safe place” stuff. I need to know if jumping in fast gets me credit or if waiting means I can see who’s actually doing what first. If I move too early and it’s wrong, I look stupid. If I wait too long, somebody else takes the good spot or gets the credit.\n\nSo I’d want a rule like: if it’s a group thing and roles aren’t clear, I watch first. If there’s a first obvious move that locks something in for me, I take it. And I keep an eye on who’s leading, who’s bluffing, and whether the teacher is actually paying attention or just talking. That part matters more than “visible” to me.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.0
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — for a school group situation like that, the clean rule is:\n\n- **If roles are unclear, watch first.**\n- **If there’s one obvious move that locks in credit or a spot, take it fast.**\n- **If both are true, do the smallest safe move that keeps you in play while you watch.**\n\nA simple way to think about it:\n\n1. **Jump in fast if:**\n   - the first move is clear,\n   - it’s low-risk,\n   - and it clearly puts you in the project / gives you a visible role.\n\n2. **Wait and watch if:**\n   - people are still figuring out roles,\n   - the teacher hasn’t assigned anything yet,\n   - or moving too early could put you in the wrong lane.\n\n3. **Watch for these signals:**\n   - **who starts giving directions**\n   - **who others follow**\n   - **whether the teacher is actually tracking the group**\n   - **whether the “leader” is just talking or actually organizing**\n\n4. **Best default move if you’re unsure:**\n   - stay present,\n   - ask one short question,\n   - or take one small task that’s easy to defend later.\n\nA plug-in rule:\n\n- **clear first move + low risk = act now**\n- **unclear roles + no obvious lock-in = watch first**\n- **if unsure = do one small visible task, then reassess**\n\nIf you want, I can turn that into a **super short 3-line decision rule** you can use in the moment.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s closer. But I want it tighter, like a real rule I can use in the moment.\n\nThe part I still need is: what counts as a move that actually *locks in* credit vs. just making me look overeager? And what’s the tell that the “leader” is fake but still getting followed anyway?\n\nBasically I want a quick read on:\n- when to move first\n- when to hang back\n- when to take a small move that still puts my name on something\n\nBecause “watch first” is fine, but if I wait wrong, I lose the useful spot. That’s the part I’m trying not to mess up.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Use this rule:\n\n**Move first only if the first action clearly puts your name on something useful.**  \nIf it doesn’t, **hang back and watch for who is actually doing the work.**\n\n### Quick read\n- **Move first:** the task/spot/role is obvious, simple, and once you take it, it’s yours.\n- **Hang back:** roles are still fuzzy, people are talking more than doing, or the teacher hasn’t really locked anything in yet.\n- **Small move:** if you’re unsure, take one visible, low-risk task that ties you to the group without overcommitting.\n\n### What “locks in” credit\nA move locks in credit when it:\n- gives you a **clear task**\n- puts your name on a **specific part**\n- is **visible enough** that people can point to it later\n- is **hard for others to quietly take over**\n\nExamples:\n- “I’ll do this section.”\n- “I’ll start the shared doc.”\n- “I’ll handle this part and update it.”\n\n### What’s just overeager\nIt’s overeager when you:\n- grab a role before anyone knows what’s happening\n- start doing work that no one asked for\n- jump into a part that could easily get changed or overwritten\n- talk like you’re leading before the group has actually settled\n\n### Fake leader tell\nA fake leader usually:\n- talks first and most\n- gives vague directions\n- doesn’t actually do the work\n- gets followed because they sound confident, not because they’re organized\n\nReal leader signs:\n- assigns specific tasks\n- keeps track of who’s doing what\n- follows through\n- can point to actual progress\n\n### In-the-moment rule\n**If there’s a clear opening that names you, take it.  \nIf there isn’t, watch first.  \nIf you need to stay in play, take one small task that can’t be easily ignored.**\n\nIf you want, I can turn this into a **one-line if/then rule** you can memorize.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah. Make it one line, but not stupidly vague.\n\nI want something I can actually use when people are moving fast. Like:\n- if the opening is specific and visible, take it\n- if it’s all noise and nobody’s assigned, wait\n- if I’m not sure, grab the small thing that tags me in\n\nAnd I need the fake-leader part sharper. The type who talks big but still somehow gets treated like they’re in charge. That’s the one I want to spot fast.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 4,
+      "agent_response": "Use this:\n\n**If the opening is specific and visible, take it; if it’s still all talk and no assignments, wait; if you’re unsure, grab the smallest task that clearly tags you in.**\n\nFor the **fake leader**:\n- **big talk, vague directions**\n- **others follow because they sound confident**\n- **they don’t actually assign or finish anything**\n- **they stay in charge of the vibe, not the work**\n\nFast test:\n- **real leader** = names tasks, tracks progress, follows through\n- **fake leader** = sounds sure, but leaves the actual work fuzzy\n\nIf you want, I can make that even shorter into a **single memorize-it line**.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that works. The one-line rule is usable, and the fake-leader split is clear enough. Short, not mushy. That's what I needed.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    }
+  ]
+}

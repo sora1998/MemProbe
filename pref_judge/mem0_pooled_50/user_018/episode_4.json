@@ -1,0 +1,137 @@
+{
+  "user_id": "user_018",
+  "task": "I’m trying to figure out why a campaign handoff keeps going sideways between the email draft, the promo details, and the final send. Can you help me lay out a quick way to spot where the breakdown is happening and what to check first so it doesn’t keep repeating?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "directness_preference",
+      "short": "Wants straight answers",
+      "explanation": "He values clear communication and efficiency, so he likely prefers responses that get to the point quickly. He probably does not want a lot of hedging or filler when he is trying to make a decision or fix something. Directness fits his practical, work-focused style."
+    },
+    {
+      "idx": 2,
+      "dimension": "verbosity_preference",
+      "short": "Prefers concise help",
+      "explanation": "His work style suggests he wants information delivered without unnecessary length. He tends to focus on what is actionable, so shorter responses with only the needed context will likely feel most useful. Long explanations may be acceptable only when the problem is genuinely complex."
+    },
+    {
+      "idx": 3,
+      "dimension": "pacing_preference",
+      "short": "Likes chunked guidance",
+      "explanation": "He seems best served by help that comes in manageable steps rather than a flood of information at once. His real-world problem solving is practical and sequential, so chunked guidance would match how he likely works through tasks. Too many steps upfront could slow him down."
+    },
+    {
+      "idx": 4,
+      "dimension": "format_preference",
+      "short": "Likes bullets and checklists",
+      "explanation": "He appears to prefer organized, efficient presentation over free-form prose. Bullets or checklists would fit his need to compare options, track tasks, and avoid missing details. This format also matches his practical approach to work and decisions."
+    },
+    {
+      "idx": 5,
+      "dimension": "tone_preference",
+      "short": "Prefers calm, matter-of-fact tone",
+      "explanation": "He seems to respond best to steady, non-dramatic communication. A matter-of-fact tone fits his practical optimism and his preference for reliability over emotional flair. He likely wants encouragement, but not at the expense of clarity."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — the fastest way is to treat it like a handoff chain and check it in the same order every time:\n\n1. **Confirm the promo is final first**\n   - Code name\n   - Discount/offer terms\n   - Start/end dates\n   - Any exclusions or usage limits\n\n2. **Check the source of truth**\n   - Is the promo brief or campaign doc updated?\n   - Are email, landing page, and checkout all pulling from the same approved details?\n\n3. **Audit the email draft**\n   - Promo code mention\n   - CTA URL\n   - Subject line / preview text if the offer changed\n   - Any segment-specific wording or exclusions\n   - Send timing if one segment is later than another\n\n4. **Verify the landing page**\n   - Copy matches the exact offer\n   - Promo code is correct everywhere it appears\n   - Hidden/reusable blocks don’t still contain the old version\n\n5. **Test the checkout flow**\n   - Apply the code in a real test flow\n   - Make sure the discount behaves as expected\n   - Confirm the customer sees the right messaging after code entry\n\n6. **Check the final send setup**\n   - Scheduled version is the approved one\n   - No old draft is still attached to the send\n   - Segments are pointing to the right content/version\n\n### Quick way to spot where it broke\nAsk: **“Which version changed last?”**\n- If the promo changed but email didn’t, the breakdown is usually in the draft update.\n- If email is right but checkout is wrong, it’s usually the promo setup or ecommerce config.\n- If both are right but the live send is wrong, it’s usually scheduling/version control.\n\n### To keep it from repeating\nUse a simple handoff checklist with 3 sign-offs:\n- **Promo approved**\n- **Creative/email updated**\n- **Landing page + checkout verified**\n\nIf you want, I can turn this into a very short handoff checklist you can reuse for every campaign.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Gets straight to the point with an immediate answer: \"Yes — the fastest way is to treat it like a handoff chain\" and then a clear ordered list."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly concise and actionable, with compact bullets and a short summary. It is a bit longer than minimal, but the extra detail is relevant to the problem."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strong chunking: the response breaks the process into numbered steps and a separate \"Quick way to spot where it broke\" section, making it easy to follow sequentially."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Uses bullets, numbered lists, and a checklist-style structure throughout, e.g. \"3 sign-offs\" and multiple sub-bullets."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Tone is calm and matter-of-fact, with practical phrasing like \"the fastest way\" and \"usually\" rather than emotional or dramatic language."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — here’s a tighter, more diagnostic version you can use.\n\n## Fast handoff diagnosis\n\n### 1) Start with the **approved source of truth**\nCheck:\n- Is there **one final brief/doc** everyone is using?\n- Does it include the **promo code, offer terms, dates, exclusions, and CTA destination**?\n- Is it clearly marked **approved/final**?\n\nIf there isn’t one clear approved doc, that’s usually the first breakdown.\n\n### 2) Compare the three live versions\nLook at:\n- **Promo brief**\n- **Email draft**\n- **Landing page / scheduled send**\n\nAsk:\n- Do they all match exactly?\n- Which one is different?\n- Which one was updated last?\n\nThe mismatch usually shows you where the handoff failed.\n\n### 3) Identify **who changed what**\nFor each asset, ask:\n- Who last edited it?\n- When was it changed?\n- Was that change communicated to the next owner?\n\nThis catches the “someone assumed someone else would update it” problem.\n\n### 4) Check the **final QA gate**\nConfirm:\n- Was there a last review before scheduling?\n- Was the **scheduled version** the approved version?\n- Was the live page tested end-to-end?\n\nIf it went from draft straight to send, that’s a high-risk gap.\n\n---\n\n## The 3 most common failure points\n\n1. **Promo changed after the draft started**\n   - Email/landing page never got refreshed.\n\n2. **Draft updated, but downstream assets didn’t**\n   - Email is right, but landing page or send platform is stale.\n\n3. **Approved version existed, but the wrong version was scheduled**\n   - Usually a version control or final-send mistake.\n\n---\n\n## Quick triage order\n1. **Check the approved brief**\n2. **Check the email draft version**\n3. **Check the scheduled send/live landing page**\n4. **Compare timestamps + owners**\n5. **Find the first mismatch**\n\nThat first mismatch is usually the failure point.\n\n---\n\n## Simple prevention rule\nDon’t let anything move forward unless these are all true:\n- **Promo approved**\n- **Email updated**\n- **Landing page updated**\n- **Final QA completed**\n- **Scheduled version confirmed**\n\nIf you want, I can turn this into a very short **handoff checklist with columns for “what changed / who changed it / approved version location”**.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Gets straight to the point with a clear diagnostic framework: \"Fast handoff diagnosis,\" \"Quick triage order,\" and \"That first mismatch is usually the failure point.\""
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly concise and actionable, with short sections and bullets. It does include some repetition and multiple lists, but avoids long explanation and stays focused on what to check first."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strong chunking: the response breaks the problem into numbered steps, then a \"Quick triage order,\" then a \"Simple prevention rule.\" This is manageable, sequential guidance."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Uses bullets, numbered lists, and checklists throughout, e.g. \"Check:\", \"Ask:\", \"Confirm:\", and the final checklist-style prevention rule."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Tone is calm and matter-of-fact, with practical phrasing like \"usually the first breakdown\" and \"usually the failure point,\" without emotional language or drama."
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "agent_response": "Absolutely — here’s a **2-minute handoff triage checklist** you can actually run when something breaks.\n\n## Campaign handoff diagnostic checklist\n\n| Asset | Owner | Last changed | Approved version lives here | What changed from prior version? | Checked? |\n|---|---|---:|---|---|---|\n| Promo brief |  |  |  |  |  |\n| Email draft |  |  |  |  |  |\n| Landing page |  |  |  |  |  |\n| Send platform / scheduled send |  |  |  |  |  |\n| Final QA |  |  |  |  |  |\n\n## Fast run order\n1. **Start with the approved brief**\n   - What was supposed to happen?\n   - Is there one final approved source of truth?\n   - Where is it stored?\n\n2. **Check the email draft**\n   - Did it inherit the final promo details?\n   - Was it updated after the brief changed?\n   - Who last changed it and when?\n\n3. **Check the landing page / send platform**\n   - Did they get the same update as the email?\n   - Is the approved version actually what’s scheduled/live?\n   - Was an old version accidentally used?\n\n4. **Check final QA**\n   - Was there a last review before scheduling?\n   - Who was supposed to catch the mismatch?\n   - Was the approved version confirmed before send?\n\n## The three questions that usually find the failure\n- **What changed?**\n- **Who changed it?**\n- **Where was the approved version supposed to live?**\n\n## Common failure patterns\n- **Promo changed after draft started**\n- **Draft updated, but landing page/send didn’t**\n- **Everything was right, but the scheduler used the old version**\n\nIf you want, I can turn this into a **copy-paste one-page checklist** with yes/no boxes and a notes column.",
+      "score": 5.0,
+      "summary": "mean=5.00 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:0, 5:5}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct: opens with \"Absolutely — here’s a 2-minute handoff triage checklist\" and immediately gives the checklist and run order without hedging."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Concise and actionable; it stays focused on the needed checks and uses short sections rather than long explanation."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Chunked well into \"Fast run order,\" then \"The three questions,\" then \"Common failure patterns,\" which breaks the guidance into manageable steps."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong use of bullets and a checklist/table format: \"Campaign handoff diagnostic checklist,\" numbered steps, and bullet lists throughout."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Calm, matter-of-fact tone throughout, e.g. \"here’s a 2-minute handoff triage checklist\" and straightforward diagnostic language without drama."
+        }
+      ]
+    }
+  ]
+}

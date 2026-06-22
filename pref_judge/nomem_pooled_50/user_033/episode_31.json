@@ -1,0 +1,170 @@
+{
+  "user_id": "user_033",
+  "task": "I’m trying to clean up a recurring discrepancy in a set of reports, and I need a practical way to sort out whether the issue is in the data, the process, or my own assumptions. Can you help me think through the first checks and what would count as a real red flag?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "formality_preference",
+      "short": "Prefers professional, no-nonsense interaction",
+      "explanation": "She would likely respond best to a controlled, businesslike style rather than friendliness for its own sake. Given her guarded and precision-focused persona, overly casual phrasing would probably feel sloppy or intrusive."
+    },
+    {
+      "idx": 2,
+      "dimension": "verbosity_preference",
+      "short": "Wants concise answers, not rambling",
+      "explanation": "She seems to value efficiency and would likely dislike long-winded explanations that repeat themselves. She probably wants enough information to act on, with no decorative padding."
+    },
+    {
+      "idx": 3,
+      "dimension": "directness_preference",
+      "short": "Prefers blunt, unsoftened answers",
+      "explanation": "Her skeptical, control-oriented style suggests she would rather hear the point plainly than receive hedged reassurance. She is likely to trust answers more when they are explicit about risks, limits, and conclusions."
+    },
+    {
+      "idx": 4,
+      "dimension": "format_preference",
+      "short": "Likes structured lists and checklists",
+      "explanation": "She appears to prefer information that is organized and easy to verify. A clean format with steps, bullets, or checklists would fit her habit of tracking details and would reduce ambiguity."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Accepts firm correction when needed",
+      "explanation": "She likely does not want the assistant to simply echo her assumptions if something is wrong or risky. A direct challenge, especially when backed by evidence, would probably be more useful to her than polite agreement."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — a good way to approach this is to separate **data issues**, **process issues**, and **assumption issues** early, then look for signs that tell you which bucket is most likely.\n\n## First checks\nStart with a quick, structured pass:\n\n### 1) Confirm the discrepancy is real\n- Re-run the report from the same source and parameters.\n- Check whether the difference is consistent or intermittent.\n- Compare against a known-good baseline or prior period.\n\n### 2) Trace the data lineage\n- Identify where the numbers originate.\n- Check for:\n  - missing records\n  - duplicates\n  - filters applied differently across reports\n  - date/time cutoffs\n  - timezone mismatches\n  - joins that may drop or multiply rows\n\n### 3) Compare the logic, not just the output\n- Are the same definitions being used?\n- Are metrics calculated the same way?\n- Are exclusions, adjustments, or rounding rules different?\n- Is one report using raw data while another uses transformed data?\n\n### 4) Test your assumptions\nAsk:\n- What am I assuming is “the same” that may not be?\n- Am I assuming the source is complete?\n- Am I assuming the business rule hasn’t changed?\n- Am I assuming the discrepancy should be zero rather than within tolerance?\n\n## What counts as a real red flag\nA red flag is something that suggests the issue is not just normal variation or a one-off mistake.\n\n### Data red flags\n- The same record appears multiple times unexpectedly\n- Large gaps in expected records\n- Sudden shifts in volume with no business explanation\n- Values outside plausible ranges\n- Source totals don’t reconcile to downstream totals\n- Records updated after the report cutoff but still included/excluded inconsistently\n\n### Process red flags\n- Manual steps are involved and not consistently documented\n- Two people run the “same” report and get different results\n- The report depends on a fragile query, spreadsheet formula, or export step\n- No version control on logic or report definitions\n- A recent change in ETL, filters, or business rules coincides with the discrepancy\n\n### Assumption red flags\n- The discrepancy only looks wrong because of an unverified expectation\n- You’re comparing metrics with different definitions\n- You’re expecting exact equality when the process naturally introduces lag or rounding\n- The report is being interpreted outside its intended scope\n\n## A practical triage rule\nUse this simple split:\n\n- **If the raw source is wrong or incomplete** → data problem\n- **If the source is fine but the output changes depending on how it’s run** → process problem\n- **If both are fine but the conclusion is still off** → assumption problem\n\n## Best next move\nPick one report instance and work backward:\n1. final output\n2. transformation/query\n3. source extract\n4. underlying records\n\nAt each step, ask:  \n**Did the count, total, or set of records change unexpectedly?**\n\nIf you want, I can help you build a **step-by-step discrepancy checklist** or a **decision tree** you can use on the reports.",
+      "score": 4.4,
+      "summary": "mean=4.40 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:3, 5:2}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Professional, businesslike tone throughout: \"good way to approach this,\" \"structured pass,\" \"practical triage rule.\" No casual or chatty padding."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly concise and action-oriented, with compact sections and bullets. It is somewhat longer than minimal, but avoids rambling and stays focused on first checks and red flags."
+        },
+        {
+          "idx": 3,
+          "score": 4,
+          "reason": "Direct and explicit about conclusions: \"If the raw source is wrong... data problem,\" \"If the source is fine but the output changes... process problem.\" It gives blunt triage rules, though the opening is mildly softened by \"good way to approach this.\""
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong structured formatting: clear headings, numbered steps, bullet lists, and a final triage rule. This is highly organized and easy to verify."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Provides firm correction criteria and does not just validate assumptions; it explicitly tells the user to test assumptions and defines red flags. It could be even more challenging, but it does push back against unverified expectations."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes. Here’s a tighter, practical triage path you can actually run on a messy report set.\n\n## Clean decision path\n\n### Step 1: Prove the discrepancy is reproducible\nRun the same report again with:\n- same inputs\n- same date range\n- same filters\n- same user/account\n- same time of day if relevant\n\n**What to look for**\n- **Same result twice:** move on.\n- **Different result on rerun:** stop blaming the data first. That’s usually a **process problem** unless the source is actively changing underneath you.\n\n**Red flag**\n- If the output changes by more than a trivial amount on identical reruns, quarantine the report.  \n  Practical threshold:  \n  - **Counts:** any change > 0 for a supposedly frozen period  \n  - **Amounts:** change > 0.5–1% on a stable period, or any change that alters a decision threshold  \n  - **Critical metrics:** any change that flips pass/fail, SLA, or exception status\n\n---\n\n### Step 2: Compare against the raw source or a direct extract\nTake the smallest possible slice: one day, one entity, one region, one report segment.\n\nCheck:\n- row count\n- distinct key count\n- total amount\n- duplicate keys\n- missing expected keys\n\n**Interpretation**\n- **Raw source and report disagree on the same slice:** likely **process**\n  - e.g. filters, joins, transformations, cutoffs, rounding, exclusions\n- **Raw source itself is wrong or incomplete:** likely **data**\n- **Raw source matches, but your expectation does not:** likely **assumption**\n\n**Stop blaming data and look at process if**\n- the source extract is clean, but the report output is off\n- the mismatch appears only after a join, filter, aggregation, or formula step\n- the same source data produces different outputs in different report versions\n\n---\n\n### Step 3: Check whether the mismatch is localized or structural\nAsk: does the discrepancy affect:\n- one report only\n- one metric only\n- one date range only\n- one segment only\n- one file/export only\n\n**Interpretation**\n- **Localized to one report/metric/segment:** usually **process**\n- **Spreads across multiple unrelated reports using the same source:** likely **data**\n- **Only appears when comparing to a business expectation or target:** likely **assumption**\n\n**Red flag**\n- If the same anomaly repeats in the same slice across runs, that’s not random noise. It’s a structural issue.\n- If the anomaly appears across multiple reports that should be independent, quarantine the shared upstream source or transformation.\n\n---\n\n### Step 4: Test the transform chain, not the final number\nWalk backward one layer at a time:\n1. final report\n2. grouped output\n3. transformed/intermediate dataset\n4. raw extract\n\nAt each step, compare:\n- row count\n- key count\n- total sum\n- number of nulls\n- number of duplicates\n\n**Interpretation**\n- **Break appears at a specific step:** that step is the problem, usually **process**\n- **No break in the chain, but the number still “looks wrong”:** likely **assumption**\n\nExample:\n- raw extract = 10,000 rows\n- after join = 12,400 rows\n- after aggregation = total is 8% higher than source\n\nThat’s a process red flag, not a data red flag.\n\n---\n\n### Step 5: Challenge the assumption explicitly\nAsk these in order:\n- Am I comparing the same definition?\n- Am I comparing the same time window?\n- Am I comparing the same population?\n- Am I expecting exact equality when the process allows lag, rounding, or exclusions?\n\n**Stop blaming process and look at your assumption if**\n- the numbers are correct under the report’s definition, but not under yours\n- the discrepancy disappears once you align the cutoff, timezone, status logic, or inclusion rules\n- the difference is explainable by expected lag, rounding, or scope\n\n---\n\n# Practical red flags, with thresholds\n\n## 1) Data red flags\nThese mean the source itself may be bad.\n\n### A. Missing volume\nCompare current source volume to a stable baseline:\n- same weekday\n- same period last week\n- same period last month\n- same business cycle\n\n**Red flag**\n- **Counts down or up by more than 5–10%** without a business reason\n- **Any drop to zero** in a source that should always have activity\n- **Missing entire partitions**: a day, region, product, or file absent\n\n### B. Duplicate inflation\nCheck distinct keys vs total rows.\n\n**Red flag**\n- total rows exceed distinct business keys by more than expected\n- duplicate rate changes materially from baseline\n- one entity suddenly appears multiple times in a source that should be unique\n\nPractical trigger:\n- if duplicates are normally near zero and now exceed **1–2%**, investigate\n- if duplicates affect a high-value metric or key population, quarantine sooner\n\n### C. Impossible values\n**Red flag**\n- negative values where impossible\n- future dates\n- amounts/orders/records outside plausible range\n- nulls in fields that are required for the metric\n\n### D. Source-to-source mismatch\nIf two upstream systems should reconcile and don’t:\n- if the gap is **persistent and larger than tolerated variance**\n- if it exceeds your known timing lag\n- if it grows over time instead of converging\n\n---\n\n## 2) Process red flags\nThese mean the pipeline, report logic, or execution path is unstable.\n\n### A. Same inputs, different outputs\nThis is the strongest process signal.\n\n**Red flag**\n- rerun changes output on frozen data\n- two users get different numbers from the same report\n- export vs dashboard vs scheduled run disagree\n\n### B. Break occurs after a transformation\nIf raw data is fine but output shifts after:\n- join\n- filter\n- dedupe\n- grouping\n- timezone conversion\n- rounding\n- formula calculation\n\nThat’s process until proven otherwise.\n\n### C. Version drift\n**Red flag**\n- report logic changed recently\n- ETL/job version changed\n- filter definition changed\n- a column was repurposed\n- someone “fixed” a spreadsheet formula\n\nIf the discrepancy starts right after a change, assume process first.\n\n### D. Fragile dependence\n**Red flag**\n- manual export/import\n- copy-paste steps\n- spreadsheet formulas\n- ad hoc SQL edits\n- undocumented filters\n- hidden parameters\n\nIf one person can break it by rerunning it slightly differently, quarantine it.\n\n---\n\n## 3) Assumption red flags\nThese mean the report may be fine and your expectation is wrong.\n\n### A. Definition mismatch\n**Red flag**\n- same label, different business meaning\n- “active,” “booked,” “closed,” “net,” “approved” defined differently across reports\n- you’re comparing operational and financial versions as if they should match exactly\n\n### B. Timing mismatch\n**Red flag**\n- comparing a live dashboard to a closed-period report\n- comparing local time to UTC\n- comparing event date to processing date\n- comparing data before the load window closes\n\n### C. Scope mismatch\n**Red flag**\n- one report excludes cancellations, test records, or internal users\n- one report includes only final statuses\n- one report covers a subset of entities\n\n### D. Tolerance mismatch\n**Red flag**\n- you expect exact equality when rounding, lag, or partial updates are normal\n- the difference is within a known tolerance band\n\n---\n\n# When to quarantine the report\n\nQuarantine it if any of these are true:\n\n1. **Identical reruns do not match**\n2. **A frozen source does not reconcile to the report**\n3. **The discrepancy affects a key metric, threshold, or decision**\n4. **The gap is large enough to change action**\n5. **The same issue appears in multiple downstream reports**\n6. **You can’t identify whether the mismatch is due to timing, definition, or logic**\n7. **There’s a recent change in source, ETL, or report logic and the issue started after it**\n\n### Practical quarantine rule\nQuarantine if the discrepancy is:\n- **> 1% on a stable operational metric**, or\n- **any amount on a small denominator**, or\n- **any difference that changes a business decision**, or\n- **persistent across 2+ reruns with no explanation**\n\n---\n\n# Fast triage summary\n\nUse this sequence:\n\n1. **Rerun identical report**\n   - changes? → process\n2. **Compare to raw source slice**\n   - source wrong? → data\n   - source right, report wrong? → process\n3. **Check whether the issue is localized**\n   - one metric/report/segment? → process\n   - multiple unrelated outputs? → data\n4. **Walk backward through transforms**\n   - break appears at a step? → process\n5. **Check definitions, timing, scope**\n   - mismatch there? → your assumption\n\nIf you want, I can turn this into a one-page **yes/no decision tree** or a **triage worksheet** you can use while reviewing a report.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Professional and businesslike: \"tighter, practical triage path,\" \"Clean decision path,\" and no casual filler. Tone is controlled and no-nonsense."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly concise and action-oriented, with a structured checklist. It is somewhat long, but the content is dense and avoids decorative padding."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Blunt and explicit: \"stop blaming the data first,\" \"That’s usually a process problem,\" and repeated direct red-flag thresholds. It states conclusions plainly."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong structured format throughout: numbered steps, subheadings, bullets, red flags, thresholds, and a fast triage summary. Very checklist-like."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Provides firm correction and challenges assumptions directly, e.g. \"Stop blaming data and look at process,\" \"likely assumption,\" and \"assume process first.\""
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "agent_response": "Absolutely. Here’s the **messy-world version**: mixed failures, partial breaks, and thresholds that depend on the shape of the report.\n\n# 1) Ugly decision tree for mixed failure modes\n\n## Start here: don’t ask “what is it?” Ask “where does it first go off the rails?”\nWork backward in layers:\n\n1. **Final report**\n2. **Metric calculation**\n3. **Join / filter / dedupe / transform**\n4. **Raw extract**\n5. **Source system**\n\nAt each layer, compare:\n- row count\n- distinct key count\n- total amount\n- null count\n- duplicate count\n\n### Branch A: one metric is bad, others are fine\n**Likely:** process issue in that metric’s logic  \nExamples:\n- one formula is wrong\n- one join multiplies rows\n- one filter excludes a subset\n\n**Rule:** if the problem is isolated to one metric or one segment, assume **process first**, even if the source has some noise.\n\n---\n\n### Branch B: source is slightly wrong, and the report makes it worse\n**Likely:** mixed data + process issue  \nExamples:\n- source has 0.8% duplicates\n- join turns that into 6% inflated totals\n- a missing status code drops a subset entirely\n\n**Rule:** if the source is imperfect but the discrepancy gets materially larger after transformation, the **process is amplifying the data problem**.\n\n---\n\n### Branch C: raw source and report both look “correct,” but the business answer is still wrong\n**Likely:** assumption issue  \nExamples:\n- wrong cutoff date\n- timezone mismatch\n- comparing booked vs recognized\n- comparing all statuses vs final statuses\n\n**Rule:** if the numbers reconcile technically but still fail the business expectation, stop blaming data/process and check **definition, scope, timing**.\n\n---\n\n### Branch D: one metric is garbage, another is fine from the same report\n**Likely:** partial process failure  \nExamples:\n- one join path broken\n- one calculation changed\n- one column repurposed\n- one dimension has bad mapping\n\n**Rule:** if the failure is selective, it is usually **not** a source-wide data problem.\n\n---\n\n### Branch E: everything is off, but only for one date range, one region, or one file\n**Likely:** process or assumption, not general data corruption  \nExamples:\n- cutoff boundary\n- timezone\n- partition issue\n- filter logic\n- incomplete load window\n\n**Rule:** if the problem is perfectly localized, look for a **rule mismatch** or **pipeline boundary**, not a broad data failure.\n\n---\n\n# 2) Thresholds that are actually usable\n\nYou need thresholds by report type, not one universal number.\n\n## A. Stable daily volume\nUse this baseline:\n- **same weekday**\n- over the **prior 4 weeks**\n- compare to the **median**, not the average\n\n### Noise band\n- **±1–2%**: usually noise for stable, high-volume reports\n- **2–5%**: investigate\n- **>5%**: likely break unless there’s a real business event\n\n### Quarantine threshold\n- **>5%** on a stable daily series with no business explanation\n- **any change that alters a decision, SLA, or exception flag**\n\n---\n\n## B. Low-count reports\nIf the report usually has small numbers, percentages are misleading.\n\n### Use absolute change instead\n- **1 row off** may be trivial in a 10,000-row report\n- **1 row off** may be fatal in a 12-row report\n\n### Practical rule\n- if the expected count is **under 50**, treat **1 row** as potentially meaningful\n- if the expected count is **under 10**, treat **any mismatch** as a real issue unless explained\n\n### Quarantine threshold\n- any mismatch that changes a status, approval, reconciliation, or pass/fail result\n\n---\n\n## C. Amount-based reports\nUse both relative and absolute thresholds.\n\n### Investigate if:\n- **>1%** on a stable, high-volume monetary metric\n- or the absolute difference exceeds a business-relevant amount\n\n### Quarantine if:\n- the difference changes a downstream decision\n- the difference exceeds the tolerance used by finance/ops\n- the difference is persistent across reruns\n\n---\n\n## D. Sparse or intermittent reports\nIf the report only runs occasionally or has many zeroes:\n- compare to the **last comparable run**\n- compare to the **same cycle last month/quarter**\n- use **presence/absence**, not just percent change\n\n### Quarantine threshold\n- missing a whole expected segment\n- zero where nonzero is normal\n- one missing record when that record drives the outcome\n\n---\n\n# 3) What counts as noise vs a real break\n\n## Noise\nTreat it as noise if:\n- it stays within the normal band for that report\n- it is explainable by timing, rounding, or late-arriving records\n- it does not change the business action\n- it is consistent with prior variation\n\n## Real break\nTreat it as a break if:\n- it crosses the normal band and persists\n- it appears after a change in source, ETL, or report logic\n- it affects only certain slices in a way that suggests a rule failure\n- it changes a decision, threshold, or exception status\n\n---\n\n# 4) When to lock/quarantine the report\n\nLock it if any of these are true:\n\n- **Same input, different output**\n- **A frozen period still moves**\n- **The mismatch is larger than the report’s normal variation band**\n- **The discrepancy changes a business decision**\n- **One metric is broken in a way that could contaminate others**\n- **The issue is reproducible but not yet explained**\n- **The report is used operationally and you can’t trust the current run**\n\n### Practical lock rule\nIf you can’t explain the mismatch in one sentence, and the report is used for action, **stop using it until you can**.\n\n---\n\n# 5) One-line rules for each branch\n\n## Data\n**Rule:** If the raw numbers are wrong before transformation, it’s a data problem.\n\n## Process\n**Rule:** If the same source gives different outputs depending on how it’s run or transformed, it’s a process problem.\n\n## Assumption\n**Rule:** If the numbers are technically consistent but don’t match the business meaning you expected, it’s an assumption problem.\n\n---\n\n# 6) Fast “while staring at the numbers” checklist\n\nAsk these in order:\n\n1. **Did the same run change?**\n   - yes → process\n2. **Is the issue only in one metric or slice?**\n   - yes → process\n3. **Does the raw source already show the problem?**\n   - yes → data\n4. **Does the discrepancy grow after joins/filters/formulas?**\n   - yes → process amplifying data\n5. **Is the mismatch actually a definition, timing, or scope difference?**\n   - yes → assumption\n\nIf you want, I can turn this into a **single-page field checklist** with checkboxes and stop/go decisions.",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly professional and businesslike: \"Here’s the messy-world version\" and the structured diagnostic framing are controlled and practical. Slightly informal wording like \"Ugly decision tree\" and \"staring at the numbers\" keeps it from being fully no-nonsense."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Generally concise and action-oriented, with clear bullets and rules. It is somewhat long, but it avoids rambling and decorative padding, focusing on checks, thresholds, and quarantine rules."
+        },
+        {
+          "idx": 3,
+          "score": 4,
+          "reason": "Direct and explicit about conclusions: \"Likely: process issue,\" \"Rule: if... assume process first,\" and \"stop blaming data/process and check definition, scope, timing.\" It does hedge a bit with \"likely\" and \"usually,\" so not maximally blunt."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong structured formatting throughout: numbered sections, branches A-E, bullet lists, thresholds, and a checklist. This is highly organized and easy to verify."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Provides firm correction and pushback rather than echoing assumptions, e.g. \"stop blaming data/process and check definition, scope, timing\" and \"If you can’t explain the mismatch in one sentence... stop using it.\" It is evidence-backed, though not aggressively confrontational."
+        }
+      ]
+    },
+    {
+      "turn": 4,
+      "agent_response": "## FIELD CARD\n\n### 1) High-volume stable reports\n\n**Branch condition**  \nDaily or frequent report, expected to be stable, large counts/amounts.\n\n**What to compare**  \n- Current run vs **4-week same weekday median**\n- Also check **same cutoff time**, **same timezone**, **same filters**\n- Compare:\n  - row count\n  - distinct key count\n  - total amount\n  - nulls / duplicates\n  - one or two key metrics\n\n**What result means stop here**  \n- Same inputs, different outputs  \n- Current value outside normal band:\n  - counts: **>2%** vs baseline\n  - amounts: **>1%** vs baseline\n  - any change that flips a decision / SLA / exception\n- Break appears after a join, filter, dedupe, or formula\n\n**What result means keep going**  \n- Difference is within band and explained by timing, rounding, or late-arriving records  \n- Raw source matches report, but business expectation does not → check assumptions  \n- Only one metric is off → isolate that metric’s transform path\n\n---\n\n### 2) Low-count reports\n\n**Branch condition**  \nExpected counts are small, sparse, or one row matters.\n\n**What to compare**  \n- Current run vs **last comparable run**\n- If possible, compare to **same cycle last month/quarter**\n- Check:\n  - exact row presence\n  - key-by-key match\n  - status changes\n  - any missing/extra record\n\n**What result means stop here**  \n- **Any missing or extra row** when expected count is under 10  \n- **1 row off** when expected count is under 50 and the row affects outcome  \n- Any mismatch that changes approval, reconciliation, pass/fail, or exception status\n\n**What result means keep going**  \n- Difference is only in a non-driving record  \n- Difference is explained by known lag, late load, or allowed exclusion  \n- Business meaning still matches even if the count is off by 1\n\n---\n\n### 3) Mixed-failure cases\n\n**Branch condition**  \nSome metrics are fine, some are bad; or source is slightly wrong and transform makes it worse.\n\n**What to compare**  \n- Compare **each metric separately**\n- Compare **raw source → intermediate → final**\n- Check:\n  - where the first break appears\n  - whether the error grows after join/filter/aggregate\n  - whether the same slice fails across multiple reports\n\n**What result means stop here**  \n- One metric breaks, others hold → process on that path  \n- Source is slightly wrong and output gets materially worse after transform → process amplifying data  \n- Same anomaly repeats in one slice across reports → shared upstream issue  \n- Raw numbers reconcile, but business answer still wrong → assumption issue\n\n**What result means keep going**  \n- Break is isolated to a known excluded slice  \n- Error stays flat through the chain and is within tolerance  \n- Only the interpretation is wrong, not the numbers\n\n---\n\n## BASELINE RULE\n\n**Use this first:**  \n- **4-week same weekday median**\n- Match:\n  - same timezone\n  - same cutoff time\n  - same reporting window\n  - same business calendar if relevant\n\n**If there are holidays, month-end spikes, or known cycle effects:**  \n- use the **last comparable business day in the same cycle**\n- if that’s not available, use the **median of the last 3 comparable cycles**\n- if the report is monthly, compare to **same day in prior month-end cycle**, not a random 4-week slice\n\n---\n\n## FALLBACK BASELINE RULE\n\nUse fallback if the 4-week baseline is contaminated, missing, or obviously distorted.\n\n**Fallback order**\n1. **Prior clean comparable period**\n2. **Same weekday from the last 3 clean cycles**\n3. **Peer group baseline** if the report is segmented\n4. **Known-good frozen extract** if available\n\n**If baseline is contaminated**\n- drop the contaminated periods\n- do not average bad weeks into the baseline\n- if fewer than 3 clean points remain, treat the baseline as weak and investigate manually\n\n---\n\n## QUARANTINE RULE\n\nQuarantine the report if any of these are true:\n- same input gives different output\n- a frozen period still moves\n- mismatch exceeds normal band:\n  - **high-volume counts: >2%**\n  - **high-volume amounts: >1%**\n  - **low-count: any missing/extra row that matters**\n- discrepancy changes a decision, SLA, approval, or exception\n- issue repeats after rerun\n- issue appears in multiple downstream reports\n- source, process, and assumption all remain plausible and unresolved\n\n---\n\n## DON’T OVERREACT RULE\n\nDo **not** quarantine yet if:\n- difference is inside normal variation for that report\n- the gap is explained by late-arriving data, rounding, or cutoff timing\n- the mismatch is only in a non-critical slice\n- the report is sparse and the difference does not affect outcome\n- the issue disappears when definitions, scope, or timing are aligned\n\n---\n\n## ONE-LINE BRANCH RULES\n\n**Data:** raw source is wrong, missing, duplicated, or impossible before transformation.  \n**Process:** same source changes after rerun, join, filter, dedupe, or formula.  \n**Assumption:** numbers are consistent, but your definition, timing, or scope is wrong.\n\nIf you want, I can format this into a **literal one-page card** with only labels and checkboxes.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Professional, businesslike style throughout: headings like \"FIELD CARD,\" \"Branch condition,\" and terse diagnostic rules. No casual friendliness or decorative language."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly concise and action-oriented, with compact bullets and thresholds. It is somewhat long because it covers multiple branches, but it avoids rambling and repetition."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Blunt and explicit: \"What result means stop here,\" \"Quarantine the report,\" and clear thresholds like \">2%\" and \"any missing or extra row.\" It states limits and red flags directly."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strongly structured as a checklist/decision card with numbered sections, bullets, branch conditions, and one-line rules. Very easy to verify and scan."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Provides firm correction and pushback criteria, e.g. \"Do not quarantine yet if...\" and \"If baseline is contaminated... do not average bad weeks into the baseline.\" It does not just echo assumptions."
+        }
+      ]
+    }
+  ]
+}

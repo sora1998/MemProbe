@@ -1,0 +1,137 @@
+{
+  "user_id": "user_033",
+  "task": "I’ve got a process issue where one bad step could snowball, and I’m trying to decide how tight the controls need to be without making the whole thing ridiculous. Can you help me sketch a practical way to handle it and what I should be watching for if something starts to slip?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "formality_preference",
+      "short": "Prefers professional, no-nonsense interaction",
+      "explanation": "She would likely respond best to a controlled, businesslike style rather than friendliness for its own sake. Given her guarded and precision-focused persona, overly casual phrasing would probably feel sloppy or intrusive."
+    },
+    {
+      "idx": 2,
+      "dimension": "verbosity_preference",
+      "short": "Wants concise answers, not rambling",
+      "explanation": "She seems to value efficiency and would likely dislike long-winded explanations that repeat themselves. She probably wants enough information to act on, with no decorative padding."
+    },
+    {
+      "idx": 3,
+      "dimension": "directness_preference",
+      "short": "Prefers blunt, unsoftened answers",
+      "explanation": "Her skeptical, control-oriented style suggests she would rather hear the point plainly than receive hedged reassurance. She is likely to trust answers more when they are explicit about risks, limits, and conclusions."
+    },
+    {
+      "idx": 4,
+      "dimension": "format_preference",
+      "short": "Likes structured lists and checklists",
+      "explanation": "She appears to prefer information that is organized and easy to verify. A clean format with steps, bullets, or checklists would fit her habit of tracking details and would reduce ambiguity."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Accepts firm correction when needed",
+      "explanation": "She likely does not want the assistant to simply echo her assumptions if something is wrong or risky. A direct challenge, especially when backed by evidence, would probably be more useful to her than polite agreement."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — the trick is to control the **steps that lock in error** and monitor the **steps that expose error**.\n\n## Practical way to handle it\n1. **Identify the lock-in steps**\n   - the first point where a mistake becomes hard to undo\n   - identity, weighing, first mix, first transfer, dilution, setup, or any irreversible step\n\n2. **Put the tightest control there**\n   - verify before the step\n   - verify immediately after the step\n   - don’t let it drift unattended\n\n3. **Use lighter control on exposure steps**\n   - later checks, final assays, summary reviews\n   - these tell you something is wrong, but they usually don’t fix it\n\n4. **Watch for early warning signs**\n   - one value moving while the rest stay normal\n   - replicate spread widening\n   - controls trending, not just failing\n   - timing or temperature drift\n   - step change after maintenance, swap, or pause\n\n## How tight the controls should be\nMake them tight enough that:\n- the lock-in step is checked live\n- the error can be caught before it spreads\n- the run can still be defended later\n\nDon’t make every step equally rigid. That just creates busywork.\n\n## What to do if something starts to slip\n- **Small, isolated slip**: verify immediately and keep only if the boundary is clean\n- **Repeated or directional slip**: treat it as real\n- **Any control trend or step change**: investigate before continuing\n- **If you can’t name the first bad point**: assume the problem is not contained\n\n## Simple rule\nIf a step can **lock in the error**, control it hard.  \nIf a step only **reveals the error**, use it to detect, not to rescue.\n\nIf you want, I can turn this into a **lock-in / exposure / action** table.",
+      "score": 4.6,
+      "summary": "mean=4.60 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:2, 5:3}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Professional and controlled tone throughout, e.g. \"the trick is to control\" and \"Don’t make every step equally rigid.\" It is businesslike, though not especially formal."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Fairly concise and action-oriented. It gives a compact framework with bullets and avoids long explanation, though there is some repetition of the core rule."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Blunt and unsoftened: \"Treat it as real,\" \"assume the problem is not contained,\" and \"Don’t make every step equally rigid. That just creates busywork.\" It states conclusions plainly."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong structured format with numbered sections, bullets, and a simple rule. It is easy to scan and verify."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Provides direct pushback against over-control and against assuming containment: \"Don’t make every step equally rigid\" and \"If you can’t name the first bad point: assume the problem is not contained.\""
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — here’s a tighter working version.\n\n## Lock-in / exposure table\n\n| Step type | What can go wrong | Recoverable? | What gets documented | Stop point |\n|---|---|---:|---|---|\n| **Identity / label / sample ID** | wrong item, mix-up, mislabel | Usually **no** once used | ID verified, who checked, time, any mismatch | **Stop immediately** if mismatch or uncertainty |\n| **Weighing / measuring starting material** | wrong mass/volume, wrong lot, wrong count | Sometimes, only if caught before use | actual value, target, tolerance, lot, verifier | **Stop** if outside limit or not traceable |\n| **First mix / first transfer** | incomplete mix, carryover, loss, contamination | Often **not** cleanly recoverable | time, operator, vessel, transfer amount, any deviation | **Stop** if mix/transfer is uncertain or interrupted |\n| **Dilution / reconstitution** | wrong dilution, wrong solvent, incomplete dissolve | Sometimes, if caught immediately | prep steps, calculations, solvent, timing | **Stop** if calculation or prep is off |\n| **Setup / calibration / instrument prep** | wrong setting, bad calibration, bad zero, wrong method | Usually recoverable only before run starts | settings, calibration status, acceptance check | **Stop** if setup check fails |\n| **Hold / waiting / transport** | drift, temp excursion, degradation, contamination | Usually **no** after the fact | start/end time, temp, storage condition, any excursion | **Stop** if hold window or temp is breached |\n| **In-process check** | exposes a problem already locked in | Not usually recoverable | result, limit, comparison to prior point | **Hold/stop** if check fails or trend is directional |\n| **Final assay / release check** | reveals earlier error | Not a rescue step | final result, acceptance, disposition | **Stop** if it fails or cannot be explained |\n\n---\n\n## Plain slip criteria\n\nTreat it as a real slip if you see any of these:\n\n- **2 points in a row move the same way**\n- **3 points out of 5 move in the same direction**\n- **a change bigger than your preset limit**\n- **replicate spread clearly widens**\n- **a step change after maintenance, pause, swap, or temperature shift**\n- **you can’t name the first bad point**\n\n### Hold the run if:\n- one point is odd but the next point is normal\n- the change is small and isolated\n- the boundary is still clean\n\n### Stop or investigate if:\n- the change repeats\n- the direction is the same across points\n- controls or suitability move with it\n- you can’t separate good from bad cleanly\n\n---\n\n## What to document\nAt the lock-in step:\n- what happened\n- time\n- who did it\n- what was checked\n- what the result was\n- whether it stayed within limit\n- any deviation or correction\n\nAt exposure steps:\n- the observed result\n- whether it matches prior points\n- whether it changes the call\n\n---\n\n## Hard rule\nIf the step can **lock in the error**, control it live.  \nIf the step only **shows the error**, use it to decide whether to stop.\n\nIf you want, I can turn this into a **one-page bench table** with a “continue / hold / stop” column.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Uses a controlled, businesslike tone: \"here’s a tighter working version,\" \"Hard rule,\" and no casual filler."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Fairly concise and action-oriented, with compact tables and bullets. Slightly more elaborate than minimal, but not rambling."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Direct and unsoftened: \"Stop immediately,\" \"Stop or investigate if,\" \"Hard rule.\" It states thresholds plainly without hedging."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong structured format with a table, bullet lists, and explicit \"continue / hold / stop\" logic."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Provides firm correction and clear stop criteria instead of just agreeing, e.g. \"Stop immediately\" and \"If the step can lock in the error, control it live.\""
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yes — here’s the tighter version with **hard stop vs watch**, plus **decision owner** and **allowed / not allowed**.\n\n## Lock-in / exposure table\n\n| Step type | What can go wrong | Recoverable? | What gets documented | Hard stop / hold | Watch / verify immediately | Decision owner |\n|---|---|---:|---|---|---|---|\n| **Identity / label / sample ID** | wrong item, mix-up, mislabel | Usually **no** once used | ID verified, who checked, time, mismatch if any | Any mismatch, missing traceability, missing timestamp | One label ambiguity before use | Designated reviewer / lead |\n| **Weighing / measuring starting material** | wrong mass/volume, wrong lot, wrong count | Sometimes, only if caught before use | actual value, target, tolerance, lot, verifier | Outside preset acceptance limit; undocumented correction | Small mismatch that is still traceable | Operator + reviewer |\n| **First mix / first transfer** | incomplete mix, carryover, loss, contamination | Often **not** cleanly recoverable | time, vessel, transfer amount, any deviation | Interrupted or uncertain mix/transfer; 2 points drifting after this step | One odd point, next point normal | Run owner |\n| **Dilution / reconstitution** | wrong dilution, wrong solvent, incomplete dissolve | Sometimes, if caught immediately | prep steps, calculations, solvent, timing | Calculation error, wrong solvent, incomplete dissolve | Small shift still inside limit | Operator + reviewer |\n| **Setup / calibration / instrument prep** | wrong setting, bad calibration, bad zero, wrong method | Usually recoverable only before run starts | settings, calibration status, acceptance check | Setup check fails; calibration out of spec | Borderline setup that is still within limit | Instrument lead |\n| **Hold / waiting / transport** | drift, temp excursion, degradation, contamination | Usually **no** after the fact | start/end time, temp, storage condition, any excursion | Temp/time window breached; step change after pause | Small shift with no breach | Run owner |\n| **In-process check** | exposes a problem already locked in | Not usually recoverable | result, limit, comparison to prior point | Any result outside preset acceptance limit; 3 of 5 points drifting same way; replicate spread beyond normal band | One isolated odd point with next point back in line | Run owner |\n| **Final assay / release check** | reveals earlier error | Not a rescue step | final result, acceptance, disposition | Missing traceability or undocumented correction; final fail | Borderline result still within limit but pattern changed | Reviewer / approver |\n\n---\n\n## Slip criteria\n\n### Hard stop / hold\n- any result outside a **pre-set acceptance limit**\n- **2 consecutive points** on the same side of target when they shouldn’t be\n- **3 of 5 points** drifting the same way\n- any step change after **maintenance, power loss, temp excursion, or operator swap**\n- replicate **RSD / spread beyond the method’s normal band**\n- missing **traceability, timestamp, or documented correction**\n\n### Watch / verify immediately\n- one isolated odd point with the next point back in line\n- a small shift that stays inside the limit but breaks the usual pattern\n- borderline condition at a **non-lock-in** step\n\n---\n\n## Allowed / not allowed before release\n\n| Situation | Allowed | Not allowed |\n|---|---|---|\n| **Hard stop / hold** | pause, verify, document, escalate | continue as if nothing happened |\n| **Watch** | verify immediately, repeat if needed, document placeholder | ignore, normalize, or release without review |\n| **Clear pass** | continue and close out normally | overreact and rebuild the run for no reason |\n\n---\n\n## Documentation rule\n- **If it changes validity, document it now**\n- **If it’s not critical, timestamp it and finish the note at the next safe gap**\n- **If you’re alone and can’t write, at minimum mark the event so it can’t disappear into memory**\n\nIf you want, I can compress this into a **one-page bench table** with just the rows and the hard stop/watch columns.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Professional, controlled style: “here’s the tighter version,” “hard stop vs watch,” and the response stays businesslike rather than chatty."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly concise and action-oriented, with a compact table and short rules. It is somewhat long, but not rambling or padded."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Direct and blunt: “Hard stop / hold,” “Not allowed,” “continue as if nothing happened,” and explicit thresholds like “any result outside a pre-set acceptance limit.”"
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong structured format: multiple tables, bullet lists, and clearly labeled sections (“Slip criteria,” “Allowed / not allowed,” “Documentation rule”)."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Provides firm correction and clear limits instead of echoing assumptions, e.g. “Usually no once used,” “Not a rescue step,” and explicit hard-stop criteria."
+        }
+      ]
+    }
+  ]
+}

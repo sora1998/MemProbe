@@ -1,0 +1,49 @@
+{
+  "user_id": "user_033",
+  "task": "I’m cleaning up a small labeling workflow, and I want to make sure I’m not setting myself up for a stupid mix-up later. Can you help me think through a simple way to organize the main set, the backups, and the notes so nothing gets crossed?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.3999999999999995,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — the simplest way is to give each thing a **different role, a different name, and a different place**.\n\nA clean setup could be:\n\n### 1) Main set\n- Keep the active/official labels in one clearly named folder or box:\n  - `MAIN`\n  - `ACTIVE`\n  - `CURRENT`\n- Only this set is used for day-to-day work.\n\n### 2) Backups\n- Store backups separately and make them obviously not for daily use:\n  - `BACKUP`\n  - `ARCHIVE`\n  - `OLD_VERSIONS`\n- If possible, add dates:\n  - `BACKUP_2026-04-29`\n\n### 3) Notes\n- Keep notes in a separate document or notebook:\n  - `NOTES`\n  - `LABEL_GUIDE`\n  - `CHANGE_LOG`\n- Don’t mix notes into the label set itself if you can avoid it.\n\n### 4) Use a simple naming rule\nFor example:\n- `project_main`\n- `project_backup_01`\n- `project_notes`\n\nOr if you want something even harder to confuse:\n- `A_MAIN`\n- `B_BACKUP`\n- `C_NOTES`\n\n### 5) Add one visible marker\nUse a color or tag system:\n- Main = green\n- Backup = gray\n- Notes = blue\n\n### 6) Keep a tiny log\nA short change log helps prevent accidental swaps:\n- date\n- what changed\n- where the latest version is\n\nExample:\n- `2026-04-29: Updated main labels. Backup saved as project_backup_2026-04-29.`\n\nIf you want, I can also help you turn this into a **very simple folder structure** or a **one-line naming convention** you can reuse every time.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Mostly fine, but it’s still a little generic. I want something I can actually use without second-guessing myself later.\n\nGive me a tighter scheme with:\n- one naming pattern for main / backup / notes\n- where each one physically lives\n- what gets updated first, and what never gets overwritten\n- a rule for duplicate labels so they don’t end up in the same folder by accident\n\nKeep it simple. I don’t need a lecture. Just a clean layout I can follow every time.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Use this every time:\n\n## Naming pattern\n`[PROJECT]_[ROLE]_[YYYY-MM-DD]`\n\nExamples:\n- `LabelSet_MAIN_2026-04-29`\n- `LabelSet_BACKUP_2026-04-29`\n- `LabelSet_NOTES_2026-04-29`\n\nIf you want it even harder to mix up, keep the role in all caps and never vary it.\n\n## Physical layout\n- **Main** → one working folder only: `01_MAIN`\n- **Backup** → separate folder: `02_BACKUP`\n- **Notes** → separate folder or file: `03_NOTES`\n\nDo not store notes inside `01_MAIN`.\n\n## Update order\n1. Update **MAIN**\n2. Save a copy to **BACKUP**\n3. Update **NOTES** last\n\n## Never overwrite\n- **BACKUP**: never edit in place\n- **NOTES**: append only, don’t replace old entries\n- **MAIN**: only this one gets active edits\n\n## Duplicate label rule\nIf a label already exists, don’t put the new one in the same folder.\n\nUse this rule:\n- **Same label, different version** → move to `02_BACKUP`\n- **Same label, same purpose** → keep only the newest in `01_MAIN`\n- **Anything uncertain** → goes to `02_BACKUP`, not `01_MAIN`\n\n## Simple daily flow\n- Put the current working set in `01_MAIN`\n- Save a dated copy in `02_BACKUP`\n- Keep changes and decisions in `03_NOTES`\n\nIf you want, I can turn this into a 3-line checklist you can paste into your workflow notes.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Close, but I want it a little stricter. The part I still don’t like is the duplicate-label rule — “anything uncertain goes to backup” is fine, but I want a hard cutoff for when a label is considered a duplicate versus a new item. Also, notes should be append-only, yes, but I’d rather have a rule that says where the notes file lives so it doesn’t drift into the working folder.\n\nGive me the same scheme, just tighter:\n- one exact naming pattern\n- one exact folder layout\n- one exact trigger for backup\n- one exact trigger for duplicate vs new\n\nNo extra explanation. Just the finished version I can use.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Use this exact scheme:\n\n## Naming pattern\n`[PROJECT]_[ROLE]_[YYYY-MM-DD]`\n\nExamples:\n- `LabelSet_MAIN_2026-04-29`\n- `LabelSet_BACKUP_2026-04-29`\n- `LabelSet_NOTES_2026-04-29`\n\n## Folder layout\n- `01_MAIN/` → active working set only\n- `02_BACKUP/` → all dated copies and duplicates\n- `03_NOTES/` → notes file only\n\n## Backup trigger\nCreate a backup **after every change to MAIN**.\n\n## Duplicate vs new trigger\n- **Duplicate** = same label text **and** same purpose as an existing label\n- **New item** = different label text **or** different purpose\n\n## Rules\n- If it is a **duplicate**, put it in `02_BACKUP/`\n- If it is a **new item**, put it in `01_MAIN/`\n- `03_NOTES/LabelSet_NOTES_YYYY-MM-DD` stays only in `03_NOTES/`\n- Never store notes in `01_MAIN/`\n- Never overwrite a backup",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That works.\n\n- Naming: `[PROJECT]_[ROLE]_[YYYY-MM-DD]`\n- Layout: `01_MAIN/`, `02_BACKUP/`, `03_NOTES/`\n- Backup trigger: after every change to `MAIN`\n- Duplicate trigger: same label text + same purpose = duplicate; anything else = new\n\nClean enough.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    }
+  ]
+}

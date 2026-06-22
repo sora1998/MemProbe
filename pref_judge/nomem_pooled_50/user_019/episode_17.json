@@ -1,0 +1,137 @@
+{
+  "user_id": "user_019",
+  "task": "I’m reviewing a change notice for a small part we already use, and the paperwork is complete but the supporting test package is still coming in. What are the main things you’d check before deciding whether it can stay in the current build or needs to wait for the next round of verification?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "directness_preference",
+      "short": "Blunt, no fluff",
+      "explanation": "She responds best to straight answers without hedging or performative softness. Her persona is skeptical and exacting, so she likely prefers help that states the issue clearly and gets to the point. Overly cautious wording would probably feel inefficient to her."
+    },
+    {
+      "idx": 2,
+      "dimension": "detail_level_preference",
+      "short": "Enough context to trust the answer",
+      "explanation": "She likely wants the key caveats and failure modes, not a vague headline. Her reliability-oriented mindset suggests she values context when it changes the conclusion or action. She probably dislikes being told something is “fine” without the conditions that make it fine."
+    },
+    {
+      "idx": 3,
+      "dimension": "format_preference",
+      "short": "Bullets and checklists preferred",
+      "explanation": "She seems likely to prefer responses that are easy to audit and act on. A structured format fits her methodical style and makes it easier to spot gaps, exceptions, or weak logic. Dense prose would probably feel slower and less useful."
+    },
+    {
+      "idx": 4,
+      "dimension": "autonomy_support_preference",
+      "short": "Collaborative, but not hand-holding",
+      "explanation": "She likely wants the assistant to work with her rather than dictate to her. She values control and personal autonomy, so prescriptive overreach would be a poor fit. At the same time, she probably appreciates a clear recommendation once the options are laid out."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Welcomes firm pushback",
+      "explanation": "She is likely comfortable being challenged when a claim is weak, risky, or sloppy. Her reliability-first mindset suggests she would rather get corrected than be coddled. Soft agreement without scrutiny would probably reduce her trust in the help."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Before deciding, I’d check a few practical risk items:\n\n- **What actually changed**\n  - Is it a true form/fit/function no-change, or did material, process, supplier, tooling, location, or spec limits change?\n  - Does the change affect any **critical characteristics** or safety/regulatory requirements?\n\n- **Impact to current build**\n  - Is the part already qualified in the exact configuration being built?\n  - Would the change affect **interfaces**, tolerances, reliability, or downstream assembly yield?\n\n- **Evidence available now**\n  - Review the completed paperwork for approval status, revision control, and traceability.\n  - Confirm whether any **interim data** exists: first article, dimensional report, process validation, material certs, or past equivalent testing.\n\n- **What’s missing from the test package**\n  - Identify whether the missing tests are **mandatory qualification tests** or just supporting/confirmatory data.\n  - Ask: can the omitted package change the risk assessment, or is it mainly documentation completion?\n\n- **Risk and containment**\n  - Check if there’s a temporary containment plan: lot traceability, inspection tightening, limited quantity, or use in noncritical builds only.\n  - Determine whether a deviation/concession is needed if you proceed before the test package arrives.\n\n- **Supplier / process stability**\n  - Is this a mature, stable process or a recent change with limited history?\n  - Any recent escapes, yield shifts, or process alerts?\n\n- **Decision criteria**\n  - If the change is low-risk, fully documented, and doesn’t affect critical requirements, it may stay in the current build with controlled release.\n  - If the missing test package covers qualification or any critical characteristic, it should likely wait for the next verification cycle.\n\nA good rule is: **if you can’t explain why the missing test data is not needed to prove conformity, hold it until the package is complete.**\n\nIf you want, I can turn this into a short go/no-go checklist you can use on the review.",
+      "score": 4.4,
+      "summary": "mean=4.40 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:3, 5:2}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly direct and practical: \"Before deciding, I’d check a few practical risk items\" and the final rule is blunt. Minor softness remains in phrases like \"it may stay\" and \"likely wait.\""
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Gives concrete caveats and failure modes: \"critical characteristics,\" \"mandatory qualification tests,\" \"deviation/concession,\" and \"if you can’t explain why the missing test data is not needed... hold it.\" This is exactly the kind of context that changes the decision."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Uses clear bullets and sub-bullets throughout, plus a closing offer to \"turn this into a short go/no-go checklist.\" Strong match for structured, auditable format."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative rather than dictating: \"I’d check,\" \"Ask,\" \"If you want, I can turn this into...\" It does give a recommendation, but it’s framed as conditional and decision-supportive rather than hand-holding."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Includes firm pushback and a clear challenge: \"if you can’t explain why the missing test data is not needed to prove conformity, hold it until the package is complete.\" It also distinguishes mandatory tests from supporting data, which is skeptical and corrective."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Absolutely — here’s a tighter **go/no-go checklist / decision table** that separates **paper complete** from **evidence complete**.\n\n## 1) First gate: what changed?\nCheck whether the change touches any of these:\n\n- **Material**\n- **Process**\n- **Supplier**\n- **Tooling / die / mold / fixture**\n- **Manufacturing location**\n- **Drawing / spec revision**\n- **Sub-tier source or special process**\n\nIf **none** of those changed, and it’s truly identical build-to-build, risk is usually low.\n\nIf **any** of those changed, move to the next gate.\n\n---\n\n## 2) Criticality gate: does it touch CTQ or regulatory items?\nAsk:\n\n- Does it affect a **CTQ**?\n- Does it affect **fit, form, function**, durability, reliability, or safety?\n- Does it touch any **regulatory / compliance / certification** requirement?\n\n**If yes to any:** missing evidence matters much more, and release should be much harder to justify.\n\n---\n\n## 3) Evidence gate: is the missing test package required or just supporting?\nSeparate the paperwork from the proof.\n\n### Paper complete\nMeans:\n- change notice is approved\n- revision is controlled\n- traceability exists\n- signatures / workflow are done\n\n### Evidence complete\nMeans:\n- required qualification tests are done\n- results are reviewed\n- acceptance criteria are met\n- nothing is still “pending” that proves conformity\n\nNow ask:\n\n- Are the missing tests part of the **qualification / validation requirement**?\n- Or are they just **supporting / confirmatory** data?\n\n**If the missing tests are required for qualification:** do not treat the part as fully cleared.\n\n**If they’re only supporting data:** you may have a path to limited release, depending on risk.\n\n---\n\n## 4) Containment gate: can it be used safely in a limited way?\nIf you need to proceed before the package is complete, check whether you have:\n\n- **lot traceability**\n- **segregation / quarantine controls**\n- **100% inspection or tightened sampling**\n- **limited quantity / limited application**\n- **use only in noncritical builds**\n- **rework / scrap plan if the data later fails**\n\nIf there is **no containment path**, the default should lean toward waiting.\n\n---\n\n## 5) Build impact gate: can the build tolerate the delta?\nAsk whether using the change now would cause:\n\n- **rework**\n- **scrap**\n- **line disruption**\n- **downstream assembly issues**\n- **field reliability risk**\n- **customer escape risk**\n\nIf the build can’t absorb the delta cleanly, that’s a strong reason to hold.\n\n---\n\n# Simple decision table\n\n| Change type | CTQ / regulatory impact | Missing evidence | Containment available? | Build can tolerate delta? | Decision |\n|---|---|---|---|---|---|\n| No material/process/supplier/tool/location/rev change | No | Supporting only | Not needed | Yes | **Go** |\n| Minor change | No | Supporting only | Yes | Yes | **Go with containment** |\n| Any change to material/process/supplier/tool/location/rev | No | Required qualification still missing | Maybe | Maybe | **Hold or limited release only with approval** |\n| Any CTQ / regulatory touch | Yes | Any required evidence missing | Usually needed | Risky | **Hold** |\n| Any change with unclear impact | Unknown | Evidence incomplete | Weak/none | Unknown | **Hold pending evidence** |\n| Paperwork complete but test package missing and tests are qualification-critical | Yes or maybe | Required | Maybe | Maybe | **Do not fully release** |\n\n---\n\n# Practical go/no-go rule\nA clean way to think about it:\n\n- **Paper complete** = the change is administratively approved\n- **Evidence complete** = the change is technically proven\n\nIf the change affects **critical requirements**, you should not let paperwork alone substitute for proof.\n\n---\n\n# Short review checklist\nBefore deciding, ask:\n\n1. **What exactly changed?**\n2. **Does it touch CTQ, safety, or regulatory requirements?**\n3. **Are the missing tests required for qualification, or just supporting data?**\n4. **Is there a containment / limited-use path if we proceed now?**\n5. **Can the build absorb the change without rework, scrap, or field risk?**\n\nIf you want, I can turn this into a **one-page go/no-go form** with checkboxes and a final release recommendation field.",
+      "score": 5.0,
+      "summary": "mean=5.00 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:0, 5:5}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct: opens with \"here’s a tighter go/no-go checklist\" and uses clear if/then rules like \"If any of those changed, move to the next gate\" and \"do not treat the part as fully cleared.\""
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Gives concrete caveats and failure modes, not just a headline: distinguishes \"paper complete\" vs \"evidence complete,\" explains when missing tests matter, and notes conditions like CTQ/regulatory impact and containment."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured with bullets, numbered gates, a decision table, and a short checklist. This is exactly the kind of audit-friendly format the preference calls for."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Collaborative without being hand-holding: it lays out options and gates, then gives a clear recommendation like \"default should lean toward waiting\" and offers to turn it into a form if wanted."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Includes firm pushback where appropriate, e.g. \"If the missing tests are required for qualification: do not treat the part as fully cleared\" and \"If there is no containment path, the default should lean toward waiting.\""
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "agent_response": "Agreed — the key is to make the table **force a decision** and make the **exception owner explicit**.\n\nHere’s a tighter version:\n\n### Decision table\n\n| Gate | Pass/Fail | Notes | Action |\n|---|---|---|---|\n| What changed? |  | material / process / supplier / tool / location / drawing rev | If unclear, **hold** |\n| CTQ / safety / regulatory touched? |  | yes/no, which item | If yes and proof missing, **hold** |\n| Missing evidence |  | qualification-critical vs support-only | If qualification-critical, **hold** |\n| Paper complete vs evidence complete |  | admin closed vs technically proven under intended conditions | If only paper complete, **do not auto-release** |\n| Interim containment |  | lot hold / limited use / extra inspect / none | If none and risk exists, **hold** |\n| Build impact |  | rework / scrap / field risk / none | If build can’t absorb delta, **hold** |\n| Final call |  | go / limited go / hold | Must be explicit |\n\n### Decision rule\n- **Go**: change is low risk, CTQ/regulatory unaffected, and missing evidence is noncritical support only.\n- **Limited go**: low-to-moderate risk, evidence is incomplete but not qualification-critical, and containment is real and enforceable.\n- **Hold**: any CTQ/safety/regulatory impact with missing proof, any qualification-critical gap, or no credible containment.\n\n### On the evidence side\nYou’re right to separate it this way:\n\n- **Paper complete** = the change is administratively closed\n- **Evidence complete** = the change is technically proven in the right conditions\n\nIf the test package doesn’t represent the actual stress, environment, or use case, then the evidence is not complete even if the certificates look clean.\n\n### Exception ownership\nFor a **limited release**, the sign-off should be explicit, not implied. Typical owners are:\n\n- **Engineering**: technical acceptability / risk justification\n- **Quality**: disposition, containment, and compliance impact\n- **Operations / Manufacturing**: build impact, rework/scrap exposure, implementation feasibility\n\nBest practice is:\n- **Engineering owns technical risk**\n- **Quality owns release disposition and containment adequacy**\n- **Operations confirms build impact and execution**\n- if it touches customer/regulatory risk, **higher-level approval** is needed\n\n### Simple final rule\nIf you can’t answer:\n1. what changed,\n2. whether CTQ/regulatory is touched,\n3. whether the missing evidence is qualification-critical,\n4. how the part is contained,\n5. and who is signing the exception,\n\nthen it should **wait**.\n\nIf you want, I can turn this into a **one-page exception form** with a signature block for Engineering / Quality / Operations.",
+      "score": 5.0,
+      "summary": "mean=5.00 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:0, 5:5}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct and blunt: \"the key is to make the table force a decision\" and the final rule says if key questions can’t be answered, \"it should wait.\" No hedging or fluff."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Gives concrete caveats and failure modes: \"CTQ / safety / regulatory touched?\", \"qualification-critical vs support-only\", \"Paper complete vs evidence complete\", and warns that evidence is incomplete if it doesn’t represent the actual stress/environment/use case."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Uses a structured checklist/table with gates, actions, and a decision rule. This is highly auditable and easy to scan."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Collaborative without hand-holding: it lays out options and ownership, then gives a clear recommendation framework. Phrases like \"Best practice is\" and \"If you want, I can turn this into...\" support autonomy rather than dictating."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Firm pushback is explicit: \"do not auto-release,\" \"If none and risk exists, hold,\" and \"then it should wait.\" It corrects the idea that paperwork alone is enough."
+        }
+      ]
+    }
+  ]
+}

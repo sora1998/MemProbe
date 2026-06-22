@@ -1,0 +1,104 @@
+{
+  "user_id": "user_006",
+  "task": "I’m trying to figure out why a small industrial network cabinet keeps acting up during the afternoon even though nothing obvious changed. If you were troubleshooting that, what would you check first so you can tell whether it’s a gear problem, a ventilation problem, or something tied to the environment?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "verbosity_preference",
+      "short": "Wants responses kept tight and efficient",
+      "explanation": "He values speed, control, and efficiency, so he is unlikely to want long-winded help. He would probably prefer responses that get to the point quickly and avoid unnecessary filler. Overexplaining would feel like wasted time to him."
+    },
+    {
+      "idx": 2,
+      "dimension": "directness_preference",
+      "short": "Prefers blunt answers without softening",
+      "explanation": "His skeptical, competitive style suggests he wants clear, unambiguous guidance rather than hedged language. He would likely see excessive caution as evasive or inefficient. Straight answers fit his preference for control and decisive action."
+    },
+    {
+      "idx": 3,
+      "dimension": "format_preference",
+      "short": "Likes structured, actionable output",
+      "explanation": "He seems most likely to respond well to responses that are organized and easy to execute, such as bullets or checklists. That matches his practical, task-focused mindset. Loose, meandering prose would probably frustrate him."
+    },
+    {
+      "idx": 4,
+      "dimension": "detail_level_preference",
+      "short": "Wants the useful essentials, not padding",
+      "explanation": "He likely wants enough context to act, but not exhaustive background unless it helps him win or avoid mistakes. He is efficiency-driven, so extra caveats only matter when they change the decision. He would probably skip anything that does not affect the outcome."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Accepts pushback only if it is sharp and useful",
+      "explanation": "He is skeptical and self-serving, so he probably does not enjoy moralizing or vague objections. But if the pushback is concrete, efficient, and clearly tied to risk or leverage, he is more likely to respect it. Weak or overly gentle correction would likely be ignored."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "I’d start with the things that can create a **time-of-day pattern** first, because “afternoon only” often points to **heat, load, or power quality** before it points to a bad device.\n\n### First checks, in order\n\n1. **Cabinet temperature and airflow**\n   - Check the internal temp at the time it acts up, not just later.\n   - Feel for:\n     - hot spots around the switch/firewall/PLC\n     - blocked intake/exhaust\n     - fan failures or weak airflow\n     - dust buildup on vents, filters, or fans\n   - Compare morning vs afternoon temps if you can.\n\n2. **Power quality**\n   - Look for:\n     - brownouts or voltage sag in the afternoon\n     - overloaded UPS\n     - loose power cords or bad strips\n     - shared circuits with motors, compressors, welders, conveyors, or HVAC\n   - If the cabinet has a UPS, check its event log for transfers, alarms, or low-voltage events.\n\n3. **Device logs and link state**\n   - Check the switch/firewall/controller logs for:\n     - interface flaps\n     - PoE faults\n     - high CPU/memory\n     - thermal alarms\n     - CRC/errors/drops\n   - If a port is flapping, note whether it’s always the same port or device.\n\n4. **Environmental changes tied to the afternoon**\n   - Nearby equipment turning on later in the day\n   - Sun load if the cabinet is near a wall/window/door\n   - Door openings, dust, humidity, or vibration from production activity\n   - Any periodic process that starts up around the same time\n\n5. **Load-related behavior**\n   - See whether the issue appears when:\n     - more devices are active\n     - production ramps up\n     - cameras/scanners/VoIP/Wi-Fi traffic increases\n   - That helps separate “gear can’t keep up” from “something is overheating or losing power.”\n\n### Quick way to isolate the cause\n- **If temps climb before failures** → ventilation/thermal issue.\n- **If voltage/UPS events line up with failures** → power/environment issue.\n- **If one port/device always fails** → likely gear, cable, optic, or endpoint.\n- **If everything degrades together** → cabinet-wide heat or power problem.\n\n### Best immediate test\nIf you can, put a **temp sensor/logger** and a **power monitor/UPS event check** on it for a day. That usually tells you whether the cabinet is failing because it’s **too hot**, **losing power quality**, or **actually has bad hardware**.\n\nIf you want, I can turn this into a **fast 10-minute cabinet triage checklist** you can use on-site.",
+      "score": 4.4,
+      "summary": "mean=4.40 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:3, 5:2}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly tight and efficient: it gets to the point quickly with a short intro and a concise checklist. Minor extra framing like \"I’d start with...\" and the closing offer add a little filler, but overall it avoids long-windedness."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Direct and unambiguous: phrases like \"start with the things\" and the explicit isolation rules are blunt and practical. It does use some softening language like \"often points to\" and \"if you can,\" so it’s not maximally blunt."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable: it uses numbered steps, bullets, and a \"Quick way to isolate the cause\" section, plus a \"Best immediate test.\" This is highly organized and easy to execute."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Focuses on essentials rather than padding: it prioritizes temperature, power quality, logs, environment, and load, and ends with the most useful immediate test. It avoids deep background and keeps only decision-relevant context."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Pushback is present but useful and concrete: it says \"afternoon only often points to heat, load, or power quality\" and gives specific diagnostic distinctions like \"If temps climb before failures\" and \"If voltage/UPS events line up.\" It avoids moralizing and keeps the correction tied to risk and leverage."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "I’d start by establishing a **time-correlated baseline** so you can separate **device failure**, **thermal/airflow**, and **site/environment**.\n\n### First things to check\n1. **Exact failure time**\n   - When does it first go bad?\n   - Does it happen at the same hour every day?\n\n2. **Cabinet temperature at that moment**\n   - Measure:\n     - inside air temp\n     - switch/PSU hotspot\n     - uplink optic area\n   - Compare morning vs afternoon.\n\n3. **Power events**\n   - UPS logs\n   - line voltage / brownouts\n   - shared loads that start later in the day\n   - any PSU alarms or resets\n\n4. **What fails**\n   - one port/device only, or the whole cabinet?\n   - same port every time?\n   - link flaps, CRCs, drops, PoE faults, reboots?\n\n5. **Airflow / physical condition**\n   - blocked vents\n   - failed or weak fans\n   - dust buildup\n   - cabinet door closed, heat soak, sun load\n   - loose optics, bad patching, damaged cable\n\n### How I’d interpret it\n- **Temp rises first, then errors** → ventilation / heat issue\n- **UPS or voltage events line up** → power/environment issue\n- **One device or port always fails** → gear, cable, optic, or endpoint\n- **Everything degrades together** → cabinet-wide thermal or power problem\n\n### Best first move\nIf you can, log:\n- **timestamp of first abnormal event**\n- **temp at that exact time**\n- **UPS/power status**\n- **interface counters/logs**\n\nThat gives you a clean before/after line and usually points to the real cause fast.\n\nIf you want, I can turn this into a **short on-site decision tree** you can use in the cabinet.",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly tight and efficient: it uses short sections, bullets, and a clear “Best first move,” though it adds some extra framing like “time-correlated baseline” and a closing offer."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Fairly direct and unsoftened: phrases like “start by establishing” and the explicit interpretations are blunt and actionable. It does hedge a bit with “If you can” and “usually points,” so not a perfect 5."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable: clear numbered checklist, sub-bullets, and a concise interpretation section make it easy to execute on-site."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Focuses on the essentials needed to diagnose the issue—timing, temperature, power, failure pattern, airflow—without much padding. Minor extra explanation keeps it from being a perfect 5."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Includes useful pushback in a concrete way by tying symptoms to likely causes, e.g. “Temp rises first, then errors” and “UPS or voltage events line up.” It avoids moralizing and keeps objections practical, though it is not especially sharp."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "user_id": "user_006",
+  "task": "I’m putting together a quick prep note for a network change later today, and I want it to be easy to follow while I’m working. What should I make sure is checked before starting, and what sequence would you use for the first few steps?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "verbosity_preference",
+      "short": "Wants responses kept tight and efficient",
+      "explanation": "He values speed, control, and efficiency, so he is unlikely to want long-winded help. He would probably prefer responses that get to the point quickly and avoid unnecessary filler. Overexplaining would feel like wasted time to him."
+    },
+    {
+      "idx": 2,
+      "dimension": "directness_preference",
+      "short": "Prefers blunt answers without softening",
+      "explanation": "His skeptical, competitive style suggests he wants clear, unambiguous guidance rather than hedged language. He would likely see excessive caution as evasive or inefficient. Straight answers fit his preference for control and decisive action."
+    },
+    {
+      "idx": 3,
+      "dimension": "format_preference",
+      "short": "Likes structured, actionable output",
+      "explanation": "He seems most likely to respond well to responses that are organized and easy to execute, such as bullets or checklists. That matches his practical, task-focused mindset. Loose, meandering prose would probably frustrate him."
+    },
+    {
+      "idx": 4,
+      "dimension": "detail_level_preference",
+      "short": "Wants the useful essentials, not padding",
+      "explanation": "He likely wants enough context to act, but not exhaustive background unless it helps him win or avoid mistakes. He is efficiency-driven, so extra caveats only matter when they change the decision. He would probably skip anything that does not affect the outcome."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Accepts pushback only if it is sharp and useful",
+      "explanation": "He is skeptical and self-serving, so he probably does not enjoy moralizing or vague objections. But if the pushback is concrete, efficient, and clearly tied to risk or leverage, he is more likely to respect it. Weak or overly gentle correction would likely be ignored."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Here’s a tight prep note you can use before starting the change.\n\n## Pre-change checklist\nUse this as a hard gate before you touch anything:\n\n| Item | Status | Evidence |\n|---|---|---|\n| Change scope is clear and matches the approved window | PASS / FAIL / NOT TESTED | Change ticket / approval reference |\n| Success criteria are defined | PASS / FAIL / NOT TESTED | Written “done” state |\n| Rollback plan is written and executable | PASS / FAIL / NOT TESTED | Exact rollback steps + owner |\n| Baseline captured: config | PASS / FAIL / NOT TESTED | Saved config / backup filename |\n| Baseline captured: neighbors | PASS / FAIL / NOT TESTED | CDP/LLDP or peer adjacency output |\n| Baseline captured: routes | PASS / FAIL / NOT TESTED | Routing table snapshot |\n| Baseline captured: interface counters/errors | PASS / FAIL / NOT TESTED | Interface stats output |\n| Baseline captured: logs | PASS / FAIL / NOT TESTED | Recent syslog/event log export |\n| Monitoring/alerting is understood | PASS / FAIL / NOT TESTED | What alarms are expected vs bad |\n| Stakeholders are aware / on standby | PASS / FAIL / NOT TESTED | Chat/email acknowledgment |\n| Access/tools are ready | PASS / FAIL / NOT TESTED | Console/SSH/VPN/management path verified |\n\n## First steps sequence\nI’d use this order:\n\n1. **Confirm the change window and success criteria**\n   - Make sure you know exactly what “good” looks like.\n\n2. **Pull the baseline**\n   - Save config\n   - Capture neighbors\n   - Capture routes\n   - Capture interface counters\n   - Capture recent logs\n\n3. **Verify rollback is usable**\n   - Confirm the rollback command/path is known\n   - Confirm backups are current\n\n4. **Check current health**\n   - Look for pre-existing errors, flaps, or alarms\n   - If something is already unstable, pause and decide before proceeding\n\n5. **Start the change in the smallest safe step**\n   - Do the first change action\n   - Pause and verify immediately after\n\n## Mid-change first things to verify if it gets weird\nIf behavior changes unexpectedly, check these first:\n\n1. **Interface/link state**\n2. **Neighbor adjacency**\n3. **Routing table changes**\n4. **Error counters / drops / CRCs**\n5. **Relevant logs and alerts**\n\n## Simple working note format\nYou can paste this into your prep note:\n\n- Change:\n- Window:\n- Success criteria:\n- Rollback path:\n- Baseline saved:\n- Monitoring contact:\n- First verification after step 1:\n- Stop condition:\n\nIf you want, I can turn this into a **PASS / FAIL / NOT TESTED checklist with evidence fields** in a copy-paste table for your exact change type.",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly tight and efficient: opens with \"Here’s a tight prep note\" and uses concise bullets/tables. Slightly longer than necessary, but not verbose."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Fairly direct and unsoftened: phrases like \"Use this as a hard gate\" and \"If something is already unstable, pause\" are blunt and clear. Not aggressively blunt, but mostly aligned."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strong structure and actionability: provides a \"Pre-change checklist\" table, a numbered \"First steps sequence,\" and a copy-paste note format. Very easy to execute."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Focuses on essentials needed to act—scope, success criteria, rollback, baseline, monitoring, access—without much padding. A bit of extra explanation exists, but it stays relevant."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Pushback is concrete and useful: \"If something is already unstable, pause and decide before proceeding\" and the \"Stop condition\" framing are practical risk-based cautions, not moralizing or vague objections."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Absolutely — for a **field note**, I’d make it specific enough that you can run it without thinking.\n\n## Quick prep note format\n\n- **Target:** device / interface / config object\n- **Pre-state:** what “normal” looks like right now\n- **Change step 1:** smallest safe action\n- **Verify:** one check immediately after\n- **Change step 2:** next smallest action\n- **Verify:** one check immediately after\n- **Rollback if:** exact trigger\n- **Stop if:** hard failure condition\n\n## What to check before starting\n\n### 1. Confirm scope and blast radius\n- Exact device, interface, VLAN, circuit, or policy object\n- What depends on it\n- What must stay up during the change\n\n### 2. Capture the baseline\n- Running config / object config\n- Interface state and counters\n- Neighbor adjacencies\n- Route / path state\n- Relevant logs or alarms\n- Current traffic or session state if it matters\n\n### 3. Verify normal path before touching anything\n- The path you care about is actually working\n- Counters are not already climbing\n- Adjacencies are stable\n- No pre-existing alarms that would confuse the result\n\n### 4. Make rollback executable\nNot “restore backup” in general — write the exact action:\n- reload previous config\n- revert interface setting\n- remove added VLAN / route / policy\n- fail back to prior unit or path\n- confirm what gets restored first\n\n### 5. Set hard stop conditions\nStop immediately if:\n- counters start rising unexpectedly\n- adjacency drops\n- route disappears\n- WAN/app path breaks\n- the change behaves differently than expected\n\n## First 3 steps I’d use\n\n1. **Confirm scope and baseline**\n   - Know exactly what you’re changing\n   - Save the current state first\n\n2. **Verify the live path**\n   - Check the actual service path, not just link-up\n   - Make sure it’s healthy before the change\n\n3. **Apply the smallest change**\n   - One action only\n   - Then verify immediately before doing anything else\n\n## Checkpoint after each action\nAfter every step, check:\n- interface/link state\n- counters\n- adjacency / neighbor state\n- route/path state\n- service reachability if relevant\n\n## Hard stop example\nIf any of these happen, pause:\n- link stays up but traffic dies\n- counters jump\n- adjacency resets\n- path changes unexpectedly\n- rollback would be guesswork\n\nIf you want, I can turn this into a **switch / firewall / WAN circuit / VLAN / router version** with the exact first 3 checks for each.",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly tight and efficient: uses a compact checklist and short step list. A bit of extra framing and repetition, but not long-winded."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Fairly direct and blunt, e.g. \"Not 'restore backup' in general\" and \"Stop immediately if...\". Some softening remains in the opening and offer to help further."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable: clear headings, numbered steps, bullets, and explicit checkpoints/stop conditions."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Focuses on essentials needed to act, like baseline, rollback, and stop conditions. Slightly more detail than minimal, but mostly useful rather than padded."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Pushback is concrete and useful, especially \"Not 'restore backup' in general\" and specific hard-stop conditions tied to risk. It is not moralizing or vague."
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "agent_response": "Absolutely — here’s the **field-useful matrix** version.\n\n## Switch\n- **target:** specific switch, port-channel, access/trunk port, STP instance, VLAN membership, or SVI\n- **pre-state:**  \n  - port is up/up where expected  \n  - no err-disabled ports  \n  - STP stable, no unexpected topology changes  \n  - MAC table and VLAN membership match normal  \n  - counters clean or at known baseline\n- **step 1:** confirm scope/blast radius on the exact port or VLAN object\n- **verify:** port state, STP state, VLAN membership, MAC learning, error counters\n- **step 2:** snapshot config/state for the affected interface/VLAN/SVI\n- **verify:** saved config and current operational state captured\n- **step 3:** make the smallest change on the specific switch object\n- **verify:** link, STP, MAC learning, counters, and downstream reachability\n- **rollback if:** port flaps, STP changes unexpectedly, counters climb, MACs stop learning, or traffic fails\n- **stop if:** adjacency/path breaks, unexpected loop behavior appears, or the port goes err-disabled\n\n**Executable rollback:** remove the VLAN change, restore the prior interface mode/config, shut/no shut if needed, or reapply the saved interface/VLAN/SVI config exactly as captured.\n\n---\n\n## Firewall\n- **target:** specific rule, policy, object group, zone pair, NAT rule, or interface\n- **pre-state:**  \n  - current rule hit counts known  \n  - session flow is established where expected  \n  - no existing drops/denies on the path  \n  - routing and next hop are healthy  \n  - management access is confirmed\n- **step 1:** confirm the exact policy/NAT/object being changed and the traffic it matches\n- **verify:** current rule ordering, hit counts, session table, and path to next hop\n- **step 2:** snapshot config/state for the affected policy/zone/NAT object\n- **verify:** export/backup plus current session and hit-count baseline\n- **step 3:** make the smallest change to the rule/object/NAT entry\n- **verify:** session builds, deny/allow counters behave as expected, app path works\n- **rollback if:** sessions reset, deny counters spike, NAT breaks, or traffic shifts to the wrong rule\n- **stop if:** app path fails, asymmetric flow appears, or firewall logs show unexpected denies\n\n**Executable rollback:** remove the new rule/object, restore prior rule order, revert NAT mapping, or push back the saved policy revision.\n\n---\n\n## WAN circuit\n- **target:** specific circuit, demarc, handoff port, CPE interface, or carrier path\n- **pre-state:**  \n  - interface up/up  \n  - circuit alarms clear  \n  - BGP/OSPF/static route path stable  \n  - latency/loss within normal  \n  - primary and backup path behavior known\n- **step 1:** confirm the exact circuit and failover/blast radius\n- **verify:** interface state, carrier handoff status, routing adjacency, and active path\n- **step 2:** snapshot interface, routing, and circuit state\n- **verify:** saved state plus baseline latency/loss/counters\n- **step 3:** make the smallest circuit-side change or cutover action\n- **verify:** link comes up, route adjacency returns, and traffic uses the intended path\n- **rollback if:** circuit drops, failover doesn’t recover, loss jumps, or route adjacency won’t return\n- **stop if:** app path fails, backup path also degrades, or carrier handoff is unstable\n\n**Executable rollback:** revert the handoff/circuit to the prior port or path, restore the previous carrier handoff config, or fail traffic back to the original circuit.\n\n---\n\n## VLAN\n- **target:** specific VLAN ID, trunk allowed list, access port membership, or SVI\n- **pre-state:**  \n  - VLAN exists where expected  \n  - trunk carries the VLAN if needed  \n  - access ports are in the correct VLAN  \n  - SVI is up if used  \n  - hosts on that VLAN can reach the expected gateway/path\n- **step 1:** confirm the exact VLAN object and where it must exist\n- **verify:** VLAN presence, trunk allowance, access membership, and gateway/SVI status\n- **step 2:** snapshot VLAN, trunk, and interface config/state\n- **verify:** current membership and forwarding state captured\n- **step 3:** make the smallest VLAN change\n- **verify:** VLAN forwards, MACs learn, gateway responds, and endpoints stay reachable\n- **rollback if:** VLAN disappears from trunk, hosts lose gateway, MAC learning stops, or traffic blackholes\n- **stop if:** broadcast/domain behavior changes unexpectedly or app path breaks\n\n**Executable rollback:** remove the VLAN from the trunk/access change, restore prior access VLAN assignment, or re-add the previous VLAN/SVI settings exactly.\n\n---\n\n## Router\n- **target:** specific interface, static route, dynamic routing neighbor, prefix-list, policy, or VRF\n- **pre-state:**  \n  - interface up/up  \n  - routing neighbor stable if applicable  \n  - route table contains expected prefixes  \n  - next hop reachable  \n  - traffic path known and stable\n- **step 1:** confirm the exact routing object and dependent prefixes/path\n- **verify:** interface, neighbor, route table, and next-hop reachability\n- **step 2:** snapshot config/state for the affected route/object/interface\n- **verify:** saved config plus baseline adjacency and route output\n- **step 3:** make the smallest routing change\n- **verify:** adjacency stays up, route installs correctly, and traffic follows the expected path\n- **rollback if:** neighbor drops, route withdraws unexpectedly, metrics/path change wrong, or traffic blackholes\n- **stop if:** adjacency cannot re-form, counters/errors rise, or app path fails\n\n**Executable rollback:** remove the route/policy change, restore the prior metric/next hop, or reapply the saved interface/routing config.\n\n---\n\n## If you want the note to be truly job-ready\nUse this exact field layout:\n\n- **target:**\n- **pre-state:**\n- **step 1:**\n- **verify:**\n- **step 2:**\n- **verify:**\n- **step 3:**\n- **verify:**\n- **rollback if:**\n- **stop if:**\n\nIf you want, I can turn this into a **copy-paste PASS / FAIL / NOT TESTED checklist with evidence fields** for each change type.",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly tight and efficient: it uses concise bullets and a reusable template, though it is still fairly long and detailed for a “quick prep note.”"
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Direct and blunt overall, with clear commands like “confirm,” “snapshot,” “make the smallest change,” and explicit “rollback if/stop if” guidance. Some softening remains in the opening and framing."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable: repeated sections, labeled fields, step-by-step sequence, and an explicit “field layout” plus offer to convert it into a checklist."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Focuses on essentials needed to act—pre-state, step 1-3, verify, rollback, stop—without much background. It does include some extra detail across multiple device types, so not perfectly minimal."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Pushback is concrete and useful, centered on risk and failure conditions: “rollback if,” “stop if,” and specific failure modes like “traffic blackholes” or “unexpected denies.” It avoids moralizing and stays operational."
+        }
+      ]
+    }
+  ]
+}

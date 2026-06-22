@@ -1,0 +1,104 @@
+{
+  "user_id": "user_022",
+  "task": "I’m trying to sanity-check a small water-treatment readout and I don’t want to overreact to one number. Can you help me think through which measurements actually matter together and what would make you trust the data enough to act on it?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "formality_preference",
+      "short": "Neutral-professional, not chatty",
+      "explanation": "She comes across as someone who would want interactions to stay professional and efficient rather than overly casual. Her practical, work-focused style suggests she’d prefer clear communication without unnecessary friendliness or performance."
+    },
+    {
+      "idx": 2,
+      "dimension": "verbosity_preference",
+      "short": "Moderate detail, enough to act",
+      "explanation": "She likely wants enough explanation to understand the issue and proceed correctly, but not a long lecture. Her preference for efficiency and clear facts points to responses that are concise while still covering the important steps."
+    },
+    {
+      "idx": 3,
+      "dimension": "directness_preference",
+      "short": "Straightforward over softened wording",
+      "explanation": "She seems to value blunt clarity more than emotional cushioning. In a technical setting, she would probably prefer the assistant to state the problem, the likely cause, and the fix plainly."
+    },
+    {
+      "idx": 4,
+      "dimension": "format_preference",
+      "short": "Bullets and checklists over prose",
+      "explanation": "Her checklist-oriented habits and notebook procedure style fit a structured presentation. She would likely do best with information broken into steps, bullets, or a quick checklist she can follow without re-reading dense paragraphs."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Wants firm correction when something is off",
+      "explanation": "She appears unlikely to want vague agreement if a detail is wrong or risky. Her real-world habit of correcting spec errors suggests she’d appreciate the assistant flagging mistakes directly and not letting questionable assumptions slide."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — the key is to judge the reading as a **set**, not as a single number.\n\n## What matters together\nFor water-treatment, the useful pairings are usually:\n- **pH + alkalinity**\n- **conductivity + total dissolved solids trend**\n- **turbidity + filter differential pressure**\n- **chlorine / ORP + contact time**\n- **flow + dose rate**\n- **temperature + reaction/contact performance**\n- **tank level + pump output**\n\nA single value can look “bad” while the system is still fine, or look “fine” while the system is drifting.\n\n---\n\n## What makes the data trustworthy\nBefore acting, ask:\n\n### 1) Is the reading plausible?\n- Does it make sense for the current operating condition?\n- Is it close to expected for that water source/process?\n- Is it wildly different from the recent baseline?\n\n### 2) Does it agree with a second measurement?\nExamples:\n- pH meter vs grab sample\n- conductivity vs TDS trend\n- turbidity vs filter pressure rise\n- chlorine residual vs ORP trend\n- flow meter vs pump stroke / setpoint\n\nIf two related measurements disagree, that’s a warning.\n\n### 3) Is it repeatable?\n- One odd reading may be noise\n- Same result twice or three times is more believable\n- If it changes a lot between back-to-back checks, suspect the instrument or sampling method\n\n### 4) Did the condition actually change?\nAsk whether:\n- the source water changed\n- the dosing changed\n- the flow changed\n- the filter loaded up\n- temperature changed\n- the sample point changed\n\nIf nothing changed but the number did, that points more toward instrument or sampling error.\n\n---\n\n## How I’d decide whether to act\n### Probably don’t overreact if:\n- one reading is off but the others are normal\n- the result is not repeatable\n- the value returns to baseline on a second check\n- it’s consistent with a known transient condition\n\n### Act if:\n- the reading is repeatably off\n- two related measurements agree that something changed\n- the trend is moving the wrong way\n- the change affects output quality, safety, or compliance\n\n---\n\n## Practical trust check\nI’d trust the data enough to act when:\n- the reading is **repeatable**\n- it matches the **expected process behavior**\n- at least one **independent check** supports it\n- the trend is consistent over time, not just one sample\n\n---\n\n## Simple field rule\n### One bad number\n→ recheck\n\n### Two related numbers disagree\n→ investigate instrumentation or sampling\n\n### Three consistent checks show the same trend\n→ treat it as real\n\n---\n\n## Quick example\nIf turbidity rises:\n- check filter differential pressure\n- check flow\n- verify sample point\n- repeat the turbidity read\n\nIf turbidity is high but filter DP is normal and the repeat sample is fine, I’d hesitate to act.\n\nIf turbidity is high, filter DP is rising, and flow/output quality is also changing, I’d trust it and act.\n\nIf you want, I can turn this into a **small one-page water-treatment sanity-check table** with:\n- measurement pair\n- what agreement looks like\n- what mismatch means\n- when to act",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Neutral-professional and efficient: starts with “Yes — the key is to judge the reading as a set,” and stays work-focused without chatty filler."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Moderate detail with actionable structure: gives concrete checks, examples, and a simple rule set, though it is somewhat longer than strictly minimal."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Straightforward and plainspoken: uses direct guidance like “If two related measurements disagree, that’s a warning” and “Act if…” without softening."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong use of bullets and checklists: sections like “What matters together,” “What makes the data trustworthy,” and “Simple field rule” are highly structured and easy to follow."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Firm correction and risk flagging are explicit: “If two related measurements disagree, that’s a warning,” “suspect the instrument or sampling method,” and “I’d hesitate to act” show direct pushback rather than vague agreement."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Absolutely — here’s a tighter **field decision table** for water-treatment sanity checks.\n\n# Water-treatment data trust table\n\n| Reading | Companion check | What agreement looks like | If mismatch, likely cause | Action |\n|---|---|---|---|---|\n| **pH** | Alkalinity, sample repeat, calibration status | pH is repeatable and alkalinity supports the shift | Probe drift, bad calibration, sample contamination, poor mixing | **Recheck** first; if repeatable and supported, investigate |\n| **Alkalinity** | pH, dosing history, sample repeat | pH and dosing trend match the change | Sampling error, incomplete mixing, test error | **Recheck**; act if repeatable and process-linked |\n| **Conductivity** | TDS trend, source water history, temperature compensation | Conductivity moves with expected source/process changes | Temp compensation error, probe fouling, wrong conversion assumption | **Investigate** if trend persists; don’t trust a one-point TDS conversion |\n| **TDS** | Conductivity, lab/grab sample, temperature | TDS tracks conductivity and source changes | Assumed conversion factor, bad probe, sampling issue | **Hold off** if based only on assumed conversion; verify first |\n| **Turbidity** | Filter differential pressure, flow, repeat sample | Turbidity rise matches filter loading or source change | Sample point issue, air bubbles, probe fouling, transient slug | **Recheck**; investigate if DP/flow also move |\n| **Filter differential pressure** | Turbidity, flow, filter age/load | DP rises as turbidity rises or filter loads | Bad gauge, plugged impulse line, flow change, sensor issue | **Investigate** if DP and turbidity disagree |\n| **Chlorine residual** | Dose rate, contact time, flow, repeat sample | Residual matches dose and contact conditions | Sampling lag, poor mixing, probe error, demand spike | **Recheck** and verify contact time before acting |\n| **ORP** | Chlorine residual, dose rate, pH | ORP moves in the same direction as disinfectant control | ORP probe drift, pH shift, poor correlation to actual residual | **Use as support only**; don’t act on ORP alone |\n| **Flow** | Pump setpoint/stroke, tank level, process output | Flow matches pump command and output behavior | Flow meter error, air in line, pump issue, valve change | **Investigate** if command and flow disagree |\n| **Dose rate** | Flow, residual, tank level | Dose changes track flow and residual response | Pump calibration issue, clogging, air lock, control error | **Investigate** if dose changes don’t affect residual |\n| **Tank level** | Pump output, usage trend, refill history | Level drops at expected rate | Level sensor error, leak, pump overuse | **Recheck**; investigate if usage doesn’t match level |\n\n---\n\n## Order of trust\nUse this order before acting:\n\n1. **Instrument sanity**\n   - calibration status\n   - sample point\n   - last maintenance\n   - obvious fouling / air / contamination\n\n2. **Process correlation**\n   - do the numbers move the way the system should?\n   - does one reading support the other?\n\n3. **Trend**\n   - last **3–5 readings** matter more than one point\n\n---\n\n## Simple decision rule\n\n### Ignore for now\n- one odd point\n- no trend\n- just cleaned / calibrated / moved probe\n- flow or temperature changed and lag is expected\n\n### Recheck\n- one reading is off\n- companion reading not yet checked\n- sample may have been bad\n- reading is borderline\n\n### Investigate\n- repeat check matches\n- companion parameter agrees\n- value is outside the normal band\n- trend is moving the wrong way\n\n### Shut down / intervene\n- repeatable bad reading\n- two related parameters agree something is wrong\n- safety or compliance limit is exceeded\n- output quality is affected\n\n---\n\n## ORP note\nTreat ORP as a **supporting indicator**, not a direct replacement for chlorine residual.  \nIf ORP changes but residual doesn’t, trust the residual and the process conditions more.\n\n## Conductivity/TDS note\nIf TDS is just a **conversion from conductivity**, treat it as approximate unless the factor is verified for that water.  \nIf conductivity is stable but TDS “changes,” suspect the conversion or instrument setup first.\n\n---\n\n## Compact field version\n\n- **One bad point** → recheck  \n- **Repeat matches** → trust more  \n- **Second related parameter agrees** → investigate  \n- **Outside normal band + trend + no sampling issue** → act  \n\nIf you want, I can turn this into a **one-page notebook sheet** with blanks for:\n- reading\n- companion check\n- normal band\n- repeat result\n- action",
+      "score": 5.0,
+      "summary": "mean=5.00 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:0, 5:5}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Neutral-professional and efficient: it opens with “a tighter field decision table” and stays work-focused, with no chatty filler."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Moderate detail with actionable guidance: it gives a table plus concise rules like “Recheck,” “Investigate,” and “Shut down / intervene,” enough to act on without becoming a lecture."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Very straightforward: phrases like “don’t trust a one-point TDS conversion,” “trust the residual,” and “suspect the conversion or instrument setup first” are blunt and clear."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strongly structured with bullets, a table, and checklists: “Order of trust,” “Simple decision rule,” and “Compact field version” make it easy to scan and use."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "It gives firm correction and pushback when needed, e.g. “don’t trust a one-point TDS conversion,” “Treat ORP as a supporting indicator, not a direct replacement,” and “trust the residual and the process conditions more.”"
+        }
+      ]
+    }
+  ]
+}

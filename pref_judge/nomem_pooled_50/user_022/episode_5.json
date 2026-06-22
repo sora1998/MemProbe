@@ -1,0 +1,170 @@
+{
+  "user_id": "user_022",
+  "task": "I’m trying to set up a simple live-check routine for a small process that can drift over a shift, and I want it to be practical rather than overkill. What would you watch in real time, and how would you decide when something is just normal variation versus worth acting on?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "formality_preference",
+      "short": "Neutral-professional, not chatty",
+      "explanation": "She comes across as someone who would want interactions to stay professional and efficient rather than overly casual. Her practical, work-focused style suggests she’d prefer clear communication without unnecessary friendliness or performance."
+    },
+    {
+      "idx": 2,
+      "dimension": "verbosity_preference",
+      "short": "Moderate detail, enough to act",
+      "explanation": "She likely wants enough explanation to understand the issue and proceed correctly, but not a long lecture. Her preference for efficiency and clear facts points to responses that are concise while still covering the important steps."
+    },
+    {
+      "idx": 3,
+      "dimension": "directness_preference",
+      "short": "Straightforward over softened wording",
+      "explanation": "She seems to value blunt clarity more than emotional cushioning. In a technical setting, she would probably prefer the assistant to state the problem, the likely cause, and the fix plainly."
+    },
+    {
+      "idx": 4,
+      "dimension": "format_preference",
+      "short": "Bullets and checklists over prose",
+      "explanation": "Her checklist-oriented habits and notebook procedure style fit a structured presentation. She would likely do best with information broken into steps, bullets, or a quick checklist she can follow without re-reading dense paragraphs."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Wants firm correction when something is off",
+      "explanation": "She appears unlikely to want vague agreement if a detail is wrong or risky. Her real-world habit of correcting spec errors suggests she’d appreciate the assistant flagging mistakes directly and not letting questionable assumptions slide."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "For a simple live-check routine, I’d keep it to a few **high-value signals** and a **clear action rule**.\n\n## What to watch in real time\nPick the smallest set that tells you whether the process is staying healthy:\n\n1. **The main output measure**\n   - The thing that matters most to quality, yield, time, or cost.\n   - Example: fill weight, cycle time, temperature, defect rate.\n\n2. **A short-term trend**\n   - Not just the latest value, but whether it’s drifting across the shift.\n   - A moving average or a simple run chart is often enough.\n\n3. **Spread/variation**\n   - Watch whether values are getting more scattered, not just shifting up or down.\n   - If variation grows, the process may be becoming unstable even if the average still looks okay.\n\n4. **A few key process inputs**\n   - Only the variables that are known to drive the output.\n   - Example: machine speed, pressure, ambient temp, operator changeover time.\n\n## How to tell normal variation from something worth acting on\nUse two questions:\n\n### 1. Is it still within expected noise?\nTreat it as normal variation if:\n- It stays within your expected range most of the time\n- There’s no consistent directional drift\n- No unusual pattern appears\n- It behaves like the process has in the past\n\n### 2. Is there a pattern, not just a point?\nAct if you see any of these:\n- **A sustained shift**: several points in a row above or below the usual level\n- **A trend**: values steadily rising or falling\n- **A spike outside limits**\n- **Increasing scatter**\n- **Repeated hits near the limit** even if not beyond it\n\n## A practical rule set\nIf you want something simple and usable on a shift:\n\n- **Green:** normal scatter, no pattern\n- **Yellow:** 2–3 consecutive points trending the same way, or repeated near-limit readings\n- **Red:** one point outside a hard limit, or a clear sustained shift/trend\n\n## Best way to keep it practical\n- Set **one target**, **one warning band**, and **one action limit**\n- Use a **run chart or control chart** rather than raw values alone\n- Define in advance:\n  - what gets logged\n  - who gets notified\n  - what action is taken\n  - when to stop and investigate\n\n## Simple decision logic\n- **Single odd reading?** Wait and recheck.\n- **Two or more suspicious readings in a row?** Investigate.\n- **Any hard limit exceeded?** Act immediately.\n- **Pattern building over time?** Intervene before it becomes a defect.\n\nIf you want, I can help you turn this into a **one-page shift checklist** or a **very simple control-chart rule set** for your specific process.",
+      "score": 5.0,
+      "summary": "mean=5.00 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:0, 5:5}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Neutral-professional tone throughout: \"keep it to a few high-value signals\" and \"simple live-check routine\". No chatty filler or overly casual language."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Moderate detail with actionable guidance: it explains what to watch, gives decision rules, and ends with a concise summary like \"Single odd reading? Wait and recheck.\""
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Direct and plainspoken: \"Act if you see any of these\" and \"Any hard limit exceeded? Act immediately.\" It states the rule clearly without softening."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strongly structured with bullets, numbered lists, and checklists: sections like \"What to watch in real time\" and \"A practical rule set\" make it easy to follow."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Firm correction and clear thresholds: it distinguishes normal variation from action-worthy signals and says \"Act immediately\" / \"Investigate\" rather than hedging or vaguely agreeing."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "That’s a good way to frame it. For a drifting process, I’d make the live-check routine physics-based and very small:\n\n## What to watch\n1. **Main output**\n   - The thing you ultimately care about.\n\n2. **Fast precursor**\n   - A variable that should move before the output does.\n   - Example: if quality follows temperature, watch temperature rate-of-change or heater response, not just final quality.\n\n3. **Instrument sanity check**\n   - Something that tells you the sensor is believable.\n   - Example: zero/span check, duplicate sensor, signal stability, or impossible-value detection.\n\n4. **One real driver**\n   - The process variable most likely to cause drift during the shift.\n   - Example: flow, pressure, temp, load, reagent rate.\n\n## How to tell normal variation from drift\nUse three layers:\n\n### Normal variation\n- Random scatter around baseline\n- No persistent direction\n- No repeating correction pattern\n- Corrections don’t keep getting larger\n\n### Watch closely\n- Several readings on the same side of center\n- Small but steady slope\n- Output still okay, but the driver is moving\n\n### Act\n- Trend continues after a recheck\n- Spread widens\n- You need bigger and bigger adjustments to hold the same output\n- Sensor sanity check looks off\n\n## Simple rule set\nA practical version:\n\n- **Green:** values bounce around baseline, no pattern\n- **Yellow:** 3–5 consecutive points moving the same way, or repeated near-limit corrections\n- **Red:** warning line crossed, sanity check fails, or trend persists after recheck\n\n## Drift-specific rule\nYour key idea is right:\n\n- If it **stays in band but keeps moving one way**, flag it.\n- If a **single warning line** is crossed, **recheck the sensor and the driver**.\n- If the trend **continues after recheck**, treat it as a real process shift, not noise.\n\n## Best operational test\nAsk:\n- Is the process **self-correcting**?\n- Or does it need **bigger intervention over time** to stay in spec?\n\nIf intervention keeps increasing, that’s usually not normal variation — it’s drift.\n\nIf you want, I can turn this into a **one-page decision tree** with exact “green / yellow / red” triggers for your process type.",
+      "score": 4.4,
+      "summary": "mean=4.40 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:3, 5:2}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly neutral-professional and efficient: \"physics-based and very small,\" \"Simple rule set,\" and concise bullets. Slightly conversational with \"That’s a good way to frame it\" and \"If you want,\" but overall not chatty."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Moderate detail with actionable guidance: it gives concrete watch items and clear thresholds like \"3–5 consecutive points\" and \"Green / Yellow / Red.\" It’s useful without becoming a long lecture."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Straightforward and plainspoken: \"If intervention keeps increasing, that’s usually not normal variation — it’s drift\" and \"treat it as a real process shift, not noise.\" It states the rule directly without softening."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strongly structured with bullets and checklists: sections like \"What to watch,\" \"How to tell normal variation from drift,\" and \"Simple rule set\" make it easy to scan and follow."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Provides firm correction and clear escalation criteria: \"that’s usually not normal variation — it’s drift\" and \"treat it as a real process shift, not noise.\" It does not hedge much, though it could be even more explicitly corrective."
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yes — that’s the right way to make it practical.\n\nIf you want it to be physics-based, I’d structure it around **cause, precursor, confirmation, and action**:\n\n## 1) Identify the drifting mechanism\nAsk: **what physically changes over the shift?**\nCommon ones:\n- **Thermal drift**: heat soak, ambient change, lag, gradients\n- **Dosing drift**: pump wear, clogging, level change, viscosity change\n- **Flow/pressure drift**: upstream supply variation, restriction, leak, valve behavior\n- **Sensor drift**: offset, gain change, fouling, wiring, calibration loss\n\nThat tells you what to watch first.\n\n## 2) Watch the precursor, not just the output\nFor each mechanism, pick the variable that should move first:\n\n- **Thermal** → temperature gradient, lag, ramp rate, or heater duty\n- **Dosing** → actual delivery rate, pump stroke/current, tank level, refill frequency\n- **Flow/pressure** → upstream vs downstream delta, valve position, pressure drop\n- **Sensor drift** → raw signal vs reference, duplicate sensor, zero/span behavior\n\nThe key is: **the precursor should change before the output does**. If it doesn’t, it’s probably not the right indicator.\n\n## 3) Separate process drift from measurement drift\nThis is usually the most important distinction.\n\n### Likely process drift if:\n- The output changes\n- The precursor changes in the same direction\n- The reference/sanity check still looks good\n\n### Likely sensor drift if:\n- The output changes\n- The precursor does **not** change\n- The reference check or second measurement disagrees\n\nThat gives you a clean diagnostic split:\n- **process problem** = fix the process\n- **measurement problem** = fix the instrument\n\n## 4) Use a simple trigger logic\nI’d keep it to three levels:\n\n### Normal\n- Same-side scatter, but no mechanism change\n- No increase in correction effort\n- Reference check agrees\n\n### Recheck\n- Same direction for a few readings\n- Precursor is moving, but output still in band\n- Or a warning line is crossed once\n\nAction:\n- Recheck the instrument\n- Compare against reference or second measurement\n- Confirm the related physical driver\n\n### Act\n- Trend persists after recheck\n- Correction effort keeps increasing\n- Process can’t hold without bigger adjustments\n- Reference check fails or mechanism clearly worsens\n\n## 5) A useful rule for drift\nYour wording is good. I’d make it slightly tighter:\n\n- **Same direction + same mechanism + repeated readings** = likely real drift\n- **Same direction, but no mechanism change** = probably noise or transient, keep watching\n- **More correction needed over time** = act early, because margin is shrinking\n\nThat last one matters a lot. If the process needs bigger and bigger intervention to stay stable, it’s no longer behaving normally.\n\n## 6) A simple template you can use\nFor any process, write:\n\n1. **Drifting variable**\n   - What is actually moving?\n\n2. **Fast precursor**\n   - What changes first if the mechanism is real?\n\n3. **Reference check**\n   - What proves the measurement is still trustworthy?\n\n4. **Trigger rule**\n   - What pattern means recheck?\n   - What pattern means stop and intervene?\n\n## Example\nFor a heated tank:\n- **Drifting variable**: product temperature\n- **Fast precursor**: heater duty cycle or temp gradient top-to-bottom\n- **Reference check**: second probe or manual spot check\n- **Trigger**: same-side temperature trend + rising heater duty = likely thermal drift; temp trend without precursor change = suspect sensor drift\n\nIf you want, I can help you turn this into a **one-page field checklist** for one specific process type, like:\n- temperature control\n- dosing/pumping\n- flow/pressure\n- sensor verification",
+      "score": 5.0,
+      "summary": "mean=5.00 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:0, 5:5}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Neutral-professional and efficient: the response is matter-of-fact, uses technical framing, and avoids chatty friendliness beyond a brief opener."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Moderate detail with actionable structure: it gives enough explanation to act on, with sections like \"Trigger logic\" and a concrete template, without becoming a long lecture."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Straightforward and direct: phrases like \"process problem = fix the process\" and \"measurement problem = fix the instrument\" state the issue and fix plainly."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strongly structured with bullets and numbered steps throughout, plus a \"simple template\" and example, matching a checklist-oriented preference."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Provides firm correction and clear decision rules, e.g. \"If it doesn’t, it’s probably not the right indicator\" and \"act early,\" rather than vague agreement."
+        }
+      ]
+    },
+    {
+      "turn": 4,
+      "agent_response": "Let’s make it concrete with **one field example**: a **heated tank** where product quality drifts as temperature slowly walks over a shift.\n\n## What to watch\n### 1) Drifting variable\n- **Product temperature at the point that matters**\n- This is the main output that affects quality\n\n### 2) Precursor\n- **Heater duty / valve position / temp gradient in the tank**\n- This moves first when the process starts to lose thermal control\n- If the tank is stratifying, the **top-bottom temperature difference** is often a better early warning than the setpoint alone\n\n### 3) Reference check\n- **Second temperature probe** or **manual spot check**\n- If you only have one sensor, use a quick independent check at intervals\n- The point is to tell whether the reading is real or the sensor is walking off\n\n## Simple field rule\n### Recheck if:\n- product temp stays on the same side of target for **3 readings in a row**\n- and the heater duty / valve position is also moving the same way\n- or the correction needed is getting larger each time\n\n### Act if:\n- the **reference check disagrees**\n- or the same-side trend **survives the recheck**\n- or you need **bigger and bigger corrections** to hold the same temperature\n\n## How to read it on shift\n- **Watch A:** product temperature, because it’s the thing that matters\n- **Watch B:** heater duty or temp gradient, because it changes first when thermal drift starts\n- **Confirm with C:** second probe or spot check, so you know it’s not sensor drift\n- **Recheck if:** same-side trend for 3 readings, or correction effort is increasing\n- **Act if:** reference disagrees, or the trend is still there after recheck\n\n## Why this works\n- If **A drifts and B moves first**, that’s likely real process drift\n- If **A drifts but B does not**, suspect sensor drift or bad measurement\n- If **correction keeps growing**, the process is losing margin even if it’s still in spec\n\n## Very short version\n- **Same direction + same mechanism + repeated readings** = likely real drift\n- **Same direction but no precursor change** = keep watching, maybe noise or sensor issue\n- **Bigger corrections over time** = act early\n\nIf you want, I can do the same thing for **dosing**, **flow/pressure**, or **sensor drift** in the same field-style format.",
+      "score": 4.4,
+      "summary": "mean=4.40 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:3, 5:2}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly neutral-professional and efficient: \"Let’s make it concrete\" and the structured headings keep it work-focused. Slightly conversational with \"If you want, I can do the same thing...\" but not overly chatty."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Moderate detail with actionable guidance: it gives specific watch items, a simple rule, and a short version. It is a bit longer than minimal, but still practical and not a lecture."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Very straightforward: \"Recheck if\" / \"Act if\" and \"likely real process drift\" state the decision plainly. It avoids softening and gives direct cause/fix logic."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong use of bullets and checklists: repeated sections like \"What to watch,\" \"Recheck if,\" \"Act if,\" and \"Very short version\" make it easy to scan and follow."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Provides firm correction criteria: \"reference check disagrees\" and \"same-side trend survives the recheck\" are direct thresholds. It could be even more forceful about rejecting bad assumptions, but it does flag them clearly."
+        }
+      ]
+    }
+  ]
+}

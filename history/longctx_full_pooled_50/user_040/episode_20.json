@@ -1,0 +1,75 @@
+{
+  "user_id": "user_040",
+  "task": "My truck may be out of service for a few days, but I still have a couple of errands and one appointment to get to this week. Can you help me think through how to lay that out so I can still get everything done?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.92,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — keep it simple:\n\n## First\n- Put the **appointment** in as fixed\n- Mark any **deadline errand**\n- Make the rest flexible\n\n## Best order\n1. **Appointment**\n2. **Deadline errand**\n3. **Other errands by area**\n4. **One backup errand** in case the truck stays out\n\n## How to make it work\n- Group stops by **part of town**\n- Do the **closest ones together**\n- Leave a little **cushion** between stops\n- If the truck is still tied up, **drop the least important errand first**\n\n## Good rule\n- Don’t force extra trips if one run can cover it\n- If one stop can wait a couple days, let it wait\n\nIf you want, send me the actual stops and I’ll put them in the cleanest order.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s the right idea, but a bit thin. Put it in a simple day-by-day order, not just categories.\n\nWhat I’d want is:\n- the exact appointment time\n- which errand has the hardest deadline\n- what parts of town each stop is in\n- which one can slide if the truck’s still down\n\nThen line them up so I’m not backtracking all over Fort Worth. If you can lay it out in a small checklist or a Monday-to-Friday sort of thing, that’d be more useful.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 5.0
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — send it like this and I’ll lay it out:\n\n- **Appointment:** exact time\n- **Hardest deadline errand:** what it is and when it has to be done\n- **Other errands:** list them\n- **Location for each:** part of town or address\n- **Can slide if truck is still down:** which one\n\nThen I’ll put it in:\n1. **day-by-day order**\n2. **best route order by area**\n3. **backup order if the truck stays out**\n\nIf you want, paste the actual stops and I’ll sort them plain and short.",
+      "user_simulator": {
+        "feedback_type": "add_context",
+        "text": "Alright, here it is, plain enough.\n\n- **Appointment:** Wednesday at 10:30 a.m. — doctor over off **Hulen**\n- **Hardest deadline errand:** pick up prescription by **Thursday afternoon** — pharmacy near **Riverside / downtown Fort Worth**\n- **Other errands:**\n  - grocery run — **Haltom City**, near home\n  - bank deposit — **North Fort Worth**, by 4 p.m. any weekday\n  - stop by hardware store for a plumbing part — **East Fort Worth**\n- **Can slide if the truck’s still down:** the hardware store stop. That one can wait a couple days if needed.\n\nIf you lay it out, keep it in a way that doesn’t send me crisscrossing the city more than once.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 5.0
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Sure — here’s the cleanest way to do it.\n\n## Day-by-day\n### Wednesday\n- **10:30 a.m. doctor appointment** — Hulen\n- **Bank deposit** — North Fort Worth, if you can do it before 4 p.m.\n- **Grocery run** — Haltom City, near home\n\n### Thursday\n- **Prescription pickup** — Riverside / downtown Fort Worth, by Thursday afternoon\n\n### Flexible\n- **Hardware store** — East Fort Worth  \n  - This is the one to **slide first** if the truck is still down\n\n## Best route order by area\n1. **Hulen** — appointment\n2. **North Fort Worth** — bank\n3. **Haltom City** — grocery\n4. **Riverside / downtown** — prescription\n5. **East Fort Worth** — hardware store, if needed\n\n## Backup if the truck stays out\n- Keep the **doctor appointment**\n- Keep the **prescription pickup**\n- Do the **bank deposit** if you can make the time\n- **Drop the hardware store stop first**\n- Grocery can wait if it has to\n\n## Cushion\nLeave a little time between stops so one delay doesn’t throw off the whole day.\n\nIf you want, I can turn this into a **one-line route list** you can glance at fast.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Better. Still a little loose on the actual driving order, though.\n\nI’d want it tightened up like this:\n- **Wednesday:** doctor at 10:30 on Hulen, then **bank** if there’s time and it’s not out of the way\n- **Thursday:** **prescription pickup** downtown by afternoon\n- **Friday or whenever the truck’s back:** **hardware store** in East Fort Worth\n- **Grocery** stays near home and can fit in around the others\n\nBut the route order you gave still jumps around some. If you can, put the stops in the most sensible path from **west to east** or whatever cuts the backtracking down the most. One simple line, like: Hulen → North Fort Worth → Haltom City → downtown → East Fort Worth.\n\nThat’d be the useful part.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 4,
+      "agent_response": "Yes — the simplest route is:\n\n**Hulen → North Fort Worth → Haltom City → downtown/Riverside → East Fort Worth**\n\n## Day-by-day\n- **Wednesday:** doctor at **10:30 a.m. on Hulen**, then **bank** if time allows\n- **Thursday:** **prescription pickup** by afternoon, downtown/Riverside\n- **Friday or when the truck is back:** **hardware store** in East Fort Worth\n- **Grocery:** near home in Haltom City, fit it in around the others\n\n## Backup if the truck stays down\n- Keep the **doctor appointment**\n- Keep the **prescription pickup**\n- Keep the **bank** if you can make the time\n- **Drop the hardware store first**\n- **Grocery** only if it’s easy to fit in\n\nIf you want, I can make this into a **single-line checklist** you can save on your phone.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Close. The order still ought to be a little tighter.\n\nWhat I’d use is:\n- **Wednesday:** Hulen doctor at 10:30, then **North Fort Worth bank** if there’s still time\n- **Thursday:** **downtown/Riverside prescription** by afternoon\n- **Friday or when the truck’s back:** **East Fort Worth hardware store**\n- **Grocery:** **Haltom City**, near home, fit that in whenever it doesn’t add a extra trip\n\nSo the driving line is basically:\n**Hulen → North Fort Worth → Haltom City → downtown/Riverside → East Fort Worth**\n\nThat’s the cleanest west-to-east path. If you’re trying to cut backtracking, I’d put the grocery with whatever other stop is closest to home, not make it its own run unless you have to.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 5,
+      "agent_response": "Yes — that’s the cleanest way to do it.\n\n## Simple plan\n- **Wednesday:** Hulen doctor at 10:30, then **North Fort Worth bank** if there’s still time\n- **Thursday:** **downtown/Riverside prescription** by afternoon\n- **Friday or when the truck’s back:** **East Fort Worth hardware store**\n- **Grocery:** **Haltom City**, near home, fit it in whenever it doesn’t add a separate trip\n\n## Route\n**Hulen → North Fort Worth → Haltom City → downtown/Riverside → East Fort Worth**\n\n## Backup if the truck stays down\n- Keep the **doctor appointment**\n- Keep the **prescription pickup**\n- Keep the **bank** if you can make it\n- **Drop the hardware store first**\n- **Grocery** goes with whatever other stop is closest to home\n\nThat’s the sensible west-to-east run.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yep. That’s the way I’d write it down.\n\n- Wednesday: Hulen doctor at 10:30, then North Fort Worth bank if there’s still time\n- Thursday: downtown/Riverside prescription by afternoon\n- Friday or when the truck’s back: East Fort Worth hardware store\n- Grocery: Haltom City, near home, fit it in with whatever else is closest\n\nRoute: Hulen → North Fort Worth → Haltom City → downtown/Riverside → East Fort Worth\n\nThat’s plain enough. No extra wandering.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 5.0
+      },
+      "gt_correct": null
+    }
+  ]
+}

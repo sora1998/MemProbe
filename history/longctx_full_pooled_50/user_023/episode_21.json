@@ -1,0 +1,62 @@
+{
+  "user_id": "user_023",
+  "task": "I’ve got a couple after-school options this week, but I’m trying to figure out the timing and how I’d get there from school without missing anything important. Can you help me think through a simple plan for the day and what I should check before I decide?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.25,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — use this quick plan:\n\n1. **What time does it start?**\n2. **How do I get there from school?**\n3. **How long will it take?**\n4. **What happens if I’m late?**\n5. **Do I still have time for everything else?**\n\n### Simple check\nIf getting there is messy or the timing is tight, **pick the easier option**.\n\n### Rule\nChoose the option that is:\n- easiest to get to\n- least likely to make you late\n- least likely to mess up the rest of the day\n\nIf you want, I can turn this into a **one-line after-school decision rule**.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, but that’s kinda generic. I need the actual plan, like break it down by school end time, travel time, and what I’m checking before I say yes. Also if there’s a bus or someone driving, that changes it a lot. Give me something I can actually use, not just a list of questions.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yep — use this:\n\n### 1) Start with school end time\n- write down when school ends\n\n### 2) Add travel time\n- **bus:** leave extra time\n- **ride from someone:** use the pickup time they gave you\n- **walking/other:** use the real time it takes, not the best-case time\n\n### 3) Check the start time\n- if you’d arrive rushed, it’s a bad fit\n\n### 4) Check the after part\n- do you still have time for homework, dinner, or getting home?\n\n### 5) Say yes only if all 3 work\n- you can get there\n- you won’t be late\n- the rest of the day still works\n\n### Quick rule\nIf the ride is unclear or the timing is tight, **pick the easier option**.\n\nIf you want, I can make this into a **one-line “yes/no” rule**.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Better, but still kinda too vague. I need it in a way I can actually fill in fast — like:\n\n- school ends at: ___\n- ride leaves at: ___ / bus at: ___\n- get there by: ___\n- event starts at: ___\n- home by: ___\n- homework/dinner/etc after: yes/no\n\nAnd then a simple yes/no cutoff, like if I have less than ___ minutes between school and the thing, it’s probably not worth it unless the ride is already set. Also if it’s a bus, I want to know the buffer I should use, because that changes everything. Make it more like a decision sheet, not just advice.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yes — use this fill-in sheet:\n\n- **School ends:** ___  \n- **Ride/bus leaves:** ___  \n- **Arrive by:** ___  \n- **Event starts:** ___  \n- **Home by:** ___  \n- **After-school stuff still fits?** yes / no  \n\n### Cutoff\n- If you have **less than 30 minutes** between school and the thing, it’s usually **not worth it** unless the ride is already set.\n- If it’s a **bus**, add a **10–15 minute buffer**.\n- If it’s a **person driving**, use the time they gave you and don’t count on extra waiting.\n\n### Decision\n- **Yes** = you can get there, you’re not rushed, and the rest of the day still works  \n- **No** = timing is tight, the ride is unclear, or it messes up everything after\n\nIf you want, I can make this into a **super short yes/no version** you can copy into notes.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, closer. But the cutoff still feels a little mushy.\n\nIf school ends and the thing starts in **under 30 min**, that’s basically a no **unless** the ride is already sitting there. For a bus, I’d want **10–15 min extra** built in, not just exact time. Like if the bus says 3:10, I’d treat it like 2:55-ish because buses don’t care what you want.\n\nI’d want the sheet to force the check like:\n- school ends at: ___\n- leave by: ___\n- arrive by: ___\n- starts at: ___\n- time gap: ___ min\n- buffer used: bus / driver / none\n- after-school stuff still works: yes/no\n\nAnd the yes/no should be something like:\n- **Yes** only if gap is 30+ min, ride is set, and I’m not cutting it close\n- **No** if the ride is vague, the bus needs a backup plan, or I’d be rushed\n\nThat’s the part I’d actually use.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 4,
+      "agent_response": "Yep — use this version:\n\n- **School ends at:** ___  \n- **Leave by:** ___  \n- **Arrive by:** ___  \n- **Starts at:** ___  \n- **Time gap:** ___ min  \n- **Buffer used:** bus / driver / none  \n- **After-school stuff still works:** yes / no  \n\n### Yes / No rule\n- **Yes** only if the gap is **30+ min**, the ride is **already set**, and you’re **not rushed**\n- **No** if the ride is vague, the bus needs a backup, or you’d be cutting it close\n\n### Buffer\n- **Bus:** treat it like **10–15 min early**\n- **Driver:** use the time they gave you, no extra guessing\n- **No ride set:** count it as **not ready yet**\n\nIf you want, I can make this into a **one-line fill-in template** for your notes.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s the version I meant. Short, usable, not mushy.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    }
+  ]
+}

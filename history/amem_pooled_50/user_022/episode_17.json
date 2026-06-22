@@ -1,0 +1,36 @@
+{
+  "user_id": "user_022",
+  "task": "I’m dealing with a pre-departure equipment issue that could hold up a launch if it isn’t cleared quickly. Can you help me think through the safest way to triage it, what to verify first, and when it’s worth staying late to get it back into spec?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 5.0,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes. For a pre-departure issue, I’d triage it in this order:\n\n1. **Make it safe**\n   - Stop if there’s any hazard, abnormal heat, pressure, leak, electrical fault, or unstable behavior.\n   - Isolate energy if needed before touching anything.\n\n2. **Identify the exact asset and failure**\n   - Equipment ID, location, current status.\n   - What failed, what changed, and when it first showed up.\n\n3. **Capture the current state before adjusting**\n   - Live readings, alarms, fault codes, setpoints, logs.\n   - Photo or timestamp if useful.\n   - Don’t “fix” it before you’ve got a baseline.\n\n4. **Check the most likely causes first**\n   - The parts or conditions most likely to drift or fail.\n   - Loose connections, contamination, calibration drift, fluid levels, wear, obvious damage.\n   - Compare against expected values/tolerance.\n\n5. **Verify the fallback / replacement path**\n   - If you might swap a sensor, part, or module, confirm the replacement is correct and available before you commit.\n   - Make sure you have the tool, spare, and any calibration item needed.\n\n6. **Make the minimum necessary correction**\n   - Adjust or replace only what’s needed.\n   - Record original values before changing anything.\n\n7. **Recheck immediately**\n   - Same readings, same conditions if possible.\n   - Confirm it’s actually back in spec, not just temporarily better.\n\n8. **Prove it holds**\n   - Run the relevant functional check or short cycle.\n   - Reinspect for leaks, looseness, alarms, or drift.\n   - If it fails again, treat that as a real fault, not a one-off.\n\n### When it’s worth staying late\nStay late if:\n- the issue is **safety-critical**\n- the fix is **small, known, and verifiable**\n- you have **parts/tools/access** right now\n- you can **prove the result** before departure\n- the delay cost is high enough that a short controlled repair is better than launching with doubt\n\nDon’t stay late if:\n- you can’t verify the root cause\n- the repair would be a guess\n- the system only passes once and then drifts back\n- you’d be trading a delay for a bigger operational risk\n\n### What to write down\n- Equipment ID\n- Time found\n- Symptoms / alarms / readings\n- What was checked\n- What was changed\n- Before/after values\n- Pass/fail against spec\n- Any remaining risk or follow-up owner\n\nIf you want, I can turn this into a very short go/no-go checklist you can use on the spot.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, mostly right. But I’d tighten it up a bit for a real pre-departure hold-up.\n\nFirst thing isn’t just “make it safe” in the abstract — it’s: **what’s the actual out-of-spec point, and is it a hard stop or a monitor-and-watch issue**. That decides whether I’m shutting down work, isolating, or just logging and verifying.\n\nWhat I’d check first:\n- current reading vs spec\n- last known good reading\n- recent calibration / service history\n- obvious mechanical stuff: loose fittings, leaks, contamination, blocked lines, damaged wiring\n- whether the fault is repeatable or just one bad snapshot\n\nAnd I wouldn’t spend long on anything that can’t be proven. If I can’t get a second confirming reading or a clean functional check, I’m not calling it good just because it looks better once.\n\nAs for staying late — yes, but only if the correction is:\n- straightforward\n- low-risk\n- has the right spare/tool on hand\n- and I can document a clean before/after and run a verification cycle\n\nIf it’s a calibration drift, sensor swap, reagent issue, or something with a clear fix, I’d stay. If it’s a weird intermittent fault or I’m guessing at the cause, I’d rather hold the departure than force it.\n\nIf you want, I can give you a tighter 5-step go/no-go version, like the kind you can use at the dock without overthinking it.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 5.0
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — here’s the tighter version I’d use for a pre-departure hold-up.\n\n### 5-step triage\n1. **Classify the issue**\n   - What is out of spec?\n   - Is it a hard stop or a monitor-only deviation?\n   - What’s the exact limit and current value?\n\n2. **Confirm it’s real**\n   - Take a second reading or cross-check.\n   - Compare with last known good value.\n   - Check whether it’s repeatable or just a bad snapshot.\n\n3. **Check the obvious failure points**\n   - Leaks, loose fittings, contamination, blocked lines\n   - Damaged wiring / connectors\n   - Recent calibration or service changes\n   - Anything touched since last good state\n\n4. **Decide if there’s a clean fix**\n   - Do you have the correct spare, tool, or calibration item?\n   - Is the correction straightforward and low-risk?\n   - Can you document before/after and verify it in the same conditions?\n\n5. **Prove it or stop**\n   - Recheck after the correction\n   - Run the relevant functional/verification cycle\n   - If it won’t hold spec or can’t be verified, don’t call it good\n\n### Stay late if\n- it’s a **hard stop**\n- the fix is **known and contained**\n- you can **verify the result**\n- the spare/tool/access is already there\n- the departure risk is worse than the controlled delay\n\n### Don’t stay late if\n- the fault is **intermittent and unexplained**\n- you’d be **guessing**\n- you can’t get a second confirming reading\n- it passes once but doesn’t hold\n\n### Minimal note to capture\n- out-of-spec point\n- hard stop or monitor issue\n- current reading / last known good\n- what was cross-checked\n- what changed\n- verification result\n- pass/fail\n- owner / next action\n\nIf you want, I can turn this into a one-line dockside checklist with **Go / No-Go / Monitor** decisions.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s the right shape. The Go / No-Go / Monitor split is what I’d actually use.\n\nI’d keep it that blunt:\n- **Go** = confirmed in spec, verified, holds\n- **Monitor** = not ideal but not a stop, log it and watch it\n- **No-Go** = hard stop, unverified fix, or it won’t hold\n\nAnd the order matters — classify first, then confirm it’s real, then decide whether you’ve got a clean fix. Saves a lot of wasted time chasing noise.\n\nThe only thing I’d maybe add is: if it’s a pre-departure item and it’s borderline, assume the clock is against you. Don’t spend an hour on a maybe. I’ve had that go bad before — one sensor drift, one bad reading, and suddenly you’re stuck redoing the whole verification while everybody’s waiting.\n\nSo yeah, this is usable. I’d probably want the one-line dockside version too, but this is already solid.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 5.0
+      },
+      "gt_correct": null
+    }
+  ]
+}

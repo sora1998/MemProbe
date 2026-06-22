@@ -1,0 +1,75 @@
+{
+  "user_id": "user_006",
+  "task": "I’m putting together a quick prep note for a network change later today, and I want it to be easy to follow while I’m working. What should I make sure is checked before starting, and what sequence would you use for the first few steps?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.32,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Here’s a practical pre-change prep note you can use, with a simple order that keeps you from missing something obvious.\n\n## Before starting: quick checks\n1. **Confirm scope**\n   - Exact device(s), interface(s), VLANs, routes, ACLs, or services involved\n   - What is changing vs. what must stay untouched\n\n2. **Confirm change window and access**\n   - You have console/OOB/remote access\n   - Someone on-site or reachable if needed\n   - Required approvals and contacts are current\n\n3. **Capture the current state**\n   - Running config / relevant section\n   - Interface status\n   - Routing/adjacency state if applicable\n   - Logs or alarms already present\n   - Any counters that matter for the change\n\n4. **Check for existing problems**\n   - Interface errors, flaps, high CPU/memory\n   - STP/LACP/neighbor issues if relevant\n   - Recent alerts or unresolved incidents\n   - Anything already degraded before you touch it\n\n5. **Verify dependencies**\n   - Downstream/upstream paths\n   - IPs, gateways, trunks, tunnels, peers, or services that could be impacted\n   - Maintenance on connected systems that might overlap\n\n6. **Have rollback ready**\n   - Exact rollback steps\n   - Last-known-good config or snapshot\n   - Thresholds that trigger rollback\n   - Backup copy saved somewhere you can actually restore from\n\n## Suggested first few steps in the window\n1. **Reconfirm the plan**\n   - Read back the exact change and expected outcome\n   - Verify you’re on the right device and interface\n\n2. **Take final pre-change snapshots**\n   - Config\n   - Status/counters\n   - Relevant logs/time stamp\n\n3. **Make the change in the smallest safe step**\n   - Do one piece at a time if possible\n   - Avoid batching unrelated changes\n\n4. **Validate immediately**\n   - Check the specific thing you changed first\n   - Then check adjacent dependencies\n   - Confirm traffic/service behavior, not just config text\n\n5. **Pause if anything drifts**\n   - If you see errors, loss of adjacency, unexpected drops, or no recovery within your acceptable window, stop and consider rollback\n\n## Simple working order\n**Pre-checks → snapshot → change → immediate validation → dependency validation → document result**\n\nIf you want, I can turn this into a tighter live change sheet with columns for **pre-checks / step / validation / rollback point / post-checks / owner / timestamp / result**.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Pretty good, but it’s still a little generic. I want it tighter for an actual field note — like a real order I can run off fast without thinking.\n\nMake it more operational:\n- split out **must-check** vs **if applicable**\n- include **what to verify right before touching anything**\n- give me a **clean first-5-step sequence** with zero fluff\n- if you mention rollback, make it concrete: what gets saved, where, and what triggers it\n\nAlso, keep it network-change specific. I don’t need broad project-management stuff.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Got it. Here’s a tighter field-note version you can run off fast.\n\n## Must-check before starting\n- Exact device name(s)\n- Exact interface/port(s)\n- VLAN / subnet / circuit ID / peer IPs if involved\n- Change window start/end\n- Approval confirmed\n- Console / OOB / remote access working\n- Backup path available to save configs/logs\n- Rollback file or last-known-good config identified\n- Current service state known: up / degraded / down\n- Any active alarms, flaps, errors, or adjacency issues already present\n\n## If applicable\n- STP state\n- LACP / port-channel state\n- Routing neighbors / BGP / OSPF / static route dependencies\n- Firewall / ACL / NAT impact\n- WAN circuit status / provider ticket\n- Onsite hands needed\n- Spare hardware staged\n- Downstream systems that depend on this link/device\n\n## Right before touching anything\nVerify all of this on the live gear:\n- You are on the correct device\n- Correct interface / port / VLAN / peer\n- Current config matches the change plan\n- Interface status, counters, and neighbor state are stable\n- No unexpected errors, drops, or recent flaps\n- Backup has been saved and is readable\n- Rollback target is ready\n\n## Clean first-5-step sequence\n1. **Confirm target**\n   - Read back device, port, and intended change\n\n2. **Capture pre-change state**\n   - Save running config\n   - Record interface status, counters, neighbor/routing state\n   - Timestamp it\n\n3. **Save rollback copy**\n   - Copy current config to a known location\n   - Label it with device + date/time + ticket number\n\n4. **Make the smallest change first**\n   - Do the first isolated step only\n   - Do not batch extra edits\n\n5. **Validate immediately**\n   - Check the exact thing changed\n   - Then check adjacent dependency state\n   - If service is impacted or state is wrong, stop\n\n## Rollback: concrete\n### Save\n- Running config\n- Relevant interface / routing / ACL sections\n- Pre-change counters or screenshots\n- Any logs showing current state\n\n### Where\n- Local backup on the device if available\n- External backup location you can actually reach during the window\n- Ticket/work order attachment if that’s your process\n\n### Trigger\nRollback if any of these happen:\n- Service does not recover within the expected window\n- Neighbor/adjacency drops and does not return cleanly\n- Interface errors, loss, or flaps increase after the change\n- Traffic fails to pass as expected\n- You cannot confirm the change is behaving normally\n\nIf you want, I can turn this into a one-page **field note template** with fill-in blanks for device, port, backup path, rollback trigger, and validation.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Better. Still a little soft on the actual sequence, though.\n\nI want it in a run sheet style, like:\n- check X\n- verify Y\n- save Z to A\n- touch config\n- confirm B\n\nNo extra framing.\n\nAlso, for rollback, be specific on the backup targets. Like if it’s a switch/router change, what exactly gets copied and where I’d pull it back from. I don’t need generic ‘external location’ wording. I want something I can glance at mid-change without thinking.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "- check device name, interface/port, circuit/VLAN/peer, and window\n- verify console/OOB/remote access works\n- verify current state is clean: interface up, counters stable, neighbors/adjacencies up, no active flaps/errors, no high CPU/mem\n- save running config and relevant state snapshots\n- copy backup to:\n  - **switch/router:** local flash or bootflash, plus SCP/TFTP/FTP to a jump host or backup server\n  - **if supported:** export the full config and the relevant section only\n- verify the backup file exists and is readable\n- record timestamp, ticket number, and baseline counters\n- touch config: make the smallest first change only\n- confirm the exact changed item first\n- confirm dependent state next: neighbor, port-channel, route, trunk, or service path\n- if it fails, rollback immediately from the saved config backup on flash/bootflash or pull the known-good copy back from the SCP/TFTP/FTP server and restore it\n- rollback if:\n  - service does not recover in the expected time\n  - adjacency/port-channel/trunk drops and does not return cleanly\n  - errors, drops, or flaps increase\n  - traffic does not pass as expected\n  - state diverges from baseline and keeps getting worse\n\nIf you want, I can compress this into a true one-line-per-step field note with blanks you can fill in during the change.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, closer. Still need it in a harder run order, not a summary.\n\nDo this next:\n- check device / port / VLAN / peer / window\n- verify console or OOB access\n- verify baseline is clean: link up, counters stable, neighbors up, no fresh alarms\n- save running config to flash/bootflash\n- copy same backup to SCP server / jump host backup folder\n- save relevant state too: interface status, route/neighbor output, logs if needed\n- verify the backup file is there and readable\n- touch the config\n- confirm the exact thing changed\n- confirm the dependent path after: trunk / LACP / STP / route / tunnel / service\n- if it breaks, restore from flash/bootflash first, then SCP backup if needed\n\nRollback target should be конкретely:\n- switch/router config backup on flash/bootflash\n- second copy on SCP server or jump host backup directory tied to the ticket\n- if the device supports it, keep a copy of the pre-change section export too, not just the whole config\n\nWhat I still want is the actual first-5-step run sheet, one line each, no prose around it.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 4,
+      "agent_response": "1. check device / port / VLAN / peer / window  \n2. verify console or OOB access  \n3. verify baseline is clean: link up, counters stable, neighbors up, no fresh alarms  \n4. save running config to flash/bootflash, copy same backup to SCP server / jump host backup folder, save relevant state outputs  \n5. verify the backup file is there and readable  \n\nIf you want, I can give you the next 5 lines in the same format, ending with rollback.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "No, keep going. I want the rest in the same run order, not “if you want.” Next 5 lines:\n\n6. touch the config\n7. verify the exact change took\n8. verify the dependent path after: trunk / LACP / STP / route / tunnel / service\n9. if it’s off, restore from flash/bootflash first\n10. if flash copy is bad or missing, pull the SCP/jump-host backup tied to the ticket and restore that\n\nAnd make the rollback line concrete like switch/router backup on flash/bootflash, second copy on SCP server or jump host folder, plus pre-change section export if the box supports it.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 5,
+      "agent_response": "6. touch the config  \n7. confirm the exact thing changed  \n8. confirm dependent path after: trunk / LACP / STP / route / tunnel / service  \n9. if it breaks, restore from switch/router config backup on flash/bootflash first  \n10. if flash/bootflash copy is bad or missing, restore from the SCP server or jump-host backup folder tied to the ticket; use pre-change section export too if the device supports it",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s the run order I wanted. Clean enough to use mid-change.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.0
+      },
+      "gt_correct": null
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "user_id": "user_022",
+  "task": "I’m trying to set up a simple live-check routine for a small process that can drift over a shift, and I want it to be practical rather than overkill. What would you watch in real time, and how would you decide when something is just normal variation versus worth acting on?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "formality_preference",
+      "short": "Neutral-professional, not chatty",
+      "explanation": "She comes across as someone who would want interactions to stay professional and efficient rather than overly casual. Her practical, work-focused style suggests she’d prefer clear communication without unnecessary friendliness or performance."
+    },
+    {
+      "idx": 2,
+      "dimension": "verbosity_preference",
+      "short": "Moderate detail, enough to act",
+      "explanation": "She likely wants enough explanation to understand the issue and proceed correctly, but not a long lecture. Her preference for efficiency and clear facts points to responses that are concise while still covering the important steps."
+    },
+    {
+      "idx": 3,
+      "dimension": "directness_preference",
+      "short": "Straightforward over softened wording",
+      "explanation": "She seems to value blunt clarity more than emotional cushioning. In a technical setting, she would probably prefer the assistant to state the problem, the likely cause, and the fix plainly."
+    },
+    {
+      "idx": 4,
+      "dimension": "format_preference",
+      "short": "Bullets and checklists over prose",
+      "explanation": "Her checklist-oriented habits and notebook procedure style fit a structured presentation. She would likely do best with information broken into steps, bullets, or a quick checklist she can follow without re-reading dense paragraphs."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Wants firm correction when something is off",
+      "explanation": "She appears unlikely to want vague agreement if a detail is wrong or risky. Her real-world habit of correcting spec errors suggests she’d appreciate the assistant flagging mistakes directly and not letting questionable assumptions slide."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "I’d keep it very simple and use a **three-part live check**:\n\n1. **Power/inputs stable?**  \n   - Watch the main supply or feed condition first.  \n   - If you have a hard threshold, use it. Example: voltage below a set floor, flow/pressure dropping, or input rate fluctuating sharply.\n\n2. **Sensor/process readings trending normally?**  \n   - Track the few measurements that best represent the process.  \n   - Compare them to a short baseline from the start of the shift, not just the last reading.  \n   - Look for **trend**, not noise: steady drift, step change, or repeated spikes.\n\n3. **Recent workflow/operator changes?**  \n   - Check whether anything changed recently: settings, material, operator action, cleaning, maintenance, batch change, etc.  \n   - A lot of “process problems” are really workflow changes showing up first.\n\n### How to tell normal variation vs worth acting on\nUse a simple rule:\n\n- **Normal variation** if the reading is:\n  - bouncing around within the usual band,\n  - not trending in one direction,\n  - and no recent change explains it.\n\n- **Act on it** if you see any of these:\n  - **Threshold breach**: it crosses a known limit.\n  - **Persistent drift**: it keeps moving in one direction over multiple checks.\n  - **Step change**: sudden jump after a change in setup, operator action, or material.\n  - **Mismatch**: one sensor or stage disagrees with the others.\n  - **Repetition**: the same deviation appears more than once in the same shift.\n\n### Practical decision rule\nIf you’re short on time, do this:\n\n- **First check order/timestamp**: is the change real and when did it start?\n- **Then compare to the last good state**: what changed by one variable?\n- **Then check consistency** across similar runs/operators/units.\n\nIf you still can’t point to a clear workflow/input cause, then escalate to the system itself.\n\n### Minimal live log\nKeep a tiny record:\n- time\n- what changed\n- key readings\n- whether it stayed within band\n- action taken\n\nThat gives you enough to spot drift without turning it into a paperwork exercise.\n\nIf you want, I can turn this into a **one-page checklist** or a **simple threshold table** for your specific process.",
+      "score": 4.4,
+      "summary": "mean=4.40 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:3, 5:2}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Neutral-professional and efficient overall: \"I’d keep it very simple\" and the response stays work-focused without being chatty. Minor softness in phrases like \"If you want, I can turn this into...\" but mostly professional."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Moderate detail with actionable guidance: it gives a clear framework, concrete criteria, and a \"Minimal live log\" without becoming a long lecture. Enough to act on."
+        },
+        {
+          "idx": 3,
+          "score": 4,
+          "reason": "Mostly straightforward and plainspoken: \"Act on it if you see any of these\" and \"If you still can’t point to a clear workflow/input cause, then escalate\" are direct. Slightly softened by explanatory framing, but not evasive."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strongly structured with bullets and numbered steps: \"three-part live check,\" sub-bullets, and a \"Practical decision rule\" make it easy to follow without dense prose."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Provides firm correction criteria rather than vague agreement: it explicitly says \"Act on it if\" thresholds, drift, mismatch, or repetition occur, and \"If you still can’t point to a clear workflow/input cause, then escalate.\" It could be even more forceful, but it does flag issues directly."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — the useful version is to **anchor it on the one process variable that actually matters**, then use only the few checks that explain why it moved.\n\n### Live-check order\n1. **Primary control variable**\n   - The main number that defines whether the process is on target.\n   - Watch its **direction**, not just the value.\n\n2. **Confirming variable**\n   - Only if there’s a second reading that should move with it.\n   - If the main reading changes but the confirm doesn’t, that’s a real clue.\n\n3. **Feed/pressure/flow condition**\n   - Anything upstream that can explain drift before blaming the process itself.\n\n4. **Controller status / alarms**\n   - Mode changes, limits, overrides, faults, or auto/manual shifts.\n\n5. **Recent change**\n   - Setpoint, material, cleaning, maintenance, operator action, changeover.\n\n### Normal vs action-worthy\n- **Normal variation**\n  - stays inside the expected band\n  - no clear directional trend\n  - confirm reading agrees\n  - no recent change that would explain it\n\n- **Worth watching**\n  - one or two readings off, but it settles back\n  - small drift that hasn’t persisted long enough to trust yet\n\n- **Act now**\n  - **2–3 checks in a row** outside the band\n  - a **steady slope** in the same direction\n  - a **step change** after some intervention\n  - mismatch between main and confirming readings\n  - repeated spikes, not a one-off blip\n\n### Simple rule of thumb\n- **One bad point** = note it\n- **Two or three in the same direction** = investigate\n- **Worsening trend or mismatch** = act\n\n### What to log\n- timestamp\n- target/setpoint\n- actual main reading\n- confirming reading\n- feed/pressure/flow condition\n- what changed right before it moved\n- whether the correction held\n\nIf you want, I can turn this into a **tight 5-line shift checklist** for a specific process type.",
+      "score": 4.6,
+      "summary": "mean=4.60 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:2, 5:3}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly neutral-professional and efficient, e.g. \"the useful version is to anchor it\" and concise headings. Slightly conversational with \"If you want\" and \"Yes —\" but not chatty overall."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Moderate detail with actionable guidance: it gives a clear checklist, thresholds, and a logging list without becoming a long lecture."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Straightforward and blunt: \"Act now,\" \"One bad point = note it,\" \"Two or three in the same direction = investigate.\" It states criteria plainly without softening."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strongly structured with bullets and checklists: \"Live-check order,\" \"Normal vs action-worthy,\" \"Simple rule of thumb,\" and \"What to log.\" This is exactly checklist-style formatting."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Provides firm correction-style guidance with explicit action thresholds and direct distinctions like \"Act now\" and \"worsening trend or mismatch = act.\" It does not hedge much, though it stops short of explicitly challenging bad assumptions."
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yes — the clean way to do it is:\n\n### 1) Trust the **primary PV** first\nThat’s the number that actually defines whether the loop is doing its job.  \nIf you only watch one thing in real time, watch that.\n\n### 2) Use the **one upstream variable** that most often makes it drift\nUsually that’s the thing feeding the loop, not the final output itself:\n- flow\n- pressure\n- feed rate\n- inlet temp\n- supply level\n- load\n\nIf that upstream number moves first, it’s usually the reason the PV is drifting.\n\n### 3) Keep the rest as support checks\n- one confirming reading, if it truly tracks the PV\n- controller mode / alarms\n- recent setpoint or operator changes\n\n### Simple action rule\n- **1 bad point**: usually ignore, unless it’s far outside normal\n- **2–3 checks in the same direction**: start investigating\n- **still worsening after that**: act\n\n### What usually means “real drift”\n- PV keeps moving the same way over multiple checks\n- upstream condition changed first\n- confirming reading agrees\n- controller isn’t in a weird mode or override\n\n### What usually means “noise”\n- one odd point\n- next reading snaps back\n- no upstream change\n- no matching change in the confirming reading\n\n### Minimal live log\n- time\n- PV\n- upstream condition\n- mode/alarm state\n- what changed\n- whether it held\n\nIf you want, I can turn this into a **one-line live-check card** for a specific loop type, like **pump, dosing, fan, scrubber, or temperature control**.",
+      "score": 4.4,
+      "summary": "mean=4.40 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:3, 5:2}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly neutral-professional and efficient: \"The clean way to do it is\" and concise headings. Slightly conversational with \"If you want, I can turn this into...\" but not overly chatty."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Moderate detail with actionable guidance: gives a simple rule, examples, and a minimal log. It is concise rather than a long lecture, though a bit more explanatory than strictly minimal."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Straightforward and blunt: \"Trust the primary PV first,\" \"If you only watch one thing... watch that,\" and \"1 bad point: usually ignore\" state the guidance plainly without softening."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong bullet/checklist structure throughout: numbered sections, bullet lists, and a \"Simple action rule\" plus \"Minimal live log\" make it easy to follow without dense prose."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Provides firm correction criteria: \"1 bad point: usually ignore\" vs \"2–3 checks... start investigating\" and \"still worsening after that: act\" clearly distinguishes noise from real drift. It is direct, though not especially forceful beyond the checklist."
+        }
+      ]
+    }
+  ]
+}

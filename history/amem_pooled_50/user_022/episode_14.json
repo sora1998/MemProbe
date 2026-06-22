@@ -1,0 +1,62 @@
+{
+  "user_id": "user_022",
+  "task": "I’m revising a troubleshooting checklist for a piece of equipment that’s had a couple of annoying repeat issues, and I want it to reflect what actually went wrong last time instead of staying generic. Can you help me turn those past misses into a cleaner step-by-step note I can keep using?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.65,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — the clean way to do that is to turn each past miss into a **specific check + comparison + stop point**.\n\nA good reusable note looks like this:\n\n### Troubleshooting note format\n1. **What failed last time**\n2. **What was assumed**\n3. **What actually proved it**\n4. **What to compare against**\n5. **What to do if it fails again**\n6. **Hard stop / quit this branch**\n\n### Example structure\n- **Symptom:** repeat issue / nuisance fault / drift\n- **First check:** exact point where the problem first showed up\n- **Baseline:** what the healthy reading/condition looked like last time it was known good\n- **Cross-check:** compare against a second source, known-good unit, handheld meter, trend, or physical inspection\n- **Branch split:**\n  - if **process drift** → check operating conditions, load, temperature, flow, timing, trend history\n  - if **bad input** → check upstream supply, signal source, setpoint, contamination, blockage, operator change\n  - if **bad measurement** → check sensor, wiring, calibration, mounting, fouling, drift, verification method\n- **Hard stop:** if the reading crosses a limit or the cross-check disagrees beyond tolerance, stop blaming this branch and move to the next one\n\n### Short reusable checklist line\nFor each item, write:\n- **item**\n- **failure mode**\n- **how checked**\n- **baseline**\n- **normal range / hard limit**\n- **cross-check**\n- **result**\n- **next action**\n\n### Example wording\n- **If the fault returns, start at the first bad point in the sequence.**\n- **Compare the current reading to the last known good baseline, not just to the spec.**\n- **If the primary reading disagrees with the cross-check, treat it as a measurement problem until proven otherwise.**\n- **If the process is stable but the value drifts, check the sensor path before changing the process.**\n- **If the value is outside hard limits, stop and correct that before continuing.**\n\nIf you want, I can turn this into a **one-page field checklist** with your exact equipment failure modes filled in.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, closer. But it’s still a bit generic.\n\nI want the note to force the technician to write down the actual last failure point and the exact cross-check we used, not just \"compare against baseline\" in the abstract. Something like:\n\n- symptom seen\n- last known good reading / condition\n- exact point where it first went bad\n- what was cross-checked against what\n- what changed when it failed\n- what ruled out the wrong branch\n- stop if the same drift/offset shows up again\n\nAlso, I’d want it to distinguish between a sensor problem, a process problem, and a maintenance/setup problem. That’s usually where people waste time. The useful part is the branch point, not the general troubleshooting language.\n\nIf you rewrite it, keep it tight and field-usable. More like a checklist I’d actually carry, less like a template explanation.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Absolutely — here’s a tighter, field-usable version that forces the technician to capture the **actual last failure point** and the **exact cross-check**, with hard branch stops.\n\n## Reusable troubleshooting note\n\n### 1) Record the failure exactly\n- **Symptom seen:**  \n- **Last known good reading / condition:**  \n- **Exact point where it first went bad:**  \n- **When it changed:**  \n\n### 2) Compare only at the failure point\n- **Primary reading:**  \n- **Cross-check used:**  \n- **Cross-check reading:**  \n- **Difference / offset / drift:**  \n\n### 3) Decide the branch\n- **Sensor problem if:** primary and cross-check disagree, or offset matches sensor drift/failure  \n- **Process problem if:** both checks move the same way and the process condition actually changed  \n- **Maintenance/setup problem if:** issue follows recent work, adjustment, install, calibration, or handling  \n\n### 4) Rule out the wrong branch\n- **What changed when it failed:**  \n- **What did not change:**  \n- **What ruled out this branch:**  \n\n### 5) Hard stop\n- **Stop this branch if the same drift/offset shows up again** and the cross-check confirms it.  \n- **Do not keep chasing this path** if the comparison does not support it.\n\n## Short field version\n- symptom seen  \n- last good reading / condition  \n- first bad point  \n- exact cross-check  \n- what changed  \n- what ruled out the wrong branch  \n- stop if same drift/offset repeats\n\nIf you want, I can turn this into a **fill-in-the-blank checklist table** with columns you can use in the field.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Closer. Still a little too soft on the branch point.\n\nI’d want it to force a technician to write the **decision trigger**, not just the branch name. Like:\n\n- symptom seen\n- last known good reading / condition\n- exact first bad point\n- exact cross-check used\n- actual offset / drift / mismatch\n- **what condition would make this a sensor issue instead of process/setup**\n- **what condition would make this a process issue instead of sensor/setup**\n- **what recent work or adjustment could have caused it**\n- what ruled out the wrong branch\n- stop if the same offset/drift repeats\n\nThat middle part matters. People will otherwise just circle “sensor” because it’s convenient.\n\nI’d also like it in a format that reads like something you’d write on a job card — short lines, no explanatory text under each one. If you can rewrite it again with those branch triggers baked in, that’s the version I’d actually use.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 5.0
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yes — here’s a tighter job-card version that forces the **decision trigger** instead of just naming the branch.\n\n## Troubleshooting job card note\n\n- **Symptom seen:**  \n- **Last known good reading / condition:**  \n- **Exact first bad point:**  \n- **Exact cross-check used:**  \n- **Actual offset / drift / mismatch:**  \n\n- **Sensor issue if:**  \n- **Process issue if:**  \n- **Setup / maintenance issue if:**  \n\n- **Recent work / adjustment / change:**  \n- **What ruled out the wrong branch:**  \n- **Stop if same offset / drift repeats:**  \n\n## Even shorter field version\n\n- symptom seen  \n- last known good  \n- first bad point  \n- cross-check used  \n- actual mismatch  \n- sensor trigger  \n- process trigger  \n- setup/maintenance trigger  \n- recent change  \n- ruled out wrong branch  \n- stop if repeat drift/offset\n\nIf you want, I can turn this into a **one-line-per-box job card** with the three trigger lines written in more concrete, equipment-agnostic wording.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Better, but still a little too hand-wavy on the trigger lines.\n\nI want the branch point to be written like a decision, not a label. More like:\n\n- **Sensor issue if** the primary reading changes but the cross-check stays stable / disagrees by the same offset\n- **Process issue if** both readings move together with the same change in operating condition\n- **Setup / maintenance issue if** the problem started right after calibration, replacement, cleaning, wiring, install, or adjustment\n\nThat’s the part I’d actually want on the card.\n\nAlso, I’d want the “what ruled out the wrong branch” line to force a note about the comparison, not just a vague comment. Something like:\n\n- **Wrong branch ruled out by:** cross-check matched / process stayed stable / recent work matched the timing / no change at the input\n\nIf you rewrite it one more time, keep the same short job-card format, but make those three triggers read like actual conditions a tech has to check off. No extra explanation, just the lines.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 4,
+      "agent_response": "- **Symptom seen:**  \n- **Last known good reading / condition:**  \n- **Exact first bad point:**  \n- **Exact cross-check used:**  \n- **Actual offset / drift / mismatch:**  \n\n- **Sensor issue if:** primary reading changes, cross-check stays stable, or the same offset repeats  \n- **Process issue if:** both readings move together with the same operating change  \n- **Setup / maintenance issue if:** problem started after calibration, replacement, cleaning, wiring, install, or adjustment  \n\n- **Recent work / adjustment / change:**  \n- **Wrong branch ruled out by:** cross-check matched / process stayed stable / recent work matched timing / no change at input  \n- **Stop if same offset / drift repeats:**",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s the shape of it. Tight enough to use, and the branch triggers are actually decision points now instead of labels. The “wrong branch ruled out by” line is good too — that’s the part people usually leave mushy.\n\nI’d use that.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 5.0
+      },
+      "gt_correct": null
+    }
+  ]
+}

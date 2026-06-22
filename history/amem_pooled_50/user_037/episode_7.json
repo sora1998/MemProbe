@@ -1,0 +1,49 @@
+{
+  "user_id": "user_037",
+  "task": "I made a few versions of a small accessory idea, and I’m trying to figure out which one is actually worth keeping and which ones I should drop. Can you help me set up a simple way to compare them before I spend more time on the weak ones?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.533333333333333,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — use a super simple 3-step filter:\n\n1. **Score each version 1–5** on:\n   - **Looks good**\n   - **Easy to make again**\n   - **Uses materials well**\n   - **Feels worth selling/keeping**\n\n2. **Pick the one with the highest total**.\n\n3. **Drop anything that is:**\n   - hard to remake,\n   - uses too much material,\n   - or looks only “okay” instead of clearly better.\n\nIf two are close, keep the one that’s **faster and cheaper** to make. If you want, I can turn your actual versions into a quick compare table.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, but that’s still kind of broad. I need a way to compare them fast, like a little table with actual cutoffs.\n\nDo it with 4 columns:\n- sell potential\n- material cost\n- time to make\n- repeatability\n\nThen give me a rule for dropping one, like if it scores low in 2 columns it’s out. I don’t want to waste time on stuff that only looks decent once.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yep — use a blunt 4-column table and a hard cutoff.\n\n## Quick compare table\nScore each version **1–5**:\n\n| Version | Sell potential | Material cost | Time to make | Repeatability | Keep / Drop |\n|---|---:|---:|---:|---:|---|\n| A |  |  |  |  |  |\n| B |  |  |  |  |  |\n| C |  |  |  |  |  |\n\n## How to score\n- **Sell potential** = would someone actually want this?\n- **Material cost** = 5 = cheap, 1 = expensive\n- **Time to make** = 5 = fast, 1 = slow\n- **Repeatability** = 5 = easy to remake the same way\n\n## Drop rule\n**Drop a version if it gets 2 or more scores of 2 or less.**\n\nThat means:\n- weak demand,\n- too expensive,\n- too slow,\n- or too hard to repeat.\n\n## Keep rule\nKeep the one that:\n- has the **highest total**, and\n- **doesn’t fail the drop rule**.\n\n## Tie-breaker\nIf two are close, keep the one with:\n1. **higher repeatability**\n2. **lower material cost**\n3. **less time to make**\n\n## Super fast version\nIf you want it even more blunt:\n\n- **5 = good**\n- **3 = maybe**\n- **1–2 = bad**\n\n**If a version has two bad scores, drop it.**\n\nIf you want, I can make this into a **one-line fill-in template** you can copy for each idea.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, closer. But I want it even tighter than that — like a real cut line, not just “2 or less.”\n\nMake it something I can use fast while I’m looking at the pieces:\n- **5 = clear yes**\n- **4 = probably yes**\n- **3 = maybe**\n- **2 = weak**\n- **1 = trash**\n\nThen give me a rule like:\n- **keep** if it gets at least **2 scores of 4 or 5**\n- **drop** if it gets **2 or more scores of 2 or 1**\n\nAnd maybe one extra rule for the annoying middle ones, because that’s usually where stuff wastes time. Like if it’s all 3s, I want to know whether that means “only make it if I’m bored” or just drop it.\n\nAlso, put the table in a version I can just copy quick, not a long explanation.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yep — use this:\n\n## Fast cut table\n\n| Version | Sell potential | Material cost | Time to make | Repeatability | Keep / Drop |\n|---|---|---|---|---|---|\n| A | 5 / 4 / 3 / 2 / 1 | 5 / 4 / 3 / 2 / 1 | 5 / 4 / 3 / 2 / 1 | 5 / 4 / 3 / 2 / 1 |  |\n| B | 5 / 4 / 3 / 2 / 1 | 5 / 4 / 3 / 2 / 1 | 5 / 4 / 3 / 2 / 1 | 5 / 4 / 3 / 2 / 1 |  |\n| C | 5 / 4 / 3 / 2 / 1 | 5 / 4 / 3 / 2 / 1 | 5 / 4 / 3 / 2 / 1 | 5 / 4 / 3 / 2 / 1 |  |\n\n## Cut rules\n\n**Keep** if:\n- it gets **2 or more scores of 4 or 5**\n\n**Drop** if:\n- it gets **2 or more scores of 2 or 1**\n\n## Middle rule\nIf it’s mostly **3s**:\n- **keep only if** it has **at least one 4 or 5** in either **sell potential** or **repeatability**\n- **drop it** if all 4 scores are **3 or lower**\n\n## Super blunt version\n- **2 strong scores = keep**\n- **2 weak scores = drop**\n- **all 3s = only keep if it has real repeatability or selling pull**\n\nIf you want, I can turn this into a **single-line screenshot version**.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that works. The middle rule is the part I needed. The copy table is fine too — simple enough to use fast.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    }
+  ]
+}

@@ -1,0 +1,721 @@
+{
+  "user_id": "user_028",
+  "tasks_dir": "CustomTasksPooledFinal",
+  "counts": {
+    "ok": 15,
+    "memory_failure": 15,
+    "agent_elicitation_failure": 1
+  },
+  "details": [
+    {
+      "category": "skill_memory",
+      "dimension": "reading_comprehension_skill",
+      "explanation": "He reliably extracts the important parts of leases, court notices, bank statements, and insurance paperwork. He does not skim and hope; he reads closely because he expects other people to miss details or hide them. That makes him solid with written procedures, especially when money is on the line.",
+      "ground_truth": "Careful reader of contracts and notices",
+      "predicted": "reads for deadlines, obligations, and hidden consequences",
+      "slot_fill_reason": "They repeatedly asked to identify the controlling deadline, consequence, and obligation lines in notices and forms, and to separate warning language from what actually matters.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the core idea of careful, detail-oriented reading of formal documents, but it is phrased more specifically around deadlines and consequences rather than broadly capturing contracts and notices.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "critical_thinking_skill",
+      "explanation": "He weighs claims against documents and observable facts rather than trusting people’s assurances. His default is to test assumptions, check the numbers, and assume there is a catch until proven otherwise. He can still be narrow when his distrust hardens into reflex, but he is not gullible.",
+      "ground_truth": "Skeptical, evidence-first evaluator",
+      "predicted": "strong at practical triage and prioritization",
+      "slot_fill_reason": "They consistently break messy situations into urgency buckets, identify key trigger words, and order actions by risk, deadlines, and consequences across notices, repairs, and property issues.",
+      "score": 0.0,
+      "judge_reason": "The prediction describes prioritization skill, not skeptical evidence-based evaluation, so it misses the core meaning.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.0,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites discussion of how the user evaluates evidence, verifies line items, and checks assumptions before agreeing, which can reveal a skeptical, evidence-first critical thinking style."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"I don’t like vague charges\" / \"assume there’s padding\" / \"That second one matters more than people think\"",
+            "reason": "The user clearly shows a skeptical, evidence-first style focused on checking line items, markup, duplicate charges, and wording that enables hidden fees, which supports inferring a critical-thinking, distrustful evaluator."
+          }
+        ],
+        "ep_index": 2
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "troubleshooting_skill",
+      "explanation": "He is good at figuring out what is actually wrong in a system, especially around home and property problems. When the furnace failed or pipes froze, he identified the immediate controls, shutoffs, and workarounds instead of freezing up. He may not pursue the most elegant fix, but he gets to a workable diagnosis quickly.",
+      "ground_truth": "Practical diagnostician for household failures",
+      "predicted": "strong at practical triage and document prioritization",
+      "slot_fill_reason": "They repeatedly sort notices, bills, estimates, and property paperwork by urgency, deadlines, and risk, and can identify key red-flag terms and next steps.",
+      "score": 0.25,
+      "judge_reason": "The prediction suggests general triage and prioritization skills, but it does not capture the specific household troubleshooting and practical diagnosis of system failures described in the ground truth.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.25,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task is explicitly about diagnosing a household failure, so natural follow-up questions about symptoms, checks, shutoffs, and what the user has already tried could readily reveal practical troubleshooting skill."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"I had a furnace-and-pipe mess in winter once, and the little warning signs mattered more than the big failure did.\"",
+            "reason": "The user shows practical troubleshooting behavior by prioritizing basic checks, noticing warning signs, and using past home-system failures to guide diagnosis rather than freezing up."
+          }
+        ],
+        "ep_index": 3
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "repairing_skill",
+      "explanation": "He can handle straightforward physical fixes and temporary workarounds, like heaters, valves, drains, and pipe replacement. He is not presented as a fine craftsman, but he is clearly capable of doing competent repair work on his own. He prefers durable, practical fixes over patching the same problem repeatedly.",
+      "ground_truth": "Handy with basic home repairs",
+      "predicted": "can inspect repair estimates and spot questionable line items",
+      "slot_fill_reason": "They repeatedly identified and questioned labor hours, shop supplies, permit/admin fees, disposal fees, duplicate charges, and vague authorization language in repair estimates.",
+      "score": 0.25,
+      "judge_reason": "The prediction shows practical judgment about repairs, but it is about evaluating estimates rather than actually doing basic home repair work.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.25,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task is directly about deciding which home repairs the user can do themselves, so natural follow-up questions about past repair experience, comfort with tools, and examples of fixes handled would plausibly reveal their repairing skill."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"The lean tool list looks sane. I already have most of that anyway.\"",
+            "reason": "The user’s comfort with the listed repair tasks and existing ownership of the core tools strongly suggests practical hands-on repair ability, including straightforward home fixes."
+          }
+        ],
+        "ep_index": 4
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "time_management_skill",
+      "explanation": "He keeps a tight routine and handles urgent tasks without much visible drift. His style is structured and self-directed, which helps him stay on top of maintenance, paperwork, and property issues. He likely becomes impatient with delays or open-ended processes.",
+      "ground_truth": "Disciplined, routine-driven time user",
+      "predicted": "prioritizes urgent tasks, builds workable checklists and sequences",
+      "slot_fill_reason": "They repeatedly sorted notices, bills, repairs, errands, and property issues into hard priority orders with deadlines, stop points, and checklists.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the structured, self-directed handling of tasks and urgency, but it does not fully capture the routine-driven, disciplined time-management style or impatience with delays.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "financial_resource_management_skill",
+      "explanation": "He tracks receipts, keeps accounts separate, and prefers cash flow he can directly control. He avoids easy-investment pitches, lending to relatives, and spending on assistance he views as unnecessary overhead. The weakness is that his caution can become overly defensive, making him slower to use helpful financial support.",
+      "ground_truth": "Frugal, tightly controlled money manager",
+      "predicted": "prioritizes urgent financial paperwork and spots risky fine print",
+      "slot_fill_reason": "They consistently triage bills, notices, transfers, and property paperwork by deadline and consequence, and they can identify risky contract language like default, cure periods, fees, and discretionary terms.",
+      "score": 0.5,
+      "judge_reason": "The prediction overlaps with careful financial management and attention to risk, but it misses the core frugal, tightly controlled money-management behavior and the emphasis on controlling cash flow and avoiding unnecessary spending.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "A budgeting and bill-sorting request naturally invites follow-up about how the user prioritizes payments, tracks receipts, separates accounts, and handles transfers, which can reveal their money-management style."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"Start with anything that can cost money if you sit on it — due dates, cutoff times, late fees, transfers. Then the routine statements and receipts. The junk can sit.\"",
+            "reason": "The user explicitly prioritizes avoiding fees and deadlines, and treats routine paperwork as lower priority, which is consistent with a careful, tightly controlled approach to money management."
+          }
+        ],
+        "ep_index": 6
+      }
+    },
+    {
+      "category": "skill_memory",
+      "dimension": "capability_under_pressure",
+      "explanation": "When a furnace failed, a pipe burst, or a tenant situation dragged on, he stayed operational and took direct action. Stress seems to sharpen his focus rather than scatter it, especially when the problem is concrete and solvable. He may be emotionally rigid under pressure, but his execution does not collapse.",
+      "ground_truth": "Keeps functioning when things break",
+      "predicted": "handles urgent triage well under pressure",
+      "slot_fill_reason": "They repeatedly sort notices, repairs, and property issues into hard priority buckets with deadlines, stop points, and documentation rules, even when the situation is time-sensitive or messy.",
+      "score": 0.75,
+      "judge_reason": "The prediction captures the core idea of staying effective in urgent situations, but it emphasizes triage rather than the broader point of simply continuing to function when things break.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "business_and_management_knowledge",
+      "explanation": "He seems to know the nuts and bolts of running rentals, handling bills, and spotting when a manager is failing. His knowledge is grounded in direct ownership and problem exposure, not in formal management language or abstract business frameworks. He likely trusts what works and ignores polished advice that does not survive contact with reality.",
+      "ground_truth": "Understands practical operations, not management theory",
+      "predicted": "understands practical property management, notices, and rental due diligence",
+      "slot_fill_reason": "They repeatedly distinguished urgent legal/property notices, rental takeover records, access controls, reconciliation, and maintenance triage, showing concrete knowledge of business and management concepts.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the practical, hands-on property management aspect of the ground truth, but it does not clearly capture the contrast with management theory or the distrust of abstract business frameworks.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "engineering_and_technology_knowledge",
+      "explanation": "He understands basic home systems well enough to work around a furnace failure, shut off water, and make sensible repairs. His knowledge is practical and component-level rather than technical or design-oriented. He probably knows enough to be self-reliant, but not enough to treat complex systems as something to improvise on indefinitely.",
+      "ground_truth": "Functional grasp of household systems",
+      "predicted": "understands practical home, property, and contract-terms basics",
+      "slot_fill_reason": "They correctly identified and discussed deadlines, cure periods, lien/title risks, repair-estimate line items, furnace troubleshooting, and rental due-diligence records across many examples.",
+      "score": 0.5,
+      "judge_reason": "The prediction overlaps on practical, self-reliant knowledge, but it shifts from household engineering systems to broader home/property and contract basics, missing the core furnace/water/system-repair meaning.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites discussion of practical home-system troubleshooting, which can reveal whether the user understands household engineering basics like furnace components, safety shutoffs, and when to stop and call a professional."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"I’ve had one quit on me in a cold snap before. Ended up being power first, then a bad limit switch later.\"",
+            "reason": "The user shows practical, component-level familiarity with household furnace troubleshooting and basic home systems, indicating functional engineering/technology knowledge."
+          }
+        ],
+        "ep_index": 9
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "law_and_public_safety_knowledge",
+      "explanation": "He appears familiar with leases, eviction procedures, insurance claims, and the basic rights and obligations that affect his property. This is not broad civic legal knowledge so much as hard-earned familiarity with the parts that cost money if ignored. He likely respects formal process when it protects him, while remaining impatient with anything that feels like bureaucratic drag.",
+      "ground_truth": "Knows the rules he has had to deal with",
+      "predicted": "understands notice deadlines, cure periods, and document preservation",
+      "slot_fill_reason": "They repeatedly distinguished mailing vs receipt, cure deadlines, consequences, and what records to keep for property and tenant notices.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the idea of practical, experience-based legal knowledge, but it is more specific and omits the broader sense of knowing the rules he has had to deal with.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "financial_literacy_knowledge",
+      "explanation": "He understands savings accounts, receipts, mortgage obligations, and the practical consequences of cash flow. He also recognizes when a deal is not worth the risk and is wary of lending or investing based on promises. His blind spot is less about basic finance than about how distrust can make him default to the safest, least flexible option.",
+      "ground_truth": "Savvy with accounts, cautious about money traps",
+      "predicted": "understands practical financial triage and fine-print risk",
+      "slot_fill_reason": "They repeatedly distinguished urgent money-risk items, asked about FDIC/NCUA, lockups, fees, APY wording, and default/cure language in notices and estimates.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the cautious, risk-aware aspect of the ground truth and implies practical financial judgment, but it is less explicit about account literacy and the specific idea of being savvy with basic money management.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "procedural_knowledge",
+      "explanation": "He has enough procedural knowledge to navigate insurance claims, eviction timelines, and the ordinary paperwork attached to property ownership. He does not seem to enjoy the process, but he knows that documents, receipts, and sequence matter. He is likely better than average at compliance when it serves his interests, though he resists systems that demand extra steps without clear payoff.",
+      "ground_truth": "Knows how to get through paperwork and claims",
+      "predicted": "knows practical triage for notices, repairs, and property paperwork",
+      "slot_fill_reason": "They repeatedly asked for and refined rules about deadlines, cure periods, notice language, repair estimate line items, and property due diligence, showing procedural knowledge of those domains.",
+      "score": 0.75,
+      "judge_reason": "The prediction captures the core idea of handling property-related paperwork and practical procedures, but it is a bit narrower and less explicit about insurance claims and general claims-processing.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "weather_and_seasonal_knowledge",
+      "explanation": "He clearly understands the practical impact of winter cold on furnaces, pipes, and heating costs. That knowledge is experiential and preventive, not scientific, but it is enough to make him act before problems spread. He likely treats seasonal risk as a real budget item rather than a sentimental concern.",
+      "ground_truth": "Alert to cold-weather household risks",
+      "predicted": "understands weather windows, dew, wind, and night temperatures matter",
+      "slot_fill_reason": "They explicitly said painting, sealing, roofing, gutters, and pressure washing depend on dry days, warm nights, dew, and wind, and that a forecast app can mislead by omission.",
+      "score": 0.5,
+      "judge_reason": "The prediction shows practical awareness of weather conditions affecting decisions, but it does not clearly capture the specific household cold-weather risks, preventive action, or budget-minded concern in the ground truth.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites discussion of winter household risks, furnace maintenance timing, and cost avoidance, which can reasonably elicit practical seasonal knowledge about cold-weather problems and preventive action."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"Waiting is how you end up paying emergency rates when the thing quits on the coldest night.\"",
+            "reason": "The user explicitly shows awareness of cold-weather household risks and treats winter furnace failure as a practical, budget-related problem to prevent."
+          }
+        ],
+        "ep_index": 13
+      }
+    },
+    {
+      "category": "knowledge_memory",
+      "dimension": "local_environment_knowledge",
+      "explanation": "He seems grounded in the realities of Morristown and the broader northern New Jersey environment, especially in how weather, housing stock, and property issues play out there. His knowledge is local and practical rather than civic-proud or nostalgic. He likely knows the region as a place to manage costs and avoid surprises, not as an identity to romanticize.",
+      "ground_truth": "Functional knowledge of North Jersey conditions",
+      "predicted": "knows practical property, repair, and notice triage basics",
+      "slot_fill_reason": "They repeatedly identified urgent notice terms, property due-diligence records, repair-estimate red flags, and basic home-system checks in the memories.",
+      "score": 0.5,
+      "judge_reason": "The prediction overlaps with the practical, local-management aspect of the ground truth, but it is narrower and misses the broader North Jersey-specific environmental knowledge.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task naturally invites local, practical discussion of weather timing and exterior-work conditions, which can reasonably lead a user to reveal firsthand knowledge of North Jersey-specific patterns and constraints."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"Night temps matter. Dew matters. Wind matters. The forecast app lying by omission matters too.\"",
+            "reason": "The user explicitly emphasizes practical, local weather realities for exterior work, showing grounded knowledge of how North Jersey conditions affect scheduling decisions."
+          }
+        ],
+        "ep_index": 14
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "career_transition_event",
+      "explanation": "Leaving forty years in warehouse logistics changed his daily life from enforced routine to self-directed control. He did not treat retirement as leisure so much as a chance to tighten his systems and reduce dependence on other people. The move also sharpened his preference for managing problems himself instead of relying on institutions.",
+      "ground_truth": "Retirement became a self-managed second act",
+      "predicted": "unknown",
+      "slot_fill_reason": "The memories show property, maintenance, notice, and contractor-management situations, but no concrete career transition event is described.",
+      "score": 0.0,
+      "judge_reason": "The prediction is \"unknown,\" which provides no meaningful match to the ground truth about retirement becoming a self-managed second act.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "agent_elicitation_failure",
+        "score": 0.0,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task is about organizing a coming stretch of time and could naturally prompt follow-up about why the user wants that structure, which may reveal a retirement or other career transition event."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": false,
+            "evidence": "none",
+            "reason": "The dialogue shows a preference for a simple, self-managed routine with buffer time, but it does not mention any career change or retirement-like transition from long-term work to a new life stage."
+          },
+          {
+            "stage": "disclosure_subclass",
+            "category": "A",
+            "reason": "The conversation stayed on generic scheduling and task-ordering, with no attempt to elicit or discuss retirement or any career transition event.",
+            "evidence": "\"I want to get my days in better order\" / \"plain daily and weekly template\""
+          }
+        ],
+        "ep_index": 15
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "financial_shock_event",
+      "explanation": "The rental property episode, with missed rent, legal fees, and repair costs, clearly changed how he thinks about money. It pushed him toward separate accounts, quicker exits, and less patience for promises about returns. He seems to have learned that income can turn into liability fast when other people control the process.",
+      "ground_truth": "Tenant losses made him distrust easy money",
+      "predicted": "experienced a costly property notice and feared missed deadlines",
+      "slot_fill_reason": "They repeatedly asked how to triage a default/cure notice, keep envelopes and postmarks, and avoid fees, termination, lien, or foreclosure consequences from a bank/property notice.",
+      "score": 0.5,
+      "judge_reason": "The prediction captures a negative property-related financial experience, but it misses the key idea that tenant losses led to distrust of easy money and broader changes in money management.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "A rental-opportunity due diligence discussion can naturally prompt the user to mention past tenant problems, missed rent, legal fees, or repair losses that shaped their caution about money."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"That’s the part people like to tuck away and hope you don’t ask twice.\"",
+            "reason": "The user explicitly shows distrust around hidden financial liabilities and wants exact amounts/dates/names to avoid being misled, which is enough signal that a memory system could infer sensitivity to financial shocks or losses in rental/property dealings."
+          }
+        ],
+        "ep_index": 16
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "legal_or_administrative_event",
+      "explanation": "He went through a dragged-out eviction and later an insurance claim, both of which forced him to deal with notices, receipts, and formal timelines. Those encounters seem to have reinforced that bureaucracy is annoying but unavoidable when money is at stake. He now treats documentation as protection rather than as a courtesy.",
+      "ground_truth": "Eviction and insurance taught him paperwork matters",
+      "predicted": "handled a default notice with a 10-day cure deadline",
+      "slot_fill_reason": "The memories include a specific notice titled “NOTICE OF DEFAULT AND RIGHT TO CURE” with a 10-day mailing-based deadline and discussion of consequences, copies, and timing.",
+      "score": 0.5,
+      "judge_reason": "The prediction matches the bureaucratic/legal paperwork theme, but it only mentions a default notice and misses the eviction plus insurance claim context that taught him paperwork matters.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task is about handling a formal notice, keeping records, and tracking deadlines, which naturally invites discussion of prior legal or administrative experiences like eviction, insurance claims, or other paperwork-heavy events."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"NOTICE OF DEFAULT AND RIGHT TO CURE\" ... \"Unless the default is cured within 10 days of mailing of this notice\" ... \"additional fees and possible termination\" ... \"may be referred for further action\"",
+            "reason": "The user explicitly discussed a formal default/cure notice with mailing-based deadlines, consequences, and the need to preserve paperwork, which is enough to infer a strong concern with legal/administrative events and documentation."
+          }
+        ],
+        "ep_index": 17
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "emergency_response_event",
+      "explanation": "When the furnace quit and then a pipe split in winter, he responded immediately with heaters, shutoffs, and buckets. That kind of emergency seems to have confirmed his habit of acting first and calling for help only if absolutely necessary. The experience likely deepened his belief that waiting on others is a losing strategy.",
+      "ground_truth": "Furnace and pipe failures proved he can handle emergencies",
+      "predicted": "shuts off water and power first during home emergencies",
+      "slot_fill_reason": "Multiple memories describe a first-hour response of shutting off water, then power to the furnace/water heater, and stopping if gas is smelled or the leak is near heating equipment.",
+      "score": 0.5,
+      "judge_reason": "The prediction overlaps with the emergency-response theme and shows practical action during home emergencies, but it misses the key point that furnace and pipe failures proved he can handle emergencies.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task is about handling a real emergency-like home failure, so natural follow-up can easily elicit whether the user has personally dealt with similar incidents and how they responded, revealing their emergency_response_event value."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"Last time I had a pipe split in winter, the part that saved me was shutting it down fast and not trying to be clever.\"",
+            "reason": "The user explicitly describes a winter pipe-split emergency and values immediate shutdown and decisive action, which is enough for a memory system to infer their emergency-response style."
+          }
+        ],
+        "ep_index": 18
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "turning_point_event",
+      "explanation": "The sale of the property marked a practical break from hoping the tenant, manager, or market would straighten out on their own. After that, he stopped lending money to relatives and stopped entertaining easy-investment talk. It reads like a clear before-and-after moment where he chose control over optimism.",
+      "ground_truth": "Sold the rental and stopped chasing unreliable people",
+      "predicted": "A winter pipe split and a furnace issue changed how they triage emergencies",
+      "slot_fill_reason": "They described a past winter pipe split and said shutting things down fast mattered more than trying to be clever, which shaped their later first-hour emergency checklist.",
+      "score": 0.25,
+      "judge_reason": "The prediction describes a change in emergency triage due to maintenance problems, but it does not capture the sale of the rental or the shift away from unreliable people and easy optimism.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.25,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task is about deciding whether to keep or sell a troublesome property, which naturally invites discussion of a decisive turning point like a sale or other before-and-after event."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"I’ve had one of those before, and the paperwork alone was enough to remind me not to get sentimental about it.\"",
+            "reason": "The user explicitly refers to a prior property problem that led to a practical, non-sentimental cutoff, which is enough to infer a turning-point event involving selling/cutting losses and changing behavior afterward."
+          }
+        ],
+        "ep_index": 19
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "betrayal_or_conflict_event",
+      "explanation": "He discovered that the manager was collecting fees while missing problems, which made the arrangement feel like a quiet betrayal. That kind of experience fits his broader suspicion that people present themselves as helpful while protecting themselves first. It likely made him even less willing to delegate anything important without checking it himself.",
+      "ground_truth": "Property manager failure hardened his distrust",
+      "predicted": "has dealt with disputed notices and sloppy property handoffs",
+      "slot_fill_reason": "The memories repeatedly mention notices, deadlines, tenant disputes, and property takeover/control issues, but no single concrete betrayal event is described.",
+      "score": 0.5,
+      "judge_reason": "The prediction overlaps with the ground truth in describing problems with property management and handoffs, but it misses the key betrayal/distrust reaction and the idea that the failure hardened his suspicion.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "The task is about delegating rental oversight, which naturally invites discussion of past experiences with managers or caretakers failing to report problems or acting against trust, making betrayal or conflict events a plausible follow-up topic."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"If somebody can get in, move money, or swap vendors without leaving a trace, the paperwork is just theater.\"",
+            "reason": "The user explicitly emphasizes access, bank control, vendor switching, and traceability as the key issue, which strongly signals distrust and concern about hidden misconduct or betrayal in management."
+          }
+        ],
+        "ep_index": 20
+      }
+    },
+    {
+      "category": "episodic_memory",
+      "dimension": "accomplishment_under_pressure_event",
+      "explanation": "He handled the cold snap, the burst pipe, and the rental collapse without giving up control or losing his footing. The result was not glamorous, but it confirmed his ability to stay functional when the situation is expensive and messy. He seems to take more pride in surviving the problem cleanly than in any emotional lesson from it.",
+      "ground_truth": "Kept the house and property stable under stress",
+      "predicted": "handles urgent property and home crises by triaging fast",
+      "slot_fill_reason": "Multiple memories show the user sorting a furnace issue, plumbing leak, default notice, and rental problems by immediate risk and deadlines, insisting on a hard first-hour or same-day sequence.",
+      "score": 0.75,
+      "judge_reason": "The prediction captures the core idea of managing urgent home/property problems quickly and effectively, but it is less explicit about maintaining overall stability under stress.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "self_model",
+      "dimension": "sincerity_self_view",
+      "explanation": "He seems to think he tells people exactly where he stands and does not dress things up. His distrust of sentiment and promises makes him value plain dealing over smooth talk. The weakness is that he may confuse bluntness with honesty even when it also serves as a shield.",
+      "ground_truth": "Sees himself as bluntly straightforward",
+      "predicted": "values blunt, no-fluff honesty",
+      "slot_fill_reason": "They repeatedly reject generic or polite wording and ask for plain, direct, no-cute-language answers in notices, messages, and checklists.",
+      "score": 0.75,
+      "judge_reason": "The prediction captures the core idea of blunt, straightforward self-presentation, but it emphasizes a value judgment about honesty rather than explicitly saying he sees himself that way.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "self_model",
+      "dimension": "sentimentality_self_view",
+      "explanation": "He presents himself as someone who does not get carried away by feelings, nostalgia, or emotional appeals. His stories show him treating loss, repairs, and money as practical matters rather than occasions for reflection. That self-image likely helps him stay steady, but it can also make him dismiss warmth or connection too quickly.",
+      "ground_truth": "Views himself as unsentimental",
+      "predicted": "practical, not sentimental about costly problems",
+      "slot_fill_reason": "They repeatedly say they’d get “less sentimental fast,” use break-point tests, and prefer blunt cutoffs over keeping trouble-prone properties or appliances.",
+      "score": 0.75,
+      "judge_reason": "The prediction captures the core idea that he is practical and not sentimental, though it focuses more narrowly on costly problems rather than his broader self-view as unsentimental.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "self_model",
+      "dimension": "organization_self_view",
+      "explanation": "He keeps bills simple, accounts separate, and receipts saved, which fits a self-image of being orderly and controlled. He seems to believe chaos is something you prevent by having systems and routines. The downside is that his orderliness can shade into rigidity when life requires flexibility.",
+      "ground_truth": "Sees himself as tightly organized",
+      "predicted": "sees themselves as practical, blunt, and anti-fluff",
+      "slot_fill_reason": "They repeatedly reject generic or “cute” systems and ask for tight, plain, usable checklists, notes, and triage rules across paperwork, repairs, and property issues.",
+      "score": 0.0,
+      "judge_reason": "The prediction describes a practical, blunt style rather than a self-view of being tightly organized, so it misses the ground truth.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.0,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "A discussion about sorting bills, receipts, and accounts naturally invites the user to describe their personal filing habits, routines, and attitudes toward orderliness, which can reveal how tightly organized they see themselves."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"Simple enough to use without turning it into a project\" ... \"anything you’re not sure about goes in a separate ‘question’ pile, not in the trash\" ... \"Last thing you want is to toss a paper and then spend an hour hunting for it later.\"",
+            "reason": "The user shows a preference for simple, orderly systems and careful sorting/retention rules, which supports inferring that he sees himself as tightly organized."
+          }
+        ],
+        "ep_index": 24
+      }
+    },
+    {
+      "category": "self_model",
+      "dimension": "prudence_self_view",
+      "explanation": "He appears to view himself as someone who avoids unnecessary risk and waits for clear payoff before acting. He prefers direct control, low debt, and known outcomes over hopeful bets or vague assurances. That prudence protects him, though it can also make him overly defensive and less open to useful help.",
+      "ground_truth": "Sees himself as cautious and calculated",
+      "predicted": "practical, cautious, and distrusts vague paperwork",
+      "slot_fill_reason": "They repeatedly ask for blunt triage, hard deadlines, exact wording, and warning signs, and reject generic or “brochure” answers in notices, repairs, and property decisions.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the ground truth’s cautious, calculated self-view, but adds a specific distrust of paperwork that is not stated in the ground truth.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "self_model",
+      "dimension": "identity_anchor",
+      "explanation": "His self-image seems rooted in not needing other people to manage his affairs. He repeatedly chooses direct action, separate accounts, and self-reliance over reliance on institutions or relatives. That anchor gives him stability, but it also leaves little room for trust or mutual dependence.",
+      "ground_truth": "Anchored in independence and control",
+      "predicted": "practical, control-focused property owner",
+      "slot_fill_reason": "They repeatedly frame themselves around property notices, rental takeovers, tenant issues, and control sheets, asking for blunt triage and recordkeeping rather than general advice.",
+      "score": 0.5,
+      "judge_reason": "The prediction overlaps with the control/self-reliance aspect, but it emphasizes practicality and property ownership rather than the core identity anchor of independence from others and institutions.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "A discussion about organizing bills and logins can naturally prompt the user to explain whether they prefer self-managed, independent systems or shared/assisted arrangements, which can reveal how strongly they value independence and control."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"One folder, one backup, one sheet on top. That’s about right.\"",
+            "reason": "The user explicitly prefers a minimal, self-managed system with one paper folder, one digital backup, and a single index sheet, which strongly signals an independence-and-control orientation."
+          }
+        ],
+        "ep_index": 26
+      }
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "directness_preference",
+      "explanation": "He values blunt honesty and dislikes sentimentality, so he is unlikely to want careful cushioning or euphemisms. Straight answers fit his transaction-first mindset better than polite buildup. If the help feels evasive, he will probably discount it quickly.",
+      "ground_truth": "Wants blunt answers, no soft-pedaling",
+      "predicted": "prefers blunt, concise, no-fluff answers",
+      "slot_fill_reason": "They repeatedly reject generic, brochure-like, or “cute” explanations and ask for tight, direct, plain-language checklists and messages.",
+      "score": 1.0,
+      "judge_reason": "The predicted description matches the ground truth exactly in meaning: it emphasizes blunt, concise answers without soft-pedaling.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 1.0,
+        "stages": []
+      }
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "verbosity_preference",
+      "explanation": "His style is practical and efficiency-minded, so long-winded explanations would likely feel like waste. He seems to want the useful part fast, with minimal ceremony. Too much text risks reading like someone trying to sell him something.",
+      "ground_truth": "Prefers concise, no-extra-fluff replies",
+      "predicted": "prefers concise, direct, no-fluff answers",
+      "slot_fill_reason": "They repeatedly reject generic, brochure-like, or lecture-style replies and ask for tight one-page, checklist, or short-note formats with no fluff.",
+      "score": 1.0,
+      "judge_reason": "The predicted description matches the ground truth exactly in meaning, emphasizing concise, direct, no-fluff replies.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 1.0,
+        "stages": []
+      }
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "format_preference",
+      "explanation": "He would likely respond well to checklists, bullets, and other formats that make action and comparison easy. His comfort with paperwork and receipts suggests he appreciates organized presentation when it serves a task. Freeform, chatty responses are more likely to feel sloppy than helpful.",
+      "ground_truth": "Likes clean, functional formats",
+      "predicted": "prefers tight, plain, scan-friendly checklists and tables",
+      "slot_fill_reason": "They repeatedly asked for one-page templates, hard if/then sequences, tables/checklists, and said they don’t want lectures, fluff, or generic/brochure-style explanations.",
+      "score": 1.0,
+      "judge_reason": "The prediction matches the ground truth closely by describing a preference for clean, functional, organized, scan-friendly formats.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 1.0,
+        "stages": []
+      }
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "emotional_support_preference",
+      "explanation": "He does not seem to want heavy validation or emotionally warm framing. A brief acknowledgment of the situation is probably enough before moving to the practical answer. Overly supportive language would likely strike him as unnecessary decoration.",
+      "ground_truth": "Wants acknowledgment, not comfort talk",
+      "predicted": "prefers blunt, no-fluff, practical guidance",
+      "slot_fill_reason": "They repeatedly reject generic, brochure-like, or cute explanations and ask for short, direct, usable answers with clear cutoffs and no extra chatter.",
+      "score": 0.75,
+      "judge_reason": "The prediction matches the practical, no-fluff preference and implies minimal emotional framing, but it does not explicitly capture the need for brief acknowledgment rather than comfort talk.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "ok",
+        "score": 0.75,
+        "stages": []
+      }
+    },
+    {
+      "category": "assistance_preference",
+      "dimension": "autonomy_support_preference",
+      "explanation": "He tends to manage problems himself and dislikes relying on other people’s promises. In interaction, that suggests he would rather get options and consequences than be guided too aggressively. Prescriptive help is only welcome if it stays clearly under his control.",
+      "ground_truth": "Prefers to stay in control of decisions",
+      "predicted": "prefers blunt, concise, decision-ready checklists",
+      "slot_fill_reason": "They repeatedly rejected generic or “cute” explanations and asked for short, hard if/then lists, one-page templates, and plain language with no fluff.",
+      "score": 0.5,
+      "judge_reason": "The prediction overlaps somewhat by implying a preference for direct, self-directed information, but it misses the core idea of wanting to stay in control of decisions and could also fit someone who simply likes concise guidance.",
+      "scoring_mode": "dump_all",
+      "attribution": {
+        "category": "memory_failure",
+        "score": 0.5,
+        "stages": [
+          {
+            "stage": "oracle",
+            "can_invite": true,
+            "reason": "Yes — a cooperative user could naturally elaborate on how much direction versus choice they want in the note, revealing whether they prefer to stay in control of decisions or want more prescriptive help."
+          },
+          {
+            "stage": "disclosure",
+            "disclosed": true,
+            "evidence": "\"No fluff, no sob story, just the facts and the deadline. The write-only part matters too — keeps people from wriggling later.\"",
+            "reason": "The user clearly prefers direct, controlled, written communication and wants to keep the exchange tightly on their terms rather than being guided or softened by others."
+          }
+        ],
+        "ep_index": 31
+      }
+    }
+  ]
+}

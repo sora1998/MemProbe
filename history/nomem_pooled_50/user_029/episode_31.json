@@ -1,0 +1,49 @@
+{
+  "user_id": "user_029",
+  "task": "I’m cleaning up a short troubleshooting note for a home repair before I share it with someone else. Can you help me make it clear and usable, and point out anything that doesn’t hold up?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.333333333333334,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Absolutely — paste the note here, and I’ll help you:\n\n- rewrite it so it’s clear and easy to follow\n- tighten up the wording\n- flag anything that seems unclear, inconsistent, or not technically sound\n- suggest a cleaner version you can share\n\nIf you want, I can also format it as:\n- a quick checklist\n- step-by-step instructions\n- a short message to send by text or email",
+      "user_simulator": {
+        "feedback_type": "add_context",
+        "text": "Yeah. Here’s the note I’m working from:\n\n“Backup power cut out during the storm. Hall lights went dark for about 45 minutes. I checked the breaker panel and the transfer switch in the basement mechanical room. Generator alarm was active, battery terminals looked corroded, and the last load test tag I found was older than it should’ve been. After reset, it came back, but the generator sounded weak on startup. Might need battery service and a full transfer relay check.”\n\nClean it up, but don’t turn it into some fluffy homeowner summary. I want it tight and usable. Also tell me what parts are solid and what parts are just inference.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Here’s a tighter, usable version:\n\n**Troubleshooting note**\nBackup power failed during the storm. Hall lights were out for about 45 minutes. I checked the breaker panel and the transfer switch in the basement mechanical room. The generator alarm was active, battery terminals showed corrosion, and the last load test tag I found appeared overdue. After a reset, power returned, but the generator sounded weak on startup. Battery service and a full transfer relay inspection may be needed.\n\n### What’s solid\n- **Backup power cut out during the storm** — direct observation.\n- **Hall lights were dark for about 45 minutes** — direct observation.\n- **Breaker panel and transfer switch were checked** — direct action taken.\n- **Generator alarm was active** — direct observation.\n- **Battery terminals looked corroded** — direct observation, assuming you actually saw corrosion.\n- **Power came back after a reset** — direct observation.\n- **Generator sounded weak on startup** — direct observation.\n\n### What’s inference / less certain\n- **“Last load test tag was older than it should’ve been”** — this depends on what the required interval is. Better as **“appeared overdue”** unless you know the schedule.\n- **“Might need battery service”** — reasonable inference, but still a diagnosis, not a confirmed fault.\n- **“Full transfer relay check”** — also a recommendation/inference, not something directly proven by the note.\n\n### One thing that doesn’t fully hold up\n- **“Transfer relay”** may not be the exact term depending on the system. If you mean the automatic transfer switch, that’s usually the clearer term. If there’s a separate relay in the setup, keep it, but otherwise **“transfer switch inspection”** is more standard.\n\nIf you want, I can also turn this into:\n- a **service-call note**\n- a **bullet checklist**\n- or a **text message version** that still sounds technical.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Pretty close. But I’d tighten one thing: **“appeared overdue”** is still a little mushy if I actually saw the tag date. If the date is on the tag, say that. If I don’t know the required interval, then say **“the last load test tag I found was dated [date]”** and leave it at that.\n\nAlso, **“transfer relay”** still feels off unless there’s actually a separate relay in that setup. For a home generator, I’d rather see **automatic transfer switch** or just **transfer switch**. That’s the part I’d want checked, not some vague relay wording.\n\nWhat I’d use:\n\n**Troubleshooting note**\nBackup power failed during the storm. Hall lights were out for about 45 minutes. I checked the breaker panel and the transfer switch in the basement mechanical room. The generator alarm was active, the battery terminals showed corrosion, and the last load test tag I found was dated [date]. After a reset, power returned, but the generator sounded weak on startup. Battery service and transfer switch inspection may be needed.\n\nSolid:\n- outage duration\n- breaker panel / transfer switch checked\n- alarm active\n- corrosion observed\n- power returned after reset\n- weak startup sound\n\nInference:\n- battery service needed\n- transfer switch inspection needed\n- anything about the test interval unless you know the actual schedule\n\nThat version holds up better.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yes — that version is better. Here’s a tightened edit that keeps your point and avoids overreaching:\n\n**Troubleshooting note**  \nBackup power failed during the storm. Hall lights were out for about 45 minutes. I checked the breaker panel and the transfer switch in the basement mechanical room. The generator alarm was active, the battery terminals showed corrosion, and the last load test tag I found was dated [date]. After a reset, power returned, but the generator sounded weak on startup. Battery service and transfer switch inspection may be needed.\n\n### Solid / directly observed\n- outage during the storm\n- hall lights out for about 45 minutes\n- breaker panel and transfer switch checked\n- generator alarm active\n- battery terminal corrosion observed\n- power returned after reset\n- weak startup sound\n\n### Inference / recommendation\n- battery service may be needed\n- transfer switch inspection may be needed\n\n### What holds up better\n- **“dated [date]”** is stronger than “appeared overdue” if you actually saw the tag date.\n- **“transfer switch”** is the right term unless you specifically know there’s a separate relay in the system.\n\nIf you want, I can also make it even more field-note style, like something a tech would read in 10 seconds.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s the cleaner version.\n\nIt’s tight, it doesn’t overclaim, and the solid vs inference split is right. “Dated [date]” is the safer wording if the tag’s actual date is visible. And yeah, dropping “transfer relay” was the right call unless there’s a separate relay you actually identified.\n\nOnly thing I’d maybe tweak is if you want it even more field-note / tech-readable:\n\n**Troubleshooting note**  \nBackup power failed during the storm. Hall lights were out for about 45 minutes. I checked the breaker panel and transfer switch in the basement mechanical room. Generator alarm was active. Battery terminals showed corrosion. Last load test tag was dated [date]. After a reset, power returned, but the generator sounded weak on startup. Battery service and transfer switch inspection may be needed.\n\nThat’s probably the version I’d keep.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    }
+  ]
+}

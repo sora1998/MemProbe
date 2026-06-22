@@ -1,0 +1,36 @@
+{
+  "user_id": "user_002",
+  "task": "I’ve got a closing process that just got paused because a document came back with a problem, and I need to decide what to do next. What are the first steps you’d take to sort out the issue and keep the file moving?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.8,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Do this in order:\n\n## 1) Get the exact problem\n- Read the rejection note or defect comment\n- Identify whether it is:\n  - title defect\n  - recording defect\n  - signature / notarization issue\n  - legal description issue\n  - vesting / ownership issue\n  - fee / format issue\n\n## 2) Decide if it is a blocker or a cleanup item\n- **Blocker:** affects title, recording, ownership, or insurability\n- **Cleanup:** formatting, tabs, fees, exhibit order, minor clerical error\n\nIf it changes ownership, legal description, or signature authority, treat it as a blocker.\n\n## 3) Find the root cause\nAsk:\n- What caused the rejection?\n- What document is actually wrong?\n- Is the defect in the source document or just in the filing package?\n\nDon’t fix the symptom before the cause.\n\n## 4) Correct the source document first if needed\nIf the problem is in:\n- legal description\n- vesting\n- signature authority\n- deed language\n- missing release or affidavit\n\nfix that before re-filing anything.\n\n## 5) Rebuild the package once\n- update the corrected document\n- check all related forms against it\n- make sure the filing matches the corrected source exactly\n\n## 6) Get confirmation before resubmitting\nIf title or the filing office is involved, confirm:\n- the correction satisfies the defect\n- the revised package is acceptable\n- there won’t be another rejection for the same issue\n\n## 7) Resubmit once\nSend:\n- corrected document\n- cover note\n- list of changes\n- reference to the original rejection\n\n## 8) Track it\nKeep a log of:\n- defect\n- fix\n- who approved it\n- date resubmitted\n- status\n\n## Rule\nDo not polish the filing until the underlying defect is cured.  \nIf ownership, legal description, or signing authority is off, nothing else matters yet.\n\nIf you want, I can turn this into a **simple blocker / cleanup / resubmit checklist**.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Mostly right. But I’d tighten it up and put the leverage first.\n\nFirst thing: get the actual rejection language, not somebody’s summary. Then classify it fast — blocker or clerical. If it touches vesting, legal description, signature authority, recording chain, or insurability, it’s a blocker. Stop treating it like admin noise.\n\nNext: identify who owns the fix. Title, lender, escrow, attorney, recorder — whoever caused the defect or can clear it. Don’t start rewriting the whole package if one party can cure it with one corrected page or an affidavit.\n\nThen I’d want two tracks running:\n- cure the defect\n- keep the rest of the file moving so you’re not dead in the water\n\nIf it’s a source-document problem, fix the source first. If it’s just a package issue, correct the filing set and resubmit once. No drip-drip re-filing.\n\nAnd I’d add one more thing: get a written confirmation before resubmitting if there’s any chance of another bounce. I’ve had paperwork stall because someone “thought” it was fine. That’s wasted time.\n\nIf you want, I can turn this into a tighter decision tree: blocker / cleanup / who fixes / when to resend.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Do this in order:\n\n## 1) Get the exact rejection language\n- Use the actual defect note, not a summary\n- Identify whether it is:\n  - title defect\n  - recording defect\n  - signature / notarization issue\n  - legal description issue\n  - vesting / ownership issue\n  - fee / format issue\n\n## 2) Classify it fast\n- **Blocker:** affects vesting, legal description, signature authority, recording chain, or insurability\n- **Cleanup:** formatting, tabs, fees, exhibit order, minor clerical error\n\nIf it touches ownership, legal description, or signing authority, treat it as a blocker.\n\n## 3) Identify who owns the fix\n- Title\n- Lender\n- Escrow\n- Attorney\n- Recorder\n\nDon’t rewrite the whole package if one party can cure it with one corrected page or affidavit.\n\n## 4) Run two tracks\n- **Track A:** cure the defect\n- **Track B:** keep the rest of the file moving\n\nIf it’s a source-document problem, fix the source first.  \nIf it’s only a package problem, correct the filing set and resubmit once.\n\n## 5) Rebuild the package once\n- update the corrected document\n- check all related forms against it\n- make sure the filing matches the corrected source exactly\n\n## 6) Get written confirmation before resubmitting\nConfirm:\n- the correction satisfies the defect\n- the revised package is acceptable\n- there won’t be another rejection for the same issue\n\n## 7) Resubmit once\nSend:\n- corrected document\n- cover note\n- list of changes\n- reference to the original rejection\n\n## 8) Track it\nKeep a log of:\n- defect\n- fix\n- who approved it\n- date resubmitted\n- status\n\n## Rule\nDo not polish the filing until the underlying defect is cured.  \nIf vesting, legal description, or signing authority is off, nothing else matters yet.\n\nIf you want, I can turn this into a **blocker / cleanup / who-fixes / resubmit** checklist.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s the right shape.\n\nI’d keep it exactly that blunt:\n- get the actual rejection language\n- classify blocker vs cleanup\n- assign who owns the cure\n- run the fix and the rest of the file in parallel\n- rebuild once\n- get written confirmation\n- resubmit once\n- log it\n\nThat’s the leverage. No wandering around fixing the wrong thing.\n\nIf you want, I can tighten it one more notch into a one-page decision tree with a hard stop line for blockers.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    }
+  ]
+}

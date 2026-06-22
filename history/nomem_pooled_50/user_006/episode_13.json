@@ -1,0 +1,36 @@
+{
+  "user_id": "user_006",
+  "task": "I’m helping a small warehouse team figure out what to prioritize when their network gets flaky during a busy shift. What’s the cleanest way to think about which stations or systems should come first so the whole flow doesn’t get jammed up?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.2,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "A clean way to think about it is: **prioritize by business flow impact, not by “who complains loudest.”**\n\n### Simple rule\nFix the systems that, if down, **stop other work from moving**:\n1. **Outbound/dispatch blockers** — anything that prevents orders from leaving\n2. **Inbound receiving blockers** — anything that stops inventory from being checked in\n3. **Inventory movement/scan points** — RF scanners, WMS terminals, label printers\n4. **Support/admin systems** — reporting, dashboards, email, noncritical apps\n\n### Best practical method: identify the “critical path”\nAsk:\n- **What task, if delayed, creates the biggest pileup downstream?**\n- **What station feeds multiple other stations?**\n- **What can be done manually for a short time, and what cannot?**\n\nUsually, the highest-priority items are:\n- **WMS / order management**\n- **RF scanners / handhelds**\n- **Shipping label printers**\n- **Packing stations**\n- **Dock doors / receiving stations**\n- **Any network segment serving those areas**\n\n### A simple prioritization matrix\nRank each station/system by:\n- **Stops the entire flow?** (yes/no)\n- **Number of people affected**\n- **Can it be worked around manually?**\n- **Does it affect outbound orders today?**\n- **Does it affect inventory accuracy?**\n\nThe ones with the highest “yes” on stopping flow and lowest workaround ability go first.\n\n### In a warehouse, the usual order is:\n1. **Systems that move orders out the door**\n2. **Systems that receive and accurately record inventory**\n3. **Systems that keep picking/packing moving**\n4. **Everything else**\n\n### Good operational mindset\nIf network is flaky:\n- **Protect the bottleneck**\n- **Keep the highest-throughput station online**\n- **Keep data capture accurate at the points where errors are expensive**\n- **Use manual fallback only for non-bottleneck steps**\n\nIf you want, I can turn this into a **one-page priority checklist** or a **decision tree** for the team to use during an outage.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, basically. But I’d tighten it more: don’t rank by department, rank by **where the delay compounds**.\n\nI’d use 3 buckets:\n\n1. **Hard stop** — if it’s down, freight doesn’t move. \n   - WMS / order release\n   - RF guns / handhelds\n   - label print\n   - dock / shipping workstations\n\n2. **Slowdown** — work can limp along, but it stacks up fast.\n   - packing stations\n   - receiving scans\n   - inventory movement points\n\n3. **Noise** — nice to have, not the first fire.\n   - dashboards\n   - email\n   - reporting\n   - anything management likes staring at\n\nIf you want a clean field rule: **fix the station that feeds the most other stations and has the worst manual workaround**. That’s the one that buys back the most throughput.\n\nAlso, one thing people screw up: they chase the loudest user instead of the **highest leverage port/switch/VLAN**. Last time I dealt with a warehouse outage, that mistake cost them a full shift of scanner weirdness because everyone kept arguing about symptoms instead of the shared segment.\n\nIf you want, I can make you a dead-simple outage triage order like:\n**1) outbound, 2) receiving, 3) scan/print, 4) packing, 5) everything else**",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — that’s the cleanest way to frame it:\n\n**Prioritize by delay compounding, not by org chart.**\n\n### Simple outage triage\n1. **Hard stop**  \n   If it’s down, freight can’t move:\n   - WMS / order release\n   - RF guns / handhelds\n   - label printing\n   - dock / shipping workstations\n\n2. **Slowdown**  \n   Work can continue, but backlog builds fast:\n   - packing stations\n   - receiving scans\n   - inventory movement points\n\n3. **Noise**  \n   Useful, but not first:\n   - dashboards\n   - email\n   - reporting\n   - management screens\n\n### Field rule\n**Fix the station or network segment that feeds the most other stations and has the worst manual workaround.**  \nThat usually gives you the biggest throughput recovery fastest.\n\n### Practical shorthand\nIf you need a quick order during a busy shift:\n\n**1) Outbound / shipping**  \n**2) Receiving / inventory capture**  \n**3) Scan / print / pack flow**  \n**4) Everything else**\n\nAnd yes — chasing the **shared port/switch/VLAN** behind the symptoms is often the real fix, not the loudest user.\n\nIf you want, I can turn this into a **1-minute decision tree** for floor supervisors.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s the clean version.\n\nDelay compounding is the right lens. Don’t let people drag you into department politics or who’s yelling loudest. You want the thing that creates the biggest downstream jam if it slips.\n\nYour order is solid:\n1) hard stop\n2) slowdown\n3) noise\n\nAnd the real field test is still the same: **what feeds the most other stations, and what has the worst manual workaround**. That’s the lever. If one switch, VLAN, or port is feeding scanners plus print plus shipping, that goes before some random workstation somebody’s whining about.\n\nThat’s basically how I’d run it too.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "user_id": "user_019",
+  "task": "I’m in the middle of a release review where the test data is mostly in, but one result is still unresolved and the schedule is tight. What are the next steps you’d take to sort out the open question and decide what to do with the shipment?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.8,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "I’d handle it in this order:\n\n1. **State the open issue precisely**\n   - What test failed\n   - Exact condition / sample count\n   - Exact fail mode\n   - Whether it’s repeatable\n   - What is known vs. what is still a guess\n\n2. **Ask why it matters**\n   - Does it touch a requirement, spec limit, safety, reliability, or customer promise?\n   - If yes, don’t soften it just because the paperwork is mostly done.\n\n3. **Identify what changed**\n   - Build, lot, config, environment, test setup, operator, timing\n   - Look for the smallest credible difference that could explain the result\n\n4. **Run the fastest discriminating check**\n   - If there’s any chance it’s a test artifact, do the quickest check that can separate artifact from real failure\n   - Don’t spend time on broad investigation first if one short test can collapse the uncertainty\n\n5. **Make an explicit shipment decision**\n   - **Hold** if the issue is unresolved and could affect acceptance\n   - **Contain** if you can limit exposure with a controlled ship or restricted use\n   - **Accept** only if the evidence supports it and the risk is understood\n   - **Defer** only with a named owner, due date, and clear rationale\n\n6. **Assign ownership and next action**\n   - One owner for the open question\n   - One next test\n   - One decision deadline\n\nIf you want, I can help you turn that into a tight release-review script you can use in the meeting.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Mostly right. But I’d tighten it more around decision criteria, not just process.\n\n- First: lock the unresolved result to a specific question. One sentence. No waffle.\n- Then: classify it as **blocking / non-blocking / unknown-blocking** against the actual acceptance criteria. If you don’t know which bucket it’s in, that’s the problem.\n- Next: check whether the open item is a **test issue, data issue, or product issue**. Different fixes. Don’t mix them.\n- If there’s any path to a fast discriminating retest, do that before the room starts improvising theories.\n- If it still won’t close, you need a documented risk call: what fails, how often, what exposure, and who owns the follow-up. Not vibes.\n- Shipment decision: if the unresolved item touches a requirement or a customer-visible failure mode, I’d hold it. If it’s clearly non-acceptance and bounded, maybe ship with a written caveat. But I’d want the caveat explicit, not implied.\n\nWhat I’d add to your list is a hard stop: **no release until the open question is either closed or formally accepted as risk by someone with authority**. Otherwise people just drift into “mostly done” and pretend that’s a decision.\n\nIf you want, I can turn that into a meeting checklist with exact phrases to use when someone starts hand-waving.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "I’d use this tighter sequence:\n\n1. **Freeze the open question**\n   - One sentence only.\n   - Tie it to the exact acceptance criterion or failure mode.\n   - Separate fact from assumption.\n\n2. **Classify it against release criteria**\n   - **Blocking**\n   - **Non-blocking**\n   - **Unknown-blocking**\n   If you can’t classify it, treat that as a release risk, not a neutral state.\n\n3. **Sort the source of the problem**\n   - **Test issue**\n   - **Data issue**\n   - **Product issue**\n   That determines the next action; don’t blur them together.\n\n4. **Run the fastest discriminating check**\n   - If there’s any chance it’s a test artifact, do the quickest retest or control check first.\n   - Don’t spend the meeting inventing theories if one short check can close it.\n\n5. **Make the risk call if it stays open**\n   Document:\n   - what can fail\n   - how often\n   - customer / requirement exposure\n   - containment or rollback\n   - owner and due date\n\n6. **Decide shipment**\n   - **Hold** if it touches a requirement, spec, safety, reliability, or customer-visible failure mode.\n   - **Maybe ship with explicit caveat** only if it’s clearly non-blocking, bounded, and the authority owner signs off.\n   - **Ship** only if the issue is closed or formally accepted as risk by the right authority.\n\nMy hard stop would be the same as yours: **no release until the open question is either closed or explicitly risk-accepted by someone with authority**.\n\nIf you want, I can turn this into a one-page release-review script with exact phrases to stop hand-waving.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s the structure I’d actually use.\n\nThe key part is the hard stop — no “mostly done” nonsense. If it’s still open, it’s either closed, classified, or explicitly risk-accepted. Anything else is just people trying to slide a bad decision through on schedule pressure.\n\nI’d keep the decision tree exactly like that:\n- freeze the question\n- classify it against acceptance criteria\n- split test/data/product\n- run the fastest discriminating check\n- document the risk if it stays open\n- only then decide hold / caveated ship / ship\n\nThat’s tight enough to use in the room. No fluff.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    }
+  ]
+}

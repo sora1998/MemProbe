@@ -1,0 +1,23 @@
+{
+  "user_id": "user_029",
+  "task": "I’m trying to make sense of a simple battery setup that’s behaving inconsistently, and I want to check my reasoning before I go in circles. If I have two identical batteries and I wire them in series versus parallel, what changes in voltage and current capacity should I expect, and what’s the safest way to think about the load side so I don’t misread the result?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.2,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Series: voltages add, capacity stays the same.  \nParallel: voltage stays the same, capacity adds.\n\nSo if each battery is, say, 12 V 100 Ah:\n\n- **Series** → 24 V, 100 Ah\n- **Parallel** → 12 V, 200 Ah\n\nSafest way to think about the load side:\n\n- In **series**, the load sees the **sum of the voltages**. Current through both batteries is the same.\n- In **parallel**, the load sees **one battery’s voltage**, but the bank can supply **more current** because the load is shared.\n\nQuick sanity checks:\n- **Series**: if one battery is weak, the whole string can sag under load.\n- **Parallel**: if one battery is weak or mismatched, it can drag the other one down or cause uneven current sharing.\n\nBest practice before trusting the result:\n- Measure **each battery individually**\n- Then measure the **bank voltage at the load terminals**\n- Make sure the batteries are at similar state of charge before paralleling them\n\nIf you want, I can give you a tiny “series vs parallel” test flow with meter points and what each reading should look like.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s the right picture.\n\nSeries = voltage adds, amp-hour capacity does not.\nParallel = voltage stays the same, amp-hour capacity adds.\n\nThe load side is the part people screw up. Don’t think “more batteries = more voltage” unless they’re in series. Think:\n- series: one path, same current through both, load sees summed voltage\n- parallel: same voltage at the load, current splits between branches\n\nYour 12 V / 100 Ah example is fine:\n- series → 24 V, 100 Ah\n- parallel → 12 V, 200 Ah\n\nOne thing I’d add: don’t assume current sharing is perfect in parallel. It isn’t, unless the batteries are closely matched and the wiring is symmetrical. Otherwise one leg does more work and you get weird readings.\n\nAnd yeah, measure at the load terminals, not just at the battery posts. I’ve chased enough bad assumptions at work to know the terminal point matters.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "user_id": "user_047",
+  "task": "I’ve got an instruction sheet for a small household item, and I need to get through it before I start on the job. What’s the best way to handle it so I can move ahead without wasting time?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.4,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Use this quick pass:\n\n1. **Read once, fast.**\n2. **Mark only:**\n   - tools needed\n   - parts included / missing\n   - warning steps\n   - exact order of steps\n3. **Check for blockers:**\n   - missing part\n   - special tool you don’t have\n   - step that needs a second person\n   - step that looks risky or unclear\n4. **If no blocker, start.**\n5. **If there is a blocker, stop and fix only that item.**\n\nIf you want, I can turn this into a **one-page checklist** with boxes.",
+      "user_simulator": {
+        "feedback_type": "too_shallow",
+        "text": "Yeah, that’s basic. I already know to scan for tools, parts, warnings, and the order. What I need is a tighter way to read the sheet fast without missing some stupid little detail that turns into a mess later. Give me a real checklist, not the kindergarten version.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Use this:\n\n### Fast instruction-sheet pass\n- [ ] Read **once, top to bottom**\n- [ ] Write **date/time** at top\n- [ ] Circle **exact model / size / version**\n- [ ] Mark **all numbers**:\n  - [ ] part #\n  - [ ] model #\n  - [ ] screw / bolt / size\n  - [ ] page / step #\n- [ ] Check for **hidden extras**:\n  - [ ] extra page\n  - [ ] insert / addendum\n  - [ ] diagram on back\n  - [ ] footnote / small print\n- [ ] Check for **must-have conditions**:\n  - [ ] left/right orientation\n  - [ ] up/down / front/back\n  - [ ] pre-assembly step\n  - [ ] “do not tighten yet”\n  - [ ] cure / dry / wait time\n- [ ] Check for **stop points**:\n  - [ ] needs 2 people\n  - [ ] needs power / battery / water / adhesive\n  - [ ] needs a tool you don’t have\n  - [ ] unclear step that could break something\n- [ ] Check for **finish requirements**:\n  - [ ] final tighten\n  - [ ] test / verify\n  - [ ] disposal / cleanup\n  - [ ] keep leftover parts\n\n### Quit rule\n- [ ] If a step is **unclear, missing, or risky**, stop there and fix only that item before going on.\n\n### Simple log line\n`Item: ____ | model/version: ____ | blocker: ____ | action: ____ | done: ____`\n\nIf you want, I can turn that into a **one-page box checklist** you can print.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Better. Still a little too neat. I’d want one more pass for the stuff that gets people later — torque specs, handed parts, and any “repeat for each side” nonsense. Also anything that says “optional” in small print usually isn’t optional.\n\nGive me the checklist with those folded in, and make it short enough to use while standing there with the paper in my hand.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Here’s the tighter standing-there version:\n\n### Quick instruction-sheet pass\n- [ ] Read once, top to bottom\n- [ ] Mark:\n  - [ ] tools\n  - [ ] parts\n  - [ ] warnings\n  - [ ] exact order\n- [ ] Catch the small traps:\n  - [ ] torque / tighten spec\n  - [ ] handed parts: L / R\n  - [ ] front / back / up / down\n  - [ ] “repeat for each side”\n  - [ ] “do not tighten yet”\n  - [ ] wait / cure / dry time\n  - [ ] optional in small print\n  - [ ] extra page / note / back side\n- [ ] Check for blockers:\n  - [ ] missing part\n  - [ ] special tool\n  - [ ] second person needed\n  - [ ] unclear step that could cause damage\n- [ ] If no blocker, start\n- [ ] If blocker, stop and fix only that item\n\n### Short log line\n`step/item: ____ | trap: ____ | blocker: ____ | fix: ____ | done: ____`\n\n### Quit rule\nIf it says **torque, handed, repeat, wait, or optional**, treat it as a real step and mark it before moving on.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s the right shape.\n\nShort enough, and the ugly little gotchas are in there. I’d use it.\n\n`step/item: ____ | trap: ____ | blocker: ____ | fix: ____ | done: ____`\n\nThat works fine standing at the counter with the paper in your hand.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    }
+  ]
+}

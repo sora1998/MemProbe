@@ -1,0 +1,104 @@
+{
+  "user_id": "user_019",
+  "task": "I’m reviewing a change notice for a small part we already use, and the paperwork is complete but the supporting test package is still coming in. What are the main things you’d check before deciding whether it can stay in the current build or needs to wait for the next round of verification?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "directness_preference",
+      "short": "Blunt, no fluff",
+      "explanation": "She responds best to straight answers without hedging or performative softness. Her persona is skeptical and exacting, so she likely prefers help that states the issue clearly and gets to the point. Overly cautious wording would probably feel inefficient to her."
+    },
+    {
+      "idx": 2,
+      "dimension": "detail_level_preference",
+      "short": "Enough context to trust the answer",
+      "explanation": "She likely wants the key caveats and failure modes, not a vague headline. Her reliability-oriented mindset suggests she values context when it changes the conclusion or action. She probably dislikes being told something is “fine” without the conditions that make it fine."
+    },
+    {
+      "idx": 3,
+      "dimension": "format_preference",
+      "short": "Bullets and checklists preferred",
+      "explanation": "She seems likely to prefer responses that are easy to audit and act on. A structured format fits her methodical style and makes it easier to spot gaps, exceptions, or weak logic. Dense prose would probably feel slower and less useful."
+    },
+    {
+      "idx": 4,
+      "dimension": "autonomy_support_preference",
+      "short": "Collaborative, but not hand-holding",
+      "explanation": "She likely wants the assistant to work with her rather than dictate to her. She values control and personal autonomy, so prescriptive overreach would be a poor fit. At the same time, she probably appreciates a clear recommendation once the options are laid out."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Welcomes firm pushback",
+      "explanation": "She is likely comfortable being challenged when a claim is weak, risky, or sloppy. Her reliability-first mindset suggests she would rather get corrected than be coddled. Soft agreement without scrutiny would probably reduce her trust in the help."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Before deciding whether it can stay in the current build, I’d check these main points:\n\n1. **What actually changed**\n   - Is it a true form/fit/function change, or just a documentation/update-only change?\n   - Any change to material, process, supplier site, tooling, or sub-tier source?\n\n2. **Configuration control**\n   - Is the part number, revision, or approved source still the same?\n   - Does the change notice clearly map to the exact build configuration you’re using?\n\n3. **Functionality impact**\n   - Could the change affect electrical, mechanical, thermal, reliability, or safety performance?\n   - Even a “small” part can matter if it’s in a critical path or margin-sensitive area.\n\n4. **Verification coverage**\n   - What tests have already been completed, and do they cover the changed aspect?\n   - Is the missing test package just confirmatory, or is it the only evidence for a key risk?\n\n5. **Field exposure / usage history**\n   - Has this exact change already been used in production or fielded in another program?\n   - If there’s prior successful use, that lowers risk, but only if the conditions match.\n\n6. **Rollback or replacement cost**\n   - If you accept it now and the late test later fails, how hard is it to rework or swap out?\n   - If rollback is expensive or schedule-critical, be more conservative.\n\n7. **Interaction risk**\n   - Could the part interact with other recent changes, new suppliers, or a tight tolerance stack-up?\n   - Small changes sometimes only show up when combined with other deltas.\n\n8. **Risk vs. schedule trade**\n   - If the test package is late, is the remaining uncertainty acceptable for this build stage?\n   - I’d ask: “What is the consequence if we’re wrong?”\n\nA practical way to decide:\n- **Stay in the build** if the change is low-impact, well-controlled, and the completed evidence already covers the critical risks.\n- **Wait for next verification** if the change touches a critical characteristic, the missing test is directly relevant, or rollback would be painful.\n\nIf you want, I can turn this into a short go/no-go checklist you can use in the review.",
+      "score": 4.4,
+      "summary": "mean=4.40 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:3, 5:2}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Direct and mostly blunt: \"Before deciding... I’d check these main points\" and the bullets get straight to the decision factors. Minor softness remains in phrases like \"I’d ask\" and \"If you want,\" but it’s still concise and non-fluffy."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Gives concrete caveats and failure modes: \"What tests have already been completed,\" \"Is the missing test package just confirmatory,\" \"Could the change affect... reliability, or safety performance?\" It explains when the answer changes, not just a vague headline."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured with numbered bullets and a final checklist-style summary. This is easy to audit and act on, matching the preference for bullets and checklists."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative rather than dictatorial: \"I’d check,\" \"I’d ask,\" and \"If you want, I can turn this into a short go/no-go checklist\". It offers a recommendation without over-prescribing, though it does lean toward advising a decision framework."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Includes firm, skeptical pushback on weak evidence: \"Even a ‘small’ part can matter,\" \"but only if the conditions match,\" and \"What is the consequence if we’re wrong?\" It challenges assumptions without being confrontational."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — I’d use hard gates, not a generic impact review.\n\nFor a small part where paperwork is done but the test package is still pending, I’d check these decision gates:\n\n1. **Exact delta is fully defined**\n   - What changed, and what did not.\n   - Material, dimensions, process, supplier, coating, torque, tooling, lot/source.\n   - If the delta isn’t cleanly isolated, that’s a stop.\n\n2. **Configuration control is airtight**\n   - New rev / lot / source / date code must map exactly to the build BOM, traveler, and change notice.\n   - If the paperwork is “complete” but the build trace is fuzzy, don’t count it as controlled.\n\n3. **Critical characteristic exposure**\n   - Does the part affect safety, reliability, sealing, power, alignment, interface, or another failure-sensitive function?\n   - If yes, missing evidence matters much more.\n\n4. **Completed evidence is on the actual changed item**\n   - Not “same family,” not “similar part,” not “same supplier process in general.”\n   - You want before/after data on the changed revision or lot, or at least on the exact delta path.\n\n5. **Missing test package relevance**\n   - What failure mode does the missing package cover?\n   - If it’s confirmatory or witness-level, maybe acceptable.\n   - If it’s the only coverage for the critical risk, it should wait.\n\n6. **Field / prior-use correlation**\n   - Has this exact revision, process, or source already been run under the same conditions?\n   - Exact correlation matters; family resemblance doesn’t.\n\n7. **Build-stage rollback cost**\n   - If the late data fails, can you remove or rework it cheaply and without schedule damage?\n   - If rollback is painful, be conservative.\n\n8. **Interaction risk**\n   - Any overlap with other recent changes, tight tolerances, or stack-up sensitivity?\n   - Small part changes often show up only in combination.\n\n### Practical gate\n- **Can stay in current build** if:\n  - delta is clean,\n  - critical function is low or well-covered,\n  - completed evidence is on the actual changed item,\n  - missing test is not tied to the main failure mode,\n  - rollback is easy.\n\n- **Wait for next verification** if:\n  - the change touches a critical characteristic,\n  - the missing package covers the key failure mode,\n  - the evidence is only indirect,\n  - traceability is incomplete,\n  - or rollback would be expensive.\n\n### My rule of thumb\nIf the missing package is the only real proof for a failure mode that would be ugly to unwind later, it does **not** stay in the build.\n\nIf you want, I can turn this into a hard-stop / soft-stop checklist you can use line-by-line on the change notice.",
+      "score": 5.0,
+      "summary": "mean=5.00 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:0, 5:5}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct: \"I’d use hard gates, not a generic impact review\" and \"If the delta isn’t cleanly isolated, that’s a stop.\" No hedging or fluff."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Gives concrete caveats and failure modes: critical characteristics, missing test relevance, rollback cost, interaction risk, and a clear rule of thumb about when it should wait."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured with numbered bullets, a \"Practical gate\" section, and a concise rule of thumb. Easy to audit."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Collaborative but not hand-holding: it lays out decision gates and ends with \"If you want, I can turn this into a hard-stop / soft-stop checklist.\" Also gives a clear recommendation without overprescribing."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Firm pushback throughout: \"that’s a stop,\" \"don’t count it as controlled,\" \"it should wait,\" and \"does not stay in the build\" when evidence is insufficient."
+        }
+      ]
+    }
+  ]
+}

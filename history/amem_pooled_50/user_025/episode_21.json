@@ -1,0 +1,36 @@
+{
+  "user_id": "user_025",
+  "task": "I’m sorting out a freight invoice that doesn’t match the paperwork, and I need to decide what to ask for before I move it any further. Can you help me think through the basic steps for checking the shipment records, the invoice, and any related messages so I can see where the mismatch starts?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.4,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — the cleanest way is to trace it in order and pin down the first point where the numbers stop matching.\n\n### 1) Start with the source docs\nPull these together first:\n- **Purchase order / order confirmation**\n- **Packing list**\n- **Bill of lading / POD**\n- **Receiving record**\n- **Freight invoice**\n- Any **emails or portal messages** about changes, delays, shortages, or re-bills\n\n### 2) Compare the core details\nCheck these side by side:\n- **Shipment date**\n- **Pro number / tracking number**\n- **Shipper / consignee**\n- **Item count / pallet count / carton count**\n- **Weight**\n- **Accessorial charges** if any\n- **Freight terms**: prepaid, collect, third-party, etc.\n\n### 3) Find the first mismatch\nAsk:\n- Did the **shipment paperwork** show the same unit count as the invoice?\n- Did **receiving** count the same amount that was shipped?\n- Is the invoice charging for:\n  - more units than were shipped\n  - more units than were received\n  - a different freight class/weight\n  - extra fees not approved\n- Was there any **written change** after the shipment went out?\n\n### 4) Check the message trail\nLook for:\n- revised shipping instructions\n- shortage or damage notices\n- carrier exceptions\n- “we’ll rebill this” or “we’ll credit that” language\n- any approval for extra charges\n\n### 5) What to ask for before moving it forward\nIf the invoice doesn’t line up, ask for:\n- **written explanation of the variance**\n- **revised invoice** tied to the actual shipped/received quantities\n- **BOL, POD, and packing list**\n- **proof for any extra charges**\n- **credit memo** if they overbilled\n- **carrier/warehouse verification** if they claim their paperwork is right\n\n### 6) Keep the issue narrow\nTry to frame it as:\n> The invoice does not match the shipment and receiving records. Please provide the supporting documents and a corrected invoice or credit memo showing how the billed amount was calculated.\n\nIf you want, I can turn this into a **one-page discrepancy checklist** you can use line by line.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah. Direction’s right, but I’d want it tighter before I release anything.\n\nNeed a simple check order:\n- invoice line by line\n- BOL / POD / packing list\n- receiving count\n- any written change order or email approval\n- rate / class / fuel / accessorials\n\nWhat I’d ask for first:\n- copy of the rate confirmation or contract terms they’re billing under\n- POD and BOL\n- weight ticket if they’re billing by weight\n- breakdown of every charge on the invoice\n- written basis for any accessorials or reclass/reweigh\n- all emails/messages showing who approved a change, and when\n\nWhat I’d be looking for is the first break in the chain. Usually it’s one of these:\n- wrong pro number\n- wrong consignee or shipment date\n- billed weight doesn’t match shipped weight\n- accessorial added with no written approval\n- invoice tied to a different load entirely\n\nI’d also separate two questions:\n1. Was the shipment actually moved as billed?\n2. Even if it was, was that charge authorized under the contract?\n\nThat’s the part people skip and then just argue numbers.\n\nIf you want, I can lay this out as a plain checklist you can use on the invoice itself, line by line.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — here’s a tighter, line-by-line check order you can use.\n\n## 1) Invoice line by line\nFor each line, check:\n- charge description\n- amount\n- load / pro number\n- shipment date\n- consignee / shipper\n- billed weight / class / miles\n- accessorial code or reason\n\n## 2) Match the shipment docs\nCompare the invoice against:\n- **BOL**\n- **POD**\n- **packing list**\n\nLook for:\n- same pro number\n- same shipment date\n- same consignee\n- same item / pallet / carton count\n- same weight\n\n## 3) Check receiving\nCompare to the **receiving count**:\n- what was received\n- who counted it\n- when it was counted\n- whether it was a blind receive\n\n## 4) Check for written approval\nLook for any:\n- change order\n- email approval\n- portal message\n- rate confirmation\n- contract / tariff terms\n\nThis is where you confirm whether the charge was not just billed, but actually **authorized**.\n\n## 5) Check the charge basis\nIf they billed:\n- **weight** → ask for the weight ticket / scale record\n- **class** → ask for the class basis or reclass support\n- **fuel** → ask how it was calculated\n- **accessorials** → ask for written approval and the exact reason\n\n## 6) Find the first break in the chain\nUsually it’s one of these:\n- wrong pro number\n- wrong shipment\n- wrong consignee or date\n- billed weight doesn’t match shipped weight\n- accessorial added without approval\n- invoice tied to a different load\n\n## What to ask for first\nBefore you move it forward, ask for:\n- **rate confirmation or contract terms**\n- **POD and BOL**\n- **weight ticket** if billed by weight\n- **full invoice breakdown**\n- **written basis for accessorials / reweigh / reclass**\n- **all emails or messages showing approval of any change**\n\n## Simple way to frame it\n> The invoice does not match the shipment, receiving, or approval record. Please provide the supporting documents and a corrected invoice showing the basis for each charge.\n\nIf you want, I can turn this into a **one-page audit checklist** with columns for **invoice / BOL / POD / receiving / approval / notes**.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s usable. Tight enough.\n\nI’d probably run it in this order:\n- invoice line by line\n- BOL / POD / packing list\n- receiving count\n- written approval or rate terms\n- weight ticket / reclass / accessorial support\n\nAnd I’d ask for the contract or rate confirmation first, not last. If they can’t tie the invoice to that, the rest is noise.\n\nThe main thing is finding the first mismatch, not arguing every line at once. Once the pro number, date, weight, or accessorial approval breaks, the rest usually follows.\n\nThe one-line frame is fine too:\n> The invoice does not match the shipment, receiving, or approval record. Provide the supporting documents and a corrected invoice showing the basis for each charge.\n\nThat’s about what I’d use.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "user_id": "user_033",
+  "task": "I’m trying to decide whether a weird result is a real sample problem or something in the instrument chain. Can you help me think through the first few checks and what would make you suspect drift, a bad calibration, or a maintenance issue?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "formality_preference",
+      "short": "Prefers professional, no-nonsense interaction",
+      "explanation": "She would likely respond best to a controlled, businesslike style rather than friendliness for its own sake. Given her guarded and precision-focused persona, overly casual phrasing would probably feel sloppy or intrusive."
+    },
+    {
+      "idx": 2,
+      "dimension": "verbosity_preference",
+      "short": "Wants concise answers, not rambling",
+      "explanation": "She seems to value efficiency and would likely dislike long-winded explanations that repeat themselves. She probably wants enough information to act on, with no decorative padding."
+    },
+    {
+      "idx": 3,
+      "dimension": "directness_preference",
+      "short": "Prefers blunt, unsoftened answers",
+      "explanation": "Her skeptical, control-oriented style suggests she would rather hear the point plainly than receive hedged reassurance. She is likely to trust answers more when they are explicit about risks, limits, and conclusions."
+    },
+    {
+      "idx": 4,
+      "dimension": "format_preference",
+      "short": "Likes structured lists and checklists",
+      "explanation": "She appears to prefer information that is organized and easy to verify. A clean format with steps, bullets, or checklists would fit her habit of tracking details and would reduce ambiguity."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Accepts firm correction when needed",
+      "explanation": "She likely does not want the assistant to simply echo her assumptions if something is wrong or risky. A direct challenge, especially when backed by evidence, would probably be more useful to her than polite agreement."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — I’d start with the checks that can actually fake the result in your chain, in this order:\n\n### 1) Rule out sample-side problems first\nThese are the easiest to mistake for instrument trouble.\n\nCheck:\n- sample ID / label mix-up\n- collection timing\n- storage temperature / transport excursion\n- dilution or prep error\n- contamination / carryover from a previous sample\n- insufficient mixing / settling\n\n**Suspect sample problem if:**\n- only one sample is odd\n- the result makes no sense relative to the rest of the batch\n- rerun on a fresh prep changes a lot\n- the same sample behaves differently after remixing / redilution\n\n### 2) Then look at the instrument state\nThis is where drift, calibration, and maintenance issues show up.\n\n#### Drift\nThink drift if:\n- results are gradually shifting over time, not jumping suddenly\n- QC is moving in one direction across several runs\n- the first few samples look fine, later ones don’t\n- repeat injections trend consistently high or low\n\n**Practical clue:** a slow slope is more “drift” than “bad one-off.”\n\n#### Bad calibration\nThink calibration if:\n- the shift appears right after calibration or after a calibration change\n- QC is off across multiple samples, not just one\n- the bias is fairly consistent, not random\n- recalibration fixes it, or at least changes the pattern clearly\n\n**Practical clue:** if the whole run is offset in the same direction, calibration is a prime suspect.\n\n#### Maintenance issue\nThink maintenance if:\n- there’s instability, noise, pressure/flow weirdness, baseline problems, leaks, clogs, or carryover\n- the instrument is not behaving consistently across injections\n- QC is erratic rather than just shifted\n- the problem improves after cleaning, replacing a part, or servicing\n\n**Practical clue:** maintenance problems often look messy, not just biased.\n\n### 3) Quick decision points\nAsk these in order:\n\n- **Is it one sample or many?**\n  - one sample → sample/prep first\n  - many samples → instrument chain more likely\n\n- **Does the error move with time?**\n  - yes → drift\n  - no, sudden offset → calibration or setup issue\n\n- **Does a rerun on fresh prep reproduce it?**\n  - no → sample/prep issue\n  - yes → instrument or method issue\n\n- **Does recalibration change the result?**\n  - yes → calibration problem likely\n  - no → look harder at maintenance, carryover, or sample matrix\n\n- **Is QC trending or just failing flatly?**\n  - trending → drift\n  - flat fail / offset → calibration or systematic method issue\n\n### 4) What I’d do first, practically\n1. Check sample identity and prep record.\n2. Rerun the same sample from a fresh prep if possible.\n3. Look at nearby QC / controls and whether they trend.\n4. Check recent calibration status and any recalibration history.\n5. Review instrument flags: baseline, pressure, carryover, noise, maintenance alerts.\n6. If possible, compare against a different instrument or analyst.\n\n### 5) Rule of thumb\n- **Single weird result** = sample/prep until proven otherwise\n- **Gradual shift across runs** = drift\n- **Consistent offset across a batch** = calibration\n- **Erratic or unstable behavior** = maintenance / instrument health\n\nIf you want, I can turn this into a very short stop/go checklist you can use at the bench.",
+      "score": 4.4,
+      "summary": "mean=4.40 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:3, 5:2}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Professional and controlled overall: \"I’d start with the checks that can actually fake the result\" and the response stays businesslike. Minor friendliness appears in \"If you want, I can turn this into a very short stop/go checklist,\" but it is restrained."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly concise and action-oriented, with a clear sequence of checks and rule-of-thumb summaries. It is somewhat long, but avoids rambling and decorative padding."
+        },
+        {
+          "idx": 3,
+          "score": 4,
+          "reason": "Direct and explicit about conclusions: \"Single weird result = sample/prep until proven otherwise\" and clear distinctions like \"Gradual shift across runs = drift.\" It does hedge a bit with \"Think drift if\" / \"Think calibration if,\" so not maximally blunt."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong structured formatting throughout: numbered sections, bullets, bolded headings, and a \"Quick decision points\" checklist. This is highly organized and easy to verify."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Provides firm corrective guidance rather than just echoing the premise, e.g. \"sample/prep until proven otherwise\" and explicit branching logic for drift, calibration, and maintenance. It clearly challenges assumptions with evidence-based checks."
+        }
+      ]
+    }
+  ]
+}

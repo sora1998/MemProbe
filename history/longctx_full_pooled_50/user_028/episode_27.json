@@ -1,0 +1,49 @@
+{
+  "user_id": "user_028",
+  "task": "I’ve got a repair estimate in front of me and a couple of line items that don’t match up with what I expected. Can you help me sort through it and figure out what deserves a second look before I respond?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.4,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — look at these first:\n\n1. **Scope**\n   - Does the line item match the actual problem?\n   - Watch for padded or vague wording.\n\n2. **Labor**\n   - Hours, rate, minimum charge\n   - Any duplicate labor hidden under another name\n\n3. **Materials / parts**\n   - Exact part names, sizes, model numbers\n   - “Materials” with no detail is a flag\n\n4. **Fees**\n   - Trip charge\n   - Diagnostic fee\n   - Disposal\n   - Permit\n   - Delivery\n   - Markup on materials\n\n5. **Duplicates**\n   - Same item charged twice in different words\n   - Labor plus “service fee” plus “diagnostic” for the same visit\n\n6. **Change order language**\n   - “As needed”\n   - “If discovered”\n   - “Additional work”\n   - “Unforeseen conditions”\n\n7. **Warranty**\n   - What’s covered\n   - For how long\n   - Who stands behind it\n\n8. **Payment terms**\n   - Deposit\n   - Progress payments\n   - Final payment trigger\n\n## Red flags\n- vague parts list\n- labor not broken out\n- fees piled on top of each other\n- scope that goes beyond the actual failure\n- pressure to sign quickly\n\nIf you want, paste the line items and I’ll tell you which ones look off.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s the general checklist. I need the actual line items, though — the devil’s in the wording.\n\nPaste the estimate and I’ll tell you which ones look duplicated, vague, or padded. If there’s a total too, include that. And if they gave you a reason for each charge, that matters.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — paste the **actual line items** and I’ll sort them for you.\n\nBest format:\n- line item\n- amount\n- any note/reason they gave\n- total at the bottom\n\nI’ll flag:\n- **duplicated charges**\n- **vague parts/materials**\n- **padding / unnecessary scope**\n- **fees that should be questioned**\n- **anything that needs a second look before you reply**\n\nIf you want, you can paste just the text and I’ll cleanly mark:\n- **looks normal**\n- **needs clarification**\n- **probably padded**",
+      "user_simulator": {
+        "feedback_type": "add_context",
+        "text": "Here’s a sample of it, since that’s what you need:\n\n- Diagnostic/service call: $125\n- Labor to replace igniter and clean burner assembly: 2.5 hrs @ $145/hr = $362.50\n- Igniter assembly: $98\n- Burner cleaning kit/materials: $42\n- Miscellaneous parts and supplies: $75\n- Trip/fuel charge: $35\n- Total: $737.50\n\nTheir note says the furnace was not heating reliably and they “found additional buildup requiring service to restore proper operation.”",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yes — a few things deserve a second look.\n\n## Looks normal\n- **Diagnostic/service call: $125**\n- **Labor to replace igniter and clean burner assembly: 2.5 hrs @ $145/hr = $362.50**\n- **Igniter assembly: $98**\n\n## Needs clarification\n- **Burner cleaning kit/materials: $42**\n- **Miscellaneous parts and supplies: $75**\n- **Trip/fuel charge: $35**\n\n## Why\n- **“Burner cleaning kit/materials”** and **“miscellaneous parts and supplies”** may be overlapping. Ask what was actually used.\n- **$75 for miscellaneous parts/supplies** is vague enough to question.\n- **Trip/fuel charge** may be redundant if the service call already covers the visit, depending on their policy.\n\n## Scope note\nTheir note:\n> “found additional buildup requiring service to restore proper operation”\n\nThat’s broad. It supports cleaning, but it also gives them room to pad. Ask:\n- what buildup was found\n- where it was\n- what was actually cleaned/replaced\n- whether any of the material charges are just consumables already covered in labor\n\n## The main issue\nThe estimate is not outrageous on its face, but the **materials/supplies side is too loose**.\n\n## What I’d ask back\n- What exactly was included in the **burner cleaning kit/materials**?\n- What were the **miscellaneous parts and supplies**?\n- Why is there a **trip/fuel charge** in addition to the service call?\n- Was any part of the labor just standard cleaning that should already be part of the service call?\n\nIf you want, I can help you draft a short reply asking for clarification without sounding combative.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "That’s about right. The labor and igniter look fine. The weak spot is the sloppy stuff:\n\n- burner cleaning kit/materials\n- miscellaneous parts and supplies\n- trip/fuel charge on top of a service call\n\nThose are the ones I’d press on. Could be legit, but they wrote them loose enough to hide padding if they wanted to.\n\nI’d ask them, plain:\n- what exactly was used in the burner cleaning kit\n- what the miscellaneous parts actually were\n- why the trip/fuel charge isn’t covered by the diagnostic/service call\n- whether the cleaning was part of the labor or billed separately\n\nThe note about “additional buildup” doesn’t bother me by itself. It just gives them room. I’d want specifics before I paid anything extra for supplies.\n\nIf you want to send a reply, keep it short and make them define the vague charges.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    }
+  ]
+}

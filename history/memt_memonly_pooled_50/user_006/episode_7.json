@@ -1,0 +1,23 @@
+{
+  "user_id": "user_006",
+  "task": "I’m reviewing a vendor quote for a network upgrade and want to sanity-check it before I respond. What should I gather about the scope, assumptions, and technical requirements so I can ask clear follow-up questions if anything looks off?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.2,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Gather these before you reply:\n\n1. **Exact scope**\n   - Which sites, racks, closets, and paths are included\n   - Exact rack type: **access switch, distribution, firewall, or storage path**\n   - What hardware is being replaced vs added\n   - What is explicitly out of scope\n   - Whether optics, cabling, mounts, licenses, and support are included\n\n2. **Assumptions**\n   - Traffic volumes and growth assumptions\n   - Uptime / maintenance-window assumptions\n   - Existing power, cooling, and rack space assumptions\n   - Any assumption about current configs being clean and reusable\n   - Any assumption about no hidden remediation on fiber, copper, or patching\n\n3. **Technical requirements**\n   - Required port counts, speeds, and media types\n   - Redundancy requirements: PSU, fans, uplinks, LACP, HA pairs\n   - Power and thermal limits\n   - Compatibility requirements for optics, transceivers, and firmware\n   - Any dependency on DNS, auth, or database services\n   - Monitoring, logging, and alerting requirements\n   - Security requirements: segmentation, ACLs, firewall policy, NAC, management access\n\n4. **Implementation details**\n   - Cutover method and rollback plan\n   - Expected outage window and validation steps\n   - Who is responsible for staging, cabling, config, and testing\n   - Whether they will test under load or only at link-up\n   - What acceptance criteria define “done”\n\n5. **Commercial details that affect scope**\n   - Labor hours and travel\n   - Support term and SLA\n   - Change-order triggers\n   - Warranty and replacement lead times\n\n### Follow-up questions to ask if anything looks off\n- “What exact rack type does this quote apply to?”\n- “Which items are included vs excluded, line by line?”\n- “What assumptions did you make about current power, cooling, optics, and cabling?”\n- “What are the acceptance criteria for the upgrade?”\n- “What is the rollback plan if cutover fails?”\n- “Are optics, patch cords, and licensing included?”\n- “What dependencies on existing configs or services are assumed?”\n- “What happens if we find a mismatch in media, firmware, or port speed during install?”\n\nIf you want, paste the quote and I can turn it into a tight checklist of **scope / assumptions / technical gaps / follow-up questions**.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s the right checklist. Covers the traps: scope creep, hidden remediation, and the usual “assumed clean environment” garbage.\n\nI’d tighten it one notch for leverage:\n- exact line items, with part numbers if they gave them\n- what they’re assuming about existing fiber/copper runs, patch panels, and transceivers\n- whether config migration is included or just hardware install\n- who owns validation if something fails after cutover\n- whether they’re charging for troubleshooting time if the site isn’t as clean as they claim\n\nIf the quote is vague on any of that, that’s where I’d press. That’s usually where the money leaks out.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    }
+  ]
+}

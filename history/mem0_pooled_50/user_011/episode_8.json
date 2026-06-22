@@ -1,0 +1,49 @@
+{
+  "user_id": "user_011",
+  "task": "I’m trying to clean up a short edit that’s been stuttering in playback and throwing a weird export error, and I want to make sure I’m not chasing the wrong fix. Can you help me think through the most likely causes and the order you’d check them in?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.8,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — I’d treat this as a **10-minute hard-check**, then stop if the cause isn’t obvious.\n\n### First pass: what I’d check in order\n1. **Freeze the current version**\n   - Duplicate the project or save a new version so you don’t lose the working state.\n\n2. **Confirm the failure mode**\n   - Is the stutter happening in:\n     - timeline playback only,\n     - export only,\n     - or both?\n   - If it’s both, that points more toward media/timeline issues than export settings alone.\n\n3. **Check for obvious timeline mismatches**\n   - Wrong frame rate sequence?\n   - Mixed frame rates in the edit?\n   - Any clips that are offline, missing, or relinked oddly?\n   - Any obvious speed changes, nested sequences, or effects on the problem section?\n\n4. **Check for destination / output issues**\n   - Is the export path valid?\n   - Enough disk space?\n   - Can the destination drive be written to?\n   - Any weird character/path length issues?\n\n5. **Check the export preset/specs**\n   - Make sure the preset matches the intended delivery format.\n   - Don’t go deep into codec tuning yet — just confirm it’s not an obviously wrong preset or resolution.\n\n### Most likely causes, in practical order\n- **Timeline/frame rate mismatch**\n- **A bad clip or section of media**\n- **Effects or nested sequence causing playback/render strain**\n- **Wrong export preset or sequence settings**\n- **Bad destination path / drive issue**\n- **Application cache / render files issue**\n\n### What I’d do next\n- If you find **one obvious mismatch or bad setting**, make **one contained fix** and retry once.\n- If it still fails, do **one fallback export** rather than chasing several variables at once.\n- If the issue is unclear after the quick checks, **stop and send an update** instead of guessing.\n\nIf you want, I can turn this into a **strict 10-minute checklist** you can follow step by step.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, this is the right lane. But I’d tighten the order a bit more so you don’t waste time.\n\nI’d check:\n1. **Does it stutter in timeline playback only, export only, or both?** That’s the first split.\n2. **Exact clip range where it happens** — if it’s always the same section, suspect media, effects, speed change, or a bad render.\n3. **Sequence settings vs source** — frame rate mismatch first, then resolution/audio sample rate if needed.\n4. **Problem media** — one bad file, variable frame rate footage, relinked media, or a corrupted cache file.\n5. **Render/cache** — purge previews / media cache and test again.\n6. **Export path / destination drive** — space, permissions, path weirdness.\n7. **Preset / codec** — only after the above, unless the error message clearly points there.\n\nThe big thing: don’t treat “weird export error” as automatically an export preset problem. I’ve had stuff like this where the actual issue was a broken source file or a mismatched sequence, and the export just exposed it.\n\nIf you want, I can turn this into a dead-simple decision tree: \n- playback stutters only\n- export fails only\n- both fail\n\nThat’s usually the fastest way to avoid chasing ghosts.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — that order is solid, and I’d keep the **relink/media check early**, not as a cleanup step.\n\nHere’s the order I’d use:\n\n1. **Duplicate the project/sequence**\n   - Freeze the current state first.\n\n2. **Confirm the exact symptom**\n   - Stutter in **timeline only**, **export only**, or **both**.\n\n3. **Check what changed in the relink**\n   - Path, drive, clip name, frame rate, audio mapping, timecode, proxy/original.\n   - This is one of the highest-value checks if the problem started after relinking.\n\n4. **Compare one bad clip against the actual source file**\n   - Open the source outside the timeline if possible.\n   - Make sure the clip in the edit matches the real media.\n\n5. **Drop the same media into a clean sequence**\n   - If it behaves there, the issue is probably sequence/timeline-specific.\n   - If it still breaks, suspect the media itself.\n\n6. **Clear cache / renders**\n   - Purge previews and media cache, then retest.\n\n7. **Only then suspect sequence corruption**\n   - Rebuild the sequence last, not first.\n\nMost likely causes, in practice:\n- **Mismatched frame rate / relinked media issue**\n- **Bad or variable-frame-rate source clip**\n- **Audio mapping or timecode mismatch**\n- **Sequence corruption or bad cached render**\n- **Export preset/path issue** only if the earlier checks don’t explain it\n\nIf you want, I can turn this into a **tight decision tree** for:\n- playback stutters only\n- export fails only\n- both fail",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah — that’s better. I’d still want the decision tree, because that’s the part that actually saves time when you’re in the middle of a bad export.\n\nWhat I’d want is something like:\n\n- **Both stutter and export fail** → media / relink / sequence settings first\n- **Playback stutters only** → timeline load, effects, cache, bad render\n- **Export fails only** → destination path, preset, codec, then source/media if the error is weird\n\nAnd for the relink piece, I’d put the check in this order:\n1. frame rate\n2. audio mapping\n3. source path / drive\n4. proxy vs original\n5. timecode mismatch\n\nThat’s the stuff that bites first. Sequence corruption is real, but I wouldn’t jump there unless the same clip behaves fine in a clean sequence and the cache purge doesn’t change anything.\n\nIf you lay it out, keep it blunt. No generic ‘try restarting’ stuff unless it’s actually part of the branch.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Absolutely — here’s the blunt version.\n\n## Fast decision tree\n\n### 1) **Both playback stutter and export fail**\nStart with **media / relink / sequence settings**:\n1. **Frame rate mismatch**\n2. **Audio mapping mismatch**\n3. **Source path / drive change**\n4. **Proxy vs original confusion**\n5. **Timecode mismatch**\n6. **Same media in a clean sequence**\n7. **Clear cache / renders**\n8. **Sequence corruption last**\n\n---\n\n### 2) **Playback stutters only**\nThink **timeline load / render strain** first:\n1. **Same exact clip range?**\n   - If yes: suspect that section, not the whole sequence.\n2. **Effects / speed change / nested sequence**\n3. **Problem media**\n   - bad file, VFR, relink issue\n4. **Cache / preview render issue**\n5. **Clean sequence test**\n6. **Sequence corruption last**\n\n---\n\n### 3) **Export fails only**\nThink **output path / preset / codec** first:\n1. **Destination path / drive**\n   - space, permissions, weird path/name\n2. **Preset / codec / delivery spec**\n3. **If the error is weird or non-specific**\n   - check the source clip / relink / sequence settings\n4. **Same sequence, different export location**\n5. **Same media in clean sequence**\n6. **Cache / renders**\n7. **Sequence corruption last**\n\n---\n\n## Relink check order\nIf relink is involved, I’d check it in this order:\n\n1. **Frame rate**\n2. **Audio mapping**\n3. **Source path / drive**\n4. **Proxy vs original**\n5. **Timecode mismatch**\n\nThat’s the order most likely to catch the real problem early.\n\n---\n\n## What I’d actually do first\n1. **Duplicate the project/sequence**\n2. **Identify which branch you’re in**\n   - playback only\n   - export only\n   - both\n3. **Check relink changes first if anything was relinked**\n4. **Test the bad clip in a clean sequence**\n5. **Purge cache/renders**\n6. **Only then suspect sequence corruption**\n\nIf you want, I can turn this into a **one-screen yes/no flowchart** you can follow while troubleshooting.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s the shape of it. Clean enough to use.\n\nThe only thing I’d maybe make even more explicit is: if it’s **both**, don’t burn time on export settings until you’ve checked the relink/media side. That branch is the one people mess up most.\n\nBut as written, this is usable. Blunt, ordered right, no fluff.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 5.0
+      },
+      "gt_correct": null
+    }
+  ]
+}

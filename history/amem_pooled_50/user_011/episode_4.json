@@ -1,0 +1,23 @@
+{
+  "user_id": "user_011",
+  "task": "I’ve got a post session where the timeline started acting weird after a relink, and I’m trying to figure out the fastest way to narrow down whether it’s a media issue, a sequence issue, or something else. Can you help me lay out a clean troubleshooting order so I don’t waste time chasing the wrong thing?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.8,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — fastest way is to isolate **what changed** and then test in the smallest possible chunks.\n\n## Clean troubleshooting order\n\n### 1) Freeze the current state\n- Save a new version of the project\n- Duplicate the broken sequence\n- Don’t keep relinking or rebuilding in the original\n- If possible, make a quick backup of the project file first\n\n### 2) Identify the exact symptom\nFigure out what “weird” means:\n- clips shifted out of sync\n- trims changed\n- effects broke\n- nested sequences misbehaving\n- frame rate / playback weirdness\n- offline media / red renders / missing links\n\nThat matters because each points to a different failure point.\n\n### 3) Check whether it’s the media or the sequence\nStart with the simplest test:\n\n- Open the **same media** in a **new, empty sequence**\n- Or bring one problem clip into a clean timeline\n- Compare behavior there\n\nIf it behaves normally in a clean sequence, the issue is probably **sequence-level**.\nIf it still acts wrong, it’s more likely **media / relink / source interpretation**.\n\n### 4) Test the relink itself\nLook for:\n- wrong source files linked\n- duplicate file names from different folders\n- mixed frame rates or mismatched audio sample rates\n- proxy vs full-res confusion\n- changed file paths after relink\n\nIf the timeline broke right after relink, check whether the relink hit the correct originals or just “matching” filenames.\n\n### 5) Check sequence interpretation\nIf the media is fine, inspect the sequence for:\n- changed sequence settings\n- mixed frame rate material\n- nested timelines\n- speed changes / retimes\n- timecode or frame rate interpretation issues\n\nA relink can expose problems that were already sitting there, especially with mixed sources.\n\n### 6) Isolate by section\nIf only part of the timeline is broken:\n- disable half the sequence\n- test sections one by one\n- narrow it to a specific clip, nest, or transition\n\nThis is usually faster than scanning the whole timeline manually.\n\n### 7) Check for hidden offenders\nCommon ones:\n- temp exports or placeholder media still in the cut\n- offline replacement clips\n- nested sequences with different settings\n- adjustment layers or effects tied to old media paths\n- audio linked to the wrong source\n\n### 8) Compare against a known-good version\nIf you have a pre-relink version:\n- open it side by side\n- compare sequence settings\n- compare clip properties\n- compare source paths / reel names / timecode\n\nThat often tells you whether the issue came from the relink or was already in the edit.\n\n## Fast rule of thumb\n- **Broken in a clean sequence too** → likely media / relink / interpretation problem\n- **Only broken in the current timeline** → likely sequence / nesting / edit structure problem\n- **Only after relink** → check source matching, duplicates, and sequence interpretation first\n\nIf you want, I can turn this into a **super short decision tree** you can follow in under 5 minutes while you’re in the session.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s basically the right order. Clean and usable.\n\nThe only thing I’d tighten is: after the relink, I’d check **source matching / duplicate filenames / wrong-card media** before I spend time on sequence settings. That’s usually the fastest failure point.\n\nSo I’d run it like this:\n1. duplicate the project / sequence\n2. identify the exact symptom\n3. test the same clip in a clean sequence\n4. verify relinked source paths and file identity\n5. then check sequence settings / nests / timebase stuff\n6. isolate by section if it’s still unclear\n\nThat part about comparing to a known-good version is solid. That’s usually where the answer shows up.\n\nIf you want, I can trim it into a literal 1-page decision tree for the edit suite.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    }
+  ]
+}

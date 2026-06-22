@@ -1,0 +1,62 @@
+{
+  "user_id": "user_019",
+  "task": "A machine has an intermittent fault that only shows up under certain conditions, and I need to decide what to check first before I touch anything. What’s a good way to narrow it down without wasting time or money?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.6,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "A good first step is to **reproduce the fault and isolate the conditions that trigger it** before replacing or adjusting anything.\n\nA practical way to narrow it down:\n\n1. **Document the symptom precisely**\n   - What happens, when, how often, and under what load, temperature, speed, vibration, etc.\n\n2. **Look for patterns**\n   - Does it happen only when hot/cold, at startup, under heavy load, after a certain runtime, or with a specific operator/process?\n\n3. **Check the simplest likely causes first**\n   - Loose connections, dirty sensors, worn cables, contamination, low fluid/air pressure, power supply fluctuations, obvious mechanical wear.\n\n4. **Compare “good” vs “bad” states**\n   - If possible, measure or observe the machine when it works normally and when the fault appears.\n\n5. **Use non-invasive tests first**\n   - Read logs, alarms, trend data, voltages, pressures, temperatures, vibration, and control signals before opening or disassembling anything.\n\n6. **Change one variable at a time**\n   - That helps identify the trigger without wasting parts or labor.\n\nIf you want, I can help you build a **quick fault-isolation checklist** for a specific machine type.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s the right shape, but it’s still generic.\n\nWhat I’d want first is a decision tree that starts with **when it fails** and **what changed** — not a broad checklist. Intermittent stuff is usually a trigger problem, not a random one. So:\n\n- exact operating state when it trips\n- load / temp / vibration / duty cycle\n- any recent part, firmware, supplier, or maintenance change\n- whether the failure is repeatable on demand or only after soak / cycling\n- whether the fault is electrical, mechanical, or procedural until proven otherwise\n\nBefore touching hardware, I’d start with **instrumentation and logs**, then build a matrix of conditions and reproduce it one variable at a time. If it’s a machine with environmental sensitivity, I’d especially look at heat, moisture, connector integrity, and power quality first. Seen too many “mystery” faults that were just a connector or a drifted supply rail under load.\n\nIf you want to be useful, give me the machine type and the symptom, and I’ll tell you what I’d check first in order.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "That’s exactly the right approach.\n\nFor an intermittent fault, I’d use this order:\n\n1. **When does it fail?**\n   - startup / warm / hot / cold\n   - idle / load / peak load\n   - steady state / acceleration / cycling\n   - after a time delay or only after vibration/heat soak\n\n2. **What changed recently?**\n   - maintenance, replacement parts, firmware/software, supplier, process settings, operator, environment\n\n3. **Can you reproduce it on demand?**\n   - if yes, vary one condition at a time\n   - if no, capture logs/trends and correlate against the operating state\n\n4. **Classify the fault before touching hardware**\n   - electrical, mechanical, or procedural\n   - if unclear, assume “observability first”: logs, sensors, power quality, temperature, vibration, connector state\n\n5. **Check the most trigger-sensitive items first**\n   - connectors/cables\n   - power rails / supply stability\n   - heat-related drift\n   - vibration-induced intermittents\n   - contamination/moisture\n   - recent changes in software or settings\n\nA simple decision tree:\n\n- **Fault only after a change?** → inspect the change first\n- **Fault only under a specific operating condition?** → reproduce that condition and instrument it\n- **Fault random but correlated with heat/vibration/load?** → test those variables first\n- **No clear pattern?** → collect logs and compare good vs bad runs before disassembly\n\nIf you give me the machine type, symptom, and what changed last, I’ll turn this into a tighter first-check sequence.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah. Better. Still a little abstract though.\n\nWhat I’d want is the first-pass tree in plain order, something like:\n\n- **Did anything change right before it started?** If yes, inspect that first. Part swap, firmware, supplier lot, maintenance, settings, operator, environment. Don’t start inventing theories before you verify the delta.\n- **Can you make it fail on demand?** If yes, hold everything else constant and sweep one variable at a time. If no, stop poking hardware and instrument the run.\n- **Does it track with heat, vibration, load, or time-in-state?** That’s where I’d look before opening anything up.\n- **Is it electrical, mechanical, or procedural on the evidence you have?** If you don’t know yet, default to logs, rails, connectors, sensors, and trend data.\n\nAnd yeah, connector integrity and supply drift are always high on the list. I’ve had the whole “mystery intermittent” thing turn out to be a bad interface under humidity or vibration more than once. Clean-looking hardware lies.\n\nSo if you want this actually useful, give me:\n1. machine type\n2. symptom\n3. what changed last\n4. when it fails\n\nThen I’ll give you the first three checks in order, not a generic sermon.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "A good first-pass tree is:\n\n1. **Did anything change right before it started?**\n   - If yes, check that first: part swap, firmware, supplier lot, maintenance, settings, operator, environment.\n\n2. **Can you make it fail on demand?**\n   - If yes, hold everything else constant and vary one condition at a time.\n   - If no, stop guessing and instrument the run.\n\n3. **Does it correlate with heat, vibration, load, or time-in-state?**\n   - If yes, focus there before opening anything up.\n\n4. **Is it electrical, mechanical, or procedural based on the evidence?**\n   - If unclear, start with logs, rails, connectors, sensors, and trend data.\n\n5. **Check the usual intermittent culprits first**\n   - connectors/cables\n   - supply drift / power quality\n   - moisture / contamination\n   - heat-related drift\n   - vibration-sensitive interfaces\n\nSo the practical rule is: **verify the last change, reproduce if possible, then instrument the condition that triggers it**. Don’t disassemble until you’ve narrowed the trigger.\n\nIf you want, send me:\n- machine type\n- symptom\n- what changed last\n- when it fails\n\nand I’ll give you the first three checks in order.",
+      "user_simulator": {
+        "feedback_type": "too_shallow",
+        "text": "Yeah, closer. Still reads like a template somebody would paste into a ticket.\n\nWhat I wanted was the actual order I’d use on the floor, not just the categories:\n\n1. **What changed?** Verify the delta first. Part swap, firmware, supplier lot, maintenance, settings, operator, ambient conditions. If nothing changed, that matters too.\n2. **Can I force it?** If yes, lock everything else down and sweep one variable at a time. If no, stop tearing into hardware and start capturing state.\n3. **What does it track with?** Heat, vibration, load, soak time, startup, duty cycle. Pick the strongest correlation and chase that.\n4. **What kind of fault is it on evidence, not guesswork?** Electrical, mechanical, procedural. If you don’t know yet, start with logs, rails, connectors, sensors, trend data.\n5. **Only then touch the machine.** And even then, start with the usual trash: connectors, cable strain, supply drift, contamination, moisture, loose grounds.\n\nThat’s the level I mean. Not “check usual culprits first” — which culprits, and in what order.\n\nIf you want to be actually useful, give me a specific machine and symptom, and I’ll give you the first three checks in order.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 4,
+      "agent_response": "That’s the right floor-order.\n\nIf I were doing it, the first-pass sequence would be:\n\n1. **What changed?**\n   - Verify the last delta first: part swap, firmware, supplier lot, maintenance, settings, operator, ambient.\n   - If nothing changed, that’s still a clue: look for drift, wear, or environment.\n\n2. **Can I force it?**\n   - If yes: hold everything else constant and sweep one variable at a time.\n   - If no: stop opening hardware and capture state/logs/trends while it runs.\n\n3. **What does it track with?**\n   - Heat\n   - Vibration\n   - Load\n   - Soak time\n   - Startup\n   - Duty cycle\n   - Pick the strongest correlation and chase that first.\n\n4. **What kind of fault is it, based on evidence?**\n   - Electrical\n   - Mechanical\n   - Procedural\n   - If unclear, default to observability: logs, rails, connectors, sensors, trend data.\n\n5. **Only then touch the machine**\n   - In this order:\n     1. connectors / cable strain\n     2. supply drift / power quality\n     3. contamination / moisture\n     4. loose grounds\n     5. vibration-sensitive interfaces\n\nThat’s the practical triage order: **delta → reproduce → correlate → classify → inspect**.\n\nIf you want, give me the machine type, symptom, what changed last, and when it fails, and I’ll turn this into a first-three-checks list for that exact case.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s the order.\n\ndelta → reproduce → correlate → classify → inspect\n\nAnd the “only then touch the machine” part is the bit people usually skip and waste half a day on. The specific order on hardware is right too — connectors/cable strain before supply drift before contamination/moisture before grounds before vibration-sensitive interfaces. That’s the floor version, not a ticket template.\n\nIf I were tightening it one more notch, I’d put a hard rule on it: if the fault isn’t reproducible yet, no parts swapping. Capture state first. Otherwise you just create a second problem and call it troubleshooting.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    }
+  ]
+}

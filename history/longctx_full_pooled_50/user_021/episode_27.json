@@ -1,0 +1,36 @@
+{
+  "user_id": "user_021",
+  "task": "I’m looking at a used electronics deal and need to decide quickly whether it’s worth meeting up for. What are the main details you’d check before making the call?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.6,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Use this quick screen:\n\n## Meet up\n- exact model is clear\n- actual photos of the item\n- powers on / works now\n- no lock or account issue\n- price leaves room for one hidden problem\n\n## Ask once\n- missing charger\n- missing serial / IMEI / model detail\n- “works” but no proof\n- minor damage that might not matter\n\n## Skip\n- no exact model\n- stock photos only\n- locked / unknown account status\n- seller dodges basic questions\n- “untested” or “as-is” with no real discount\n- title doesn’t match photos\n\n## Fast rule\n- **clear + working + unlocked + cheap enough = meet**\n- **fuzzy + weird + locked = skip**\n\nIf you want, I can turn that into a **one-glance drive / ask / skip card**.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s the right lane. But I’d want it tighter. Like, what matters first if I’m trying not to waste a trip — lock status, serial/IMEI, actual pics, or price? And what’s the one thing that’s an instant no even if the deal looks good?",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Use this order:\n\n## 1) instant no\n- **lock status unclear**  \n  If it might be iCloud / Google / Samsung / carrier / BIOS locked, **skip**.\n- **no real photo of the actual item**  \n  **Skip**.\n- **no exact model**  \n  **Skip**.\n\n## 2) ask once\n- **serial / IMEI missing**\n- **charger missing**\n- **“works” but no proof**\n- **minor damage**\n\nAsk once:\n- “Is it locked?”\n- “What exact model is it?”\n- “Can you send a fresh pic and serial/IMEI?”\n- “Does it power on?”\n\nIf they dodge, **skip**.\n\n## 3) worth meeting\n- exact model is clear\n- actual item pics\n- lock status is clear\n- it powers on / works\n- price still leaves room for one hidden issue\n\n## 4) price\nOnly matters **after** the first three.  \nCheap doesn’t save a deal that’s locked, vague, or fake-looking.\n\n## one instant no\n**unclear lock status** — that’s the fastest way to get stuck with junk.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That order makes sense.\n\nFirst: **lock status**. If that’s fuzzy, I’m out. Doesn’t matter if it looks cheap.\n\nSecond: **actual pics**. Not stock junk. If they won’t show the real item, nope.\n\nThird: **exact model / serial / IMEI**. If they can’t even say what it is, I’m not driving anywhere.\n\n**Price is last.** Cheap doesn’t fix locked or fake.\n\nInstant no? **Unclear lock status.** That’s the one that’ll waste the whole trip.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "user_id": "user_006",
+  "task": "I’m trying to sanity-check a small office network before I touch it: one uplink is on fiber, there’s a switch in the middle, and a VPN into a remote site keeps acting flaky. What would you look at first to figure out whether the weak link is the transceiver, the switch port, the tunnel config, or something else?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.2,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "I’d go in this order:\n\n1. **Baseline the live state**\n- fiber link status\n- switch port state\n- error counters\n- CPU/mem on the switch and VPN device\n- any flaps in the last hour\n- tunnel up/down history\n\n2. **Check the transceiver and fiber path first**\n- optic model matches both ends\n- light levels / DOM readings if available\n- Rx power low or bouncing\n- dirty connector / bad patch lead\n- bend stress or loose seating\n- link renegotiation or intermittent LOS\n\n3. **Then the switch port**\n- CRC/FCS, drops, input errors\n- speed/duplex mismatch\n- port flapping\n- STP/LACP events if relevant\n- admin config vs actual behavior\n- try a known-good port if you can do it safely\n\n4. **Then the VPN tunnel**\n- phase 1 / phase 2 status\n- rekey events\n- DPD / keepalive failures\n- NAT-T issues if it crosses NAT\n- MTU/MSS problems\n- auth or cert expiry\n- route changes pushing traffic the wrong way\n\n5. **Check for config drift**\n- recent changes on the switch or VPN device\n- running vs saved config\n- ACLs, routes, tunnel selectors, NAT rules\n- whether the remote site still matches what this side expects\n\n6. **Rule out “something else”**\n- upstream ISP issues\n- remote-site instability\n- power/thermal problems\n- bad cable management causing intermittent fiber strain\n- a single bad client or service making the tunnel look flaky\n\nIf you want the fastest split:\n- **Errors/flaps on the fiber port** → transceiver/cabling/port\n- **Port clean, tunnel drops** → VPN config, MTU, routing, auth, or remote side\n- **Both look clean but traffic fails** → routing/ACL/NAT or an upstream issue\n\nIf you want, I can turn that into a **10-minute field checklist** you can run in order without guessing.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, close. But I’d tighten the order a bit so you don’t waste time chasing the wrong layer.\n\nFirst thing: **prove whether the fiber side is actually clean under load**, not just “link up.” I’d look at:\n- DOM/Rx power on both ends\n- interface flaps\n- CRC/FCS, symbol, LOS/LOF type errors\n- whether the port is bouncing only when traffic hits it\n- swap the optic or patch lead with a known-good one if the numbers look even a little off\n\nThen the **switch port and the middle switch behavior**:\n- port errors, drops, STP events\n- any weird log messages around the exact time the tunnel gets flaky\n- CPU/memory if it’s a cheap box getting hammered\n- if there’s LACP, verify it’s not half-broken and pretending to be fine\n\nThen the **VPN tunnel**, but not just “is it up”:\n- rekeys happening too often\n- phase 1 / phase 2 lifetime mismatch\n- DPD/keepalive timers\n- MTU/MSS blackhole stuff\n- route/selector mismatch after a config change\n- cert or auth weirdness if it’s remote-access-ish\n\nWhat I’d add that your list didn’t hit hard enough: **compare timestamps**. If the tunnel drops at the same moment the fiber port logs an LOS or the switch port increments errors, you’ve already got your weak link. If the tunnel falls over with clean layer 1/2, it’s probably config, routing, or the remote side.\n\nFastest triage:\n1. optics/patch lead\n2. switch port counters + logs\n3. tunnel logs/rekeys\n4. MTU/routing/ACL drift\n\nLast time I had something like this, the ISP got blamed too fast and it ended up being a bad transceiver. Same story every time — people love guessing wrong before they check counters.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yep — I’d tighten it into a **layered isolation pass** and keep the order strict:\n\n1. **Fiber / transceiver / patch lead**\n   - DOM/Rx power both ends\n   - link flaps\n   - LOS/LOF, symbol, CRC/FCS-type errors\n   - swap optic or patch with a known-good one if anything looks marginal\n\n2. **Middle switch port / switch health**\n   - port errors, drops, resets\n   - STP/LACP events\n   - CPU/mem if the box is small or busy\n   - logs at the exact times the VPN gets flaky\n\n3. **VPN tunnel**\n   - phase 1 / phase 2 stability\n   - rekey frequency\n   - DPD/keepalive failures\n   - MTU/MSS issues\n   - route/selector mismatch\n   - auth/cert expiry if relevant\n\n4. **Correlate timestamps**\n   - if tunnel drops line up with fiber/port errors, it’s probably physical\n   - if L1/L2 is clean but the tunnel still drops, focus on config, routing, or remote-side behavior\n\nFastest split:\n- **errors/flaps on fiber path** → transceiver/cabling/port\n- **clean fiber, tunnel still drops** → VPN config, MTU, routing, auth, remote peer\n- **both look clean but traffic still fails** → ACL/NAT/routing or upstream issue\n\nIf you want, I can turn this into a **10-minute field checklist** you can run in order.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s the order. Clean enough.\n\nI’d run it the same way:\n- **Fiber first** if I see even slight marginal DOM or any flaps\n- **Middle switch** next, because cheap boxes lie until they’re under load\n- **VPN logs** after that, and I’d care more about rekeys/timers than just “tunnel up”\n- **Timestamp correlation** is the part that actually saves time\n\nIf the fiber side is clean and the tunnel still drops, I stop blaming hardware and go straight at MTU, selectors, route drift, or the remote peer. If the port counters move when the tunnel acts up, it’s almost never the VPN itself.\n\nThat’s basically the right triage. I’d use the 10-minute checklist if you want to make it repeatable.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    }
+  ]
+}

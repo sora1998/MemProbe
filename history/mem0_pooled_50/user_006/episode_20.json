@@ -1,0 +1,36 @@
+{
+  "user_id": "user_006",
+  "task": "I’m writing up a short handoff for a technical fix I’ve already completed, and I want it to be clear enough that someone else can verify the result or continue the work if needed. What details should I include so the steps, assumptions, and outcome are easy to follow without turning it into a long report?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.4,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "For a short, useful handoff, include just enough detail for someone else to **verify the fix, reproduce it if needed, or pick it up if it’s not fully done**.\n\nA good format is:\n\n1. **What was changed**\n   - Device / site / circuit / port / service\n   - Exact item affected\n   - Before-and-after state\n\n2. **Why it was done**\n   - Original fault or maintenance reason\n   - Ticket / incident / change number, if available\n\n3. **When it was done**\n   - Date and time window\n   - Any outage or impact period\n\n4. **What you did**\n   - Short step-by-step summary\n   - Keep it high level but specific enough to follow\n\n5. **Assumptions and dependencies**\n   - Required access, upstream services, vendor involvement, or site conditions\n   - Anything you assumed was already in place\n\n6. **Validation / proof of success**\n   - What you checked to confirm it worked\n   - Examples: ping, service status, logs, interface state, screenshots, test results\n\n7. **Current outcome**\n   - What is working now\n   - Any remaining issues or monitoring needed\n\n8. **Rollback / next step if needed**\n   - Brief note on what to revert or who should continue if the fix doesn’t hold\n\n9. **Contacts / approvals**\n   - Who approved it, or who should be contacted if follow-up is needed\n\nIf you want it very short, use this template:\n\n**Summary:**  \nFixed [issue] on [device/site/service].  \n\n**Change made:**  \n[Brief step summary].  \n\n**Assumptions/dependencies:**  \n[Access, upstream, vendor, etc.].  \n\n**Validation:**  \n[How you confirmed success].  \n\n**Outcome:**  \n[Current status and any follow-up].  \n\n**Rollback/next steps:**  \n[What to do if it fails or who picks it up].  \n\nIf you want, I can turn this into a **one-paragraph handoff template** or a **bullet format you can paste into a ticket**.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s the right shape. But make it tighter for an actual handoff.\n\nInclude only this:\n- what failed\n- what changed\n- what assumption mattered\n- how you proved it\n- what’s still risky / next move\n\nIf you want it usable, add one line for scope too — like exact device, port, VLAN, circuit, whatever. That’s the part people usually dodge and then the next tech wastes time.\n\nI’d keep it to 5 lines max, not a mini novel. Something like:\n\n**Issue:** [short fault]\n**Fix:** [exact change]\n**Assumption:** [dependency/access/upstream]\n**Verification:** [test/log/result]\n**Status:** [resolved / monitoring / next step]\n\nIf there was any rollback risk, put that in the status line too. That’s enough for someone to verify it or pick it up without reading your life story.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Exactly — for a real handoff, keep it to the minimum that lets someone **verify, continue, or roll back** without digging.\n\nUse this 5-line structure:\n\n**Scope:** exact device / site / port / VLAN / circuit / service  \n**Issue:** what failed, in plain terms  \n**Fix:** what you changed, specifically  \n**Assumption:** the one dependency or condition that mattered  \n**Verification:** how you proved it worked  \n**Status:** current result, plus any risk / next step / rollback note\n\nExample:\n\n**Scope:** SW1 Gi1/0/24, VLAN 120  \n**Issue:** client link was down after port flap  \n**Fix:** replaced patch lead and reset interface  \n**Assumption:** upstream switchport config was already correct  \n**Verification:** link came up, ping succeeded, error counters stayed clear  \n**Status:** restored; monitor for recurrence, rollback is to restore old patch lead if needed\n\nIf you want, I can turn this into a **copy-paste handoff template** with placeholders.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s it.\n\nScope, issue, fix, assumption, verification, status. Clean enough to hand off, not bloated.\n\nThe example is fine too. I’d probably keep the status line sharp — like whether it’s fully closed or just stable for now. But yeah, usable.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    }
+  ]
+}

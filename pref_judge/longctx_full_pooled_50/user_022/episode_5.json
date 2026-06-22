@@ -1,0 +1,170 @@
+{
+  "user_id": "user_022",
+  "task": "I’m trying to set up a simple live-check routine for a small process that can drift over a shift, and I want it to be practical rather than overkill. What would you watch in real time, and how would you decide when something is just normal variation versus worth acting on?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "formality_preference",
+      "short": "Neutral-professional, not chatty",
+      "explanation": "She comes across as someone who would want interactions to stay professional and efficient rather than overly casual. Her practical, work-focused style suggests she’d prefer clear communication without unnecessary friendliness or performance."
+    },
+    {
+      "idx": 2,
+      "dimension": "verbosity_preference",
+      "short": "Moderate detail, enough to act",
+      "explanation": "She likely wants enough explanation to understand the issue and proceed correctly, but not a long lecture. Her preference for efficiency and clear facts points to responses that are concise while still covering the important steps."
+    },
+    {
+      "idx": 3,
+      "dimension": "directness_preference",
+      "short": "Straightforward over softened wording",
+      "explanation": "She seems to value blunt clarity more than emotional cushioning. In a technical setting, she would probably prefer the assistant to state the problem, the likely cause, and the fix plainly."
+    },
+    {
+      "idx": 4,
+      "dimension": "format_preference",
+      "short": "Bullets and checklists over prose",
+      "explanation": "Her checklist-oriented habits and notebook procedure style fit a structured presentation. She would likely do best with information broken into steps, bullets, or a quick checklist she can follow without re-reading dense paragraphs."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Wants firm correction when something is off",
+      "explanation": "She appears unlikely to want vague agreement if a detail is wrong or risky. Her real-world habit of correcting spec errors suggests she’d appreciate the assistant flagging mistakes directly and not letting questionable assumptions slide."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — for a drifting process, the trick is to monitor **a few leading indicators**, not every possible number.\n\n## What to watch in real time\nPick 3–5 things that change **before** the process fails:\n- **Output rate / cycle time**\n- **Temperature**\n- **Pressure / flow / speed**\n- **Quality proxy** like size, weight, fill, torque, color, etc.\n- **Alarm count / fault flags**\n- **Operator adjustments** if those are a sign the process is drifting\n\nThe best live checks are the ones that move **early** and are easy to measure continuously.\n\n---\n\n## How to tell normal variation from a problem\n\n### 1) Compare to the baseline\nYou need a known-good normal:\n- average value\n- normal range\n- expected fluctuation\n\nIf the process is behaving like its usual pattern, that’s normal variation.\n\n---\n\n### 2) Watch for trend, not just one bad point\nA single outlier may be noise. A pattern matters more:\n- steadily rising temperature\n- slowly increasing cycle time\n- pressure drifting downward\n- more frequent corrections by the operator\n\nIf it keeps moving the same way over several readings, treat it as real.\n\n---\n\n### 3) Use simple warning and stop limits\nFor each metric, define:\n- **normal range**\n- **warning threshold**\n- **stop / intervention threshold**\n\nExample:\n- Normal: 95–105\n- Warning: 92–108\n- Stop: below 90 or above 110\n\nThat way you don’t have to debate every small fluctuation.\n\n---\n\n### 4) Look at the relationship between variables\nSometimes the number itself is less useful than how it behaves with others.\n\nExamples:\n- temperature up + quality down\n- pressure stable + output drops\n- cycle time increases + operator adjustments increase\n\nThat combination is often more meaningful than one metric alone.\n\n---\n\n### 5) Act on repeatability\nIf the issue happens:\n- once = watch\n- twice in the same shift = investigate\n- repeatedly or worsening = act\n\nThat’s a simple rule that prevents overreacting to noise.\n\n---\n\n## A practical live-check routine\n### Every shift / continuous:\n- current value of the key metric\n- compare to baseline\n- note trend direction\n- check alarms/faults\n\n### If warning threshold is crossed:\n- increase observation frequency\n- check related variables\n- verify setup/inputs\n- document it\n\n### If stop threshold is crossed:\n- pause or intervene\n- find cause\n- correct before continuing\n\n---\n\n## Simple decision rule\n### Probably normal variation if:\n- it stays inside the normal range\n- it doesn’t trend in one direction\n- related metrics stay stable\n- no alarms or quality impact\n\n### Worth acting on if:\n- it trends consistently\n- it crosses warning/stop limits\n- it affects another metric\n- it needs repeated adjustment to hold steady\n\n---\n\n## Short template\n**Process:** __________  \n**Baseline:** __________  \n**Live metric(s):** __________  \n**Normal range:** __________  \n**Warning limit:** __________  \n**Stop limit:** __________  \n**Trend to watch:** __________  \n**Action if warning:** __________  \n**Action if stop:** __________  \n\nIf you want, I can turn this into a **one-page live monitoring sheet** with blanks for the exact metrics and thresholds.",
+      "score": 5.0,
+      "summary": "mean=5.00 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:0, 5:5}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Neutral-professional and efficient: it stays work-focused, e.g. \"the trick is to monitor a few leading indicators\" and avoids chatty filler."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Moderate detail with actionable guidance: gives enough to act on, including \"warning threshold\" / \"stop threshold\" and a \"practical live-check routine,\" without becoming a long lecture."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Straightforward and plainspoken: uses direct rules like \"once = watch, twice... = investigate, repeatedly... = act\" and clearly states when to intervene."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strongly structured with bullets and checklists: multiple bullet lists, numbered sections, and a \"Short template\" make it easy to follow without dense prose."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Firm correction and clear thresholds: it explicitly says to \"act on repeatability\" and defines when something is \"worth acting on,\" rather than vaguely agreeing or softening the decision."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — that’s the right way to do it.\n\nA practical shift check should be built around **one failure mode at a time**, not generic monitoring.\n\n## Real-time check structure\n\n### 1) Primary variable\nThe main process number that should stay stable:\n- temperature\n- pressure\n- flow\n- speed\n- position\n- torque\n- weight\n- fill level\n- etc.\n\n### 2) Independent cross-check\nA second reading that should agree with the first:\n- second sensor\n- handheld measurement\n- gauge\n- manual spot check\n- readback from a different system\n\nIf these disagree, that’s often more important than the absolute value.\n\n### 3) Output / quality result\nWhat the process produces:\n- size\n- weight\n- defect rate\n- scrap\n- pass/fail\n- cycle result\n\nThis tells you whether the drift is actually affecting the product/process.\n\n### 4) Corrective action count\nHow often someone has to:\n- tweak a setting\n- reset an alarm\n- re-run a cycle\n- adjust by hand\n\nA rising correction count is often an early warning.\n\n### 5) Alarm / fault history\n- repeat alarms\n- nuisance alarms\n- same fault recurring\n- faults that clear and come back\n\nThat’s often the “don’t ignore this” signal.\n\n---\n\n# How to decide normal vs drift\n\n## Use this order\n### A. Baseline from known-good runs\nRecord:\n- normal value\n- normal spread\n- normal relationship between readings\n\n### B. Rate of change\nA number can still be “in range” but drifting the wrong way.\n\n### C. Repeatability\nOne odd read = note it  \nTwo in the same direction = watch  \nThree or repeated = likely real\n\n### D. Cross-check agreement\nIf the primary variable and independent check disagree, treat that as a real problem even if the primary number looks okay.\n\n### E. Reset behavior\nIf the issue clears after reset but returns, that’s not fixed — it’s unstable.\n\n---\n\n# Simple action rule\n\n## Note it if:\n- one off reading\n- no quality impact\n- cross-check still agrees\n- no trend yet\n\n## Watch it if:\n- same direction twice\n- slow drift over the shift\n- more manual adjustment than usual\n- still no quality impact\n\n## Act if:\n- primary and cross-check disagree\n- drift continues across multiple reads\n- output quality changes\n- alarms/faults repeat\n- operator keeps having to correct it\n\n---\n\n# Shift-check checklist\n\n**Process:** __________  \n**Failure mode being watched:** __________  \n\n### Readings\n- Primary variable: __________\n- Independent cross-check: __________\n- Output/quality result: __________\n- Adjustment count: __________\n- Alarm/fault count: __________\n\n### Baseline\n- Primary normal: __________\n- Cross-check normal: __________\n- Output normal: __________\n\n### Thresholds\n- Warning: __________\n- Stop/intervene: __________\n\n### Decision rule\n- One off reading = note\n- Same direction twice = watch\n- Same direction + mismatch = act\n- Quality impact or alarm = intervene\n\n---\n\n# Example\nIf the process is drifting on temperature:\n- primary: process temp\n- cross-check: handheld temp or second probe\n- output: defect rate\n- adjustment count: number of setpoint changes\n- alarms: overtemp/low-temp faults\n\nThen:\n- temp up once = note\n- temp up twice in a row = watch\n- temp up and handheld doesn’t agree = act\n- temp drift plus defects = intervene\n\nIf you want, I can turn this into a **one-page shift check sheet** with blanks for:\n- process type\n- failure mode\n- primary / cross-check / output\n- warning limit\n- stop limit\n- action rule",
+      "score": 5.0,
+      "summary": "mean=5.00 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:0, 5:5}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Neutral-professional and efficient: the response is matter-of-fact, uses structured headings, and avoids chatty filler. Phrases like \"A practical shift check should be built around one failure mode at a time\" fit the requested tone."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Moderate detail with actionable guidance: it gives enough to proceed, including \"Note it / Watch it / Act if\" rules and a checklist, without becoming a long lecture."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Very straightforward: it states the logic plainly, e.g. \"If these disagree, that’s often more important than the absolute value\" and \"that’s not fixed — it’s unstable.\" No softening or hedging dominates."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong use of bullets, numbered sections, and checklists throughout. The response is explicitly formatted as \"Real-time check structure,\" \"Simple action rule,\" and \"Shift-check checklist.\""
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Provides firm correction and clear thresholds rather than vague agreement. It directly flags risky cases like \"treat that as a real problem\" and \"that’s not fixed — it’s unstable,\" which matches a preference for pushback when something is off."
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yes — that’s the right way to make it usable.\n\nThe cleanest way is to build the checklist around **one specific failure mode**, because the trigger logic is different for:\n\n- **sensor/instrument drift**\n- **process drift**\n- **output/quality drift**\n\nHere’s a practical template you can use for any one process.\n\n---\n\n# Shift check template: one process, one failure mode\n\n## 1) Define the process and failure mode\n**Process:** ____________________  \n**Failure mode:** ____________________  \nExamples:\n- sensor bias\n- temperature drift\n- flow instability\n- pressure loss\n- dosing variation\n- alignment shift\n\n---\n\n## 2) Identify what moves first\nFor the failure mode you care about, write:\n\n- **Primary variable:** the main live reading\n- **Independent cross-check:** handheld, second sensor, gauge, or alternate readback\n- **Output/result:** what the process produces\n- **Correction trend:** how often operators adjust/reset\n- **Alarm/fault trend:** recurring alarms or resets\n\n---\n\n## 3) Define the trigger logic by failure type\n\n### A. Sensor / instrument drift\nUse this rule:\n- **Primary changes, cross-check does not**\n- or **primary and cross-check disagree beyond expected lag**\n\n### Trigger\n- mismatch that persists across **2–3 reads**\n- or mismatch that exceeds the normal gap for that instrument\n\n### Meaning\nLikely:\n- sensor bias\n- calibration drift\n- wiring issue\n- bad transmitter\n- scaling problem\n\n### Next move\n- verify with a second independent measurement\n- check calibration / zero / span\n- inspect wiring, connectors, impulse lines, mounting\n\n---\n\n### B. Process drift\nUse this rule:\n- **Primary still agrees with cross-check**\n- but **output, correction count, or trend starts moving**\n\n### Trigger\n- primary and cross-check both move the same way\n- output quality starts slipping\n- operator adjustments increase\n- drift persists over several checks\n\n### Meaning\nLikely:\n- real process shift\n- upstream input change\n- wear\n- fouling\n- control loop instability\n- environmental change\n\n### Next move\n- look upstream\n- check feed/material/input conditions\n- inspect control response\n- compare to known-good runs\n\n---\n\n### C. Output / quality drift\nUse this rule:\n- readings still look okay\n- but **result quality changes first**\n\n### Trigger\n- output defect rate rises\n- pass/fail margin shrinks\n- rework increases\n- cycle result becomes less stable\n\n### Meaning\nLikely:\n- process is still “in range” but no longer stable\n- drift is early or hidden\n- control limits may be too loose\n\n### Next move\n- tighten watch thresholds\n- compare current run to baseline\n- check whether lag between input change and result has shifted\n\n---\n\n# 4) What counts as noise vs real shift?\n\nUse this simple ladder:\n\n### Noise\n- one off reading\n- no repeat on next check\n- cross-check agrees\n- no output change\n- no extra corrections\n\n### Watch\n- same direction twice\n- small drift but still within expected spread\n- cross-check still agrees\n- corrections increasing slightly\n\n### Real shift\n- same direction across multiple reads\n- cross-check mismatch **or** output trend worsening\n- repeated alarms/resets\n- manual correction needed to hold normal operation\n\n### Act now\n- primary vs cross-check mismatch that persists\n- output quality impacted\n- alarm/fault repeats\n- correction trend keeps rising\n\n---\n\n# 5) Lag between reading and result\nThis is important.\n\nWrite down:\n- **Expected lag:** ____________________\n- **Normal lag range:** ____________________\n\nExamples:\n- immediate\n- 1–2 cycles later\n- 5–10 minutes later\n- next batch/shift\n\n### Why it matters\nIf the output normally lags the process by 10 minutes, don’t call it a process failure at minute 2 just because the result hasn’t moved yet.\n\nBut if the lag is usually 10 minutes and now it’s 30+, that itself is a drift clue.\n\n---\n\n# 6) A practical shift-check sheet\n\n**Process:** ____________________  \n**Failure mode:** ____________________  \n\n### Readings\n- Primary variable: __________\n- Cross-check: __________\n- Output/result: __________\n- Correction count: __________\n- Alarm/fault count: __________\n\n### Baseline\n- Primary normal: __________\n- Cross-check normal: __________\n- Expected lag to result: __________\n- Normal correction rate: __________\n\n### Thresholds\n- Noise range: __________\n- Watch threshold: __________\n- Act threshold: __________\n\n### Decision rule\n- One off reading = note\n- Same direction twice = watch\n- Primary/cross-check mismatch = sensor issue\n- Primary agrees but output/corrections drift = process issue\n- Output impact or alarm repeat = act\n\n---\n\n# 7) Example logic\n\n## Example: temperature-controlled process\n- **Primary:** process temp\n- **Cross-check:** handheld probe or second sensor\n- **Output:** defect rate\n- **Correction trend:** setpoint changes\n- **Lag:** output changes 1 batch later\n\n### Sensor drift pattern\n- primary temp reads high\n- cross-check stays normal\n- output stays normal\n\n→ likely sensor issue\n\n### Process drift pattern\n- primary and cross-check both rise\n- output defects rise after one batch\n- operator keeps lowering setpoint\n\n→ likely real process shift\n\n---\n\nIf you want, I can turn this into a **one-page fill-in checklist** with blanks for:\n- process\n- failure mode\n- primary / cross-check / output\n- expected lag\n- noise / watch / act thresholds\n- sensor-drift vs process-drift trigger rule",
+      "score": 5.0,
+      "summary": "mean=5.00 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:0, 5:5}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Neutral-professional and efficient: the response is structured and work-focused, with phrases like \"practical template\" and \"one process, one failure mode\" rather than chatty filler."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Moderate detail with actionable guidance: it gives enough to proceed, including \"Noise / Watch / Real shift / Act now\" and a fill-in checklist, without becoming a long lecture."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Straightforward and plainspoken: it states rules directly, e.g. \"Primary changes, cross-check does not\" and \"Primary agrees but output/corrections drift = process issue.\""
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong use of bullets, headings, and checklist structure throughout, including \"Shift check template\" and \"A practical shift-check sheet.\""
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Firm correction is explicit and direct, not vague: it distinguishes sensor vs process drift and says \"Act now\" when mismatch persists or output is impacted."
+        }
+      ]
+    },
+    {
+      "turn": 4,
+      "agent_response": "Sure — let’s make it concrete with a **temperature-controlled loop**. That’s one of the easiest to turn into an actual shift check.\n\n# Example process: temperature-controlled loop\n\n## Likely drift modes\n1. **Sensor drift / bias**\n2. **Process drift** from heater/cooler performance change\n3. **Control instability** from tuning, flow, load, or fouling\n\n---\n\n## What moves first\n\n### Sensor drift\nUsually:\n- the **primary sensor reading** moves first\n- the **independent cross-check does not**\n\n### Process drift\nUsually:\n- **primary and cross-check both move**\n- then output quality or correction trend follows\n\n### Control instability\nUsually:\n- temp oscillates\n- corrections increase\n- output may lag or vary\n\n---\n\n## What the cross-check is on site\nBest options, in order:\n- handheld probe at the same point\n- second fixed sensor\n- IR only if the surface and conditions make it reliable\n- downstream or upstream temp if that’s all you have, but it’s weaker\n\nIf the cross-check is poor, the whole decision tree gets fuzzy.\n\n---\n\n## Normal lag\nTypical lag depends on the process mass and flow, but for a practical shift check:\n\n- **small loop / fast response:** result lag **1–2 minutes**\n- **medium thermal mass:** **5–15 minutes**\n- **batch or heavy thermal system:** **next batch / 15–60+ minutes**\n\nIf you already know the process, write the real lag down from known-good runs.\n\n---\n\n## What range is noise vs real shift\n\n### Temperature reading\nAssume your known-good baseline is something like:\n- setpoint: 100\n- normal swing: ±1\n- acceptable short-term variation: ±2\n\n### Practical thresholds\n- **Noise:** within about **±1–2 units** of baseline and not trending\n- **Watch:** drift of **2–3 units** in one direction over repeated reads\n- **Act:** drift of **4+ units**, or any mismatch with the cross-check that persists\n\nIf the process is tighter than that, tighten the numbers. If it’s sloppier, widen them — but keep the same logic.\n\n---\n\n## Exact mismatch logic\n\n### Sensor problem\nTreat it as sensor/instrument drift if:\n- primary temp is off by **more than ~2 units** from the cross-check\n- and the mismatch persists for **2–3 reads**\n- while output stays normal\n\nThat points to:\n- sensor bias\n- calibration drift\n- wiring/connection issue\n- bad transmitter/scaling\n\n### Process problem\nTreat it as process drift if:\n- primary and cross-check both move the same way by **2+ units**\n- and output quality or correction count starts sliding\n- especially if the shift persists beyond the normal lag\n\nThat points to:\n- real process change\n- fouling\n- load change\n- airflow/flow change\n- heater/cooler performance issue\n- control loop issue\n\n---\n\n## Operator-style decision rule\n\nUse this exactly:\n\n- **One bad read** = note it\n- **Same direction twice** = watch\n- **Primary vs cross-check mismatch beyond normal lag** = sensor check\n- **Cross-check agrees but output slides** = process check\n- **Alarm or quality hit** = intervene\n\n---\n\n# One-page shift check sheet: temp loop\n\n**Process:** Temperature-controlled loop  \n**Failure mode:** Sensor drift / process drift / control instability\n\n### Baseline\n- Setpoint: ________\n- Normal primary reading: ________\n- Normal cross-check reading: ________\n- Expected lag to output change: ________\n- Normal correction rate: ________\n\n### Live checks\n- Primary temp: ________\n- Cross-check temp: ________\n- Output/quality result: ________\n- Corrections made: ________\n- Alarms/faults: ________\n\n### Thresholds\n- Noise range: ________\n- Watch threshold: ________\n- Act threshold: ________\n- Mismatch limit: ________\n\n### Decision rule\n- One bad read = note\n- Same direction twice = watch\n- Mismatch beyond lag = sensor check\n- Cross-check agrees but output slides = process check\n- Alarm/quality hit = intervene\n\n---\n\nIf you want, I can do the same thing for **flow/dosing**, **pressure/vacuum**, or **rotating equipment** next — those have different first-move and mismatch logic.",
+      "score": 4.4,
+      "summary": "mean=4.40 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:3, 5:2}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly neutral-professional and efficient, e.g. \"let’s make it concrete\" and structured technical language. Slightly conversational with \"If you want\" and a friendly tone, but not overly chatty."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Provides enough detail to act without becoming a lecture: concrete thresholds, decision rules, and a one-page checklist. It is somewhat long, but still practical and usable."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Direct and plainspoken: \"Treat it as sensor/instrument drift if...\" and \"Alarm or quality hit = intervene.\" It states causes and actions bluntly without much hedging."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strongly uses bullets, numbered lists, and a checklist format throughout, including a \"One-page shift check sheet\" and explicit decision rules."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Gives firm correction and clear action thresholds, e.g. \"If the cross-check is poor, the whole decision tree gets fuzzy\" and \"Treat it as sensor/instrument drift if...\" It does not over-accommodate questionable assumptions, though it could be even more assertive in rejecting bad inputs."
+        }
+      ]
+    }
+  ]
+}

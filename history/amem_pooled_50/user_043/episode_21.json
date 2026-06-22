@@ -1,0 +1,36 @@
+{
+  "user_id": "user_043",
+  "task": "I’ve got a site issue where the inspection window is tight and there are a few moving parts that need to be handled in order. What should I line up first so the work stays organized and the next step doesn’t get delayed?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.8,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Line up these first, in this order:\n\n1. **Confirm the inspection hold point**\n   - Know exactly what has to be ready before the inspector can clear the next step.\n   - If that item isn’t complete, the next step stays **held**.\n\n2. **Lock the work sequence**\n   - Get the fix, cleanup, access, and any follow-on work in the right order.\n   - Don’t let crews start the next task until the current one is cleared.\n\n3. **Check the material/delivery window**\n   - Make sure anything needed for the next step is actually on site, or has a firm arrival time.\n   - If the delivery slips, the next step is **held**, not “worked around.”\n\n4. **Assign one owner for each moving part**\n   - You, the foreman, the supplier, and the inspector.\n   - Keep it tight so nobody assumes someone else is handling it.\n\n5. **Set the confirm-by time**\n   - Get a clear time for:\n     - fix complete\n     - inspector ready\n     - delivery on site\n     - crew handoff clean\n   - If one misses, that step gets held.\n\n6. **Prepare the backup**\n   - Have the next safe task ready if the main step clears late.\n   - If there’s no clean backup, don’t force the sequence.\n\nIf you want, I can turn this into a **day-by-day crew run sheet** with **must happen / owner / confirm by / backup if it slips / hard stop**.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Close, but I want it tighter. Give me the actual order to line up on site, not the generic list.\n\nI’d want it like this:\n1. inspection requirement nailed down first\n2. work area ready and clear\n3. any fix/rework finished\n4. materials on hand or confirmed to land\n5. crew assignment locked\n6. inspector time confirmed\n7. backup task ready if the window slips\n\nAnd make it plain where the hard stop is. No fluff. I need to know what can’t move until what’s signed off.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Got it. On site, line it up in this order:\n\n1. **Inspection requirement nailed down**\n   - Know exactly what has to pass and what the inspector is checking.\n   - **Hard stop:** nothing moves forward until the requirement is clear.\n\n2. **Work area ready and clear**\n   - Access open, debris out, no trade blocking the spot.\n   - **Hard stop:** no inspection or next-step work if the area isn’t ready.\n\n3. **Fix/rework finished**\n   - Any punch, repair, or correction gets done before the inspector shows.\n   - **Hard stop:** if it’s not fixed, it stays held.\n\n4. **Materials on hand or delivery confirmed**\n   - Either it’s on site or the delivery window is locked.\n   - **Hard stop:** no next-step start if the material isn’t there or firmly scheduled.\n\n5. **Crew assignment locked**\n   - Foreman knows who’s on it and what they’re doing.\n   - **Hard stop:** no drift, no “someone will handle it.”\n\n6. **Inspector time confirmed**\n   - Get the window set and repeat it back.\n   - **Hard stop:** if the time moves and you can’t hold it, the next step stays held.\n\n7. **Backup task ready if the window slips**\n   - Have the safe fallback ready, but don’t jump to it unless the main path is held.\n\n**Plain rule:**  \nIf **inspection requirement, area readiness, fix/rework, or materials** are not locked, the next step does **not** move. It stays **held** until it’s signed off or confirmed.\n\nIf you want, I can turn this into a **one-line field hold list** you can text to the foreman.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s the order. Keep it like this:\n\n1. inspection requirement nailed down\n2. work area ready and clear\n3. fix/rework finished\n4. materials on hand or delivery locked\n5. crew assignment locked\n6. inspector time confirmed\n7. backup task ready\n\nHard stop is simple: if 1 through 4 aren’t locked, nothing advances. Held until signed off. That’s the whole game.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    }
+  ]
+}

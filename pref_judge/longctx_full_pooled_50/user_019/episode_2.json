@@ -1,0 +1,203 @@
+{
+  "user_id": "user_019",
+  "task": "I’ve got a process issue that only shows up once in a while, and the obvious fixes haven’t held. Can you help me map out a clean way to isolate it without changing too many things at once?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "directness_preference",
+      "short": "Blunt, no fluff",
+      "explanation": "She responds best to straight answers without hedging or performative softness. Her persona is skeptical and exacting, so she likely prefers help that states the issue clearly and gets to the point. Overly cautious wording would probably feel inefficient to her."
+    },
+    {
+      "idx": 2,
+      "dimension": "detail_level_preference",
+      "short": "Enough context to trust the answer",
+      "explanation": "She likely wants the key caveats and failure modes, not a vague headline. Her reliability-oriented mindset suggests she values context when it changes the conclusion or action. She probably dislikes being told something is “fine” without the conditions that make it fine."
+    },
+    {
+      "idx": 3,
+      "dimension": "format_preference",
+      "short": "Bullets and checklists preferred",
+      "explanation": "She seems likely to prefer responses that are easy to audit and act on. A structured format fits her methodical style and makes it easier to spot gaps, exceptions, or weak logic. Dense prose would probably feel slower and less useful."
+    },
+    {
+      "idx": 4,
+      "dimension": "autonomy_support_preference",
+      "short": "Collaborative, but not hand-holding",
+      "explanation": "She likely wants the assistant to work with her rather than dictate to her. She values control and personal autonomy, so prescriptive overreach would be a poor fit. At the same time, she probably appreciates a clear recommendation once the options are laid out."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Welcomes firm pushback",
+      "explanation": "She is likely comfortable being challenged when a claim is weak, risky, or sloppy. Her reliability-first mindset suggests she would rather get corrected than be coddled. Soft agreement without scrutiny would probably reduce her trust in the help."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — use a **tight triage loop** so you only change one thing at a time.\n\n## 15-minute intermittent-fault triage\n\n### 1) Define the failure in measurable terms\nWrite down:\n- **What exactly fails**: output, alarm, drift, missed step, shutdown, bad quality, etc.\n- **How you know it failed**: alarm code, spec limit, timestamp, sensor value, operator observation\n- **What “good” looks like**: normal range, normal cycle time, normal signal trend\n\nIf you can’t state this clearly, stop here and define it first.\n\n### 2) Capture the trigger window\nRecord the conditions right before it happens:\n- Load\n- Temperature\n- Vibration\n- Supply voltage / air pressure / flow\n- Startup vs steady-state vs shutdown\n- Operator action or recipe step\n- Time since last service / cycle count\n\nIf possible, change **one variable at a time**.\n\n### 3) Pull evidence before touching anything\nCheck:\n- Fault codes\n- Event history\n- Trend logs\n- Sensor traces\n- Cycle counts\n- Timestamped alarms\n\nYou’re looking for the moment the process starts to drift, not just the final failure.\n\n### 4) Inspect the cheap physical suspects\nBefore software or parts:\n- Connectors\n- Grounds\n- Harness rub or strain\n- Loose fasteners\n- Contamination\n- Heat discoloration\n- Air leaks / fluid leaks / blocked filters if relevant\n\nThese are common intermittent causes and cheap to verify.\n\n### 5) Reproduce under controlled conditions\nTry to make it fail on purpose:\n- Same recipe, same load, same operator step\n- Then vary **one** condition at a time\n- Stop if the fault appears and note exactly what changed\n\nIf you can’t reproduce it, don’t start swapping assemblies.\n\n## Hard rule\nDon’t:\n- Change software\n- Swap assemblies\n- “Shotgun” parts\n\nuntil you have:\n1. a defined failure mode, and  \n2. at least one repeatable trigger or strong log evidence.\n\n## Simple decision tree\n- **No logs/evidence?** → collect logs first\n- **Logs show a specific trigger?** → inspect the physical path related to that trigger\n- **Can reproduce?** → isolate by changing one variable\n- **Cannot reproduce?** → focus on trend data, environmental conditions, and intermittent physical faults\n\nIf you want, I can turn this into a **fill-in-the-blanks checklist** you can use on the floor in real time.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct and blunt: \"use a tight triage loop,\" \"Hard rule,\" \"Don’t: Change software / Swap assemblies / ‘Shotgun’ parts.\" It gets straight to the method without hedging."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Provides concrete caveats and failure modes: \"If you can’t state this clearly, stop here,\" \"You’re looking for the moment the process starts to drift,\" and the decision tree about logs vs triggers vs reproduction. Enough context to trust the approach."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured with numbered steps, bullets, a hard rule, and a simple decision tree. Very easy to audit and act on."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative but still directive: it lays out options and conditions, and ends with \"If you want, I can turn this into a fill-in-the-blanks checklist.\" Minor prescriptiveness, but not hand-holding."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Clear firm pushback against weak process: \"If you can’t state this clearly, stop here,\" \"don’t start swapping assemblies,\" and \"Don’t: ... ‘Shotgun’ parts.\" It corrects sloppy approaches rather than just agreeing."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Absolutely. Here’s a cleaner isolation plan for intermittent process faults.\n\n## 1) Define the failure mode in one line\nUse this format:\n\n**“When [condition], [signal/output] deviates to [measured bad state] for [duration], causing [alarm/quality/stop].”**\n\nExample:\n- “At startup under high load, motor current spikes above 18 A for 2–3 s, triggering alarm E42.”\n- “During steady-state at >45°C, output pressure drops below 2.1 bar for 10–20 s, causing rejects.”\n\nIf you can’t write this line, the fault is still undefined.\n\n---\n\n## 2) Rank the variables by likely impact\nStart with the variables most likely to explain intermittents:\n\n1. **Timing / sequence**\n   - startup, shutdown, transition, dwell time, handoff, interlock order\n\n2. **Environment**\n   - temperature, humidity, vibration, dust, airflow, supply voltage, pressure, flow\n\n3. **Marginal hardware**\n   - loose connectors, worn contacts, cracked solder, heat-sensitive components, harness strain\n\n4. **Operator / process variation**\n   - different shift, manual step, recipe selection, setup method, speed, loading pattern\n\nThat order is useful because timing and environment often expose marginal hardware.\n\n---\n\n## 3) Freeze one baseline condition\nPick a known-good reference state and hold it constant:\n- same recipe\n- same operator if possible\n- same load\n- same start time window\n- same ambient conditions as much as you can\n- same machine configuration\n\nThis gives you a control point.\n\n---\n\n## 4) Change only one variable per run\nFor each test, vary only one thing:\n- temperature only\n- load only\n- startup sequence only\n- operator step only\n- supply voltage only\n\nIf two things change, you lose attribution.\n\n---\n\n## 5) Minimum logging set\nTo make the result defensible, capture:\n\n### Core fields\n- **Date/time stamp**\n- **Machine ID / line / station**\n- **Recipe / program / version**\n- **Operator / shift**\n- **Start state**\n- **End state**\n- **Failure code or symptom**\n- **Measured value**\n- **Threshold / limit**\n- **Condition changed**\n- **Pass/fail**\n\n### If relevant, add:\n- temperature\n- vibration\n- voltage / pressure / flow\n- cycle count\n- alarm history\n- trend snapshot before/during/after\n- maintenance state\n- recent changes\n\nKeep it timestamped so you can align cause and effect.\n\n---\n\n## 6) Decision tree for intermittent faults\n\n### A. Does the fault correlate with environment?\nLook for:\n- heat\n- vibration\n- voltage sag\n- pressure drop\n- humidity\n- contamination\n\n**If yes:** inspect the path affected by that environment first.\n\n---\n\n### B. Does it correlate with a specific step or transition?\nLook for:\n- startup\n- shutdown\n- tool change\n- recipe change\n- handoff between stations\n- operator action\n\n**If yes:** focus on sequence timing, interlocks, delays, and state transitions.\n\n---\n\n### C. Does it correlate with a certain load or duration?\nLook for:\n- only under high load\n- only after warm-up\n- only after X cycles\n- only after running for Y minutes\n\n**If yes:** suspect marginal hardware, thermal drift, wear, or cumulative stress.\n\n---\n\n### D. Does it correlate with operator or shift variation?\nLook for:\n- one shift sees it more\n- one operator method causes it\n- different setup style\n- manual intervention timing\n\n**If yes:** isolate process variation, training, or setup standardization.\n\n---\n\n## 7) Stop rule\nStop testing when you have one of these:\n\n- **A repeatable trigger**\n- **A clear log signature tied to the failure**\n- **A single variable that changes pass/fail consistently**\n\nThat’s enough to justify the next step.\n\nIf you have none of those after a few controlled runs, don’t broaden the search randomly — go back and improve the measurement.\n\n---\n\n## 8) What not to do\n- Don’t change multiple variables in one run\n- Don’t swap assemblies before you have a trigger\n- Don’t “fix” three things and claim a root cause\n- Don’t rely on memory instead of timestamps\n- Don’t accept “it looked better” as evidence\n\nIf you want, I can turn this into a **one-page field checklist** or a **decision tree table** you can use during an actual investigation.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct and blunt: “Here’s a cleaner isolation plan,” “If you can’t write this line, the fault is still undefined,” and “Don’t change multiple variables in one run.” No hedging or fluff."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Gives concrete context and caveats: failure-mode definition, logging fields, decision tree, stop rule, and “If you have none of those after a few controlled runs, don’t broaden the search randomly.”"
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured with numbered sections, bullets, and checklists: “1) Define… 2) Rank… 3) Freeze… 4) Change only one variable…” plus sub-bullets and a “What not to do” list."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative and supportive without being overbearing: “If you want, I can turn this into a one-page field checklist…” It gives a clear recommendation while leaving control to the user."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Firm pushback is explicit: “If you can’t write this line, the fault is still undefined,” “don’t broaden the search randomly,” and “Don’t ‘fix’ three things and claim a root cause.”"
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yes — here’s a tighter version with **branch order**, **trigger vs suspect separation**, a **minimal log set**, and **operational stop rules**.\n\n## Intermittent fault isolation tree\n\n### 0) First: define the failure\nWrite one line:\n\n**“At [timestamp], under [condition], [signal/output] went from [normal] to [bad], producing [alarm/defect/stop].”**\n\nIf you can’t fill that in, you do not have a diagnosable fault yet.\n\n---\n\n## 1) Separate trigger from suspect\n\n- **Trigger** = the condition that makes the fault appear\n  - heat, load, startup, vibration, operator step, voltage sag, etc.\n\n- **Suspect** = the thing likely failing because of that trigger\n  - connector, relay, sensor, timing logic, marginal power supply, worn actuator, process setup, etc.\n\nDo not mix them.  \nExample:\n- Trigger: startup after warm soak\n- Suspect: power rail droop, relay chatter, thermal drift, loose connection\n\n---\n\n## 2) Branch order when evidence is weak\n\nUse this order because it gives the highest chance of separating causes fast:\n\n### Branch 1: Sequence / timing\nAsk:\n- Does it happen on startup, shutdown, handoff, changeover, or after a delay?\n- Does it occur at the same point in the cycle?\n\nIf yes, suspect:\n- interlocks\n- timers\n- state transitions\n- sequencing\n- delayed response\n\n### Branch 2: Environment\nAsk:\n- Does it track with temperature, vibration, humidity, dust, supply pressure, voltage, airflow?\n\nIf yes, suspect:\n- marginal hardware\n- thermal drift\n- loose hardware\n- contamination\n- power/utility instability\n\n### Branch 3: Load / duration\nAsk:\n- Does it appear only after warm-up, high load, long run time, or a certain cycle count?\n\nIf yes, suspect:\n- wear\n- overheating\n- saturation\n- drift\n- fatigue\n\n### Branch 4: Operator / process variation\nAsk:\n- Does one shift, one operator, one recipe, or one setup method see it more?\n\nIf yes, suspect:\n- setup variation\n- procedural step\n- training inconsistency\n- recipe selection\n- manual timing differences\n\nThat is the order I’d use when the data is messy.\n\n---\n\n## 3) Minimum log set: always log these 7 fields\n\nKeep it lean. Always capture:\n\n1. **Timestamp**\n2. **Machine / station ID**\n3. **Failure mode**  \n   - exact alarm code, bad output, or measured deviation\n4. **State at failure**\n   - startup / steady / shutdown / transition / manual step\n5. **Single variable changed**\n   - the one thing you altered for that run\n6. **Measured value**\n   - the actual number that crossed the limit\n7. **Pass/fail**\n   - did it fail or not\n\nThat’s the core set. Nothing else is mandatory.\n\n---\n\n## 4) Add only these fields if the branch points there\n\n### If Branch 1: sequence/timing\nAdd:\n- step number\n- elapsed time since start\n- event order\n- interlock state\n- transition timestamp\n\n### If Branch 2: environment\nAdd:\n- temperature\n- vibration\n- voltage / pressure / flow\n- humidity if relevant\n- ambient condition snapshot\n\n### If Branch 3: load/duration\nAdd:\n- load\n- run time\n- cycle count\n- duty cycle\n- warm-up time\n\n### If Branch 4: operator/process\nAdd:\n- operator ID or shift\n- recipe / program version\n- setup method\n- manual intervention\n- lot / batch ID if relevant\n\nThat keeps the log defensible without turning it into a dump.\n\n---\n\n## 5) What to test first\nWhen evidence is weak, test in this order:\n\n1. **Can I make it fail at the same cycle step?**\n2. **Can I make it fail by changing one environmental variable?**\n3. **Can I make it fail by changing only load or duration?**\n4. **Can I make it fail with a different operator or setup method?**\n\nIf a branch gives you a repeatable result, stop going wider and go deeper on that branch.\n\n---\n\n## 6) Operational stop rules\n\nStop the current branch when any of these happen:\n\n- **Same single-variable change causes the same failure twice**\n- **Freezing one variable makes the fault disappear twice**\n- **The same transition point appears in logs three times**\n- **One branch explains the fault better than the others with repeatable evidence**\n\nThat’s enough to move from isolation to targeted verification.\n\n---\n\n## 7) What not to do\n- Don’t change more than one variable per run\n- Don’t add fields “just in case”\n- Don’t swap assemblies before a branch is repeatable\n- Don’t call a pattern real unless the same condition reproduces it\n- Don’t let people argue from memory when timestamps exist\n\n---\n\n## 8) Simple working flow\nIf I were running it on the floor:\n\n1. Write the one-line failure definition\n2. Pick the most likely branch: timing, environment, load, or operator\n3. Freeze everything else\n4. Change one variable\n5. Log the 7 core fields\n6. Repeat once\n7. Stop or branch based on the result\n\nIf you want, I can turn this into a **one-page decision tree table** with columns for **branch / trigger / suspect / minimum logs / stop rule**.",
+      "score": 5.0,
+      "summary": "mean=5.00 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:0, 5:5}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct and blunt: starts with “Yes — here’s a tighter version” and uses imperative, no-fluff language like “Do not mix them” and “Don’t change more than one variable per run.”"
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Gives concrete caveats and failure modes, not just a headline: “If you can’t fill that in, you do not have a diagnosable fault yet,” plus branch-specific conditions and stop rules that explain when conclusions are valid."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and audit-friendly: numbered sections, nested bullets, and explicit lists like “Minimum log set: always log these 7 fields” and “Operational stop rules.”"
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Collaborative without hand-holding: it lays out options and a workflow, then says “If you want, I can turn this into a one-page decision tree table,” while still giving a clear recommendation on branch order and test sequence."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Welcomes and applies firm pushback: “If you can’t fill that in, you do not have a diagnosable fault yet,” “Do not mix them,” and “Don’t call a pattern real unless the same condition reproduces it” all directly challenge weak assumptions."
+        }
+      ]
+    },
+    {
+      "turn": 4,
+      "agent_response": "Yes — that’s the right tightening. Here’s the version I’d actually use.\n\n## Intermittent fault decision tree\n\n### First split: what is the strongest evidence?\nPick the first branch that has a **repeatable pattern**:\n\n1. **Repeatable transition point?**  \n   Same step, same handoff, same startup/shutdown moment, same cycle index  \n   → **Sequence / timing branch**\n\n2. **No transition point, but one environment variable tracks it across runs?**  \n   Temp, vibration, voltage, pressure, humidity, airflow  \n   → **Environment branch**\n\n3. **No environment link, but it appears only after time/load builds up?**  \n   Warm-up, duty cycle, cycle count, accumulated load  \n   → **Marginal hardware / wear branch**\n\n4. **No above, but it follows one operator/setup path?**  \n   Shift, recipe, manual step, setup method  \n   → **Process variation branch**\n\nThat is the branch order. Don’t skip around.\n\n---\n\n## How to tell “triggered by environment” vs “just exposed by environment”\n\nUse this rule:\n\n- **Triggered by environment** = the fault appears only when that variable changes, and stays away when it’s held constant.\n- **Exposed by environment** = the fault exists in the system, but the environment makes it visible.\n\nPractical test:\n- Freeze the environment and rerun.\n- If the fault **disappears twice**, the environment is likely the trigger.\n- If it **still happens**, but at a different point or with a weaker signature, the environment is probably exposing a marginal condition, not causing it alone.\n\nSo:\n- **Disappears when frozen** → treat as trigger\n- **Persists when frozen** → treat as suspecting marginal hardware/timing/process, not just environment\n\n---\n\n## Hard dead-branch rule\n\nA branch is dead if either of these happens:\n\n- You run **2 clean repeats** with that variable changed and the fault does **not** follow it.\n- Or you freeze that variable in **2 clean repeats** and the fault **still occurs**.\n\nAt that point, stop arguing that branch and move to the next one.\n\nIf you want it even stricter:\n- **2/2 same result** = branch confirmed or rejected\n- **1/2** = inconclusive, not enough to keep the branch alive\n\n---\n\n## Minimal log set: 7 fields, compressed\n\nLog only these:\n\n1. **Timestamp**\n2. **Unit / station**\n3. **Exact fault state**\n   - alarm code, bad output, measured failure condition\n4. **One changed variable**\n   - the only thing you intentionally altered\n5. **Before/after value**\n   - the value that matters for that variable\n6. **Pass / fail**\n7. **Transition point or cycle index**\n   - where in the sequence it happened, if applicable\n\nThat’s the base set. Nothing else is mandatory.\n\n### Add only if the branch needs it\n- Sequence branch: step number, state transition, elapsed time\n- Environment branch: temp, vibration, voltage, pressure, humidity\n- Load/wear branch: load, runtime, cycle count, warm-up time\n- Process branch: operator, recipe, setup method, manual intervention\n\n---\n\n## Operational stop rules\n\nStop a branch when:\n\n- **Same single-variable change reproduces the same failure twice**\n- **Freezing one variable clears the fault twice**\n- **Same transition point appears in 3/3 runs**\n- **One branch gives repeatable evidence and the others do not**\n\nThat’s enough to move from isolation to targeted verification.\n\n---\n\n## Floor-use version\n\n1. Write the failure in one line\n2. Ask: **Is there a repeatable transition point?**\n   - yes → sequence first\n3. If no: **Does one environment variable track it across runs?**\n   - yes → environment first\n4. If no: **Does it build with time/load?**\n   - yes → wear/marginal hardware first\n5. If no: **Does it follow one operator/setup path?**\n   - yes → process variation first\n6. Log the 7 fields\n7. Run twice\n8. Keep or kill the branch\n\nIf you want, I can turn this into a **one-page decision tree table** with the exact branch questions and stop rules in a compact format.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct and blunt: \"Yes — that’s the right tightening\" and \"Don’t skip around\". It gets straight to the method without hedging."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Gives concrete caveats and failure modes, not just a headline: distinguishes \"Triggered by environment\" vs \"Exposed by environment,\" explains what to do if it \"persists when frozen,\" and includes dead-branch rules."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured with headings, numbered steps, and bullets: \"Intermittent fault decision tree,\" \"Hard dead-branch rule,\" \"Minimal log set,\" and \"Floor-use version.\" Easy to audit."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative rather than dictatorial: \"Here’s the version I’d actually use\" and \"If you want, I can turn this into...\" It does give clear recommendations, but not in an overbearing way."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Firm pushback is explicit: \"Don’t skip around,\" \"stop arguing that branch,\" and the dead-branch rule rejects weak branches after 2/2 evidence. It challenges sloppy reasoning directly."
+        }
+      ]
+    },
+    {
+      "turn": 5,
+      "agent_response": "Yes — here’s the floor version, written as **hard questions** with **yes/no rules**.\n\n## Intermittent fault first-split tree\n\n### 1) Sequence first?\nAsk:\n\n**“Does the fault happen at the same step, handoff, startup/shutdown moment, or cycle index in 2 out of 2 runs?”**\n\n- **Yes** → sequence/timing branch\n- **No** → go to environment\n\n**Repeatable transition point means:**\n- same step number, or\n- same state change, or\n- same elapsed-time window, or\n- same cycle index\n\nIf it only happens “around there” but not at the same point twice, it does **not** count.\n\n---\n\n### 2) Environment first?\nAsk:\n\n**“Does the fault follow one environmental variable across 2 out of 2 runs when that variable changes, and stay away when that variable is held constant?”**\n\n- **Yes** → environment branch\n- **No** → go to load/wear\n\n**Tracks one environmental variable means:**\n- only one variable is changing in the test\n- the fault appears when that variable changes\n- the fault does **not** appear when that variable is frozen\n\nIf the fault is still there with the variable frozen, the branch is **not** confirmed.\n\n---\n\n### 3) Load / wear first?\nAsk:\n\n**“Does the fault appear only after time, load, or cycle count builds up, and does it repeat in 2 out of 2 runs at the same accumulation point?”**\n\n- **Yes** → marginal hardware / wear branch\n- **No** → go to operator/process\n\n**Counts as accumulation:**\n- same warm-up time\n- same runtime\n- same cycle count\n- same load duration\n\nIf it shows up randomly with no accumulation point, this branch is not confirmed.\n\n---\n\n### 4) Operator / setup first?\nAsk:\n\n**“Does the fault follow one operator, one setup method, one recipe, or one manual step in 2 out of 2 runs?”**\n\n- **Yes** → process variation branch\n- **No** → branch is still unresolved\n\n---\n\n## Environment vs exposed-by-environment: hard test\n\nAsk:\n\n**“If I freeze the environmental variable and rerun twice, does the fault disappear both times?”**\n\n- **Yes** → environment is a trigger\n- **No** → environment is only exposing a marginal condition, not the full cause\n\nThat’s the split.\n\nIf the fault still appears with the environment frozen, stop calling it an environment problem.\n\n---\n\n## Dead branch rule\n\nA branch is dead if either of these is true:\n\n- **2/2 runs do not follow the variable**\n- **2/2 runs with the variable frozen do not clear the fault**\n\nIf the runs are messy but not clean, use this rule:\n\n- **1/2** = inconclusive\n- **2/2** = confirm or kill the branch\n\nNo third category unless you have a bad test setup.\n\n---\n\n## Minimal log set: brutal version\n\nOnly log these 7 fields:\n\n1. **Timestamp**\n2. **Unit / station**\n3. **Fault code or measured failure**\n4. **One variable changed**\n5. **Before value**\n6. **After value**\n7. **Pass / fail + step/cycle index**\n\n### Make them specific:\n- **Fault code or measured failure** = the exact alarm code, exact out-of-limit signal, or exact bad output\n- **Before value** = the value before the change or before the fault\n- **After value** = the value after the change or at the failure point\n- **Pass / fail + step/cycle index** = whether the run failed and where it failed\n\nNo narrative in the log field. No “seemed off.” No “operator noted weird behavior.” Just the value and the result.\n\n---\n\n## Floor sequence\n\n1. Ask: **same step/cycle twice?**\n   - yes → sequence\n2. If no: **one env variable tracks it twice?**\n   - yes → environment\n3. If no: **same accumulation point twice?**\n   - yes → load/wear\n4. If no: **same operator/setup path twice?**\n   - yes → process\n5. If no branch hits 2/2, stop arguing and improve the test setup\n\nIf you want, I can compress this into a **single-page yes/no flowchart** with only the branch questions and stop rules.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct and blunt: \"hard questions\" with \"yes/no rules,\" \"brutal version,\" \"No narrative,\" and \"stop arguing\" all match the no-fluff preference."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Gives concrete caveats and failure modes: repeated emphasis on \"2 out of 2 runs,\" \"If it only happens 'around there'... it does not count,\" and distinctions like \"environment is only exposing a marginal condition.\""
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Highly structured and audit-friendly: uses numbered sections, branches, bullets, and a \"Minimal log set\" checklist with exactly 7 fields."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative but not hand-holding: it lays out options and a clear recommendation path, and even offers to \"compress this into a single-page yes/no flowchart\" rather than dictating beyond the framework."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Strong pushback is explicit: \"stop calling it an environment problem,\" \"No third category unless you have a bad test setup,\" and \"stop arguing and improve the test setup\" all show firm challenge of weak claims."
+        }
+      ]
+    }
+  ]
+}

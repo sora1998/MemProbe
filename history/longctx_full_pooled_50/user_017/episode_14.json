@@ -1,0 +1,36 @@
+{
+  "user_id": "user_017",
+  "task": "I’m trying to settle a debate with a friend about when a restaurant actually has to remake something versus just comping it or leaving it alone. What’s the simplest way to think about that without getting buried in policy jargon?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.8,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Simplest way to think about it:\n\n### Remake it when:\n- The item is **wrong**\n- It’s **overcooked/undercooked**\n- It has the **wrong ingredient**\n- It was made **against the guest’s clear request**\n- It’s a **quality or safety issue**\n\n### Comp it when:\n- The item is **technically fine** but the guest is unhappy and policy allows a goodwill fix\n- There was a **service mistake** that doesn’t require remaking the food\n- The restaurant wants to **make it right without redoing the item**\n\n### Leave it alone when:\n- The guest is just **changing their mind**\n- The item was made correctly and **matches what was ordered**\n- The complaint is **not verifiable** or outside policy\n\n### Easy rule\n- **Wrong food = remake**\n- **Right food, bad experience = comp if allowed**\n- **No real issue = leave it**\n\n### Example\n- Ordered chicken, got fish → **remake**\n- Burger was right but waited too long → **comp or manager decision**\n- Ate most of it and now wants a different dish for free → **usually leave it alone**\n\nIf you want, I can turn that into a **very short server-side decision tree**.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, basically. But that’s still a little clean for real life.\n\nWhat usually matters is:\n- **Did the kitchen make the wrong thing?** remake.\n- **Did the right thing go out, but it got messed up in cooking or prep?** remake.\n- **Did the guest just not like it, or change their mind?** usually comp only if the manager wants to keep the peace.\n- **Did they eat most of it first?** that’s where people start fishing.\n\nThe part people skip is **proof**. If it’s a real mistake, you want the ticket, the plate, the server notes, whatever. If it’s just a complaint with no clear issue, then it’s not automatically a remake just because somebody says so.\n\nSo the simple version I’d use is:\n**Wrong order or bad prep = remake.**\n**Correct order but guest unhappy = comp maybe.**\n**No actual problem = leave it.**\n\nIf you want, I can tighten that into a one-line rule you can use in the argument.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yep — the cleanest one-line rule is:\n\n**Wrong item or bad prep = remake. Right item but guest unhappy = comp if allowed. No real problem = leave it.**\n\nIf you want it a little firmer:\n\n**If the kitchen made it wrong, remake it. If it was made right and they just don’t like it, that’s a comp/manager call. If there’s no actual issue, don’t remake it.**\n\nAnd the practical test is:\n- **Can you point to the mistake?** remake\n- **Can you only point to dislike?** comp maybe\n- **Can’t point to either?** leave it alone\n\nIf you want, I can make that into a **restaurant-style decision tree in 3 steps**.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s basically it. Clean enough to use in an argument without turning it into policy soup.\n\nThat 3-step test is the useful part:\n- **Point to the mistake** → remake\n- **Only point to dislike** → comp maybe\n- **Can’t point to either** → leave it alone\n\nThat’s how it plays in real life most of the time. The only thing people try to sneak in is the \"I ate half of it, so now it’s a problem\" move. That’s not proof, that’s leverage.\n\nSo yeah, that version works.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "user_id": "user_021",
+  "task": "My dirt bike has a couple small issues at once, and I’m trying to get it rideable again without overdoing it. Can you help me map out the fastest way to check what’s worth fixing first and what I can probably leave alone for now?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.6,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — fastest way is to sort the problems by **whether they stop it from running/riding safely**, then check the **most likely root cause first** so you don’t chase random parts.\n\n### Start with this order\n1. **No-start / hard-start / dies immediately**\n2. **Runs but bogs, cuts out, or won’t take throttle**\n3. **Clutch / transmission / chain / wheel issues**\n4. **Noise, vibration, leaks, cosmetics**\n\n### Quick triage rule\nFix first anything that is:\n- **Safety-related**: brakes, throttle sticking, chain coming off, loose wheel/axle, steering play\n- **Engine-killing**: fuel starvation, air leaks, spark issues, clogged carb, bad plug, bad kill switch\n- **Likely to get worse fast**: knocking, grinding, overheating, metal in oil, severe smoke\n\nThings you can usually leave for later:\n- Small oil seep\n- Cosmetic plastics\n- Slightly worn grips/seat cover\n- Minor suspension seep if it’s not affecting control\n- Jetting tweaks if it still starts/rides okay\n\n### Fastest diagnostic path\nAnswer these in order:\n\n1. **Does it start and idle?**\n   - No → check fuel, spark, air, compression basics\n   - Yes → go to 2\n\n2. **Does it rev cleanly in neutral?**\n   - No → carb/fuel/air/spark issue\n   - Yes → go to 3\n\n3. **Does it bog or die only under load / when you open throttle?**\n   - Yes → fuel delivery, clogged carb, air leak, exhaust blockage, clutch slipping, valve issue on 4-stroke\n   - No → go to 4\n\n4. **Does the bike move normally when you give it throttle?**\n   - No, revs rise but bike doesn’t move → clutch or transmission\n   - Yes → likely smaller issue, maybe tune-up items\n\n### Best “don’t overdo it” approach\nBefore replacing anything:\n- Check **fresh fuel**\n- Check **air filter**\n- Check **spark plug condition**\n- Check **chain tension and clutch free play**\n- Check for **loose connections, cracked intake boot, clogged petcock/filter**\n- Make sure the **kill switch and sidestand switch** aren’t causing cutouts if equipped\n\n### If you want the quickest path with the least wasted effort\nTell me:\n- **2-stroke or 4-stroke**\n- **Carb or fuel injection**\n- **Exact symptoms**: won’t start / starts then dies / bogs / backfires / cuts out hot / loses power / weird noise\n- **What changed right before it started**\n- **What you already checked**\n\nIf you give me that, I can turn it into a **plain yes/no decision tree** and tell you what’s worth fixing now vs later.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s the right idea. But I need it tighter — like a real triage, not just a general list.\n\nGive me a **fast yes/no order** for checking it, based on the symptoms I actually have. I want:\n\n- **what to check first**\n- **what would make it a stop riding now**\n- **what can wait**\n- **what’s the cheapest likely fix before parts**\n\nIf you want, I can tell you the exact symptoms and you lay it out like a decision tree. Short and blunt. No essay.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — send me the exact symptoms and I’ll turn it into a **short yes/no triage tree**.\n\nUse this format:\n\n- **Starts?** yes/no\n- **Idles?** yes/no\n- **Revs in neutral?** yes/no\n- **Bogs under throttle?** yes/no\n- **Cuts out when hot?** yes/no\n- **Revs climb but bike doesn’t move?** yes/no\n- **Any noise / smoke / leaks?**\n- **2-stroke or 4-stroke**\n- **Carb or fuel injection**\n- **What changed right before it started**\n\nThen I’ll give you:\n1. **Check first**\n2. **Stop riding now**\n3. **Can wait**\n4. **Cheapest likely fix first**\n\nShort and blunt, like you want.",
+      "user_simulator": {
+        "feedback_type": "add_context",
+        "text": "Starts? yeah\nIdles? kinda, but rough\nRevs in neutral? yes\nBogs under throttle? yeah, especially low end\nCuts out when hot? sometimes after a few minutes\nRevs climb but bike doesn’t move? no\nAny noise / smoke / leaks? small fuel smell, no crazy smoke, maybe a little seep by the carb\n2-stroke or 4-stroke: 2-stroke\nCarb or fuel injection: carb\nWhat changed right before it started: sat a while, then started acting up after I rode it hard once\n\nJust lay it out straight. Don’t get fancy.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yep. Here’s the **fast triage order** for your exact symptoms.\n\n## 1) Check first\n### A. Fuel/carb basics\n- **Drain old gas**\n- **Open carb bowl drain** and see if fuel flows clean\n- **Check fuel cap vent**: ride or idle with cap loosened briefly\n- **Check air filter**: if filthy/oily, clean it\n- **Check spark plug**: if black, wet, or old, replace it\n\n### B. Carb problem check\nBecause it:\n- starts\n- idles rough\n- revs in neutral\n- **bogs low-end**\n- sometimes **cuts out hot**\n- sat a while\n\nThat screams:\n- **dirty pilot jet / main jet**\n- **gummed carb**\n- **sticking float/needle**\n- **bad fuel flow**\n- possibly **air leak**\n\n### C. Quick leak check\n- Look at the **intake boot**\n- Check carb clamps\n- Check reed cage area if accessible\n- Listen for hanging idle or surging\n\n---\n\n## 2) Stop riding now if\n- It **cuts out unpredictably in traffic/trails**\n- It **dies hot and won’t restart right away**\n- Throttle **sticks**\n- Chain/brakes/wheels are unsafe\n- You hear **metal knocking**, loud top-end rattle, or grinding\n\nFor your bike:  \n**I’d avoid hard riding until the bog/cutout is fixed.**  \nNot because it sounds blown up, but because **running lean from fuel/carb issues can seize a 2-stroke**.\n\n---\n\n## 3) What can wait\n- Small fuel seep if it’s just a seep and not dripping\n- Cosmetics\n- Minor exhaust seep\n- Non-critical tuning once it runs clean\n- Suspension seep if it’s not affecting control\n\n---\n\n## 4) Cheapest likely fix first\nDo these before buying parts:\n\n### Cheapest first:\n1. **Fresh premix / fresh gas**\n2. **Clean carb thoroughly**\n   - pilot jet\n   - main jet\n   - needle/needle seat\n   - float height\n3. **New spark plug**\n4. **Clean or replace air filter**\n5. **Check fuel line + petcock + tank cap vent**\n6. **Inspect intake boot / reeds for air leak**\n\n---\n\n## 5) Most likely cause ranking\nBased on your symptoms:\n\n1. **Clogged pilot jet / dirty carb**\n2. **Stale fuel**\n3. **Air leak at intake boot/reeds**\n4. **Weak spark / bad plug**\n5. **Restricted fuel flow**\n6. **Float issue**\n7. **Top-end wear** if it still bogs after carb/fuel checks\n\n---\n\n## 6) Fast yes/no order\n### Step 1\n**Does fresh fuel and a clean plug improve it?**  \n- Yes → you were in basic fuel/ignition trouble  \n- No → go to Step 2\n\n### Step 2\n**Does it idle better with the air filter removed briefly?**  \n- Yes → air/filter issue  \n- No → go to Step 3\n\n### Step 3\n**Does it still bog if you clean the carb jets?**  \n- No → solved  \n- Yes → go to Step 4\n\n### Step 4\n**Any air leak at boot/reeds?**  \n- Yes → fix that first  \n- No → go to Step 5\n\n### Step 5\n**Still cuts out hot after all that?**  \n- Yes → check ignition coil/stator, plug cap, compression, and top end\n\n---\n\n## 7) My blunt call\nFor **your exact bike**, the fastest cheap path is:\n\n**fresh fuel → clean carb jets → new plug → check intake leak → check fuel cap vent**\n\nThat’s the best “don’t overdo it” plan.\n\nIf you want, I can turn this into a **super short 10-minute checklist** in order, like:\n**“do this, then this, then stop if X happens.”**",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s solid. Straight answer:\n\n**Check first**\n1. Fresh fuel\n2. Plug\n3. Carb jets, especially pilot\n4. Fuel flow / cap vent\n5. Intake boot / reeds leak\n\n**Stop riding now if**\n- it starts cutting out randomly hot\n- throttle hangs or sticks\n- it starts sounding lean or sharp and weird\n- it gets worse after a few minutes instead of better\n\n**Can wait**\n- small seep by the carb if it’s not dripping bad\n- cosmetics\n- anything not affecting start, idle, or throttle\n\n**Cheapest likely fix first**\n- drain old gas\n- clean carb\n- new spark plug\n- clean air filter\n- make sure fuel is actually flowing\n\nFor your symptoms, I’d bet on **gummed carb / pilot jet** or **stale fuel** before anything expensive. If it sat a while and then got weird after one hard ride, that’s the first place I’d hit.\n\nIf you want the absolute shortest order: **fuel → plug → carb → leak check → stop if it still cuts out hot.**",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    }
+  ]
+}

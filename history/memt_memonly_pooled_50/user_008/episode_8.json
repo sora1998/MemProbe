@@ -1,0 +1,36 @@
+{
+  "user_id": "user_008",
+  "task": "I’m looking at the forecast for the next few days and I can’t tell if this is just a wet stretch or something I should treat more seriously. Can you help me sort out what signs usually mean I ought to get things squared away early?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.699999999999999,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — here’s a quick **ACT / WATCH** check you can use.\n\n## **ACT**\nTreat it seriously if **3 or more** of these are true:\n\n1. **Hits your block**, not just the borough/city\n2. It’s a **warning**, not just an advisory\n3. It mentions **flooding** first, or also **wind / outage / evacuation** risk\n4. It’s expected **within hours**, not “later this week”\n5. It means you should **move stuff, charge up, or stay put**\n\n## **WATCH**\nIf fewer than 3 are true, it’s probably just a wet stretch — keep an eye on it.\n\n### Extra rule:\nIf flooding is mentioned, that’s a big deal. I’d use **flood risk as the tie-breaker**, even if the wording sounds mild.\n\nIf you want, paste the forecast text and I’ll score it with your rule.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "That’s the right idea, but it’s still a little too neat. Forecasts around here like to sound harmless right up until the water’s in the street.\n\nWhat I’d want in the check is this:\n- **Flooding anywhere near my block** = take it serious\n- **Wind + rain together** = worse than rain alone\n- **Outage language** = move fast, charge everything\n- **Timing**: if it’s talking about tonight or tomorrow, not some vague later date, that matters\n- **Repeated updates** from the forecast or city = usually means it’s getting worse, not better\n\nAnd one more thing — if they start talking about **coastal flooding, drainage problems, or high tide**, I’d lean toward getting squared away early even if the rain total doesn’t look crazy.\n\nIf you want, I can help you turn the actual forecast into a plain **“ignore / watch / act”** call. That’s the part that matters.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — here’s a tighter **ignore / watch / act** check that leans toward **flooding first**.\n\n## **ACT**\nGet squared away early if **2 or more** of these are true:\n\n- **Flooding is mentioned anywhere near your block**\n- **Wind + rain together** are in the forecast\n- There’s **outage language** or “power could go out”\n- It’s **tonight / tomorrow / within hours**\n- They mention **coastal flooding, drainage problems, or high tide**\n- The forecast or city keeps issuing **repeated updates** or escalating language\n\n## **WATCH**\nIf it’s mostly just rain, and the serious stuff is only broad or vague, keep an eye on it:\n- no flooding near you\n- no outage talk\n- no wind problem\n- no urgent timing\n\n## **IGNORE**\nOnly if it’s basically:\n- light rain\n- no flood risk\n- no wind risk\n- no outage risk\n- no timing pressure\n\n### Short rule:\nIf **flooding + timing** show up together, I’d treat it like it matters.\n\nIf you want, paste the forecast text and I’ll sort it into **ignore / watch / act**.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That works.\n\nYou kept the important part first — flood risk, timing, outage language, wind with rain, the whole thing. And you didn’t dress it up like some harmless weather-note nonsense.\n\nThat’s the right split: **ignore / watch / act**. Good enough to use.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    }
+  ]
+}

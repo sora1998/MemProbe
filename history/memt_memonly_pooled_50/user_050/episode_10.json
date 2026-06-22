@@ -1,0 +1,36 @@
+{
+  "user_id": "user_050",
+  "task": "I’m trying to sort out a small payment mismatch at work, and I only have the usual papers in front of me. Can you help me figure out which record I should check first and what order to look at the rest in?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.300000000000001,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — start with the **cashier drawer log / till count for that exact shift** first.\n\nUse this order:\n1. **Drawer log / till count** — confirms whether the mismatch is in the drawer itself.\n2. **Receipt for the transaction** — check amount tendered, change given, and time.\n3. **POS transaction detail / audit trail** — look for voids, re-rings, payment type changes, or split tender.\n4. **Shift notes / incident log** — see if anyone already flagged a change trick, fake bill, or drawer issue.\n5. **Video, if available** — only after the paper trail points to a specific transaction.\n\nIf you want, I can also give you a **fast mismatch checklist** in the order I’d use on shift.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that order makes sense. I’d still hit the receipt first if I already know the exact sale. Drawer log first only if I don’t know where the hole is.\n\nFor me it’d go:\n1. receipt\n2. till count / drawer log\n3. POS detail\n4. shift notes\n5. camera if it still looks weird\n\nIf you want, give me the kind of mismatch it is — short drawer, overage, wrong tender, missing cash, whatever — and I can narrow the first two checks.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yep — if you already know the exact sale, **receipt first** is the right move.\n\n**Best order:**\n1. **Receipt** — confirm the sale amount, tendered amount, change, time, and register.\n2. **Till count / drawer log** — see whether the drawer itself is off and by how much.\n3. **POS detail / audit trail** — check for voids, re-rings, tender changes, split payments.\n4. **Shift notes** — look for anything already flagged.\n5. **Camera** — only if the paper trail still doesn’t explain it.\n\n**Fast rule:**\n- **Known transaction?** Start with the **receipt**.\n- **Unknown hole / general drawer issue?** Start with the **drawer count**.\n\nIf you want, I can also give you a **2-minute check order** for:\n- short drawer\n- overage\n- wrong tender\n- missing cash",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s the clean version. Receipt first if I know the sale, drawer count first if I’m just chasing the hole. Short and usable.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    }
+  ]
+}

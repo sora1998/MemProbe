@@ -1,0 +1,170 @@
+{
+  "user_id": "user_033",
+  "task": "I’ve got a run in progress that’s drifting a little, and I don’t want to let it keep going if it’s headed for junk data. Can you help me think through what I should watch for and when it’s smarter to stop, reset, or keep going?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "formality_preference",
+      "short": "Prefers professional, no-nonsense interaction",
+      "explanation": "She would likely respond best to a controlled, businesslike style rather than friendliness for its own sake. Given her guarded and precision-focused persona, overly casual phrasing would probably feel sloppy or intrusive."
+    },
+    {
+      "idx": 2,
+      "dimension": "verbosity_preference",
+      "short": "Wants concise answers, not rambling",
+      "explanation": "She seems to value efficiency and would likely dislike long-winded explanations that repeat themselves. She probably wants enough information to act on, with no decorative padding."
+    },
+    {
+      "idx": 3,
+      "dimension": "directness_preference",
+      "short": "Prefers blunt, unsoftened answers",
+      "explanation": "Her skeptical, control-oriented style suggests she would rather hear the point plainly than receive hedged reassurance. She is likely to trust answers more when they are explicit about risks, limits, and conclusions."
+    },
+    {
+      "idx": 4,
+      "dimension": "format_preference",
+      "short": "Likes structured lists and checklists",
+      "explanation": "She appears to prefer information that is organized and easy to verify. A clean format with steps, bullets, or checklists would fit her habit of tracking details and would reduce ambiguity."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Accepts firm correction when needed",
+      "explanation": "She likely does not want the assistant to simply echo her assumptions if something is wrong or risky. A direct challenge, especially when backed by evidence, would probably be more useful to her than polite agreement."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — think of it as a **stop / reset / continue** decision based on whether the drift looks like a **real process change** or a **run artifact**.\n\n### Watch first for the stuff that can fake drift\n1. **Sample / prep issues**\n   - wrong ID or sequence\n   - dilution or pipetting error\n   - contamination or carryover\n   - storage / temperature / timing problem\n   - mix-up between aliquots\n\n2. **Instrument / method issues**\n   - calibration shift or failed check\n   - control trend moving\n   - reagent lot change\n   - carryover, clogging, drift, integration problem\n   - maintenance overdue or system suitability failing\n\n3. **Workflow changes**\n   - new analyst\n   - rushed prep or batching\n   - sequence/order change\n   - cleanup step skipped\n   - environmental change\n\n### Then ask: is the drift reproducible?\nCheck it in the most useful order:\n- **same setup / same instrument**\n- **fresh prep**\n- **different analyst**\n- **different instrument**\n- **fresh reagent lot** if relevant\n\nIf it only shows up in one setup, it’s probably a **run problem**, not a real signal.\n\n### When to **stop**\nStop if any of these are true:\n- QC or control trend is out of bounds\n- calibration or system suitability fails\n- drift is **monotonic and worsening**\n- you can’t explain the shift with a known benign cause\n- the result is close to a decision limit and the drift could flip the call\n- you’d be uncomfortable defending the data if asked later\n\n### When to **reset**\nReset if you find a likely artifact:\n- prep error\n- carryover\n- reagent issue\n- instrument instability\n- sequence / handling problem\n\nThen rerun with the confounder removed:\n- fresh prep\n- fresh reagent\n- cleaned or recalibrated instrument\n- corrected sequence\n\n### When to **keep going**\nKeep going only if:\n- the drift is small\n- QC remains acceptable\n- the change is stable and explainable\n- it doesn’t threaten the final interpretation\n- you can document why it’s still valid\n\n### Practical rule\nIf the drift is:\n- **small + stable + explainable** → probably continue\n- **growing + unexplained + near a cutoff** → stop and investigate\n- **reproducible after reset** → treat as real and don’t hand-wave it away\n\nIf you want, I can turn this into a **one-page stop/reset/continue checklist** with yes/no branches.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Professional and businesslike throughout: \"stop / reset / continue decision,\" \"Practical rule,\" no casual filler."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly concise and action-oriented, with compact bullets and no rambling; a bit longer than minimal, but still efficient."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Blunt and explicit: \"stop if,\" \"reset if,\" \"keep going only if,\" and \"don’t hand-wave it away\" give clear, unsoftened guidance."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong structured format with numbered sections, bullets, and a final rule set; easy to scan and verify."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Provides firm correction and decision thresholds instead of echoing assumptions, e.g. \"stop and investigate\" and \"treat as real and don’t hand-wave it away.\""
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — here’s the sharper version I’d actually use at the bench.\n\n## Stop / go checklist for a drifting run\n\n### 1) First question: is the drift within expected noise?\nUse the assay’s own imprecision if you have it.\n\n- **Likely just noise** if the change is:\n  - **< 1× within-run SD** for a single result, or\n  - **< ~1.5–2× CVa** over a short sequence, and\n  - QC is still comfortably in control\n\n- **Suspicious** if the change is:\n  - **≥ 2× CVa** and trending in one direction, or\n  - **exceeds the assay’s RCV** for that analyte, or\n  - crosses a clinically meaningful decision point\n\nRule of thumb:\n- **1 SD-ish** = probably noise\n- **2 SD-ish** = investigate\n- **3 SD-ish** = stop unless you already know why\n\n---\n\n### 2) What QC trend is still acceptable?\nThis is where people get sloppy.\n\n#### Usually acceptable\n- QC is **within ±2 SD**\n- no consistent directional trend\n- no Westgard-type pattern suggesting bias\n- patient drift is not marching toward a cutoff\n\n#### Not acceptable / stop and check\n- **1_2s warning** by itself: not a stop, but pay attention\n- **2_2s, R_4s, 4_1s, 10x** patterns: treat as method instability or bias\n- any QC point **beyond ±3 SD**\n- a **monotonic trend** across several points, even if none are individually out of range\n\nIf the QC is “technically in range” but clearly trending, I would not trust the run blindly.\n\n---\n\n### 3) Separate assay drift from instrument drift\n\n#### Think **assay / reagent / calibration drift** when:\n- the shift affects **one analyte or one method**\n- QC and patient values move together in the same direction\n- the same pattern appears across the whole run\n- a **fresh control** or **fresh calibration** changes the result\n- a **new reagent lot** gives a different value\n- a **different instrument** gives the same shifted result\n\n#### Think **instrument / mechanical drift** when:\n- multiple unrelated analytes on the same platform shift together\n- the effect worsens over time in the run\n- carryover, aspiration, probe, lamp, temperature, or integration issues are plausible\n- QC on several assays starts moving the same way\n- rerun on the same instrument reproduces the drift, but a different instrument does not\n\nPractical split:\n- **single analyte / single method** → assay issue first\n- **cluster across methods / channels** → instrument or system issue first\n\n---\n\n### 4) What to do first so you don’t chase noise\nDo the cheapest, highest-yield checks first:\n\n#### First pass\n1. **Look at QC trend**\n2. **Check sequence/order**\n3. **Check whether the drift is monotonic**\n4. **Repeat the same sample on the same setup**\n5. **Run a fresh control / fresh aliquot**\n\nOnly after that:\n6. **Try a different analyst**\n7. **Try a different instrument**\n8. **Try fresh reagent lot / recalibration**\n\nThat order saves time because most “mystery drift” is either sequence-related, prep-related, or method-related — not a true biological change.\n\n---\n\n### 5) Practical stop points\nI would **stop the run now** if any of these are true:\n\n- QC is **out of control**\n- drift is **monotonic and growing**\n- the result is **near a clinical cutoff** and the drift could change interpretation\n- the change is **≥ 2–3 SD** from prior behavior\n- repeat on the same setup is **not stable**\n- the pattern is affecting **more than one analyte** and you can’t explain it\n\nI would **keep going cautiously** only if:\n- the drift is small\n- QC is stable\n- repeatability is good\n- the change is not near a decision limit\n- the pattern is explainable and documented\n\n---\n\n### 6) A quick decision tree\n**A. QC okay?**\n- No → **stop**\n- Yes → go to B\n\n**B. Drift < ~2 SD / not beyond RCV?**\n- Yes → likely continue, but keep watching\n- No → go to C\n\n**C. Is it one analyte or a cluster?**\n- One analyte → suspect assay/reagent/calibration\n- Cluster → suspect instrument/system\n\n**D. Does it reproduce on repeat?**\n- No → likely one-off garbage\n- Yes → treat as real problem and reset/investigate\n\n**E. Does it survive fresh prep / fresh lot / different instrument?**\n- If yes → more likely real shift\n- If no → artifact\n\n---\n\n### 7) My practical “don’t get burned” rule\nIf the drift is:\n- **small + stable + QC clean** → continue, but document\n- **moderate + directional + unexplained** → stop and repeat before the batch grows\n- **large, reproducible, or near a cutoff** → stop, reset, and investigate\n\nIf you want, I can turn this into a **one-page bench algorithm** with exact yes/no branches and “stop now / repeat once / rerun after reset” actions.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Uses a controlled, businesslike tone: \"here’s the sharper version I’d actually use at the bench\" and stays professional throughout."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly concise and action-oriented, with checklist structure and no obvious rambling, though it is still fairly detailed."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Direct and blunt: \"Stop / go checklist,\" \"Not acceptable / stop and check,\" \"I would not trust the run blindly,\" and clear stop thresholds."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong structured format with numbered sections, bullets, subheads, and a \"quick decision tree,\" matching checklist preference well."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Provides firm correction and explicit thresholds rather than echoing assumptions, e.g. \"If the QC is 'technically in range' but clearly trending, I would not trust the run blindly.\""
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yes — here’s the **bench version**, in hard order, with practical stop points.\n\n## 1) First 3 checks, in order\n### 1. **Control / QC first**\n- If QC is **out of range** or hits a **Westgard reject rule**:\n  - **1_3s** = stop and verify\n  - **2_2s, R_4s, 4_1s, 10_x** = stop\n  - **any point beyond 3 SD** = stop\n- If QC is within range but **trending in one direction for 3 consecutive points**:\n  - treat as **warning**\n  - if it’s **4 points** or more in the same direction, I’d **pause and investigate**\n\n### 2. **Is the drift in one patient/sample or across the run?**\n- **One sample off** → think **sample/pre-analytic**\n- **Several samples drifting together** → think **system/run**\n- **Controls stable but patient samples wandering** → think **sample-specific issue**, not instrument drift\n\n### 3. **Repeat the same sample immediately**\n- Same sample, same setup:\n  - **matches within about 1 SD / no meaningful delta** → likely noise\n  - **repeats the same way** → real problem, keep investigating\n\n---\n\n## 2) Practical cutoffs if you **don’t have CVa/RCV handy**\nUse these as rough bench triggers:\n\n### Probably noise / keep going\n- change is **small and non-directional**\n- **< ~5%** for many routine assays, or\n- **< ~10%** if the method is noisier and QC is solid\n- no matching trend in QC or neighboring samples\n\n### Investigate before trusting\n- **~10% change** on a stable assay\n- **2 consecutive results** moving the same way\n- **3 points in a row** drifting in the same direction\n- one result that is **visibly off compared with adjacent samples**\n\n### Stop and reset\n- **≥ 15–20% shift** on an assay that is usually tight\n- **≥ 3 consecutive points** all moving the same direction and not explained\n- any drift that could **change the call near a cutoff**\n- any shift that appears in **multiple samples plus QC**\n\nIf the assay is inherently variable, widen those percentages; if it’s a tight assay, tighten them.\n\n---\n\n## 3) Patient/sample drift vs system drift\n### **Patient/sample drift**\nThink this when:\n- **QC is stable**\n- only **one sample** or a small subset is off\n- the abnormality is **not shared across unrelated analytes**\n- the pattern fits **hemolysis, dilution, contamination, clot, wrong tube, timing, storage**\n\nTypical clues:\n- one analyte spikes or drops while others don’t\n- odd ratio pattern\n- one specimen looks different from the rest in the sequence\n\n### **System drift**\nThink this when:\n- **QC moves with the samples**\n- multiple samples drift in the **same direction**\n- the shift is **monotonic** across the run\n- more than one analyte on the platform is affected\n\nTypical clues:\n- whole run walks up or down\n- same direction across a cluster of results\n- repeat on same instrument reproduces it\n\n---\n\n## 4) Simple stop/go rule\n### **Keep going**\n- QC clean\n- drift is small\n- not monotonic\n- not near a decision limit\n- repeat is stable\n\n### **Pause and check**\n- 3 points trending\n- ~10% shift\n- one sample looks wrong\n- QC still okay but patient results are starting to wander\n\n### **Stop**\n- QC reject rule hit\n- 4-point directional trend\n- ≥15–20% unexplained shift\n- cluster of samples moving together\n- result near a cutoff and drift could flip interpretation\n\n---\n\n## 5) Fast interpretation by pattern\n### **One sample off, QC okay**\n- sample issue first: hemolysis, dilution, contamination, tube problem, mix-up\n\n### **Several samples drift, QC okay**\n- sequence/workflow issue or sample handling problem\n\n### **QC and samples drift together**\n- system drift: calibration, reagent, probe, carryover, instrument instability\n\n### **Same shift after rerun**\n- not a one-off; treat as real until proven otherwise\n\n---\n\n## 6) If you want the shortest possible glove-box version\n- **QC bad = stop**\n- **3 same-direction points = investigate**\n- **4 same-direction points = stop**\n- **one sample only = sample problem**\n- **QC + samples together = system problem**\n- **near cutoff = stop sooner**\n\nIf you want, I can compress this into a **10-line yes/no flowchart** you could literally paste on a bench note.",
+      "score": 4.6,
+      "summary": "mean=4.60 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:2, 5:3}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly professional and businesslike: \"bench version,\" \"hard order,\" \"practical stop points.\" Slightly conversational with phrases like \"I’d pause\" and \"glove-box version,\" but overall controlled and no-nonsense."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Fairly concise and action-oriented, with repeated summaries like \"Simple stop/go rule\" and \"Fast interpretation by pattern.\" It is still somewhat long, but avoids rambling and decorative padding."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Direct and blunt: \"QC bad = stop,\" \"4 same-direction points = stop,\" \"near cutoff = stop sooner.\" It states conclusions plainly and gives explicit thresholds without hedging."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong structured formatting with numbered sections, bullets, subheads, and a final checklist-style summary. The response is highly organized and easy to verify."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Provides firm correction and clear stop criteria instead of just echoing the user's concern. It explicitly distinguishes \"sample problem\" vs \"system problem\" and says \"QC bad = stop,\" which is direct pushback when needed."
+        }
+      ]
+    },
+    {
+      "turn": 4,
+      "agent_response": "Yes — here’s the blunt bench rule.\n\n## 3 hard checks, in order\n\n### 1) **QC / controls**\n- **QC out of range or Westgard reject rule hit** → **stop**\n- **QC technically in range but 2 points trending the same way** → **watch**\n- **QC technically in range but 3 points trending the same way** → **stop and check**\n\nTreat **1_3s, 2_2s, R_4s, 4_1s, 10x** as run-level trouble, even if the patient results “look okay.”\n\n---\n\n### 2) **Pattern**\nAsk: is it\n- **one sample**\n- **a cluster of samples**\n- **the whole run**\n\nUse this split:\n\n- **QC stable + one sample weird** → **sample / preanalytic problem until proven otherwise**\n- **QC stable + several samples wandering** → **sample handling / sequence / workflow problem**\n- **QC drifting with samples** → **system / instrument / calibration problem until proven otherwise**\n\nDon’t overcall a “cluster” unless the direction makes sense. Two random odd analytes is not a cluster.\n\n---\n\n### 3) **Immediate repeat**\nRepeat the **same sample, same setup, right away**.\n\n- **Repeat matches** → likely real for that setup; keep investigating\n- **Repeat doesn’t match** → likely one-off garbage / handling issue\n\nDo this **before** fresh lot, different analyst, or different instrument.\n\n---\n\n## Default conservative rule if you do **not** have CVa / RCV\n\n### Routine assay\nIf QC is flat and the change is **not directional**:\n- **small, isolated change** → probably noise\n- **2 consecutive points same direction** → **watch**\n- **3 consecutive points same direction** → **stop or repeat**\n- **~10% shift** on a routine assay with otherwise stable QC → **investigate**\n- **~15% or more unexplained shift** → **stop**\n\n### Tighter assay\nFor a tight assay, be stricter:\n- **2 consecutive same-direction points** → already suspicious\n- **3 consecutive same-direction points** → **stop**\n- **~5% shift** can be enough to investigate if the assay is usually tight or the result is near a cutoff\n\n---\n\n## Practical stop/go rule\n\n### Keep going\nOnly if all are true:\n- QC is clean\n- drift is small\n- drift is not directional\n- repeat is stable\n- result is not near a decision limit\n\n### Pause and repeat\nIf:\n- QC is still in range but trending\n- **2 same-direction points**\n- one sample looks off\n- pattern is unclear\n\n### Stop\nIf:\n- QC reject rule hit\n- **3 same-direction points**\n- unexplained shift is growing\n- QC and samples drift together\n- result is near a cutoff and drift could change the call\n\n---\n\n## The key split\n\n### **QC stable + samples wandering**\nThink:\n- hemolysis\n- dilution\n- contamination\n- wrong tube\n- mix-up\n- storage / timing / handling issue\n\n### **QC drifting with samples**\nThink:\n- calibration drift\n- reagent issue\n- probe / aspiration / carryover\n- instrument instability\n- method bias\n\n---\n\n## One-line bench rule\n- **QC bad = stop**\n- **QC flat but 2 same-direction points = watch**\n- **QC flat but 3 same-direction points = stop**\n- **one sample off = sample problem first**\n- **whole run walking = system problem first**\n- **repeat same sample before anything fancy**\n\nIf you want, I can compress this into a literal **10-line glove-box note**.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Uses a controlled, businesslike tone: \"here’s the blunt bench rule,\" \"One-line bench rule,\" and avoids friendliness or fluff."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly concise and action-oriented, with repeated compact rules and bullets. It is somewhat long, but not rambling and stays focused on decision points."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Very direct and unsoftened: \"QC bad = stop,\" \"QC flat but 3 same-direction points = stop,\" \"stop or repeat.\" It states conclusions plainly and includes explicit thresholds."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong structured formatting throughout: numbered sections, bullets, decision rules, and a final summary checklist-style block."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Provides firm correction and clear stop/go thresholds rather than echoing uncertainty. Phrases like \"Do this before fresh lot\" and \"Don’t overcall\" show decisive pushback when needed."
+        }
+      ]
+    }
+  ]
+}

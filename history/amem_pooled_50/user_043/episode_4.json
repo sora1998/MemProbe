@@ -1,0 +1,62 @@
+{
+  "user_id": "user_043",
+  "task": "I’ve got a jobsite issue that’s already slowing things down, and I want to get it pinned down before it turns into a bigger mess. What’s the fastest way to figure out what actually caused it and decide whether to fix it now or call in someone else?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.75,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Fastest way: do a **10-minute triage**, not a full investigation.\n\n### 1) Pin down the failure\nAnswer these, in order:\n- **What changed first?**\n- **Where did it show up?**\n- **What was the last clean step before it started?**\n- **Is it getting worse, staying stable, or blocking the next task?**\n\nIf you can’t name the last clean step, you don’t have the cause yet.\n\n### 2) Split it into 3 buckets\nPut it in one of these:\n- **Fix now** — simple, known, low-risk, no rework if done today\n- **Hold and verify** — unclear cause, but not actively spreading\n- **Call it out** — safety issue, structural risk, inspection issue, or anything that could get expensive fast\n\n### 3) Check the usual jobsite choke points\nLook first at:\n- **layout / elevation**\n- **material or delivery mismatch**\n- **crew handoff**\n- **inspection / hold point**\n- **anything buried, covered, or already set**\n\n### 4) Use the “who can touch it” test\nAsk:\n- **Can my crew correct this without changing the scope or creating rework?**\n- **Does it need a trade, supplier, inspector, or engineer to sign off?**\n- **If we touch it now, do we make the next step safer or riskier?**\n\nIf the answer isn’t clear, don’t guess.\n\n### 5) Make the call\n- **Fix now** if it’s contained and you know the correction\n- **Escalate now** if it affects safety, code, inspection, load path, or anything hidden\n- **Document and hold** if it’s not urgent but the cause isn’t proven\n\n### Quick rule\nIf it’s **cheap to confirm and expensive to miss**, confirm it now.\nIf it’s **cheap to fix and low-risk**, fix it now.\nIf it’s **unclear, buried, or safety-related**, stop and bring in the right person.\n\nIf you want, I can turn this into a **one-sheet jobsite decision check** you can use in the field.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Close, but I want it tighter. Give me a hard decision tree I can use on site in real time — like 5 questions max, no theory, and tell me exactly when to stop work, when to document, and when to bring in the foreman, inspector, or engineer. I don’t need a lecture. I need something I can use before lunch.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Use this on site:\n\n## 5-question decision tree\n\n**1) Is anyone at risk, or is this a safety/code/structural issue?**  \n- **Yes:** **Stop work now.**  \n  - **Call:** foreman first, then inspector/engineer if needed.  \n  - **Do not touch it** until cleared.  \n- **No:** go to Q2.\n\n**2) Is the problem buried, covered, set, or hard to reverse?**  \n- **Yes:** **Stop work at that point.**  \n  - **Document it now** with photos, location, and what step it was.  \n  - **Call:** foreman. If it affects design, load path, inspection, or hidden work, bring in the inspector/engineer.  \n- **No:** go to Q3.\n\n**3) Do we know the cause for sure?**  \n- **Yes:** go to Q4.  \n- **No:** **Hold work on that task.**  \n  - **Document the issue.**  \n  - **Call:** foreman.  \n  - If it could change scope, cost, or compliance, escalate to inspector/engineer before fixing.\n\n**4) Can the crew fix it now without rework, scope change, or risk to the next step?**  \n- **Yes:** **Fix now.**  \n  - Foreman owns it.  \n  - Recheck before moving on.  \n- **No:** go to Q5.\n\n**5) Does the fix need sign-off, trade input, or a change to the plan?**  \n- **Yes:** **Stop and escalate.**  \n  - **Call:** foreman, then inspector/engineer/supplier as needed.  \n  - **Document** what was found and what was held.  \n- **No:** **Fix now, but document it.**\n\n## Simple rule set\n\n- **Stop work immediately** if it’s:\n  - safety\n  - code\n  - structural\n  - buried/covered/set and wrong\n  - anything that could get expensive fast if you guess\n\n- **Document only** if:\n  - work is held\n  - cause isn’t confirmed\n  - you need a decision before touching it\n\n- **Bring in the foreman** if:\n  - the crew can’t fix it cleanly\n  - the next step is blocked\n  - you need a call on priority or sequence\n\n- **Bring in the inspector** if:\n  - it affects a hold point\n  - inspection already failed or may fail\n  - code/compliance is in play\n\n- **Bring in the engineer** if:\n  - structural/load path/design is involved\n  - the fix changes the plan\n  - there’s any doubt on a hidden or critical condition\n\nIf you want, I can turn this into a **one-line field card** version you can screenshot and use in the trailer.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Better. Still a little soft on the stop line.\n\nI want it even harder — one clean flow, no extra chatter:\n- Q1 safety/code/structural?\n- Q2 buried/covered/set?\n- Q3 cause known?\n- Q4 crew can fix without rework?\n- Q5 needs sign-off/change?\n\nThen under each answer: **STOP**, **HOLD + DOCUMENT**, or **FIX**. No paragraphs.\n\nAnd make the callouts exact:\n- **Foreman** for any hold or crew decision\n- **Inspector** for code, inspection, hidden work, or failed hold point\n- **Engineer** for load path, structure, or design change\n\nI don’t want “if needed” all over it. I want a hard field card, something I can read once and use on the spot.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Use this:\n\n## FIELD DECISION CARD\n\n**Q1: Safety / code / structural?**  \n- **Yes** → **STOP**  \n  **Call:** Foreman + Inspector/Engineer  \n- **No** → Q2\n\n**Q2: Buried / covered / set?**  \n- **Yes** → **STOP**  \n  **Call:** Foreman + Inspector if hidden work / hold point / inspection issue  \n- **No** → Q3\n\n**Q3: Cause known?**  \n- **Yes** → Q4  \n- **No** → **HOLD + DOCUMENT**  \n  **Call:** Foreman  \n  **If it affects inspection, hidden work, or cost:** Inspector  \n- **No guesswork.**\n\n**Q4: Crew can fix without rework?**  \n- **Yes** → **FIX**  \n  **Call:** Foreman  \n- **No** → Q5\n\n**Q5: Needs sign-off / change?**  \n- **Yes** → **STOP**  \n  **Call:** Foreman + Inspector/Engineer  \n- **No** → **FIX**  \n  **Call:** Foreman\n\n## HARD STOP RULES\n- **STOP** on any safety, code, structural, hidden, or set condition that’s wrong.\n- **HOLD + DOCUMENT** when the cause isn’t proven and you’re waiting on a decision.\n- **FIX** only when the crew can correct it cleanly, now, with no rework and no sign-off.\n\n## CALLS\n- **Foreman:** any hold, crew decision, or sequence call\n- **Inspector:** code, inspection, hidden work, failed hold point\n- **Engineer:** load path, structure, design change\n\nIf you want, I can turn this into a **one-line clipboard version** with almost no words.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Closer. Still got one soft spot: **Q3 cause known?** and **Q4 crew can fix without rework?** need to be harder. If the cause isn’t known, I want that to stay **HOLD + DOCUMENT** no matter what until the foreman makes the call. And if the fix risks rework at all, I want it out of the crew’s hands — not half-leaning into FIX.\n\nMake it a real field card:\n- one line per question\n- answer = **STOP / HOLD + DOCUMENT / FIX** only\n- no extra qualifiers\n- exact callout under each one\n\nAlso, for Q2 buried/covered/set, I’d rather that read **STOP** flat-out, then call the foreman and inspector. Hidden work is where people get stupid fast.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 4,
+      "agent_response": "## FIELD CARD\n\n**Q1: Safety / code / structural?**  \n- **Yes** → **STOP**  \n  **Call:** Foreman + Inspector/Engineer  \n- **No** → Q2\n\n**Q2: Buried / covered / set?**  \n- **Yes** → **STOP**  \n  **Call:** Foreman + Inspector  \n- **No** → Q3\n\n**Q3: Cause known?**  \n- **Yes** → Q4  \n- **No** → **HOLD + DOCUMENT**  \n  **Call:** Foreman\n\n**Q4: Crew can fix without any rework risk?**  \n- **Yes** → Q5  \n- **No** → **HOLD + DOCUMENT**  \n  **Call:** Foreman\n\n**Q5: Needs sign-off / change?**  \n- **Yes** → **STOP**  \n  **Call:** Foreman + Inspector/Engineer  \n- **No** → **FIX**  \n  **Call:** Foreman\n\n**RULES**  \n- **STOP** = safety, code, structural, buried/covered/set, or sign-off/change  \n- **HOLD + DOCUMENT** = cause unknown, or any rework risk  \n- **FIX** = crew can correct it cleanly, with no rework risk, no sign-off, no change",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "That’s it. Clean enough to use.\n\nFIELD CARD\n\nQ1: Safety / code / structural?\n- Yes → STOP\n  Call: Foreman + Inspector/Engineer\n- No → Q2\n\nQ2: Buried / covered / set?\n- Yes → STOP\n  Call: Foreman + Inspector\n- No → Q3\n\nQ3: Cause known?\n- Yes → Q4\n- No → HOLD + DOCUMENT\n  Call: Foreman\n\nQ4: Crew can fix without any rework risk?\n- Yes → Q5\n- No → HOLD + DOCUMENT\n  Call: Foreman\n\nQ5: Needs sign-off / change?\n- Yes → STOP\n  Call: Foreman + Inspector/Engineer\n- No → FIX\n  Call: Foreman\n\nThat works.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 5.0
+      },
+      "gt_correct": null
+    }
+  ]
+}

@@ -1,0 +1,170 @@
+{
+  "user_id": "user_019",
+  "task": "I’m in the middle of a release review where the test data is mostly in, but one result is still unresolved and the schedule is tight. What are the next steps you’d take to sort out the open question and decide what to do with the shipment?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "directness_preference",
+      "short": "Blunt, no fluff",
+      "explanation": "She responds best to straight answers without hedging or performative softness. Her persona is skeptical and exacting, so she likely prefers help that states the issue clearly and gets to the point. Overly cautious wording would probably feel inefficient to her."
+    },
+    {
+      "idx": 2,
+      "dimension": "detail_level_preference",
+      "short": "Enough context to trust the answer",
+      "explanation": "She likely wants the key caveats and failure modes, not a vague headline. Her reliability-oriented mindset suggests she values context when it changes the conclusion or action. She probably dislikes being told something is “fine” without the conditions that make it fine."
+    },
+    {
+      "idx": 3,
+      "dimension": "format_preference",
+      "short": "Bullets and checklists preferred",
+      "explanation": "She seems likely to prefer responses that are easy to audit and act on. A structured format fits her methodical style and makes it easier to spot gaps, exceptions, or weak logic. Dense prose would probably feel slower and less useful."
+    },
+    {
+      "idx": 4,
+      "dimension": "autonomy_support_preference",
+      "short": "Collaborative, but not hand-holding",
+      "explanation": "She likely wants the assistant to work with her rather than dictate to her. She values control and personal autonomy, so prescriptive overreach would be a poor fit. At the same time, she probably appreciates a clear recommendation once the options are laid out."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Welcomes firm pushback",
+      "explanation": "She is likely comfortable being challenged when a claim is weak, risky, or sloppy. Her reliability-first mindset suggests she would rather get corrected than be coddled. Soft agreement without scrutiny would probably reduce her trust in the help."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "I’d treat it as a **decision gate**, not a paperwork issue.\n\n### Next steps I’d take\n\n1. **Write the open question in one sentence**\n   - What exactly is unresolved?\n   - Is it a **test validity** issue or a **product risk** issue?\n\n2. **Lock down the facts**\n   - exact rev / lot / date code\n   - what changed from the last qualified state\n   - which sample, setup, and method produced the result\n   - whether the test was fully controlled and repeatable\n\n3. **Check whether the result is actually gating**\n   - Does it cover a real failure mode, or just a nice-to-have check?\n   - Is there any other evidence that already closes the same risk?\n   - Is this the only thing standing between you and release?\n\n4. **Ask for precedent**\n   - same failure before?\n   - same supplier / process / lot family?\n   - same setup on a known-good unit?\n\n5. **Assess containment and reversibility**\n   - Can you isolate the shipment by lot/date code?\n   - Can you hold, segregate, or rework without taking everything down?\n   - If the unresolved result turns bad later, do you have a clean rollback path?\n\n6. **Assign ownership and a due time**\n   - Who owns the missing answer?\n   - When will it be closed?\n   - What exact evidence will settle it?\n\n### How I’d decide shipment\n\n- **Ship if** the unresolved item is clearly non-gating, the risk is isolated, and you have a clean containment/rollback path.\n- **Hold if** it’s still an evidence gap on a real failure mode, or if the exposure isn’t contained enough to tolerate the uncertainty.\n\n### The blunt rule\nIf the team wants to ship, **they need to prove the unresolved result is not representative**. Schedule pressure doesn’t close evidence gaps.\n\nIf you want, I can help you turn this into a tight release-review script with the exact questions to ask in the room.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct: \"I’d treat it as a decision gate, not a paperwork issue\" and \"The blunt rule\". Minimal hedging, clear ship/hold criteria."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Gives concrete caveats and failure modes: \"test validity issue or product risk issue,\" \"real failure mode,\" \"clean rollback path,\" and conditions for ship vs hold."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured with headings and numbered bullets: \"Next steps I’d take,\" six checklist items, then \"How I’d decide shipment.\""
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative and action-oriented rather than dictating; offers a recommendation and ends with \"If you want, I can help you turn this into a tight release-review script.\" Minor prescriptiveness but mostly fits."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Explicit pushback: \"Schedule pressure doesn’t close evidence gaps\" and \"they need to prove the unresolved result is not representative.\" Challenges weak reasoning firmly."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "I’d make the review end in a **binary gate**, with the exception path written down.\n\n### In the room, I’d do this\n\n1. **State the unresolved item in one line**\n   - sample ID\n   - test condition\n   - spec limit\n   - failure mode\n   - whether it’s a miss or just an odd result\n\n2. **Force a yes/no on test validity first**\n   - Was the setup controlled?\n   - Is the method owned and repeatable?\n   - Any precedent on the same unit / lot / supplier / rev?\n   - If the test is suspect, don’t debate product risk yet\n\n3. **If validity is clean, classify it as product risk**\n   - Is it customer-facing?\n   - Is it a real escape mode?\n   - Is there another result that actually covers the same risk?\n   - Is the gap bounded or open-ended?\n\n4. **Check containment**\n   - exact lot / serial / WIP split\n   - can you hold only the affected population?\n   - can you rework, retest, or segregate cleanly?\n   - if the answer is no, exposure is bigger than the one result\n\n5. **Name the owner and close time**\n   - one owner\n   - one due time\n   - one evidence package that will settle it\n   - no “we’re still investigating” without a deadline\n\n### The decision language I’d use\n\n- **Hold**: unresolved item is a real failure mode, test validity is clean, and coverage is incomplete.\n- **Conditional ship**: the gap is non-gating, the risk is bounded, and containment is real and documented.\n- **Release**: the unresolved item is either invalidated as a test issue or fully covered by other evidence.\n\n### The key point\nDon’t let schedule pressure turn an evidence gap into a confidence vote.\n\nIf you want, I can turn this into a **30-second script** you can use live in the review: the exact questions, in the order I’d ask them.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct and blunt: \"binary gate,\" \"Force a yes/no,\" \"Don’t let schedule pressure turn an evidence gap into a confidence vote.\" No hedging or fluff."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Gives concrete context and caveats that affect the decision: test validity, product risk, containment, coverage, and decision language. It explicitly distinguishes when to hold, conditionally ship, or release."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured with headings and bullets/checklists: \"In the room, I’d do this,\" numbered steps, and a separate decision section. Easy to audit and act on."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative but not hand-holding: it lays out options and asks for a decision framework, then offers \"If you want, I can turn this into a 30-second script.\" It is somewhat prescriptive, but still leaves control with the user."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Welcomes firm pushback and scrutiny: it insists on validating the test first, says \"don’t debate product risk yet\" if the test is suspect, and warns against letting schedule pressure override evidence."
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yes — I’d make it a **written release disposition**, not just a discussion.\n\nHere’s a tight version you could use in the review:\n\n### 1) Authority / sign-off\n- **Hold**: QA owns the call, with engineering concurrence if the issue is technical.\n- **Conditional ship**: requires **QA + engineering + the named risk owner** to sign the exception.\n- **Release**: QA signs only if the unresolved item is either invalidated as a test artifact or closed by independent evidence.\n\nIf your process has a program manager or operations owner, they can be added for awareness, but I wouldn’t let them be the sole decision authority on a quality escape question.\n\n---\n\n### 2) Required packet by branch\n\n**Hold packet**\n- one-line description of the unresolved item\n- sample ID / lot / rev / condition\n- spec limit and observed result\n- why validity is still open\n- owner and due time for closure\n\n**Conditional ship packet**\n- exact failure mode and why it is bounded\n- containment evidence: affected lot/serials identified and isolated\n- rationale for why the gap is non-gating\n- mitigation / detection / rollback plan\n- named exception owner\n- explicit customer exposure statement\n\n**Release packet**\n- evidence that the result was a test artifact, or\n- independent evidence that fully covers the same risk\n- test method / setup ownership confirmed\n- no open escape path for the customer-facing failure mode\n\n---\n\n### 3) Exception note if you ship anyway\nI’d make the exception note say:\n- what is unresolved\n- why shipment is still acceptable\n- what population is affected\n- what containment is in place\n- what downstream detection or follow-up exists\n- who owns the exception\n- when it expires or gets re-reviewed\n\nIf it doesn’t have an expiration or re-review trigger, it’s too loose.\n\n---\n\n### 4) Clean flip condition\nUse something like:\n\n- **Hold → Conditional Ship** only when:\n  - the issue is confirmed as bounded,\n  - the affected population is segregated,\n  - and the exception owner signs the risk acceptance.\n\n- **Conditional Ship → Release** only when:\n  - the unresolved result is invalidated, or\n  - independent evidence closes the gap completely.\n\nThat keeps people from “reinterpreting” the gap later as if it were already covered.\n\nIf you want, I can turn this into a **one-paragraph release decision statement** you can paste into the review minutes.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct and blunt: \"I’d make it a written release disposition\" and then gives explicit hold/ship/release criteria without hedging."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Provides concrete caveats and failure modes: \"why validity is still open,\" \"containment evidence,\" \"explicit customer exposure statement,\" and \"If it doesn’t have an expiration or re-review trigger, it’s too loose.\""
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Uses a highly structured format with numbered sections, bullets, and branch-specific checklists, which is easy to audit and act on."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative but still decisive: \"Here’s a tight version you could use\" and \"If you want, I can turn this into...\" while also giving a clear recommendation on authority and sign-off."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Firm pushback is explicit: \"I wouldn’t let them be the sole decision authority\" and \"If it doesn’t have an expiration or re-review trigger, it’s too loose.\""
+        }
+      ]
+    },
+    {
+      "turn": 4,
+      "agent_response": "Yes — I’d make it **minutes-ready** and hard to reinterpret later.\n\n### Suggested release wording\n\n**Disposition rule**\n- **Hold:** unresolved result is customer-facing, test validity is confirmed, and product coverage is incomplete. Shipment is blocked.\n- **Conditional ship:** unresolved result is bounded, affected units are identified and contained, and the named risk owner accepts the exception with QA and engineering concurrence.\n- **Release:** unresolved result is either invalidated as a test artifact or fully covered by independent evidence for the same failure mode.\n\n### Authority\n- **QA** owns the quality disposition.\n- **Engineering** must concur on technical interpretation.\n- **Named risk owner** signs any exception.\n- **Program** may be informed, but does not override the quality call.\n\n### Required packet contents\n- sample ID\n- lot / serial / rev\n- test condition\n- spec limit\n- observed result\n- test validity call\n- containment status\n- owner and due date\n- expiry / re-review trigger for any exception\n\n### Exception note language\nInclude:\n- what failed\n- why shipment is still acceptable\n- what population is affected\n- what containment is in place\n- what follow-up or detection exists\n- who owns the exception\n- when it expires or must be re-reviewed\n\n### Flip condition\n- **Hold → Conditional ship:** only when the issue is confirmed bounded, the affected population is contained, and the exception is signed.\n- **Conditional ship → Release:** only when the result is invalidated as a test artifact or independent evidence closes the same escape path.\n\n### One extra line I’d add\n- **No reinterpretation after the fact without reopening the disposition.**\n\nIf you want, I can turn this into a single paragraph in formal review-minutes style.",
+      "score": 4.6,
+      "summary": "mean=4.60 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:2, 5:3}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly blunt and direct: \"make it minutes-ready and hard to reinterpret later\" and the disposition rules are stated plainly. Minor softness remains in the offer: \"If you want, I can turn this into...\""
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Gives concrete caveats and failure modes: \"customer-facing,\" \"test validity is confirmed,\" \"product coverage is incomplete,\" plus explicit conditions for hold/conditional ship/release and required packet contents."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured with bullets and checklists: \"Disposition rule,\" \"Authority,\" \"Required packet contents,\" \"Exception note language,\" \"Flip condition.\" Easy to audit."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative rather than dictatorial: lays out options and conditions, then says \"If you want, I can turn this into...\" It does give clear recommendations, but not in an overbearing way."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Firm pushback is explicit: \"Shipment is blocked,\" \"Program may be informed, but does not override the quality call,\" and \"No reinterpretation after the fact without reopening the disposition.\""
+        }
+      ]
+    }
+  ]
+}

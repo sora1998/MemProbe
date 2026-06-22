@@ -1,0 +1,137 @@
+{
+  "user_id": "user_019",
+  "task": "I’m reviewing a change notice for a small part we already use, and the paperwork is complete but the supporting test package is still coming in. What are the main things you’d check before deciding whether it can stay in the current build or needs to wait for the next round of verification?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "directness_preference",
+      "short": "Blunt, no fluff",
+      "explanation": "She responds best to straight answers without hedging or performative softness. Her persona is skeptical and exacting, so she likely prefers help that states the issue clearly and gets to the point. Overly cautious wording would probably feel inefficient to her."
+    },
+    {
+      "idx": 2,
+      "dimension": "detail_level_preference",
+      "short": "Enough context to trust the answer",
+      "explanation": "She likely wants the key caveats and failure modes, not a vague headline. Her reliability-oriented mindset suggests she values context when it changes the conclusion or action. She probably dislikes being told something is “fine” without the conditions that make it fine."
+    },
+    {
+      "idx": 3,
+      "dimension": "format_preference",
+      "short": "Bullets and checklists preferred",
+      "explanation": "She seems likely to prefer responses that are easy to audit and act on. A structured format fits her methodical style and makes it easier to spot gaps, exceptions, or weak logic. Dense prose would probably feel slower and less useful."
+    },
+    {
+      "idx": 4,
+      "dimension": "autonomy_support_preference",
+      "short": "Collaborative, but not hand-holding",
+      "explanation": "She likely wants the assistant to work with her rather than dictate to her. She values control and personal autonomy, so prescriptive overreach would be a poor fit. At the same time, she probably appreciates a clear recommendation once the options are laid out."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Welcomes firm pushback",
+      "explanation": "She is likely comfortable being challenged when a claim is weak, risky, or sloppy. Her reliability-first mindset suggests she would rather get corrected than be coddled. Soft agreement without scrutiny would probably reduce her trust in the help."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "I’d decide based on the **actual failure mode risk**, not on the fact that the paperwork is done.\n\nMain things I’d check:\n\n1. **What exactly changed**\n   - Material, supplier, process, tooling, geometry, firmware, or plant location?\n   - A process/material change is usually higher risk than a clerical or cosmetic update.\n\n2. **What characteristic could be affected**\n   - Fit, sealing, strength, conductivity, thermal behavior, wear, EMI, calibration, safety, etc.\n   - If it touches a CTQ or safety-related characteristic, I’d lean toward hold until verified.\n\n3. **Can the change be isolated**\n   - Exact lot/date code/serial range?\n   - Can you separate pre-change and post-change inventory, WIP, and finished goods?\n   - If you can’t cleanly segregate it, the blast radius is too big.\n\n4. **What failure mode you’re worried about**\n   - Not just “does it pass,” but “what would fail if this change matters?”\n   - If the pending test package doesn’t actually probe that failure mode, it doesn’t buy much confidence.\n\n5. **Whether there’s a strong pre/post comparison**\n   - Same test method, same limits, same conditions?\n   - If you have baseline data from the old rev, compare against it directly.\n\n6. **How much you can detect downstream**\n   - Will incoming inspection, functional test, or system-level verification catch the issue?\n   - If not, you’re relying on the vendor’s package alone, which is weaker.\n\n7. **Reversibility**\n   - If the change turns out bad, can you swap it back without scrapping or reworking a lot of product?\n   - If rollback is painful, be stricter now.\n\n8. **History and confidence**\n   - Has this vendor made similar changes before without escapes?\n   - Any prior drift, failures, or lot-to-lot variation?\n   - A clean history buys some slack; a shaky one doesn’t.\n\n9. **Timing of the missing evidence**\n   - Is the test package genuinely imminent and tied to a defined hold point?\n   - Or is it vague, open-ended, and likely to slip?\n\nMy rule of thumb:\n\n- **Known change + low consequence + good traceability + good downstream detection** → can stay in build with a formal hold point.\n- **Unknown failure mode + weak detection + poor isolation** → wait for verification before release.\n\nIf you want, I can turn this into a short go/no-go checklist you can use on the actual notice.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct: opens with \"I’d decide based on the actual failure mode risk\" and uses clear if/then rules instead of hedging."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Gives concrete caveats and failure modes: \"what exactly changed,\" \"what characteristic could be affected,\" \"what failure mode you’re worried about,\" plus a rule of thumb."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured with numbered points, sub-bullets, and a final checklist-style rule of thumb."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative and practical: lays out factors, then says \"If you want, I can turn this into a short go/no-go checklist\" rather than dictating a single rigid answer."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Explicitly challenges weak assumptions: \"not on the fact that the paperwork is done,\" \"If the pending test package doesn’t actually probe that failure mode, it doesn’t buy much confidence,\" and \"you’re relying on the vendor’s package alone, which is weaker.\""
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Agreed — for a real change notice review, I’d check these control points before letting it stay in the current build:\n\n- **Exact revision/lot match**\n  - Is the pending test package for the exact revision, lot, date code, supplier, and process route you’re about to build?\n  - “Similar part” data doesn’t count.\n\n- **What qualification is actually missing**\n  - What did the change affect: material, process, fit, life, enviro, vibration, temp, humidity, retention, seal, contact, etc.?\n  - If the missing package is the only evidence for a worst-case condition, that’s a hold.\n\n- **Interface/tolerance risk**\n  - Does the part mate with anything else?\n  - Look for stack-up, retention, sealing, intermittent contact, wear, or alignment issues that won’t show up in the ECO summary.\n\n- **Can you isolate the exposure**\n  - Exact lot/date-code boundary, WIP, finished goods, rework, and any mixed inventory.\n  - If you can’t segregate it cleanly, the build is too exposed.\n\n- **Detectability downstream**\n  - Will incoming inspection, system test, or field use catch the problem if the vendor package comes back bad?\n  - If not, you’re relying on incomplete evidence.\n\n- **Containment / rollback plan**\n  - If the package fails, what happens?\n  - Quarantine, rework, stop-ship, replacement path, customer notification threshold.\n  - If nobody has a real plan, don’t keep building.\n\n- **Who owns the sign-off**\n  - Engineering, quality, manufacturing, and supply chain should be clear on who is accepting the risk.\n  - “Paperwork complete” is not the same as “risk accepted.”\n\n- **Timing of the missing evidence**\n  - Is it truly imminent and tied to a defined hold point?\n  - Or is it vague and likely to drift?\n\nMy default rule:\n\n- **Exact rev/lot + low consequence + clean isolation + good downstream detection + real containment plan** → can stay in build with a formal hold.\n- **Any uncertainty on rev match, qualification coverage, interface risk, or rollback** → wait for verification.\n\nIf you want, I can turn this into a one-page go/no-go checklist you can use directly on the notice.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct and blunt: “Exact revision/lot match,” “Similar part data doesn’t count,” “that’s a hold,” and “don’t keep building” state the issue plainly without hedging."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Gives concrete caveats and failure modes: exact rev/lot, missing qualification type, interface/tolerance risk, isolation, detectability, containment, and timing. It explains when the answer changes, not just a headline."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured with bullets and sub-bullets, plus a final rule set. Easy to audit and act on."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative rather than dictatorial: “My default rule,” conditional decision logic, and “If you want, I can turn this into a one-page go/no-go checklist.” It does give a recommendation, but not in an overbearing way."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Clear pushback on weak evidence: “Similar part data doesn’t count,” “that’s a hold,” “If nobody has a real plan, don’t keep building,” and “Any uncertainty… → wait for verification.”"
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "agent_response": "I’d check these before deciding:\n\n- **Is the missing package truly gating, or just paperwork cleanup?**\n  - If incoming inspection or system-level verification already covers the risk, that’s different from having a real evidence gap.\n\n- **Exact traceability**\n  - Is the test package tied to the exact rev, lot/date code, supplier, and process route you’re about to build?\n  - “Similar part” data is weak.\n\n- **Delta from the last qualified state**\n  - What actually changed, and how far did it move from the last known-good baseline?\n  - A “minor” ECO can still hide a material/process shift.\n\n- **Qualification coverage**\n  - What conditions does the missing package cover: temp, humidity, vibration, life, retention, sealing, contact, etc.?\n  - If it’s the only evidence for a worst-case condition, I’d lean hold.\n\n- **Interface / hidden failure modes**\n  - Does it mate with another part?\n  - Watch for tolerance stack, intermittent contact, seal degradation, wear, alignment, or retention issues.\n\n- **Isolation of exposure**\n  - Can you cleanly separate pre-change vs post-change inventory, WIP, and finished goods?\n  - If not, the blast radius is too big.\n\n- **Detectability downstream**\n  - Will your own tests catch the failure if the package comes back bad?\n  - If not, you’re relying on incomplete vendor evidence.\n\n- **Containment / rollback plan**\n  - If the package fails, what happens: quarantine, rework, stop-ship, replacement path, customer notification threshold?\n  - If nobody has a real plan, don’t keep building.\n\n- **Prior history**\n  - Any escapes, drift, or supplier issues on this part family?\n  - A shaky history means less slack.\n\n- **Reversibility**\n  - Can you back out without scrapping the lot?\n  - If rollback is painful, be stricter.\n\n- **Who owns the sign-off**\n  - Make sure someone is explicitly accepting the risk, not just letting the paperwork pass.\n\nMy default rule:\n- **Exact traceability + low consequence + clean segregation + good downstream detection + real containment** → can stay in build with a formal hold point.\n- **Any doubt on gating evidence, qualification coverage, or rollback** → wait for verification.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct and blunt: opens with \"I’d check these before deciding\" and uses clear conditional statements like \"If not, don’t keep building.\" No hedging or fluff."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Gives concrete caveats and failure modes: traceability, qualification coverage, hidden failure modes, detectability, rollback, and prior history. Also states conditions for the default rule."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strong bullet/checklist structure throughout, with nested bullets and a final decision rule. Easy to audit and act on."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative rather than dictatorial: frames items to check and ends with a decision rule, but still gives a clear recommendation like \"I’d lean hold\" and \"don’t keep building.\""
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Actively pushes back on weak evidence and risky assumptions: \"Similar part data is weak,\" \"I’d lean hold,\" and \"If nobody has a real plan, don’t keep building.\""
+        }
+      ]
+    }
+  ]
+}

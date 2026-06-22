@@ -1,0 +1,104 @@
+{
+  "user_id": "user_011",
+  "task": "I’ve got a post session where the timeline started acting weird after a relink, and I’m trying to figure out the fastest way to narrow down whether it’s a media issue, a sequence issue, or something else. Can you help me lay out a clean troubleshooting order so I don’t waste time chasing the wrong thing?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "verbosity_preference",
+      "short": "Prefers concise, efficient responses",
+      "explanation": "He seems to value getting to the point without extra noise, especially given how he works under deadline pressure. A response that is too long or meandering would likely feel inefficient to him. He probably still wants enough detail to act, but not a lot of filler."
+    },
+    {
+      "idx": 2,
+      "dimension": "directness_preference",
+      "short": "Wants clear, plain answers",
+      "explanation": "His communication style in work is straightforward: explain the issue, name the delay, and state the next step. He likely prefers the same from an assistant rather than softened hints or vague hedging. Directness fits his honest, exacting temperament."
+    },
+    {
+      "idx": 3,
+      "dimension": "structure_preference",
+      "short": "Likes organized, step-by-step help",
+      "explanation": "He seems to respond well to order and clean workflow, so scattered or exploratory replies would probably frustrate him. Structured guidance would match how he already thinks about edits, revisions, and process templates. He likely appreciates when the assistant lays things out in a predictable sequence."
+    },
+    {
+      "idx": 4,
+      "dimension": "detail_level_preference",
+      "short": "Wants the main points plus key caveats",
+      "explanation": "He cares about technical correctness, so bare headlines are probably not enough when a mistake could matter. At the same time, he likely does not want exhaustive theory unless it directly helps him act. A focused answer with the important caveats is the best fit."
+    },
+    {
+      "idx": 5,
+      "dimension": "feedback_style_preference",
+      "short": "Responds best to direct, constructive critique",
+      "explanation": "He appears to prefer honest correction over vague reassurance, especially when quality or timing is at stake. Pointing out what is wrong and how to fix it would likely be more useful to him than overly gentle framing. He probably respects critique that is specific and practical."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — fastest way is to isolate **where the corruption lives**: media, sequence, or project/session state.\n\n## Clean troubleshooting order\n\n### 1) Confirm the problem is reproducible\n- Open the session/project again.\n- Note **exactly what looks wrong**:\n  - wrong clip timing?\n  - shifted edits?\n  - missing media?\n  - retimed clips?\n  - audio/video out of sync?\n  - only one track or the whole timeline?\n\nIf it only happens in one view or after one action, that’s a big clue.\n\n---\n\n### 2) Test the media first\nGoal: determine if the source files themselves are bad or mismatched.\n\nCheck:\n- Does the relinked media have the **same duration, frame rate, resolution, and timecode** as the original?\n- Are there any **offline/online mismatches** or duplicate filenames?\n- If possible, load the suspect clip in a viewer or new bin/timeline.\n\nQuick tests:\n- Open the clip directly in the source monitor.\n- Compare clip duration and start timecode against the original.\n- If one clip is wrong, it’s likely a **media relink/mismatch issue**.\n\nIf the media behaves correctly outside the sequence, move on.\n\n---\n\n### 3) Test the sequence/timeline integrity\nGoal: see whether the sequence itself is damaged or just referencing bad media.\n\nDo this:\n- Duplicate the sequence.\n- Remove or disable the suspected relinked clips.\n- Reinsert one known-good clip from the same source.\n\nWatch for:\n- Does the timeline still behave oddly?\n- Do edits slip when you move clips?\n- Does the sequence duration change unexpectedly?\n- Are transitions, speed changes, or nested sequences involved?\n\nIf the issue follows the sequence even with known-good media, it’s probably a **sequence problem**.\n\n---\n\n### 4) Check for session/project-level issues\nIf media and sequence both look okay, suspect the project state.\n\nLook for:\n- Cache/database corruption\n- Conformed/generated media issues\n- Auto-save vs current project differences\n- Timeline settings mismatch\n- Sequence settings changed after relink\n- Mixed frame rates or timebase changes\n\nQuick isolation:\n- Create a **new empty sequence** and place the same media there.\n- If it works in the new sequence, the original sequence is the problem.\n- If it fails in the new project too, the issue may be **project/session-wide or media-wide**.\n\n---\n\n### 5) Check for relink-specific causes\nRelinks often cause weirdness from:\n- wrong source folder\n- same filename, different file\n- altered codec or wrapper\n- changed start timecode\n- audio channel mapping differences\n- proxy/full-res mismatch\n- conforming to the wrong version of the clip\n\nBest quick sanity check:\n- Compare the relinked file against the original by **filename, duration, frame rate, timecode, and audio layout**.\n\n---\n\n## Fast decision tree\n\n- **Only one clip is wrong** → media issue\n- **All instances of that source are wrong** → media relink/mismatch issue\n- **Sequence acts weird with known-good media** → sequence issue\n- **New sequence also fails** → project/session/global issue\n- **Only after relink** → relink mismatch is the prime suspect\n\n---\n\n## Fastest practical workflow\n1. Duplicate the sequence.\n2. Test one known-good clip in a new sequence.\n3. Compare source media metadata.\n4. If needed, create a brand-new project and import the sequence/media.\n\nThat usually tells you in minutes whether you’re dealing with:\n- bad media,\n- damaged sequence,\n- or project/session corruption.\n\nIf you want, I can turn this into a **1-page checklist** or tailor it to **Premiere / Resolve / Avid / FCP**.",
+      "score": 4.6,
+      "summary": "mean=4.60 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:2, 5:3}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly concise and action-oriented, with a clear troubleshooting order and decision tree. It is a bit longer than strictly minimal, but avoids much filler and stays focused on the task."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Very direct and plain: it says things like \"fastest way is to isolate where the corruption lives\" and gives explicit conclusions such as \"If the issue follows the sequence... it’s probably a sequence problem.\""
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured with numbered steps, sub-bullets, quick tests, and a \"Fast decision tree\" plus \"Fastest practical workflow.\" This is clearly organized and step-by-step."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Gives the main points plus important caveats, especially metadata checks like \"same duration, frame rate, resolution, and timecode\" and relink-specific causes such as \"same filename, different file\" and \"audio channel mapping differences.\""
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Provides direct, practical critique of likely failure points and how to verify them, e.g. \"it’s likely a media relink/mismatch issue\" and \"the issue may be project/session-wide or media-wide.\" It is constructive, though not especially critical in tone."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yep — that’s the right tightening of the order.\n\nI’d use this **fastest isolation path**:\n\n### 1) Verify the relinked media first\nCheck the relinked file against the original for:\n- duration\n- frame rate / timebase\n- start timecode\n- audio layout / channel count\n- codec/wrapper\n- actual file, not just matching filename\n\nIf any of those changed, assume **media/relink mismatch** until proven otherwise.\n\n### 2) Determine if it’s clip-specific or source-specific\n- **One instance bad** → likely the timeline clip/instance\n- **Every instance of that source bad** → likely the relinked media or conform\n\nThis is the quickest way to separate a bad edit instance from a bad source.\n\n### 3) Put the same media in a clean sequence\nUse a new sequence with:\n- no nests\n- no speed changes\n- no transitions\n- no effects if possible\n\nIf it behaves normally there, the **original sequence** is the problem.\n\n### 4) Only then check project/session state\nLook at:\n- cache\n- conform/peak/generated files\n- auto-save vs current project\n- database/session corruption\n- timeline settings changes\n\n### 5) Watch for subtle relink damage\nThe common “looks like sequence corruption” culprits are:\n- frame-rate mismatch\n- timecode offset\n- audio channel mapping changes\n- proxy/full-res mismatch\n- wrong file with same name\n\n### Fast rule of thumb\n- **Metadata mismatch** → media issue\n- **Same source wrong everywhere** → relink/conform issue\n- **Works in new sequence** → original sequence issue\n- **Fails in new project too** → project/session/media-wide issue\n\nIf you want, I can turn this into a **super short checklist** you can keep next to the timeline while you test.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly concise and action-oriented, with a clear checklist and no long digressions. It does include a fair amount of detail, but it stays focused on the troubleshooting order."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Very direct and plain: \"I’d use this fastest isolation path,\" \"If any of those changed, assume media/relink mismatch,\" and the rule-of-thumb summary are clear and unhedged."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strong structure: numbered steps, bullets under each step, and a final rule-of-thumb summary. This is exactly a clean step-by-step troubleshooting order."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Gives the main points plus key caveats, especially the specific checks like \"duration,\" \"frame rate / timebase,\" and \"audio channel mapping changes\" without going into unnecessary theory."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Direct, constructive critique style is evident in phrases like \"assume media/relink mismatch until proven otherwise\" and the explicit separation of likely causes. It points out what to check and how to interpret results."
+        }
+      ]
+    }
+  ]
+}

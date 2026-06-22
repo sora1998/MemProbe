@@ -1,0 +1,170 @@
+{
+  "user_id": "user_033",
+  "task": "I’ve got a run in progress that’s drifting a little, and I don’t want to let it keep going if it’s headed for junk data. Can you help me think through what I should watch for and when it’s smarter to stop, reset, or keep going?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "formality_preference",
+      "short": "Prefers professional, no-nonsense interaction",
+      "explanation": "She would likely respond best to a controlled, businesslike style rather than friendliness for its own sake. Given her guarded and precision-focused persona, overly casual phrasing would probably feel sloppy or intrusive."
+    },
+    {
+      "idx": 2,
+      "dimension": "verbosity_preference",
+      "short": "Wants concise answers, not rambling",
+      "explanation": "She seems to value efficiency and would likely dislike long-winded explanations that repeat themselves. She probably wants enough information to act on, with no decorative padding."
+    },
+    {
+      "idx": 3,
+      "dimension": "directness_preference",
+      "short": "Prefers blunt, unsoftened answers",
+      "explanation": "Her skeptical, control-oriented style suggests she would rather hear the point plainly than receive hedged reassurance. She is likely to trust answers more when they are explicit about risks, limits, and conclusions."
+    },
+    {
+      "idx": 4,
+      "dimension": "format_preference",
+      "short": "Likes structured lists and checklists",
+      "explanation": "She appears to prefer information that is organized and easy to verify. A clean format with steps, bullets, or checklists would fit her habit of tracking details and would reduce ambiguity."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Accepts firm correction when needed",
+      "explanation": "She likely does not want the assistant to simply echo her assumptions if something is wrong or risky. A direct challenge, especially when backed by evidence, would probably be more useful to her than polite agreement."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes. The clean way to handle a drifting run is to decide **beforehand** what counts as:\n- acceptable drift,\n- warning drift,\n- and stop-now drift.\n\n## What to watch for\nTrack the things that usually move first:\n- **control trend**\n- **calibration shift**\n- **signal/peak shape or response**\n- **retention time / timing**\n- **replicate spread**\n- **blank/background rise**\n- **temperature / pressure / flow / instrument status**, if relevant\n\n## Practical decision rule\n\n### Keep going if:\n- drift is small\n- controls are still in range\n- calibration is still valid\n- replicate behavior is stable\n- the trend is not accelerating\n\n### Pause and investigate if:\n- drift is increasing run-to-run\n- controls are trending toward the limit\n- signal quality is degrading\n- you see a step change after a change in reagent, operator, or instrument state\n\n### Stop and reset if:\n- a control fails\n- calibration is out of spec\n- the drift crosses your predefined acceptance limit\n- the trend is clearly monotonic and worsening\n- the run is generating results you would not be comfortable releasing\n\n## The key question\nAsk: **“If this keeps drifting at the same rate, will I still trust the last half of the run?”**\n\nIf the answer is no, it’s usually smarter to stop early than to collect a lot of unusable data.\n\n## What not to do\n- Don’t wait for the whole run to finish just to “see how bad it gets.”\n- Don’t assume a slow drift is harmless.\n- Don’t keep going if the run is already outside what you’d be willing to sign off on.\n- Don’t invent a root cause mid-run unless you can verify it quickly.\n\n## A simple rule of thumb\n- **One bad point**: check and continue only if it’s clearly isolated.\n- **Two or more points trending the same way**: treat it as real drift.\n- **Any failed control or hard limit breach**: stop.\n\nIf you want, I can turn this into a **stop/continue/reset decision tree** with explicit trigger thresholds.",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Uses a controlled, businesslike tone: \"The clean way to handle a drifting run\" and avoids casual friendliness. Slightly instructional, but generally professional."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Fairly concise and action-oriented. It gives a compact checklist and decision rules without much padding, though it is not maximally terse."
+        },
+        {
+          "idx": 3,
+          "score": 4,
+          "reason": "Mostly blunt and explicit: \"Stop and reset if\" and \"Don’t wait for the whole run to finish.\" It states limits and conclusions plainly, with little hedging."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strongly structured with headings and bullets: \"What to watch for,\" \"Keep going if,\" \"Pause and investigate if,\" \"Stop and reset if.\" This is exactly checklist-like organization."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Provides firm correction and clear pushback against risky assumptions: \"Don’t assume a slow drift is harmless\" and \"Don’t keep going if the run is already outside what you’d be willing to sign off on.\""
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — here’s the harder version.\n\n## Decision tree for a drifting run\n\n### 1) First: can you verify the issue fast?\nCheck these in this order:\n1. **Blank / background**\n2. **System suitability / control**\n3. **Calibration status**\n4. **Pressure / flow / temp / timing**, if the method uses them\n5. **Replicate behavior / peak shape / signal quality**\n\nIf one of those explains the drift and can be corrected quickly, do that **before** deciding the run is dead.\n\n---\n\n## 2) What counts as a real warning?\nA warning is real if it is:\n\n- **reproducible on the next point**\n- **directional** in the same way more than once\n- **linked to a measurable change** in blank, control, calibration, pressure/flow/temp, or signal quality\n- **new after a specific event** such as reagent change, pause, restart, maintenance, or operator change\n\n### Not a real warning\n- one isolated odd point\n- a wiggle that disappears on the next measurement\n- a change with no supporting control or instrument evidence\n\n---\n\n## 3) Slow drift that stays inside spec\nThis is usually a **watch-and-continue** case if:\n\n- controls remain in range\n- calibration remains valid\n- replicate spread is stable\n- the drift is small and not accelerating\n- the last accepted result would still be defensible if the run ended now\n\n### Action\n- keep running\n- increase check frequency\n- document the drift\n- do not overreact unless it worsens or crosses a limit\n\n### Do not\n- stop just because the line is sloping a little\n- invent a failure before the run actually breaches anything\n\n---\n\n## 4) Step change after an event\nTreat this as a **quarantine-the-run** event if:\n\n- the change happens right after a clear event\n- the shift is abrupt, not gradual\n- the new level persists for more than one point\n- it affects controls, blanks, or signal quality, not just one sample\n\n### Examples of events\n- reagent swap\n- recalibration\n- pause/restart\n- maintenance\n- temperature excursion\n- flow/pressure change\n- operator change\n\n### Action\n- pause\n- verify the event-related parameter\n- rerun a control / blank / suitability check\n- if confirmed, quarantine data collected after the event until the cause is resolved\n\n### Do not\n- assume the step is “just noise”\n- keep collecting data from a new regime and hope it sorts itself out\n\n---\n\n## 5) Instrument behavior changing mid-run\nThis is the strongest stop signal short of a hard failure.\n\nLook for:\n- retention time shift\n- peak shape distortion\n- baseline rise or instability\n- pressure/flow instability\n- calibration slope/intercept movement\n- control drift in the same direction\n- replicate precision getting worse\n\n### Action\n- **stop the run**\n- do a quick instrument check\n- verify blank, control, and calibration\n- only restart after the behavior is understood and corrected\n\n### Do not\n- keep the run alive while the instrument is changing state\n- try to “average through” instability\n\n---\n\n## 6) What can be corrected immediately without invalidating everything?\nUsually only things that are:\n- **local**\n- **verified**\n- **reversible**\n- **documented**\n\nExamples:\n- rerun a blank\n- rerun a control\n- recalibrate if the method allows it and the issue is clearly calibration-related\n- correct pressure/flow/temp if the instrument spec supports that and the affected data can be bounded\n\n### Allowed only if:\n- the correction does not change the meaning of already-collected data\n- you can show exactly where the bad segment starts\n- you can separate valid from invalid data cleanly\n\n### Do not\n- patch over a drifting run with ad hoc fixes\n- mix pre- and post-correction data without a clear cutoff\n\n---\n\n## 7) What absolutely forces a stop and rerun?\nStop immediately if any of these happen:\n- control fails\n- calibration fails\n- blank fails in a way that affects interpretation\n- drift crosses a predefined acceptance limit\n- step change cannot be explained quickly\n- instrument behavior is changing mid-run\n- replicate precision collapses\n- you cannot clearly separate valid from invalid data\n\n---\n\n## 8) Simple hard rule set\n- **One isolated odd point** → verify, then continue if the next point is normal\n- **Repeated directional change** → real warning\n- **Step change after an event** → quarantine and investigate\n- **Instrument state changing mid-run** → stop and rerun\n- **Any failed control or limit breach** → stop\n\n---\n\n## 9) Fastest next move\nIf you want the shortest practical sequence:\n1. **blank**\n2. **control**\n3. **calibration**\n4. **pressure / flow / temp**\n5. **replicate / signal quality**\n6. decide: **continue, quarantine, or stop**\n\nIf you want, I can turn this into a **one-page run decision sheet** with three columns:\n- **continue**\n- **quarantine**\n- **stop/rerun**",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Professional and controlled: uses a businesslike tone like \"Decision tree,\" \"Action,\" \"Do not,\" and avoids casual friendliness."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly concise and action-oriented, with a compact decision tree and short rules, though it is somewhat detailed rather than maximally terse."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Very direct and unsoftened: \"stop the run,\" \"quarantine the run,\" \"Do not\" repeatedly states conclusions plainly and without hedging."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong structured formatting with numbered sections, bullets, and a clear decision tree/checklist style."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Provides firm correction and pushback, e.g. \"Do not invent a failure before the run actually breaches anything\" and \"Do not assume the step is 'just noise'\"."
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yes. Here’s the tighter version.\n\n## 5-minute triage order\nIf the run is slipping, check in this order:\n\n1. **Blank / background**\n2. **Control / system suitability**\n3. **Calibration status**\n4. **Instrument state**  \n   - pressure  \n   - flow  \n   - temperature  \n   - timing / retention  \n   - baseline / signal shape\n\nIf one of those is off, fix or confirm it **before** deciding what to do with the run.\n\n---\n\n## Hard cutoff: quarantine vs stop\n\n### Quarantine the affected segment if:\n- the problem has a **clear start point**\n- you can draw a **clean line** between good and bad data\n- the issue is **localized** to a segment, not the whole run\n- controls/blanks/calibration are still usable **outside** the affected window\n- the drift is explainable by a bounded event, such as:\n  - brief temperature excursion\n  - short pressure wobble\n  - reagent change\n  - restart/pause\n  - transient baseline rise\n\n### What that means\nYou may be able to **freeze the run at the cutoff** and keep only the pre-event data, if the method and SOP allow it.\n\n---\n\n### Stop and rerun the whole thing if:\n- there is **no clean cutoff**\n- the drift is **continuous or accelerating**\n- the instrument state is changing in a way you can’t bound\n- calibration or control failure affects the whole run\n- retention / signal behavior is shifting enough that you can’t trust where the bad segment starts\n- you cannot separate valid from invalid data without guessing\n\n### What that means\nIf you can’t say “valid up to here, invalid after here” with confidence, the whole run is contaminated.\n\n---\n\n## Subtle drift: what to check next\nIf the drift is small but moving, do these in order:\n\n1. **Repeat blank**\n2. **Repeat control**\n3. **Check calibration drift**\n4. **Check pressure / flow / temp**\n5. **Look at signal shape / retention / baseline trend**\n6. **Compare to the last known good point**\n\nIf the next point confirms the same direction, treat it as real.\n\n---\n\n## Recoverable drift vs non-recoverable drift\n\n### Recoverable example\n- **Baseline rises slightly**\n- **Control stays flat**\n- **Calibration is still valid**\n- **Blank explains the change**\n- **No retention shift**\n- **No loss of precision**\n\n**Action:** likely quarantine only the affected segment or correct the local issue if the SOP allows it.\n\nWhy it’s recoverable: the problem is bounded and doesn’t change the meaning of the rest of the run.\n\n---\n\n### Non-recoverable example\n- **Retention time shifts after a pressure twitch**\n- **Peak shape changes**\n- **Control starts drifting too**\n- **Calibration no longer cleanly fits**\n- **You can’t tell where the regime changed**\n\n**Action:** stop and rerun.\n\nWhy it’s non-recoverable: the run has crossed into a new state, and you can’t separate good from bad data cleanly.\n\n---\n\n## Boundary rule\nUse this as the cutoff:\n\n- **Can I identify the first bad point and exclude only what follows?**  \n  - Yes → quarantine the affected segment  \n  - No → stop and rerun\n\n---\n\n## Short hard rules\n- **Blank/control/calibration off** → verify immediately\n- **Clear event + clean cutoff** → quarantine segment\n- **Continuous or accelerating drift** → stop\n- **Instrument state changing mid-run** → stop\n- **Can’t separate valid from invalid data** → stop\n\nIf you want, I can turn this into a **one-page continue/quarantine/stop sheet** with yes/no boxes and a blank line for the cutoff point.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Uses a controlled, businesslike tone: \"Here’s the tighter version,\" \"Hard cutoff,\" \"Short hard rules.\" No casual friendliness or padding."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly concise and action-oriented, with compact bullets and decision rules. Slightly longer than minimal, but not rambling."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Direct and unsoftened: \"Stop and rerun,\" \"the whole run is contaminated,\" \"If you can’t say... with confidence.\" It states conclusions plainly."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong structure throughout: numbered triage order, nested bullets, separate sections, and a clear yes/no boundary rule."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Provides firm correction and explicit stop conditions instead of echoing uncertainty: \"If you can’t separate valid from invalid data... stop,\" \"the whole run is contaminated.\""
+        }
+      ]
+    },
+    {
+      "turn": 4,
+      "agent_response": "Yes — here’s the tighter cutoff logic.\n\n## 5-minute order, blunt version\nIf the run is drifting, check in this order:\n\n1. **Blank / background**\n2. **Control / system suitability**\n3. **Calibration**\n4. **Instrument state**\n   - pressure\n   - flow\n   - temperature\n   - timing\n   - baseline\n   - peak shape\n5. **Repeat once only** to confirm direction\n\nIf step 1–4 don’t explain it, one repeat is enough to decide whether the drift is real. Don’t keep sampling the problem.\n\n---\n\n## Clean segment break: when you can quarantine\nYou may **freeze/quarantine only the affected segment** if all of these are true:\n\n- the change is tied to a **discrete event** or a **single verified instrument shift**\n- the **next point confirms** the new behavior\n- you can name the **first bad injection/run**\n- the pre-event data are still internally consistent\n- the affected segment is **bounded**, not smeared\n\n### Examples of qualifying evidence\n- reagent swap followed by a step change\n- restart/pause followed by a new stable baseline\n- pressure jump followed by a clear retention shift starting at the next run\n- verified instrument correction followed by a new steady state\n\n### What this means\nYou can keep the pre-event segment and quarantine only the post-event segment **if your SOP allows segment exclusion**.\n\n---\n\n## When you must stop and rerun\n**Stop/rerun the whole run** if any of these are true:\n\n- the change is **smeared across multiple points**\n- the baseline keeps moving\n- the instrument state is **unstable**\n- you cannot name the **first bad injection/run**\n- the drift is **continuous or accelerating**\n- the boundary between good and bad data is guesswork\n\n### Translation\nIf you can’t point to the first bad point with confidence, the whole run is contaminated.\n\n---\n\n## Boundary case: blank off, control still flat\nThis is the one people wave through incorrectly.\n\n### Quarantine is acceptable if:\n- the blank is off **slightly**\n- the control remains flat\n- calibration is still valid\n- the blank shift is **stable and bounded**\n- the blank explains only a **local** effect, not the whole run\n\n### Automatic stop if:\n- the blank is off **enough to affect interpretation**\n- the blank keeps rising\n- the blank shift is not stable\n- the blank change alters the meaning of sample results\n- you cannot bound the affected segment\n\n### Simple rule\nIf the blank is outside the level where it could bias the reported result, **stop**.  \nIf it is small, stable, and clearly bounded, **quarantine the affected segment** may be enough.\n\n---\n\n## Hard decision rule\n- **Discrete event + next point confirms + first bad point known** → quarantine affected segment\n- **Smeared drift + moving baseline + unstable instrument state** → stop and rerun\n- **Blank off but control flat** → quarantine only if the blank shift is small, stable, and bounded; otherwise stop\n\n---\n\n## What not to do\n- Don’t keep extending the run to “see where it settles.”\n- Don’t call something quarantinable unless you can identify the cutoff.\n- Don’t let a flat control excuse a bad blank if the blank can bias the result.\n- Don’t repeat the same check five times hoping for a cleaner story.\n\nIf you want, I can turn this into a **one-page yes/no decision tree** with the blank/control/calibration checks at the top and the quarantine/stop boundary at the bottom.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Uses a professional, businesslike tone: \"blunt version,\" \"Hard decision rule,\" and avoids casual friendliness."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly concise and action-oriented, with compact bullets and rules. Slightly longer than minimal, but not rambling."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Very direct and unsoftened: \"If you can’t point to the first bad point with confidence, the whole run is contaminated\" and \"Don’t keep sampling the problem.\""
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong structured format with numbered steps, bullet lists, examples, and explicit decision rules/checklists."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Provides firm correction and clear stop/quarantine thresholds, e.g. \"Automatic stop if\" and \"Don’t let a flat control excuse a bad blank.\""
+        }
+      ]
+    }
+  ]
+}

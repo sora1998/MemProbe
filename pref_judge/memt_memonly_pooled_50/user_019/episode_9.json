@@ -1,0 +1,170 @@
+{
+  "user_id": "user_019",
+  "task": "I’m trying to decide how much confidence to put in a vendor’s latest change notice for a part we already use. If a material or process change might have slipped in before the paperwork caught up, what should I look at first to tell whether it’s just a document lag or a real shift in shipped quality?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "directness_preference",
+      "short": "Blunt, no fluff",
+      "explanation": "She responds best to straight answers without hedging or performative softness. Her persona is skeptical and exacting, so she likely prefers help that states the issue clearly and gets to the point. Overly cautious wording would probably feel inefficient to her."
+    },
+    {
+      "idx": 2,
+      "dimension": "detail_level_preference",
+      "short": "Enough context to trust the answer",
+      "explanation": "She likely wants the key caveats and failure modes, not a vague headline. Her reliability-oriented mindset suggests she values context when it changes the conclusion or action. She probably dislikes being told something is “fine” without the conditions that make it fine."
+    },
+    {
+      "idx": 3,
+      "dimension": "format_preference",
+      "short": "Bullets and checklists preferred",
+      "explanation": "She seems likely to prefer responses that are easy to audit and act on. A structured format fits her methodical style and makes it easier to spot gaps, exceptions, or weak logic. Dense prose would probably feel slower and less useful."
+    },
+    {
+      "idx": 4,
+      "dimension": "autonomy_support_preference",
+      "short": "Collaborative, but not hand-holding",
+      "explanation": "She likely wants the assistant to work with her rather than dictate to her. She values control and personal autonomy, so prescriptive overreach would be a poor fit. At the same time, she probably appreciates a clear recommendation once the options are laid out."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Welcomes firm pushback",
+      "explanation": "She is likely comfortable being challenged when a claim is weak, risky, or sloppy. Her reliability-first mindset suggests she would rather get corrected than be coddled. Soft agreement without scrutiny would probably reduce her trust in the help."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Start with the **highest-signal, lowest-latency checks**:\n\n1. **Recent lot-to-lot behavior**\n   - Compare the newest lots against the last known-good lots.\n   - Look for changes in your own test yield, drift, intermittent failures, or cycle-dependent failures.\n   - If the issue only shows up after a humidity or temperature transition, treat that as a possible quality shift, not just paperwork lag.\n\n2. **Supplier lot traceability**\n   - Check whether the suspect lots line up with a new raw material lot, sub-supplier lot, or process batch.\n   - Ask for the lot genealogy if you can get it.\n\n3. **Change timing vs. paperwork timing**\n   - Compare:\n     - first shipped date of the new lot/process\n     - internal implementation date\n     - date the notice was issued\n   - If shipments changed before the notice, that’s a red flag for document lag or incomplete communication.\n\n4. **COA / spec data trend**\n   - Don’t just confirm “in spec.”\n   - Look for shifts in the distribution of key attributes: thickness, moisture, viscosity, hardness, surface energy, etc.\n   - A material can stay in spec and still move enough to matter.\n\n5. **Incoming inspection and quick functional checks**\n   - Re-run the same checks you used on the last good lot.\n   - Use identical setup, operator, and chamber conditions if possible.\n   - If the failure is intermittent, compare rates, not just pass/fail.\n\n6. **Process or handling changes**\n   - Ask whether there was:\n     - equipment maintenance\n     - firmware or recipe changes\n     - packaging or storage changes\n     - operator handling changes\n     - environment changes during shipping or storage\n\n7. **Retention samples / cross-checks**\n   - If available, test retained samples from before and after the notice.\n   - Best case is a side-by-side comparison under the same conditions.\n\nA practical rule: **treat it as a real shift until you prove it’s only documentation lag**.  \nIf you want, I can help you build a fast decision tree for “document lag vs. actual material/process change” that fits a manufacturing floor workflow.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct: \"Start with the highest-signal, lowest-latency checks\" and \"treat it as a real shift until you prove it’s only documentation lag\". No hedging or fluff."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Gives concrete caveats and failure modes: \"A material can stay in spec and still move enough to matter,\" plus specific checks like lot genealogy, timing, and retention samples."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured with numbered bullets and sub-bullets, making it easy to audit and act on."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative and non-dictatorial: it lays out options and ends with \"If you want, I can help you build a fast decision tree\". It does give a clear recommendation, which fits, though it is somewhat directive."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Firm pushback is explicit: \"Don’t just confirm ‘in spec’\" and \"treat it as a real shift until you prove it’s only documentation lag\". It challenges weak assumptions rather than smoothing them over."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — that’s the right order.\n\nI’d tighten it into this sequence:\n\n1. **Hard date cutover**\n   - first bad lot\n   - first shipped lot\n   - first internal use date  \n   If shipments or failures start before the notice, assume lag until proven otherwise.\n\n2. **Controlled A/B check**\n   - old lot vs new lot\n   - same setup\n   - same chamber / operator / fixture if possible\n   - no other variable changes\n\n3. **Failure mode match**\n   - does the problem show up only under humidity, thermal cycling, vibration, soak, etc.?\n   - if yes, that’s more meaningful than a clean room-temp bench pass\n\n4. **Trace the actual change**\n   - resin / alloy / compound\n   - cure time\n   - supplier\n   - tool / recipe / process step\n   - packaging / storage / handling\n\n5. **Distribution shift, not just spec**\n   - compare the curve, not only pass/fail\n   - look for drift in margin, spread, or tail behavior\n\n6. **Packaging / storage / transit**\n   - this is the common fake-out\n   - if the “change” tracks with environment exposure, it may not be a true material change\n\nA simple rule:\n- **paperwork lag** = same behavior, no measurable shift, timing mismatch only\n- **real shift** = behavior changes, especially under the same stress path that exposed the issue\n\nIf you want, I can turn this into a one-page vendor change triage checklist with **go / hold / investigate** decisions.",
+      "score": 4.6,
+      "summary": "mean=4.60 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:2, 5:3}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct: opens with \"Yes — that’s the right order\" and gives a blunt rule, e.g. \"assume lag until proven otherwise\" and \"real shift = behavior changes.\""
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Gives concrete caveats and failure modes: \"same setup,\" \"if yes, that’s more meaningful than a clean room-temp bench pass,\" and distinguishes \"paperwork lag\" vs \"real shift.\""
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Uses a numbered sequence with nested bullets and a final rule list, making it easy to audit and act on."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative rather than dictatorial: \"I’d tighten it into this sequence\" and offers \"If you want, I can turn this into...\" while still giving a clear recommendation."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Includes firm pushback and skepticism, e.g. \"assume lag until proven otherwise\" and \"this is the common fake-out,\" but it does not explicitly challenge the user's premise beyond that."
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yes — that’s the right shape.\n\nI’d make the first pass a **decision gate**, not a summary:\n\n### 1) Timing gate\n- **Did the first bad lot predate the notice?**\n  - **Yes:** treat as **document lag** until disproven.\n  - **No / unclear:** keep investigating.\n\n### 2) Controlled comparison gate\n- **Can you reproduce the failure on old vs. new lot under identical stress?**\n  - same setup\n  - same chamber / fixture / operator if possible\n  - same profile, same duration\n- **If there’s no controlled delta, don’t call it causal.**\n\n### 3) Stress-path gate\n- **Does the failure only show up under the same stress path that exposed it in the field?**\n  - humidity\n  - thermal cycling\n  - vibration\n  - soak / transition\n- A clean bench pass doesn’t clear it if the real failure only appears under stress.\n\n### 4) Change-content gate\n- **What exactly changed?**\n  - material\n  - supplier\n  - recipe\n  - cure\n  - handling\n  - packaging\n  - storage / transit\n- “Process updated” is not enough.\n\n### 5) Distribution gate\n- **Did the distribution move, not just the spec status?**\n  - mean\n  - spread\n  - tails\n  - margin to limit\n- “Still in spec” can still be a real shift.\n\n### 6) Retained sample gate\n- **Can you compare retained old units vs suspect lots side by side?**\n- Same chamber, same setup, same criteria.\n- This is often where the paperwork story either holds or collapses.\n\n### Practical rule\n- **Paperwork lag:** timing mismatch only, no measurable behavior shift.\n- **Real shift:** behavior changes, especially under the same stress path.\n\nIf you want, I can turn this into a **go / hold / investigate** checklist with explicit pass/fail triggers.",
+      "score": 4.6,
+      "summary": "mean=4.60 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:2, 5:3}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct and blunt: opens with \"Yes — that’s the right shape\" and then gives a clear \"Practical rule\" with no hedging."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Gives concrete caveats and failure modes: timing, controlled comparison, stress path, distribution, retained samples, and the distinction between \"Paperwork lag\" vs \"Real shift.\""
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Uses a highly structured checklist format with numbered gates and bullets, which is easy to audit and act on."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative rather than dictatorial: \"If you want, I can turn this into a go / hold / investigate checklist\" and it lays out options before the practical rule. Slightly prescriptive, but not hand-holding."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Includes firm pushback against weak inference: \"If there’s no controlled delta, don’t call it causal\" and \"‘Process updated’ is not enough.\" It challenges sloppy conclusions clearly."
+        }
+      ]
+    },
+    {
+      "turn": 4,
+      "agent_response": "Yes — that’s the right way to force it.\n\nI’d make the first-pass triage:\n\n### GO\n- timing mismatch only\n- no reproducible old-vs-new delta\n- retained samples match\n- distribution hasn’t moved\n\n### HOLD\n- first bad lot or stress failure is before/at the notice\n- but no clean A/B yet\n- or no retained sample comparison yet\n\n### INVESTIGATE\n- any controlled delta\n- any stress-path match\n- any distribution shift\n- change content still vague\n- packaging / storage / transit looks suspect\n\nAnd I’d keep one rule hard:\n**If they can’t say what actually changed, don’t accept “process update” as a finding.**\n\nThat’s the part that keeps people from hiding behind paperwork when the real issue might be material, process, or handling drift.\n\nIf you want, I can turn this into a one-page checklist with the buckets at the bottom and the decision triggers written as checkbox items.",
+      "score": 4.6,
+      "summary": "mean=4.60 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:2, 5:3}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct and blunt: \"Yes — that’s the right way to force it,\" then a crisp triage list with no hedging."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Gives useful caveats and failure modes: \"timing mismatch only,\" \"no reproducible old-vs-new delta,\" \"retained samples match,\" \"distribution hasn’t moved,\" plus conditions for HOLD/INVESTIGATE."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Uses a structured checklist format with clear buckets: \"GO / HOLD / INVESTIGATE\" and bullet points, which is easy to audit."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative rather than dictating: \"I’d make the first-pass triage\" and ends with \"If you want, I can turn this into a one-page checklist,\" while still giving a clear recommendation."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Strong pushback against weak claims: \"If they can’t say what actually changed, don’t accept ‘process update’ as a finding\" and \"keeps people from hiding behind paperwork.\""
+        }
+      ]
+    }
+  ]
+}

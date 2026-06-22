@@ -1,0 +1,49 @@
+{
+  "user_id": "user_034",
+  "task": "I’ve got a week coming up where a couple of appointments, a route change, and some paperwork could all shift around on me. What’s a practical way to keep things moving if the order changes at the last minute?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.8,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "A practical way is to plan the week in **layers**, so a last-minute order change doesn’t wreck the whole day.\n\nUse this structure:\n\n1. **Hard anchors first**\n   - Put the appointments that are hardest to move at the top.\n   - Anything tied to someone’s work shift, travel, or a fixed window goes here.\n\n2. **Group by route**\n   - Put nearby stops together so a route change doesn’t create extra driving.\n   - If one area gets delayed, you can often swap in something close by.\n\n3. **Keep one flex block**\n   - Leave one appointment or task intentionally loose.\n   - That becomes your recovery space if something runs long or the route shifts.\n\n4. **Paperwork at the edges**\n   - Do the must-finish paperwork at the end of the day, or in a short buffer between stops.\n   - If it’s not urgent, don’t let it block the time-sensitive stuff.\n\n5. **Have a quick swap rule**\n   - If two things are equal, do the one that:\n     - is harder to reschedule,\n     - is closer geographically,\n     - or prevents more follow-up work.\n\nA simple fallback:\n- **Must keep**\n- **Can move**\n- **Can drop for now**\n\nIf you want, I can help you sort your actual appointments and paperwork into those three buckets.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s basically the right shape. Hard anchors first, route grouping, one flex block — that part makes sense.\n\nWhat I’d want a little more of is a real-world backup rule for when two things collide. Like, if a client needs the slot and the paperwork is sitting there unfinished, what do you drop first without creating a mess later? I don’t want a tidy theory, just the order I should use when the day goes sideways.\n\nAlso, I’d probably want the paperwork split into urgent vs. can-wait, because that’s where I get burned if I let it pile up.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 5.0
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yep — use a **simple collision order**:\n\n1. **Client / fixed appointment wins**\n2. **Time-sensitive paperwork next**\n3. **Everything else can wait**\n\nFor paperwork, split it like this:\n\n- **Urgent:** anything with a deadline, required signature, billing, or something that blocks the next step\n- **Can wait:** filing, cleanup, nonessential notes, anything that doesn’t stop the week from moving\n\nSo if a client needs the slot and the paperwork is unfinished, I’d drop in this order:\n\n- **nonessential paperwork first**\n- then **movable admin**\n- keep only the **deadline-critical stuff**\n- protect the client appointment unless it’s truly optional\n\nA good rule of thumb:\n- **If it creates a downstream problem, keep it**\n- **If it’s just housekeeping, move it**\n\nAnd if two things are equally important, do the one that’s:\n- harder to reschedule,\n- tied to someone else’s schedule,\n- or more likely to cause a bigger mess if delayed.\n\nIf you want, I can turn that into a one-line decision rule you can use on the fly.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s closer. But I’d want the rule a little sharper than that.\n\nFor me it’d be:\n- **keep the client slot if there’s any way to keep it**\n- **keep paperwork only if it has a hard deadline or blocks payment/licensing/next appointment**\n- **drop the rest without guilt**\n\nSo if it’s client vs. unfinished forms, the forms lose unless they’re about to bite you in the next day or two. Otherwise they turn into a pile, and that’s where the trouble starts.\n\nWhat I’d still want is a clean sorter for the paperwork itself — like 3 buckets:\n- **today or tomorrow**\n- **this week**\n- **can sit until the weekend**\n\nThat’s the part that usually saves me when the schedule gets jagged.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "That’s a solid sorter. I’d use it exactly that way:\n\n### Paperwork buckets\n- **Today / tomorrow**\n  - deadline in 24–48 hours\n  - blocks payment, licensing, coverage, or the next appointment\n  - needs someone else’s reply to move forward\n\n- **This week**\n  - important, but not a hard stop yet\n  - needs attention before the week ends\n  - can wait if the day gets blown up\n\n- **Can sit until the weekend**\n  - filing, cleanup, nonurgent notes\n  - anything that won’t create a problem if it waits\n  - housekeeping only\n\n### Collision rule\nWhen the day goes sideways:\n\n1. **Keep the client slot**\n2. **Keep only paperwork that is truly time-sensitive**\n3. **Push everything else down a bucket**\n\n### Quick test\nIf you’re unsure where something goes, ask:\n- **Will this cause a problem in the next 1–2 days?**\n- **Does it block money, licensing, or the next step?**\n- **Does someone else need it before I can move on?**\n\nIf yes, it stays in **today/tomorrow**.  \nIf no, it drops to **this week** or **weekend**.\n\nIf you want, I can turn this into a **one-page checklist** you could glance at between appointments.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that works. Clean enough to actually use.\n\nThat 24–48 hour test is the part I’d keep. If it’s going to bite me on money, licensing, or the next appointment, it stays up top. If not, it drops.\n\nOne-page checklist would be useful too, honestly.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 5.0
+      },
+      "gt_correct": null
+    }
+  ]
+}

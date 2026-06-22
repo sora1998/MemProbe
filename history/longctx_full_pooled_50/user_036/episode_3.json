@@ -1,0 +1,75 @@
+{
+  "user_id": "user_036",
+  "task": "I’m trying to merge a couple of versions of a reference sheet, but a few entries don’t match and I’m not sure which source to trust. Could you help me sort out a clean version and point out what I should verify before I finalize it?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.8,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — paste both versions here, and I’ll help you:\n\n- **merge them into one clean reference sheet**\n- **flag mismatched entries**\n- **note which items look uncertain or need verification**\n- **call out any likely copy/paste drift or formatting issues**\n\nIf you want, I can return it in this format:\n\n1. **Clean merged version**\n2. **Differences / conflicts**\n3. **Items to verify before finalizing**\n\nSend the two versions whenever you’re ready.",
+      "user_simulator": {
+        "feedback_type": "add_context",
+        "text": "Yeah, I can do that — but I need the two versions first. Paste both sheets here, even if they’re messy. If there are headers, dates, source notes, or any rows you already suspect are off, include those too. I’ll merge the clean overlaps, flag the conflicts, and point out what needs verification before you lock it in.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — paste both versions here, even if they’re messy.\n\nIf you can, include:\n- the full text of both sheets\n- headers or section titles\n- dates or source notes\n- any rows you already suspect are off\n\nI’ll then:\n1. merge the overlapping clean parts,\n2. flag mismatches or contradictions,\n3. and list anything that should be verified before you finalize it.",
+      "user_simulator": {
+        "feedback_type": "add_context",
+        "text": "Okay. Here’s a messy mockup of the two versions so you can work with something:\n\nVersion A\n- Project: North Shore Vendor Reference\n- Updated: 4/18/26\n- Vendor: Seacliff Electronics\n- Contact: Maya Chen\n- Email: maya@seacliffelectronics.com\n- Phone: (949) 555-0148\n- Warranty: 12 months\n- Return window: 30 days\n- Shipping cutoff: 3 PM PST\n- Notes: bulk orders require approval\n\nVersion B\n- Project: North Shore Vendor Ref Sheet\n- Updated: 4/19/26\n- Vendor: Seacliff Electronics LLC\n- Contact: M. Chen\n- Email: maya.chen@seacliffelec.com\n- Phone: 949-555-0148\n- Warranty: 1 year\n- Return window: 14 days\n- Shipping cutoff: 2 PM PST\n- Notes: bulk orders need approval for orders over 50 units\n- Notes 2: tax ID on file\n\nThe ones I’m not sure about are the email, return window, cutoff time, and the bulk-order note. The rest might just be formatting drift, but I’d still want them checked before finalizing.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Absolutely — here’s a clean merge with the mismatches called out clearly.\n\n## Clean merged version\n- **Project:** North Shore Vendor Reference\n- **Updated:** 4/19/26\n- **Vendor:** Seacliff Electronics / Seacliff Electronics LLC\n- **Contact:** Maya Chen\n- **Email:** *needs verification*\n- **Phone:** (949) 555-0148\n- **Warranty:** 12 months / 1 year\n- **Return window:** *needs verification*\n- **Shipping cutoff:** *needs verification*\n- **Notes:** bulk orders require approval\n- **Additional note:** tax ID on file\n\n## Differences / conflicts\n- **Project name:** “North Shore Vendor Reference” vs. “North Shore Vendor Ref Sheet”\n- **Updated date:** 4/18/26 vs. 4/19/26\n- **Vendor name:** “Seacliff Electronics” vs. “Seacliff Electronics LLC”\n- **Contact:** “Maya Chen” vs. “M. Chen”\n- **Email:** `maya@seacliffelectronics.com` vs. `maya.chen@seacliffelec.com`\n- **Warranty:** “12 months” vs. “1 year”  \n  - This may be the same thing, but it’s worth confirming the intended wording.\n- **Return window:** 30 days vs. 14 days\n- **Shipping cutoff:** 3 PM PST vs. 2 PM PST\n- **Bulk-order note:** \n  - Version A: bulk orders require approval\n  - Version B: bulk orders need approval for orders over 50 units\n\n## Items to verify before finalizing\n- **Email**\n- **Return window**\n- **Shipping cutoff**\n- **Bulk-order approval rule**\n- **Whether “12 months” and “1 year” should be standardized**\n- **Whether the vendor should be listed with or without “LLC”**\n\n## Likely formatting drift\nThese look like they may just be presentation differences, but still worth checking:\n- **Project title**\n- **Contact name format**\n- **Phone number punctuation**\n- **Warranty phrasing**\n\nIf you want, I can also turn this into a **single polished final sheet** with the uncertain items marked inline.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Pretty close. But I’d want the conflicts separated a little more cleanly — right now the merged version is still mixing unresolved items into the main sheet.\n\nWhat I’d fix:\n- Don’t keep **Vendor: Seacliff Electronics / Seacliff Electronics LLC** in the clean version. Pick one or mark it as unresolved.\n- Same with **Warranty: 12 months / 1 year**. That’s basically equivalent, so I’d standardize it to one form and note the source phrasing.\n- **Email, return window, cutoff, bulk-order note** should stay flagged, not blended into the final sheet.\n- The **updated date** should probably be treated as the newest source date only if Version B is the later approved revision. Otherwise that needs verification too.\n\nI’d like a tighter output like:\n1. **Provisional clean sheet** — only the items that match or are safely standardized\n2. **Open conflicts** — only the fields that genuinely disagree\n3. **Verify before finalizing** — the actual decision points\n\nAlso, I’d want the bulk-order note split into two possibilities, because Version A is broad and Version B adds a threshold. That’s not just wording drift; it changes the rule.\n\nSo yeah — right direction, but I’d push for a more conservative merge. If this were one of my edit checks, I wouldn’t let the unresolved fields sit inside the clean version yet.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 5.0
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 4,
+      "agent_response": "Got it — here’s a more conservative version with the unresolved fields kept out of the clean sheet:\n\n## 1. Provisional clean sheet\n- **Project:** North Shore Vendor Reference\n- **Vendor:** Seacliff Electronics\n- **Contact:** Maya Chen\n- **Phone:** (949) 555-0148\n- **Warranty:** 1 year\n- **Notes:** tax ID on file\n\n## 2. Open conflicts\n- **Updated date:** 4/18/26 vs. 4/19/26\n- **Email:** `maya@seacliffelectronics.com` vs. `maya.chen@seacliffelec.com`\n- **Return window:** 30 days vs. 14 days\n- **Shipping cutoff:** 3 PM PST vs. 2 PM PST\n- **Bulk-order note:**\n  - Version A: bulk orders require approval\n  - Version B: bulk orders need approval for orders over 50 units\n\n## 3. Verify before finalizing\n- Which version has the correct **updated date**\n- Which **email** is current\n- Which **return window** applies\n- Which **shipping cutoff** is correct\n- Whether bulk-order approval applies to **all bulk orders** or only **orders over 50 units**\n- Whether the vendor should be listed as **Seacliff Electronics** or **Seacliff Electronics LLC**\n\nIf you want, I can also turn this into a **more polished reference-sheet format** or a **shorter client-ready version**.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, this is much closer.\n\nTwo things I’d still tighten:\n- I wouldn’t put **Notes: tax ID on file** in the provisional clean sheet unless that note appears in both versions or is explicitly confirmed. Right now it’s only in B, so I’d treat it as a source-specific note, not clean overlap.\n- I’d probably move **Vendor: Seacliff Electronics** to a neutral form like **Vendor: Seacliff Electronics [verify legal name]** or leave it out of the provisional clean sheet entirely if the legal entity matters.\n\nAlso, if you’re keeping **Warranty: 1 year** as the standardized form, I’d note in the verify section that the source phrasing was **12 months / 1 year**, just so nobody thinks it was invented.\n\nSo the structure is right. I’d just want that clean sheet to be even stricter about what actually qualifies as settled versus what’s only present in one source.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 5,
+      "agent_response": "Got it — that’s the right tightening. Here’s a stricter version:\n\n## 1. Provisional clean sheet\n- **Project:** North Shore Vendor Reference\n- **Contact:** Maya Chen\n- **Phone:** (949) 555-0148\n- **Warranty:** 1 year\n\n## 2. Open conflicts\n- **Updated date:** 4/18/26 vs. 4/19/26\n- **Vendor legal name:** Seacliff Electronics vs. Seacliff Electronics LLC\n- **Email:** `maya@seacliffelectronics.com` vs. `maya.chen@seacliffelec.com`\n- **Return window:** 30 days vs. 14 days\n- **Shipping cutoff:** 3 PM PST vs. 2 PM PST\n- **Bulk-order note:**\n  - Version A: bulk orders require approval\n  - Version B: bulk orders need approval for orders over 50 units\n- **Source-specific note:** tax ID on file appears only in Version B\n\n## 3. Verify before finalizing\n- Which version is the **latest approved update**\n- The correct **vendor legal name**\n- The correct **email**\n- The correct **return window**\n- The correct **shipping cutoff**\n- Whether bulk-order approval applies to **all bulk orders** or only **orders over 50 units**\n- Source phrasing for warranty: **12 months / 1 year**  \n  - standardized here as **1 year**\n\nIf you want, I can also turn this into a **client-ready clean sheet plus a short verification note** in one polished block.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah — that’s the one.\n\nThis version is clean enough for a real edit pass. The provisional sheet is actually provisional now, not half-merged, and the conflicts are separated the way I wanted.\n\nI’d use this. Maybe only tiny note: if this were going to a client, I’d probably label the warranty line as standardized wording from source phrasing, just so nobody reads it as a verified legal term. But that’s minor.\n\nSo, satisfied.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    }
+  ]
+}

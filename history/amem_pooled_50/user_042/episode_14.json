@@ -1,0 +1,49 @@
+{
+  "user_id": "user_042",
+  "task": "I had a sketchy call about an account issue, and I’m trying to decide what I should change right away versus what’s probably overkill. Can you help me make a short checklist so I don’t make things worse by reacting too fast?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.866666666666666,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — here’s a short, “don’t-make-it-worse” checklist.\n\n### Do right away\n- **Don’t call back using the number they gave you.**\n- **Don’t give any code, password, or backup code.**\n- **Check the account yourself** by going to the site/app directly.\n- **Look for real alerts** in the account’s security or notifications page.\n- **Change the password only if you see signs of real risk**:\n  - unknown login\n  - password reset you didn’t start\n  - email/phone changed\n  - money or settings changed\n\n### If the call looked fake\n- **Hang up and block the number.**\n- **Mark the message/call as suspicious** if your phone or carrier lets you.\n- **Tell the real company through their official support page**, not through any link or number from the call.\n\n### What’s usually overkill at first\n- Resetting every password you have\n- Factory-resetting your phone\n- Closing the account immediately\n- Changing payment cards unless there’s actual account or card misuse\n\n### Safe order\n1. Verify the account yourself.\n2. Check for real changes.\n3. Secure the account if needed.\n4. Only then update other related passwords.\n\nIf you want, I can turn this into a **yes/no decision tree** you can follow in 30 seconds.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Pretty good, but I want it a little tighter. You’re still a bit broad with the “if you see signs of real risk” part — I want the exact signs laid out in plain order, and what to ignore so I don’t chase ghosts. A yes/no tree would help more than the general list.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — here’s the tighter yes/no tree.\n\n## 1) Did the caller ask for a code, password, or backup code?\n- **Yes** → **Stop. Hang up. Do not give it.**\n- **No** → go to 2\n\n## 2) Did they tell you to log in from a link, install anything, or “verify” through the call?\n- **Yes** → **Stop. Ignore it.**\n- **No** → go to 3\n\n## 3) Check the account yourself using the app/site you open directly.\n- **If you can sign in normally** → go to 4\n- **If you can’t sign in** → go to 5\n\n## 4) Inside the account, do you see any of these?\n- unknown login/device\n- password changed\n- email or phone changed\n- recovery info changed\n- money moved, card added, or settings changed you didn’t do\n- security alert you didn’t trigger\n\n**If yes to any** → change the password **now** and sign out other sessions if the account lets you.  \n**If no to all** → **ignore the call** and do nothing else for now.\n\n## 5) If you can’t sign in, what error do you get?\n- **It asks for a code sent to your email/phone/app you control** → use the code from the **real account recovery flow**, not anything from the caller.\n- **It asks for your old password** → that can be normal in recovery.\n- **It asks for a code you do not control, or a backup code you don’t recognize** → **stop**; don’t keep trying random recovery paths.\n- **It says the email/phone on the account was changed** → treat that as a real risk and go to official support immediately.\n\n## What to ignore so you don’t chase ghosts\nIgnore:\n- “urgent” tone\n- caller ID\n- numbers they give you\n- links they text/email you\n- requests to “confirm” a code they claim was sent\n- one-off warnings with no matching alert inside the account\n\n## What is enough to act\nAct only if **you confirm it yourself inside the real account** or you **can’t log in because recovery details changed**.\n\n## Safe first move\n1. Open the app/site yourself.\n2. Check security/activity.\n3. Change password only if you find a real change or unknown login.\n4. Sign out other sessions if available.\n5. Then update other accounts that reused the same password.\n\nIf you want, I can make this into a **one-screen version** with just **Yes / No / Do this**.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Better. But I still want the actual one-screen version, not the offer.\n\nMake it blunt:\n- 5 or 6 yes/no questions max\n- what counts as a real sign\n- what to ignore outright\n- and the exact first move if it’s suspicious\n\nKeep it tight. No fluff.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "## One-screen check\n\n**1) Did they ask for a code, password, or backup code?**  \n- **Yes** → **Ignore it. Hang up.**  \n- **No** → go to 2\n\n**2) Did they tell you to click a link, log in through the call, or install anything?**  \n- **Yes** → **Ignore it. Don’t use the link.**  \n- **No** → go to 3\n\n**3) Can you open the account yourself through the app/site you type in or already trust?**  \n- **No** → **Treat it as suspicious.** Go to the official support page yourself.  \n- **Yes** → go to 4\n\n**4) Inside the account, do you see any real sign of trouble?**  \nReal signs = any of these:\n- unknown login/device\n- password changed\n- email or phone changed\n- recovery info changed\n- money moved\n- card added\n- settings changed you didn’t do\n- security alert you didn’t trigger\n\n- **Yes** → **Change the password now. Sign out other sessions if available.**  \n- **No** → go to 5\n\n**5) Did the recovery flow ask for an old password or a code sent to your own email/phone/app?**  \n- **Yes** → that can be normal. Use only the code tied to the account, not anything from the caller.  \n- **No** → go to 6\n\n**6) Did it ask for a code, backup code, or recovery detail you do not control or do not recognize?**  \n- **Yes** → **Stop. Do not keep trying. Use official support.**  \n- **No** → **Ignore the call.**\n\n## What to ignore outright\n- caller ID\n- urgency\n- numbers they gave you\n- links they sent\n- “confirm this code”\n- “log in now” requests through the call\n- one-off warnings with no matching alert inside the account\n\n## Exact first move if it feels suspicious\n**Open the account yourself by typing the site/app address or using the app you already have.**  \nDo **not** call back using their number.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "That’s the one. Tight enough. I’d use it.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 5.0
+      },
+      "gt_correct": null
+    }
+  ]
+}

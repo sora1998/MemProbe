@@ -1,0 +1,36 @@
+{
+  "user_id": "user_029",
+  "task": "I’m dealing with a building system that’s supposed to be fine on paper, but I don’t trust the last check on it. What would you want to verify first before I accept that it’s actually ready to go?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.7,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "I’d verify in this order:\n\n1. **Identity**\n   - exact asset / unit / location\n   - serial or tag number\n   - make sure you’re looking at the right thing\n\n2. **What was actually checked**\n   - not just “inspected”\n   - look for the specific task, test, or measurement\n\n3. **Proof it worked**\n   - readings, logs, photos, screenshots, test results\n   - a pass/fail result tied to the task\n\n4. **Who did it**\n   - name, title, date/time\n   - whether the person was qualified to do that work\n\n5. **What was left open**\n   - deferred items\n   - temporary fixes\n   - bypasses\n   - missing parts\n\n6. **Whether the result matches reality**\n   - does the equipment condition match the paperwork?\n   - do the readings make sense?\n   - does the unit actually operate as claimed?\n\n## Red flags\n- “completed” with no evidence\n- generic wording like “checked OK”\n- no date or no asset ID\n- no test values\n- deferred items missing from the record\n- signs of a temporary fix with no note\n\n## If it’s safety-related\nAlso verify the **fail condition**, not just normal operation.\n\nIf you want, I can turn this into a **short accept / reject checklist** you can use before sign-off.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, basically that. But I’d push harder on the **actual test condition** and **failure mode** first, not just the signature page.\n\nWhat I’d verify first:\n- **What exact test was run**\n- **What condition it was run under** — load, temp, power source, alarms, whatever matters\n- **Did it fail the right way when forced to fail**\n- **Did someone just cycle it once and call it good**\n- **Any bypasses / jumpers / overrides left in place**\n- **Last real maintenance date, not the date on the signoff**\n\nPaper saying “fine” is cheap. I want the sequence, the measurements, and the edge case. If it’s a backup system or anything safety-related, I’d want to know it actually transferred, actually carried load, and actually recovered cleanly. Otherwise it’s just a story.\n\nIf you want, make it a tighter go/no-go list with the exact fields I’d check.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Absolutely — for a building system I’d verify these **first**, in this order:\n\n## 1) Exact asset and location\n- unit ID / tag\n- room / panel / zone\n- make / model / serial\n\nIf you’re not on the right unit, nothing else matters.\n\n## 2) Exact test condition\n- what was tested\n- under what load / power source / temperature / alarm state\n- whether it was normal operation or a forced-fail / transfer / alarm test\n\nIf the condition isn’t stated, the result is weak.\n\n## 3) Failure mode and recovery\n- did it fail the right way when pushed?\n- did it transfer, trip, alarm, or recover as expected?\n- did it clear on its own or only after reset?\n\nFor safety-related systems, normal operation alone is not enough.\n\n## 4) Evidence of the test\n- readings\n- logs\n- photos\n- screenshots\n- timestamps\n- fault codes\n\nIf there’s no proof, treat it as unverified.\n\n## 5) Bypasses / temporary fixes\n- jumpers\n- overrides\n- manual holds\n- temporary wiring\n- disabled alarms\n- parts left out\n\nAny of those means “not ready” until corrected.\n\n## 6) Maintenance timing\n- last real service date\n- last test date\n- last load test / fail test date\n- not just the signoff date\n\n## Go / no-go rule\n### Go only if:\n- the right unit was tested\n- the test condition is clear\n- the failure mode was verified if relevant\n- the evidence matches the claim\n- no bypasses or temporary fixes remain\n\n### No-go if:\n- the record is vague\n- the test condition is missing\n- the system was only cycled once and called good\n- the fail condition was not checked\n- the paperwork says fine but the condition says otherwise\n\nIf you want, I can turn this into a **short accept / reject checklist** with columns for **check / evidence / red flag / pass-fail**.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s the list I’d use.\n\nExact unit, exact condition, actual fail/recovery, evidence, bypasses, maintenance date. That’s the order. If the paper can’t answer those cleanly, I’m not signing off on it.\n\nThe only thing I’d add is: if the test depends on a specific environmental condition, I’d want that documented too — temp, voltage, load, whatever actually changes the result. Otherwise people can hand-wave the whole thing.\n\nThe accept/reject checklist would be useful.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 5.0
+      },
+      "gt_correct": null
+    }
+  ]
+}

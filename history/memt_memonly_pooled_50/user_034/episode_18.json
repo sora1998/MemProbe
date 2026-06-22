@@ -1,0 +1,49 @@
+{
+  "user_id": "user_034",
+  "task": "A client cancels at the last minute, and the weather has turned into heavy rain with strong wind. You suddenly have an open block in the middle of the day, and there’s also a message from an older patient in Tukwila asking if someone could still make their follow-up appointment.",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.533333333333333,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Given the heavy rain/wind and the fact this is Tukwila, I’d use this rule:\n\n- **Treat the Tukwila follow-up as the highest-value fill** if it’s clinically appropriate and the patient can still be seen safely.\n- **Add the full “bad conditions” buffer:** aim to leave **50 minutes before the appointment** if you’re going from SeaTac/nearby.\n- **Protect parking/navigation time first** — in this weather, that’s the part most likely to blow up.\n\nQuick decision order:\n1. **Can the older patient safely be seen today?**\n2. **Is the appointment location easy to find/park at in heavy rain?**\n3. **Do you have enough slack after the visit if traffic slows you down?**\n\nIf yes to all three, I’d **take the follow-up and use the open block to absorb the weather risk**. If parking is tight or the building is hard to find, I’d be even more conservative and treat it like a **50-minute pre-appointment arrival target**, not 40.\n\nIf you want, I can help you turn this into a **“take the fill / decline the fill” 10-second rule** for days like this.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, close enough, but I’d want it a little more practical than that.\n\nFor me it’s not just “highest-value fill.” It’s:\n\n- is the older patient actually okay to be seen in this weather\n- how bad is the drive in and back\n- can I still keep the rest of the day from getting wrecked\n\nIn heavy rain and wind, Tukwila can be fine or it can turn into a mess real quick depending on the exact spot. Parking and walking in with a bag in the rain matters more than people think.\n\nIf you want to make it useful, give me the 10-second rule, but make it something I can decide from fast, like:\n\n- go if it’s within X minutes and parking is simple\n- skip if I’d need to hunt for parking or arrive tight\n- always leave a buffer for I-5 and surface streets\n\nThat kind of thing. More usable.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yep — here’s a more usable **10-second rule**:\n\n### Heavy rain / wind fill rule\n**Take the Tukwila follow-up if:**\n- the patient is **safe to be seen today**\n- the drive is **not pushing you tight**\n- **parking is simple or predictable**\n- you can still leave with a **real buffer** for the return trip\n\n### Quick cutoff\n- **Go** if you can arrive with **20 minutes of cushion**\n- **Go with extra caution** if parking/building access is messy: aim for **30 minutes cushion**\n- **Skip or reschedule** if you’d need to **hunt for parking, walk far in the rain, or arrive tight**\n\n### Weather add-on\nIn **heavy rain + wind**, add:\n- **15–20 minutes extra buffer** for the weather\n- **10 more minutes** if you’re crossing heavier traffic areas\n\n### Simple mental test\nAsk:\n1. **Can this older patient safely be seen today?**\n2. **Will parking/walking in this weather be annoying enough to eat time?**\n3. **If the drive slows down, does the rest of my day still survive?**\n\nIf all 3 are yes, **take it**.  \nIf parking is uncertain or the day is already fragile, **skip it**.\n\nIf you want, I can turn this into a **one-line van rule** you can glance at while driving.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Better. Still a little too broad though.\n\nWhat I’d actually use is more like:\n\n- **Go** if I’m **20 minutes out or more** from the appointment and the parking is straightforward\n- **30 minutes out** if it’s one of those Tukwila spots where you already know the lot is a pain or the walk-in is exposed\n- **Skip** if I’d be **under 15 minutes cushion** on arrival, or if I’d have to circle for parking in heavy rain/wind\n\nAnd yeah, I’d keep the return trip in mind too. If I can’t get in and out without the rest of the day getting bent, it’s not worth forcing.\n\nIf you want, make it one line I could actually keep in my head while driving. That’s the part that matters.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yep — one-line version:\n\n**Go if I’ve got 20 minutes cushion, or 30 in a bad Tukwila spot; skip if I’d be under 15 or have to hunt for parking in heavy rain/wind.**\n\nIf you want, I can make that even tighter into a **van-note version** with just the trigger words.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s it. Tight enough to actually use. The 20 / 30 / under 15 part is the useful bit, and the parking piece is right where the real headache is.\n\nVan-note version would be fine too, but this already works.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "user_id": "user_033",
+  "task": "I’m trying to clean up a recurring discrepancy in a set of reports, and I need a practical way to sort out whether the issue is in the data, the process, or my own assumptions. Can you help me think through the first checks and what would count as a real red flag?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.7,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — start by separating **data issue**, **process issue**, and **assumption issue**.\n\n## First checks\n1. **Verify the basics**\n   - correct report\n   - correct version\n   - correct date range\n   - correct units\n   - correct source file\n\n2. **Check whether the discrepancy reproduces**\n   - same result on a rerun?\n   - same result from a fresh extract?\n   - same result in a different report view?\n\n3. **Compare against the source**\n   - does the report match the raw data?\n   - does the raw data match the process record?\n   - does the process record match what you expected?\n\n4. **Look for pattern**\n   - one-off or recurring?\n   - one field or many?\n   - one batch, one operator, one date, one site?\n\n## What points to a data issue\n- source file is wrong or incomplete\n- report pulls the wrong field\n- units or mapping are off\n- discrepancy disappears when you rerun from the source\n\n## What points to a process issue\n- the same mismatch keeps showing up\n- it follows a step, site, operator, or batch\n- the raw data is consistent but the process record is not\n- the error appears after a specific handoff or transformation\n\n## What points to an assumption issue\n- the report is correct, but the interpretation is wrong\n- you compared the wrong fields\n- the rule you used doesn’t match the way the data are actually built\n- the discrepancy only exists because of an expected exception or valid edge case\n\n## Real red flags\nTreat it seriously if:\n- the mismatch is recurring\n- the raw data and report do not agree\n- the same issue appears across multiple records\n- the discrepancy affects a decision or release\n- you cannot explain the first point where the numbers diverge\n\n## Simple rule\n- **One-off and reproducible only in one place** → likely data or mapping issue\n- **Recurring across records** → likely process issue\n- **Report makes sense only under a different assumption** → likely interpretation issue\n\nIf you want, I can turn this into a **first-check / red-flag / next-step table**.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Mostly right, but it’s still a bit generic. I’d want the first pass tied to where the number actually changes, not just “compare against source” in the abstract.\n\nWhat I’d do first:\n- lock the exact report version and extract time\n- pick one bad case and one clean case\n- walk the value back step by step: raw source → transformation/query → report output\n- note the first point where the two cases diverge\n\nReal red flags, in my book:\n- the discrepancy is consistent after a rerun, not just a one-off glitch\n- it follows a specific step, filter, operator, or batch, which usually means process or mapping, not random noise\n- the source and report disagree before any interpretation gets involved\n- the same mismatch shows up in more than one record or date range\n- you can’t identify the exact step where the value changes\n\nIf the “bad” result disappears when you change the report view, that points to the report logic. If it stays put across views but shifts with the raw extract, that’s data. If neither changes and only your expectation is wrong, then it’s your assumption.\n\nI’d probably want a tighter table: symptom / likely cause / what to check next. That’s the useful version.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "| Symptom | Likely cause | What to check next |\n|---|---|---|\n| Discrepancy disappears when you change the report view | Report logic / mapping issue | Lock the report version, inspect filters, joins, formulas, and field mapping |\n| Discrepancy changes when you rerun the raw extract | Data source / extract issue | Check source file, extract time, source completeness, and whether the same records are pulled |\n| Discrepancy stays the same across views and reruns | Process issue or real upstream mismatch | Walk the value from raw source → transformation/query → report output and find the first divergence |\n| Mismatch follows a specific step, operator, batch, site, or date | Process issue | Compare the affected records to clean ones at each handoff or transformation |\n| Source and report disagree before interpretation | Data / mapping issue | Verify units, field mapping, join logic, and whether the correct source field is being used |\n| Only your expectation is off, but the report is internally consistent | Assumption issue | Recheck the rule, exception, or definition you used to interpret the data |\n| Same mismatch appears in multiple records or date ranges | Recurring process or logic issue | Look for a common step, filter, template, or upstream rule that repeats the error |\n| You can’t name the exact step where the value changes | Unresolved control point | Trace one bad case and one clean case side by side until the first split point |\n\n## First pass\n1. Lock the exact report version and extract time.\n2. Pick one bad case and one clean case.\n3. Trace both from raw source to final report.\n4. Mark the first point where they diverge.\n5. If the divergence is in the source, treat it as data.\n6. If it appears after a step, treat it as process or mapping.\n7. If the report is correct but the rule is wrong, treat it as assumption.\n\n## Real red flags\n- the discrepancy is reproducible\n- it follows a specific step or filter\n- source and report disagree before interpretation\n- it shows up in more than one record or range\n- the first divergence point cannot be identified\n\n",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s the useful version.\n\nThe table is tight enough to use, and the first-pass sequence is actually anchored to the control point where the value changes, which is what matters. The “bad vs clean case” side-by-side is the part I’d keep — otherwise people start hand-waving about source data when the break is really in a filter, join, or formula.\n\nThe red flags are about right too. Reproducible after rerun, follows a specific step, mismatch across records, and no identifiable split point — those are the ones that deserve attention fast.\n\nIf I were tightening it one more notch, I’d add one more line for each row: whether the check is looking for a **data break**, a **process break**, or a **definition break**. That keeps people from lumping everything into “something is wrong” and wasting time.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 5.0
+      },
+      "gt_correct": null
+    }
+  ]
+}

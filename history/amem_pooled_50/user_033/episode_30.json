@@ -1,0 +1,49 @@
+{
+  "user_id": "user_033",
+  "task": "I’m cleaning up a set of notes from a project and need to turn them into something I can refer back to later. The information is a little scattered, and I want a practical way to organize it before I file it away.",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.333333333333333,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Absolutely — a simple way to do this is to sort the notes into three buckets before you file anything:\n\n1. **Core info to keep together**  \n   Put the main project summary, key decisions, and anything you’d want to find quickly later in one place.\n\n2. **Supporting details / attachments**  \n   Keep related papers, references, or background notes grouped with the main set, but separate enough that they don’t clutter the summary.\n\n3. **Follow-up items**  \n   Make a short note for anything unresolved: questions, next steps, missing info, or things someone else needs to confirm.\n\nA practical format could be:\n\n- **Project title / date**\n- **Short summary**\n- **Key points**\n- **Action items**\n- **Related records / attachments**\n- **Open questions**\n\nIf you want, I can help you turn your scattered notes into a clean one-page filing template.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "That’s too generic. I need something I can actually use without babysitting it. Give me a tighter structure — like a template with fields and a rule for what goes where. Also make it work for messy notes, not just neat little bullets. If you’ve got a naming convention or a way to flag what’s verified vs. still shaky, include that too.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 3.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Use this:\n\n## 1) Main record\n**Filename:** `YYYY-MM-DD_ProjectName_Main_v01`  \nThis is the controlling note. Everything important gets pulled here.\n\n**Fields:**\n- **Project / case:**  \n- **Date range:**  \n- **Source notes:**  \n- **Verified facts:**  \n- **Unverified / shaky items:**  \n- **Decisions made:**  \n- **Open questions:**  \n- **Next action / owner / due date:**  \n\n## 2) Source log\nKeep messy notes here in the order they came in.\n\n**Format:**\n- **Timestamp**\n- **Source / person / doc**\n- **What was said / observed**\n- **Status:** verified / unverified / needs follow-up\n- **Linked to main record:** yes / no\n\n## 3) Rule for what goes where\n- **Main record:** only cleaned, usable information you’d want to find later fast.\n- **Source log:** raw notes, fragments, contradictions, and anything not yet confirmed.\n- **Attachments:** files, scans, screenshots, emails, or supporting docs.\n\n## 4) Verification flag\nUse one tag only:\n- **[V]** = verified\n- **[U]** = unverified\n- **[F]** = follow-up needed\n\n## 5) Quick cleanup rule\nIf a note has both confirmed and shaky info, split it:\n- keep the confirmed part in the main record\n- leave the rest in the source log with a flag\n\nIf you want, I can turn this into a fill-in template you can paste straight into your notes app.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Closer. But it still reads like a skeleton, not a working system.\n\nI need the actual fill-in template — copy/paste format, with the fields laid out so I can drop messy notes into it without thinking. And make the rules sharper: what counts as verified, what stays raw, and how to handle one note that contains three different kinds of information.\n\nAlso: the filename convention is fine, but I’d want versioning that doesn’t get stupid. v01, v02 is okay. Maybe add a status tag in the name if the record is still provisional. Something like `YYYY-MM-DD_Project_Main_v01_PROV` or whatever you’d actually use.\n\nGive me the usable version, not the outline.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Use this as a copy/paste working template.\n\n```text\nFILENAME:\nYYYY-MM-DD_ProjectName_Main_v01_PROV\nYYYY-MM-DD_ProjectName_Main_v01_FINAL\n\nSTATUS:\nPROV / FINAL / HOLD\n\nPROJECT / CASE:\n[one line]\n\nDATE RANGE:\n[start – end]\n\nCONTROLLING RECORD:\n[this note / this packet / this file]\n\nSUMMARY:\n- [4–5 lines max, plain facts only]\n\nVERIFIED FACTS:\n- [confirmed items only]\n\nRAW / UNVERIFIED NOTES:\n- [messy notes, fragments, contradictions, unclear points]\n\nDECISIONS MADE:\n- [decision]\n- [who decided]\n- [date]\n\nOPEN QUESTIONS / FOLLOW-UP:\n- [question]\n- [owner]\n- [due date]\n\nNEXT ACTION:\n- [action]\n- [owner]\n- [due date]\n\nRELATED RECORDS / ATTACHMENTS:\n- [file name / doc / email / scan / screenshot]\n\nCROSS-REFERENCE:\n- Case ID:\n- Sample / lot / project ID:\n- Date / time:\n- Person / owner:\n- Version:\n\nSOURCE LOG:\n- [timestamp] [source] [note] [status]\n- [timestamp] [source] [note] [status]\n```\n\nRules for what goes where:\n\n- **Verified facts** = directly confirmed, dated, named, or supported by a source you trust.\n- **Raw / unverified notes** = anything unclear, incomplete, conflicting, or not yet checked.\n- **Summary** = only the cleaned version you’d want to find later fast.\n- **Source log** = keep the messy original wording there; don’t rewrite it.\n- **If one note has 3 kinds of info, split it**:\n  - confirmed piece → **Verified Facts**\n  - unclear piece → **Raw / Unverified Notes**\n  - action item → **Open Questions / Follow-up** or **Next Action**\n\nHard rule for the gray area:\n\n- If it could go in two places, **don’t force it into the main record**.\n- Put it in **RAW / UNVERIFIED NOTES** or **HOLD** with a one-line reason.\n- Only move it to **Verified Facts** once it’s confirmed.\n\nA clean status convention:\n\n- **PROV** = still being worked\n- **FINAL** = ready to file\n- **HOLD** = ambiguous, missing info, or waiting on someone\n\nIf you want, I can turn your actual scattered notes into this format directly.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s usable.\n\nThe split between **Verified Facts**, **Raw / Unverified Notes**, and **Source Log** is the part I needed. Also the **HOLD** tag is better than trying to pretend everything unresolved is just “provisional.” That’s how records get sloppy.\n\nI’d use it. Probably with a little stricter naming on the versioning if the file gets revised a lot, but `v01_PROV`, `v02_PROV`, then `FINAL` is fine. Clean enough.\n\nNo extra babysitting, which was the point.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    }
+  ]
+}

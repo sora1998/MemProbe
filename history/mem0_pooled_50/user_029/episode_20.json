@@ -1,0 +1,36 @@
+{
+  "user_id": "user_029",
+  "task": "We had a building-wide power issue at work and part of the place is basically running on dim emergency lighting right now. I’m trying to figure out the fastest way to narrow down whether it’s a local fault or something upstream before the official fix gets here—what would you check first?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.300000000000001,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "First thing: treat it as a **power-quality / safety issue**, not just a lighting problem. If anything is **smoking, hot, buzzing, or tripping repeatedly**, stop and escalate to facilities/electrician immediately.\n\nFastest way to narrow **local fault vs upstream issue**:\n\n1. **Confirm scope**\n   - Is it **only one room/zone** or **multiple areas / whole building**?\n   - If several unrelated areas are affected, that strongly suggests **upstream**.\n\n2. **Check the obvious upstream points first**\n   - Main breaker / feeder breaker status\n   - Any **disconnects**, panel alarms, or ATS/transfer switch indications\n   - Utility outage indicators if you have them\n   - If there’s a generator/UPS system: is it actually carrying load, or just emergency lights?\n\n3. **Look for a common point of failure**\n   - One panel feeding the dim lights?\n   - A shared neutral/common connection issue?\n   - Any sign of **loose connection, heat discoloration, corrosion, or damage** at the panel or fixture feed?\n\n4. **Test whether the symptom is repeatable**\n   - If safe, note whether the dimming changes with load switching or when a specific circuit comes on.\n   - A symptom that changes with load often points to **marginal supply / upstream connection** rather than one bad lamp.\n\n5. **Check fault history / indicators**\n   - Breaker trip history, UPS logs, inverter alarms, lamp/driver fault codes if available.\n   - If there’s a controller/HMI, see whether it shows a stale alarm or actual active fault.\n\n6. **Compare against a known-good area**\n   - If another part of the building is normal, compare voltage/behavior at the nearest panel or feed point if you’re authorized and have the right meter/training.\n   - If the issue is present everywhere, it’s almost certainly **upstream**.\n\nRule of thumb:\n- **One fixture or one room** = likely local.\n- **Multiple areas, dim emergency lighting, or odd behavior across circuits** = likely upstream supply/transfer/neutral issue.\n\nIf you want, I can help you turn this into a **very short现场 checklist** in the exact order to walk it.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s the right direction, but it’s still a little generic. I want the actual order I’d walk it in, like 5 minutes max, not a broad safety lecture.\n\nWhat I’d check first:\n- whether it’s one panel/one zone or multiple unrelated areas\n- panel/ATS/generator status first, not fixtures\n- any obvious loose/heat/corrosion signs at the common feed point\n- whether the dimming tracks with load changes\n- compare a known-good area if I can do it safely\n\nIf you can, put that into a tight sequence: what to look at first, second, third. That’s the useful part.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yep — I’d walk it like this, in order:\n\n1. **Scope it in 30 seconds**\n   - Check whether the dim emergency lighting is:\n     - **one room/one panel/one zone**, or\n     - **multiple unrelated areas**\n   - If it’s spread across unrelated areas, treat it as **upstream** immediately.\n\n2. **Go straight to the common source point**\n   - Look at the **panel / ATS / generator / UPS status first**, not fixtures.\n   - Check for:\n     - breaker trip / transfer indication\n     - source fail / on-battery / on-generator\n     - any obvious alarm lights\n   - The question is: **is the source actually feeding normally, or is it already degraded?**\n\n3. **Check the common feed point for obvious damage**\n   - At the panel or first common distribution point, look for:\n     - **heat discoloration**\n     - loose terminations\n     - corrosion\n     - burnt smell / damage\n   - If there’s one shared point feeding the bad area, that’s the highest-value local-vs-upstream clue.\n\n4. **See if the dimming changes with load**\n   - Turn on/off a known load if that’s something you can do safely and normally.\n   - If the lights **dip more, recover, or flicker with load changes**, that points to:\n     - marginal supply\n     - loose neutral/common\n     - upstream connection issue\n   - If it stays the same regardless, that leans more toward a local fixture/driver issue.\n\n5. **Compare to a known-good area**\n   - Check a nearby area that should be on a different feed/panel if possible.\n   - If the good area is normal and the bad area is not, you’ve narrowed it to the **feed/panel branch**.\n   - If everything is dim, it’s almost certainly **upstream** of the building branch.\n\nFast read:\n- **One zone only** → local feed/panel/branch issue\n- **Several unrelated zones** → upstream supply / ATS / generator / neutral issue\n- **Dimming changes with load** → marginal connection or upstream supply problem\n\nIf you want, I can turn this into a **one-line decision tree** you can follow while standing there.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s basically the sequence I’d use.\n\n1. **Scope first** — one zone/panel or multiple unrelated areas.\n2. **Source next** — panel / ATS / generator / UPS status before touching fixtures.\n3. **Common feed point** — look for heat, looseness, corrosion, burnt smell.\n4. **Load behavior** — see if the dimming shifts when a known load changes.\n5. **Known-good compare** — if a different area is normal, that helps pin the branch.\n\nThat’s the right order. Fastest way to avoid chasing a bad lamp when the supply is the real problem.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    }
+  ]
+}

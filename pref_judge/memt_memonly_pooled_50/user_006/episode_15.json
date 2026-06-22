@@ -1,0 +1,203 @@
+{
+  "user_id": "user_006",
+  "task": "I’m putting together a plan for how to handle a new technical role I’m stepping into, and I want to make sure I don’t waste the first few weeks. What should I focus on early so I can get up to speed fast and actually build some leverage instead of just staying busy?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "verbosity_preference",
+      "short": "Wants responses kept tight and efficient",
+      "explanation": "He values speed, control, and efficiency, so he is unlikely to want long-winded help. He would probably prefer responses that get to the point quickly and avoid unnecessary filler. Overexplaining would feel like wasted time to him."
+    },
+    {
+      "idx": 2,
+      "dimension": "directness_preference",
+      "short": "Prefers blunt answers without softening",
+      "explanation": "His skeptical, competitive style suggests he wants clear, unambiguous guidance rather than hedged language. He would likely see excessive caution as evasive or inefficient. Straight answers fit his preference for control and decisive action."
+    },
+    {
+      "idx": 3,
+      "dimension": "format_preference",
+      "short": "Likes structured, actionable output",
+      "explanation": "He seems most likely to respond well to responses that are organized and easy to execute, such as bullets or checklists. That matches his practical, task-focused mindset. Loose, meandering prose would probably frustrate him."
+    },
+    {
+      "idx": 4,
+      "dimension": "detail_level_preference",
+      "short": "Wants the useful essentials, not padding",
+      "explanation": "He likely wants enough context to act, but not exhaustive background unless it helps him win or avoid mistakes. He is efficiency-driven, so extra caveats only matter when they change the decision. He would probably skip anything that does not affect the outcome."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Accepts pushback only if it is sharp and useful",
+      "explanation": "He is skeptical and self-serving, so he probably does not enjoy moralizing or vague objections. But if the pushback is concrete, efficient, and clearly tied to risk or leverage, he is more likely to respect it. Weak or overly gentle correction would likely be ignored."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Focus early on the few things that give you control, reduce risk, and make other work easier. I’d use this order:\n\n1. **Learn the critical workflow first**\n   - Identify the systems or stations that, if they fail, stop work or create the most downstream pain.\n   - In your environment, that usually means: core path first, then shared choke points, then high-volume stations, then single-user issues.\n   - Ask: “What breaks the most? What breaks the most expensive stuff? What is active during peak use?”\n\n2. **Map the real escalation path**\n   - Know who owns what, who can approve changes, and who you call when things go sideways.\n   - Build a short list of “if X fails, do Y” contacts and recovery steps.\n\n3. **Get a baseline of normal**\n   - Document what “good” looks like before you’re in a crisis.\n   - For network work, that means checking the physical layer first and knowing the normal counters, link state, and behavior.\n   - Define “done” and “stable enough” up front so you don’t chase half-fixes.\n\n4. **Find the recurring pain points**\n   - Look for the issues that happen repeatedly, especially during peak shifts or at upstream stations.\n   - Prioritize things that protect time and prevent blame, not just things that look urgent.\n\n5. **Build a simple triage filter**\n   - Score items by impact and frequency on a 0–10 scale.\n   - Keep in your lane the items that score high on leverage, even if they aren’t screaming urgent.\n   - Kick out low-leverage busywork unless it becomes a real problem.\n\n6. **Make rollback and recovery part of every change**\n   - Have a rollback path, checkpoints, and a quick “first things to verify” list if something starts acting weird mid-change.\n   - Don’t touch dependent services until the transport or core path is proven clean.\n\n7. **Document as you go**\n   - Track patterns, failure windows, and what you verified.\n   - That gives you evidence, speeds future troubleshooting, and keeps you from re-learning the same lesson.\n\nA good early goal is: **know what matters, know what breaks, know how to verify it, and know how to recover it.** That’s leverage.\n\nIf you want, I can turn this into a **30-day ramp plan** with weekly priorities and a “what to ignore” list.",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly tight and efficient: it uses a concise numbered list and ends with a short summary. Slightly longer than necessary, but not rambling."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Fairly direct and blunt, e.g. \"Focus early on the few things that give you control\" and \"Don’t touch dependent services until the transport or core path is proven clean.\" Some softening remains in phrases like \"I’d use this order\" and \"usually means.\""
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable: numbered steps, bullets, explicit questions, and a clear offer to turn it into a \"30-day ramp plan.\""
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Gives the useful essentials without much padding, focusing on workflow, escalation, baseline, triage, rollback, and documentation. A few extra examples add some context, but they support action."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Includes useful pushback against busywork and low-leverage tasks, e.g. \"Prioritize things that protect time and prevent blame\" and \"Kick out low-leverage busywork.\" The pushback is practical rather than moralizing."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Got it. If the goal is **control fast**, not “stay busy,” then the first month should be about building a **map of leverage**:\n\n- what actually breaks work,\n- who actually owns it,\n- what evidence proves what happened,\n- and what recurring pain you can turn into authority.\n\nHere’s a tighter sequence.\n\n## 1) First learn the “blast radius” map\nDon’t start by learning everything. Start by learning **what, if broken, stops other people from working**.\n\nAsk:\n- What systems are on the critical path?\n- What’s the shared choke point?\n- What fails during peak hours?\n- What causes the most downstream tickets?\n- What issue creates blame, delay, or rework?\n\nYour first target is not “the whole environment.” It’s:\n1. core path  \n2. shared dependencies  \n3. high-volume endpoints  \n4. repeat offenders  \n5. edge cases\n\nIf you know the blast radius, you know where your attention has leverage.\n\n## 2) Get the artifacts that save time later\nYou want copies of the things that let you verify before/after state and avoid arguments.\n\nSteal time to get:\n- current network / system diagrams\n- config backups or exports\n- change records\n- monitoring dashboards\n- alert history\n- incident tickets / postmortems\n- maintenance windows\n- vendor handoff docs\n- known-issues list\n- access list / ownership matrix\n\nFor anything you touch, capture:\n- timestamp\n- before state\n- after state\n- config snapshot if possible\n\nThat’s not paperwork. That’s dispute insurance and troubleshooting speed.\n\n## 3) Learn the logs that expose the real story\nDon’t just ask “is it up?” Ask “what changed when it started failing?”\n\nFor network / infrastructure work, look for:\n- interface up/down events\n- STP changes\n- LACP churn\n- SFP / optics events\n- power events\n- watchdog / reboot events\n- auth / DHCP / DNS failures if they affect the path\n\nYou want to know:\n- what the first symptom was,\n- what changed right before it,\n- and whether the failure is physical, control-plane, or dependency-related.\n\nThat’s how you stop chasing noise.\n\n## 4) Ask questions that reveal ownership, not just process\nA lot of orgs look clear on paper and fuzzy in reality. Your job is to find out who actually owns decisions, validation, and recovery.\n\nAsk:\n- Who owns this if it fails after cutover?\n- Who signs off that it’s stable?\n- Who can approve rollback?\n- Who owns validation if the vendor says “done” but it’s not working?\n- Who gets paged first?\n- Who can change the config without waiting?\n- What’s the escalation path when the normal path stalls?\n\nYou’re trying to find the **real operator**, not just the name on the chart.\n\n## 5) Ignore anything that doesn’t increase control\nPeople will dump work on you that feels useful but doesn’t move leverage.\n\nUsually low-value early work is:\n- cosmetic cleanup with no operational gain\n- one-off requests with no pattern\n- “nice to have” documentation not tied to a real failure mode\n- tasks that don’t reduce risk, save time, or clarify ownership\n- busywork that keeps you occupied but doesn’t improve your ability to act\n\nIf it doesn’t help you:\n- prevent outages,\n- recover faster,\n- reduce blame,\n- or make future changes safer,\n\nit’s probably not first-month work.\n\n## 6) Look for repeat pain you can turn into authority\nAuthority comes from solving things that keep coming back.\n\nWatch for:\n- the same ticket showing up repeatedly\n- the same station or service causing delays\n- the same failure mode after changes\n- the same “nobody knows” gap\n- the same manual workaround\n- the same handoff problem\n\nIf you can turn one recurring pain into:\n- a clean checklist,\n- a standard validation step,\n- a rollback plan,\n- a dashboard,\n- or a short runbook,\n\nyou become the person who made the work safer and faster. That’s leverage.\n\n## 7) Use a simple filter for what to take on\nFor every request, ask:\n\n- Does this protect time?\n- Does it reduce risk?\n- Does it prevent blame?\n- Does it keep control in our hands?\n- Does it make future work easier?\n\nIf yes, high leverage.  \nIf no, probably noise.\n\n## 8) A practical first-month sequence\n### Week 1: map and collect\n- identify critical systems and owners\n- get diagrams, configs, logs, dashboards, and change history\n- learn escalation and rollback paths\n- find the top 3 recurring pain points\n\n### Week 2: verify and observe\n- compare docs to reality\n- check what’s actually monitored\n- review recent incidents and first-symptom logs\n- identify where ownership is unclear\n- note where validation usually breaks down\n\n### Week 3: narrow to leverage points\n- pick 1–2 recurring issues you can improve\n- build or improve a checklist/runbook\n- define before/after evidence for changes\n- tighten handoffs and validation steps\n\n### Week 4: make it repeatable\n- standardize the most useful checks\n- document the escalation path\n- create a simple “what to verify first” list\n- turn one recurring pain into a visible win\n\n## 9) What “good” looks like by the end of month one\nYou should be able to answer, quickly:\n- what matters most,\n- what breaks most often,\n- who owns what,\n- where the evidence lives,\n- how to validate a change,\n- how to recover when it fails,\n- and which work is worth your time.\n\nThat’s the difference between being busy and being useful.\n\nIf you want, I can turn this into a **first-30-days checklist** you can actually use day by day, with:\n- what to ask,\n- what to collect,\n- what to ignore,\n- and what outputs to produce by week.",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly tight and efficient: it says \"Here’s a tighter sequence\" and uses concise bullets. But it’s still fairly long and detailed, so not a perfect match for wanting minimal length."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Generally blunt and direct, e.g. \"Don’t start by learning everything\" and \"Ignore anything that doesn’t increase control.\" Some softening remains in phrases like \"probably\" and \"If you want,\" so it’s not maximally blunt."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable: numbered sections, bullet lists, a \"Practical first-month sequence,\" and a clear \"What ‘good’ looks like\" section. Very easy to execute."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Focuses on essentials and leverage rather than background, with lines like \"what actually breaks work\" and \"Ignore anything that doesn’t increase control.\" It still includes a fair amount of supporting detail, so not fully stripped down."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Pushback is present and useful, not moralizing: \"Don’t start by learning everything\" and \"Usually low-value early work is...\" It’s concrete and tied to risk/leverage, though not especially sharp or confrontational."
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "agent_response": "Here’s the **actual order** I’d use if the goal is **control fast**.\n\n## 1) Day 1–3: learn before touching anything\nDo **not** start by fixing random stuff. Start by building a working map of the environment.\n\nLearn these in order:\n1. **What is business-critical**\n   - What systems/stations stop work if they fail?\n   - What is on the core path?\n   - What are the shared choke points?\n\n2. **What breaks most often**\n   - Top recurring incidents\n   - Peak-time failures\n   - Anything that causes downstream tickets or delays\n\n3. **Who really owns recovery**\n   - Not the org chart owner\n   - The person who can actually approve, validate, and roll back\n\n4. **What “normal” looks like**\n   - Normal status\n   - Normal alerts\n   - Normal change window behavior\n   - Normal failure patterns\n\nIf you don’t know those four things, you’re just reacting.\n\n---\n\n## 2) First files / exports / screenshots / logs to grab\nGet the artifacts that let you verify reality later and avoid “he said / she said.”\n\nPrioritize these:\n- **Network / system diagrams**\n- **Config exports or backups**\n- **Current inventory / asset list**\n- **Monitoring dashboard screenshots**\n- **Alert history**\n- **Recent incident tickets**\n- **Postmortems / RCA docs**\n- **Change records**\n- **Maintenance window schedule**\n- **Ownership / escalation matrix**\n- **Known issues list**\n- **Any vendor handoff docs**\n\nIf you can only grab a few things first, take:\n1. latest config/export  \n2. current diagram  \n3. recent incident history  \n4. alert history  \n5. ownership/escalation list  \n\nThat gives you context, evidence, and a path to action.\n\n---\n\n## 3) Questions that expose the real owner\nAsk questions that force people to name who actually acts when things go wrong.\n\nUse these:\n- **Who owns this when it fails at 2 a.m.?**\n- **Who can approve rollback without waiting?**\n- **Who signs off that it’s stable?**\n- **Who validates it after a change?**\n- **Who gets paged first?**\n- **If the vendor says it’s done but it’s not working, who decides next steps?**\n- **Who can make the config change directly?**\n- **Who is the final escalation if the normal path stalls?**\n\nA fake owner will talk about process.  \nA real owner will give names, actions, and decision rights.\n\n---\n\n## 4) Low-leverage red flags in a new role\nThese are the things that look useful but usually waste your first month:\n\n- cosmetic cleanup\n- one-off requests with no pattern\n- “nice to have” docs that don’t help recovery or validation\n- tasks with no impact on risk, downtime, or speed\n- work that makes you busy but doesn’t teach you ownership\n- jumping into edge cases before you know the core path\n- fixing symptoms without capturing the failure evidence\n- doing other people’s admin because they want to offload it\n\nIf it doesn’t improve:\n- recovery,\n- validation,\n- ownership clarity,\n- or repeatability,\n\nit’s probably low leverage.\n\n---\n\n## 5) The early win that usually buys more control\nThe best early win is usually:\n\n**turning one recurring pain into a repeatable check or runbook.**\n\nExamples:\n- a short validation checklist\n- a rollback checklist\n- a “first 5 things to verify” sheet\n- a clean incident triage note\n- a dashboard or alert view that shows the real failure mode\n- a simple ownership map for a recurring problem area\n\nWhy this works:\n- it saves time\n- it reduces blame\n- it makes you look like the person who stabilizes things\n- it gives you authority to touch adjacent areas later\n\nIf you fix one recurring issue and make it repeatable, people start trusting you with more of the process.\n\n---\n\n## 6) The sequence for the first month\n### Days 1–3\n- map critical systems\n- collect configs, diagrams, logs, incident history\n- identify real owners\n- learn normal state and common failure modes\n\n### Days 4–7\n- compare docs to reality\n- find gaps between “official” ownership and actual ownership\n- identify top recurring pain points\n- learn escalation and rollback paths\n\n### Week 2\n- sit on recent incidents or changes if possible\n- trace first symptom to root cause pattern\n- capture what gets checked too late or not at all\n- identify the one thing that would have saved time\n\n### Week 3\n- build a checklist, runbook, or validation step for one recurring issue\n- get copies of whatever evidence is needed to prove before/after state\n- tighten who owns what in that process\n\n### Week 4\n- use the repeatable fix as proof you can reduce risk and save time\n- expand only to adjacent high-leverage areas\n- ignore anything that doesn’t improve control\n\n---\n\n## 7) The rule to keep you from getting buried\nWhen someone gives you work, ask:\n\n**Does this increase control, reduce risk, or make future work easier?**\n\nIf yes, take it.  \nIf no, it’s probably noise.\n\nIf you want, I can turn this into a **day-by-day first 10 working days plan** with exact questions and artifact checklist.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very tight and efficient: uses short sections, bullets, and direct imperatives like \"Do not start by fixing random stuff\" and \"If you don’t know those four things, you’re just reacting.\" No filler."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Blunt throughout, with little hedging: \"Do not,\" \"fake owner,\" \"it’s probably noise,\" and \"If no, it’s probably low leverage.\" The tone is decisive and unsoftened."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Highly structured and actionable: numbered sections, sub-bullets, a first-month sequence, and concrete questions/checklists. Easy to execute."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Focuses on essentials that matter for leverage: critical systems, recurring incidents, ownership, configs, incident history, and repeatable checks. Explicitly rejects padding: \"If it doesn’t improve... it’s probably low leverage.\""
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Pushback is present and useful, not moralizing: \"Do not start by fixing random stuff,\" \"A fake owner will talk about process,\" and \"If no, it’s probably noise.\" It’s sharp and tied to risk/control, though not especially adversarial."
+        }
+      ]
+    },
+    {
+      "turn": 4,
+      "agent_response": "Absolutely — here’s the **day-by-day sequence** in the technical lane, aimed at **control fast**.\n\n## Day 1 — don’t touch anything yet\nBefore you change or “help” with anything:\n\n- Get your **access story** straight:\n  - what you can read\n  - what you can change\n  - what needs approval\n  - what needs a second set of eyes\n- Ask for the **current critical path**:\n  - what systems, configs, or services stop work if they fail\n  - what’s considered core vs downstream\n- Get the **last known good** point:\n  - last stable config\n  - last clean change window\n  - last incident that mattered\n- Write down the **escalation path**:\n  - who owns what\n  - who approves rollback\n  - who validates recovery\n\nGoal: know where control lives before you touch the environment.\n\n## Day 2 — pull the artifacts first\nCopy or capture the things that tell you what “normal” is and what changed last:\n\n- current configs / exports / backups\n- network or system diagrams\n- interface or service status screenshots\n- monitoring dashboards\n- alert history\n- recent incident tickets\n- recent change records\n- maintenance window notes\n- ownership / escalation matrix\n- known-issues list\n\nIf time is tight, prioritize:\n1. current config/export\n2. diagram\n3. recent change record\n4. alert history\n5. incident history\n\nGoal: have evidence, not just someone’s memory.\n\n## Day 3 — verify reality against the paper\nNow compare what you were told to what’s actually true:\n\n- Does the diagram match the live setup?\n- Do the configs match what’s in production?\n- Are the monitored alerts the ones that actually fail first?\n- Are the “owners” on paper the same people who really respond?\n- Do the recent incidents show the same recurring pattern people described?\n\nLook for gaps between:\n- documented vs actual\n- official owner vs real owner\n- “healthy” vs quietly failing\n\nGoal: find where the environment lies to people.\n\n## Days 4–5 — ask questions that force real ownership\nUse questions that require names, actions, and decision rights:\n\n- Who owns this when it fails after hours?\n- Who can approve rollback immediately?\n- Who validates that it’s actually stable?\n- Who gets paged first?\n- Who makes the final call if the vendor says “done” but it still breaks?\n- Who can change this without waiting on another team?\n- If this fails mid-change, who takes command?\n\nIf they answer vaguely, keep pushing until you get:\n- a person\n- a role\n- a decision point\n- a fallback path\n\nGoal: separate real operators from paper owners.\n\n## Week 2 — ignore noise, take on only leverage work\nThis is where people get buried. Don’t.\n\n### Ignore:\n- cosmetic cleanup\n- one-off requests with no pattern\n- “nice to have” docs that don’t help recovery\n- edge cases before you understand the core path\n- busywork that doesn’t improve control\n- tasks that make you look occupied but don’t reduce risk\n\n### Take on:\n- recurring failures\n- unclear ownership in critical paths\n- missing validation steps\n- broken rollback or change checks\n- repeated manual work that can be standardized\n\nGoal: spend time where it reduces future pain.\n\n## Week 3 — turn one pain point into a repeatable process\nPick one recurring issue and make it boring.\n\nTurn it into one of these:\n- a short validation checklist\n- a rollback checklist\n- a first-5-things-to-check sheet\n- a runbook for a recurring failure\n- a simple evidence template for before/after state\n- a handoff checklist for changes\n\nMake sure it includes:\n- what to check first\n- what “stable enough” means\n- what evidence proves success\n- when to stop and escalate\n\nGoal: convert tribal knowledge into a control point.\n\n## Week 4 — use the repeatable fix as your proof piece\nThis is your leverage move.\n\nUse the thing you standardized to show:\n- less rework\n- faster recovery\n- fewer missed checks\n- clearer ownership\n- safer changes\n\nThen document:\n- the failure pattern\n- the check you added\n- the result\n- who owns it now\n- what gets verified before/after\n\nThat becomes your proof that you’re not just doing tasks — you’re improving the process.\n\n## The rule for the whole month\nFor any task, ask:\n\n**Does this increase control, reduce risk, or make future work easier?**\n\nIf yes, do it.  \nIf no, it’s probably noise.\n\nIf you want, I can turn this into a **single-page first-30-days checklist** you can keep open while you work.",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly tight and efficient: it uses short sections, bullets, and a clear sequence. Minor verbosity remains in the repeated goals and examples, but it avoids long-winded filler."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Fairly blunt and direct, e.g. \"don’t touch anything yet,\" \"ignore noise,\" and \"If no, it’s probably noise.\" It does soften a bit with explanatory framing like \"Absolutely\" and repeated goal statements."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable: day-by-day plan, bullet lists, prioritized items, and explicit goals. Very easy to execute."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Focuses on essentials and leverage rather than background. It does include some extra detail and repetition, but mostly sticks to what matters: access, artifacts, reality checks, ownership, and repeatable fixes."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Pushback is sharp and useful rather than moralizing. For example, \"If they answer vaguely, keep pushing\" and \"If no, it’s probably noise\" give concrete correction tied to control and risk."
+        }
+      ]
+    },
+    {
+      "turn": 5,
+      "agent_response": "Absolutely. Here’s the **operational move order** for the first month in a technical role — built to get you **control, not just activity**.\n\n## Day 1 — first 15 minutes: get the map before you touch anything\nAsk for these in this order:\n\n1. **“What am I allowed to read, change, and approve?”**\n2. **“What are the top 3 systems or configs that break work if they go wrong?”**\n3. **“Where is the latest known-good config or export?”**\n4. **“What’s the rollback path if a change goes sideways?”**\n5. **“Who gets called first if this fails after hours?”**\n\nThen immediately ask for:\n- access list\n- escalation list\n- change window schedule\n- current ownership matrix\n- any “do not touch” systems\n\nDo **not** start troubleshooting or helping yet.  \nYour job on Day 1 is to find where control lives.\n\n---\n\n## Day 2 — copy the things that save you later\nPull these locally or into your working folder if allowed:\n\n### Copy, don’t just look at:\n- current config exports / backups\n- network or system diagrams\n- ownership / escalation matrix\n- recent change records\n- incident tickets from the last 30–90 days\n- postmortems / RCAs\n- maintenance window notes\n- known-issues list\n- monitoring dashboards, if exportable\n- any runbooks or vendor handoff docs\n\n### Screenshot only if you can’t export:\n- live status pages\n- alert dashboards\n- topology views\n- permission screens\n- service health views\n\n### Best first grabs:\n1. latest config/export\n2. diagram\n3. recent incidents\n4. alert history\n5. escalation/ownership list\n\nIf you can only get a few things, get the ones that explain:\n- what normal looks like\n- what changed\n- who responds\n- what failed before\n\n---\n\n## Day 3 — compare side by side\nNow verify paper vs reality.\n\nCompare:\n- **diagram vs live environment**\n- **exported config vs actual config**\n- **incident history vs what people say breaks**\n- **alert history vs what people claim is monitored**\n- **ownership matrix vs who actually responds**\n- **change records vs what actually got touched**\n\nSpecifically look for:\n- stale configs\n- undocumented dependencies\n- alerts that fire too late\n- systems that are “owned” on paper but ignored in practice\n- repeated failure patterns that never made it into the docs\n\nYour goal is to find the gaps people have normalized.\n\n---\n\n## Days 4–5 — ask questions that make people reveal the real owner\nUse wording that forces decision rights, not vague process talk.\n\nAsk exactly:\n\n- **“When this fails, who actually takes command?”**\n- **“Who can approve rollback without waiting?”**\n- **“Who signs off that this is stable?”**\n- **“Who validates it after the change?”**\n- **“Who gets paged first when it breaks?”**\n- **“If the vendor says it’s fixed but it still fails, who decides next?”**\n- **“Who can change this directly?”**\n- **“Who owns this at 2 a.m.?”**\n\nFollow-up if they stay vague:\n- **“Who’s the person I’d call?”**\n- **“Who did that last time?”**\n- **“Who has the final yes/no?”**\n\nReal owners answer with names and actions.  \nFake owners answer with process language.\n\n---\n\n## Week 2 — refuse the work that looks urgent but doesn’t buy control\n### Refuse to own:\n- cosmetic cleanup\n- one-off requests with no pattern\n- “quick favors” that don’t touch configs, logs, access, or change control\n- edge-case debugging before you know the common failure modes\n- admin work someone else is trying to offload\n- tasks with no rollback, no evidence, and no repeatability\n\n### Take on only:\n- recurring failures\n- broken validation steps\n- unclear ownership on critical systems\n- missing logs or monitoring that block diagnosis\n- change-control gaps\n- recovery steps that are undocumented or inconsistent\n\nIf it doesn’t improve:\n- config clarity,\n- log visibility,\n- access,\n- escalation,\n- rollback,\n- or change safety,\n\nit’s probably not your Week 2 work.\n\n---\n\n## Week 3 — standardize one process that gives you more authority\nPick **one recurring change or failure path** and make it repeatable.\n\nBest choice:\n- a change validation checklist\n- a rollback checklist\n- a pre/post-change evidence template\n- a “first 5 checks” runbook for a common failure\n- a handoff checklist for ownership transfer\n- a simple incident triage sheet\n\n### The process should include:\n- what to check first\n- what counts as success\n- what counts as “stop and escalate”\n- where the logs live\n- what config snapshot to capture\n- who signs off before/after\n\n### Why this buys authority:\nIt turns you into the person who:\n- prevents bad changes,\n- catches failures earlier,\n- and makes recovery cleaner.\n\nThat usually gets you pulled into more of the process, which is where control comes from.\n\n---\n\n## Week 4 — present one concrete artifact that proves you’re useful\nDon’t present a vague summary. Present something that shows you improved the operating model.\n\nBest proof pieces:\n- a before/after config comparison\n- a one-page ownership + escalation map\n- a change checklist with actual usage\n- a rollback/runbook used on a real issue\n- an incident summary showing the new check caught the problem earlier\n- a dashboard or log view that now exposes the failure faster\n\n### The strongest one:\n**a real example where your checklist/runbook reduced time to identify, validate, or recover a failure.**\n\nBring:\n- what failed\n- what you checked\n- what evidence you used\n- what changed\n- what got faster or safer\n\nThat’s the artifact that makes people trust you with more access and more control.\n\n---\n\n## The whole sequence in one line\n**Day 1:** get access, ownership, rollback, critical path  \n**Day 2:** copy configs, logs, incidents, diagrams, escalation docs  \n**Day 3:** compare docs to reality  \n**Days 4–5:** force real owners to name themselves  \n**Week 2:** refuse noise, take only leverage work  \n**Week 3:** standardize one recurring change/failure path  \n**Week 4:** show a real artifact that proves you improved control\n\nIf you want, I can turn this into a **literal checklist you can follow day by day** with copy/paste questions and a folder structure for what to collect.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very tight and efficient overall: it uses short imperative sections like \"Day 1,\" \"Day 2,\" and a final one-line summary, with little filler."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Blunt and direct throughout, e.g. \"Do **not** start troubleshooting,\" \"Refuse to own,\" and \"Fake owners answer with process language.\" It avoids hedging."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Highly structured and actionable: clear headings, numbered questions, bullet lists, and a step-by-step sequence the user can execute immediately."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Focuses on essentials that matter for leverage—\"access, ownership, rollback, critical path,\" \"copy configs, logs, incidents,\" and \"standardize one recurring change/failure path\"—without much padding."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Pushback is sharp and useful rather than moralizing, e.g. \"Refuse to own\" low-leverage work and \"If it doesn’t improve... it’s probably not your Week 2 work.\" Minor gap: it doesn’t explicitly challenge the user’s assumptions beyond prioritization."
+        }
+      ]
+    }
+  ]
+}

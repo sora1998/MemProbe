@@ -1,0 +1,49 @@
+{
+  "user_id": "user_050",
+  "task": "I had a weird thing happen at work and I want to know what’s normal before I make a bigger deal out of it. If a card payment goes through but the receipt doesn’t print right, what would you check first and what would you treat as the real sign that something actually went wrong?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.6000000000000005,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Check first:\n- **Did the card actually approve?**\n- **Did the register show a completed sale?**\n- **Did the payment terminal say approved/declined/pending?**\n- **Did the customer get charged twice or only once?**\n- **Can you reprint the receipt from the register?**\n\n### Real sign something went wrong\nTreat it as a real problem if:\n- the card was **declined**\n- the payment shows **pending/failed**\n- the sale didn’t post in the register\n- the customer was charged but the transaction didn’t complete properly\n- the system says the receipt is missing because the sale itself didn’t finish\n\n### If it’s just the receipt\nIf the payment went through and the sale completed, but the receipt didn’t print:\n- try **reprint**\n- check paper / printer / jam\n- don’t assume the payment failed just because the receipt didn’t come out\n\n### Short rule\n**Approved sale = usually fine.**\n**Decline / pending / missing sale = actual problem.**\n\nIf you want, I can give you a **tiny “receipt didn’t print” flow** for the register.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, but that’s still kind of generic. I know to check if it approved. I mean like, what order first so I don’t waste time at the counter.\n\nLike:\n- printer/paper/jam first?\n- then reprint from register?\n- then look at the terminal?\n- or do I check the batch/transaction screen before anything else?\n\nAnd what’s the point where I stop treating it like a dumb printer problem and assume the sale itself is screwed? Because at my job people love acting like the receipt is the whole issue when sometimes the card really did go sideways.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yep — use this order:\n\n1. **Check printer basics first**\n   - paper\n   - jam\n   - power / error light\n\n2. **Try reprint from the register**\n   - if it prints, it was probably just a printer issue\n\n3. **Check the transaction screen / terminal**\n   - look for **approved / declined / pending**\n   - make sure the sale is actually there\n\n4. **Check the receipt details**\n   - amount\n   - last 4 digits\n   - time\n   - match it to the sale\n\n### When it’s just a printer problem\n- card shows **approved**\n- sale is in the register\n- reprint works\n- terminal looks normal\n\n### When the sale might be screwed\nTreat it as a real payment problem if:\n- terminal says **declined** or **pending**\n- sale never shows in the register\n- amount doesn’t match\n- customer says they were charged but nothing posted\n- reprint won’t pull anything up\n\n### Short rule\n**Printer dead = receipt problem.**  \n**No approved sale = payment problem.**\n\nIf you want, I can turn that into a **3-line counter checklist**.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s closer. Still want the split that saves time though.\n\nFor me I’d do:\n1. quick paper/jam/power glance\n2. hit reprint from the register\n3. if nothing comes up, then check the terminal/transaction screen\n\nBecause if the sale actually posted, reprint usually tells you fast. If reprint pulls nothing and the register/terminal screen looks weird, then it’s not just a dumb printer issue anymore.\n\nThe point I’d stop calling it a printer problem? If the transaction doesn’t show as approved in the register/terminal, or it shows pending / missing / wrong amount. That’s when I’d assume the sale itself got messed up.\n\nAnd yeah, people do act like the receipt is the whole world. It isn’t. Receipt can be dead and the charge still be fine. But if the register can’t find the sale, then it’s not the printer.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Exactly — that’s the clean split.\n\n### Fast order\n1. **Paper / jam / power**\n2. **Reprint from register**\n3. **Check terminal / transaction screen**\n\n### Stop calling it “just printer” if:\n- sale is **missing**\n- transaction is **pending**\n- amount is **wrong**\n- it’s **not approved**\n- reprint can’t find anything\n\n### Short rule\n**Printer problem = receipt doesn’t come out.**  \n**Payment problem = sale doesn’t show right.**\n\nThat’s the right way to treat it.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s the split I wanted.\n\nFast first, no wasting time:\n1. paper / jam / power glance\n2. reprint from register\n3. terminal / transaction screen\n\nAnd yeah, once it’s missing, pending, wrong amount, or not approved — stop blaming the printer. That’s the sale, not the receipt.\n\nClean enough.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 5.0
+      },
+      "gt_correct": null
+    }
+  ]
+}

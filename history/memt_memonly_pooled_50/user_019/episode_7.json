@@ -1,0 +1,75 @@
+{
+  "user_id": "user_019",
+  "task": "I’ve got a time-sensitive issue at work, and the next step depends on what the evidence shows. Can you help me map out a clean way to handle it if the situation starts moving faster than expected?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.639999999999999,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — the cleanest way is to set up a **fast, evidence-gated decision path** with a **hard stop rule** before you start.\n\n### 1) Define the failure in pass/fail terms\nWrite down:\n- **What exactly counts as “the issue”**\n- **What evidence would confirm it**\n- **What evidence would rule it out**\n\nIf it’s moving quickly, avoid vague “looks better/worse” language.\n\n### 2) Split into 2–3 likely hypotheses\nRank suspects by:\n- **Likelihood**\n- **Cost/time to test**\n- **Impact if wrong**\n\nKeep it small. If the situation is changing fast, a big matrix wastes time.\n\n### 3) Predefine kill criteria\nFor each hypothesis, decide in advance:\n- **What result kills it**\n- **What result keeps it alive**\n\nExample:\n- “If the problem does not correlate with X, then X is not the cause.”\n- “If the issue still appears after Y is removed, Y is not sufficient.”\n\n### 4) Set a hard stop rule\nBefore you act, define:\n- **How long you’ll run the test**\n- **What trend means you stop early**\n- **What condition means you escalate immediately**\n\nThis prevents chasing the problem past the point of useful evidence.\n\n### 5) Use leading indicators, not just final outcome\nIf the process can accelerate, watch the early signals:\n- temperature\n- current\n- pressure\n- rate of change\n- error frequency\n\nThese often tell you where it’s headed before the final failure.\n\n### 6) Decide the next action from the evidence\nUse a simple decision box:\n- **Hypothesis killed** → move to next suspect\n- **Hypothesis supported** → run a confirmatory test\n- **Unclear / drifting fast** → stop, preserve state, escalate\n\n### 7) Keep a one-page log\nTrack:\n- time\n- condition\n- change made\n- observation\n- decision\n- next step\n\nThat keeps the process from turning into hand-waving under pressure.\n\nIf you want, I can turn this into a **one-page decision template** you can use live while the situation is unfolding.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Mostly right. Still too generic though.\n\nI need it tighter — something I can actually use when the clock is running. Give me a live decision path, not just the theory. Like:\n\n- what I check first\n- what I freeze so I don’t contaminate the evidence\n- when I stop collecting and make the call\n- what I document so nobody can hand-wave it later\n- what the escalation trigger is if it starts blowing past the window\n\nAnd keep it to a format I can run fast. Bullets, maybe a short decision tree. Not a lecture. I’ve had to do this before on a bad batch that started slipping while management was still trying to talk around it — if I don’t lock the variables early, the data gets useless fast.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — use this as a **live, evidence-gated runbook**:\n\n## Fast decision path\n\n### 0) Freeze first\nBefore touching anything:\n- **Stop nonessential changes**\n- **Lock current settings/lot/operator/material/chamber/software version**  \n- **Do not “try a quick fix” yet**\n- **Start a timestamped log**\n\nIf you can’t freeze it, the evidence gets contaminated.\n\n---\n\n### 1) Check first: is the problem still active?\nCollect only the minimum needed to answer:\n- **Pass/fail status**\n- **When it started**\n- **What changed most recently**\n- **Leading indicators**: temp / current / pressure / rate of change / error frequency\n\nDecision:\n- **Active and worsening** → go to escalation path\n- **Active but stable** → continue evidence capture\n- **Not reproducible right now** → preserve state and test the last known trigger only\n\n---\n\n### 2) Lock the variables\nFreeze these unless they are the suspected cause:\n- recipe / setup\n- lot / material\n- operator\n- machine / chamber / tool\n- calibration state\n- environmental conditions\n- timing / dwell / cycle count\n\nRule:\n- **One change at a time**\n- If multiple things changed, **revert to last known good** before testing anything else\n\n---\n\n### 3) Decide what evidence you need\nUse a simple matrix:\n\n| Evidence | If true | If false |\n|---|---|---|\n| Problem tracks with X | X stays in play | X is killed |\n| Problem disappears when Y is removed | Y is likely causal | Y is not sufficient |\n| Leading indicator drifts before failure | drift path confirmed | look elsewhere |\n\nKeep it to **2–3 suspects max**.\n\n---\n\n### 4) When to stop collecting and make the call\nStop and decide when **any** of these are true:\n- you have a **clear correlation**\n- you have a **clean kill** of a hypothesis\n- the process hits the **pre-set stop threshold**\n- the evidence window is being lost by further drift or changes\n\nDon’t keep sampling just because people want more comfort.\n\n---\n\n### 5) Escalation trigger\nEscalate immediately if:\n- the issue is **accelerating**\n- a leading indicator crosses a **pre-set threshold**\n- the process is moving outside the **worst realistic corner case**\n- you can’t preserve the current state long enough to test cleanly\n\nUse a trigger like:\n- “If rate of change doubles”\n- “If temp/current/pressure crosses X”\n- “If another variable changes before we finish capture”\n\n---\n\n### 6) What to document\nOne page, no prose:\n- time started\n- exact failure definition\n- frozen variables\n- suspect list\n- evidence collected\n- what was ruled out\n- what was supported\n- stop/escalation threshold\n- decision made\n- next action\n\n---\n\n## Short decision tree\n**Problem appears**\n→ Freeze variables  \n→ Capture leading indicators + last change  \n→ Ask: “Can I reproduce the trigger without adding noise?”\n- **Yes** → test one suspect at a time\n- **No** → preserve state, log, escalate if window is closing\n\nThen:\n- **Evidence supports suspect** → confirm with worst-case / repeat run\n- **Evidence kills suspect** → move to next\n- **Evidence unclear but drift is increasing** → stop and escalate\n\nIf you want, I can turn this into a **one-page fill-in template** you can use on the floor or in a live meeting.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Better. Still a little too clean, but usable. I want it even more operational — like a cut-down live card I can actually keep in front of me.\n\nGive me:\n- a 30-second first-pass checklist\n- the exact freeze list in priority order\n- the stop / escalate rule in plain language\n- a minimal log format with fields I can fill fast\n- a tiny decision tree with maybe 3 branches max\n\nNo matrix. No extra explanation. If you can, make it read like something I’d actually use while people are talking over each other.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "### 30-second first pass\n- **Name the failure**\n- **Mark time started**\n- **Freeze current state**\n- **Capture last change**\n- **Check if it’s still moving**\n- **Decide: test / hold / escalate**\n\n---\n\n### Freeze list, in order\n1. **Stop nonessential changes**\n2. **Lock current setup/config**\n3. **Record lot/material/unit ID**\n4. **Record operator / shift**\n5. **Record machine/tool/chamber state**\n6. **Record environment / cycle / timing**\n7. **Block any “quick fix” until evidence is captured**\n\n---\n\n### Stop / escalate rule\n- **Stop collecting** when you have either:\n  - a clear pass/fail answer, or\n  - enough evidence to kill one suspect\n- **Escalate immediately** if:\n  - the issue is getting worse while you’re collecting\n  - the key condition is changing faster than you can record it\n  - you can’t keep the state stable long enough to test cleanly\n\nPlain version: **if the window is closing, stop arguing and escalate.**\n\n---\n\n### Minimal log\n- **Time**\n- **Observed symptom**\n- **Last known change**\n- **Frozen variables**\n- **What was checked**\n- **Result**\n- **Decision**\n- **Next action**\n\n---\n\n### Tiny decision tree\n**Issue appears**\n→ **Freeze state + log last change**\n→ **Can I test cleanly right now?**\n- **Yes** → run one check\n- **No** → hold state and escalate if it’s drifting\n- **Still unclear** → stop, preserve evidence, move to next suspect\n\nIf you want, I can compress this one step further into a **single-screen pocket card** version.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Better. Still a little too roomy.\n\nI’d tighten the freeze list and make the stop rule uglier / more binary. Right now it still reads like something people can talk around.\n\nNeed one more pass:\n- put the freeze list in true priority order, top 5 only\n- make the stop/escalate rule one line, no qualifiers\n- cut the log fields to the absolute minimum that still holds up later\n- decision tree should read like: if X, do Y; if not, do Z\n\nAnd I want it to sound less like a template and more like something I’d actually slap on a clipboard when everybody’s in my ear.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 4,
+      "agent_response": "### 30-second first pass\n- Name it\n- Time it\n- Freeze it\n- Capture the last change\n- Check if it’s still moving\n- Decide: test / hold / escalate\n\n### Freeze list, top 5\n1. Stop nonessential changes\n2. Lock current setup\n3. Record unit / lot ID\n4. Record machine / chamber / tool state\n5. Record environment and cycle status\n\n### Stop / escalate\n**If the condition is changing faster than you can lock it down, stop and escalate.**\n\n### Minimal log\n- Time\n- Symptom\n- Last change\n- What was frozen\n- Decision\n\n### Tiny decision tree\n**If you can test cleanly now, do one check.  \nIf you can’t, hold state.  \nIf it’s still drifting, stop and escalate.**",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Closer. Still too neat, though.\n\nMake it uglier and more usable:\n- top 5 freeze list, but in the order I’d actually do it under pressure\n- stop/escalate as one hard line, no soft language\n- log should be 4 fields max, not 5\n- decision tree should read like commands, not a paragraph\n\nAnd drop the generic wording. I want clipboard language, not a worksheet.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 5,
+      "agent_response": "### 30-second first pass\n- Name the failure\n- Time it\n- Stop new changes\n- Grab the last change\n- Check if it’s still moving\n\n### Freeze list\n1. Stop the next change\n2. Lock the current setup\n3. Record the unit / lot\n4. Record the machine / chamber / tool\n5. Record the environment / cycle state\n\n### Stop / escalate\n**If it’s changing faster than you can lock it down, stop and escalate.**\n\n### Minimal log\n- Time\n- Symptom\n- Last change\n- Decision\n\n### Decision tree\n- **Can you test cleanly right now?** Do one check.\n- **Can’t test cleanly?** Hold state.\n- **Still drifting?** Stop and escalate.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. This is usable.\n\n- Name it\n- Time it\n- Stop new changes\n- Grab the last change\n- Check if it’s still moving\n\n1. Stop the next change\n2. Lock the current setup\n3. Record the unit / lot\n4. Record the machine / chamber / tool\n5. Record the environment / cycle state\n\n**If it’s changing faster than you can lock it down, stop and escalate.**\n\n- Time\n- Symptom\n- Last change\n- Decision\n\n- **Can you test cleanly right now?** Do one check.\n- **Can’t test cleanly?** Hold state.\n- **Still drifting?** Stop and escalate.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    }
+  ]
+}

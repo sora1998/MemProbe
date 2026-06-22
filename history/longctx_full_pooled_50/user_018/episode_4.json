@@ -1,0 +1,23 @@
+{
+  "user_id": "user_018",
+  "task": "I’m trying to figure out why a campaign handoff keeps going sideways between the email draft, the promo details, and the final send. Can you help me lay out a quick way to spot where the breakdown is happening and what to check first so it doesn’t keep repeating?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.8,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — the fastest way is to inspect the handoff at the **three failure points**:\n\n## 1) Promo details not locked\nCheck whether the basics changed after drafting started:\n- promo code\n- offer terms\n- dates\n- exclusions\n- approvals\n\n**If this is the issue:** stop downstream work until promo details are frozen.\n\n## 2) Email draft built on stale info\nCheck whether the draft reflects the latest promo details:\n- correct code in body/CTA\n- correct landing page URL\n- correct dates\n- correct segment/version\n- correct legal/footer language\n\n**If this is the issue:** update the source details first, then rebuild the draft.\n\n## 3) Final send not matched to the approved version\nCheck whether the scheduled send matches what was approved:\n- right subject line\n- right audience\n- right links\n- right promo code\n- right send time\n- right suppression list\n\n**If this is the issue:** compare the scheduled version against the approved QA version before sending.\n\n---\n\n## Quick way to spot the breakdown\nAsk these 4 questions in order:\n1. **What changed last?**\n2. **Who approved it?**\n3. **Which version is the source of truth?**\n4. **Was QA rerun after the change?**\n\nIf any answer is unclear, that’s usually where the handoff broke.\n\n---\n\n## What to check first\nStart with the **promo details**, because everything else depends on them:\n- code\n- dates\n- terms\n- exclusions\n- approval\n\nThen check the **landing page**, then the **email draft**, then the **final send settings**.\n\n---\n\n## Simple prevention rule\n- No draft moves forward until promo details are frozen\n- No send gets scheduled until the final QA version matches approval\n- Any late change reopens QA for all affected assets\n\nIf you want, I can turn this into a **1-page handoff checklist** you can use every time.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, this is solid. The order makes sense — promo details first, then draft, then send. That’s usually where it goes bad.\n\nThe only thing I’d add is a simple owner check, because half the time the issue isn’t the asset itself, it’s nobody knowing who was supposed to freeze it.\n\nSo I’d run it like this:\n- promo details frozen?\n- one owner confirmed?\n- draft pulled from the latest approved version?\n- QA rerun after any change?\n- final send matched to approved copy and audience?\n\nThat’s enough to catch most of the breakpoints without overcomplicating it. The checklist angle is what I’d actually use.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    }
+  ]
+}

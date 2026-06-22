@@ -1,0 +1,104 @@
+{
+  "user_id": "user_006",
+  "task": "I’ve got a messy outage situation and want a sane recovery plan, not a guess: if a core network segment goes down and a couple dependent services start failing after that, how would you break it apart and bring things back in the right order? I’m looking for a practical approach I could actually follow under pressure.",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "verbosity_preference",
+      "short": "Wants responses kept tight and efficient",
+      "explanation": "He values speed, control, and efficiency, so he is unlikely to want long-winded help. He would probably prefer responses that get to the point quickly and avoid unnecessary filler. Overexplaining would feel like wasted time to him."
+    },
+    {
+      "idx": 2,
+      "dimension": "directness_preference",
+      "short": "Prefers blunt answers without softening",
+      "explanation": "His skeptical, competitive style suggests he wants clear, unambiguous guidance rather than hedged language. He would likely see excessive caution as evasive or inefficient. Straight answers fit his preference for control and decisive action."
+    },
+    {
+      "idx": 3,
+      "dimension": "format_preference",
+      "short": "Likes structured, actionable output",
+      "explanation": "He seems most likely to respond well to responses that are organized and easy to execute, such as bullets or checklists. That matches his practical, task-focused mindset. Loose, meandering prose would probably frustrate him."
+    },
+    {
+      "idx": 4,
+      "dimension": "detail_level_preference",
+      "short": "Wants the useful essentials, not padding",
+      "explanation": "He likely wants enough context to act, but not exhaustive background unless it helps him win or avoid mistakes. He is efficiency-driven, so extra caveats only matter when they change the decision. He would probably skip anything that does not affect the outcome."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Accepts pushback only if it is sharp and useful",
+      "explanation": "He is skeptical and self-serving, so he probably does not enjoy moralizing or vague objections. But if the pushback is concrete, efficient, and clearly tied to risk or leverage, he is more likely to respect it. Weak or overly gentle correction would likely be ignored."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — treat it like a dependency recovery, not a single “outage.”\n\n## 1) First, stabilize and stop making it worse\n- Freeze changes.\n- Identify the exact failed segment: switch, VLAN, firewall zone, router, uplink, storage network, etc.\n- Confirm scope: what’s actually down vs just noisy because dependencies are missing.\n- If there’s a known-safe rollback, prefer that over improvising.\n\n## 2) Build the dependency chain\nWrite down:\n- **Core network segment**\n- **Services directly dependent on it**\n- **Services that depend on those services**\n- **External dependencies** like DNS, DHCP, AD/LDAP, storage, monitoring, load balancers\n\nA simple order is:\n**transport → addressing → name resolution → auth → storage → app → user-facing services**\n\nThat sequence matters because higher layers often fail noisily when lower layers are missing.\n\n## 3) Restore the foundation first\nBring back the layer that everything else needs:\n1. **Physical/link layer**\n   - power, optics, cables, ports, transceivers\n   - interface up/up, no errors, correct speed/duplex\n2. **Routing/switching**\n   - VLANs, trunks, routes, ACLs, gateway reachability\n3. **Core services**\n   - DNS\n   - DHCP if clients rely on it\n   - AD/LDAP/Kerberos if apps need auth\n   - NTP if time-sensitive auth/certs are involved\n\nDon’t start with apps if clients can’t even resolve names or reach the subnet.\n\n## 4) Bring services up in dependency order\nUse a strict ladder:\n- **Infrastructure services**: DNS, DHCP, auth, time\n- **Shared backends**: databases, message queues, storage, caches\n- **Platform services**: API gateways, load balancers, middleware\n- **Application services**\n- **User-facing entry points**: web, mobile, remote access, reporting\n\nAfter each rung:\n- verify health\n- test one dependent service\n- then move up\n\n## 5) Validate with one known-good path\nFor each restored layer, test a single end-to-end path:\n- client gets IP\n- resolves name\n- reaches gateway\n- authenticates\n- reaches backend\n- completes a simple app transaction\n\nThat prevents the classic mistake of “service is running” when it’s still broken from the user’s point of view.\n\n## 6) Watch for hidden failures\nAfter the segment comes back, check for:\n- stale routes\n- split brain\n- expired sessions/tokens\n- DNS cache issues\n- cert/time drift\n- storage resync delays\n- apps stuck on old connection pools\n\nA lot of “recovered” systems still fail until caches, sessions, or retries settle.\n\n## 7) Use a simple decision rule\nIf a service is down:\n- **Can it reach its dependency?** If no, fix the dependency first.\n- **Can the dependency answer a basic request?** If no, fix lower layer.\n- **Does one known-good client work?** If yes, the issue may be partial or config-specific.\n- **Did the failure begin immediately after the core segment outage?** If yes, suspect dependency chain, not a new unrelated fault.\n\n## 8) Recovery order cheat sheet\nA practical default order:\n\n1. Core network segment\n2. Routing/VLAN/gateway\n3. DNS/DHCP/NTP/auth\n4. Storage/database/message bus\n5. Internal app services\n6. Load balancers / reverse proxies\n7. User-facing apps\n8. Monitoring and alerting last\n\nMonitoring is important, but don’t let it distract from restoring the actual service.\n\n## 9) Keep a live matrix\nTrack for each item:\n- dependency\n- symptom\n- restored/not restored\n- verification method\n- owner\n- rollback option\n\nThat keeps pressure from turning into guesswork.\n\nIf you want, I can turn this into a one-page incident runbook checklist you could literally follow during an outage.",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Fairly tight and efficient: it uses short sections, bullets, and a concise recovery sequence. It is still somewhat long, but avoids filler and gets to the point quickly."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly blunt and direct, e.g. \"Don’t start with apps if clients can’t even resolve names\" and \"fix the dependency first.\" It is practical, though not aggressively blunt."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable: numbered steps, bullet lists, a clear order like \"transport → addressing → name resolution,\" and a \"Recovery order cheat sheet.\""
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Focuses on essentials needed to act under pressure, such as dependency chains, restore order, and validation. There is some extra detail, but it is mostly useful rather than padded."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Provides useful pushback in a concrete way, e.g. \"Don’t start with apps if clients can’t even resolve names\" and \"Monitoring is important, but don’t let it distract.\" It is corrective without being moralizing."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Absolutely — here’s the tighter version as a **decision tree / incident runbook**, not just a recovery ladder.\n\n## 0) First rule: don’t guess\nBefore fixing anything:\n- **Freeze changes**\n- **Confirm the timeline**\n- **Check whether a recent change lines up with the outage**\n- **Decide whether rollback is safer than repair**\n\nIf there’s a clean rollback to the last known-good state, that’s usually the first move.\n\n---\n\n## 1) Prove the core segment is the real root cause\nAsk:\n\n- **Did multiple unrelated services fail at the same time?**\n- **Did they all share the same network path / segment / gateway / VLAN / zone?**\n- **Did the failures start immediately after a network event or change?**\n\nIf yes, treat the core segment as the likely root.\n\nIf no, don’t anchor on it — you may be looking at one noisy failure plus unrelated symptoms.\n\n---\n\n## 2) Split the problem by layer\nDo **not** troubleshoot all layers at once. Use this order:\n\n### A. Physical / link\nCheck:\n- power\n- cables\n- optics\n- port state\n- interface errors\n- speed/duplex mismatch\n- link flaps\n\n**If physical is broken, stop here.**  \nNothing above it matters yet.\n\n---\n\n### B. Layer 2\nCheck:\n- VLAN membership\n- trunks\n- STP state\n- MAC learning\n- port security\n- loops / blocked ports\n\n**If L2 is broken, fix that before touching routes or apps.**\n\n---\n\n### C. Layer 3\nCheck:\n- gateway reachability\n- routing tables\n- ACLs\n- NAT\n- asymmetric routing\n- subnet overlap\n\n**If L3 is broken, don’t chase DNS or app errors yet.**\n\n---\n\n## 3) Restore the minimum viable path\nOnce the network path is back, bring up **one critical service end-to-end**.\n\nUse this order:\n\n1. **Network path**\n2. **DNS / DHCP / NTP / auth**\n3. **Shared backends**\n   - database\n   - storage\n   - queue\n   - cache\n4. **App layer**\n5. **Load balancers / proxies / user-facing entry points**\n6. **Monitoring last**\n\nThe key is: **restore one working path, not the whole environment at once**.\n\n---\n\n## 4) At every step, ask the same 3 questions\nFor each dependency:\n\n1. **Did it actually come back?**\n2. **Did one known-good client pass traffic?**\n3. **Did the next layer stop failing?**\n\nIf the answer is:\n- **No to 1** → fix the current layer\n- **Yes to 1, no to 2** → partial/config/client-specific issue\n- **Yes to 1 and 2, no to 3** → move up one layer; the next dependency is still broken\n\nThat keeps you from mistaking “service started” for “service recovered.”\n\n---\n\n## 5) Recovery order I’d actually use\nPractical default:\n\n1. **Physical / link**\n2. **L2**\n3. **L3**\n4. **Core infra**\n   - DNS\n   - DHCP\n   - auth\n   - NTP\n5. **Shared backends**\n   - DB\n   - storage\n   - queue\n   - cache\n6. **Application services**\n7. **Load balancers / proxies / user-facing services**\n8. **Monitoring / alerting**\n\n---\n\n## 6) Rollback discipline\nIf the outage followed a change:\n- **rollback first**\n- don’t keep stacking fixes\n- don’t “test one more thing” unless you know exactly why\n\nA good rule:\n- if a change was made in the last few minutes and the failure followed it, **revert before diagnosing deeper**\n\n---\n\n## 7) Watch for recovery traps\nEven after the segment is back, check for:\n- stale routes\n- DNS cache issues\n- expired sessions/tokens\n- time drift / cert failures\n- connection pools stuck on dead endpoints\n- storage resync delays\n- partial failover / split brain\n\nA lot of systems look “up” but still fail from stale state.\n\n---\n\n## 8) Simple outage decision tree\n### If the service is failing:\n- **Can it reach its dependency?**\n  - **No** → fix dependency below\n  - **Yes** → continue\n- **Is the dependency healthy for a known-good client?**\n  - **No** → fix dependency\n  - **Yes** → move up\n- **Did the failure start after a change?**\n  - **Yes** → rollback candidate\n  - **No** → isolate layer-by-layer\n\n---\n\n## 9) What to restore first in practice\nIf you only have time for one path:\n- pick **one critical service**\n- restore **its exact dependency chain**\n- verify one end-to-end transaction\n- then expand outward\n\nThat’s the fastest way to get from “outage chaos” to “service back.”\n\nIf you want, I can turn this into a **one-page if/then incident checklist** you could use live during an outage.",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly tight and efficient: it says \"the tighter version\" and uses concise bullets/runbook structure, though it is still fairly long."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Direct and blunt overall, with imperatives like \"Freeze changes,\" \"don’t guess,\" and \"rollback first,\" but it still uses some hedging like \"usually\" and \"likely root.\""
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable: \"decision tree / incident runbook,\" numbered steps, bullets, and explicit if/then guidance make it easy to execute."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Focuses on essentials and recovery order, with little background padding, though it includes some extra explanatory framing and recovery traps."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Pushback is concrete and useful, e.g. \"don’t anchor on it\" and \"rollback first,\" tied to risk and leverage rather than moralizing or vague objections."
+        }
+      ]
+    }
+  ]
+}

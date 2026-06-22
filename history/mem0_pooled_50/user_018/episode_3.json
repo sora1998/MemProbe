@@ -1,0 +1,36 @@
+{
+  "user_id": "user_018",
+  "task": "I’ve got a campaign landing page, a few email segments, and a promo code change all landing at once, and I’m trying to figure out the cleanest way to update everything without breaking the rollout. Can you help me think through the order I should tackle it in and what I should double-check first?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.9,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — the cleanest way is to treat this like a dependency chain and update the most “foundational” pieces first so everything else can point to the right version.\n\n### Recommended order\n1. **Confirm the promo code change first**\n   - This is the core variable.\n   - Make sure the new code is final, active, and tested in checkout.\n   - Double-check any rules tied to it:\n     - start/end dates\n     - eligible products\n     - exclusions\n     - stacking behavior\n     - usage limits\n\n2. **Update the landing page next**\n   - The page should reflect the final promo code and any associated terms.\n   - Check:\n     - headline/subhead mentions\n     - CTA text\n     - promo code placement\n     - terms and conditions\n     - any tracking links or buttons\n   - If the landing page is used in email, make sure it’s the exact final URL.\n\n3. **Then update the email segments**\n   - Once the offer and landing page are locked, update each segment so they all match.\n   - Check:\n     - subject lines and preview text\n     - promo code mention\n     - CTA links\n     - segment-specific copy differences\n     - suppression rules / exclusions\n   - If segments are staggered or personalized, make sure each version is pointing to the same offer details.\n\n4. **Final QA before launch**\n   - Send test emails to yourself and click through.\n   - Verify:\n     - the code works on the landing page and at checkout\n     - links go to the right page\n     - no old promo code is still referenced anywhere\n     - mobile formatting is clean\n     - analytics/tracking are firing correctly\n\n### What to double-check first\nIf you only have time to validate a few things up front, I’d prioritize:\n\n- **Promo code functionality**\n- **Landing page accuracy**\n- **Email links and copy consistency**\n- **Any scheduled send times / automation triggers**\n\n### Simple rule of thumb\nIf the promo code changes, **update the offer source first**, then the page, then the emails. That keeps the rollout from drifting across channels.\n\nIf you want, I can also turn this into a **quick launch checklist** you can use before going live.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that order makes sense. I’d just tighten the QA part a bit more because the promo code is usually where stuff breaks.\n\nWhat I’d do first:\n- confirm the code itself is final\n- check checkout behavior in a test flow\n- make sure the landing page copy matches the exact terms\n\nThen I’d update the landing page before the emails, because the emails are basically just pointing traffic somewhere. If the page is wrong, every segment is wrong too.\n\nFor the email segments, I’d double-check:\n- code mention\n- CTA URL\n- preview text / subject if the offer changed\n- any segment-specific exclusions\n- send timing if one segment goes out later than the others\n\nOne thing I’d add: make sure the old code is fully removed from any template, landing page module, and scheduled automation. That’s the kind of thing that gets missed when you’re moving fast.\n\nIf you want, I can turn this into a tighter step-by-step launch checklist you can actually use before it goes live.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Absolutely — here’s a cleaner launch order and a tighter QA checklist, with the promo code treated as the highest-risk item.\n\n## Best order to update\n1. **Finalize and test the promo code first**\n   - Confirm the code is final\n   - Test it in checkout\n   - Verify:\n     - discount amount\n     - eligible products\n     - exclusions\n     - start/end dates\n     - usage limits\n     - stacking rules\n\n2. **Update the landing page next**\n   - Make sure the page matches the exact offer terms\n   - Double-check:\n     - code display\n     - headline/subhead\n     - CTA\n     - terms and conditions\n     - any linked buttons or tracking URLs\n\n3. **Update the email segments after the page is locked**\n   - Each segment should point to the same final offer\n   - Check:\n     - promo code mention\n     - CTA URL\n     - subject/preview text if needed\n     - segment-specific copy\n     - exclusions or suppression rules\n     - send timing\n\n4. **Do a final end-to-end QA pass**\n   - Test the full flow from email → landing page → checkout\n   - Make sure the old code is removed everywhere\n\n## What to double-check first\nIf you only verify a few things up front, make it these:\n- **The promo code works in checkout**\n- **The landing page matches the exact terms**\n- **The emails point to the correct page and code**\n- **No old code is still sitting in a template, module, or automation**\n\n## Simple rule\n**Code first, page second, emails third.**  \nThat keeps the source of truth aligned before traffic starts hitting it.\n\nIf you want, I can turn this into a **one-page prelaunch checklist** you can paste into your tracker.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s basically the right shape. Cleaner than the first pass too.\n\nA couple things I’d keep in mind:\n- promo code first, always\n- landing page second, since that’s the source of truth for traffic\n- emails after that, because they’re just distributing the offer\n\nAnd yeah, the real QA is the end-to-end flow. Email → page → checkout. That’s where the break happens, not usually in the copy itself.\n\nThe one thing I’d be a little more aggressive about is the old-code cleanup. I’d check:\n- templates\n- modules\n- automations\n- scheduled sends\n- any hidden landing page blocks or reusable components\n\nThat’s the stuff that gets left behind when somebody updates the main version and assumes everything else followed.\n\nThis is good enough for me.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 5.0
+      },
+      "gt_correct": null
+    }
+  ]
+}

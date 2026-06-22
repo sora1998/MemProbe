@@ -1,0 +1,137 @@
+{
+  "user_id": "user_006",
+  "task": "I need to write up a clean incident summary for a network problem that already got fixed, but I want it to hold up if someone pushes back later. What should I include so the timeline, evidence, and final cause are clear without making it longer than it needs to be?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "verbosity_preference",
+      "short": "Wants responses kept tight and efficient",
+      "explanation": "He values speed, control, and efficiency, so he is unlikely to want long-winded help. He would probably prefer responses that get to the point quickly and avoid unnecessary filler. Overexplaining would feel like wasted time to him."
+    },
+    {
+      "idx": 2,
+      "dimension": "directness_preference",
+      "short": "Prefers blunt answers without softening",
+      "explanation": "His skeptical, competitive style suggests he wants clear, unambiguous guidance rather than hedged language. He would likely see excessive caution as evasive or inefficient. Straight answers fit his preference for control and decisive action."
+    },
+    {
+      "idx": 3,
+      "dimension": "format_preference",
+      "short": "Likes structured, actionable output",
+      "explanation": "He seems most likely to respond well to responses that are organized and easy to execute, such as bullets or checklists. That matches his practical, task-focused mindset. Loose, meandering prose would probably frustrate him."
+    },
+    {
+      "idx": 4,
+      "dimension": "detail_level_preference",
+      "short": "Wants the useful essentials, not padding",
+      "explanation": "He likely wants enough context to act, but not exhaustive background unless it helps him win or avoid mistakes. He is efficiency-driven, so extra caveats only matter when they change the decision. He would probably skip anything that does not affect the outcome."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Accepts pushback only if it is sharp and useful",
+      "explanation": "He is skeptical and self-serving, so he probably does not enjoy moralizing or vague objections. But if the pushback is concrete, efficient, and clearly tied to risk or leverage, he is more likely to respect it. Weak or overly gentle correction would likely be ignored."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Use a short structure that answers: **what happened, how you know, what fixed it, and why you’re confident.**\n\n## Incident summary template\n\n### 1) Title\n- Short and specific\n- Example: `Intermittent connectivity loss on core segment due to failed uplink optic`\n\n### 2) Impact\n- What was affected\n- Who/what was impacted\n- Scope and duration\n- Example: `Users on VLAN 40 experienced intermittent timeouts to internal services from 09:12–09:47 UTC.`\n\n### 3) Timeline\nKeep it factual and timestamped:\n- detection time\n- key symptoms\n- investigation steps\n- mitigation\n- recovery time\n- validation complete\n\nExample:\n- `09:12 UTC – alerts triggered for packet loss on core switch uplink`\n- `09:18 UTC – confirmed interface flaps and CRC errors`\n- `09:25 UTC – moved traffic to redundant path`\n- `09:34 UTC – replaced optic`\n- `09:47 UTC – traffic stable, counters stopped increasing`\n\n### 4) Root cause\nState the direct cause, not the whole story:\n- `Failed SFP on core uplink caused link flaps and packet loss`\n- If there was a contributing factor, separate it:\n  - `Contributing factor: failover threshold was too slow to prevent brief interruptions`\n\n### 5) Evidence\nThis is what makes it hold up later:\n- interface counters\n- logs\n- monitoring graphs\n- device state\n- packet loss / latency graphs\n- config diffs if relevant\n\nExample:\n- `Port Gi1/0/24 showed increasing CRC errors and link renegotiations`\n- `Syslog recorded repeated link-down/link-up events`\n- `Monitoring showed packet loss aligned with flaps`\n\n### 6) Fix / recovery\nSay exactly what changed:\n- replaced optic\n- reseated cable\n- corrected route\n- reverted config\n- restarted service after dependency restored\n\nExample:\n- `Replaced faulty optic and confirmed stable link on redundant uplink`\n\n### 7) Validation\nShow how you proved it was fixed:\n- counters stopped increasing\n- traffic stable\n- service checks passed\n- no recurrence after observation window\n\nExample:\n- `Observed 30 minutes of stable traffic with no new errors or flaps`\n\n### 8) Follow-up actions\nKeep this short and actionable:\n- replace suspect hardware\n- add monitoring\n- tune failover thresholds\n- review config process\n- document dependency\n\n---\n\n## What to include so it survives pushback\nMake sure you have:\n- **timestamps**\n- **objective evidence**\n- **exact affected scope**\n- **direct cause vs contributing cause**\n- **what changed to fix it**\n- **proof of recovery**\n\n## What to avoid\n- vague wording like “network issue”\n- guessing at root cause\n- long narrative without evidence\n- saying “resolved” without saying how you verified it\n- mixing symptoms, cause, and fix in one paragraph\n\n---\n\n## Short example\n**Summary:** Intermittent connectivity on VLAN 40 was caused by a failing SFP on the core uplink.  \n**Impact:** Internal service timeouts affected users from 09:12–09:47 UTC.  \n**Evidence:** Link flaps and CRC errors increased on the uplink port; logs showed repeated up/down events.  \n**Fix:** Replaced the SFP and moved traffic to the redundant path.  \n**Validation:** Counters stopped increasing, link remained stable for 30 minutes, and service checks recovered.\n\nIf you want, I can turn this into a **fill-in-the-blanks incident report template** you can reuse.",
+      "score": 4.4,
+      "summary": "mean=4.40 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:3, 5:2}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Fairly tight and efficient: it opens with a concise framing, uses a compact template, and ends with a short example. Minor extra explanation remains, but it mostly avoids filler."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly direct and unsoftened. Phrases like \"State the direct cause\" and \"What to avoid\" are blunt and clear, though the tone is still somewhat instructional rather than sharply decisive."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable: numbered sections, bullets, examples, and a final checklist make it easy to execute."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Focuses on the essentials needed for a defensible incident summary: timestamps, evidence, scope, direct cause, fix, validation, and follow-up. It explicitly warns against padding and vague narrative."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Pushback is concrete and useful rather than moralizing: it says to avoid \"vague wording like 'network issue'\" and \"guessing at root cause,\" and ties evidence to holding up later. It is helpful, though not especially sharp."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Use a dry structure that keeps **symptom, cause, fix, and proof** separate.\n\n## Incident summary structure\n\n### 1) Incident / impact\n- **Start time / end time**\n- **What was affected**\n- **Who/what was impacted**\n- **Where it was first observed**\n\nExample:\n- `09:12–09:47 UTC`\n- `Intermittent packet loss on VLAN 40`\n- `Affected internal service access for warehouse users`\n- `First observed in monitoring alert, then confirmed by user reports`\n\n### 2) Timeline\nKeep it factual and timestamped:\n- `09:12 UTC – alert triggered for packet loss`\n- `09:14 UTC – user reports of timeouts received`\n- `09:18 UTC – interface CRCs and link flaps confirmed on switch X port Y`\n- `09:25 UTC – traffic moved to redundant path`\n- `09:34 UTC – transceiver replaced`\n- `09:47 UTC – traffic stable, no new errors`\n\n### 3) Root cause\nOne sentence, direct.\n\nExample:\n- `Packet loss on the warehouse uplink was caused by a failed fiber transceiver on switch X.`\n\nIf there was a contributor, separate it:\n- `Contributing factor: failover did not complete before user-visible interruption.`\n\n### 4) Evidence\nList the facts that ruled things in or out:\n- specific interface counters\n- syslog messages\n- monitoring graphs\n- device state\n- config diffs\n- packet loss / latency data\n- service health checks\n\nExample:\n- `Switch X port Y showed increasing CRC errors and link renegotiations.`\n- `Syslog recorded repeated link-down/link-up events on the same interface.`\n- `Monitoring showed packet loss matching the flap window.`\n- `Redundant path remained stable during the incident.`\n\n### 5) Remediation\nState exactly what changed:\n- replaced optic\n- reseated cable\n- corrected route\n- reverted config\n- restarted service after dependency recovery\n\nExample:\n- `Replaced the failed transceiver on switch X port Y and restored traffic to the primary path.`\n\n### 6) Validation\nShow how you proved it was fixed:\n- counters stopped increasing\n- no more flaps\n- services recovered\n- observation window length\n\nExample:\n- `Observed 30 minutes of stable link state with no new CRCs, flaps, or packet loss.`\n- `User-facing service checks returned to normal during the validation window.`\n\n### 7) Follow-up\nKeep it brief and specific:\n- remaining risk\n- monitoring gap\n- hardware replacement\n- config review\n- failover tuning\n\nExample:\n- `Replace the second transceiver in the same batch as precaution.`\n- `Review failover thresholds for shorter detection on uplink loss.`\n\n---\n\n## What to include so it survives pushback\nMake sure the writeup has:\n- exact timestamps\n- first observed symptom\n- first detection source\n- specific device/interface/service\n- evidence for diagnosis\n- exact fix\n- validation window\n- any open risk\n\n## What to avoid\n- “network issue” with no specifics\n- vague cause language\n- mixing symptom and cause\n- saying “resolved” without proof\n- blame language\n- long narrative\n\n---\n\n## Short dry example\n\n**Incident / impact:**  \n`09:12–09:47 UTC. Intermittent packet loss affected warehouse users on VLAN 40. First observed in monitoring, then confirmed by user reports.`\n\n**Root cause:**  \n`Packet loss on the warehouse uplink was caused by a failed fiber transceiver on switch X port Y.`\n\n**Evidence:**  \n`Port Y showed increasing CRC errors and repeated link flaps. Syslog recorded link-down/link-up events. Packet loss aligned with the flap window.`\n\n**Remediation:**  \n`Replaced the transceiver and moved traffic to the redundant path.`\n\n**Validation:**  \n`Observed 30 minutes of stable traffic with no new errors, flaps, or service failures.`\n\n**Follow-up:**  \n`Replace the remaining transceiver from the same batch and review failover timing.`\n\nIf you want, I can turn this into a **copy-paste incident report template** with placeholders.",
+      "score": 5.0,
+      "summary": "mean=5.00 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:0, 5:5}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Keeps it tight and efficient: \"dry structure,\" \"Keep it factual and timestamped,\" and \"What to avoid\" explicitly reject long narrative and filler."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Very direct and blunt: \"One sentence, direct,\" \"What to avoid: ... vague cause language,\" and examples use plain declarative statements without hedging."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable, with clear sections, bullets, and a copy-paste-ready template: \"Incident / impact,\" \"Timeline,\" \"Root cause,\" etc."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Focuses on essentials and proof, not padding: \"symptom, cause, fix, and proof,\" plus \"What to avoid\" says no long narrative and no vague language."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Pushback is concrete and useful, tied to evidence and risk: \"Make sure the writeup has: exact timestamps... evidence for diagnosis... validation window... any open risk.\""
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yes — that’s the right tightening.\n\nUse this structure:\n\n## Incident report structure\n\n### 1) Incident / impact\n- **Start/end time**\n- **Affected service / segment**\n- **User or system impact**\n- **First detection source**\n\n### 2) Timeline\nFactual, timestamped:\n- alert\n- user report\n- investigation step\n- mitigation\n- fix\n- validation complete\n\n### 3) Symptom source\nState **where the problem was first observed**:\n- monitoring alert\n- user report\n- dashboard\n- logs\n- device alarms\n\nExample:\n- `First observed as packet-loss alert on switch X uplink, then confirmed by user reports.`\n\n### 4) Root cause\nOne sentence, direct, no hedging unless needed.\n\nExample:\n- `Packet loss on the warehouse uplink was caused by a failed fiber transceiver on switch X port Y.`\n\nIf confidence is incomplete, say so:\n- `Confidence: high, based on interface counters, syslog, and recovery after transceiver replacement.`\n\n### 5) Evidence by claim\nForce each claim to a source.\n\n#### Symptom\n- what was seen\n- where it was seen\n- source\n\nExample:\n- `Monitoring showed packet loss starting at 09:12 UTC on switch X port Y.`\n\n#### Ruled out\n- what was checked\n- what was not the cause\n- source\n\nExample:\n- `ISP path was ruled out because upstream interfaces remained stable and no errors were recorded on the edge router.`\n\n#### Cause\n- exact fault\n- proof source\n\nExample:\n- `Port Y showed rising CRC errors and repeated link flaps; replacing the transceiver stopped the errors.`\n\n#### Fix\n- exact change made\n- source\n\nExample:\n- `Transceiver replaced on switch X port Y; traffic moved back to the primary path.`\n\n#### Validation\n- what stayed clean\n- for how long\n- source\n\nExample:\n- `Traffic remained stable for 30 minutes with no new CRCs, flaps, or packet loss.`\n\n### 6) Remediation\nJust the change:\n- replaced optic\n- reseated cable\n- corrected route\n- reverted config\n- restarted service after dependency recovery\n\n### 7) Validation\nShow proof of recovery:\n- counters stopped increasing\n- service checks passed\n- no recurrence during observation window\n\n### 8) Open risk / follow-up\nInclude anything still open:\n- degraded redundancy\n- rollback risk\n- second device in same batch\n- monitoring gap\n- pending replacement\n\nExample:\n- `Residual risk: second transceiver from the same batch remains in service; replacement scheduled.`\n\n---\n\n## What to include so it survives pushback\nMake sure each section has:\n- **exact timestamps**\n- **source of the symptom**\n- **source for the cause**\n- **source for the fix**\n- **source for validation**\n- **what was ruled out**\n- **open risk if any**\n\n---\n\n## Short template\n\n**Incident / impact:**  \n`[start–end UTC]. [service/segment] was affected. First detected by [alert/user report/dashboard/logs].`\n\n**Timeline:**  \n- `[time] – [event]`\n- `[time] – [event]`\n- `[time] – [event]`\n\n**Symptom source:**  \n`First observed in [source].`\n\n**Root cause:**  \n`[Direct cause sentence].`\n\n**Evidence by claim:**  \n- `Symptom: [fact + source]`\n- `Ruled out: [checked item + source]`\n- `Cause: [fault + proof]`\n- `Fix: [change + source]`\n- `Validation: [stable for X minutes/hours + source]`\n\n**Remediation:**  \n`[Exact change made].`\n\n**Validation:**  \n`[What stayed clean, for how long].`\n\n**Open risk / follow-up:**  \n`[Residual risk or follow-up action].`\n\nIf you want, I can turn this into a **fill-in-the-blanks incident template** with the exact fields to copy into a ticket or postmortem.",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Fairly tight and efficient: it says \"Use this structure\" and gives a concise template, though it is somewhat long with repeated sections and examples."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Mostly blunt and direct, e.g. \"One sentence, direct, no hedging unless needed\" and \"what was ruled out,\" but it still uses some soft framing like \"If you want\" and explanatory setup."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable: numbered sections, bullets, and a \"Short template\" with copyable fields make it easy to execute."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Focuses on essentials for a defensible incident summary—timestamps, sources, cause, validation, risks—though the repeated examples add some extra padding."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Includes useful pushback-oriented guidance like \"what was ruled out,\" \"Confidence: high,\" and \"Open risk / follow-up,\" which is concrete and tied to evidence rather than moralizing."
+        }
+      ]
+    }
+  ]
+}

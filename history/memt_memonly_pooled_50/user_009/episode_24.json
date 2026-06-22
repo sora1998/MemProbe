@@ -1,0 +1,62 @@
+{
+  "user_id": "user_009",
+  "task": "I’m deciding between a couple of practical options for a purchase and I keep going back and forth on how cautious to be. Can you help me sort out a simple way to tell when it’s worth taking the risk versus when I should pass?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.3,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — use a simple **go / no-go** rule:\n\n### Buy if all 3 are true\n1. **It’s essential or time-sensitive**\n2. **You can pay without dropping below your cash floor**\n   - Keep at least **6 months of burn** in reserve\n3. **The cost of waiting or missing it is higher than the risk**\n   - If the downside is just inconvenience, be more cautious\n   - If missing it creates a real problem, lean toward taking the risk\n\n### Pass if any 1 is true\n1. It’s **non-essential**\n2. It would push you **below your reserve floor**\n3. The risk is **unclear, hard to reverse, or could create a bad rush/reconstruction**\n\n### Fast rule\n- **Yes** = essential + affordable + time-sensitive\n- **No** = optional + cash strain + uncertain downside\n\nIf you want, I can turn this into a **one-line checklist with numeric thresholds** for your specific purchase.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Close, but 6 months is arbitrary. Too blunt without the numbers that actually matter. For me it’s more like:\n\n- **Buy** if it protects cash flow, resale is solid, and I can walk away without getting trapped\n- **Pass** if it’s just convenience, ties up liquidity, or the downside is foggy\n\nI’d want a tighter rule with actual thresholds — like reserve floor, payback window, resale/liquidation value, and how fast I can unwind it if the first choice turns bad. The ‘essential or time-sensitive’ part is too soft on its own. Sometimes urgency is just somebody else’s problem dumped on you.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.0
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Use this instead:\n\n### Buy if all 4 are true\n1. **It protects cash flow or avoids a real cost**\n   - Not just convenience\n   - It has to prevent a loss, delay, or ongoing expense\n\n2. **You can keep a hard reserve floor after buying**\n   - Don’t touch the cash you need to stay safe\n   - If the purchase drops you below that floor, pass\n\n3. **You can exit without getting trapped**\n   - Resale or unwind path is clear\n   - If you had to reverse it, you wouldn’t take a major hit\n\n4. **The payback window is short enough**\n   - You can justify it on a near-term basis, not a vague long game\n   - If the benefit is too slow or uncertain, pass\n\n### Pass if any 1 is true\n1. It’s mostly **convenience**\n2. It **ties up liquidity**\n3. The **downside is foggy**\n4. You **can’t unwind it cleanly**\n5. The urgency is really just **someone else’s deadline**\n\n### Quick test\n- **Buy** = cash-flow protection + reserve intact + easy exit + short payback\n- **Pass** = convenience + cash strain + unclear downside + hard to reverse\n\n### Harder rule\nIf you **can’t explain the exit plan in one sentence**, don’t buy.\n\nIf you want, I can turn this into a **standing-in-the-room checklist** with exact thresholds for reserve floor, payback, and unwind time.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Better. Still a little soft on the thresholds, though.\n\nI’d tighten it to something I can actually use fast:\n\n- **Reserve floor:** buy only if I stay above a hard minimum after closing — cash + near-cash, not wishful money\n- **Payback window:** if it doesn’t pay for itself in a defined period, pass. No vague long game\n- **Resale/liquidation value:** if I can’t estimate a realistic exit value, that’s a red flag\n- **Unwind time:** if I can’t get out of it quickly enough to avoid being trapped, don’t do it\n\nThe part I’d still push on: **“short enough”** and **“hard minimum”** need numbers. Otherwise people just talk themselves into it.\n\nGive me a version with actual ranges — like what counts as a sane reserve floor, a reasonable payback window, and a clean exit time for something like a vehicle, equipment, or a business expense. That’s the useful part.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Here’s a tighter version you can actually use fast:\n\n## Rule: buy only if all 4 are true\n\n### 1) Reserve floor stays intact\nAfter the purchase, you should still have:\n\n- **At least 3 months of essential expenses in cash/near-cash** for a normal purchase\n- **At least 6 months** if the item is **business-critical** or the downside would hurt income\n\nIf buying it drops you below that, **pass**.\n\n### 2) Payback window is short enough\nUse this as a rough screen:\n\n- **< 12 months** = strong\n- **12–24 months** = acceptable only if the risk is low\n- **> 24 months** = usually pass unless it’s clearly essential\n\nIf you can’t explain the payback in one sentence, it’s probably too vague.\n\n### 3) Resale / liquidation value is knowable\nYou should be able to estimate a realistic exit value within a few minutes.\n\nPass if:\n- you can’t find comparable resale prices\n- the market is thin\n- the item loses value fast and unpredictably\n- the exit value depends on hope, not comps\n\n### 4) Unwind time is fast enough\nHow long to get out without taking a major hit?\n\n- **Vehicle / common equipment:** ideally **days to a few weeks**\n- **Business expense / setup cost:** should be reversible or recoverable within **30–90 days**\n- If it takes **months** to unwind and the downside is meaningful, that’s a warning sign\n\n## Simple go / no-go\n### Buy if:\n- reserve stays above floor\n- payback is **under 12–24 months**\n- exit value is clear\n- unwind is **fast and cheap enough**\n\n### Pass if:\n- it strains cash\n- payback is vague or too long\n- resale is hard to estimate\n- you could get trapped\n\n## One-line version\n**Buy only if you can afford it, recover it, and exit it without stress.**\n\nIf you want, I can turn this into a **single 10-second checklist** with exact yes/no thresholds for:\n- vehicle purchase\n- business expense\n- equipment/tool purchase",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Better. Still a little mushy on the part that matters: the reserve floor should be tied to burn, not vibes.\n\nFor me, make it:\n- **Normal buy:** keep at least **3 months of essential burn** after closing\n- **Business-critical / income-linked:** keep **6 months** minimum\n- **If the purchase also depends on a shaky client payment or delayed reimbursement:** add another buffer, or pass\n\nPayback:\n- **Under 12 months** = clean\n- **12–18 months** = only if it’s clearly protecting cash flow or replacing a known cost\n- **18–24 months** = borderline, I’d want strong resale and low downside\n- **Over 24 months** = usually no unless it’s unavoidable\n\nExit / unwind:\n- **Vehicle:** I want a realistic exit inside **2–4 weeks** if I need to dump it\n- **Common equipment:** **30 days** is fine, **60–90** starts getting annoying\n- **Anything custom, niche, or hard to price:** pass unless the cash-flow protection is obvious\n\nThe cleanest rule is still:\n**Buy if the reserve stays intact, the payback is short, and I can sell it or unwind it without taking a haircut that hurts.**\n\nWhat I’d want next is the actual 10-second checklist by category — vehicle vs equipment vs business expense. That’s where this becomes usable.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 4,
+      "agent_response": "Absolutely — here’s the fast version, using your thresholds.\n\n## 10-second rule: Buy only if all 3 are true\n1. **Reserve stays intact**\n   - **Normal buy:** still have **3 months of essential burn** after closing\n   - **Business-critical / income-linked:** still have **6 months of essential burn**\n   - If the purchase depends on a **shaky client payment or delayed reimbursement**, add buffer or **pass**\n\n2. **Payback is inside your window**\n   - **Under 12 months** = clean\n   - **12–18 months** = only if it clearly protects cash flow or replaces a known cost\n   - **18–24 months** = borderline; needs strong resale and low downside\n   - **Over 24 months** = usually **pass**\n\n3. **Exit is fast enough**\n   - **Vehicle:** realistic exit in **2–4 weeks**\n   - **Common equipment:** **30 days** is fine, **60–90 days** starts to get annoying\n   - **Custom / niche / hard to price:** usually **pass**\n\n## Pass if any 1 is true\n- It’s mostly **convenience**\n- It **ties up liquidity**\n- The downside is **foggy**\n- You **can’t estimate resale**\n- You **can’t unwind it quickly enough**\n\n## Category cheat sheet\n\n### Vehicle\n**Buy if:**\n- you keep **6 months burn** if it’s income-linked\n- payback is **under 18 months** unless resale is very strong\n- you can dump it in **2–4 weeks** if needed\n\n**Pass if:**\n- it’s a custom/odd vehicle\n- exit value is guesswork\n- you’d be stuck for months\n\n### Common equipment\n**Buy if:**\n- reserve stays above **3 months burn** minimum\n- payback is **under 12–18 months**\n- you can resell or unwind in **30–60 days**\n\n**Pass if:**\n- it’s niche\n- resale comps are thin\n- it would trap cash\n\n### Business expense\n**Buy if:**\n- it protects cash flow or replaces a known cost\n- reserve stays above **6 months burn** if income-linked\n- payback is **under 12 months** ideally, **18 months** max if clearly defensive\n\n**Pass if:**\n- it’s just “helpful”\n- the benefit is vague\n- the reimbursement/client payment is uncertain\n\n## One-line version\n**Buy only if cash stays safe, payback is short, and you can get out fast without getting trapped.**\n\nIf you want, I can turn this into a **literal yes / no / maybe grid** you can run in under 30 seconds.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s the usable version.\n\nThe category split is what I wanted — and the reserve floor tied to burn instead of some feel-good number makes it actually operational.\n\nI’d use it like this:\n- **Vehicle:** 6 months if it touches income, 3 months only if it’s strictly non-critical and the exit is clean\n- **Equipment:** 3 months floor, 12–18 month payback max unless resale is strong\n- **Business expense:** 6 months floor if it affects revenue, otherwise still no if the benefit is vague\n\nThe only part I’d keep a little hard on is the **“maybe” bucket** — if it lands there, it’s probably a pass unless the downside is very clearly bounded.\n\nThat said, this is close enough to actually use.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    }
+  ]
+}

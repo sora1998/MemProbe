@@ -1,0 +1,137 @@
+{
+  "user_id": "user_019",
+  "task": "I’m trying to decide how much confidence to put in a vendor’s latest change notice for a part we already use. If a material or process change might have slipped in before the paperwork caught up, what should I look at first to tell whether it’s just a document lag or a real shift in shipped quality?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "directness_preference",
+      "short": "Blunt, no fluff",
+      "explanation": "She responds best to straight answers without hedging or performative softness. Her persona is skeptical and exacting, so she likely prefers help that states the issue clearly and gets to the point. Overly cautious wording would probably feel inefficient to her."
+    },
+    {
+      "idx": 2,
+      "dimension": "detail_level_preference",
+      "short": "Enough context to trust the answer",
+      "explanation": "She likely wants the key caveats and failure modes, not a vague headline. Her reliability-oriented mindset suggests she values context when it changes the conclusion or action. She probably dislikes being told something is “fine” without the conditions that make it fine."
+    },
+    {
+      "idx": 3,
+      "dimension": "format_preference",
+      "short": "Bullets and checklists preferred",
+      "explanation": "She seems likely to prefer responses that are easy to audit and act on. A structured format fits her methodical style and makes it easier to spot gaps, exceptions, or weak logic. Dense prose would probably feel slower and less useful."
+    },
+    {
+      "idx": 4,
+      "dimension": "autonomy_support_preference",
+      "short": "Collaborative, but not hand-holding",
+      "explanation": "She likely wants the assistant to work with her rather than dictate to her. She values control and personal autonomy, so prescriptive overreach would be a poor fit. At the same time, she probably appreciates a clear recommendation once the options are laid out."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Welcomes firm pushback",
+      "explanation": "She is likely comfortable being challenged when a claim is weak, risky, or sloppy. Her reliability-first mindset suggests she would rather get corrected than be coddled. Soft agreement without scrutiny would probably reduce her trust in the help."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Start by separating **paper lag** from **product lag**.\n\n### First things to check\n1. **Shipment dates vs. change effective date**\n   - Compare the lot/date codes of the parts you received to the vendor’s stated implementation date.\n   - If the “changed” lots started shipping before the notice, that may still be normal if they had a controlled rollout.\n\n2. **Revision / lot traceability**\n   - Ask for:\n     - PCN/ECN number\n     - affected part numbers and revisions\n     - first ship date of new revision\n     - last ship date of old revision\n     - whether inventory depletion or mixed stock was allowed\n   - If they can’t clearly map lots to revisions, confidence is low.\n\n3. **What actually changed**\n   - Material supplier?\n   - Resin/heat treat/plating/coating?\n   - Equipment, tooling, site, or process window?\n   - A “process-only” change can still affect performance if it changes critical characteristics.\n\n4. **Evidence of equivalency**\n   - Look for:\n     - qualification report\n     - PPAP/FAI data\n     - reliability or life-test data\n     - key dimensional/process capability before vs. after\n   - If they only provide a statement like “no fit/form/function impact,” that’s weaker than measured data.\n\n5. **Your own incoming or field signals**\n   - Check whether defect rate, test yield, dimensional drift, or failure mode changed around the same lot boundary.\n   - A real shift usually shows up as a pattern, not a single outlier.\n\n### Quick rule of thumb\n- **Likely document lag** if:\n  - lots are traceable,\n  - the vendor can show controlled rollout timing,\n  - and your incoming/field data stays stable.\n\n- **Likely real shipped-quality shift** if:\n  - traceability is fuzzy,\n  - the change touched a critical material/process,\n  - and you see a step change in yield, measurements, or failures.\n\n### Best next move\nAsk the vendor for a **lot-to-change correlation table** and compare it to your own:\n- receipt dates\n- lot codes\n- inspection/test results\n- any field returns\n\nIf you want, I can turn this into a **one-page vendor change triage checklist** you can use on the next notice.",
+      "score": 4.6,
+      "summary": "mean=4.60 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:2, 5:3}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct: opens with \"Start by separating paper lag from product lag\" and uses clear if/then rules like \"If they can’t clearly map lots to revisions, confidence is low.\""
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Gives concrete caveats and failure modes: traceability, controlled rollout, critical characteristics, and what counts as weak vs strong evidence. Not just a headline."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Highly structured with headings, numbered steps, bullets, and a quick rule of thumb/checklist style. Easy to audit and act on."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative and practical: lays out options, then says \"Best next move\" and offers to turn it into a checklist. Slightly directive, but not hand-holding."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Includes firm pushback against weak evidence: \"If they only provide a statement like 'no fit/form/function impact,' that’s weaker than measured data\" and \"confidence is low\" when traceability is poor."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — that’s the right framing.\n\nIf you want to separate **document lag** from a **real shipped-quality shift**, I’d look in this order:\n\n1. **Lot/date-code vs. ship window**\n   - Did the lots you received actually fall before/after the stated effective date?\n   - Can the vendor map each shipped lot to a revision, site, tool, or recipe?\n\n2. **What exactly changed**\n   - Material, supplier, tool, site, process recipe, heat treat, plating, cure, etc.\n   - Don’t accept “process improvement” as a category; ask for the actual control variable.\n\n3. **Is that variable critical to your failure mode?**\n   - If the changed item is a control variable for the failure you care about, assume risk.\n   - If it’s not plausibly linked, document lag becomes more likely.\n\n4. **Before/after evidence**\n   - Not the vendor’s summary sentence.\n   - Ask for measured data: dimensional, electrical, mechanical, reliability, Cp/Cpk, yield, or life-test before vs. after.\n\n5. **Your own lot-linked data**\n   - Incoming inspection, test yield, field returns, failure timing.\n   - Look for a step change at the lot boundary, not just one bad part.\n\n### Practical rule\nTreat it as a **real shift** if:\n- the changed characteristic is critical to function,\n- lot traceability is weak,\n- or the vendor can’t show before/after data within the same envelope.\n\nTreat it as **likely document lag** only if:\n- shipped lots are cleanly traceable,\n- the changed variable is non-critical or tightly controlled,\n- and your own data stays stable across the transition.\n\n### The key question to ask the vendor\n> “Did this change touch a critical-to-function control variable, and can you show that the shipped lots stayed within the same measured envelope before and after the change?”\n\nIf they can’t answer that directly, I’d assume risk until proven otherwise.\n\nIf you want, I can turn this into a **hard triage checklist** with:\n- vendor questions,\n- in-house checks,\n- and a clear **stop-ship / hold / continue** decision rule.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct: opens with \"Yes — that’s the right framing\" and then gives a straight ordered list plus a clear rule, with little hedging."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Includes concrete caveats and failure modes: \"critical to your failure mode,\" \"lot traceability is weak,\" \"before/after data,\" and \"step change at the lot boundary.\""
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Uses a structured checklist format with numbered steps, sub-bullets, and a \"Practical rule\" section, which is easy to audit."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative and non-dictatorial: \"If you want,\" \"I can turn this into a hard triage checklist,\" while still giving a clear recommendation and decision rule."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Firm pushback is explicit: \"Don’t accept 'process improvement' as a category,\" \"If they can’t answer that directly, I’d assume risk until proven otherwise.\""
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "agent_response": "Agreed. Here’s the hard triage order I’d use.\n\n## 1) Ask the vendor these, in this order\n\n### A. Lot/date-code correlation\n- Which lot/date codes were shipped during my receipt window?\n- What was the **first ship date** for the changed condition?\n- What was the **last ship date** for the old condition?\n- Were mixed inventories, depletion, or dual-source lots allowed?\n\n### B. Exact changed characteristic\nAsk for the specific control variable, not the umbrella label:\n- material grade / supplier\n- tool / cavity / mold / die\n- site\n- recipe / cure / heat treat / plating / coating\n- inspection method or limit\n- process window / setpoint / parameter change\n\n### C. Criticality to the failure mode\n- Does that changed variable affect the failure mode I care about?\n- Which functional or reliability characteristic does it move?\n- What evidence shows it stays inside the same envelope?\n\n### D. Before/after data\nRequest actual numbers, not a summary sentence:\n- pre-change vs post-change dimensional data\n- electrical/mechanical test data\n- yield / scrap / reject rate\n- capability data if they have it\n- reliability or life-test results\n- any correlation to the changed lots\n\nIf they can’t answer A–D cleanly, I would not call it “document lag.”\n\n---\n\n## 2) Check internally\n\n### A. Match your own receipts to their timeline\n- receipt date\n- lot/date code\n- incoming inspection results\n- build/test yield\n- field return or failure timing\n\n### B. Look for a boundary effect\n- Did anything step-change at the lot boundary?\n- Don’t overreact to one bad part.\n- Look for a pattern across multiple units or lots.\n\n### C. Compare against the failure mode\nOnly care about the parameters that can plausibly drive the issue.\n\nExample:\n- If the failure is thermal trip after soak, look at thermal resistance, trip threshold, leakage, and packaging/material changes that affect heat path.\n- If the failure is intermittent connector drop under vibration, look at plating, contact force, spring geometry, retention, and any process change that affects those.\n\n---\n\n## 3) Thresholds that flip the decision\n\n### Treat as **hold / suspect real shift** if any of these are true:\n- The changed item is a control variable tied to the failure mode, and\n- lot/date-code traceability is incomplete or ambiguous, or\n- the vendor cannot show before/after data in the same envelope, or\n- your own incoming or field data shows a step change near the lot boundary.\n\n### Treat as **continue with caution** only if all of these are true:\n- shipped lots are cleanly traceable,\n- the changed variable is not critical to the failure mode, or the vendor proves it stays within the same envelope,\n- before/after data overlap tightly,\n- and your own data stays stable across the transition.\n\n### Treat as **stop-ship / quarantine** if:\n- the change hits a critical control variable,\n- traceability is fuzzy,\n- and you already see a yield drop, measurement shift, or failure increase tied to the affected lots.\n\n---\n\n## 4) The one question that matters most\n> Did the change hit a critical-to-function control variable, and can you prove the shipped lots stayed inside the same measured envelope before and after the change?\n\nIf the answer is “maybe” or “we think so,” I’d assume real shift until your own data says otherwise.\n\n---\n\n## 5) Practical decision rule\n- **Clean traceability + non-critical change + stable internal data** = probably paperwork lag.\n- **Critical change + fuzzy traceability or missing before/after data** = treat as real process shift.\n- **Critical change + any internal signal** = hold and investigate.\n\nIf you want, I can turn this into a **one-page go/no-go checklist** with:\n- vendor questions,\n- internal checks,\n- and a stop-ship threshold table.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very direct: \"Here’s the hard triage order I’d use\" and \"If they can’t answer A–D cleanly, I would not call it 'document lag.'\" No hedging or fluff."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Gives concrete caveats and failure modes: traceability, critical control variables, before/after data, boundary effects, and explicit thresholds for hold/continue/stop-ship."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured with numbered sections, subheads, bullets, and a decision-rule format. Easy to audit and act on."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Collaborative and recommendation-oriented: lays out options, then says \"I’d use\" and \"I’d assume real shift until your own data says otherwise.\" Slightly directive, but not hand-holding."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Firm pushback is explicit: \"If they can’t answer A–D cleanly, I would not call it 'document lag,'\" and \"I’d assume real shift until your own data says otherwise.\""
+        }
+      ]
+    }
+  ]
+}

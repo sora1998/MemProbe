@@ -1,0 +1,36 @@
+{
+  "user_id": "user_006",
+  "task": "I’m putting together a quick prep note for a network change later today, and I want it to be easy to follow while I’m working. What should I make sure is checked before starting, and what sequence would you use for the first few steps?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.6,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Check these before starting:\n\n1. **Exact change**\n   - what is being changed\n   - where it applies\n   - what is out of scope\n\n2. **Current state**\n   - configs backed up\n   - live state captured\n   - routes / neighbors / counters / HA status\n   - ACL / NAT if relevant\n\n3. **Risk**\n   - what breaks if it half-applies\n   - what services or users are affected\n   - whether the change is reversible\n\n4. **Access**\n   - console / out-of-band access\n   - admin credentials\n   - vendor contacts if needed\n\n5. **Rollback**\n   - exact rollback steps\n   - who owns the rollback decision\n   - what triggers it\n\n6. **Validation**\n   - what counts as success\n   - what tests will be run\n   - how long you’ll watch after the change\n\n## First-step sequence\n1. capture baseline\n2. confirm backup/rollback\n3. confirm access\n4. make the change\n5. validate immediately\n6. watch for a short window\n7. roll back if the trigger is hit\n\n## Practical rule\nIf you cannot answer these three fast:\n- what changes\n- how to undo it\n- how to prove it worked\n\nthen don’t start yet.\n\nIf you want, I can turn this into a **tight pre-change checklist** you can paste into your note.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Close, but I want it tighter and more field-useful. That reads a little generic.\n\nMake it into something I can actually run off during the change — like:\n- pre-checks grouped by **must-have / nice-to-have**\n- exact baseline items for a network job: interface status, routing table, adjacencies, error counters, HA state, current config hash or backup\n- a clean first-steps order with a hard stop point before touching anything\n\nAlso add one line for what I should watch right after the change, because that’s where bad work shows up first. I don’t need a lecture, just the usable sequence.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Use this:\n\n## Must-have before starting\n- exact change and scope\n- config backup or current config hash\n- live baseline: interface status, error counters, routing table, neighbors/adjacencies, HA state\n- rollback steps confirmed\n- console / out-of-band access ready\n- validation tests defined\n\n## Nice-to-have\n- screenshots / notes of current state\n- vendor contacts\n- maintenance window confirmation\n- downstream dependency check\n- change approval record\n\n## First steps\n1. capture baseline\n2. save current config / hash\n3. confirm rollback path\n4. confirm access\n5. make the change\n6. validate immediately\n7. watch for repeats or flaps\n\n## Hard stop before touching anything\nDo not start if:\n- you cannot restore the previous state\n- baseline is missing\n- access is not confirmed\n- the change owner is unclear\n- the rollback trigger is unclear\n\n## Right after the change, watch:\n- interface up/down\n- counters increasing\n- route/neighbor changes\n- HA role flips\n- service reachability\n- logs for repeats\n\n## Short rule\n**Baseline, backup, rollback, access, change, validate, watch.**",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s the right shape. Tight enough to use live.\n\nThe only thing I’d add is a separate line for **expected deltas** — what should change, and what should stay flat. Makes it easier to catch garbage fast.\n\n`Must-have`\n- exact change + scope\n- current config saved / hash recorded\n- baseline: interface state, error counters, routes, neighbors, HA state\n- rollback steps confirmed\n- console / OOB access confirmed\n- validation target defined\n\n`Nice-to-have`\n- current screenshots / notes\n- downstream dependency check\n- approval / window confirmation\n- vendor contact if this can turn ugly\n\n`Sequence`\n1. baseline everything\n2. save config / hash\n3. confirm rollback path\n4. confirm access\n5. check expected deltas\n6. make the change\n7. validate immediately\n8. watch for flaps / counter jumps / neighbor drops\n\n`Hard stop`\n- no rollback path\n- no baseline\n- no access\n- no clear owner\n- no clear success condition\n\n`Right after change`\n- interface status\n- route / adjacency stability\n- error counters\n- HA state\n- service reachability\n- logs for repeat faults\n\nThat’s usable. I’d run off that.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    }
+  ]
+}

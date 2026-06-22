@@ -1,0 +1,36 @@
+{
+  "user_id": "user_045",
+  "task": "I’ve got a situation where a shipment is supposed to move fast, but a couple of details don’t line up and people are pressing for a quick sign-off. What’s the safest way to handle it without making a bad call under the clock?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.8,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Safest approach: **don’t rush a clean sign-off on an unverified mismatch**.\n\nUse a simple path:\n1. **Pause the release** if the details don’t line up.\n2. **Verify the discrepancy** against the source docs / part / traceability info.\n3. If it’s still unresolved, **put the shipment or part on HOLD**.\n4. **Escalate to quality/supervision** for review.\n5. Only release if there’s **quality sign-off** confirming it’s acceptable.\n\nKey rule:\n- **Supervisors can override HOLD only with quality sign-off.**\n- **Never override FAIL.**\n\nIf you want, I can help you turn this into a short floor-ready checklist or a one-line escalation script.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s the right lane. But I’d want it tighter for the floor — what’s the actual hold point, and what gets documented so nobody can say it was just a gut call later? I’ve seen this go sideways when people keep the truck moving and figure they’ll sort it out after. Usually doesn’t end clean.\n\nGive me a short checklist version, like 5 steps max, with the wording for the escalation note.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Here’s a tight floor version:\n\n### 5-step hold checklist\n1. **Mismatch found?**  \n   Stop sign-off.\n\n2. **Check the source**  \n   Verify part / lot / serial / doc / label against the record.\n\n3. **Still doesn’t line up?**  \n   **HOLD the shipment** — do not release it to keep moving.\n\n4. **Document it immediately**  \n   Record:\n   - what didn’t match\n   - part / lot / serial\n   - date / time\n   - who checked it\n   - where it was found\n   - current status: **HOLD**\n\n5. **Escalate for review**  \n   Send to quality / supervision for disposition.  \n   **No release without quality sign-off.**\n\n### Escalation note wording\n> **HOLD placed due to traceability / documentation mismatch. Shipment not released pending quality review and disposition.**\n\nIf you want, I can make that even shorter as a station card line.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "That’ll do. Clean and usable.\n\nThe hold point is when the mismatch is still there after you check the source docs, part, lot, serial, label — that’s the line. Not after the truck’s rolling.\n\nI’d use this:\n\n1. Mismatch found, stop sign-off.\n2. Verify against source record and physical ID.\n3. If it still doesn’t match, place shipment on HOLD.\n4. Log what failed to match, date/time, who verified it, and current status.\n5. Escalate to quality/supervision. No release without quality disposition.\n\nEscalation note:\n> HOLD placed due to traceability/documentation mismatch. Shipment not released pending quality review and disposition.\n\nThat’s tight enough for the floor. ",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    }
+  ]
+}

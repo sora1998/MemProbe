@@ -1,0 +1,23 @@
+{
+  "user_id": "user_011",
+  "task": "I’m trying to clean up a short edit that’s been stuttering in playback and throwing a weird export error, and I want to make sure I’m not chasing the wrong fix. Can you help me think through the most likely causes and the order you’d check them in?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.8,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — start with the **least invasive checks first**, and separate **playback stutter** from **export error** because they often have different causes.\n\n## Order to check\n\n### 1) Confirm whether it’s a playback problem, an export problem, or both\n- Does it stutter in the timeline only?\n- Does the exported file also stutter?\n- Does the export fail, or just come out wrong?\n\nIf export is clean and playback is not, don’t over-focus on the timeline.\n\n### 2) Check the media first\nMost common causes:\n- bad or heavy source media\n- variable frame rate footage\n- mismatched frame rate\n- corrupt clip\n- weird audio file\n- missing or relinked media behaving badly\n\nTest:\n- play the problem clip in isolation\n- compare it against a known-good clip\n- see whether the issue follows the media\n\n### 3) Check sequence / timeline complexity\nLook for:\n- nests\n- multicam\n- adjustment layers\n- effects\n- retimes\n- plugins\n- heavy transitions\n\nThese can cause stutter in playback and sometimes export issues too.\n\n### 4) Check cache / render files\nIf the media is fine and the timeline is complex:\n- clear cache\n- rebuild previews/renders\n- reopen the project\n- test again\n\nIf the problem disappears after cache/render refresh, it was probably a playback/render issue rather than bad media.\n\n### 5) Check sequence settings and export settings\nVerify:\n- frame rate\n- resolution\n- aspect ratio\n- audio sample rate\n- export codec\n- hardware acceleration / encoding settings if relevant\n\nA mismatch here can create weird export errors even if the timeline looks okay.\n\n### 6) Test a short export\nExport just the problem section:\n- if the short export fails, the issue is local to that section or its media/effects\n- if the short export works, the problem may be tied to the full sequence or export path\n\n## Most likely causes, in order\n1. bad or mismatched media  \n2. timeline complexity  \n3. cache/render corruption  \n4. sequence/export setting mismatch  \n5. plugin or hardware encoding issue\n\n## Quick rule\n- **Playback stutters but export is fine** → likely cache, render, or timeline complexity\n- **Export fails or errors** → likely media, settings, or a specific effect/plugin\n- **Both fail** → start with media and sequence settings\n\nIf you want, I can turn this into a **fast 5-step troubleshooting checklist** you can run in order.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that order makes sense. I’d probably do it almost exactly that way.\n\nOnly thing I’d add: if it’s a short edit, I’d check for **one bad clip or one weird effect** before I start clearing cache and rebuilding anything. I’ve had projects where the whole timeline looked cursed, but it was just one relinked shot or one retime sitting in the middle of it.\n\nSo my version would be:\n1) isolate whether it’s playback, export, or both\n2) test the problem clip/section in isolation\n3) check frame rate / VFR / mismatched media\n4) look for effects, nests, multicam, retimes, plugins\n5) clear cache / previews\n6) verify sequence and export settings\n7) do a short export of just the bad section\n\nIf the export error is specific, I’d also want the exact wording. That usually points pretty hard at whether it’s media, codec, hardware encoding, or a plugin thing.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    }
+  ]
+}

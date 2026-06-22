@@ -1,0 +1,49 @@
+{
+  "user_id": "user_033",
+  "task": "I’ve got a batch issue that looks minor on paper, but the pressure is already on to move it along. Can you help me think through what I should verify before anyone makes a call on it?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.466666666666667,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — before anyone makes a call, verify the things that tell you whether it’s **actually minor** or just **small-looking**.\n\n## Verify first\n1. **What exactly changed**\n   - one value, one step, one sample, or the whole batch?\n\n2. **Whether it reproduces**\n   - same result on repeat?\n   - fresh aliquot?\n   - second check?\n\n3. **Whether the controls are clean**\n   - QC, blank, calibration, system suitability, whatever applies\n\n4. **Whether the change is bounded**\n   - can you name the first bad point or first bad step?\n\n5. **Whether the batch is still defensible**\n   - would you sign it off if this were the last data point?\n\n## What makes it more than “minor”\nTreat it seriously if:\n- the problem repeats\n- controls move with it\n- the affected boundary is unclear\n- the error could have spread through the batch\n- the result would change interpretation or release\n\n## What to ask before the call\n- Is this a one-off or a pattern?\n- What evidence says the rest is still valid?\n- What is the first bad step or point?\n- What would be lost if we stop now?\n- What would be lost if we keep going?\n\n## Practical rule\nIf you can’t clearly say **what is valid** and **what is not**, don’t let pressure turn that into a casual “minor issue.”\n\nIf you want, I can help you turn the specific batch problem into a short **verify / hold / stop** decision list.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Mostly right, but it’s too generic. I’d want the actual checks pinned down to the failure mode, not a motivational list.\n\nWhat I’d verify first:\n- exact endpoint that moved\n- instrument status since last acceptable run\n- calibration / standard prep / reagent lot / expiry\n- replicate spread, not just the mean\n- system suitability and blanks\n- whether any step change or maintenance happened before the shift\n- chain-of-custody / sample handling if anything touched the material twice\n- whether the deviation is inside a pre-set investigation limit or just “looks small”\n\nAnd one thing missing: who is pushing the release, and what’s their incentive. That matters. If they’re trying to clear inventory or hit ship date, I’d treat the “minor” label as suspect until the data says otherwise.\n\nIf you want, narrow it to dissolution, assay, or something else and I’ll tighten the checklist.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — before anyone calls it minor, verify these in order:\n\n1. **Exact endpoint that moved**\n   - what changed, by how much, and in which direction\n\n2. **Replicate spread**\n   - not just the mean; check whether the variation widened\n\n3. **Blank / system suitability / control status**\n   - if these moved, it’s not just a small sample issue\n\n4. **Calibration / standard prep / reagent lot / expiry**\n   - any recent change here can explain a “small” shift\n\n5. **Instrument status since the last acceptable run**\n   - maintenance, reset, drift, error flags, pressure/flow/temp issues\n\n6. **Step change or event before the shift**\n   - maintenance, pause, restart, swap, cleaning, rerun\n\n7. **Chain of custody / handling**\n   - especially if the material was touched, transferred, or held twice\n\n8. **Investigation limit**\n   - is it inside a preset limit, or just being called “small” because it looks that way?\n\n9. **Who is pushing release**\n   - and whether the pressure is coming from ship date, inventory, or something else\n\n## Practical rule\nIf the endpoint moved, the replicates widened, or QC/blank/calibration changed, don’t call it minor yet.\n\nIf the only reason it’s being called minor is that someone wants it released, treat that as a reason to verify harder, not softer.\n\n## What not to do\n- Don’t focus only on the mean.\n- Don’t ignore a recent maintenance or reagent change.\n- Don’t let “looks small” substitute for the investigation limit.\n- Don’t let release pressure decide the technical call.\n\nIf you want, I can turn this into a **short verify / hold / escalate checklist** for the batch.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Closer. Still a bit tidy for real life. I’d want it tied to the actual failure mode, not just a generic QC ladder.\n\nFor dissolution specifically, I’d verify:\n- which timepoint or endpoint moved\n- whether the shift is only at one vessel or across the set\n- profile shape, not just % dissolved at the report point\n- apparatus condition: paddles/baskets, centering, vibration, bath temp, degassing, rpm\n- media prep: pH, volume, deaeration, temperature, sampling timing\n- analyst handling: sample pull timing, filtration, dilution, transfer delays\n- standard prep / potency / expiry / storage\n- instrument log since last passing run\n- any maintenance, calibration, or parts swap before the failure\n- OOS/OOT limit versus some vague “it’s only a little off” story\n\nFor assay, I’d shift the emphasis:\n- peak shape / retention / integration changes\n- calibration curve behavior, not just one point\n- standard and sample prep accuracy\n- reagent lot, expiry, carryover\n- system suitability, blanks, and any drift across the run\n\nAnd yes, who wants it released matters. If the pressure is from inventory or ship date, I treat that as a motive to challenge the data harder, not a reason to relax.\n\nIf you want it useful, I’d rather have one specific failure mode and turn it into a hold/retest decision tree than keep it general.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yes — that’s the right way to do it.\n\n## Dissolution: verify in this order\n1. **Which timepoint or endpoint moved**\n   - report point, early profile, or full curve\n\n2. **Whether it’s one vessel or the whole set**\n   - one outlier points differently than a batch-wide shift\n\n3. **Profile shape, not just the report point**\n   - a weird curve matters more than a single % number\n\n4. **Apparatus condition**\n   - paddles/baskets\n   - centering\n   - vibration\n   - bath temp\n   - rpm\n   - degassing\n\n5. **Media prep**\n   - pH\n   - volume\n   - temperature\n   - deaeration\n   - sampling timing\n\n6. **Analyst handling**\n   - pull timing\n   - filtration\n   - dilution\n   - transfer delay\n\n7. **Standard prep / potency / expiry / storage**\n\n8. **Instrument log since the last acceptable run**\n   - maintenance\n   - calibration\n   - parts swap\n   - error flags\n\n9. **OOS/OOT limit**\n   - use the actual limit, not “it looks small”\n\n## Dissolution decision rule\n- **One vessel only + apparatus/handling issue** → likely localized, investigate that vessel/step\n- **Whole set shifts + apparatus/media/instrument issue** → treat as run-level problem\n- **Profile shape changes** → don’t focus only on the report point\n- **Limit exceeded** → hold, don’t talk yourself into “minor”\n\n---\n\n## Assay: verify in this order\n1. **Peak shape / retention / integration**\n2. **Calibration curve behavior**\n3. **Standard and sample prep accuracy**\n4. **Reagent lot / expiry / storage**\n5. **System suitability / blanks / drift across the run**\n6. **Carryover or instrument issue**\n\n## Assay decision rule\n- **One sample off, everything else clean** → sample-specific or prep-specific\n- **Curve or standards off** → calibration / prep / reagent problem\n- **Retention / peak shape / blanks drifting** → instrument or method issue\n- **QC or suitability failing** → don’t call it minor\n\n---\n\n## Pressure rule\nIf the push is coming from:\n- inventory\n- ship date\n- release pressure\n\ntreat that as a reason to **verify harder**, not softer.\n\n## Hard call rule\nIf you can’t say:\n- what moved,\n- where it moved,\n- and what evidence shows the rest is still valid,\n\ndon’t call it minor yet.\n\nIf you want, I can turn this into a **hold / retest / escalate tree** for either dissolution or assay.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s the shape of it.\n\nWhat you gave is actually usable now — not the fluffy QC sermon version.\n\nFor dissolution, the order matters:\n- endpoint/timepoint first\n- one vessel vs the set\n- profile shape\n- apparatus condition\n- media prep\n- analyst handling\n- standard prep\n- instrument log\n- actual OOS/OOT limit\n\nAnd the decision split is right too:\n- one vessel + obvious local issue = chase the local cause\n- whole set shift = run-level problem\n- profile change = don’t get fixated on the report point\n- limit exceeded = stop pretending it’s minor\n\nSame for assay. Curve behavior, peak shape, retention, integration, blanks, carryover — that’s the right emphasis. Not just “check QC.”\n\nThe pressure piece is important. If release is being pushed because of inventory or ship date, that’s motive, not evidence. I’d expect pushback, not trust.\n\nSo yes. That’s the checklist I’d actually use.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    }
+  ]
+}

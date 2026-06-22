@@ -1,0 +1,137 @@
+{
+  "user_id": "user_006",
+  "task": "I’ve got a messy outage situation and want a sane recovery plan, not a guess: if a core network segment goes down and a couple dependent services start failing after that, how would you break it apart and bring things back in the right order? I’m looking for a practical approach I could actually follow under pressure.",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "verbosity_preference",
+      "short": "Wants responses kept tight and efficient",
+      "explanation": "He values speed, control, and efficiency, so he is unlikely to want long-winded help. He would probably prefer responses that get to the point quickly and avoid unnecessary filler. Overexplaining would feel like wasted time to him."
+    },
+    {
+      "idx": 2,
+      "dimension": "directness_preference",
+      "short": "Prefers blunt answers without softening",
+      "explanation": "His skeptical, competitive style suggests he wants clear, unambiguous guidance rather than hedged language. He would likely see excessive caution as evasive or inefficient. Straight answers fit his preference for control and decisive action."
+    },
+    {
+      "idx": 3,
+      "dimension": "format_preference",
+      "short": "Likes structured, actionable output",
+      "explanation": "He seems most likely to respond well to responses that are organized and easy to execute, such as bullets or checklists. That matches his practical, task-focused mindset. Loose, meandering prose would probably frustrate him."
+    },
+    {
+      "idx": 4,
+      "dimension": "detail_level_preference",
+      "short": "Wants the useful essentials, not padding",
+      "explanation": "He likely wants enough context to act, but not exhaustive background unless it helps him win or avoid mistakes. He is efficiency-driven, so extra caveats only matter when they change the decision. He would probably skip anything that does not affect the outcome."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Accepts pushback only if it is sharp and useful",
+      "explanation": "He is skeptical and self-serving, so he probably does not enjoy moralizing or vague objections. But if the pushback is concrete, efficient, and clearly tied to risk or leverage, he is more likely to respect it. Weak or overly gentle correction would likely be ignored."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — the key is to **restore the foundation first, then the dependencies, then the app/services**. Under pressure, the biggest mistake is chasing every alert in parallel.\n\nHere’s a practical recovery order you can actually use:\n\n## 1) Stabilize and scope the blast radius\n- Confirm **what is actually down** vs. what is just failing because of the core segment.\n- Identify:\n  - affected VLANs/subnets\n  - upstream/downstream dependencies\n  - whether the failure is **loss of connectivity**, **high latency**, **packet loss**, or **routing/DNS/auth issues**\n- Freeze nonessential changes. No “quick fixes” unless you know exactly what they affect.\n\n## 2) Restore the core network segment first\nFocus on the thing everything else depends on:\n- power / UPS / PDU\n- switch/router/firewall health\n- physical links and transceivers\n- cabling\n- routing adjacency / LACP / STP / VRRP / BGP/OSPF, whatever applies\n- firewall rules or ACLs if they were changed\n\nIf the segment is down because of a failed device, bring up the **minimum viable path** first:\n- one known-good switch/router\n- one known-good uplink\n- one known-good path to the rest of the network\n\nDon’t try to make it “perfect” yet — just make it functional.\n\n## 3) Verify basic network primitives before services\nBefore touching app servers, test:\n- link status\n- IP reachability\n- gateway reachability\n- DNS resolution\n- time sync if auth or certs are involved\n- routing to dependent subnets\n- MTU if you suspect weird partial failures\n\nA lot of “service failures” are really:\n- DNS broken\n- gateway unreachable\n- bad route\n- asymmetric routing\n- firewall path blocked\n\n## 4) Bring up shared infrastructure next\nOnce core connectivity is back, recover shared services in this order:\n1. **DNS**\n2. **DHCP** if used\n3. **NTP/time sync**\n4. **Directory/auth services** if apps depend on them\n5. **Load balancers / reverse proxies**\n6. **Databases / storage / message buses** if they are central dependencies\n\nIf you have redundancy, bring up the **primary path first**, then fail over carefully.\n\n## 5) Recover dependent services in dependency order\nNow start the services that were failing because of the network outage:\n- backend services\n- app servers\n- API gateways\n- workers/queues\n- cache layers\n- frontends\n\nFor each one:\n- check logs\n- confirm it can resolve and reach its dependencies\n- restart only if needed\n- validate health checks, not just process status\n\n## 6) Validate end-to-end, not just individual components\nDo a real path test:\n- client → DNS → gateway → service → database/storage → response\n- check from multiple network locations if possible\n- confirm no partial failures, timeouts, or retries\n\n## 7) Watch for delayed failures\nAfter recovery, keep an eye on:\n- retry storms\n- queue backlogs\n- failed session reauth\n- stale DNS caches\n- split-brain or failover loops\n- certificate or time drift issues\n\n## A simple pressure-friendly recovery rule\nUse this sequence:\n\n**Physical → Network control plane → Addressing/DNS → Shared infra → Apps → Validation**\n\nThat keeps you from restoring applications on top of a broken foundation.\n\n## If you want a very short incident checklist\n- Confirm blast radius\n- Stop changes\n- Restore core link/device/path\n- Verify routing/DNS/basic reachability\n- Restore shared services\n- Restore dependent apps\n- Validate end-to-end\n- Monitor for secondary issues\n\nIf you want, I can turn this into a **one-page incident runbook** or a **decision tree** you can follow during an outage.",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly tight and efficient: it gets to the point quickly with a concise recovery sequence and a short checklist. Minor extra detail exists, but little filler."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Direct and unambiguous overall, e.g. \"restore the foundation first\" and \"Don’t try to make it ‘perfect’ yet.\" It is not especially blunt in tone, but it avoids hedging."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable: numbered steps, bullets, and a final \"simple pressure-friendly recovery rule\" plus a short checklist make it easy to execute."
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Focuses on essentials needed to act under pressure, like \"blast radius,\" \"core network segment,\" and dependency order. A bit of extra diagnostic detail is included, but it is mostly relevant."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Pushback is present but useful and concrete, not moralizing: \"The biggest mistake is chasing every alert in parallel\" and \"Don’t try to make it ‘perfect’ yet.\" It is firm, though not especially sharp."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Absolutely. Here’s an **operator-style triage sequence** you can run under pressure.\n\n---\n\n# Core outage recovery checklist\n\n## 0) First rule: do not chase every alert\nYour job is to answer one question fast:\n\n**Is the core path broken, or are services failing because the core path is broken?**\n\nIf you don’t know yet, assume the core path is guilty until proven otherwise.\n\n---\n\n## 1) First 5 minutes: establish the shape of the failure\n\n### Check these in order\n1. **Is the problem isolated or broad?**\n   - One host?\n   - One VLAN/subnet?\n   - One site?\n   - Everything behind one core device?\n\n2. **Can you still reach the network edge/core devices?**\n   - ping/SSH/web UI to router/switch/firewall\n   - if management plane is dead, treat it as infrastructure first\n\n3. **What failed first in the timeline?**\n   - core segment down first\n   - then app/service errors\n   - if yes, likely dependency fallout\n\n4. **Is there a physical alarm or obvious link loss?**\n   - interface down\n   - power loss\n   - LOS on fiber\n   - device rebooted\n   - transceiver errors\n\n### Fast classification\n- **Physical**: link down, device offline, power/optic/cable issue\n- **Control plane**: device up, forwarding/routing broken\n- **Dependency fallout**: network mostly works, but apps fail because DNS/auth/DB/etc. is broken\n\n---\n\n## 2) Decide which bucket you’re in\n\n## A. Physical failure signs\nTreat it as physical if you see any of:\n- interface down\n- no link light\n- device unreachable on all paths\n- power/UPS issue\n- fiber LOS / bad optic / bad cable\n- switch port flapping hard\n\n### What to do\n- verify power\n- verify uplink/downlink status\n- swap to known-good cable/optic\n- move to known-good port if possible\n- bring up one known-good path only\n\n---\n\n## B. Control plane failure signs\nTreat it as control plane if:\n- devices are reachable but traffic doesn’t pass\n- routes vanished\n- neighbors dropped\n- STP/LACP/VRRP/BGP/OSPF weirdness\n- firewall rules changed\n- management works but user traffic doesn’t\n\n### What to check\n- routing table\n- neighbor adjacencies\n- default route\n- VLAN trunking\n- STP state\n- LACP bundle status\n- VRRP/HSRP active node\n- firewall policy/NAT\n- asymmetry between forward and return path\n\n---\n\n## C. Dependency fallout signs\nTreat it as fallout if:\n- core connectivity is mostly back\n- services still fail or time out\n- only certain apps are broken\n- auth/DNS/DB/storage/queue errors dominate logs\n\n### What to check\n- DNS\n- auth/LDAP/SSO/Kerberos\n- NTP/time drift\n- database/storage/message bus\n- service health checks\n- app logs for connection failures\n\n---\n\n# 3) If you have partial redundancy: restore the minimum viable path first\n\nDo **not** try to restore everything at once.\n\n## Bring up this order:\n1. **Core routing/switching path**\n2. **One stable upstream/downstream link**\n3. **DNS**\n4. **Auth**\n5. **NTP/time**\n6. **Storage/DB/message bus**\n7. **Dependent apps/services**\n\n### Rule\nIf you can get **one clean path** through the core, use that before touching anything fancy.\n\n### If there’s failover\n- force traffic onto the known-good side\n- disable flapping/looping failover if needed\n- avoid automatic “helpful” failover if it’s bouncing between bad and good paths\n\n---\n\n# 4) What to check before restarting services\n\nBefore restarting app tiers, confirm:\n\n## Network basics\n- gateway reachable\n- routes present\n- no stale/incorrect default route\n- no blackhole route\n- no asymmetric return path\n- MTU is sane end-to-end\n- no ACL/firewall block on return traffic\n\n## Dependency basics\n- DNS resolves correctly from the affected subnet\n- DNS cache isn’t stale on clients/servers\n- auth can be reached and time is synced\n- DB/storage endpoints are reachable\n- no certificate errors caused by time drift\n\n---\n\n# 5) The stuff people always miss\n\n## Stale routes\nCheck for:\n- old static route still preferred\n- route advertisement not withdrawn\n- stale route cache on routers/firewalls\n- wrong default route after failover\n\n## Asymmetric return path\nSymptoms:\n- SYN goes out, reply never comes back\n- app works from one subnet but not another\n- firewall sees one direction only\n\nCheck:\n- NAT path\n- firewall statefulness\n- routing on both directions\n- load balancer return path\n\n## DNS cache\nSymptoms:\n- service is “up” but clients hit dead IPs\n- some users work, others don’t\n\nCheck:\n- resolver cache\n- client cache\n- TTL behavior\n- split-horizon DNS\n- stale records after failover\n\n## Auth\nSymptoms:\n- network looks fine, logins fail\n- service tokens expire\n- SSO/LDAP/Kerberos errors\n\nCheck:\n- time sync\n- directory reachability\n- cert validity\n- auth server dependency chain\n\n## MTU\nSymptoms:\n- small pings work, real traffic breaks\n- TLS/session setup fails\n- intermittent app timeouts\n\nCheck:\n- path MTU\n- jumbo frame mismatch\n- tunnel overhead\n- fragmentation blocked\n\n## Failover loops\nSymptoms:\n- traffic bounces between nodes\n- service keeps flapping\n- “healthy/unhealthy” alternates\n\nCheck:\n- health check thresholds\n- split brain\n- election state\n- failover timers\n- whether both sides think the other is down\n\n---\n\n# 6) When to stop digging and declare the core path good enough\n\nStop when all of these are true:\n\n- core device/path is stable\n- interfaces are up and not flapping\n- routing is converged\n- gateway reachable from affected segments\n- DNS resolves correctly\n- return path is verified\n- MTU is confirmed sane enough for normal traffic\n- dependent services can reach their backends\n- no failover loop is active\n\n## “Good enough” means:\nYou can pass traffic **consistently**, not perfectly.\n\nIf it’s stable enough for:\n- clients to connect\n- services to authenticate\n- requests to reach backends\n- responses to return normally\n\nthen stop deep-diving and move to service recovery.\n\n---\n\n# 7) A simple run order you can memorize\n\n## Triage order\n**Power/Link → Device reachability → Routing/Forwarding → DNS/Auth/Time → Storage/DB → Apps → End-to-end validation**\n\n## Decision rule\n- If link is down: fix physical first\n- If link is up but traffic fails: fix control plane\n- If core works but apps fail: fix dependencies\n\n---\n\n# 8) Quick “under fire” checklist\n\n- [ ] Confirm blast radius\n- [ ] Identify first failure in timeline\n- [ ] Check power/link/device reachability\n- [ ] Verify routing and return path\n- [ ] Check for stale routes and failover state\n- [ ] Verify DNS resolution and cache behavior\n- [ ] Verify auth/time sync\n- [ ] Check MTU\n- [ ] Restore minimum viable path\n- [ ] Bring up shared services\n- [ ] Bring up dependent apps\n- [ ] Validate end-to-end\n- [ ] Watch for loops, retries, and delayed failures\n\n---\n\nIf you want, I can turn this into a **one-page printable runbook** or a **yes/no decision tree** you can follow live during an outage.",
+      "score": 4.6,
+      "summary": "mean=4.60 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:2, 5:3}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly tight and efficient: it uses a checklist and direct steps like \"First 5 minutes\" and \"Triage order.\" It is a bit long, but still focused and not especially verbose."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Very blunt and decisive, e.g. \"assume the core path is guilty until proven otherwise\" and \"Do not try to restore everything at once.\" It avoids hedging and gives clear commands."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured and actionable: numbered sections, bullets, checklists, and a memorized run order like \"Power/Link → Device reachability → Routing/Forwarding.\""
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Gives the useful essentials without much padding, focusing on what to check and in what order. It includes practical decision rules and avoids deep background."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Pushback is present but useful and concrete, such as \"Do not chase every alert\" and warnings about stale routes, asymmetric return paths, and failover loops. It is not moralizing or vague, though it is not especially sharp."
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "agent_response": "Here’s the **brutal operator version**.\n\n## 1) First 5 minutes\n- **If core segment is down, stop chasing app alerts.**\n- **If you can’t reach the core device, treat it as infra first.**\n- **If links are down/flapping/LOS/power alarms exist, go physical.**\n- **If links are up but traffic is dead, go control plane.**\n- **If core is mostly up and only services fail, go dependency fallout.**\n\n## 2) Classify fast\n\n### Physical\n- **If** interface down / no light / device offline / power issue  \n  **Then** check power, cable, optic, port, UPS.\n- **If** swapping to known-good cable/port restores it  \n  **Then** stop digging there and move on.\n- **If** it still fails after known-good swap  \n  **Then** assume device or upstream path, not cabling.\n\n### Control plane\n- **If** device is reachable but traffic doesn’t pass  \n  **Then** check routes, neighbors, VLANs, STP, LACP, VRRP/HSRP, firewall/NAT.\n- **If** routes/neighbors are missing or unstable  \n  **Then** fix that before touching services.\n- **If** management works but user traffic doesn’t  \n  **Then** suspect forwarding, policy, or return path.\n\n### Fallout\n- **If** core connectivity is back but apps still fail  \n  **Then** check DNS, auth, time, DB/storage, queues, load balancers.\n- **If** app logs show connection/auth/DNS errors  \n  **Then** do not keep rebooting apps blindly.\n\n## 3) Minimum viable path on partial redundancy\n- **If** you have two paths and one is stable  \n  **Then** force traffic onto the stable one.\n- **If** failover keeps bouncing  \n  **Then** disable automatic failover long enough to stabilize one side.\n- **If** one clean path works end-to-end  \n  **Then** declare the core path “good enough” and move to services.\n- **If** no path is clean  \n  **Then** keep working infra, not apps.\n\n## 4) Stop conditions\nStop digging in the network layer when all of these are true:\n- device is up\n- link is stable\n- routing converged\n- gateway reachable\n- forward and return path both work\n- DNS resolves correctly\n- auth/time are sane\n- no flapping failover\n\n**If all of that is true, the core path is good enough. Move on.**\n\n## 5) Missed stuff to check explicitly\n\n### Stale routes\n- **If** traffic still goes to the wrong place after failover  \n  **Then** check stale static routes, route advertisements, default route, route cache.\n\n### Asymmetry\n- **If** outbound works but replies vanish  \n  **Then** check asymmetric return path, NAT, firewall state, load balancer return routing.\n\n### DNS cache\n- **If** some clients work and others hit dead IPs  \n  **Then** check resolver/client cache, TTLs, split-horizon records.\n\n### Auth\n- **If** logins/tokens fail after network recovery  \n  **Then** check time sync, LDAP/SSO/Kerberos reachability, cert validity.\n\n### MTU\n- **If** small pings work but real traffic/TLS fails  \n  **Then** check MTU, tunnel overhead, fragmentation, jumbo mismatch.\n\n### Failover loops\n- **If** service flips healthy/unhealthy repeatedly  \n  **Then** check health checks, thresholds, split brain, election state, timers.\n\n## 6) Final run order\n**Physical → Control plane → Return path/DNS/Auth/MTU → Minimum viable path → Services → Validation**\n\nIf you want, I can compress this into a **single-screen checklist** you can paste into a ticket or incident doc.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very tight and efficient: starts with “Here’s the brutal operator version” and uses short imperative bullets instead of long explanation."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Blunt and unsoftened throughout, e.g. “stop chasing app alerts,” “go physical,” “do not keep rebooting apps blindly,” and “keep working infra, not apps.”"
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Highly structured and actionable: numbered sections, nested bullets, explicit “If… Then…” steps, and a clear final run order."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Focuses on essentials needed to act under pressure, with minimal padding and only the key checks that affect recovery order."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Pushback is present but useful and concrete, not moralizing; e.g. “do not keep rebooting apps blindly” and “stop chasing app alerts.” It’s strong, though not really a challenge to the user’s assumptions."
+        }
+      ]
+    }
+  ]
+}

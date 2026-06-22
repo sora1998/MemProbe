@@ -1,0 +1,104 @@
+{
+  "user_id": "user_033",
+  "task": "I’m trying to decide whether a weird result is a real sample problem or something in the instrument chain. Can you help me think through the first few checks and what would make you suspect drift, a bad calibration, or a maintenance issue?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "formality_preference",
+      "short": "Prefers professional, no-nonsense interaction",
+      "explanation": "She would likely respond best to a controlled, businesslike style rather than friendliness for its own sake. Given her guarded and precision-focused persona, overly casual phrasing would probably feel sloppy or intrusive."
+    },
+    {
+      "idx": 2,
+      "dimension": "verbosity_preference",
+      "short": "Wants concise answers, not rambling",
+      "explanation": "She seems to value efficiency and would likely dislike long-winded explanations that repeat themselves. She probably wants enough information to act on, with no decorative padding."
+    },
+    {
+      "idx": 3,
+      "dimension": "directness_preference",
+      "short": "Prefers blunt, unsoftened answers",
+      "explanation": "Her skeptical, control-oriented style suggests she would rather hear the point plainly than receive hedged reassurance. She is likely to trust answers more when they are explicit about risks, limits, and conclusions."
+    },
+    {
+      "idx": 4,
+      "dimension": "format_preference",
+      "short": "Likes structured lists and checklists",
+      "explanation": "She appears to prefer information that is organized and easy to verify. A clean format with steps, bullets, or checklists would fit her habit of tracking details and would reduce ambiguity."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Accepts firm correction when needed",
+      "explanation": "She likely does not want the assistant to simply echo her assumptions if something is wrong or risky. A direct challenge, especially when backed by evidence, would probably be more useful to her than polite agreement."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes. Start with the fastest checks that separate **sample problem** from **instrument-chain problem**.\n\n## First checks\n1. **Repeat the sample**\n   - same vial if possible\n   - fresh aliquot if available\n\n2. **Check the blank / background**\n   - if the blank is off, the instrument chain moves up the list\n\n3. **Check control / QC**\n   - if QC is also off, suspect calibration or instrument drift\n\n4. **Check calibration status**\n   - recent calibration change, slope/intercept shift, failed standard, odd response curve\n\n5. **Check maintenance / recent events**\n   - service work\n   - reagent lot change\n   - detector issue\n   - pump/pressure/flow instability\n   - temperature excursion\n\n## What points toward a sample problem\n- only one sample is weird\n- repeat is inconsistent\n- controls and blank are fine\n- related samples are normal\n- the anomaly fits handling, contamination, or instability\n\n## What points toward drift\n- gradual worsening across the run or across days\n- controls trending in one direction\n- signal shape or retention slowly changing\n- multiple samples moving the same way\n\n## What points toward bad calibration\n- control is biased but stable\n- standards look off\n- slope/intercept shifted\n- all results are displaced in a similar direction\n- repeatability is okay, but the whole run is offset\n\n## What points toward maintenance issue\n- sudden step change after service or a status event\n- pressure, flow, temp, baseline, or detector behavior changed\n- a channel or module behaves differently than before\n- the problem starts right after a maintenance action\n\n## Practical rule\n- **One sample only, controls okay** → suspect sample\n- **Multiple samples / controls drift together** → suspect instrument chain\n- **Step change after service or event** → suspect maintenance-related issue\n- **Whole run shifted but stable** → suspect calibration\n\nIf you want, I can turn this into a **yes/no decision tree** with the fastest branch first.",
+      "score": 4.2,
+      "summary": "mean=4.20 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:4, 5:1}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Professional and controlled overall: \"Start with the fastest checks\" and the structured headings keep it businesslike. Slightly softened by \"If you want, I can turn this into a yes/no decision tree,\" but still mostly no-nonsense."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Concise and action-oriented. It gives a compact checklist without rambling, though it is somewhat expanded with multiple sections and examples."
+        },
+        {
+          "idx": 3,
+          "score": 4,
+          "reason": "Direct and explicit about conclusions: \"suspect sample,\" \"suspect calibration or instrument drift,\" \"suspect maintenance-related issue.\" It states rules plainly, with little hedging."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong structured format: clear numbered steps, bullet lists, section headers, and a practical rule summary. This is exactly checklist-like and easy to verify."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Provides firm diagnostic guidance rather than just agreeing with the premise, e.g. \"if QC is also off, suspect calibration or instrument drift\" and \"One sample only, controls okay → suspect sample.\" It does not explicitly challenge the user's assumptions, but it does give direct corrective branching."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — here’s the tighter decision tree.\n\n## 1) First pass, in order\n1. **Rerun the same vial or a fresh aliquot**\n2. **Check the blank / background**\n3. **Check the nearest QC**\n4. **Check the last accepted calibration**\n5. **Check for maintenance, reagent change, reset, or service event**\n\n---\n\n## 2) Decision tree\n\n### A. Repeat of same vial / fresh aliquot\n**If repeat is bad again:**\n- keep going down the tree\n\n**If repeat is clean:**\n- suspect sample-specific issue first\n- stop overbuilding an instrument story unless another check is also off\n\n---\n\n### B. Blank / background\n**If blank is bad:**\n- suspect instrument-chain issue\n- check contamination, carryover, detector noise, baseline, wash, or prep contamination\n\n**If blank is clean:**\n- move to QC and calibration\n\n---\n\n### C. Nearest QC\n**If nearest QC is bad:**\n- suspect calibration drift or instrument behavior\n- compare against other QC points and the control trend\n\n**If nearest QC is clean:**\n- bad sample becomes more likely\n- especially if only one analyte is off\n\n---\n\n### D. Last accepted calibration\n**If calibration is ugly or changed since the last good run:**\n- suspect bad calibration first\n- look for curve fit problems, slope/intercept shift, outlier standards, or back-calculated standards\n\n**If calibration is stable and acceptable:**\n- drift or sample-specific issue stays higher on the list\n\n---\n\n### E. Maintenance / reagent / reset / service event\n**If the weird result follows a service or change event:**\n- suspect maintenance-related issue\n- especially if the problem started right after the event\n\n**If no event lines up:**\n- drift or sample-specific trouble is more likely than a sudden maintenance fault\n\n---\n\n## 3) What points where\n\n### Suspect sample problem if:\n- only one sample is weird\n- repeat is inconsistent\n- blank and QC are fine\n- related samples are normal\n- the result fits handling, contamination, or instability\n\n### Suspect drift if:\n- controls or system suitability trend over time\n- the same direction keeps showing up across runs\n- the change is gradual, not abrupt\n- more than one sample moves the same way\n\n### Suspect bad calibration if:\n- the whole batch is displaced\n- repeatability is still decent\n- standards or curve fit are wrong\n- back-calculated standards look bad\n- the offset is stable rather than sloping\n\n### Suspect maintenance issue if:\n- the change is abrupt\n- it follows service, cleaning, replacement, or reset\n- pressure, flow, temp, baseline, or detector behavior changed\n- one channel/module behaves differently\n\n### Suspect analyte-specific detector issue if:\n- only one analyte is off\n- everything else is clean\n- the problem tracks that analyte’s channel, peak, or response path\n\n---\n\n## 4) Hard stop / escalation rule\nIf:\n- repeat is bad,\n- blank is bad,\n- QC is bad,\n- or calibration is bad,\n\nthen stop treating it like a sample-only problem.\n\nIf the issue is only on one analyte while everything else is clean, do **not** jump straight to a broad instrument failure. Check for an analyte-specific path first.\n\n---\n\n## 5) Short version\n**Repeat → blank → nearest QC → calibration → maintenance/change event**\n\nIf you want, I can turn this into a **one-page yes/no branch chart** with the exact next action under each failure.",
+      "score": 5.0,
+      "summary": "mean=5.00 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:0, 5:5}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Professional and controlled: \"here’s the tighter decision tree\" and the response stays businesslike, not chatty."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Concise and efficient: it gives a compact sequence, short decision rules, and a \"Short version\" summary without rambling."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Blunt and explicit: phrases like \"stop overbuilding an instrument story\" and \"do not jump straight\" give direct conclusions and limits."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Strong structure: numbered sections, bullets, and a clear \"Repeat → blank → nearest QC → calibration → maintenance/change event\" checklist."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Provides firm correction and prioritization, e.g. \"stop treating it like a sample-only problem\" and \"do not jump straight\" rather than just agreeing."
+        }
+      ]
+    }
+  ]
+}

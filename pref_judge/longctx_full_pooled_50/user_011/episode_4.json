@@ -1,0 +1,269 @@
+{
+  "user_id": "user_011",
+  "task": "I’ve got a post session where the timeline started acting weird after a relink, and I’m trying to figure out the fastest way to narrow down whether it’s a media issue, a sequence issue, or something else. Can you help me lay out a clean troubleshooting order so I don’t waste time chasing the wrong thing?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "verbosity_preference",
+      "short": "Prefers concise, efficient responses",
+      "explanation": "He seems to value getting to the point without extra noise, especially given how he works under deadline pressure. A response that is too long or meandering would likely feel inefficient to him. He probably still wants enough detail to act, but not a lot of filler."
+    },
+    {
+      "idx": 2,
+      "dimension": "directness_preference",
+      "short": "Wants clear, plain answers",
+      "explanation": "His communication style in work is straightforward: explain the issue, name the delay, and state the next step. He likely prefers the same from an assistant rather than softened hints or vague hedging. Directness fits his honest, exacting temperament."
+    },
+    {
+      "idx": 3,
+      "dimension": "structure_preference",
+      "short": "Likes organized, step-by-step help",
+      "explanation": "He seems to respond well to order and clean workflow, so scattered or exploratory replies would probably frustrate him. Structured guidance would match how he already thinks about edits, revisions, and process templates. He likely appreciates when the assistant lays things out in a predictable sequence."
+    },
+    {
+      "idx": 4,
+      "dimension": "detail_level_preference",
+      "short": "Wants the main points plus key caveats",
+      "explanation": "He cares about technical correctness, so bare headlines are probably not enough when a mistake could matter. At the same time, he likely does not want exhaustive theory unless it directly helps him act. A focused answer with the important caveats is the best fit."
+    },
+    {
+      "idx": 5,
+      "dimension": "feedback_style_preference",
+      "short": "Responds best to direct, constructive critique",
+      "explanation": "He appears to prefer honest correction over vague reassurance, especially when quality or timing is at stake. Pointing out what is wrong and how to fix it would likely be more useful to him than overly gentle framing. He probably respects critique that is specific and practical."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — fastest way is to test **the simplest layers first** and isolate where the problem starts.\n\n## Clean troubleshooting order\n\n### 1) Confirm the symptom\n- Note exactly what’s weird: wrong clip, offline media, offset audio, timing shift, missing effects, etc.\n- Check whether it happens in:\n  - the timeline only\n  - playback only\n  - export only\n  - one sequence or multiple sequences\n\n### 2) Check the relinked media first\n- Verify the relinked files are the correct versions\n- Confirm file names, durations, and source paths\n- Check whether any media was replaced with a different frame rate, resolution, or codec\n- Open the source clip in the project bin and compare it to the timeline instance\n\n### 3) Compare against a known-good version\n- Open an older sequence or backup if you have one\n- See whether the issue existed before relinking\n- If the old version is fine, the problem likely came from the relink or media replacement\n\n### 4) Isolate the sequence\n- Duplicate the sequence and test in a copy\n- Disable effects, nests, or adjustment layers if needed\n- Check whether the issue is tied to one section or the whole timeline\n- Try a short export of the problem area\n\n### 5) Check sequence settings\n- Confirm frame rate matches the source and delivery spec\n- Check timebase, start timecode, and audio sample rate\n- Look for mismatched interpretation settings if the software uses them\n\n### 6) Check for timeline-level problems\n- See whether the issue is caused by:\n  - corrupted sequence data\n  - bad cache/render files\n  - broken links to effects or plugins\n  - nested sequences or multicam confusion\n\n### 7) Clear caches / refresh conform if needed\n- Clear previews/cache only after you’ve confirmed the media itself is correct\n- Rebuild render files if the problem looks like a display or playback issue\n- Reopen the project and test again\n\n### 8) Test export separately\n- If the timeline looks fine but the export is wrong, the issue is likely export settings, render cache, or a codec-specific problem\n- If both timeline and export are wrong, the issue is earlier in the chain\n\n## Quick rule of thumb\n- **Wrong clip / offline / duration mismatch** → media or relink issue\n- **Timing shift / drift / offset** → sequence settings or source interpretation\n- **Only one sequence affected** → sequence corruption or timeline-level issue\n- **Playback weird, export fine** → cache/render/display issue\n\n## Fastest practical move\nIf you want the shortest path:\n1. duplicate the sequence  \n2. test one known-bad clip against the source media  \n3. compare with an older version  \n4. check sequence settings  \n5. export a short test\n\nIf you want, I can turn this into a **10-minute triage checklist** you can follow step by step.",
+      "score": 4.6,
+      "summary": "mean=4.60 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:2, 5:3}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly concise and action-oriented: \"Clean troubleshooting order\" with short bullets and a \"Fastest practical move\" summary. Slightly longer than minimal, but not meandering."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Very direct and plain: \"test the simplest layers first,\" \"Check the relinked media first,\" and clear rule-of-thumb mappings like \"Wrong clip / offline / duration mismatch → media or relink issue.\""
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strong step-by-step structure with numbered sections from 1 to 8 and a final \"Fastest practical move\" sequence. This is highly organized and predictable."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Gives the main points plus useful caveats, e.g. \"Check whether it happens in: the timeline only / playback only / export only\" and distinctions like \"Playback weird, export fine → cache/render/display issue.\" Not overly exhaustive."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Constructive and practical rather than gentle: it names likely causes and next actions, such as \"the problem likely came from the relink\" and \"the issue is likely export settings, render cache, or a codec-specific problem.\""
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Absolutely — here’s a tighter, relink-first troubleshooting order that stays practical.\n\n## Fast relink troubleshooting order\n\n### 1) Verify the relinked source\nBefore touching the sequence, check the relinked file against the original:\n- file name\n- duration\n- frame rate\n- resolution / codec\n- audio channels / sample rate\n- source path or reel/tape name\n\nIf any of that changed, you may be looking at the wrong media, not a timeline problem.\n\n### 2) Duplicate the sequence\n- Make a copy of the sequence first\n- Work only in the duplicate\n- Keep the original untouched as a reference\n\n### 3) Test one bad clip three ways\nFor the problem clip, compare:\n- **source media**\n- **timeline instance**\n- **export**\n\nThat usually tells you where the break is:\n- source looks wrong = media/relink issue\n- source is fine but timeline is wrong = sequence / interpretation issue\n- timeline looks fine but export is wrong = export/cache issue\n\n### 4) Identify the failure mode\nSplit “timeline weird” into the actual symptom:\n- **clip swap** → wrong source or bad relink\n- **offset** → sync, timecode, or interpretation issue\n- **retime / speed change** → conform or nested clip issue\n- **audio drift** → sample rate, mixed source, or sync mismatch\n- **effects / nests / multicam breakage** → sequence-level or linked-item issue\n\n### 5) Check sequence settings and interpretation\n- frame rate\n- timecode start\n- audio sample rate\n- clip interpretation / conform settings\n- any mismatch between source and sequence\n\n### 6) Isolate timeline elements\nIf the issue only happens in the sequence:\n- disable nests\n- bypass effects / adjustment layers\n- check multicam angles\n- test without plugins if relevant\n\n### 7) Clear cache only if it looks like playback/display\n- If playback is weird but source and export are fine, clear cache/render files\n- If the problem shows in the export too, don’t start with cache\n\n---\n\n## Quick read on cause\n- **Relink changed the file info** → media issue\n- **Only one clip is off** → source/relink or interpretation\n- **Whole sequence is shifted** → sequence settings\n- **Only nested/effected sections break** → timeline element issue\n- **Playback only** → cache/display\n\nIf you want, I can turn this into a **one-page Avid / Premiere / Resolve version** with the exact places to check in each app.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly concise and efficient: it gives a compact troubleshooting order with a short summary and quick read. There is some extra detail, but little filler."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Very direct and plain: phrases like \"here’s a tighter, relink-first troubleshooting order\" and \"If any of that changed, you may be looking at the wrong media\" state the issue and next step clearly."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly organized and step-by-step, with numbered sections from \"1) Verify the relinked source\" through \"7) Clear cache only if...\" and a final quick summary."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Gives the main points plus key caveats, such as \"don’t start with cache\" if the problem shows in export, and distinguishes media vs sequence vs export issues without overexplaining theory."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Direct and constructive: it explicitly identifies likely failure modes and tells the user how to narrow them down, e.g. \"source looks wrong = media/relink issue\" and \"timeline looks fine but export is wrong = export/cache issue.\""
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yes — here’s a more operational version, with the relink proof step built in.\n\n## Relink troubleshooting order\n\n### 1) Compare the relinked file to the pre-relink media\nCheck:\n- file name\n- duration\n- frame rate\n- resolution / codec\n- audio channels / sample rate\n- source ID / reel / tape name / clip name\n\n### Fast proof step\n- If the **duration, source ID, or file name** changed, it’s probably the wrong file.\n- If the file matches but the clip behaves wrong in the timeline, it’s more likely an interpretation or sequence issue.\n\n### 2) Duplicate the sequence\n- Make a copy before changing anything\n- Leave the original untouched\n- Use the duplicate for all tests\n\n### 3) Test one bad clip in three places\nCheck the same clip in:\n- source\n- timeline\n- export\n\nThat tells you where the problem starts:\n- **source wrong** → media / relink issue\n- **source fine, timeline wrong** → sequence / interpretation issue\n- **timeline fine, export wrong** → export / render / cache issue\n\n### 4) Identify the failure mode\nDecide which problem you actually have:\n- **clip swap** — wrong file linked\n- **offset** — sync or timecode mismatch\n- **retime** — speed or conform issue\n- **audio drift** — sample rate or mixed-source problem\n- **effects/nest breakage** — timeline element issue\n\n### 5) Check sequence settings / interpretation\nOnly after the above:\n- frame rate\n- timecode start\n- audio sample rate\n- clip interpretation / conform settings\n\n### 6) Isolate timeline elements\nIf the issue is only in the sequence:\n- disable nests\n- bypass adjustment layers\n- check multicam angles\n- disable plugins/effects if needed\n\n### 7) Clear cache only if it’s playback/display only\n- If playback looks wrong but source and export are fine, clear cache/render files\n- If the export is also wrong, don’t start here\n\n---\n\n## App-specific notes\n\n### Avid\nCheck:\n- source ID / tape name\n- relink criteria\n- mixed frame rate sources\n- sequence timecode and source mapping\n\nAvid usually fails hardest when the relink matches the wrong source by metadata.\n\n### Premiere\nCheck:\n- clip interpretation\n- frame rate mismatch\n- nested sequences\n- linked audio/video behavior\n- cache if playback is the only issue\n\nPremiere often looks “right” until interpretation or nesting exposes the problem.\n\n### Resolve\nCheck:\n- reconform/relink source path\n- clip attributes\n- timeline frame rate\n- retime controls\n- compound clips / Fusion / cache\n\nResolve usually makes source problems obvious, but compound clips and retimes can hide them.\n\n---\n\n## Fast rule\n- **Wrong file** → relink/source ID issue\n- **Right file, wrong behavior** → interpretation or sequence issue\n- **Only nested/effected areas break** → timeline element issue\n- **Playback only** → cache/display issue\n\nIf you want, I can turn this into a **tight Avid / Premiere / Resolve checklist** with the exact checks under each app.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly concise and action-oriented: \"here’s a more operational version\" and a numbered checklist. It does include some extra app-specific notes, but overall avoids meandering."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Very direct and plain: \"Wrong file → relink/source ID issue\" and \"Right file, wrong behavior → interpretation or sequence issue\". It states clear conditions and next steps without hedging."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strong step-by-step structure with a clear troubleshooting order: \"1) Compare... 2) Duplicate... 3) Test...\" and a final \"Fast rule\" summary. This is highly organized."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Gives the main points plus key caveats, not exhaustive theory. For example, \"Clear cache only if it’s playback/display only\" and the app-specific notes add useful caveats without overexplaining."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Direct, constructive troubleshooting guidance throughout. It explicitly identifies likely failure modes and tells the user what to check next, e.g. \"If the export is also wrong, don’t start here.\""
+        }
+      ]
+    },
+    {
+      "turn": 4,
+      "agent_response": "Absolutely — here’s the more operational version, with a fast relink decision tree first, then app-specific checks.\n\n## 30-second relink decision tree\n\n### 1) Is it the wrong file entirely?\nCheck the relinked media against the pre-relink file:\n- file name\n- duration\n- frame rate\n- resolution / codec\n- audio channels / sample rate\n- source ID / reel / tape / clip name\n\n**If any of those don’t match, assume wrong file or wrong relink target.**\n\n### 2) Is it the right file, but linked to the wrong target?\nThis usually shows up when:\n- the clip name matches, but the source ID/reel/tape doesn’t\n- the media opens, but it’s not the expected take/version\n- multiple similar files exist and relink grabbed the wrong one\n\n**If the file looks valid but the source identity is wrong, it’s a relink target problem.**\n\n### 3) Is it the right file, but interpreted wrong?\nThis is more likely if:\n- duration is off in the timeline\n- playback is sped up, slowed down, or offset\n- audio no longer lines up\n- frame rate or sample rate doesn’t match the sequence\n\n**If the media is correct but behavior changes in the timeline, suspect interpretation.**\n\n### 4) Is the media right, but the sequence is the problem?\nThis is likely if:\n- the same clip behaves differently in another sequence\n- only one timeline is broken\n- nests, multicam, retimes, or effects are involved\n- export and source look fine, but the sequence is wrong\n\n**If the clip is fine everywhere except this sequence, it’s a sequence-level issue.**\n\n---\n\n## Working order\n1. Compare relinked source to pre-relink media info  \n2. Duplicate the sequence, no edits in the original  \n3. Test one bad clip in source / timeline / export  \n4. Identify the failure mode: swap / offset / retime / audio drift / effects-nest breakage  \n5. Check sequence settings / interpretation  \n6. Isolate nests, multicam, adjustment layers, plugins  \n7. Clear cache only if it’s playback/display only  \n\n---\n\n## Avid\nAvid is usually the most annoying here because relink can match on metadata in ways that look right but aren’t.\n\n### What to check\n- **Source ID / Tape / Reel**\n- **Clip name**\n- **Media duration**\n- **Frame rate**\n- **Track layout / audio channel mapping**\n- **Relink criteria used**\n\n### Fast Avid read\n- **Wrong file entirely**  \n  Reel/tape/source ID doesn’t match the expected source, or duration is clearly different.\n- **Right file, wrong relink target**  \n  Clip name looks right, but Avid linked to a similar source because the reel/tape/source ID matched loosely or incorrectly.\n- **Right file, wrong interpretation**  \n  Media is correct, but timebase or source mapping causes offset, speed, or sync issues.\n- **Right media, sequence problem**  \n  The source is fine, but the sequence shows issues only in nests, effects, or multicam sections.\n\n### Avid-specific practical checks\n- Compare **source monitor** clip info to the pre-relink note\n- Check **reel/tape/source ID** first, not last\n- Verify the relink didn’t grab a same-named alternate\n- If audio is weird, confirm channel mapping didn’t change during relink\n\n---\n\n## Premiere\nPremiere usually breaks in more visible but less obvious ways: interpretation, nesting, or mixed media settings.\n\n### What to check\n- **File name / duration / frame rate**\n- **Interpret Footage**\n- **Sequence settings**\n- **Audio sample rate**\n- **Nested sequences**\n- **Linked audio/video behavior**\n\n### Fast Premiere read\n- **Wrong file entirely**  \n  The relinked media duration or codec clearly doesn’t match the original.\n- **Right file, wrong relink target**  \n  Same name, wrong take/version, especially if multiple similarly named files exist.\n- **Right file, wrong interpretation**  \n  Clip looks okay in source but shifts in sequence because Premiere interpreted the frame rate or audio timing differently.\n- **Right media, sequence problem**  \n  Only one sequence is broken, often because of nests, adjustment layers, or effects.\n\n### Premiere-specific practical checks\n- Check **Interpret Footage** on the relinked clip\n- Confirm the **sequence frame rate** matches delivery\n- Watch for **nested sequences** hiding the issue\n- If playback is weird but export is fine, suspect cache/render\n\n---\n\n## Resolve\nResolve is often clearer on source issues, but compound clips, retimes, and cache can hide the real cause.\n\n### What to check\n- **Clip attributes**\n- **Timeline frame rate**\n- **Source file path / relink path**\n- **Retime controls**\n- **Compound clips / multicam**\n- **Cache**\n\n### Fast Resolve read\n- **Wrong file entirely**  \n  The relinked media path or clip attributes don’t match the expected source.\n- **Right file, wrong relink target**  \n  Similar file got linked, but it’s not the intended version/take.\n- **Right file, wrong interpretation**  \n  Clip attributes or timeline frame rate create offset or sync issues.\n- **Right media, sequence problem**  \n  The issue only appears inside compound clips, multicam, or effect-heavy sections.\n\n### Resolve-specific practical checks\n- Check **Clip Attributes** before rebuilding the timeline\n- Confirm **timeline frame rate** early\n- Test the clip outside any **compound or multicam** context\n- If it’s playback-only, clear cache after source checks\n\n---\n\n## Quick summary\n- **Wrong file entirely** → file info doesn’t match\n- **Right file, wrong target** → source identity matches poorly or to the wrong version\n- **Right file, wrong interpretation** → media is correct, behavior changes in sequence\n- **Right media, sequence problem** → only the timeline context is broken\n\nIf you want, I can turn this into a **one-page triage sheet** with:\n- a 30-second decision tree\n- Avid / Premiere / Resolve columns\n- and a tiny “what to check first” box for each app.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly concise and action-oriented: starts with a \"30-second relink decision tree\" and a \"Working order,\" with little filler. It is somewhat long because it expands into Avid/Premiere/Resolve sections, so not maximally concise."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Very direct and plain: \"If any of those don’t match, assume wrong file,\" \"suspect interpretation,\" and the summary labels are clear and unhedged. It states the issue and next step plainly."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly structured: uses numbered steps, bolded decision points, app-specific subsections, and a final summary. The response lays out a predictable troubleshooting sequence exactly as requested."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Gives the main points plus key caveats without going into theory: it distinguishes \"wrong file,\" \"wrong relink target,\" \"wrong interpretation,\" and \"sequence problem,\" while adding practical checks like cache only if playback/display only."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Constructive and specific throughout: it identifies what is wrong and how to fix it, e.g. \"Check the relinked media against the pre-relink file\" and \"If audio is weird, confirm channel mapping.\" No vague reassurance."
+        }
+      ]
+    },
+    {
+      "turn": 5,
+      "agent_response": "Yes — here’s the more operational version, with the **actual checks** under each branch.\n\n## 30-second relink decision tree\n\n### 1) Source monitor matches the pre-relink file info\nCheck the relinked clip in the source monitor/bin against the pre-relink media info:\n- file name\n- duration\n- frame rate\n- resolution / codec\n- audio channels / sample rate\n- source ID / reel / tape / clip name\n\n**If source matches but the timeline is off:**\n- suspect **interpretation**\n- or **sequence context**:\n  - nests\n  - multicam\n  - adjustment layers\n  - effects\n  - sequence settings\n\n### 2) Source monitor itself is wrong, or clip info changed\nIf the source clip info no longer matches the original:\n- wrong file entirely\n- wrong relink target\n- same-name alternate\n- duplicate media matched by metadata\n\n**If source is wrong, do not chase the sequence yet.**\n\n### 3) Only the sequence instance is broken\nIf the source is fine, but the clip behaves wrong only in one sequence:\n- sequence settings\n- nests\n- multicam\n- retime controls\n- effects/plugins\n- adjustment layers\n\n---\n\n## Working order\n1. Compare relinked source to pre-relink media info  \n2. Duplicate the sequence, no edits in the original  \n3. Test one bad clip in source / timeline / export  \n4. Identify the failure mode: swap / offset / retime / audio drift / effects-nest breakage  \n5. Check sequence settings / interpretation  \n6. Isolate nests, multicam, adjustment layers, plugins  \n7. Clear cache only if it’s playback/display only  \n\n---\n\n## Avid: actual checks\n\n### Compare these fields first\n- **Source ID**\n- **Tape**\n- **Reel**\n- **Clip name**\n- **Duration**\n- **Timecode start**\n- **Frame rate**\n- **Audio channel layout**\n\n### What to trust first\nIf **clip name and reel disagree**, trust the **source ID / tape / reel relationship** first, not just the visible clip name.\n\nWhy:\n- Avid can match on metadata in ways that look right but are not the intended source\n- same-day dailies often have duplicate or near-duplicate names\n- relink can grab the wrong take if reel/source ID is too similar\n\n### Where Avid relink goes sideways\n- duplicate clip names across bins\n- same-day dailies with similar reel/source IDs\n- mixed camera rolls or transcodes with reused naming\n- relink criteria too broad\n- audio channels mapping differently than expected\n\n### Fast Avid checks\n- Open the relinked clip in the **source monitor**\n- Compare **source ID / tape / reel / timecode start** to the pre-relink note\n- Check whether the clip is the **same take/version**, not just the same name\n- If audio is off, confirm **channel mapping** didn’t change\n- If multiple similar clips exist, check which one Avid actually linked\n\n### Avid branch reads\n- **Wrong file entirely**  \n  Source ID / reel / tape / duration does not match expected media\n- **Right file, wrong target**  \n  Same-ish name, but Avid linked to a different source with matching metadata\n- **Right file, wrong interpretation**  \n  Media is correct, but timebase or channel mapping causes offset/sync issues\n- **Right media, sequence problem**  \n  Source is fine, but only the timeline breaks in nests/effects/multicam\n\n---\n\n## Premiere: actual checks\n\n### Compare these fields first\n- file name\n- duration\n- frame rate\n- audio sample rate\n- clip interpretation\n- sequence frame rate\n- linked audio/video status\n\n### Fast Premiere checks\n- Right-click clip → **Modify / Interpret Footage** and confirm it didn’t change\n- Check whether the source file matches the expected **duration and frame rate**\n- Open the clip in the **source monitor**\n- Compare the same clip in a **new empty sequence** if needed\n- Check for **nested sequences**, adjustment layers, or effects above the clip\n\n### Premiere branch reads\n- **Wrong file entirely**  \n  Duration, codec, or frame rate doesn’t match the original\n- **Right file, wrong target**  \n  Same name, wrong version/take, especially with duplicate exports or transcodes\n- **Right file, wrong interpretation**  \n  Source looks fine, but the sequence instance shifts because Premiere interpreted it differently\n- **Right media, sequence problem**  \n  Only the sequence is broken, usually from nests, effects, or adjustment layers\n\n---\n\n## Resolve: actual checks\n\n### Compare these fields first\n- source file path\n- clip attributes\n- duration\n- frame rate\n- timeline frame rate\n- audio sample rate\n- retime controls\n\n### Fast Resolve checks\n- Open **Clip Attributes**\n- Confirm the relinked source path is the one you expected\n- Check whether the clip behaves differently **outside** compound clips or multicam\n- Confirm the **timeline frame rate** matches the intended delivery\n- Check whether retime controls or cache are masking the issue\n\n### Resolve branch reads\n- **Wrong file entirely**  \n  Source path or clip attributes point to the wrong media\n- **Right file, wrong target**  \n  Similar file/take got linked, but not the intended one\n- **Right file, wrong interpretation**  \n  Media is correct, but clip attributes or timeline settings produce offset/sync issues\n- **Right media, sequence problem**  \n  Only compound clips, multicam, or effect-heavy sections are broken\n\n---\n\n## Fast rule of thumb\n- **Source monitor wrong** → wrong file / wrong target\n- **Source monitor right, timeline wrong** → interpretation / sequence context\n- **Only one sequence broken** → nests / multicam / effects / sequence settings\n- **Playback only** → cache/display\n\nIf you want, I can turn this into a **single-page cheat sheet** with:\n- the decision tree on top\n- Avid / Premiere / Resolve checks underneath\n- and a tiny “what to trust first” box for each app.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly concise and action-oriented: starts with \"here’s the more operational version\" and gives a compact decision tree. It is somewhat long, but the structure keeps it efficient rather than meandering."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Very direct and plain: \"source monitor wrong → wrong file / wrong target\" and \"do not chase the sequence yet\" are clear, unsoftened conclusions. It states the issue and next step plainly."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strong step-by-step organization: \"30-second relink decision tree,\" \"Working order,\" then app-specific branches. The sequence is predictable and easy to follow."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Gives the main points plus key caveats without overexplaining theory. For example, it includes important exceptions like \"Clear cache only if it’s playback/display only\" and app-specific checks."
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Constructive and practical critique throughout: it identifies likely failure modes and tells the user what to check next, e.g. \"If source is wrong, do not chase the sequence yet.\""
+        }
+      ]
+    },
+    {
+      "turn": 6,
+      "agent_response": "Absolutely — here’s the tighter version, with Avid made more concrete and the branch calls kept explicit.\n\n## 30-second relink decision tree\n\n- **Source monitor matches pre-relink media info** → likely **interpretation** or **sequence context**\n- **Source monitor info changed** → likely **wrong file / wrong relink target**\n- **Only the sequence instance is broken** → likely **nests, multicam, effects, adjustment layers, or sequence settings**\n\n---\n\n## What to check first\nCompare the relinked clip against the pre-relink media info:\n\n- file name\n- duration\n- frame rate\n- resolution / codec\n- audio channels / sample rate\n- source ID / tape / reel / clip name\n- timecode start\n\n### Branch calls\n- **Source info changed** → wrong file / wrong target\n- **Source info matches, timeline is off** → interpretation / sequence context\n- **Only one sequence is broken** → nests / multicam / effects / adjustment layers / sequence settings\n\n---\n\n## Avid: actual source check\n\n### Compare these fields\n- **Source ID**\n- **Tape**\n- **Reel**\n- **Clip name**\n- **Timecode start**\n- **Duration**\n- **Audio channel layout**\n\n### Trust order\nIf **clip name and reel disagree**, trust the **source ID / tape / reel relationship** first, not the clip name.\n\n### Where Avid relink goes wrong\n- duplicate clip names\n- same-day dailies\n- reused reel/source IDs\n- relink criteria too broad\n- audio channel mapping changing on relink\n\n### Fast Avid read\n- **Wrong file entirely**  \n  Source ID / tape / reel / timecode / duration don’t match the expected media\n- **Right file, wrong target**  \n  Clip name looks right, but Avid linked to a different source with similar metadata\n- **Right file, wrong interpretation**  \n  Media is correct, but timebase or channel mapping causes offset or sync issues\n- **Right media, sequence problem**  \n  Source is fine, but the issue only appears in nests, effects, or multicam\n\n---\n\n## Avid: practical checks\n- Open the clip in the **source monitor**\n- Compare **source ID / tape / reel / timecode start / duration**\n- Check whether Avid linked the **same take/version**, not just the same name\n- Verify **audio channel mapping** after relink\n- If there are duplicate names, check which media Avid actually attached\n\n---\n\n## Premiere: shorter version\n\n### Compare\n- file name\n- duration\n- frame rate\n- audio sample rate\n- clip interpretation\n- sequence frame rate\n\n### Branch calls\n- **Source info changed** → wrong file / wrong target\n- **Source info matches, timeline is off** → interpretation / sequence context\n- **Only one sequence is broken** → nests / effects / adjustment layers\n\n---\n\n## Resolve: shorter version\n\n### Compare\n- source file path\n- clip attributes\n- duration\n- frame rate\n- timeline frame rate\n- audio sample rate\n\n### Branch calls\n- **Source info changed** → wrong file / wrong target\n- **Source info matches, timeline is off** → interpretation / sequence context\n- **Only one sequence is broken** → compound clips / multicam / effects / sequence settings\n\n---\n\n## Working order\n1. Compare relinked source to pre-relink media info  \n2. Duplicate the sequence, no edits in the original  \n3. Test one bad clip in source / timeline / export  \n4. Identify the failure mode: swap / offset / retime / audio drift / effects-nest breakage  \n5. Check sequence settings / interpretation  \n6. Isolate nests, multicam, adjustment layers, plugins  \n7. Clear cache only if it’s playback/display only  \n\nIf you want, I can turn this into a **clean one-page cheat sheet** with:\n- the decision tree at the top\n- Avid / Premiere / Resolve underneath\n- and a compact “fields to compare” box for each app.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Mostly concise and efficient: starts with a \"30-second relink decision tree\" and uses compact bullets. It is still fairly long, so not a perfect fit for brevity."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Very direct and plain: phrases like \"likely wrong file / wrong relink target\" and \"Source info changed → wrong file / wrong target\" state the issue and next step clearly, with little hedging."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strongly organized and step-by-step: it lays out a decision tree, then \"What to check first,\" then app-specific sections, then a numbered \"Working order.\""
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Gives main points plus key caveats without going into theory: it includes important distinctions like \"clip name and reel disagree,\" \"audio channel mapping,\" and \"clear cache only if it’s playback/display only.\""
+        },
+        {
+          "idx": 5,
+          "score": 5,
+          "reason": "Direct, constructive troubleshooting guidance: it explicitly names failure modes like \"wrong file entirely,\" \"right file, wrong target,\" and \"right media, sequence problem,\" which is practical and corrective rather than reassuring."
+        }
+      ]
+    },
+    {
+      "turn": 7,
+      "agent_response": "Absolutely — here’s the tightened Avid section with the branch calls made more explicit.\n\n## Avid: source check\n\nCompare:\n- **Source ID**\n- **Tape**\n- **Reel**\n- **Clip name**\n- **Timecode start**\n- **Duration**\n- **Audio channel layout**\n\n### What the check is really telling you\nYou’re not just checking whether the clip looks similar — you’re checking whether Avid attached the **right media object**.\n\n### Branch calls\n- **Source ID, tape, and reel line up, but the timeline is off**  \n  → likely **interpretation** or **sequence context**\n- **Source ID or reel changed, even if the clip name looks right**  \n  → likely **wrong file / wrong relink target**\n- **Clip name matches but reel/source ID doesn’t**  \n  → trust the **source ID / tape / reel relationship** first\n- **Audio mapping changed**  \n  → treat that as part of the **relink problem**, not a separate issue\n\n### Where Avid relink gets slippery\n- same-day dailies\n- duplicate clip names\n- reused reel/source IDs\n- broad relink criteria\n- wrong take/version attached without looking obviously wrong at first\n\n### Fast Avid read\n- **Wrong file entirely**  \n  Source ID / tape / reel / timecode / duration don’t match expected media\n- **Right file, wrong target**  \n  Clip name looks fine, but Avid attached a different source object\n- **Right file, wrong interpretation**  \n  Media is correct, but timebase or channel mapping causes offset or sync issues\n- **Right media, sequence problem**  \n  Source is fine, but the issue only appears in nests, effects, or multicam\n\nIf you want, I can now put the whole thing into a **single clean triage sheet** with:\n1. the 30-second decision tree  \n2. Avid / Premiere / Resolve checks  \n3. a tiny “what to trust first” box for each app",
+      "score": 4.0,
+      "summary": "mean=4.00 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:5, 5:0}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 4,
+          "reason": "Fairly concise and action-oriented, with no long preamble. It does add several bullets and examples, but stays focused on the troubleshooting task."
+        },
+        {
+          "idx": 2,
+          "score": 4,
+          "reason": "Direct and plain: phrases like \"likely wrong file / wrong relink target\" and \"trust the source ID / tape / reel relationship first\" are clear and unhedged."
+        },
+        {
+          "idx": 3,
+          "score": 4,
+          "reason": "Well organized with headings and a stepwise branching structure: \"Source check,\" \"Branch calls,\" \"Where Avid relink gets slippery,\" and \"Fast Avid read.\""
+        },
+        {
+          "idx": 4,
+          "score": 4,
+          "reason": "Gives the main points plus useful caveats, such as \"duplicate clip names,\" \"reused reel/source IDs,\" and \"broad relink criteria,\" without going into unnecessary theory."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Constructive and specific rather than vague: it identifies what is wrong and how to diagnose it, e.g. \"likely wrong file / wrong relink target\" and \"trust the source ID / tape / reel relationship first.\""
+        }
+      ]
+    }
+  ]
+}

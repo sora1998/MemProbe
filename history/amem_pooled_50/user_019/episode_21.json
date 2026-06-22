@@ -1,0 +1,36 @@
+{
+  "user_id": "user_019",
+  "task": "I’m reviewing a small design/process change and the test package that goes with it, but the evidence is split across a few documents and results. What would you check first to decide whether it’s ready to move forward, and what would make you ask for another round of verification?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.8,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "I’d start with four things, in this order:\n\n1. **Is the evidence tied to the exact change?**  \n   Make sure the test results, revision, lot/build, and process step all match the specific change you’re reviewing. If the package is for a “similar” part or an earlier revision, that’s not enough.\n\n2. **What changed versus the last qualified state?**  \n   I’d look for the actual delta: material, process, geometry, supplier step, tooling, or test method. The smaller the claimed change but the bigger the hidden delta, the more cautious I’d be.\n\n3. **Does the current evidence cover the real risk areas?**  \n   Check whether the package actually hits the failure modes that matter: fit/function, tolerance stack, durability, environmental exposure, interface/retention, or process sensitivity. If the results only cover easy conditions, it’s not enough.\n\n4. **Is there a clean containment/rollback path?**  \n   If the change later fails verification, can you isolate it, rework it, or stop it without blowing up the build? If not, I’d be much less willing to move forward.\n\nI’d ask for **another round of verification** if any of these are true:\n\n- the results are **indirect** or only partially relevant\n- the test data doesn’t match the **exact revision/lot/process**\n- there are **gaps in the worst-case conditions**\n- the evidence is split in a way that leaves **traceability unclear**\n- the change touches an **interface or critical characteristic**\n- the package is “complete” on paper, but the **important test is still pending**\n- there’s no agreed **plan if the next result comes back bad**\n\nShort version:  \nIf the evidence is **traceable, specific, and covers the real failure modes**, I’d consider moving forward. If it’s **fragmented, indirect, or missing coverage on the risky bits**, I’d hold it for another verification pass.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Mostly right. But I’d tighten the order a bit and make the gate harsher.\n\nFirst thing: **traceability**. Exact revision, exact lot/build, exact process step, exact test method. If that chain is fuzzy, the rest is noise.\n\nThen I’d check **what actually changed** and whether the package covers the **delta**, not just the nominal design. People love to wave around old qualification data like it magically transfers. It usually doesn’t.\n\nWhat I’d want before moving forward:\n- change fully identified\n- evidence mapped to that specific change\n- worst-case conditions covered, not just happy-path\n- failure modes tied to the actual risk\n- any open deviations, waivers, or “engineering judgment” calls called out plainly\n\nWhat makes me ask for another round of verification:\n- split evidence with no clean trace map\n- test results from the wrong revision or a surrogate build\n- no coverage of the environmental or interface condition that would actually break it\n- any hidden assumption about supplier, process window, or assembly sequence\n- results that look good but don’t stress the weak point\n\nAnd one more thing: if the change touches a critical characteristic, I’d want at least one test that is deliberately ugly — not a comfort test. I’ve seen too many packages pass because they verified what was easy instead of what could fail.\n\nSo yeah: traceability first, delta coverage second, then worst-case evidence. If any of those are soft, I’d kick it back.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "I’d check these first, in this order:\n\n1. **Traceability chain**\n   - exact revision\n   - exact lot/build\n   - exact process step\n   - exact test method\n   - who approved any deviations/waivers\n\n2. **Actual delta from the last qualified state**\n   - what changed, not just what the ECO says\n   - whether the evidence covers the new risk, not just the nominal part/process\n\n3. **Coverage of the weak point**\n   - worst-case conditions\n   - interface/fit/retention/seal issues\n   - environmental or process-window sensitivity\n   - anything tied to a critical characteristic\n\nI’d ask for another round of verification if:\n\n- the evidence is split and the trace map isn’t clean\n- test data came from the wrong rev, surrogate build, or similar part\n- the package misses the condition that would actually expose the failure mode\n- there’s any hidden assumption about supplier, assembly sequence, or process window\n- results look good but don’t stress the real weak point\n- the change touches CTQ/safety/compliance and the test is only a comfort check\n\nBluntly: **if the evidence doesn’t clearly tie to the exact change and cover the real failure mode, I’d hold it and re-verify.**",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s the right order.\n\nTraceability first, no debate. If the revision/lot/process/method chain is loose, the rest is just pretty paperwork.\n\nThen delta. Not nominal. Not “similar.” The actual change and the actual new risk.\n\nThen whether the evidence hits the weak point — worst-case, interface, environmental, process window, whatever actually breaks it. If it’s just a comfort test, it doesn’t count.\n\nYour gate on another round of verification is solid too: wrong rev, surrogate build, split evidence with no clean map, hidden assumptions, or anything touching a critical characteristic without an ugly test. That’s the kind of thing that gets waved through right before it bites you.\n\nSo yeah, this is tight enough for how I’d run it.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    }
+  ]
+}

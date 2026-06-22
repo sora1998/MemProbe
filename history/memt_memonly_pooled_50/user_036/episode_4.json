@@ -1,0 +1,23 @@
+{
+  "user_id": "user_036",
+  "task": "I’m trying to reconcile a weird mismatch between a product manual, the serial number on the device, and a couple of order records, and I keep second-guessing which detail is the one that’s off. Could you help me build a step-by-step way to sort out what matches and what needs a closer look?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 5.0,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Absolutely — here’s a clean step-by-step way to sort it out without flattening anything too early.\n\n## 1) Put the three sources side by side\nMake one row for each detail you’re checking, and one column for each source:\n\n- **Product manual**\n- **Device serial number**\n- **Order record 1**\n- **Order record 2**\n\nFor each row, copy the **exact text as written**:\n- serial number\n- model number\n- version / revision\n- date\n- customer or order name\n- any suffixes, dashes, or leading zeros\n\n## 2) Compare only one field at a time\nDon’t compare the whole record at once. Check:\n- serial number vs serial number\n- model vs model\n- date vs date\n- revision vs revision\n\nThis helps catch tiny mismatches like:\n- one extra digit\n- missing leading zero\n- swapped letters/numbers\n- version differences like **v3.0 vs v3.1**\n\n## 3) Classify each mismatch\nFor each conflicting detail, label it as one of these:\n\n- **Matches exactly**\n- **Minor formatting difference**  \n  Example: spaces, hyphens, capitalization\n- **Possible copy error**  \n  Example: one digit off, one letter off, missing character\n- **Version / revision mismatch**  \n  Example: older draft vs later correction\n- **Needs source check**  \n  Example: manual says one thing, device label and orders disagree\n\n## 4) Treat serial numbers as high priority\nIf the **device serial number** conflicts with the manual or order records, don’t guess. Serial numbers are usually the strongest identifier, so:\n- verify the number directly on the device label\n- check whether the manual is for a different unit or revision\n- check whether the order record was reissued or amended\n\n## 5) Look for “older draft” vs “later correction”\nIf one source looks like a revision of another, label it explicitly:\n- **older draft**\n- **later correction**\n\nThat’s especially useful when you see things like:\n- version changes\n- updated serial formats\n- corrected order numbers\n- revised model naming\n\n## 6) Preserve uncertain items separately\nDon’t merge anything you’re not sure about. Keep a separate bucket for:\n- unclear serial digits\n- version mismatches\n- name differences\n- date discrepancies\n\nThat prevents quiet errors from slipping into the final result.\n\n## 7) Decide the final status for each line\nFor each item, assign one of these outcomes:\n- **Keep as-is**\n- **Merge wording**\n- **Flag for verification**\n- **Likely copy error**\n\n## 8) If you want, use this simple template\nYou can paste your details into this format:\n\n| Field | Manual | Device | Order 1 | Order 2 | Status |\n|---|---|---|---|---|---|\n| Serial number |  |  |  |  |  |\n| Model |  |  |  |  |  |\n| Revision |  |  |  |  |  |\n| Date |  |  |  |  |  |\n| Name / customer |  |  |  |  |  |\n\nIf you want, send me the actual manual line, the serial number, and the order record lines exactly as written, and I can help you compare them side by side and label what looks like a match vs. what needs verification.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, this is usable. The one thing I’d tighten is: treat the device label and any amended order record as the anchor, not the manual if the manual looks generic or older. I’d also add a column for source date / revision, because that’s usually where the mismatch hides. But the step-by-step is solid. I can work with this.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 5.0
+      },
+      "gt_correct": null
+    }
+  ]
+}

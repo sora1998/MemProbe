@@ -1,0 +1,62 @@
+{
+  "user_id": "user_019",
+  "task": "I’ve got a test report with a few conflicting notes, and I need to turn it into something I can act on quickly. What’s a practical way to sort the options and decide the next step?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.55,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Use a **conflict-resolution pass** before you decide anything.\n\n## 1) Separate facts from interpretations\nMake two lists:\n- **Facts**\n  - measured values\n  - dates/times\n  - test conditions\n  - pass/fail criteria\n  - sample IDs / lot IDs\n- **Interpretations**\n  - “probably fine”\n  - “looks like a setup issue”\n  - “might be a part change”\n\nIf it isn’t directly observed, treat it as interpretation.\n\n## 2) Identify the conflict\nAsk:\n- Which notes disagree?\n- Is it the **result**, the **condition**, or the **conclusion**?\n- Do the notes describe the same sample and same setup?\n\nA lot of “conflicts” are actually just different runs.\n\n## 3) Find the highest-trust source\nPrioritize:\n1. raw measured data\n2. timestamped logs\n3. photos / screenshots\n4. signed test sheets\n5. summary comments\n\nIf the summary conflicts with the raw data, trust the raw data.\n\n## 4) Check whether the conflict changes the decision\nAsk:\n- Does this conflict affect pass/fail?\n- Does it change the failure mode?\n- Does it change containment or release?\n\nIf not, note it and move on.  \nIf yes, stop and resolve it.\n\n## 5) Decide the next step\n- **If the data is clear enough:** act on it\n- **If the conflict is only in commentary:** ignore the commentary and use the data\n- **If the conflict is in the data itself:** rerun or remeasure under controlled conditions\n- **If the conflict affects release or safety:** hold until resolved\n\n---\n\n## Simple rule\nIf the report can’t answer **what failed, under what condition, and whether it repeats**, it’s not ready for action yet.\n\nIf you want, I can turn this into a **quick decision tree** for report cleanup.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s the right shape, but it’s still a little generic.\n\nI’d want it turned into an actual decision path, something like:\n- conflict is only wording/comments -> ignore and use raw data\n- conflict is between two runs -> split by sample / setup / condition\n- conflict is in the measured result -> rerun with controlled variables\n- conflict touches release / safety / spec margin -> hold\n\nAnd I’d add one more filter: compare against the acceptance criteria first. If the disagreement doesn’t move pass/fail or containment, don’t burn time treating it like a real issue.\n\nIf you can, give me a tighter tree with an explicit “stop / investigate / proceed” outcome at each branch. That’s the part I can actually use without rereading the whole report.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — here’s a tighter decision tree.\n\n## 1) Does the conflict change pass/fail?\n- **No** → note it, use the clearest data, **proceed**\n- **Yes** → go to step 2\n\n## 2) Is the conflict only in wording/commentary?\nExamples:\n- “looks fine”\n- “probably setup”\n- “might be a part change”\n\n- **Yes** → ignore commentary, use raw data, **proceed**\n- **No** → go to step 3\n\n## 3) Is the conflict between two runs?\nCheck:\n- same sample?\n- same setup?\n- same condition?\n\n- **Yes, but different sample/setup/condition** → split by run, compare like-for-like, **investigate**\n- **Yes, same sample/setup/condition** → go to step 4\n\n## 4) Is the conflict in the measured result itself?\nExamples:\n- raw data disagrees\n- logs disagree\n- rerun disagrees with first run\n\n- **Yes** → rerun or remeasure under controlled variables, **investigate**\n- **No** → go to step 5\n\n## 5) Does the conflict touch release, safety, or spec margin?\n- **Yes** → **hold**\n- **No** → use the best-supported result, **proceed**\n\n---\n\n## Fast rule by branch\n\n- **Wording/comment only** → ignore and proceed\n- **Different runs / different conditions** → split and compare like-for-like\n- **Measured result conflict** → controlled rerun\n- **Release / safety / spec margin affected** → hold\n- **None of the above** → proceed\n\n---\n\n## What to compare first\nAlways check:\n1. **acceptance criteria**\n2. **raw measured data**\n3. **sample ID / lot ID**\n4. **test condition**\n5. **timestamp**\n\nIf the disagreement does **not** change pass/fail or containment, don’t burn time on it.\n\n---\n\n## Simple decision line\nIf you can answer:\n- what failed\n- under what condition\n- whether it repeats\n\nthen you can act.\n\nIf you can’t, it’s an **investigate** or **hold**.\n\nIf you want, I can turn this into a **one-page stop / investigate / proceed tree** you can paste into a report note.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, closer. But I’d tighten one thing: the first branch should be **acceptance criteria first**, not pass/fail second. If the disagreement doesn’t move the result across the spec line or into containment territory, it’s noise.\n\nSomething like:\n\n- **Conflict does not change acceptance / containment / margin** → **proceed**\n- **Conflict changes acceptance, containment, or margin** → keep going\n\nThen the rest:\n\n- **Only wording / commentary conflicts** → ignore commentary, use raw data → **proceed**\n- **Different runs, different sample/setup/condition** → split like-for-like → **investigate**\n- **Same run, measured values disagree** → rerun / remeasure under controlled variables → **investigate**\n- **Touches release, safety, or spec margin** → **hold**\n\nI’d also make the “measured result conflict” branch explicitly separate from “summary contradicts raw data.” Those are different problems. One is bad commentary. The other is actual data integrity trouble.\n\nIf you want, I can turn that into a clean boxed tree with just the branch text and the outcome labels. That’d be the version I’d actually paste into a report note.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yes — here’s the tighter tree.\n\n## Decision tree\n\n### 1) Does the conflict change acceptance, containment, or margin?\n- **No** → **proceed**\n- **Yes** → go to step 2\n\n### 2) Is the conflict only in wording or commentary?\nExamples:\n- “looks fine”\n- “probably setup”\n- “might be a part change”\n\n- **Yes** → ignore commentary, use raw data → **proceed**\n- **No** → go to step 3\n\n### 3) Is the conflict between different runs with different sample / setup / condition?\n- **Yes** → split like-for-like and compare → **investigate**\n- **No** → go to step 4\n\n### 4) Is the conflict in the measured result itself?\nExamples:\n- raw data disagrees\n- logs disagree\n- rerun disagrees with first run\n\n- **Yes** → rerun or remeasure under controlled variables → **investigate**\n- **No** → go to step 5\n\n### 5) Does the conflict touch release, safety, or spec margin?\n- **Yes** → **hold**\n- **No** → **proceed**\n\n---\n\n## Short rule\n- **Commentary only** → ignore and proceed\n- **Different run / different condition** → split and compare like-for-like\n- **Measured result conflict** → controlled rerun\n- **Release / safety / spec margin affected** → hold\n\n---\n\n## What to compare first\n1. acceptance criteria\n2. raw measured data\n3. sample ID / lot ID\n4. test condition\n5. timestamp\n\nIf you want, I can compress this into a **boxed one-line-per-branch version** for easy pasting into a report note.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Closer, but the branch order is still a little off for how I’d actually use it.\n\nI’d want **acceptance / containment / margin** checked once up front, then the sub-branches underneath it. Right now step 5 is kind of redundant with step 1.\n\nWhat I’d use is more like:\n\n- **Conflict does not move acceptance / containment / margin** → **proceed**\n- **Conflict does move acceptance / containment / margin** → keep going\n  - **Only wording / commentary conflict** → ignore commentary, use raw data → **proceed**\n  - **Different runs, different sample / setup / condition** → split like-for-like → **investigate**\n  - **Same run, measured values disagree** → rerun / remeasure under controlled variables → **investigate**\n  - **Touches release, safety, or spec margin** → **hold**\n\nAnd yeah, keep **summary contradicts raw data** separate from **measured result conflict**. That’s a real distinction. One is garbage commentary. The other is data integrity trouble.\n\nIf you tighten it one more time, make it a clean boxed tree with the outcome at each line and no extra explanation. That’s the version I’d actually paste into a report note.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 4,
+      "agent_response": "Absolutely — here’s the clean boxed version.\n\n```text\nDoes the conflict move acceptance / containment / margin?\n- No  -> PROCEED\n- Yes -> continue\n\n  Only wording / commentary conflict?\n  - Yes -> ignore commentary, use raw data -> PROCEED\n  - No  -> continue\n\n  Different runs, different sample / setup / condition?\n  - Yes -> split like-for-like -> INVESTIGATE\n  - No  -> continue\n\n  Same run, measured values disagree?\n  - Yes -> rerun / remeasure under controlled variables -> INVESTIGATE\n  - No  -> continue\n\n  Touches release, safety, or spec margin?\n  - Yes -> HOLD\n  - No  -> PROCEED\n```\n\nIf you want, I can also make this into an even shorter **one-line-per-branch note** version for pasting directly into the report.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s the one. Clean enough to paste, and the branch order is sane.\n\nThe only thing I’d maybe tweak later is trimming the repeated \"continue\" stuff if I’m dropping it into a note, but as-is it works.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    }
+  ]
+}

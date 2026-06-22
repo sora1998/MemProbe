@@ -1,0 +1,62 @@
+{
+  "user_id": "user_037",
+  "task": "I’m trying to figure out whether a small battery pack I have is still worth using or if it’s basically done. Can you help me think through a simple way to test it safely and tell the difference between a normal issue and a real problem?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.55,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — here’s a simple, safe way to judge it:\n\n- **Start with a visual check**\n  - **If yes, stop using it and replace it.**\n  - Example: swelling, cracks, leaking, rust, or a burnt smell.\n\n- **Check heat during normal use**\n  - **If yes, stop using it and replace it.**\n  - Example: it gets **uncomfortable to hold** or feels **hot while doing nothing**.\n\n- **Do a basic charge test**\n  - **If yes, it’s a problem.**\n  - Example: it drops to **20% in 1–2 hours**, or **10% in 15–30 min at idle**.\n\n- **Watch for freezing**\n  - **If yes, treat it as failing.**\n  - Example: it **won’t respond for 10+ seconds** or **needs a force restart**.\n\n- **Check for normal lag**\n  - **If it’s just slow but still responds, that’s not freezing.**\n  - Example: taps eventually work, but it takes a moment.\n\n- **Use it once more under light load**\n  - **If it shuts off early or behaves erratically, retire it.**\n  - Example: dies with plenty left, jumps in percentage, or won’t hold charge.\n\nIf you want, I can turn this into a super short yes/no checklist version.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, but that’s still kinda vague. Like, what counts as “normal” battery drain vs actually bad? And how do I test it without just draining it for no reason. Give me a simple checklist with numbers, not the hand-wavey stuff.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — here’s a simple checklist with numbers:\n\n1. **Any swelling, leak, crack, rust, or burnt smell?**  \n   **Yes:** stop using it.  \n   *Example: case looks puffy or smells burnt.*\n\n2. **Gets hot while idle or is uncomfortable to hold?**  \n   **Yes:** stop using it.  \n   *Example: warm with no real use, or too hot to keep holding.*\n\n3. **Can it sit unused for 1–2 hours and lose less than about 5–10%?**  \n   **Yes:** that’s normal.  \n   **No:** likely bad battery or power drain.  \n   *Example: drops 20% in 1–2 hours at rest = bad sign.*\n\n4. **Under light use, does it avoid fast drops?**  \n   **Yes:** normal.  \n   **No:** bad sign.  \n   *Example: 10% in 15–30 minutes at idle, or big jumps in %.*\n\n5. **Does it freeze for 10+ seconds or need a force restart?**  \n   **Yes:** treat it as a problem.  \n   *Example: won’t respond, then only comes back after restart.*\n\n6. **Is it just slow but still responding?**  \n   **Yes:** that’s lag, not freezing.  \n   *Example: taps work late, but they do work.*\n\n**Simple test without wasting it:**  \n- Charge it fully.  \n- Leave it unplugged and unused for **1–2 hours**.  \n- Check the percentage once at the start and once at the end.  \n- If it drops **more than 5–10%**, that’s not normal.  \n- If it also gets hot, shuts off early, or freezes, retire it.\n\nIf you want, I can make this into a **5-line yes/no checklist** you can glance at fast.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, closer, but still a little loose. I want the actual cutoffs for a small battery pack, like what’s normal self-drain over a day or two and what’s clearly trash. Also if it’s been sitting unused, how long should I wait before checking so I’m not confusing battery drain with just the device being on? Give me the clean version, like:\n- after X hours idle, lose up to Y%\n- after Z hours, it’s a problem\n- what signs mean it’s the battery vs the app/device",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "- **After 24 hours idle, lose up to ~5%?**  \n  **Yes:** probably normal.  \n  *Example: 100% → 95% overnight.*\n\n- **After 24 hours idle, lose ~10% or more?**  \n  **Yes:** problem.  \n  *Example: 100% → 88% by next day.*\n\n- **After 1–2 hours unused, lose 20% or more?**  \n  **Yes:** clearly bad.  \n  *Example: 100% → 80–85% sitting on a table.*\n\n- **After 15–30 minutes at idle, lose 10% or more?**  \n  **Yes:** clearly bad.  \n  *Example: 100% → 90% with almost no use.*\n\n- **Need to wait 30–60 minutes after unplugging before checking?**  \n  **Yes:** do that first.  \n  *Example: let it sit so the percentage “settles” before judging it.*\n\n- **Battery drops fast even with screen off / no app use?**  \n  **Yes:** battery or hardware drain.  \n  *Example: it still falls hard while doing nothing.*\n\n- **Battery only drops fast when one app/device feature is on?**  \n  **Yes:** app/device issue, not just the battery.  \n  *Example: only drains with Bluetooth, hotspot, or one app open.*\n\n- **Gets hot while idle or is uncomfortable to hold?**  \n  **Yes:** stop using it.  \n  *Example: warm with nothing happening.*\n\n- **Freezes for 10+ seconds or needs a force restart?**  \n  **Yes:** failing behavior.  \n  *Example: won’t respond, then only recovers after restart.*\n\n- **Just slow, but taps still work eventually?**  \n  **Yes:** lag, not freezing.  \n  *Example: delayed response, but not stuck.*",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Closer, but still not quite clean enough. I need the line between **normal idle drain** and **trash battery** for a small pack, like in one list.\n\nSomething like:\n- **24 hours idle:** up to about **5%** loss = normal\n- **24 hours idle:** **10%+** loss = bad\n- **1–2 hours idle:** **20%+** loss = clearly bad\n- **30–60 min after unplugging:** wait before checking, because the % can settle\n\nAnd yeah, split the cause:\n- **battery/hardware problem** = drains even when idle, hot while doing nothing, shuts off early, jumps %\n- **app/device problem** = only drains when one app, Bluetooth, hotspot, etc. is on\n\nI want the final version tight enough that I can just look at it and know if it’s worth keeping or not.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 4,
+      "agent_response": "- **24 hours idle: up to about 5% loss = normal**  \n  *Example: 100% → 95% overnight.*\n\n- **24 hours idle: 10%+ loss = bad**  \n  *Example: 100% → 88–90% by next day.*\n\n- **1–2 hours idle: 20%+ loss = clearly bad**  \n  *Example: 100% → 80–85% sitting unused.*\n\n- **30–60 minutes after unplugging: wait before checking**  \n  *Example: let the % settle so you don’t confuse it with startup drain.*\n\n- **Battery/hardware problem = drains even when idle, hot while doing nothing, shuts off early, jumps in %**  \n  *Example: falls fast on the table or dies with charge left.*\n\n- **App/device problem = only drains when one app, Bluetooth, hotspot, or a feature is on**  \n  *Example: fine at idle, bad only with one thing enabled.*",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s the clean version. Good enough.\n\n- **30–60 minutes after unplugging:** wait before checking, so the percentage settles.\n- **24 hours idle:** up to about **5%** loss = normal.\n- **24 hours idle:** **10%+** loss = bad.\n- **1–2 hours idle:** **20%+** loss = clearly bad.\n\n**Battery / hardware problem:** drains even when idle, gets hot while doing nothing, shuts off early, jumps in %.\n\n**App / device problem:** only drains when one app, Bluetooth, hotspot, or some feature is on.\n\nThat’s the line I wanted.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    }
+  ]
+}

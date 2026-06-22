@@ -1,0 +1,49 @@
+{
+  "user_id": "user_020",
+  "task": "I need to make a quick plan for a few errands and I don’t want to waste a trip. What’s the best way to group stops around Old Jamestown so I can get them done without backtracking all over the place?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.5,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "A good way to avoid backtracking is to group errands by **direction and type**:\n\n1. **Start with the farthest stop from Old Jamestown**  \n   Then work your way back toward home. That usually cuts out the most unnecessary driving.\n\n2. **Cluster by area, not by store name**  \n   Put all stops that are near each other on the same side of town into one leg of the trip.\n\n3. **Group by errand type if they’re in the same corridor**  \n   For example: groceries + pharmacy + bank in one area, then gas + pickup/drop-off in another.\n\n4. **Use a loop, not a zigzag**  \n   Plan it as:  \n   **Old Jamestown → farthest stop → nearby stops in that area → next area on the way back → home**\n\n5. **Save the easiest/most flexible stop for last**  \n   Things like gas, quick pickup, or a store with long hours work well at the end in case the earlier stops take longer.\n\nIf you want, send me the exact errands and I can help you sort them into the best route order.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s the general idea. But I need the actual stops to make it worth anything. Give me the errands and, if you know them, the side of town or the address. Otherwise it’s just guesswork and I’m not wasting gas on guesswork.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "I don’t actually know your specific errands or the addresses unless you give them to me.\n\nSend me a list like this:\n\n- Stop name / errand\n- Address or cross streets\n- Any time constraints\n\nExample:\n- Pharmacy — 123 Main St\n- Grocery — 455 Oak Ave\n- Bank — 900 Pine Rd\n\nThen I can put them in the best order from Old Jamestown with minimal backtracking.",
+      "user_simulator": {
+        "feedback_type": "add_context",
+        "text": "Here. Make do with this:\n\n- Pharmacy — Walgreens, 2140 Old Jamestown Rd\n- Grocery — Schnucks, 11887 W Florissant Ave\n- Bank — Regions, 11020 Bellefontaine Rd\n- Hardware — Home Depot, 1225 Dunn Rd\n- Gas — QuikTrip, 10300 Halls Ferry Rd\n- Post office — 1234 Dunn Rd\n\nNo special time on the pharmacy, but I’d rather not sit around all day.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Best no-backtracking order from **Old Jamestown** is:\n\n1. **Home Depot — 1225 Dunn Rd**\n2. **Post office — 1234 Dunn Rd**\n3. **Walgreens — 2140 Old Jamestown Rd**\n4. **Regions Bank — 11020 Bellefontaine Rd**\n5. **QuikTrip — 10300 Halls Ferry Rd**\n6. **Schnucks — 11887 W Florissant Ave**\n\nWhy this works:\n- **Dunn Rd stops together** first: Home Depot + post office\n- Then **Old Jamestown Rd** for the pharmacy\n- Then head generally **south/east** to **Bellefontaine**\n- Then **Halls Ferry**\n- Finish at **W Florissant**, which keeps you from bouncing back north again\n\nIf you want, I can also turn this into a **quick loop with turn-by-turn corridor directions** so you can drive it without thinking about the map.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "That’ll do. Dunn Rd together, pharmacy next, then work down the line. No sense zigzagging all over North County. Keep the post office before the bank if it’s on the way, and I’d hit the gas stop only if the tank’s actually low. Otherwise you’re just adding a stop for nothing.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.5
+      },
+      "gt_correct": null
+    }
+  ]
+}

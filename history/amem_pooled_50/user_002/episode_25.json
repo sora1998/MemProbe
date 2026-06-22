@@ -1,0 +1,49 @@
+{
+  "user_id": "user_002",
+  "task": "I’m putting together a plan for a messy project handoff, and there are a few open items that still need an owner. What’s the cleanest way to write the handoff so responsibilities are clear and nothing gets lost in the shuffle?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.666666666666666,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Use a **handoff matrix** with one owner per item and a hard status log.\n\nKeep it simple:\n\n### Handoff format\n- **Item**\n- **Owner**\n- **Due date**\n- **Dependency**\n- **Proof required**\n- **Status**\n- **Escalation / blocker**\n\n### Rules\n- **One named owner per item** — not “team” or “ops.”\n- **If it isn’t logged, it doesn’t count.**\n- **No open item without a due date.**\n- **Proof required** should be specific: email, permit, photo, invoice, signoff, etc.\n- **Status** should be one of: open / in progress / blocked / complete.\n- **Escalation** should say who gets pulled in if it slips.\n\n### Clean handoff note\nAt the top, add a short summary:\n- what is being handed off\n- what is still open\n- what is blocked\n- what needs immediate attention\n\n### Example\n| Item | Owner | Due date | Dependency | Proof required | Status | Escalation / blocker |\n|---|---|---:|---|---|---|---|\n| Final inspection schedule | PM | 5/3 | roughs complete | calendar invite + inspector confirmation | open | inspector availability |\n| Utility transfer | Owner | 5/2 | access confirmed | utility confirmation email | blocked | tenant access |\n| Closeout docs | Admin | 5/5 | vendor signoff | lien waivers + warranty packet | open | missing vendor docs |\n\nIf you want, I can turn this into a **one-page handoff template** you can reuse.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Good enough structure, but I’d tighten it more. I don’t want a pretty table that people can ignore. I want something that forces ownership and makes slippage obvious.\n\nAdd these pieces:\n- **RAG status**: red / yellow / green\n- **Owner backup**: who takes over if the named owner is out\n- **Decision needed**: yes/no, so people can see what’s actually waiting on a call\n- **Next action**: one concrete step, not a vague update\n- **Date last touched**: so dead items don’t sit there pretending to be alive\n\nAnd at the top, I’d put a blunt summary like:\n- open items remaining: 7\n- blockers: 3\n- items needing decision this week: 2\n- handoff complete when: all open items have owner, due date, and proof of completion\n\nIf you want this to work in the real world, the rule is: no owner, no item. No due date, no item. No proof, not done.\n\nI had something like this with a rehab handoff where the contractor kept saying “handled” and nothing was actually handled. The only thing that fixed it was making the log ugly and specific enough that nobody could hide in it.\n\nIf you want, I can turn your format into a sharper one-page version with the exact fields I’d use.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — I’d make it **less like a table and more like a control log**.\n\n### Handoff rules\n- **No owner = no item**\n- **No due date = no item**\n- **No proof = not done**\n- **No backup owner = fragile**\n- **No last-touched date = stale by default**\n\n### Top summary\n- open items remaining: __\n- blockers: __\n- decisions needed this week: __\n- handoff complete when: all open items have owner, backup owner, due date, next action, and proof of completion\n\n### One-line item format\nUse one row per item with these fields:\n\n- **Item**\n- **Owner**\n- **Backup owner**\n- **Due date**\n- **RAG status**\n- **Decision needed?**\n- **Next action**\n- **Dependency / blocker**\n- **Proof required**\n- **Date last touched**\n\n### Status rules\n- **Red** = blocked or slipping\n- **Yellow** = at risk / waiting on something\n- **Green** = on track or complete\n\n### What makes it forceful\n- **Decision needed** should be **yes/no** only\n- **Next action** must be a verb + object, like “send revised permit set” or “confirm utility transfer”\n- **Date last touched** gets updated every time the item changes\n- Anything **red** should also name who is being escalated to\n\n### Example\n| Item | Owner | Backup owner | Due date | RAG | Decision needed? | Next action | Dependency / blocker | Proof required | Date last touched |\n|---|---|---|---:|---|---|---|---|---|---|\n| Utility transfer | PM | Ops | 5/2 | Red | No | confirm transfer date with provider | tenant access not confirmed | confirmation email | 4/29 |\n| Final inspection | Contractor | PM | 5/3 | Yellow | Yes | schedule inspector call | rough punch list still open | calendar invite + inspector confirmation | 4/29 |\n| Closeout docs | Admin | PM | 5/5 | Green | No | collect lien waivers | vendor responses pending | signed packet | 4/29 |\n\nIf you want, I can turn this into a **copy-paste handoff template** with a short intro blurb and the exact column order I’d use.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah. Better. But I’d still make it uglier and more operational.\n\nI’d add two things:\n\n- **Escalation owner** — who gets pulled in if it slips\n- **Blocker age** — how long it’s been red/yellow, so people can’t keep recycling the same excuse\n\nAnd I’d put the summary in hard numbers only. No prose.\n\n### Top summary\n- open items remaining: __\n- blockers: __\n- decisions needed this week: __\n- red items older than 48 hours: __\n- handoff complete when: every item has owner, backup owner, due date, next action, proof, and escalation owner\n\n### Control log fields\n- Item\n- Owner\n- Backup owner\n- Escalation owner\n- Due date\n- RAG status\n- Decision needed? yes/no\n- Next action\n- Dependency / blocker\n- Proof required\n- Date last touched\n- Blocker age\n\n### My rule on status\n- **Red** = blocked, late, or missing proof\n- **Yellow** = at risk, waiting, or unclear decision path\n- **Green** = done, verified, or genuinely on track\n\n### One more thing\nThe log should be sorted by **red first**, then yellow, then green. Otherwise people bury the problems at the bottom and pretend the file is fine.\n\nIf you want it to actually force action, I’d also put a line under the title:\n\n**If it’s not in the log, it does not exist. If it has no owner, it stays open. If it’s red for more than 48 hours, it escalates.**\n\nThat’s the version that makes people uncomfortable enough to pay attention.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Yes — that’s the right shape.\n\nI’d use this as the **one-page handoff control log**:\n\n## Handoff summary\n- open items remaining: __\n- blockers: __\n- decisions needed this week: __\n- red items older than 48 hours: __\n- handoff complete when: every item has owner, backup owner, due date, next action, proof, and escalation owner\n\n## Rules\n- If it’s not in the log, it does not exist.\n- No owner = no item.\n- No due date = no item.\n- No proof = not done.\n- Red for more than 48 hours = escalated.\n\n## Control log fields\n- Item\n- Owner\n- Backup owner\n- Escalation owner\n- Due date\n- RAG status\n- Decision needed? yes/no\n- Next action\n- Dependency / blocker\n- Proof required\n- Date last touched\n- Blocker age\n\n## Status rules\n- **Red** = blocked, late, or missing proof\n- **Yellow** = at risk, waiting, or unclear decision path\n- **Green** = done, verified, or on track\n\n## Sorting rule\n- Sort by **Red**, then **Yellow**, then **Green**.\n\n## Example row\n| Item | Owner | Backup owner | Escalation owner | Due date | RAG | Decision needed? | Next action | Dependency / blocker | Proof required | Date last touched | Blocker age |\n|---|---|---|---|---:|---|---|---|---|---|---:|---:|\n| Final inspection | Contractor | PM | Ops lead | 5/3 | Red | Yes | schedule inspector call | rough punch list still open | calendar invite + inspector confirmation | 4/29 | 3 days |\n\nIf you want, I can turn this into a **copy-paste template** with a short intro line and blank rows.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s the version I’d use.\n\nIt’s tight enough to force ownership, and ugly enough that people can’t hide in it. The rules are clean, the fields are doing real work, and sorting red first is the right move. The blocker's age piece matters too — that’s where excuses start dying.\n\nI’d probably only add one more thing if I was using it on an actual project: a **single escalation contact** at the top, just so there’s no debate about who gets the problem when the log turns red. But the structure itself is solid.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    }
+  ]
+}

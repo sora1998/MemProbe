@@ -1,0 +1,23 @@
+{
+  "user_id": "user_029",
+  "task": "I’m trying to make sense of a simple battery setup that’s behaving inconsistently, and I want to check my reasoning before I go in circles. If I have two identical batteries and I wire them in series versus parallel, what changes in voltage and current capacity should I expect, and what’s the safest way to think about the load side so I don’t misread the result?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.2,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "If the two batteries are truly identical and in good condition:\n\n## Series\n- **Voltage adds**\n  - 2 × battery voltage\n- **Current capacity stays the same**\n  - same Ah as one battery\n- **Use case**\n  - for a load that needs higher voltage\n\nExample:\n- two 12 V batteries in series = **24 V**\n- capacity stays **same as one battery** in Ah\n\n## Parallel\n- **Voltage stays the same**\n  - same as one battery\n- **Current capacity adds**\n  - Ah roughly doubles\n- **Use case**\n  - for a load that needs longer runtime or more current at the same voltage\n\nExample:\n- two 12 V batteries in parallel = **12 V**\n- capacity is roughly **double**\n\n## Safest way to think about the load side\nDon’t think “more batteries = more power” in a vague way. Think:\n\n- **Series** changes the **voltage available to the load**\n- **Parallel** changes the **available current/runtime at the same voltage**\n\nThe load will draw what it needs, within the limits of the system:\n- If voltage is too low, the load may not run properly.\n- If voltage is correct but capacity is low, runtime suffers.\n- If the load draws too much current, the batteries or wiring may sag or overheat.\n\n## Important caution\nFor parallel batteries:\n- they should be the **same type, same age, same state of charge**\n- otherwise one battery can push current into the other and cause imbalance\n\nFor series batteries:\n- keep them matched too, because a weak battery can drag the whole string down\n\n## Quick rule\n- **Series = more volts**\n- **Parallel = more amp-hours / runtime**\n- **Load determines current draw**\n- **Battery setup determines how long and how safely it can supply that load**\n\nIf you want, I can also give you a **simple numeric example with two 12 V batteries and a resistor/load** so you can see how the current changes in each case.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s the right framing.\n\nSeries: voltage adds, Ah stays the same.\nParallel: voltage stays the same, Ah adds.\n\nAnd the part people mess up — the load doesn’t get “forced” current just because you added batteries. The load draws what it draws at that voltage, assuming the batteries and wiring can support it. So I’d read it like this:\n\n- **Series** changes the supply voltage seen by the load\n- **Parallel** increases available capacity / lowers stress per battery at the same voltage\n- **Current is set by the load and impedance**, not by the battery count in some abstract way\n\nThe only thing I’d keep extra sharp on is mismatch. If the batteries aren’t closely matched in age, charge state, and internal resistance, parallel can get ugly fast. I’ve seen enough bad maintenance to distrust “identical” unless I’ve checked it myself.\n\nSo, clean rule:\n- higher voltage needed → series\n- longer runtime / more current reserve at same voltage → parallel\n- always verify the load’s actual voltage requirement before reading the result\n\nThat’s the part worth not hand-waving.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    }
+  ]
+}

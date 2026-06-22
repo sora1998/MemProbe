@@ -1,0 +1,88 @@
+{
+  "user_id": "user_028",
+  "task": "I’ve got a furnace that won’t start, and I’m trying to decide whether this is something I can safely poke at or if I should stop and call for help. What’s the sensible first pass before I make it worse?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.333333333333333,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — there are a few **safe, sensible first checks** you can do before calling for service. Keep it basic and avoid opening anything beyond access panels unless you’re comfortable and the unit is clearly off.\n\n## First: stop and call for help right away if you notice:\n- **Smell of gas**\n- **Burning smell, smoke, or soot**\n- **Water leaking onto electrical parts**\n- **Repeated tripping breaker**\n- **Loud banging/grinding**\n- **Any sign of cracked heat exchanger / CO alarm going off**\n\nIf any of those are present, **shut the furnace off and call a pro**.\n\n## Safe first pass\n1. **Thermostat**\n   - Make sure it’s set to **Heat**\n   - Set the temperature **5–10°F higher** than room temp\n   - Replace thermostat batteries if it uses them\n\n2. **Power**\n   - Check the **furnace switch** (looks like a light switch near the unit)\n   - Check the **breaker** in the panel\n   - If the breaker tripped, reset it **once** only\n\n3. **Furnace door/panel**\n   - Make sure the access panel is fully seated\n   - Many furnaces won’t run if the door switch isn’t engaged\n\n4. **Filter**\n   - Check whether the air filter is **severely clogged**\n   - A very dirty filter can cause shutdowns or overheating\n\n5. **Vents / intake / exhaust**\n   - Make sure outside intake/exhaust pipes aren’t blocked by snow, leaves, nests, etc.\n   - Inside vents should not be completely closed\n\n6. **Condensate drain**\n   - If it’s a high-efficiency furnace, look for a **clogged condensate line** or full drain pan\n   - Some units shut down if the drain backs up\n\n7. **Reset once, then stop**\n   - If the furnace has a reset button, use it **only once**\n   - If it fails again, don’t keep cycling it\n\n## What not to do\n- Don’t bypass safety switches\n- Don’t remove sealed combustion parts\n- Don’t keep resetting repeatedly\n- Don’t touch gas valves, wiring, or flame sensors unless you know exactly what you’re doing\n\n## Best practical rule\nIf it’s **just not responding**, the first pass above is reasonable.  \nIf it **tries to start and then shuts down**, or if you smell gas / see any abnormal symptoms, **stop and call a technician**.\n\nIf you want, tell me **what the furnace does when you call for heat** — completely dead, fan runs, igniter clicks, lights then shuts off, etc. — and I can help narrow it down safely.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s the right lane. But I’d want a little more before I fool with it too much.\n\nFirst pass, in order:\n- thermostat actually calling for heat\n- breaker and furnace switch\n- door panel seated right\n- filter not packed solid\n- outside intake/exhaust not blocked\n- if it’s a condensing unit, check the drain hose/pan\n\nOne thing I’d add: listen for whether it even tries. Dead silent is one bucket. Clicks, fan, then quits is another. Different problem.\n\nAnd no hero stuff. If you smell gas, get CO, see soot, or the breaker keeps tripping, stop. I’ve had a furnace die on a cold snap before — turned out to be simple, but I still shut the thing off first and worked from the outside in. Better that than making a cheap problem expensive.\n\nWhat’s it doing exactly when you call for heat?",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.6
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "That’s exactly the right way to think about it.\n\nBest next step is to **classify the behavior** before touching anything else:\n\n### 1) Dead silent\nNo click, no fan, no ignition attempt.\nLikely: thermostat/power/door switch/control issue.\n\n### 2) Starts, then stops\nYou hear a click, inducer fan, maybe igniter, then it quits.\nLikely: safety lockout, blocked vent, flame-sensing issue, condensate drain, pressure switch, or gas delivery problem.\n\n### 3) Blower runs but no heat\nAir moves, but it never lights.\nLikely: ignition/gas/flame-sense problem.\n\n### 4) Repeated clicking or short cycling\nIt tries over and over, then gives up.\nLikely: ignition failure, gas valve issue, dirty flame sensor, or venting/safety fault.\n\n### 5) Runs briefly, then shuts down\nCould be overheating, airflow restriction, dirty filter, blocked registers, or a failing component.\n\nIf you want, describe it in one line like:\n- “completely dead”\n- “clicks then stops”\n- “blower only”\n- “lights then shuts off”\n- “tries a few times then locks out”\n\nAnd I’ll tell you the safest next check for that specific symptom.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah. That’s the useful split.\n\nMine was a little like the “dead silent” bucket once, except it wasn’t really dead — bad door switch. Cheap part, annoying little thing.\n\nWhat I’d want next is this, plain: when you call for heat, do you get **nothing at all**, or do you hear **a click / fan / ignition attempt** before it quits? And is it a regular furnace or one of those condensing units with the drain line?",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 3,
+      "agent_response": "Exactly. That’s the key question.\n\n**Ask yourself:**\n1. **Totally nothing** — no click, no fan, no hum?\n   - Think: thermostat, power, door switch, breaker, control board.\n\n2. **It tries** — click, inducer fan, igniter, then stops?\n   - Think: safety lockout, venting, flame sensor, gas delivery, condensate drain, pressure switch.\n\nAnd yes, **whether it’s a condensing furnace matters**:\n- **Regular furnace:** no condensate drain to check\n- **Condensing/high-efficiency furnace:** drain hose/pan/clogged condensate trap can absolutely stop it\n\nIf you’re not sure which it is, a quick clue:\n- **PVC intake/exhaust pipes** usually mean **condensing**\n- **Metal flue/vent** often means **standard-efficiency**\n\nIf you want, tell me:\n- **what happens when heat is called**\n- **whether you see PVC vent pipes**\n- **whether any lights/blink codes are showing**\n\nand I’ll help you narrow it down safely.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s the part I’d want pinned down before touching anything else.\n\nIf it’s **totally dead** — no click, no fan, no hum — I’d stay on the outside stuff first:\n- thermostat actually calling\n- breaker\n- furnace switch\n- door panel\n- filter\n\nIf it **tries** — click, inducer, igniter, then quits — different animal. Then I’d start looking at venting, condensate, flame sensor, pressure switch, that sort of thing.\n\nAnd yes, PVC usually means condensing. Metal flue, more likely standard. That matters because the drain can shut a condensing unit down, and a regular furnace won’t even have that piece in play.\n\nSo: when you call for heat, is it **dead silent**, or does it **make an attempt and then stop**?",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 4,
+      "agent_response": "That’s the right question to answer first.\n\nIf you’re deciding whether to keep poking or stop:\n\n- **Dead silent**: stay with the basic outside checks only  \n  - thermostat calling for heat  \n  - breaker / furnace switch  \n  - door/panel seated  \n  - filter  \n  - any obvious blocked vents\n\n- **Tries to start, then quits**: that’s a different bucket  \n  - don’t keep cycling it  \n  - stop and look for a fault code / blink light if your furnace has one  \n  - if it’s a **condensing furnace**, the drain line/pan becomes a likely suspect  \n  - if you smell gas, see soot, or get a CO alarm, shut it down and call for help\n\nSo the sensible first pass is: **figure out whether it’s truly dead or attempting ignition**.  \nIf you tell me which one it is, I can suggest the safest next check.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah. That’s still a little too generic, though. I want the next step to be tied to what the furnace is actually doing, not a brochure answer.\n\nIf it’s dead silent, fine — I stay outside the box:\n- thermostat calling\n- breaker\n- furnace switch\n- door seated\n- filter\n- obvious vent blockage\n\nIf it makes an attempt, I’d want the cheap, safe tells first:\n- blink code at the control board\n- any pressure switch fault light\n- condensate trap or drain backed up, if it’s PVC vented\n- any odd hum/click sequence before lockout\n\nAnd I still don’t want the gas-side guessing unless there’s a real symptom. No smell, no soot, no CO, no repeated breaker trip — then maybe it’s worth one careful look. Otherwise stop.\n\nSo, plain answer: what does it do when you call for heat — dead silent, or does it try and fail? If it tries, what’s the exact sequence?",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.2
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 5,
+      "agent_response": "Fair enough — here’s the practical version:\n\n## If it’s **dead silent**\nDo only the boring, safe checks:\n- thermostat set to **Heat** and calling for temp\n- furnace **switch** on\n- **breaker** on\n- **door/panel** fully seated\n- **filter** not plugged solid\n- intake/exhaust not blocked\n\nIf all that’s good and it’s still dead, that points more toward **power, door switch, thermostat, or control board**. At that point, you can stop and call for help if you’re not comfortable testing voltage.\n\n## If it **tries to start and fails**\nListen for the sequence:\n- click\n- inducer fan\n- igniter glow/click\n- then shutdown\n\nThat usually means it’s getting past the thermostat and into a safety/ignition issue. The safest next checks are:\n- **look for a blink code** on the control board or status light\n- if it’s **PVC vented**, check the **condensate drain/trap/pan**\n- make sure the **vent/intake** is clear outside\n- don’t keep resetting it over and over\n\n## Simple rule\n- **No sound at all** = basic power/control checks only\n- **Any attempt to start** = look for a fault code and stop if you smell gas, see soot, or get a CO alarm\n\nIf you want, tell me the **exact sequence** you hear — even just “clicks once,” “fan starts,” “lights then shuts off,” or “nothing at all” — and I’ll tell you the safest next move.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Better. Still want the next move tied to the symptom, not a general lecture.\n\nIf it’s **dead silent** after the thermostat calls:\n- I’d check the easy stuff one more time: switch, breaker, door panel, filter.\n- If all that’s fine and it’s still dead, I’d stop there unless I’m willing to test voltage. No point guessing.\n\nIf it **tries to start**:\n- first thing I want is the **status light / blink code**\n- then I’d listen to the sequence: inducer, igniter, flame, shutdown — or whatever it actually does\n- if it’s PVC vented, condensate trap/drain is worth a look before anything gas-side\n\nAnd if it’s doing something half-bad — clicking, humming, then stopping — that’s usually enough for me to quit and call it in. I’ve seen one cheap part turn into a long afternoon because somebody kept resetting it.\n\nSo the useful next step is: what exact sequence do you get? Dead silent, or what comes first, second, third?",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 6,
+      "agent_response": "Exactly. The next move should match the symptom.\n\n### If it’s **dead silent**\nStay with the basic outside checks only:\n- thermostat is actually calling for heat\n- furnace switch is on\n- breaker is on\n- door/panel is seated\n- filter isn’t packed solid\n\nIf all that checks out and it’s still dead, I’d stop there unless you’re comfortable testing voltage. That points more toward a power/control/door-switch issue than something you should keep poking.\n\n### If it **tries to start**\nThe first useful thing is the **status light / blink code** on the furnace control board, if it has one.\n\nThen listen for the sequence:\n- inducer fan?\n- igniter?\n- flame?\n- shutdown?\n\nThat sequence tells you whether it’s getting into ignition/safety territory.\n\n### If it’s **PVC vented**\nA clogged **condensate trap/drain/pan** is a sensible safe check before anything gas-side.\n\n### If it’s **clicking, humming, then stopping**\nThat’s usually where I’d stop and call it in rather than keep resetting it.\n\nSo the practical question is: **dead silent, or what exact sequence do you hear — first, second, third?**",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah. That’s the right cut.\n\nDead silent = stay with the outside checks and don’t get cute about it.\n\nTries to start = look at the blink code first, then the sequence. Inducer, igniter, flame, shutdown — or whatever it actually does.\n\nPVC vented = condensate trap/drain/pan is fair game. No gas-side wandering unless there’s an actual symptom.\n\nAnd if it’s clicking, humming, then quitting, I’d probably stop there too. I’ve seen that turn into a half-day for nothing.\n\nSo yeah — dead silent, or what’s the exact sequence?",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.4
+      },
+      "gt_correct": null
+    }
+  ]
+}

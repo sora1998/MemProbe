@@ -1,0 +1,36 @@
+{
+  "user_id": "user_036",
+  "task": "I’m trying to untangle why a spreadsheet export and the source file don’t line up, and I can’t tell whether the issue started in the data, the import step, or my cleanup pass. Could you help me figure out a sensible way to track down where it went off and what to check first?",
+  "ground_truth": null,
+  "end_reason": "satisfied",
+  "final_preference_score": 4.9,
+  "final_gt_correct": null,
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Yes — a good way to do this is to trace the mismatch in the order it could have been introduced:\n\n1. **Source file**\n   - Check whether the original data already contains the mismatch.\n   - If it does, the issue likely started before export/import.\n\n2. **Spreadsheet export**\n   - Compare the exported values against the source file field by field.\n   - If the source is clean but the export is off, the export step is the likely problem.\n\n3. **Cleanup pass**\n   - Review any manual edits, formulas, find/replace actions, or formatting changes.\n   - If the export was correct but the final sheet differs, the cleanup pass introduced the error.\n\nA practical way to isolate it:\n- pick one or two mismatched rows\n- compare them across all three stages\n- note whether the difference is in:\n  - the raw value\n  - the displayed value\n  - the formatting\n  - a copied/transcribed field\n\nWhat to check first:\n- **Exact text values** in the source file\n- **Export settings** or field mapping\n- **Any cleanup transformations** you applied afterward\n\nIf you want, I can help you build a **step-by-step reconciliation checklist** or a **simple comparison table** you can fill in.",
+      "user_simulator": {
+        "feedback_type": "followup",
+        "text": "Yeah, that’s the right order, but I’d want it a little more concrete. The part that usually trips people up is assuming the mismatch is in the data itself when it’s really a field mapping or a formula shift.\n\nI’d start with one bad row and trace just that row all the way through:\n- source value\n- exported value\n- cleaned value\n- any formula/reference feeding it\n\nThen check the boring stuff first:\n- column order changed in export?\n- header names matched wrong field?\n- any cells converted to dates, numbers, or trimmed text?\n- formulas dragged one row too far or shifted a column?\n- find/replace touched more than you meant?\n\nIf the source and export match exactly, the cleanup pass is the likely point of failure. If the source already differs, stop there — don’t waste time blaming the spreadsheet.\n\nI’d actually make a tiny reconciliation table for maybe 3 rows, not just 1, because one row can be a weird outlier. If you want, I’d rather see a fill-in table with columns for source/export/final value and a note for the transformation that happened at each step. That would make the break point obvious faster.",
+        "is_done": false
+      },
+      "preference_evaluator": {
+        "score": 5.0
+      },
+      "gt_correct": null
+    },
+    {
+      "turn": 2,
+      "agent_response": "Yes — here’s a concrete way to trace where it went off, with the “field mapping / formula shift” failure mode front and center.\n\n## Step-by-step check\n\n### 1. Pick 3 rows, not just 1\nChoose:\n- one row that looks wrong\n- one row that looks right\n- one row that is borderline or similar\n\nThat helps tell you whether the problem is isolated or systematic.\n\n### 2. Trace each row through all stages\nFor each row, compare:\n\n- **Source value**\n- **Exported value**\n- **Cleaned value**\n- **Formula / reference feeding it**  \n  if applicable\n\n### 3. Check the most common failure points first\nBefore blaming the data itself, verify:\n\n- **Column order changed** in the export\n- **Header names mapped to the wrong fields**\n- **Cells converted** to dates, numbers, or trimmed text\n- **Formula references shifted** one row or one column\n- **Find/replace** changed more than intended\n\n### 4. Identify where the mismatch first appears\nUse this rule:\n\n- **Source = Export, Export ≠ Final**  \n  → the cleanup pass introduced the issue\n\n- **Source ≠ Export**  \n  → the problem started in the export or mapping step\n\n- **Source already differs from the original system**  \n  → the issue is upstream in the data\n\n## Simple reconciliation table\n\n| Row | Source value | Export value | Final value | Formula/reference | Notes |\n|---|---|---|---|---|---|\n| 1 |  |  |  |  |  |\n| 2 |  |  |  |  |  |\n| 3 |  |  |  |  |  |\n\n## What to look for in the notes column\n- field mapping mismatch\n- shifted formula\n- date/number conversion\n- text trimming\n- accidental find/replace\n- copied value from the wrong row\n\n## Fast decision rule\n- If **source and export match exactly**, look at cleanup first.\n- If **source and export differ**, stop there and inspect export/mapping.\n- If **the same error repeats across rows**, it’s probably systematic, not random.\n\nIf you want, I can turn this into a **fillable checklist** or a **shorter client-safe troubleshooting note**.",
+      "user_simulator": {
+        "feedback_type": "satisfied",
+        "text": "Yeah, that’s solid. The 3-row table is the part I’d actually use first, because one bad row can lie to you.\n\nThe decision rule is clear too — source/export match means cleanup, source/export don’t match means export or mapping. That’s the exact break point I’d want.\n\nI don’t need it shorter right now. This is usable as-is.",
+        "is_done": true
+      },
+      "preference_evaluator": {
+        "score": 4.8
+      },
+      "gt_correct": null
+    }
+  ]
+}

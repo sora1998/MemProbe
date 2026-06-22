@@ -1,0 +1,104 @@
+{
+  "user_id": "user_006",
+  "task": "I’m helping a small warehouse team figure out what to prioritize when their network gets flaky during a busy shift. What’s the cleanest way to think about which stations or systems should come first so the whole flow doesn’t get jammed up?",
+  "prefs": [
+    {
+      "idx": 1,
+      "dimension": "verbosity_preference",
+      "short": "Wants responses kept tight and efficient",
+      "explanation": "He values speed, control, and efficiency, so he is unlikely to want long-winded help. He would probably prefer responses that get to the point quickly and avoid unnecessary filler. Overexplaining would feel like wasted time to him."
+    },
+    {
+      "idx": 2,
+      "dimension": "directness_preference",
+      "short": "Prefers blunt answers without softening",
+      "explanation": "His skeptical, competitive style suggests he wants clear, unambiguous guidance rather than hedged language. He would likely see excessive caution as evasive or inefficient. Straight answers fit his preference for control and decisive action."
+    },
+    {
+      "idx": 3,
+      "dimension": "format_preference",
+      "short": "Likes structured, actionable output",
+      "explanation": "He seems most likely to respond well to responses that are organized and easy to execute, such as bullets or checklists. That matches his practical, task-focused mindset. Loose, meandering prose would probably frustrate him."
+    },
+    {
+      "idx": 4,
+      "dimension": "detail_level_preference",
+      "short": "Wants the useful essentials, not padding",
+      "explanation": "He likely wants enough context to act, but not exhaustive background unless it helps him win or avoid mistakes. He is efficiency-driven, so extra caveats only matter when they change the decision. He would probably skip anything that does not affect the outcome."
+    },
+    {
+      "idx": 5,
+      "dimension": "pushback_tolerance",
+      "short": "Accepts pushback only if it is sharp and useful",
+      "explanation": "He is skeptical and self-serving, so he probably does not enjoy moralizing or vague objections. But if the pushback is concrete, efficient, and clearly tied to risk or leverage, he is more likely to respect it. Weak or overly gentle correction would likely be ignored."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "agent_response": "Prioritize by **operational dependency**, not by who complains loudest.\n\n## Simple order\n1. **Systems that keep the whole floor moving**\n   - core switch/uplink\n   - Wi‑Fi controller/AP backhaul\n   - ERP/WMS terminal path\n   - barcode scanners / pick stations\n   - label printers\n   - shipping/receiving stations\n\n2. **Systems with the biggest blast radius**\n   - shared VLANs\n   - shared printers\n   - shared authentication\n   - shared VPN/remote access\n   - anything all stations depend on\n\n3. **Systems with time sensitivity**\n   - shipping cutoff systems\n   - inbound receiving windows\n   - pick/pack workflow\n   - dispatch or dock scheduling\n\n4. **Single-user or nonblocking issues**\n   - one workstation\n   - one phone\n   - one noncritical device\n   - anything that can wait without stopping flow\n\n## Practical rule\nAsk:\n- **If this fails, does the line stop?**\n- **If this fails, does everyone else get slower or blocked?**\n- **Is there a workaround?**\n- **Is it time-critical right now?**\n\nIf the answer is “yes, it stops the line,” it goes first.\n\n## Triage order during a busy shift\n1. **Core network path**\n2. **Shared services**\n3. **Station groups that block work**\n4. **Individual devices**\n5. **Nice-to-have fixes**\n\n## What to avoid\n- chasing the loudest complaint first\n- fixing a single printer while the shared uplink is unstable\n- spending time on cosmetic issues during active workflow failure\n\n## Fast warehouse priority rule\n**Keep the shared path alive, then restore the stations that unblock the most work, then clean up the rest.**\n\nIf you want, I can turn this into a **warehouse triage checklist** with “first / second / last” priorities.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very tight and efficient: starts with the core rule, uses short bullets, and avoids filler. Phrases like \"Simple order\" and \"Fast warehouse priority rule\" keep it concise."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Blunt and direct: \"Prioritize by operational dependency, not by who complains loudest\" and \"If the answer is 'yes, it stops the line,' it goes first\" are clear, unhedged guidance."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Strong structure and actionability: numbered tiers, a \"Practical rule\" with questions, a \"Triage order,\" and a \"What to avoid\" section make it easy to execute."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Focuses on essentials only: core network path, shared services, blocking stations, and time-sensitive systems. It avoids background and keeps only decision-relevant criteria."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Includes pushback in a sharp, useful way: \"not by who complains loudest\" and \"What to avoid\" are concrete corrections tied to operational risk. It is not especially confrontational, but it is direct and practical."
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "agent_response": "Use this rule:\n\n**Prioritize by dependency, throughput, and deadline risk.**\n\n## Order\n1. **Core path**\n   - uplink\n   - core switch\n   - AP backhaul\n   - DHCP/auth if shared\n\n2. **Shared blockers**\n   - anything affecting multiple scanners, printers, or WMS terminals\n\n3. **Bottleneck stations**\n   - shipping\n   - receiving\n   - dock\n   - pack-out\n   - label printing\n\n4. **Isolated devices**\n   - one workstation\n   - one phone\n   - one noncritical endpoint\n\n## Quick questions\n- How many people are blocked?\n- Does this stop the line or just slow it?\n- Is there a manual workaround?\n- Does fixing it unblock downstream steps?\n\n## Practical rule\nIf it affects **many users**, **high-volume flow**, or **a cutoff/deadline**, it goes first.\n\nIf you want, I can turn this into a **red / yellow / green warehouse triage sheet**.",
+      "score": 4.8,
+      "summary": "mean=4.80 over 5/5 prefs (na=0); dist={1:0, 2:0, 3:0, 4:1, 5:4}",
+      "per_pref": [
+        {
+          "idx": 1,
+          "score": 5,
+          "reason": "Very tight and efficient: starts with \"Use this rule\" and gives a compact prioritized list, not a long explanation."
+        },
+        {
+          "idx": 2,
+          "score": 5,
+          "reason": "Direct and blunt: \"Prioritize by dependency, throughput, and deadline risk\" and \"If it affects many users... it goes first\" are clear, unhedged rules."
+        },
+        {
+          "idx": 3,
+          "score": 5,
+          "reason": "Well structured and actionable: uses numbered sections, bullets, and quick questions that are easy to execute."
+        },
+        {
+          "idx": 4,
+          "score": 5,
+          "reason": "Gives the useful essentials without padding: focuses on core path, shared blockers, bottlenecks, and a practical rule, with minimal background."
+        },
+        {
+          "idx": 5,
+          "score": 4,
+          "reason": "Includes pushback-like prioritization criteria tied to risk and leverage, e.g. \"many users,\" \"high-volume flow,\" and \"a cutoff/deadline,\" but it does not explicitly challenge bad assumptions or provide sharp corrective pushback."
+        }
+      ]
+    }
+  ]
+}
