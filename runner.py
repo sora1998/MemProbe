@@ -205,7 +205,7 @@ if __name__ == "__main__":
     p.add_argument("--run-id", default=None,
                    help="suffix for all output dirs (memory/history/pref_judge/output) to avoid collisions")
     p.add_argument("--bank", default=None,
-                   help="override path to user_memory_banks.json (default: Deeppersona/data/user_memory_banks.json)")
+                   help="override path to the user-memory bank (default: Deeppersona/data/user_memory_banks_pooled_final.json)")
     p.add_argument("--agent", default="amem",
                    help="memory system to evaluate (e.g. amem, nomem)")
     p.add_argument("--scoring-modes", nargs="+", default=["dump_all"],

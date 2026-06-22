@@ -37,6 +37,8 @@ Memory-system code:
 Released benchmark data:
 
 - `Deeppersona/data/user_memory_banks_pooled_final.json`: 50 hidden user banks.
+  This is the only user-memory bank shipped and is the default `--bank` for
+  `runner.py` / `task_generator.py`, so the `--bank` flag is optional.
 - `benchmark_data/CustomTasksPooledFinal/user_*.json`: 50 task files, one per user.
 
 Released run artifacts:

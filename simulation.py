@@ -20,7 +20,7 @@ from typing import Dict, List, Optional, Tuple
 from llm_client import get_completion, parse_json_response
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
-_USER_DATA_PATH = os.path.join(_HERE, "Deeppersona", "data", "user_memory_banks.json")
+_USER_DATA_PATH = os.path.join(_HERE, "Deeppersona", "data", "user_memory_banks_pooled_final.json")
 
 # ---------------------------------------------------------------------------
 # User loader
@@ -29,7 +29,7 @@ _USER_DATA_PATH = os.path.join(_HERE, "Deeppersona", "data", "user_memory_banks.
 _user_cache: Optional[Dict] = None
 
 def load_user(user_id: str) -> Dict:
-    """Load a user by user_id (e.g. 'user_001') from user_memory_banks.json."""
+    """Load a user by user_id (e.g. 'user_001') from user_memory_banks_pooled_final.json."""
     global _user_cache
     if _user_cache is None:
         with open(_USER_DATA_PATH) as f:

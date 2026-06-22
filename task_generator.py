@@ -423,7 +423,7 @@ if __name__ == "__main__":
     p.add_argument("--output-dir", type=str, default=None,
                    help="override default benchmark_data/CustomTasks/ output dir")
     p.add_argument("--bank", type=str, default=None,
-                   help="override path to user_memory_banks.json")
+                   help="override path to the user-memory bank (default: Deeppersona/data/user_memory_banks_pooled_final.json)")
     args = p.parse_args()
 
     if args.bank:
