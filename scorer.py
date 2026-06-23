@@ -350,11 +350,9 @@ class UserScorer:
         agent=None,
         use_retrieve: bool = False,
     ) -> UserScore:
-        # A: Task Fit
-        completed = [
-            bool(r.final_gt_correct) if r.ground_truth is not None else r.end_reason == "satisfied"
-            for r in episode_results
-        ]
+        # A: Task Fit — custom tasks carry no ground truth, so completion is the
+        # simulated user declaring satisfaction within the turn budget.
+        completed = [r.end_reason == "satisfied" for r in episode_results]
         task_completion_rate = sum(completed) / len(completed) if completed else 0.0
 
         # B: Reconstruction Quality. ``use_retrieve`` must be set explicitly

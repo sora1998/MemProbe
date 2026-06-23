@@ -75,7 +75,6 @@ class Turn:
     user_feedback: Optional[UserFeedback] = None
     preference_score: Optional[float] = None  # 1-5, mean over per-pref scores
     preference_judgment: Optional[PrefJudgment] = None
-    gt_correct: Optional[bool] = None
 
 
 @dataclass
@@ -86,7 +85,6 @@ class EpisodeResult:
     turns: List[Turn] = field(default_factory=list)
     end_reason: str = ""                          # "satisfied" | "max_turns"
     final_preference_score: Optional[float] = None  # avg across turns
-    final_gt_correct: Optional[bool] = None
 
     def save_history(self, path: str) -> None:
         """
@@ -95,14 +93,13 @@ class EpisodeResult:
         Format:
         {
           "user_id": ..., "task": ..., "ground_truth": ...,
-          "end_reason": ..., "final_preference_score": ..., "final_gt_correct": ...,
+          "end_reason": ..., "final_preference_score": ...,
           "turns": [
             {
               "turn": 1,
               "agent_response": "...",
               "user_simulator": {"feedback_type": "...", "text": "...", "is_done": ...},
-              "preference_evaluator": {"score": 3},
-              "gt_correct": null
+              "preference_evaluator": {"score": 3}
             }, ...
           ]
         }
@@ -118,7 +115,6 @@ class EpisodeResult:
                     "is_done": t.user_feedback.is_done if t.user_feedback else None,
                 },
                 "preference_evaluator": {"score": t.preference_score},
-                "gt_correct": t.gt_correct,
             })
 
         data = {
@@ -127,7 +123,6 @@ class EpisodeResult:
             "ground_truth": self.ground_truth,
             "end_reason": self.end_reason,
             "final_preference_score": self.final_preference_score,
-            "final_gt_correct": self.final_gt_correct,
             "turns": turns_data,
         }
         os.makedirs(os.path.dirname(os.path.abspath(path)), exist_ok=True)
@@ -634,7 +629,6 @@ class Episode:
 
         self.simulator = UserSimulator(user_id)
         self.pref_checker = PreferenceChecker()
-        self.gt_judge = GroundTruthJudge(dataset_type) if ground_truth else None
 
     def run(self, agent_fn) -> EpisodeResult:
         result = EpisodeResult(
@@ -660,11 +654,6 @@ class Episode:
             pref_judgment = self.pref_checker.check(self.user_id, self.task, agent_response)
             pref_score = pref_judgment.score
 
-            # GT check (every turn so we track if the agent eventually gets it right)
-            gt_correct = None
-            if self.gt_judge:
-                gt_correct, _ = self.gt_judge.check(self.task, agent_response, self.ground_truth)
-
             # User feedback
             feedback = self.simulator.respond(
                 task=self.task,
@@ -679,7 +668,6 @@ class Episode:
                 user_feedback=feedback,
                 preference_score=pref_score,
                 preference_judgment=pref_judgment,
-                gt_correct=gt_correct,
             ))
 
             history.append({"agent": agent_response, "user": feedback.text})
@@ -693,9 +681,6 @@ class Episode:
 
         pref_scores = [t.preference_score for t in result.turns if t.preference_score is not None]
         result.final_preference_score = sum(pref_scores) / len(pref_scores) if pref_scores else None
-
-        gt_results = [t.gt_correct for t in result.turns if t.gt_correct is not None]
-        result.final_gt_correct = gt_results[-1] if gt_results else None
 
         return result
 
@@ -869,7 +854,6 @@ if __name__ == "__main__":
 
     print(f"\nEnd reason: {result.end_reason}")
     print(f"Preference score (avg): {result.final_preference_score}")
-    print(f"GT correct: {result.final_gt_correct}")
     for t in result.turns:
         print(f"\n[Turn {t.turn}]")
         print(f"  Agent: {t.agent_response[:80]}")
