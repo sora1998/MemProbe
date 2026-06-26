@@ -1,19 +1,11 @@
 # MemProbe
 
-Release artifact package for **MemProbe**, a benchmark for auditing
-long-term agent memory via hidden user-state recovery.
-
-The benchmark asks: after an assistant interacts with a simulated user across
-ordinary assistance tasks, what hidden user state can be reconstructed from the
-memory artifact the assistant leaves behind?
-
-This repository contains the 50-user release artifacts and the code needed to
+Release artifact package for **MemProbe**, a benchmark for auditing long-term agent memory via hidden user-state recovery.The benchmark asks: after an assistant interacts with a simulated user across ordinary assistance tasks, what hidden user state can be reconstructed from the memory artifact the assistant leaves behind? This repository contains the 50-user release artifacts and the code needed to
 inspect, score, and rerun the benchmark.
 
 ## Paper
 
 **MEMPROBE: Probing Long-Term Agent Memory via Hidden User-State Recovery**
-
 Paper: https://arxiv.org/abs/2606.24595
 
 ## Citation
