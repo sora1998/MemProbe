@@ -10,6 +10,27 @@ memory artifact the assistant leaves behind?
 This repository contains the 50-user release artifacts and the code needed to
 inspect, score, and rerun the benchmark.
 
+## Paper
+
+**MEMPROBE: Probing Long-Term Agent Memory via Hidden User-State Recovery**
+
+Paper: https://arxiv.org/abs/2606.24595
+
+## Citation
+
+If you find this benchmark or code useful, please cite:
+
+```bibtex
+@misc{ma2026memprobeprobinglongtermagent,
+  title={MEMPROBE: Probing Long-Term Agent Memory via Hidden User-State Recovery},
+  author={Enze Ma and Yufan Zhou and Wei-Chieh Huang and Jie Yang and Huanhuan Ma and Zixuan Wang and Chengze Li and Chunyu Miao and Philip S. Yu and Zhen Wang},
+  year={2026},
+  eprint={2606.24595},
+  archivePrefix={arXiv},
+  primaryClass={cs.CL},
+  url={https://arxiv.org/abs/2606.24595}
+}
+
 ## What Is Included
 
 The release keeps the 50-user pooled-final benchmark used by the paper.
