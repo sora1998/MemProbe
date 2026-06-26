@@ -340,9 +340,3 @@ License and terms-of-use notes:
   this study to support audit and reproducibility. They do not grant additional
   rights to upstream datasets, taxonomies, model weights, or API services beyond
   those upstream terms.
-
-## Git Hygiene
-
-The `.gitignore` excludes runtime logs, usage logs, reports, and native raw
-memory workspaces. If you rerun experiments, use a new `--run-id` so released
-artifacts remain untouched.
