@@ -6,6 +6,7 @@ inspect, score, and rerun the benchmark.
 ## Paper
 
 **MEMPROBE: Probing Long-Term Agent Memory via Hidden User-State Recovery**
+
 Paper: https://arxiv.org/abs/2606.24595
 
 ## Citation
